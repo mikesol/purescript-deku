@@ -22,7 +22,7 @@ import Bolson.Core (Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
-import Data.Foldable (for_, oneOf)
+import Data.Foldable (for_)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap, wrap)
@@ -30,7 +30,7 @@ import Data.Profunctor (dimap, lcmap)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), dyn, flattenArgs, unsafeSetPos)
-import FRP.Poll (Poll, sample, sampleBy)
+import FRP.Poll (Poll, merge, sample, sampleBy)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -90,7 +90,7 @@ elementify2 ns en attributes kids = Nut
     )
   aa [] = empty
   aa [ aaa ] = aaa
-  aa x = oneOf x
+  aa x = merge x
 
 elementify
   :: forall payload element

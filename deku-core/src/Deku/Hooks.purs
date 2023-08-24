@@ -51,7 +51,6 @@ import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as STRef
 import Control.Plus (empty)
-import Data.Foldable (oneOf)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
@@ -62,7 +61,7 @@ import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node',
 import Deku.Do as Deku
 import Effect (Effect)
 import FRP.Event (filterMap, mapAccum)
-import FRP.Poll (Poll, sample, sample_, stToPoll)
+import FRP.Poll (Poll, merge, sample, sample_, stToPoll)
 import FRP.Poll as Poll
 
 flattenArgs
@@ -271,7 +270,7 @@ useDynWith e opts f = Nut go'
     c1 <- Poll.mailbox
     let
       mc ix (Tuple pos v) = Tuple
-        ( oneOf
+        ( merge
             [ opts.remove v $> Child BCore.Remove
             , Child <<< BCore.Logic <$> opts.sendTo v
             , c1.poll ix

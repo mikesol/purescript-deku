@@ -9,7 +9,7 @@ import Control.Plus (empty)
 import Data.Array (replicate, (!!), (..))
 import Data.Array as Array
 import Data.Filterable (compact, filter)
-import Data.Foldable (intercalate, for_, oneOf, oneOfMap, traverse_)
+import Data.Foldable (intercalate, for_, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Traversable (sequence)
@@ -30,7 +30,7 @@ import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
 import Effect.Random (random, randomInt)
 import FRP.Event (fold, mapAccum, folded, keepLatest, makeEvent, subscribe)
-import FRP.Poll (Poll, poll, effectToPoll)
+import FRP.Poll (Poll, poll, effectToPoll, merge, mergeMap)
 import Record (union)
 import Type.Proxy (Proxy(..))
 import Web.HTML (window)
@@ -153,7 +153,7 @@ sendsToPosition = Deku.do
     , D.span [ DA.id_ "div1" ] [ text_ "bar" ]
     , Deku.do
         { value: i } <-
-          useDynAtEndWith (oneOfMap pure [ 0, 1, 2, 3, 4 ])
+          useDynAtEndWith (mergeMap pure [ 0, 1, 2, 3, 4 ])
             $ dynOptions { sendTo = \i -> if i == 3 then posIdx else empty }
         D.span [ DA.id_ ("dyn" <> show i) ] [ text_ (show i) ]
     , D.button [ DA.id_ "pos", DL.click_ \_ -> setPosIdx 1 ]
@@ -168,7 +168,7 @@ sendsToPositionFixed = Deku.do
     , D.span [ DA.id_ "div1" ] [ text_ "bar" ]
     , Deku.do
         { value: i } <-
-          useDynAtEndWith (oneOfMap pure [ 0, 1, 2, 3, 4 ])
+          useDynAtEndWith (mergeMap pure [ 0, 1, 2, 3, 4 ])
             $ dynOptions { sendTo = \i -> if i == 3 then posIdx else empty }
         fixed
           [ D.span [ DA.id_ ("dyn" <> show i <> "a") ]
@@ -191,7 +191,7 @@ insertsAtCorrectPositions = D.div [ DA.id_ "div0" ]
       -- are inserted in the scrambled order so that they read
       -- 0-1-2-3-4 from top to bottom
       { value: i } <- useDyn
-        ((Tuple <*> identity) <$> oneOfMap pure [ 3, 0, 4, 2, 1 ])
+        ((Tuple <*> identity) <$> mergeMap pure [ 3, 0, 4, 2, 1 ])
       D.span [ DA.id_ ("dyn" <> show i) ] [ text_ (show i) ]
   ]
 
@@ -632,7 +632,7 @@ switcherSwitches = Deku.do
             [ text_ "contact" ]
         ]
     , D.span [ DA.id_ "hack" ]
-        [ text $ oneOf
+        [ text $ merge
             [ filter (_ == 1) item $> "hello", compact goodbyeC $> "goodbye" ]
         ]
     ]
@@ -697,7 +697,7 @@ randomNouns = randomFromArray [ "table", "chair", "house", "bbq", "desk", "car",
 
 rowReplicator
   :: Int -> Poll Unit
-rowReplicator n = oneOf (replicate n $ pure unit)
+rowReplicator n = merge (replicate n $ pure unit)
 
 makeRow ∷ forall a. { n :: Int, excl :: Int -> Poll a, selectMe :: Int -> Effect Unit, removeMe :: Effect Unit } → Nut
 makeRow { n, excl, selectMe, removeMe } = rowTemplate ~~
@@ -792,7 +792,7 @@ stressTest =  Deku.do
     , c10000: DL.click_ \_ -> incrementRows 10000 *> setRowBuilder C10000
     , append: DL.click_ \_ -> incrementRows 1000 *> thunkAppendRows unit
     , clear: DL.click_ \_ -> clearRows *> setRowBuilder Clear
-    , swap: DL.runOn DL.click $ oneOf [ pure false, swap ] <#> not >>> setSwap
+    , swap: DL.runOn DL.click $ merge [ pure false, swap ] <#> not >>> setSwap
     , update: DL.runOn DL.click $ fold (\a b -> maybe 0 (add a) b) 0 nRows <#> \n -> do
         for_ (0 .. (n / 10 - 1)) \i -> do
           pushToRow { address: i * 10, payload: unit }
