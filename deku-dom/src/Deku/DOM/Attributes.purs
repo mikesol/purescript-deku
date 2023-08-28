@@ -387,6 +387,8 @@ module Deku.DOM.Attributes
   , autocompleteBilling
   , autocompleteShipping
   , autocompleteSection
+  , dirname
+  , dirname_
   , form
   , form_
   , xdata
@@ -486,8 +488,6 @@ module Deku.DOM.Attributes
   , minlength_
   , maxlength
   , maxlength_
-  , dirname
-  , dirname_
   , placeholder
   , placeholder_
   , list
@@ -2317,6 +2317,16 @@ autocompleteSection
   :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteSection = autocomplete_ "section-"
 
+dirname
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dirname :: String | r))
+dirname = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "dirname", value: _ } <<< Deku.Attribute.prop')
+
+dirname_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (dirname :: String | r))
+dirname_ = dirname <<< Applicative.pure
+
 form
   :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (form :: String | r))
 form = Functor.map
@@ -2769,16 +2779,6 @@ maxlength = Functor.map
 maxlength_
   :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (maxlength :: String | r))
 maxlength_ = maxlength <<< Applicative.pure
-
-dirname
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dirname :: String | r))
-dirname = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "dirname", value: _ } <<< Deku.Attribute.prop')
-
-dirname_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (dirname :: String | r))
-dirname_ = dirname <<< Applicative.pure
 
 placeholder
   :: forall r

@@ -3,7 +3,7 @@ module Main where
 import Prelude
 
 import Control.Monad.Except (ExceptT, runExceptT)
-import DOM.Common (Ctor(..), Interface, TagNS(..))
+import DOM.Common (Ctor(..), Interface, TagNS(..), mkAttribute, unSnake)
 import DOM.Indexed as Indexed
 import DOM.Parse as Parse
 import DOM.TypeStub (TypeStub(..))
@@ -12,6 +12,7 @@ import Data.Array as Array
 import Data.Either (blush)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
+import Data.Set as Set
 import Data.String as String
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Traversable (sequence)
@@ -122,6 +123,11 @@ fixSVG svgBase =
         { interfaces =
             map ( missingPresentationProperties ) svgBase.interfaces
                 <> [ svgText, svgPresentation ]
+        , attributes = do
+            let existing = Set.fromFoldable $ _.name <$> svgBase.attributes
+                patched = flip Array.mapMaybe ( svgTextMembers <> svgPresentationMembers ) \member -> 
+                    if Set.member member existing then Nothing else mkAttribute mempty member
+            svgBase.attributes <> patched
         }
 
 missingPresentationProperties :: Interface -> Interface
@@ -135,6 +141,9 @@ missingPresentationProperties = case _ of
     animate@{ name : "SVGAnimateElement" } ->
         animate { members = animate.members <> [ Ctor "by" /\ TypeString ] }
 
+    animate@{ name } | Just _ <- String.stripPrefix ( String.Pattern "SVGAnimate" ) name ->
+        animate { bases = animate.bases <> [ svgPresentation.ctor, Ctor "SVGAnimateElement" ] }
+
     svg@{ name : "SVGSVGElement" } ->
         svg
             { members = svg.members <>
@@ -143,9 +152,6 @@ missingPresentationProperties = case _ of
                 ]
             , bases = svg.bases <> [ svgPresentation.ctor ]
             }
-
-    animate@{ name } | Just _ <- String.stripPrefix ( String.Pattern "SVGAnimate" ) name ->
-        animate { bases = animate.bases <> [ svgPresentation.ctor, Ctor "SVGAnimateElement" ] }
 
     clippath@{ name : "SVGClipPathElement" } ->
         clippath
@@ -161,43 +167,47 @@ svgText =
     { ctor : Ctor "SvgText"
     , name : "SvgText"
     , bases : []
-    , members :
-        map ( ( _ /\ TypeString ) <<< Ctor )
-            [ "alignment-baseline"
-            , "baseline-shift"
-            , "dominant-baseline"
-            , "font-family"
-            , "font-size"
-            , "font-size-adjust"
-            , "font-stretch"
-            , "font-style"
-            , "font-variant"
-            , "font-weight"
-            , "letter-spacing"
-            , "text-decoration"
-            , "word-spacing"
-            , "writing-mode"
-            , "unicode-bidi" 
-            ]
+    , members : map ( ( _ /\ TypeString ) <<< Ctor <<< unSnake ) svgTextMembers
     }
+
+svgTextMembers :: Array String
+svgTextMembers =
+    [ "alignment-baseline"
+    , "baseline-shift"
+    , "dominant-baseline"
+    , "font-family"
+    , "font-size"
+    , "font-size-adjust"
+    , "font-stretch"
+    , "font-style"
+    , "font-variant"
+    , "font-weight"
+    , "letter-spacing"
+    , "text-decoration"
+    , "word-spacing"
+    , "writing-mode"
+    , "unicode-bidi" 
+    ]
 
 svgPresentation :: Interface
 svgPresentation =
     { ctor : Ctor "SvgPresentation"
     , name : "SvgPresentation"
     , bases : []
-    , members :
-        map ( ( _ /\ TypeString ) <<< Ctor )
-            [ "pathLength"
-            , "mask"
-            , "opacity"
-            , "overflow"
-            , "clip-path"
-            , "clip-rule"
-            , "cursor"
-            , "display"
-            , "transform"
-            , "transform-origin"
-            , "visibility"
-            ]
+    , members : map ( ( _ /\ TypeString ) <<< Ctor <<< unSnake ) svgPresentationMembers
     }
+
+svgPresentationMembers :: Array String
+svgPresentationMembers =
+    [ "pathLength"
+    , "mask"
+    , "opacity"
+    , "overflow"
+    , "clip-path"
+    , "clip-rule"
+    , "cursor"
+    , "display"
+    , "transform"
+    , "transform-origin"
+    , "visibility"
+    ]
