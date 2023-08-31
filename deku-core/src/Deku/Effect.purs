@@ -16,9 +16,9 @@ module Deku.Effect
 
 import Prelude
 
-import Bolson.Control (Flatten, behaving, behaving')
-import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..))
+-- import Bolson.Control (Flatten, behaving, behaving')
+-- import Bolson.Control as Bolson
+-- import Bolson.Core (Element(..), Entity(..))
 import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)

@@ -7,9 +7,9 @@ print_('''module Deku.Pursx where
 
 import Prelude
 
-import Bolson.Control (behaving, behaving')
-import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..))
+-- import Bolson.Control (behaving, behaving')
+-- import Bolson.Control as Bolson
+-- import Bolson.Core (Element(..), Entity(..))
 import Control.Plus (empty)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))

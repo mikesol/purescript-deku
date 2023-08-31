@@ -9,8 +9,8 @@ module Deku.Toplevel where
 
 import Prelude
 
-import Bolson.Control as BControl
-import Bolson.Core (Scope(..))
+-- import Bolson.Control as BControl
+-- import Bolson.Core (Scope(..))
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)

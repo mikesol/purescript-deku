@@ -2,8 +2,8 @@ module Deku.Pursx.Unsafe where
 
 import Prelude
 
-import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..))
+-- import Bolson.Control as Bolson
+-- import Bolson.Core (Element(..), Entity(..))
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
 import Data.Reflectable (class Reflectable, reflectType)

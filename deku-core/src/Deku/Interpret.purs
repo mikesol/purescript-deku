@@ -27,8 +27,8 @@ module Deku.Interpret
 
 import Prelude
 
-import Bolson.Control as BC
-import Bolson.Core (Scope(..))
+-- import Bolson.Control as BC
+-- import Bolson.Core (Scope(..))
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST, liftST)
 import Control.Monad.ST.Global (Global)

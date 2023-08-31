@@ -16,10 +16,10 @@ module Deku.Control
 
 import Prelude
 
-import Bolson.Control (behaving)
-import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..), Scope(..))
-import Bolson.Core as BCore
+-- import Bolson.Control (behaving)
+-- import Bolson.Control as Bolson
+-- import Bolson.Core (Element(..), Entity(..), Scope(..))
+-- import Bolson.Core as BCore
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
 import Data.Foldable (for_)

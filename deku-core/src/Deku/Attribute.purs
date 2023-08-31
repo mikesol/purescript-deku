@@ -6,6 +6,8 @@ module Deku.Attribute
   ( AttributeValue(..)
   , Attribute
   , Attribute'
+  , Key(..)
+  , Value(..)
   , unsafeUnAttribute
   , unsafeAttribute
   , prop'
@@ -24,6 +26,8 @@ import Safe.Coerce (coerce)
 import Web.Event.Internal.Types (Event)
 
 -- | A callback function that can be used as a value for a listener.
+newtype Key = Key String
+newtype Value = Value String
 newtype Cb = Cb (Event -> Effect Boolean)
 
 derive instance newtypeCb :: Newtype Cb _

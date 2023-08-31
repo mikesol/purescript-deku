@@ -41,10 +41,10 @@ module Deku.Hooks
 
 import Prelude
 
-import Bolson.Control (Flatten, behaving, behaving')
-import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..))
-import Bolson.Core as BCore
+-- import Bolson.Control (Flatten, behaving, behaving')
+-- import Bolson.Control as Bolson
+-- import Bolson.Core (Element(..), Entity(..))
+-- import Bolson.Core as BCore
 import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
