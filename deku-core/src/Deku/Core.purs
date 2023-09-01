@@ -19,15 +19,17 @@ import Data.Compactable (compact)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
+import Data.Nullable (toMaybe)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), Cb, Key(..), Value(..), unsafeUnAttribute)
 import Deku.Do as Deku
+import Deku.JSWeakRef (WeakRef, deref, weakRef)
 import Effect (Effect, foreachE)
 import Effect.Random (randomInt)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn6, EffectFn7, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn6, mkEffectFn7, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn6, runEffectFn7)
 import FRP.Event (subscribe)
 import FRP.Event as Event
 import FRP.Poll (Poll(..))
@@ -89,9 +91,11 @@ type GetFragmentParent = EffectFn1 DekuBeacon (Maybe DekuElement)
 
 type MakeFragment = Effect DekuElement
 
-type SendToPosForDyn = EffectFn3 Int DekuBeacon DekuBeacon Unit
-type SendToPosForElement = EffectFn2 Int DekuElement Unit
-type SendToPosForText = EffectFn2 Int DekuText Unit
+type SendToPosForDyn = EffectFn5 Int DekuBeacon DekuBeacon DekuBeacon DekuBeacon
+  Unit
+
+type SendToPosForElement = EffectFn4 Int DekuElement DekuBeacon DekuBeacon Unit
+type SendToPosForText = EffectFn4 Int DekuText DekuBeacon DekuBeacon Unit
 
 type RemoveForDyn = EffectFn3 Boolean DekuBeacon DekuBeacon Unit
 type RemoveForElement = EffectFn1 DekuElement Unit
@@ -180,6 +184,10 @@ type MakePursx =
 -- | Type used by Deku backends to make a beacon signaling the beginning or end of a dynamic construct. For internal use only unless you're writing a custom backend.
 type MakeBeacon = Effect DekuBeacon
 
+type CleanUpBeacon = EffectFn1 (WeakRef DekuBeacon) Unit
+type CleanUpElement = EffectFn1 (WeakRef DekuElement) Unit
+type CleanUpText = EffectFn1 (WeakRef DekuText) Unit
+
 -- | This is the interpreter that any Deku backend creator needs to impelement.
 -- | Three interpreters are included with Deku: SPA, SSR, and hydrated SSR.
 -- | As an example, if you want to create a nullary interpreter that
@@ -215,9 +223,30 @@ newtype DOMInterpret = DOMInterpret
   , removeForDyn :: RemoveForDyn
   , removeForElement :: RemoveForElement
   , removeForText :: RemoveForText
+  , cleanUpElement :: CleanUpElement
+  , cleanUpBeacon :: CleanUpBeacon
+  , cleanUpText :: CleanUpText
   }
 
 derive instance Newtype DOMInterpret _
+
+getLifecycle
+  :: forall r
+   . Maybe
+       { end :: DekuBeacon
+       , lifecycle :: Maybe (Poll DekuDynamic)
+       , start :: DekuBeacon
+       | r
+       }
+  -> Maybe
+       { e :: DekuBeacon
+       , l :: Poll DekuDynamic
+       , s :: DekuBeacon
+       }
+getLifecycle mb = do
+  m <- mb
+  l <- m.lifecycle
+  pure { l, s: m.start, e: m.end }
 
 fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2
@@ -264,8 +293,8 @@ fixed nuts = Nut $ mkEffectFn2
               }
           )
           di
-      for_ (psr.beacon >>= _.lifecycle) \l ->
-        runEffectFn5 actOnLifecycleForDyn doAssociations l di dbStart dbEnd
+      for_ (getLifecycle psr.beacon) \{ l, s, e } ->
+        runEffectFn7 actOnLifecycleForDyn doAssociations l di dbStart dbEnd s e
       pure $ DekuBeaconOutcome dbStart dbEnd
 
 -- hooks
@@ -424,6 +453,7 @@ useDynWith p d f = Nut $ mkEffectFn2
          , attributeDynParentForBeacon
          , associateUnsubsToBeacon
          , makeBeacon
+         , cleanUpBeacon
          }
      ) ->
     do
@@ -451,7 +481,7 @@ useDynWith p d f = Nut $ mkEffectFn2
       let those' = eventOrBust p
       let that' = pollOrBust p
       let
-        oh'hi (Tuple mpos value) = do
+        oh'hi sstaaarrrrrt eeeeeennnnd (Tuple mpos value) = do
           let sendTo = d.sendTo value
           let remove = d.remove value
           sendTo' <- liftST $ Poll.create
@@ -466,8 +496,8 @@ useDynWith p d f = Nut $ mkEffectFn2
             ( PSR $ psr
                 { unsubs = Just []
                 , beacon = Just
-                    { start: dbStart
-                    , end: dbEnd
+                    { start: sstaaarrrrrt
+                    , end: eeeeeennnnd
                     , pos: mpos
                     , lifecycle: Just $ Poll.merge
                         [ DekuSendToPos <$> sendTo
@@ -479,55 +509,156 @@ useDynWith p d f = Nut $ mkEffectFn2
                 }
             )
             di
-      for_ this' \t -> foreachE t oh'hi
-      for_ those' \t -> do
-        uu <- subscribe t oh'hi
-        when doAssociations $ runEffectFn2 associateUnsubsToBeacon dbStart
-          [ uu ]
+      for_ this' \t -> foreachE t $ oh'hi dbStart dbEnd
+      let
+        handleEvent t = do
+          wrStart <- runEffectFn1 weakRef dbStart
+          wrEnd <- runEffectFn1 weakRef dbEnd
+          uu <- subscribe t \yy -> do
+            drStart <- runEffectFn1 deref wrStart
+            drEnd <- runEffectFn1 deref wrEnd
+            case toMaybe drStart, toMaybe drEnd of
+              Just dbStartx, Just dbEndy -> oh'hi dbStartx dbEndy yy
+              _, _ -> do
+                -- only need to run on head as head is reference
+                runEffectFn1 cleanUpBeacon wrStart
+          when doAssociations $ runEffectFn2 associateUnsubsToBeacon dbStart
+            [ uu ]
+      for_ those' handleEvent
       for_ that' \t -> do
         pump <- liftST $ Event.create
-        uu <- subscribe (UPoll.sample t pump.event) oh'hi
-        when doAssociations $ runEffectFn2 associateUnsubsToBeacon dbStart
-          [ uu ]
+        handleEvent (UPoll.sample t pump.event)
         pump.push identity
-      for_ (psr.beacon >>= _.lifecycle) \l -> runEffectFn5 actOnLifecycleForDyn
+      for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn7
+        actOnLifecycleForDyn
         doAssociations
         l
         di
         dbStart
         dbEnd
+        s
+        e
       pure $ DekuBeaconOutcome dbStart dbEnd
 
-actOnLifecycleForDyn
-  :: EffectFn5 Boolean (Poll DekuDynamic) DOMInterpret DekuBeacon DekuBeacon
+actOnLifecycleForText
+  :: EffectFn6 Boolean (Poll DekuDynamic) DOMInterpret DekuText DekuBeacon
+       DekuBeacon
        Unit
-actOnLifecycleForDyn = mkEffectFn5
-  \doAssociations
-   p
-   (DOMInterpret { associateUnsubsToBeacon, sendToPosForDyn, removeForDyn })
-   dbStart
-   dbEnd -> do
-    pump <- liftST $ Event.create
-    uu <- subscribe (Poll.sample p pump.event) case _ of
-      DekuSendToPos i -> runEffectFn3 sendToPosForDyn i dbStart dbEnd
-      DekuRemove -> runEffectFn3 removeForDyn (not doAssociations) dbStart dbEnd
-    when doAssociations $ runEffectFn2 associateUnsubsToBeacon dbStart [ uu ]
-    pump.push identity
-
-actOnLifecycleForElement
-  :: EffectFn4 Boolean (Poll DekuDynamic) DOMInterpret DekuElement Unit
-actOnLifecycleForElement = mkEffectFn4
+actOnLifecycleForText = mkEffectFn6
   \doAssociations
    p
    ( DOMInterpret
-       { associateUnsubsToElement, sendToPosForElement, removeForElement }
+       { associateUnsubsToText, cleanUpText, sendToPosForText, removeForText }
    )
-   elt -> do
+   txt'
+   startAnchor'
+   endAnchor' -> do
     pump <- liftST $ Event.create
-    uu <- subscribe (Poll.sample p pump.event) case _ of
-      DekuSendToPos i -> runEffectFn2 sendToPosForElement i elt
-      DekuRemove -> runEffectFn1 removeForElement elt
-    when doAssociations $ runEffectFn2 associateUnsubsToElement elt [ uu ]
+    txtWr <- runEffectFn1 weakRef txt'
+    startAnchorWr <- runEffectFn1 weakRef startAnchor'
+    endAnchorWr <- runEffectFn1 weakRef endAnchor'
+    uu <- subscribe (Poll.sample p pump.event) \x -> do
+      txtX <- runEffectFn1 deref txtWr
+      startAnchorX <- runEffectFn1 deref startAnchorWr
+      endAnchorX <- runEffectFn1 deref endAnchorWr
+      case
+        toMaybe txtX,
+        toMaybe startAnchorX,
+        toMaybe endAnchorX
+        of
+        Just txt, Just startAnchor, Just endAnchor ->
+          case x of
+            DekuSendToPos i -> runEffectFn4 sendToPosForText i txt startAnchor
+              endAnchor
+            DekuRemove -> runEffectFn1 removeForText txt
+        _, _, _ -> do
+          runEffectFn1 cleanUpText txtWr
+    when doAssociations $ runEffectFn2 associateUnsubsToText txt' [ uu ]
+    pump.push identity
+
+actOnLifecycleForDyn
+  :: EffectFn7 Boolean (Poll DekuDynamic) DOMInterpret DekuBeacon DekuBeacon
+       DekuBeacon
+       DekuBeacon
+       Unit
+actOnLifecycleForDyn = mkEffectFn7
+  \doAssociations
+   p
+   ( DOMInterpret
+       { associateUnsubsToBeacon, sendToPosForDyn, removeForDyn, cleanUpBeacon }
+   )
+   dbStart'
+   dbEnd'
+   startAnchor'
+   endAnchor' -> do
+    pump <- liftST $ Event.create
+    dbStartWr <- runEffectFn1 weakRef dbStart'
+    dbEndWr <- runEffectFn1 weakRef dbEnd'
+    startAnchorWr <- runEffectFn1 weakRef startAnchor'
+    endAnchorWr <- runEffectFn1 weakRef endAnchor'
+    uu <- subscribe (Poll.sample p pump.event) \x -> do
+      dbStartX <- runEffectFn1 deref dbStartWr
+      dbEndX <- runEffectFn1 deref dbEndWr
+      startAnchorX <- runEffectFn1 deref startAnchorWr
+      endAnchorX <- runEffectFn1 deref endAnchorWr
+      case
+        toMaybe dbStartX,
+        toMaybe dbEndX,
+        toMaybe startAnchorX,
+        toMaybe endAnchorX
+        of
+        Just dbStart, Just dbEnd, Just startAnchor, Just endAnchor ->
+          case x of
+            DekuSendToPos i -> runEffectFn5 sendToPosForDyn i dbStart dbEnd
+              startAnchor
+              endAnchor
+            DekuRemove -> runEffectFn3 removeForDyn (not doAssociations) dbStart
+              dbEnd
+        _, _, _, _ -> do
+          -- only need to run on head as head is reference
+          runEffectFn1 cleanUpBeacon dbStartWr
+    when doAssociations $ runEffectFn2 associateUnsubsToBeacon dbStart' [ uu ]
+    pump.push identity
+
+actOnLifecycleForElement
+  :: EffectFn6 Boolean (Poll DekuDynamic) DOMInterpret DekuElement DekuBeacon
+       DekuBeacon
+       Unit
+actOnLifecycleForElement = mkEffectFn6
+  \doAssociations
+   p
+   ( DOMInterpret
+       { cleanUpElement
+       , associateUnsubsToElement
+       , sendToPosForElement
+       , removeForElement
+       }
+   )
+   elt'
+   startAnchor'
+   endAnchor' -> do
+    pump <- liftST $ Event.create
+    eltWr <- runEffectFn1 weakRef elt'
+    startAnchorWr <- runEffectFn1 weakRef startAnchor'
+    endAnchorWr <- runEffectFn1 weakRef endAnchor'
+    uu <- subscribe (Poll.sample p pump.event) \x -> do
+      eltX <- runEffectFn1 deref eltWr
+      startAnchorX <- runEffectFn1 deref startAnchorWr
+      endAnchorX <- runEffectFn1 deref endAnchorWr
+      case
+        toMaybe eltX,
+        toMaybe startAnchorX,
+        toMaybe endAnchorX
+        of
+        Just elt, Just startAnchor, Just endAnchor ->
+          case x of
+            DekuSendToPos i -> runEffectFn4 sendToPosForElement i elt
+              startAnchor
+              endAnchor
+            DekuRemove -> runEffectFn1 removeForElement elt
+        _, _, _ -> do
+          runEffectFn1 cleanUpElement eltWr
+    when doAssociations $ runEffectFn2 associateUnsubsToElement elt' [ uu ]
     pump.push identity
 
 -- elt
@@ -561,6 +692,7 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
          , setProp
          , setCb
          , unsetAttribute
+         , cleanUpElement
          }
      ) ->
     do
@@ -573,25 +705,30 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
         runEffectFn2 associateUnsubsToElement elt unsubs
       runEffectFn3 eltAttribution ps di elt
       let
-        oh'hi'attr att = do
+        oh'hi'attr eeeee att = do
           let { key, value } = unsafeUnAttribute att
           case value of
-            Prop' v -> runEffectFn3 setProp elt (Key key) (Value v)
-            Cb' cb -> runEffectFn3 setCb elt (Key key) cb
-            Unset' -> runEffectFn2 unsetAttribute elt (Key key)
+            Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
+            Cb' cb -> runEffectFn3 setCb eeeee (Key key) cb
+            Unset' -> runEffectFn2 unsetAttribute eeeee (Key key)
         handleAttrEvent y = do
-          uu <- subscribe y oh'hi'attr
+          wr <- runEffectFn1 weakRef elt
+          uu <- subscribe y \x -> do
+            drf <- runEffectFn1 deref wr
+            case toMaybe drf of
+              Just yy -> oh'hi'attr yy x
+              Nothing -> runEffectFn1 cleanUpElement wr
           when doAssociations $ runEffectFn2 associateUnsubsToElement elt [ uu ]
         handleAttrPoll y = do
           pump <- liftST $ Event.create
           handleAttrEvent (UPoll.sample y pump.event)
           pump.push identity
       foreachE atts case _ of
-        OnlyPure x -> foreachE x oh'hi'attr
+        OnlyPure x -> foreachE x $ oh'hi'attr elt
         OnlyEvent y -> handleAttrEvent y
         OnlyPoll y -> handleAttrPoll y
         PureAndPoll x y -> do
-          foreachE x oh'hi'attr
+          foreachE x $ oh'hi'attr elt
           handleAttrPoll y
       let
         oh'hi (Nut nut) = do
@@ -604,29 +741,15 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
             )
             di
       foreachE nuts oh'hi
-      for_ (psr.beacon >>= _.lifecycle) \l -> runEffectFn4
+      for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn6
         actOnLifecycleForElement
         doAssociations
         l
         di
         elt
+        s
+        e
       pure $ DekuElementOutcome elt
-
-actOnLifecycleForText
-  :: EffectFn4 Boolean (Poll DekuDynamic) DOMInterpret DekuText Unit
-actOnLifecycleForText = mkEffectFn4
-  \doAsscoiations
-   p
-   ( DOMInterpret
-       { associateUnsubsToText, sendToPosForText, removeForText }
-   )
-   txt -> do
-    pump <- liftST $ Event.create
-    uu <- subscribe (Poll.sample p pump.event) case _ of
-      DekuSendToPos i -> runEffectFn2 sendToPosForText i txt
-      DekuRemove -> runEffectFn1 removeForText txt
-    when doAsscoiations $ runEffectFn2 associateUnsubsToText txt [ uu ]
-    pump.push identity
 
 -- text
 textAttribution :: EffectFn3 PSR DOMInterpret DekuText Unit
@@ -647,6 +770,7 @@ text p = Nut $ mkEffectFn2
      ( DOMInterpret
          { associateUnsubsToText
          , makeText
+         , cleanUpText
          , setText
          }
      ) ->
@@ -663,21 +787,27 @@ text p = Nut $ mkEffectFn2
         runEffectFn2 associateUnsubsToText txt unsubs
       runEffectFn3 textAttribution ps di txt
       let
-        oh'hi str = runEffectFn2 setText txt str
-      for_ those' \y -> do
-        uu <- subscribe y oh'hi
-        when doAssociations $ runEffectFn2 associateUnsubsToText txt [ uu ]
+        handleEvent y = do
+          wr <- runEffectFn1 weakRef txt
+          uu <- subscribe y \yy -> do
+            drf <- runEffectFn1 deref wr
+            case toMaybe drf of
+              Just yyy -> runEffectFn2 setText yyy yy
+              Nothing -> runEffectFn1 cleanUpText wr
+          when doAssociations $ runEffectFn2 associateUnsubsToText txt [ uu ]
+      for_ those' handleEvent
       for_ that' \y -> do
         pump <- liftST $ Event.create
-        uu <- subscribe (UPoll.sample y pump.event) oh'hi
-        when doAssociations $ runEffectFn2 associateUnsubsToText txt [ uu ]
+        handleEvent (UPoll.sample y pump.event)
         pump.push identity
-      for_ (psr.beacon >>= _.lifecycle) \l -> runEffectFn4
+      for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn6
         actOnLifecycleForText
         doAssociations
         l
         di
         txt
+        s
+        e
       pure $ DekuTextOutcome txt
 
 -- portal
