@@ -33,3 +33,4 @@ package:
   - web-html
   - web-uievents
   - untagged-union
+  - web-dom-parser

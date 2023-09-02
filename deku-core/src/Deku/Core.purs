@@ -30,7 +30,6 @@ import Deku.Do as Deku
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
 import Effect (Effect, foreachE)
-import Effect.Random (randomInt)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn7, EffectFn8, mkEffectFn2, mkEffectFn3, mkEffectFn7, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn7, runEffectFn8)
 import FRP.Event (subscribe)
 import FRP.Event as Event
@@ -94,7 +93,7 @@ type SendToPosForDyn = EffectFn4 Int DekuBeacon DekuBeacon DekuBeacon
 type SendToPosForElement = EffectFn4 Int DekuElement DekuBeacon DekuBeacon Unit
 type SendToPosForText = EffectFn4 Int DekuText DekuBeacon DekuBeacon Unit
 
-type RemoveForDyn = EffectFn3 Boolean DekuBeacon DekuBeacon Unit
+type RemoveForDyn = EffectFn2 Boolean DekuBeacon Unit
 type RemoveForElement = EffectFn2 Boolean DekuElement Unit
 type RemoveForText = EffectFn2 Boolean DekuText Unit
 
@@ -164,12 +163,12 @@ type SetCb =
   EffectFn4 DekuElement Key Cb (STObject.STObject Global EventListener) Unit
 
 newtype Html = Html String
-newtype PxScope = PxScope String
 newtype Verb = Verb String
 -- | Type used by Deku backends to make pursx. For internal use only unless you're writing a custom backend.
 type MakePursx =
-  EffectFn5 Html PxScope Verb (Object.Object (Poll (Attribute')))
+  EffectFn5 Html Verb (Object.Object (Poll (Attribute')))
     (Object.Object Nut)
+    DOMInterpret
     DekuElement
 
 -- | Type used by Deku backends to make a beacon signaling the beginning or end of a dynamic construct. For internal use only unless you're writing a custom backend.
@@ -394,6 +393,16 @@ type DynOptions v =
 dynOptions :: forall v. DynOptions v
 dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
 
+useDyn
+  :: forall value
+   . Poll (Tuple (Maybe Int) value)
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDyn p = useDynWith p dynOptions
+
 useDynAtBeginning
   :: forall value
    . Poll value
@@ -598,12 +607,15 @@ actOnLifecycleForDyn
        DekuBeacon
        Unit
 actOnLifecycleForDyn = mkEffectFn8
-  \fromPortal associations
+  \fromPortal
+   associations
    p
    ( DOMInterpret
        { sendToPosForDyn, removeForDyn }
    )
    dbStart'
+   -- todo: we're just using dbend for the weakref
+   -- do we need it?
    dbEnd'
    startAnchor'
    endAnchor' -> do
@@ -623,15 +635,14 @@ actOnLifecycleForDyn = mkEffectFn8
           toMaybe startAnchorX,
           toMaybe endAnchorX
           of
-          Just dbStart, Just dbEnd, Just startAnchor, Just endAnchor ->
+          Just dbStart, Just _, Just startAnchor, Just endAnchor ->
             case x of
               DekuSendToPos i -> runEffectFn4 sendToPosForDyn i dbStart
                 startAnchor
                 endAnchor
-              DekuRemove -> runEffectFn3 removeForDyn
+              DekuRemove -> runEffectFn2 removeForDyn
                 fromPortal
                 dbStart
-                dbEnd
           _, _, _, _ -> do
             -- only need to run on head as head is reference
             thunker associations
@@ -694,6 +705,43 @@ eltAttribution = mkEffectFn3
         y.end
         Nothing
 
+handleAtts
+  :: forall e
+   . DOMInterpret
+  -> STObject.STObject Global EventListener
+  -> DekuElement
+  -> STArray.STArray Global (Effect Unit)
+  -> Array (Poll (Attribute e))
+  -> Effect Unit
+handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts =
+  do
+    let
+      oh'hi'attr eeeee att = do
+        let { key, value } = unsafeUnAttribute att
+        case value of
+          Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
+          Cb' cb -> runEffectFn4 setCb eeeee (Key key) cb obj
+          Unset' -> runEffectFn3 unsetAttribute eeeee (Key key) obj
+      handleAttrEvent y = do
+        wr <- runEffectFn1 weakRef elt
+        uu <- subscribe y \x -> do
+          drf <- runEffectFn1 deref wr
+          case toMaybe drf of
+            Just yy -> oh'hi'attr yy x
+            Nothing -> thunker unsubs
+        void $ liftST $ STArray.push uu unsubs
+      handleAttrPoll y = do
+        pump <- liftST $ Event.create
+        handleAttrEvent (UPoll.sample y pump.event)
+        pump.push identity
+    foreachE atts case _ of
+      OnlyPure x -> foreachE x $ oh'hi'attr elt
+      OnlyEvent y -> handleAttrEvent y
+      OnlyPoll y -> handleAttrPoll y
+      PureAndPoll x y -> do
+        foreachE x $ oh'hi'attr elt
+        handleAttrPoll y
+
 elementify
   :: forall element
    . Maybe String
@@ -706,9 +754,6 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
    di@
      ( DOMInterpret
          { makeElement
-         , setProp
-         , setCb
-         , unsetAttribute
          }
      ) ->
     do
@@ -719,32 +764,7 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
       runEffectFn3 eltAttribution ps di elt
       obj <- liftST $ STObject.new
-      let
-        oh'hi'attr eeeee att = do
-          let { key, value } = unsafeUnAttribute att
-          case value of
-            Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
-            Cb' cb -> runEffectFn4 setCb eeeee (Key key) cb obj
-            Unset' -> runEffectFn3 unsetAttribute eeeee (Key key) obj
-        handleAttrEvent y = do
-          wr <- runEffectFn1 weakRef elt
-          uu <- subscribe y \x -> do
-            drf <- runEffectFn1 deref wr
-            case toMaybe drf of
-              Just yy -> oh'hi'attr yy x
-              Nothing -> thunker unsubs
-          void $ liftST $ STArray.push uu unsubs
-        handleAttrPoll y = do
-          pump <- liftST $ Event.create
-          handleAttrEvent (UPoll.sample y pump.event)
-          pump.push identity
-      foreachE atts case _ of
-        OnlyPure x -> foreachE x $ oh'hi'attr elt
-        OnlyEvent y -> handleAttrEvent y
-        OnlyPoll y -> handleAttrPoll y
-        PureAndPoll x y -> do
-          foreachE x $ oh'hi'attr elt
-          handleAttrPoll y
+      handleAtts di obj elt unsubs atts
       let
         oh'hi (Nut nut) = do
           void $ runEffectFn2 nut
@@ -884,8 +904,7 @@ class
   PursxToElement (rl :: RL.RowList Type) (r :: Row Type)
   | rl -> r where
   pursxToElement
-    :: String
-    -> Proxy rl
+    :: Proxy rl
     -> { | r }
     -> { atts :: Object.Object (Poll Attribute'), nuts :: Object.Object Nut }
 
@@ -898,9 +917,9 @@ instance pursxToElementConsNut ::
   PursxToElement
     (RL.Cons key (Nut) rest)
     r where
-  pursxToElement pxScope _ r = do
+  pursxToElement _ r = do
     let
-      o = pursxToElement pxScope (Proxy :: Proxy rest) r
+      o = pursxToElement (Proxy :: Proxy rest) r
     o { nuts = Object.insert (reflectType pxk) (get pxk r) o.nuts }
     where
     pxk = Proxy :: _ key
@@ -914,9 +933,9 @@ else instance pursxToElementConsAttr ::
   PursxToElement
     (RL.Cons key (Poll (Attribute deku)) rest)
     r where
-  pursxToElement pxScope _ r = do
+  pursxToElement _ r = do
     let
-      o = pursxToElement pxScope (Proxy :: Proxy rest) r
+      o = pursxToElement (Proxy :: Proxy rest) r
     o
       { atts = Object.insert (reflectType pxk)
           (unsafeUnAttribute <$> (get pxk r))
@@ -927,7 +946,7 @@ else instance pursxToElementConsAttr ::
 
 instance pursxToElementNil ::
   PursxToElement RL.Nil r where
-  pursxToElement _ _ _ =
+  pursxToElement _ _ =
     { atts: Object.empty
     , nuts: Object.empty
     }
@@ -957,15 +976,14 @@ unsafeMakePursx' verb html r = Nut $ mkEffectFn2
          }
      ) ->
     do
-      pxScope <- show <$> randomInt 1 2147483646
       let
         { atts, nuts } = pursxToElement
-          pxScope
           (Proxy :: _ rl)
           r
-      elt <- runEffectFn5 makePursx (Html html) (PxScope pxScope) (Verb verb)
+      elt <- runEffectFn5 makePursx (Html html) (Verb verb)
         atts
         nuts
+        di
 
       unsubs <- liftST $ STArray.new
       when (not (null psr.unsubs)) do

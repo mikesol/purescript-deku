@@ -7,56 +7,56 @@ module Deku.Interpret where
 
 import Prelude
 
+import Control.Monad.Maybe.Trans (MaybeT(..), runMaybeT)
 import Control.Monad.Rec.Class (Step(..), tailRecM)
-import Control.Monad.ST (ST)
-import Control.Monad.ST.Class (class MonadST, liftST)
-import Control.Monad.ST.Global (Global)
-import Control.Monad.ST.Global as Region
-import Control.Monad.ST.Internal as Ref
-import Data.Array as Array
-import Data.Array.ST (STArray)
+import Control.Monad.ST.Class (liftST)
+import Data.Array.NonEmpty (toArray)
 import Data.Array.ST as STArray
+import Data.Compactable (compact)
+import Data.Either (Either(..))
 import Data.Exists (Exists, mkExists, runExists)
 import Data.Foldable (for_)
+import Data.FoldableWithIndex (foldrWithIndex)
 import Data.List (List(..), (:))
 import Data.List as List
-import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
-import Data.Monoid.Endo (Endo(..))
-import Data.Newtype (unwrap)
-import Data.Nullable (toMaybe)
 import Data.String (toUpper)
-import Data.String.Utils (includes)
-import Data.Traversable (traverse)
-import Deku.Attribute (Cb(..), Key(..), Value(..))
-import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuParent(..), DekuText)
+import Data.String as String
+import Data.String.Regex (match, regex)
+import Data.String.Regex.Flags (global)
+import Deku.Attribute (Cb(..), Key(..), Value(..), unsafeAttribute)
+import Deku.Core (DOMInterpret, DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), Tag(..), Verb(..), handleAtts)
 import Deku.Core as Core
-import Deku.JSUtil (unsafeFragmentToElement, unsafeNodeToFragment)
-import Deku.JSWeakRef (WeakRef, deref, weakRef)
-import Effect (Effect, whileE)
-import Effect.Class.Console (logShow)
-import Effect.Console (error, log)
+import Deku.JSWeakRef (WeakRef)
+import Effect (Effect, foreachE)
+import Effect.Console (error)
 import Effect.Ref (new, read, write)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
-import FRP.Event (create, subscribe)
-import FRP.Poll (sample)
+import Effect.Uncurried (EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn2, runEffectFn3, runEffectFn4)
+import Foreign.Object as Object
 import Foreign.Object.ST as STObject
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
-import Untagged.Union (type (|+|), asOneOf)
+import Untagged.Union (type (|+|))
 import Web.DOM (Comment, Element, Text)
 import Web.DOM as Node
+import Web.DOM.ChildNode (remove)
 import Web.DOM.Comment as Comment
-import Web.DOM.Document (createComment, createDocumentFragment, createElement, createElementNS, createTextNode)
-import Web.DOM.Element (removeAttribute, setAttribute, tagName, toEventTarget)
+import Web.DOM.DOMParser (makeDOMParser, parseHTMLFromString)
+import Web.DOM.Document (createComment, createElement, createElementNS, createTextNode)
+import Web.DOM.Element (getAttribute, removeAttribute, setAttribute, toChildNode, toEventTarget)
 import Web.DOM.Element as Element
-import Web.DOM.Node (appendChild, insertBefore, nextSibling, nodeType, nodeTypeIndex, parentNode, previousSibling, setTextContent, textContent)
+import Web.DOM.Node (appendChild, childNodes, firstChild, insertBefore, nextSibling, nodeTypeIndex, parentNode, replaceChild, setTextContent, textContent)
+import Web.DOM.NodeList as NodeList
+import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
+import Web.DOM.Text (splitText)
 import Web.DOM.Text as Text
 import Web.Event.Event (EventType(..))
 import Web.Event.EventTarget (addEventListener, eventListener, removeEventListener)
-import Web.HTML (HTMLButtonElement, HTMLFieldSetElement, HTMLTextAreaElement, window)
+import Web.HTML (window)
 import Web.HTML.HTMLButtonElement as HTMLButtonElement
-import Web.HTML.HTMLDocument (toDocument)
+import Web.HTML.HTMLDocument (fromDocument, toDocument)
+import Web.HTML.HTMLDocument as HTMLDocument
+import Web.HTML.HTMLElement as HTMLElement
 import Web.HTML.HTMLFieldSetElement as HTMLFieldSetElement
 import Web.HTML.HTMLInputElement as HTMLInputElement
 import Web.HTML.HTMLKeygenElement as HTMLKeygenElement
@@ -101,32 +101,35 @@ d3kU = "d3kU" :: String
 uk3D = "ul3D" :: String
 
 -- gets the next positional node
-ffwd :: Node.Node -> Effect (Maybe Node.Node)
-ffwd inode = tailRecM go { n: 0, node: inode }
-  where
-  go { n, node } = do
-    nxt <- nextSibling node
-    case nxt, nodeTypeIndex node, n of
-      Nothing, _, _ -> pure $ Done Nothing
-      -- the current node is an element
-      Just nx, 1, 0 -> pure $ Done (Just nx)
-      -- the current node is text
-      Just nx, 3, 0 -> pure $ Done (Just nx)
-      Just nx, 8, _ -> do
-        ctext <- textContent node
-        case ctext of
-          i
-            -- the current node starts a dyn
-            | i == d3kU -> pure $ Loop { n: n + 1, node: nx }
-            -- the current node ends this dyn
-            -- so the next node is out of the dyn
-            | i == uk3D && n == 1 -> pure $ Done $ Just nx
-            -- the current node closes a dyn
-            | i == uk3D -> pure $ Loop { n: n - 1, node: nx }
-            -- random comment, carry on
-            | otherwise -> pure $ Loop { n, node: nx }
-      -- exotic node, carry on
-      Just nx, _, _ -> pure $ Loop { n, node: nx }
+ffwd
+  :: { n :: Int, node :: Node.Node, cpos :: Int }
+  -> Effect
+       ( Step { n :: Int, node :: Node.Node, cpos :: Int }
+           { cpos :: Int, sb :: Maybe Node.Node }
+       )
+ffwd { n, node, cpos } = do
+  nxt <- nextSibling node
+  case nxt, nodeTypeIndex node, n of
+    Nothing, _, _ -> pure $ Done { cpos, sb: Nothing }
+    -- the current node is an element
+    Just nx, 1, 0 -> pure $ Done { cpos, sb: Just nx }
+    -- the current node is text
+    Just nx, 3, 0 -> pure $ Done { cpos, sb: Just nx }
+    Just nx, 8, _ -> do
+      ctext <- textContent node
+      case ctext of
+        i
+          -- the current node starts a dyn
+          | i == d3kU -> pure $ Loop { n: n + 1, node: nx, cpos }
+          -- the current node ends this dyn
+          -- so the next node is out of the dyn
+          | i == uk3D && n == 1 -> pure $ Done { cpos, sb: Just nx }
+          -- the current node closes a dyn
+          | i == uk3D -> pure $ Loop { n: n - 1, node: nx, cpos }
+          -- random comment, carry on
+          | otherwise -> pure $ Loop { n, node: nx, cpos }
+    -- exotic node, carry on
+    Just nx, _, _ -> pure $ Loop { n, node: nx, cpos }
 
 attributeDynParentForNodeEffect
   :: EffectFn4 Node.Node DekuBeacon
@@ -135,10 +138,20 @@ attributeDynParentForNodeEffect
        Unit
 attributeDynParentForNodeEffect = mkEffectFn4
   \nd start end mpos -> do
+    let
+      doInsertAtEnd = do
+        pn <- parentNode (Comment.toNode (fromDekuBeacon end))
+        case pn of
+          Just x -> insertBefore nd
+            (Comment.toNode (fromDekuBeacon end))
+            x
+          Nothing -> error
+            "Programming error: parent node missing in attributeDynParentForNodeEffect (3)"
+        pure $ Done unit
     case mpos of
       Just pos -> do
         let
-          go { curSib, cpos } = do
+          go (Left { curSib, cpos }) = do
             if cpos >= pos then do
               par <- parentNode curSib
               case par of
@@ -146,35 +159,29 @@ attributeDynParentForNodeEffect = mkEffectFn4
                 Nothing -> error
                   "Programming error: parent node missing in attributeDynParentForNodeEffect (1)"
               pure $ Done unit
-            else do
-              let
-                doInsertAtEnd = do
-                  pn <- parentNode (Comment.toNode (fromDekuBeacon end))
-                  case pn of
-                    Just x -> insertBefore nd
-                      (Comment.toNode (fromDekuBeacon end))
-                      x
-                    Nothing -> error
-                      "Programming error: parent node missing in attributeDynParentForNodeEffect (3)"
-                  pure $ Done unit
+            else
               ifM
                 -- have we hit an end binding
                 -- ffwd will never hit this
+                -- so if we hit it it must be the end of the dyn
+                -- we don't need to check for equality with the end
+                -- because "parentheses" are assumed to be balanced
                 ( if nodeTypeIndex curSib /= 8 then pure false
                   else do
                     ctext <- textContent curSib
                     pure $ ctext == uk3D
                 )
                 doInsertAtEnd
-                do
-                  sb <- ffwd curSib
-                  case sb of
-                    Just sb' -> do
-                      pure $ Loop { curSib: sb', cpos: cpos + 1 }
-                    Nothing -> doInsertAtEnd
+                (Loop <<< Right <$> ffwd { n: 0, node: curSib, cpos })
+          go (Right (Loop l)) = Loop <<< Right <$> ffwd l
+          go (Right (Done { sb, cpos })) = do
+            case sb of
+              Just sb' -> do
+                pure $ Loop $ Left { curSib: sb', cpos: cpos + 1 }
+              Nothing -> doInsertAtEnd
         firstOrEnd <- nextSibling (Comment.toNode (fromDekuBeacon start))
         case firstOrEnd of
-          Just st -> tailRecM go { cpos: 0, curSib: st }
+          Just st -> tailRecM go $ Left { cpos: 0, curSib: st }
           Nothing -> error
             "Programming error: no boundary found in attributeDynParentForNodeEffect"
       Nothing -> do
@@ -330,7 +337,7 @@ getDisableable :: Element -> List (Exists FeI) -> Maybe (Exists FeO)
 getDisableable elt = go
   where
   go Nil = Nothing
-  go (x : y)
+  go (x : _)
     | Just o <-
         runExists
           (\(FeI { f, e }) -> e elt <#> \e' -> mkExists (FeO { f, e: e' }))
@@ -431,8 +438,8 @@ unsetAttributeEffect = mkEffectFn3 \elt' (Key k) stobj -> do
   let eventType = EventType k
   let eventTarget = toEventTarget asElt
   for_ l \toRemove -> do
-      removeEventListener eventType toRemove true eventTarget
-      liftST $ STObject.delete k stobj
+    removeEventListener eventType toRemove true eventTarget
+    liftST $ STObject.delete k stobj
   removeAttribute k asElt
 
 setTextEffect :: Core.SetText
@@ -448,22 +455,181 @@ sendToPosForElementEffect :: Core.SendToPosForElement
 sendToPosForElementEffect = mkEffectFn4 \i b st ed ->
   runEffectFn4 attributeDynParentForElementEffect (DekuChild b) st ed (Just i)
 
--- fullDOMInterpret :: Core.DOMInterpret
--- fullDOMInterpret = Core.DOMInterpret
---   { makeElement: makeElementEffect
---   , attributeDynParentForElement: attributeDynParentForElementEffect
---   , attributeElementParent: attributeElementParentEffect
---   , makeOpenBeacon: makeOpenBeaconEffect
---   , makeCloseBeacon: makeCloseBeaconEffect
---   , attributeBeaconParent: attributeBeaconParentEffect
---   , attributeDynParentForBeacons: attributeDynParentForBeaconsEffect
---   , attributeBeaconFullRangeParent: attributeBeaconFullRangeParentEffect
---   , attributeDynParentForBeaconFullRange: attributeDynParentForBeaconFullRangeEffect
---   , makeText: makeTextEffect
---   , attributeDynParentForText: attributeDynParentForTextEffect
---   , attributeTextParent: attributeTextParentEffect
---   , setProp: setPropEffect
---   , setCb: setCbEffect
---   , unsetAttribute: unsetAttributeEffect
---   , setText: setTextEffect
---   }
+sendToPosForTextEffect :: Core.SendToPosForText
+sendToPosForTextEffect = mkEffectFn4 \i b st ed ->
+  runEffectFn4 attributeDynParentForTextEffect b st ed (Just i)
+
+-- for now ignore isPortal elements
+removeForDynEffect :: Core.RemoveForDyn
+removeForDynEffect = mkEffectFn2 \_ l -> do
+  -- todo: is a dyn always an acceptable dummy parent element?
+  e <- runEffectFn2 makeElementEffect Nothing (Tag "div")
+  runEffectFn2 attributeBeaconFullRangeParentEffect l (DekuParent e)
+
+removeForElementEffect :: Core.RemoveForElement
+removeForElementEffect = mkEffectFn2 \_ e -> do
+  remove (toChildNode (fromDekuElement e))
+
+removeForTextEffect :: Core.RemoveForText
+removeForTextEffect = mkEffectFn2 \_ t -> do
+  remove (Text.toChildNode (fromDekuText t))
+
+matchTildes :: String -> Array String
+matchTildes nodeContent =
+  case regex "~([^~]+)~" global of
+    Right r ->
+      -- Extract matched content for all matches
+      maybe [] (compact <<< toArray) (match r nodeContent)
+    Left _ -> []
+
+data ListList a = KeepGoing (List a) (ListList a) | Stop
+
+processNode :: DOMInterpret -> Object.Object Nut -> Node.Node -> Effect Unit
+processNode di nuts elm = tailRecM go (KeepGoing (pure elm) Stop)
+  where
+  go Stop = pure $ Done unit
+  go (KeepGoing Nil x) = go x
+  go (KeepGoing (a : b) kg) = do
+    let nt = nodeTypeIndex a
+    case nt of
+      8 -> do
+        tc <- textContent a
+        let matches = matchTildes tc
+        currentTextNode' <- new a
+        foreachE matches \match -> do
+          let nut' = Object.lookup match nuts
+          case nut' of
+            Nothing -> pure unit
+            Just (Nut replacementNode) -> do
+              currentTextNode'' <- read currentTextNode'
+              ctxc <- textContent currentTextNode''
+              let ix' = String.indexOf (String.Pattern match) ctxc
+              case ix', Text.fromNode currentTextNode'' of
+                Just ix, Just currentTextNode -> do
+                  afterMatchNode <- splitText (ix + (String.length match))
+                    currentTextNode
+                  matchNode <- splitText ix currentTextNode
+                  pn <- parentNode (Text.toNode matchNode)
+                  case pn >>= Element.fromNode of
+                    Nothing -> do
+                      error
+                        "Programming error: processNode could not find a parent node"
+                    Just x -> do
+                      myNut <- runEffectFn2 replacementNode
+                        ( PSR
+                            { parent: toDekuElement x
+                            , fromPortal: false
+                            , unsubs: []
+                            , beacon: Nothing
+                            }
+                        )
+                        di
+                      case myNut of
+                        DekuElementOutcome eo -> replaceChild
+                          (Element.toNode (fromDekuElement eo))
+                          (Text.toNode matchNode)
+                          (Element.toNode x)
+                        DekuTextOutcome to -> replaceChild
+                          (Text.toNode (fromDekuText to))
+                          (Text.toNode matchNode)
+                          (Element.toNode x)
+                        DekuBeaconOutcome bo -> do
+                          runEffectFn3
+                            attributeBeaconFullRangeParentProto
+                            true
+                            ( \i -> insertBefore i (Text.toNode matchNode)
+                                (Element.toNode x)
+                            )
+                            (Comment.toNode (fromDekuBeacon bo))
+                          remove (Text.toChildNode matchNode)
+                        NoOutcome -> pure unit
+                  write (Text.toNode afterMatchNode) currentTextNode'
+                _, _ -> do
+                  error
+                    "Programming error: processNode had too many matches of the regex (the loop overshoots)"
+        pure $ Loop (KeepGoing b kg)
+      _ -> do
+        cn <- childNodes a >>= NodeList.toArray
+        pure $ Loop (KeepGoing (List.fromFoldable cn) (KeepGoing b kg))
+
+makePursxEffect :: Core.MakePursx
+makePursxEffect = mkEffectFn5
+  \(Html html) (Verb verb) atts nuts di -> do
+    let
+      foldedHtml = foldrWithIndex
+        ( \i _ -> String.replace (String.Pattern $ verb <> i <> verb)
+            (String.Replacement $ "data-deku-attr-internal=\"" <> i <> "\"")
+        )
+        html
+        atts
+    dp <- makeDOMParser
+    h <- parseHTMLFromString foldedHtml dp
+    let failure = runEffectFn2 makeElementEffect Nothing (Tag "div")
+    case h of
+      Left err -> do
+        error $ "Programming error: makePursxEffect type-level validation failed: " <> err
+        failure
+      Right elt' -> do
+        iii <- runMaybeT do
+          o <- MaybeT $ pure $ fromDocument elt'
+          b <- MaybeT $ HTMLDocument.body o
+          asn <- MaybeT $ firstChild (HTMLElement.toNode b)
+          MaybeT $ pure $ Element.fromNode asn
+        case iii of
+          Just elt -> do
+            processNode di nuts (Element.toNode elt)
+            nl <- querySelectorAll (QuerySelector "[data-deku-attr-internal]")
+              (Element.toParentNode elt)
+            arr <- NodeList.toArray nl
+            obj <- liftST STObject.new
+            foreachE arr \nd -> do
+              case Element.fromNode nd of
+                Just asElt -> do
+                  attTag <- getAttribute "data-deku-attr-internal" asElt
+                  case attTag >>= flip Object.lookup atts of
+                    Just att -> do
+                      star <- liftST $ STArray.new
+                      -- todo: does this map have a runtime hit?
+                      handleAtts di obj (toDekuElement asElt) star
+                        [ (map unsafeAttribute att) ]
+                    Nothing -> do
+                      error $ "Programming error: att not found in pursx"
+                Nothing -> do
+                  error $
+                    "Programming error: non-element with attr-internal tag"
+            pure $ toDekuElement elt
+          Nothing -> do
+            error $ "Programming error: document parser yielded non-document"
+            failure
+
+fullDOMInterpret :: Core.DOMInterpret
+fullDOMInterpret = Core.DOMInterpret
+  { makeElement: makeElementEffect
+  , setProp: setPropEffect
+  , setCb: setCbEffect
+  , unsetAttribute: unsetAttributeEffect
+  , attributeElementParent: attributeElementParentEffect
+  , attributeDynParentForElement: attributeDynParentForElementEffect
+  , sendToPosForElement: sendToPosForElementEffect
+  , removeForElement: removeForElementEffect
+  --
+  , makeOpenBeacon: makeOpenBeaconEffect
+  , makeCloseBeacon: makeCloseBeaconEffect
+  , attributeBeaconParent: attributeBeaconParentEffect
+  , attributeDynParentForBeacons: attributeDynParentForBeaconsEffect
+  , attributeBeaconFullRangeParent: attributeBeaconFullRangeParentEffect
+  , attributeDynParentForBeaconFullRange:
+      attributeDynParentForBeaconFullRangeEffect
+  , sendToPosForDyn: sendToPosForDynEffect
+  , removeForDyn: removeForDynEffect
+  --
+  , makeText: makeTextEffect
+  , setText: setTextEffect
+  , attributeTextParent: attributeTextParentEffect
+  , attributeDynParentForText: attributeDynParentForTextEffect
+  , sendToPosForText: sendToPosForTextEffect
+  , removeForText: removeForTextEffect
+  --
+  , makePursx: makePursxEffect
+  --
+  }
