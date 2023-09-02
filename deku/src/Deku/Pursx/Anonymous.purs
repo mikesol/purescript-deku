@@ -3,6 +3,7 @@ module Deku.Pursx.Anonymous where
 import Data.Reflectable (class Reflectable)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple.Nested (type (/\), (/\))
+import Deku.Pursx.Unsafe (class PursxToElement)
 import Deku.Core (Nut)
 import Deku.Pursx (class PXStart, (~~))
 import Prim.Row (class Cons, class Lacks)

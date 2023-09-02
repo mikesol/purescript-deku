@@ -7,6 +7,7 @@ module Deku.Interpret where
 
 import Prelude
 
+import Control.Monad.Rec.Class (Step(..), tailRecM)
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST, liftST)
 import Control.Monad.ST.Global (Global)
@@ -14,37 +15,60 @@ import Control.Monad.ST.Global as Region
 import Control.Monad.ST.Internal as Ref
 import Data.Array as Array
 import Data.Array.ST (STArray)
+import Data.Array.ST as STArray
+import Data.Exists (Exists, mkExists, runExists)
 import Data.Foldable (for_)
-import Data.List ((:))
+import Data.List (List(..), (:))
 import Data.List as List
 import Data.Map as Map
-import Data.Maybe (Maybe(..), maybe)
+import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Monoid.Endo (Endo(..))
 import Data.Newtype (unwrap)
 import Data.Nullable (toMaybe)
+import Data.String (toUpper)
 import Data.String.Utils (includes)
 import Data.Traversable (traverse)
-import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuText)
+import Deku.Attribute (Cb(..), Key(..), Value(..))
+import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuParent(..), DekuText)
 import Deku.Core as Core
-import Deku.JSMap (JSMap)
 import Deku.JSUtil (unsafeFragmentToElement, unsafeNodeToFragment)
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
-import Effect (Effect)
-import Effect.Uncurried (EffectFn1, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1)
+import Effect (Effect, whileE)
+import Effect.Class.Console (logShow)
+import Effect.Console (error, log)
+import Effect.Ref (new, read, write)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
 import FRP.Event (create, subscribe)
 import FRP.Poll (sample)
+import Foreign.Object.ST as STObject
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
-import Untagged.Union (type (|+|))
+import Untagged.Union (type (|+|), asOneOf)
 import Web.DOM (Comment, Element, Text)
+import Web.DOM as Node
 import Web.DOM.Comment as Comment
-import Web.DOM.Document (createDocumentFragment, createElementNS)
-import Web.DOM.Node (nodeType, nodeTypeIndex, parentNode)
-import Web.HTML (window)
+import Web.DOM.Document (createComment, createDocumentFragment, createElement, createElementNS, createTextNode)
+import Web.DOM.Element (removeAttribute, setAttribute, tagName, toEventTarget)
+import Web.DOM.Element as Element
+import Web.DOM.Node (appendChild, insertBefore, nextSibling, nodeType, nodeTypeIndex, parentNode, previousSibling, setTextContent, textContent)
+import Web.DOM.Text as Text
+import Web.Event.Event (EventType(..))
+import Web.Event.EventTarget (addEventListener, eventListener, removeEventListener)
+import Web.HTML (HTMLButtonElement, HTMLFieldSetElement, HTMLTextAreaElement, window)
+import Web.HTML.HTMLButtonElement as HTMLButtonElement
 import Web.HTML.HTMLDocument (toDocument)
+import Web.HTML.HTMLFieldSetElement as HTMLFieldSetElement
+import Web.HTML.HTMLInputElement as HTMLInputElement
+import Web.HTML.HTMLKeygenElement as HTMLKeygenElement
+import Web.HTML.HTMLLinkElement as HTMLLinkElement
+import Web.HTML.HTMLOptGroupElement as HTMLOptGroupElement
+import Web.HTML.HTMLOptionElement as HTMLOptionElement
+import Web.HTML.HTMLSelectElement as HTMLSelectElement
+import Web.HTML.HTMLTextAreaElement as HTMLTextAreaElement
 import Web.HTML.Window (document)
 
-type MapEntry = WeakRef DekuElement |+| WeakRef DekuBeacon |+| WeakRef DekuText
+type MapEntry = (WeakRef DekuElement) |+| (WeakRef DekuBeacon) |+|
+  (WeakRef DekuText)
 
 toDekuElement :: Element -> DekuElement
 toDekuElement = unsafeCoerce
@@ -64,46 +88,382 @@ toDekuText = unsafeCoerce
 fromDekuText :: DekuText -> Text
 fromDekuText = unsafeCoerce
 
-type UnsubscribeMap = JSMap MapEntry (STArray Global (Effect Unit))
-
-makeElementEffect :: UnsubscribeMap -> Core.MakeElement
-makeElementEffect jsMap = mkEffectFn2 \ns tag -> do
+makeElementEffect :: Core.MakeElement
+makeElementEffect = mkEffectFn2 \ns tag -> do
   doc <- window >>= document
-  elt <- createElementNS (coerce ns) (coerce tag) (toDocument doc)
-  wr <- runEffectFn1 weakRef elt
+  elt <- case coerce ns :: Maybe String of
+    Nothing -> createElement (toUpper (coerce tag)) (toDocument doc)
+    Just ns' -> createElementNS (Just $ coerce ns') (toUpper (coerce tag))
+      (toDocument doc)
   pure $ toDekuElement elt
 
-getFragmentParentEffect :: Core.GetFragmentParent
-getFragmentParentEffect = mkEffectFn1 \beacon' -> do
-  let beacon = fromDekuBeacon beacon'
-  parent' <- parentNode (Comment.toNode beacon)
-  case parent' of
-    Just parent
-      | nodeTypeIndex parent == 11 -> do
-          pure $ Just $ toDekuElement $ unsafeFragmentToElement $
-            unsafeNodeToFragment parent
-    _ -> pure Nothing
+d3kU = "d3kU" :: String
+uk3D = "ul3D" :: String
 
-makeFragmentEffect :: Core.MakeFragment
-makeFragmentEffect = do
+-- gets the next positional node
+ffwd :: Node.Node -> Effect (Maybe Node.Node)
+ffwd inode = tailRecM go { n: 0, node: inode }
+  where
+  go { n, node } = do
+    nxt <- nextSibling node
+    case nxt, nodeTypeIndex node, n of
+      Nothing, _, _ -> pure $ Done Nothing
+      -- the current node is an element
+      Just nx, 1, 0 -> pure $ Done (Just nx)
+      -- the current node is text
+      Just nx, 3, 0 -> pure $ Done (Just nx)
+      Just nx, 8, _ -> do
+        ctext <- textContent node
+        case ctext of
+          i
+            -- the current node starts a dyn
+            | i == d3kU -> pure $ Loop { n: n + 1, node: nx }
+            -- the current node ends this dyn
+            -- so the next node is out of the dyn
+            | i == uk3D && n == 1 -> pure $ Done $ Just nx
+            -- the current node closes a dyn
+            | i == uk3D -> pure $ Loop { n: n - 1, node: nx }
+            -- random comment, carry on
+            | otherwise -> pure $ Loop { n, node: nx }
+      -- exotic node, carry on
+      Just nx, _, _ -> pure $ Loop { n, node: nx }
+
+attributeDynParentForNodeEffect
+  :: EffectFn4 Node.Node DekuBeacon
+       DekuBeacon
+       (Maybe Int)
+       Unit
+attributeDynParentForNodeEffect = mkEffectFn4
+  \nd start end mpos -> do
+    case mpos of
+      Just pos -> do
+        let
+          go { curSib, cpos } = do
+            if cpos >= pos then do
+              par <- parentNode curSib
+              case par of
+                Just x -> insertBefore nd curSib x
+                Nothing -> error
+                  "Programming error: parent node missing in attributeDynParentForNodeEffect (1)"
+              pure $ Done unit
+            else do
+              let
+                doInsertAtEnd = do
+                  pn <- parentNode (Comment.toNode (fromDekuBeacon end))
+                  case pn of
+                    Just x -> insertBefore nd
+                      (Comment.toNode (fromDekuBeacon end))
+                      x
+                    Nothing -> error
+                      "Programming error: parent node missing in attributeDynParentForNodeEffect (3)"
+                  pure $ Done unit
+              ifM
+                -- have we hit an end binding
+                -- ffwd will never hit this
+                ( if nodeTypeIndex curSib /= 8 then pure false
+                  else do
+                    ctext <- textContent curSib
+                    pure $ ctext == uk3D
+                )
+                doInsertAtEnd
+                do
+                  sb <- ffwd curSib
+                  case sb of
+                    Just sb' -> do
+                      pure $ Loop { curSib: sb', cpos: cpos + 1 }
+                    Nothing -> doInsertAtEnd
+        firstOrEnd <- nextSibling (Comment.toNode (fromDekuBeacon start))
+        case firstOrEnd of
+          Just st -> tailRecM go { cpos: 0, curSib: st }
+          Nothing -> error
+            "Programming error: no boundary found in attributeDynParentForNodeEffect"
+      Nothing -> do
+        pn <- parentNode (Comment.toNode (fromDekuBeacon end))
+        case pn of
+          Just x -> insertBefore nd (Comment.toNode (fromDekuBeacon end)) x
+          Nothing -> error
+            "Programming error: parent node missing in attributeDynParentForNodeEffect (4)"
+
+attributeDynParentForElementEffect :: Core.AttributeDynParentForElement
+attributeDynParentForElementEffect = mkEffectFn4
+  \(DekuChild child) start end mpos -> runEffectFn4
+    attributeDynParentForNodeEffect
+    (Element.toNode (fromDekuElement child))
+    start
+    end
+    mpos
+
+attributeDynParentForTextEffect :: Core.AttributeDynParentForText
+attributeDynParentForTextEffect = mkEffectFn4
+  \txt start end mpos -> runEffectFn4
+    attributeDynParentForNodeEffect
+    (Text.toNode (fromDekuText txt))
+    start
+    end
+    mpos
+
+attributeElementParentEffect :: Core.AttributeElementParent
+attributeElementParentEffect = mkEffectFn2
+  \(DekuChild child) (DekuParent parent) -> do
+    appendChild (Element.toNode (fromDekuElement child))
+      (Element.toNode (fromDekuElement parent))
+
+attributeTextParentEffect :: Core.AttributeTextParent
+attributeTextParentEffect = mkEffectFn2
+  \txt (DekuParent parent) -> do
+    appendChild (Text.toNode (fromDekuText txt))
+      (Element.toNode (fromDekuElement parent))
+
+makeOpenBeaconEffect :: Core.MakeBeacon
+makeOpenBeaconEffect = do
   doc <- window >>= document
-  df <- createDocumentFragment $ toDocument doc
-  pure $ toDekuElement $ unsafeFragmentToElement df
+  cm <- createComment d3kU (toDocument doc)
+  pure (toDekuBeacon cm)
 
--- attributeDynParentForElement :: Core.AttributeDynParentForElement
--- attributeDynParentForElement = mkEffectFn4 \(DekuChild child) start end mpos -> do
---   case mpos of
---     Just pos ->
---     Nothing -> insertBefore child end
+makeCloseBeaconEffect :: Core.MakeBeacon
+makeCloseBeaconEffect = do
+  doc <- window >>= document
+  cm <- createComment uk3D (toDocument doc)
+  pure (toDekuBeacon cm)
 
--- insertBefore :: Node -> Node -> Node -> Effect Unit
--- Inserts the first node before the second as a child of the third node.
+attributeBeaconParentEffect :: Core.AttributeBeaconParent
+attributeBeaconParentEffect = mkEffectFn2 \beacon (DekuParent parent) -> do
+  appendChild (Comment.toNode (fromDekuBeacon beacon))
+    (Element.toNode (fromDekuElement parent))
 
-fullDOMInterpret
-  :: UnsubscribeMap
-  -> Core.DOMInterpret
-fullDOMInterpret jsMap = Core.DOMInterpret
-  { makeElement: makeElementEffect jsMap
-  , getFragmentParent: getFragmentParentEffect
-  , makeFragment: makeFragmentEffect
-  }
+attributeDynParentForBeaconsEffect :: Core.AttributeDynParentForBeacons
+attributeDynParentForBeaconsEffect = mkEffectFn5
+  \i o start end mpos -> do
+    let oo = Comment.toNode (fromDekuBeacon o)
+    let ii = Comment.toNode (fromDekuBeacon i)
+    runEffectFn4 attributeDynParentForNodeEffect oo start end mpos
+    p <- parentNode oo
+    case p of
+      Just x -> insertBefore ii oo x
+      Nothing -> do
+        error
+          "Programming error: parent node missing in attributeDynParentForBeaconsEffect"
+
+attributeBeaconFullRangeParentProto
+  :: EffectFn3 Boolean (Node.Node -> Effect Unit) Node.Node Unit
+attributeBeaconFullRangeParentProto = mkEffectFn3
+  \skipFirst mover initial ->
+    do
+      let
+        go { n, node } = do
+          nxt <- nextSibling node
+          mover node
+          case nxt of
+            Nothing -> do
+              error
+                "Programming error: attributeBeaconFullRangeParentProto out of range"
+              pure $ Done unit
+            Just nx -> case nodeTypeIndex nx of
+              8 -> do
+                ctext <- textContent nx
+                case ctext of
+                  i
+                    | i == d3kU -> pure $ Loop
+                        { n: n + 1, node: nx }
+                    | i == uk3D && n == 0 -> do
+                        mover nx
+                        pure $ Done unit
+                    | i == uk3D -> pure $ Loop
+                        { n: n - 1, node: nx }
+                    | otherwise -> pure $ Loop { n, node: nx }
+              _ -> pure $ Loop { n, node: nx }
+      n <-
+        if not skipFirst then pure 0
+        else do
+          case nodeTypeIndex initial of
+            8 -> do
+              ctext <- textContent initial
+              case ctext of
+                i
+                  | i == d3kU -> pure 1
+                  | otherwise -> pure 0
+            _ -> pure 0
+      tailRecM go { n, node: initial }
+
+attributeBeaconFullRangeParentEffect :: Core.AttributeBeaconFullRangeParent
+attributeBeaconFullRangeParentEffect = mkEffectFn2
+  \stBeacon (DekuParent parent) -> runEffectFn3
+    attributeBeaconFullRangeParentProto
+    false
+    (flip appendChild (Element.toNode (fromDekuElement parent)))
+    (Comment.toNode (fromDekuBeacon stBeacon))
+
+attributeDynParentForBeaconFullRangeEffect
+  :: Core.AttributeDynParentForBeaconFullRange
+attributeDynParentForBeaconFullRangeEffect = mkEffectFn4
+  \stBeacon leftB rightB mpos -> do
+    nsOld <- nextSibling (Comment.toNode (fromDekuBeacon stBeacon))
+    runEffectFn4
+      attributeDynParentForNodeEffect
+      (Comment.toNode (fromDekuBeacon stBeacon))
+      leftB
+      rightB
+      mpos
+    par <- parentNode (Comment.toNode (fromDekuBeacon stBeacon))
+    ns <- nextSibling (Comment.toNode (fromDekuBeacon stBeacon))
+    case par, ns, nsOld of
+      Just par', Just ns', Just nso -> runEffectFn3
+        attributeBeaconFullRangeParentProto
+        true
+        (\i -> insertBefore i ns' par')
+        nso
+      _, _, _ -> error
+        "Programming error: attributeDynParentForBeaconFullRangeEffect cannot find parent"
+
+makeTextEffect :: Core.MakeText
+makeTextEffect = mkEffectFn1 \mstr -> do
+  doc <- window >>= document
+  txt <- createTextNode (fromMaybe "" mstr) (toDocument doc)
+  pure $ toDekuText txt
+
+newtype FeI e = FeI
+  { f :: Boolean -> e -> Effect Unit, e :: Element -> Maybe e }
+
+newtype FeO e = FeO { f :: Boolean -> e -> Effect Unit, e :: e }
+
+getDisableable :: Element -> List (Exists FeI) -> Maybe (Exists FeO)
+getDisableable elt = go
+  where
+  go Nil = Nothing
+  go (x : y)
+    | Just o <-
+        runExists
+          (\(FeI { f, e }) -> e elt <#> \e' -> mkExists (FeO { f, e: e' }))
+          x = Just o
+  go (_ : y) = go y
+
+setPropEffect :: Core.SetProp
+setPropEffect = mkEffectFn3 \elt' (Key k) (Value v) -> do
+  let elt = fromDekuElement elt'
+  let
+    o
+      | k == "value"
+      , Just ie <- HTMLInputElement.fromElement elt = HTMLInputElement.setValue
+          v
+          ie
+      | k == "value"
+      , Just tx <- HTMLTextAreaElement.fromElement elt =
+          HTMLTextAreaElement.setValue v tx
+      | k == "checked"
+      , Just ie <- HTMLInputElement.fromElement elt =
+          HTMLInputElement.setChecked (v == "true") ie
+      | k == "disabled"
+      , Just fe <-
+          getDisableable elt
+            ( mkExists
+                ( FeI
+                    { e: HTMLButtonElement.fromElement
+                    , f: HTMLButtonElement.setDisabled
+                    }
+                )
+                : mkExists
+                    ( FeI
+                        { e: HTMLInputElement.fromElement
+                        , f: HTMLInputElement.setDisabled
+                        }
+                    )
+                : mkExists
+                    ( FeI
+                        { e: HTMLFieldSetElement.fromElement
+                        , f: HTMLFieldSetElement.setDisabled
+                        }
+                    )
+                : mkExists
+                    ( FeI
+                        { e: HTMLKeygenElement.fromElement
+                        , f: HTMLKeygenElement.setDisabled
+                        }
+                    )
+                : mkExists
+                    ( FeI
+                        { e: HTMLLinkElement.fromElement
+                        , f: HTMLLinkElement.setDisabled
+                        }
+                    )
+                : mkExists
+                    ( FeI
+                        { e: HTMLOptGroupElement.fromElement
+                        , f: HTMLOptGroupElement.setDisabled
+                        }
+                    )
+                : mkExists
+                    ( FeI
+                        { e: HTMLOptionElement.fromElement
+                        , f: HTMLOptionElement.setDisabled
+                        }
+                    )
+                : mkExists
+                    ( FeI
+                        { e: HTMLSelectElement.fromElement
+                        , f: HTMLSelectElement.setDisabled
+                        }
+                    )
+                : mkExists
+                    ( FeI
+                        { e: HTMLTextAreaElement.fromElement
+                        , f: HTMLTextAreaElement.setDisabled
+                        }
+                    )
+                : Nil
+            ) = runExists (\(FeO { f, e }) -> f (v == "true") e) fe
+      | otherwise = setAttribute k v elt
+  o
+
+setCbEffect :: Core.SetCb
+setCbEffect = mkEffectFn4 \elt' (Key k) (Cb v) stobj -> do
+  l <- liftST $ STObject.peek k stobj
+  let eventType = EventType k
+  let eventTarget = toEventTarget (fromDekuElement elt')
+  for_ l \toRemove -> removeEventListener eventType toRemove true eventTarget
+  nl <- eventListener v
+  addEventListener eventType nl true eventTarget
+  liftST $ void $ STObject.poke k nl stobj
+
+unsetAttributeEffect :: Core.UnsetAttribute
+unsetAttributeEffect = mkEffectFn3 \elt' (Key k) stobj -> do
+  l <- liftST $ STObject.peek k stobj
+  let asElt = fromDekuElement elt'
+  let eventType = EventType k
+  let eventTarget = toEventTarget asElt
+  for_ l \toRemove -> do
+      removeEventListener eventType toRemove true eventTarget
+      liftST $ STObject.delete k stobj
+  removeAttribute k asElt
+
+setTextEffect :: Core.SetText
+setTextEffect = mkEffectFn2 \txt' str -> do
+  let txt = fromDekuText txt'
+  setTextContent str (Text.toNode txt)
+
+sendToPosForDynEffect :: Core.SendToPosForDyn
+sendToPosForDynEffect = mkEffectFn4 \i b st ed ->
+  runEffectFn4 attributeDynParentForBeaconFullRangeEffect b st ed (Just i)
+
+sendToPosForElementEffect :: Core.SendToPosForElement
+sendToPosForElementEffect = mkEffectFn4 \i b st ed ->
+  runEffectFn4 attributeDynParentForElementEffect (DekuChild b) st ed (Just i)
+
+-- fullDOMInterpret :: Core.DOMInterpret
+-- fullDOMInterpret = Core.DOMInterpret
+--   { makeElement: makeElementEffect
+--   , attributeDynParentForElement: attributeDynParentForElementEffect
+--   , attributeElementParent: attributeElementParentEffect
+--   , makeOpenBeacon: makeOpenBeaconEffect
+--   , makeCloseBeacon: makeCloseBeaconEffect
+--   , attributeBeaconParent: attributeBeaconParentEffect
+--   , attributeDynParentForBeacons: attributeDynParentForBeaconsEffect
+--   , attributeBeaconFullRangeParent: attributeBeaconFullRangeParentEffect
+--   , attributeDynParentForBeaconFullRange: attributeDynParentForBeaconFullRangeEffect
+--   , makeText: makeTextEffect
+--   , attributeDynParentForText: attributeDynParentForTextEffect
+--   , attributeTextParent: attributeTextParentEffect
+--   , setProp: setPropEffect
+--   , setCb: setCbEffect
+--   , unsetAttribute: unsetAttributeEffect
+--   , setText: setTextEffect
+--   }
