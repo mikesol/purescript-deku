@@ -25,6 +25,7 @@ import Data.String (toUpper)
 import Data.String as String
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
+import Debug (spy)
 import Deku.Attribute (Cb(..), Key(..), Value(..), unsafeAttribute)
 import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), Tag(..), Verb(..), handleAtts)
 import Deku.Core as Core
@@ -468,9 +469,9 @@ setCbEffect = mkEffectFn4 \elt' (Key k) (Cb v) stobj -> do
     l <- liftST $ STObject.peek k stobj
     let eventType = EventType k
     let eventTarget = toEventTarget (fromDekuElement elt')
-    for_ l \toRemove -> removeEventListener eventType toRemove true eventTarget
+    for_ l \toRemove -> removeEventListener eventType toRemove false eventTarget
     nl <- eventListener v
-    addEventListener eventType nl true eventTarget
+    addEventListener eventType nl false eventTarget
     liftST $ void $ STObject.poke k nl stobj
 
 unsetAttributeEffect :: Core.UnsetAttribute
@@ -480,7 +481,7 @@ unsetAttributeEffect = mkEffectFn3 \elt' (Key k) stobj -> do
   let eventType = EventType k
   let eventTarget = toEventTarget asElt
   for_ l \toRemove -> do
-    removeEventListener eventType toRemove true eventTarget
+    removeEventListener eventType toRemove false eventTarget
     liftST $ STObject.delete k stobj
   removeAttribute k asElt
 
@@ -580,6 +581,7 @@ makePursxEffect = mkEffectFn5
                   case attTag >>= flip Object.lookup atts of
                     Just att -> do
                       star <- liftST $ STArray.new
+                      let _ = spy "attTag" { attTag }
                       -- todo: does this map have a runtime hit?
                       handleAtts di obj (toDekuElement asElt) star
                         [ (map unsafeAttribute att) ]
