@@ -572,10 +572,10 @@ makePursxEffect = mkEffectFn5
             nl <- querySelectorAll (QuerySelector "[data-deku-attr-internal]")
               (Element.toParentNode elt)
             arr <- NodeList.toArray nl
-            obj <- liftST STObject.new
             foreachE arr \nd -> do
               case Element.fromNode nd of
                 Just asElt -> do
+                  obj <- liftST STObject.new
                   attTag <- getAttribute "data-deku-attr-internal" asElt
                   case attTag >>= flip Object.lookup atts of
                     Just att -> do
