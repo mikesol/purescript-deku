@@ -32,7 +32,7 @@ import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
 import Effect (Effect, foreachE)
 import Effect.Ref (Ref, new, write)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn8, mkEffectFn2, mkEffectFn3, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn6, EffectFn8, mkEffectFn2, mkEffectFn3, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn6, runEffectFn8)
 import FRP.Event (subscribe)
 import FRP.Event as Event
 import FRP.Poll (Poll(..))
@@ -169,9 +169,10 @@ newtype Html = Html String
 newtype Verb = Verb String
 -- | Type used by Deku backends to make pursx. For internal use only unless you're writing a custom backend.
 type MakePursx =
-  EffectFn5 Html Verb (Object.Object (Poll (Attribute')))
+  EffectFn6 Html Verb (Object.Object (Poll (Attribute')))
     (Object.Object Nut)
     DOMInterpret
+    PSR
     DekuElement
 
 -- | Type used by Deku backends to make a beacon signaling the beginning or end of a dynamic construct. For internal use only unless you're writing a custom backend.
@@ -995,14 +996,14 @@ unsafeMakePursx' verb html r = Nut $ mkEffectFn2
         { atts, nuts } = pursxToElement
           (Proxy :: _ rl)
           r
-      elt <- runEffectFn5 makePursx (Html html) (Verb verb)
+      elt <- runEffectFn6 makePursx (Html html) (Verb verb)
         atts
         nuts
         di
+        ps
 
       unsubs <- liftST $ STArray.new
       when (not (null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
-      runEffectFn3 eltAttribution ps di elt
       runEffectFn2 oneOffFinalizationRegistry elt (thunker unsubs)
       pure $ DekuElementOutcome elt
