@@ -30,7 +30,8 @@ import Deku.Do as Deku
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
 import Effect (Effect, foreachE)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn7, EffectFn8, mkEffectFn2, mkEffectFn3, mkEffectFn7, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn7, runEffectFn8)
+import Effect.Ref (Ref, new, write)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn8, mkEffectFn2, mkEffectFn3, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
 import FRP.Event (subscribe)
 import FRP.Event as Event
 import FRP.Poll (Poll(..))
@@ -54,6 +55,7 @@ newtype PSR = PSR
         { start :: DekuBeacon
         , end :: DekuBeacon
         , pos :: Maybe Int
+        , lucky :: Ref Boolean
         , lifecycle :: Maybe (Poll DekuDynamic)
         }
   }
@@ -90,8 +92,8 @@ type MakeElement =
 type SendToPosForDyn = EffectFn4 Int DekuBeacon DekuBeacon DekuBeacon
   Unit
 
-type SendToPosForElement = EffectFn4 Int DekuElement DekuBeacon DekuBeacon Unit
-type SendToPosForText = EffectFn4 Int DekuText DekuBeacon DekuBeacon Unit
+type SendToPosForElement = EffectFn5 (Ref Boolean) Int DekuElement DekuBeacon DekuBeacon Unit
+type SendToPosForText = EffectFn5 (Ref Boolean) Int DekuText DekuBeacon DekuBeacon Unit
 
 type RemoveForDyn = EffectFn2 Boolean DekuBeacon Unit
 type RemoveForElement = EffectFn2 Boolean DekuElement Unit
@@ -120,7 +122,7 @@ type AssociateUnsubsToElement = EffectFn2 DekuElement (Array (Effect Unit))
 
 -- parent is not needed because we may be in a portal
 -- we always grab the parent from the beacon
-type AttributeDynParentForElement = EffectFn4 DekuChild DekuBeacon
+type AttributeDynParentForElement = EffectFn5 (Ref Boolean) DekuChild DekuBeacon
   DekuBeacon
   (Maybe Int)
   Unit
@@ -140,7 +142,7 @@ type AttributeDynParentForBeacons = EffectFn5 DekuBeacon DekuBeacon DekuBeacon
 
 -- parent is not needed because we may be in a portal
 -- we always grab the parent from the beacon
-type AttributeDynParentForText = EffectFn4 DekuText DekuBeacon
+type AttributeDynParentForText = EffectFn5 (Ref Boolean) DekuText DekuBeacon
   DekuBeacon
   (Maybe Int)
   Unit
@@ -221,17 +223,19 @@ getLifecycle
        { end :: DekuBeacon
        , lifecycle :: Maybe (Poll DekuDynamic)
        , start :: DekuBeacon
+       , lucky :: Ref Boolean
        | r
        }
   -> Maybe
        { e :: DekuBeacon
        , l :: Poll DekuDynamic
        , s :: DekuBeacon
+       , lucky :: Ref Boolean
        }
 getLifecycle mb = do
   m <- mb
   l <- m.lifecycle
-  pure { l, s: m.start, e: m.end }
+  pure { l, s: m.start, e: m.end, lucky: m.lucky }
 
 thunker :: STArray.STArray Global (Effect Unit) -> Effect Unit
 thunker unsubs = do
@@ -257,6 +261,9 @@ runListener oh'hi associations = go
       pump.push identity
     PureAndPoll x y -> go (OnlyPure x) *> go (OnlyPoll y)
 
+notLucky :: Ref Boolean -> Effect Unit
+notLucky = write false
+
 fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2
   \(PSR psr)
@@ -269,8 +276,9 @@ fixed nuts = Nut $ mkEffectFn2
          }
      ) ->
     do
+      lucky <- new true
+      for_ psr.beacon (_.lucky >>> notLucky)
       dbStart <- makeOpenBeacon
-
       unsubs <- liftST $ STArray.new
       when (not (null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
@@ -292,13 +300,14 @@ fixed nuts = Nut $ mkEffectFn2
               , beacon = Just
                   { start: dbStart
                   , end: dbEnd
+                  , lucky
                   , pos: Nothing
                   , lifecycle: Nothing
                   }
               }
           )
           di
-      for_ (getLifecycle psr.beacon) \{ l, s, e } ->
+      for_ (getLifecycle psr.beacon) \{ l, s, e } -> do
         runEffectFn8 actOnLifecycleForDyn
           psr.fromPortal
           unsubs
@@ -479,8 +488,9 @@ useDynWith p d f = Nut $ mkEffectFn2
          }
      ) ->
     do
+      lucky <- new true
+      for_ psr.beacon (_.lucky >>> notLucky)
       dbStart <- makeOpenBeacon
-
       unsubs <- liftST $ STArray.new
       when (not (null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
@@ -517,6 +527,7 @@ useDynWith p d f = Nut $ mkEffectFn2
                     { start: sstaaarrrrrt
                     , end: eeeeeennnnd
                     , pos: mpos
+                    , lucky
                     , lifecycle: Just $ Poll.merge
                         [ DekuSendToPos <$> sendTo
                         , sendTo'.poll
@@ -559,14 +570,15 @@ useDynWith p d f = Nut $ mkEffectFn2
       pure $ DekuBeaconOutcome dbStart
 
 actOnLifecycleForText
-  :: EffectFn7 Boolean (STArray.STArray Global (Effect Unit)) (Poll DekuDynamic)
+  :: EffectFn8 Boolean (Ref Boolean) (STArray.STArray Global (Effect Unit)) (Poll DekuDynamic)
        DOMInterpret
        DekuText
        DekuBeacon
        DekuBeacon
        Unit
-actOnLifecycleForText = mkEffectFn7
+actOnLifecycleForText = mkEffectFn8
   \fromPortal
+   lucky
    associations
    p
    ( DOMInterpret
@@ -590,7 +602,7 @@ actOnLifecycleForText = mkEffectFn7
           of
           Just txt, Just startAnchor, Just endAnchor ->
             case x of
-              DekuSendToPos i -> runEffectFn4 sendToPosForText i txt
+              DekuSendToPos i -> runEffectFn5 sendToPosForText lucky i txt
                 startAnchor
                 endAnchor
               DekuRemove -> runEffectFn2 removeForText fromPortal txt
@@ -649,14 +661,15 @@ actOnLifecycleForDyn = mkEffectFn8
     runListener oh'hi associations p
 
 actOnLifecycleForElement
-  :: EffectFn7 Boolean (STArray.STArray Global (Effect Unit)) (Poll DekuDynamic)
+  :: EffectFn8 Boolean (Ref Boolean) (STArray.STArray Global (Effect Unit)) (Poll DekuDynamic)
        DOMInterpret
        DekuElement
        DekuBeacon
        DekuBeacon
        Unit
-actOnLifecycleForElement = mkEffectFn7
+actOnLifecycleForElement = mkEffectFn8
   \fromPortal
+   lucky
    associations
    p
    ( DOMInterpret
@@ -682,7 +695,7 @@ actOnLifecycleForElement = mkEffectFn7
           of
           Just elt, Just startAnchor, Just endAnchor ->
             case x of
-              DekuSendToPos i -> runEffectFn4 sendToPosForElement i elt
+              DekuSendToPos i -> runEffectFn5 sendToPosForElement lucky i elt
                 startAnchor
                 endAnchor
               DekuRemove -> runEffectFn2 removeForElement fromPortal elt
@@ -700,7 +713,7 @@ eltAttribution = mkEffectFn3
       runEffectFn2 attributeElementParent (DekuChild elt)
         (DekuParent psr.parent)
     Just y -> do
-      runEffectFn4 attributeDynParentForElement (DekuChild elt)
+      runEffectFn5 attributeDynParentForElement y.lucky (DekuChild elt)
         y.start
         y.end
         y.pos
@@ -758,7 +771,6 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
      ) ->
     do
       elt <- runEffectFn2 makeElement (Namespace <$> ns) (Tag tag)
-
       unsubs <- liftST $ STArray.new
       when (not (null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
@@ -777,9 +789,10 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
             )
             di
       foreachE nuts oh'hi
-      for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn7
+      for_ (getLifecycle psr.beacon) \{ l, s, e, lucky } -> runEffectFn8
         actOnLifecycleForElement
         psr.fromPortal
+        lucky
         unsubs
         l
         di
@@ -795,7 +808,7 @@ textAttribution = mkEffectFn3 \(PSR psr) (DOMInterpret di) txt ->
     Nothing -> do
       runEffectFn2 di.attributeTextParent txt (DekuParent psr.parent)
     Just y -> do
-      runEffectFn4 di.attributeDynParentForText txt
+      runEffectFn5 di.attributeDynParentForText y.lucky txt
         y.start
         y.end
         Nothing
@@ -836,9 +849,10 @@ text p = Nut $ mkEffectFn2
         pump <- liftST $ Event.create
         handleEvent (UPoll.sample y pump.event)
         pump.push identity
-      for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn7
+      for_ (getLifecycle psr.beacon) \{ l, s, e, lucky } -> runEffectFn8
         actOnLifecycleForText
         psr.fromPortal
+        lucky
         unsubs
         l
         di

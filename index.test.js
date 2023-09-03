@@ -30,7 +30,7 @@ describe("deku", () => {
       const out = di.makeElementEffect(testFriend.nothing, "div");
       expect(out.tagName).toBe("DIV");
     });
-    describe("attributeDynParentForElementEffect", () => {
+    describe("attributeDynParentForElementEffect,", () => {
       it("attriubtes correctly when pos is 0 and no children present", () => {
         const $ = require("jquery");
         const elt = di.makeElementEffect(testFriend.nothing, "li");
@@ -39,7 +39,7 @@ describe("deku", () => {
         const parent = di.makeElementEffect(testFriend.nothing, "ul");
         di.attributeBeaconParentEffect(oBeacon, parent);
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -57,7 +57,7 @@ describe("deku", () => {
         const parent = di.makeElementEffect(testFriend.nothing, "ul");
         di.attributeBeaconParentEffect(oBeacon, parent);
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -75,7 +75,7 @@ describe("deku", () => {
         const parent = di.makeElementEffect(testFriend.nothing, "ul");
         di.attributeBeaconParentEffect(oBeacon, parent);
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -93,7 +93,7 @@ describe("deku", () => {
         const parent = di.makeElementEffect(testFriend.nothing, "ul");
         di.attributeBeaconParentEffect(oBeacon, parent);
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -117,7 +117,7 @@ describe("deku", () => {
           di.attributeElementParentEffect(elt2, parent);
         }
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -141,7 +141,7 @@ describe("deku", () => {
         }
         di.attributeBeaconParentEffect(cBeacon, parent);
         const mpos = 25;
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -164,7 +164,7 @@ describe("deku", () => {
           di.attributeElementParentEffect(elt2, parent);
         }
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -187,7 +187,7 @@ describe("deku", () => {
           di.attributeElementParentEffect(elt2, parent);
         }
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -221,7 +221,7 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -255,7 +255,7 @@ describe("deku", () => {
           di.attributeElementParentEffect(elt2, parent);
         }
         const mpos = 38;
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -289,7 +289,7 @@ describe("deku", () => {
           di.attributeElementParentEffect(elt2, parent);
         }
         const mpos = 4242;
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -322,7 +322,7 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -360,7 +360,7 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -398,7 +398,7 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -435,7 +435,7 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -472,7 +472,7 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -518,7 +518,7 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -563,7 +563,7 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -615,7 +615,7 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -666,7 +666,7 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(
+        di.attributeDynParentForElementEffect(testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
