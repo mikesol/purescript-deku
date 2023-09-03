@@ -739,16 +739,20 @@ tableBody i = Deku.do
 
 data RowBuilder = AddRows (Array (Tuple Int String)) | Clear
 
+rando :: Array String -> Effect String
+rando a = do
+  ri <- randomInt 0 (Array.length a)
+  pure $ fromMaybe "foo" (a !! ri)
+
 genRows :: Int -> Int -> Effect (Array (Tuple Int String))
 genRows offset n = do
   arr <- liftST $ STArray.new
   foreachE (0 .. (n - 1)) \i -> do
-    s <- intercalate (pure " ")
-      $ [ randomAdjectives, randomColors, randomNouns ] <#> \a ->
-          do
-            ri <- randomInt 0 (Array.length a)
-            pure $ fromMaybe "foo" (a !! ri)
-    liftST $ void $ STArray.push (Tuple (offset + i) s) arr
+    adjective <- rando randomAdjectives
+    color <- rando randomColors
+    noun <- rando randomNouns
+    let label = intercalate " " [ adjective, color, noun ]
+    liftST $ void $ STArray.push (Tuple (offset + i) label) arr
   liftST $ STArray.freeze arr
 
 stressTest :: Nut
