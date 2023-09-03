@@ -389,6 +389,12 @@ useState' f = Nut $ mkEffectFn2 \psr di -> do
   let Nut nut = f (push /\ poll)
   runEffectFn2 nut psr di
 
+useStateTagged' :: forall a. String -> Hook ((a -> Effect Unit) /\ Poll a)
+useStateTagged' tag f = Nut $ mkEffectFn2 \psr di -> do
+  { poll, push } <- liftST $ Poll.createTagged tag
+  let Nut nut = f (push /\ poll)
+  runEffectFn2 nut psr di
+
 useState :: forall a. a -> Hook ((a -> Effect Unit) /\ Poll a)
 useState a f = Nut $ mkEffectFn2 \psr di -> do
   { poll, push } <- liftST $ Poll.create
