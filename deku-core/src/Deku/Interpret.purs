@@ -25,7 +25,6 @@ import Data.String (toUpper)
 import Data.String as String
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
-import Debug (spy)
 import Deku.Attribute (Cb(..), Key(..), Value(..), unsafeAttribute)
 import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), Tag(..), Verb(..), handleAtts)
 import Deku.Core as Core
@@ -581,7 +580,6 @@ makePursxEffect = mkEffectFn5
                   case attTag >>= flip Object.lookup atts of
                     Just att -> do
                       star <- liftST $ STArray.new
-                      let _ = spy "attTag" { attTag }
                       -- todo: does this map have a runtime hit?
                       handleAtts di obj (toDekuElement asElt) star
                         [ (map unsafeAttribute att) ]

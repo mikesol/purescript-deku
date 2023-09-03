@@ -25,7 +25,6 @@ import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
-import Debug (spy)
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), Cb, Key(..), Value(..), unsafeUnAttribute)
 import Deku.Do as Deku
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
@@ -734,7 +733,7 @@ handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts
         let { key, value } = unsafeUnAttribute att
         case value of
           Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
-          Cb' cb -> let _ = spy "settingcb" true in runEffectFn4 setCb eeeee (Key key) cb obj
+          Cb' cb -> runEffectFn4 setCb eeeee (Key key) cb obj
           Unset' -> runEffectFn3 unsetAttribute eeeee (Key key) obj
       handleAttrEvent y = do
         wr <- runEffectFn1 weakRef elt

@@ -1107,7 +1107,7 @@ describe("deku", () => {
         expect($("#span0").text()).toBe("hello");
         $("#inny").trigger("click");
         expect($("#span0").text()).toBe("goodbye");
-      }), true
+      })
     );
 
     doTest("sends to position correctly when elt is fixed", (f) =>
