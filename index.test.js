@@ -1443,9 +1443,6 @@ describe("deku", () => {
     doTest("stress test doesn't blow up", (f) =>
       f(tests.stressTest, () => {
         const $ = require("jquery");
-        // $("#run").trigger("click");
-        // $("#swaprows").trigger("click");
-        // $("#clear").trigger("click");
         $("#runlots").trigger("click");
       })
     );
