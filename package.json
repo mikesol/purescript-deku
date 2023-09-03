@@ -10,7 +10,6 @@
 		"build:examples": "spago build -p examples",
 		"snapshot": "npm run bundle:performance && spago -x test/test.dhall run --main Performance.Snapshot.Write",
 		"test": "npm run build && jest",
-		"bundle:optimizer-performance": "spago -x test/test-optimized.dhall build && purs-backend-es bundle-app --main Performance.Test.App --to test/test.js",
 		"generate": "npx spago run -p codegen"
 	},
 	"keywords": [],

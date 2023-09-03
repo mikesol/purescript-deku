@@ -1,6 +1,10 @@
 workspace:
   package_set:
     registry: 31.0.0
+  backend:
+    cmd: purs-backend-es
+    args:
+      - build
   extra_packages:
     hyrule:
       git: "https://github.com/mikesol/purescript-hyrule.git"
