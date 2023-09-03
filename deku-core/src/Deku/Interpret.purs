@@ -18,19 +18,17 @@ import Data.Exists (Exists, mkExists, runExists)
 import Data.Foldable (for_)
 import Data.FoldableWithIndex (foldrWithIndex)
 import Data.List (List(..), (:))
-import Data.List as List
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.String (toUpper)
 import Data.String as String
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
 import Deku.Attribute (Cb(..), Key(..), Value(..), unsafeAttribute)
-import Deku.Core (DOMInterpret, DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), Tag(..), Verb(..), handleAtts)
+import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), Tag(..), Verb(..), handleAtts)
 import Deku.Core as Core
 import Deku.JSWeakRef (WeakRef)
 import Effect (Effect, foreachE)
 import Effect.Console (error)
-import Effect.Ref (new, read, write)
 import Effect.Uncurried (EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn2, runEffectFn3, runEffectFn4)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
@@ -45,12 +43,12 @@ import Web.DOM.DOMParser (makeDOMParser, parseHTMLFromString)
 import Web.DOM.Document (createComment, createElement, createElementNS, createTextNode)
 import Web.DOM.Element (getAttribute, removeAttribute, setAttribute, toChildNode, toEventTarget)
 import Web.DOM.Element as Element
-import Web.DOM.Node (appendChild, childNodes, firstChild, insertBefore, nextSibling, nodeTypeIndex, parentNode, replaceChild, setTextContent, textContent)
+import Web.DOM.Node (appendChild, firstChild, insertBefore, nextSibling, nodeTypeIndex, parentNode, replaceChild, setTextContent, textContent)
 import Web.DOM.NodeList as NodeList
 import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
-import Web.DOM.Text (splitText)
 import Web.DOM.Text as Text
 import Web.Event.Event (EventType(..))
+import Web.Event.Event as Web
 import Web.Event.EventTarget (addEventListener, eventListener, removeEventListener)
 import Web.HTML (window)
 import Web.HTML.HTMLButtonElement as HTMLButtonElement
@@ -423,13 +421,16 @@ setPropEffect = mkEffectFn3 \elt' (Key k) (Value v) -> do
 
 setCbEffect :: Core.SetCb
 setCbEffect = mkEffectFn4 \elt' (Key k) (Cb v) stobj -> do
-  l <- liftST $ STObject.peek k stobj
-  let eventType = EventType k
-  let eventTarget = toEventTarget (fromDekuElement elt')
-  for_ l \toRemove -> removeEventListener eventType toRemove true eventTarget
-  nl <- eventListener v
-  addEventListener eventType nl true eventTarget
-  liftST $ void $ STObject.poke k nl stobj
+  if k == "@self@" then do
+    void $ v ((unsafeCoerce :: DekuElement -> Web.Event) elt')
+  else do
+    l <- liftST $ STObject.peek k stobj
+    let eventType = EventType k
+    let eventTarget = toEventTarget (fromDekuElement elt')
+    for_ l \toRemove -> removeEventListener eventType toRemove true eventTarget
+    nl <- eventListener v
+    addEventListener eventType nl true eventTarget
+    liftST $ void $ STObject.poke k nl stobj
 
 unsetAttributeEffect :: Core.UnsetAttribute
 unsetAttributeEffect = mkEffectFn3 \elt' (Key k) stobj -> do
@@ -447,16 +448,21 @@ setTextEffect = mkEffectFn2 \txt' str -> do
   let txt = fromDekuText txt'
   setTextContent str (Text.toNode txt)
 
+-- for the send pos family of functions
+-- we remove first
 sendToPosForDynEffect :: Core.SendToPosForDyn
-sendToPosForDynEffect = mkEffectFn4 \i b st ed ->
+sendToPosForDynEffect = mkEffectFn4 \i b st ed -> do
+  runEffectFn2 removeForDynEffect true b
   runEffectFn4 attributeDynParentForBeaconFullRangeEffect b st ed (Just i)
 
 sendToPosForElementEffect :: Core.SendToPosForElement
-sendToPosForElementEffect = mkEffectFn4 \i b st ed ->
+sendToPosForElementEffect = mkEffectFn4 \i b st ed -> do
+  runEffectFn2 removeForElementEffect true b
   runEffectFn4 attributeDynParentForElementEffect (DekuChild b) st ed (Just i)
 
 sendToPosForTextEffect :: Core.SendToPosForText
-sendToPosForTextEffect = mkEffectFn4 \i b st ed ->
+sendToPosForTextEffect = mkEffectFn4 \i b st ed -> do
+  runEffectFn2 removeForTextEffect true b
   runEffectFn4 attributeDynParentForTextEffect b st ed (Just i)
 
 -- for now ignore isPortal elements
@@ -484,73 +490,7 @@ matchTildes nodeContent =
 
 data ListList a = KeepGoing (List a) (ListList a) | Stop
 
-processNode :: DOMInterpret -> Object.Object Nut -> Node.Node -> Effect Unit
-processNode di nuts elm = tailRecM go (KeepGoing (pure elm) Stop)
-  where
-  go Stop = pure $ Done unit
-  go (KeepGoing Nil x) = go x
-  go (KeepGoing (a : b) kg) = do
-    let nt = nodeTypeIndex a
-    case nt of
-      8 -> do
-        tc <- textContent a
-        let matches = matchTildes tc
-        currentTextNode' <- new a
-        foreachE matches \match -> do
-          let nut' = Object.lookup match nuts
-          case nut' of
-            Nothing -> pure unit
-            Just (Nut replacementNode) -> do
-              currentTextNode'' <- read currentTextNode'
-              ctxc <- textContent currentTextNode''
-              let ix' = String.indexOf (String.Pattern match) ctxc
-              case ix', Text.fromNode currentTextNode'' of
-                Just ix, Just currentTextNode -> do
-                  afterMatchNode <- splitText (ix + (String.length match))
-                    currentTextNode
-                  matchNode <- splitText ix currentTextNode
-                  pn <- parentNode (Text.toNode matchNode)
-                  case pn >>= Element.fromNode of
-                    Nothing -> do
-                      error
-                        "Programming error: processNode could not find a parent node"
-                    Just x -> do
-                      myNut <- runEffectFn2 replacementNode
-                        ( PSR
-                            { parent: toDekuElement x
-                            , fromPortal: false
-                            , unsubs: []
-                            , beacon: Nothing
-                            }
-                        )
-                        di
-                      case myNut of
-                        DekuElementOutcome eo -> replaceChild
-                          (Element.toNode (fromDekuElement eo))
-                          (Text.toNode matchNode)
-                          (Element.toNode x)
-                        DekuTextOutcome to -> replaceChild
-                          (Text.toNode (fromDekuText to))
-                          (Text.toNode matchNode)
-                          (Element.toNode x)
-                        DekuBeaconOutcome bo -> do
-                          runEffectFn3
-                            attributeBeaconFullRangeParentProto
-                            true
-                            ( \i -> insertBefore i (Text.toNode matchNode)
-                                (Element.toNode x)
-                            )
-                            (Comment.toNode (fromDekuBeacon bo))
-                          remove (Text.toChildNode matchNode)
-                        NoOutcome -> pure unit
-                  write (Text.toNode afterMatchNode) currentTextNode'
-                _, _ -> do
-                  error
-                    "Programming error: processNode had too many matches of the regex (the loop overshoots)"
-        pure $ Loop (KeepGoing b kg)
-      _ -> do
-        cn <- childNodes a >>= NodeList.toArray
-        pure $ Loop (KeepGoing (List.fromFoldable cn) (KeepGoing b kg))
+foreign import outerHtml :: Element.Element -> String
 
 makePursxEffect :: Core.MakePursx
 makePursxEffect = mkEffectFn5
@@ -558,26 +498,37 @@ makePursxEffect = mkEffectFn5
     let
       foldedHtml = foldrWithIndex
         ( \i _ -> String.replace (String.Pattern $ verb <> i <> verb)
-            (String.Replacement $ "data-deku-attr-internal=\"" <> i <> "\"")
+            ( String.Replacement $
+                "<span data-deku-elt-internal=\""
+                  <> i
+                  <>
+                    "\"></span>"
+            )
         )
-        html
-        atts
+        ( foldrWithIndex
+            ( \i _ -> String.replace (String.Pattern $ verb <> i <> verb)
+                (String.Replacement $ "data-deku-attr-internal=\"" <> i <> "\"")
+            )
+            html
+            atts
+        )
+        nuts
     dp <- makeDOMParser
     h <- parseHTMLFromString foldedHtml dp
     let failure = runEffectFn2 makeElementEffect Nothing (Tag "div")
     case h of
       Left err -> do
-        error $ "Programming error: makePursxEffect type-level validation failed: " <> err
+        error $
+          "Programming error: makePursxEffect type-level validation failed: " <>
+            err
         failure
       Right elt' -> do
         iii <- runMaybeT do
           o <- MaybeT $ pure $ fromDocument elt'
-          b <- MaybeT $ HTMLDocument.body o
-          asn <- MaybeT $ firstChild (HTMLElement.toNode b)
-          MaybeT $ pure $ Element.fromNode asn
+          oo <- MaybeT $ HTMLDocument.body o
+          pure $ HTMLElement.toElement oo
         case iii of
           Just elt -> do
-            processNode di nuts (Element.toNode elt)
             nl <- querySelectorAll (QuerySelector "[data-deku-attr-internal]")
               (Element.toParentNode elt)
             arr <- NodeList.toArray nl
@@ -597,7 +548,65 @@ makePursxEffect = mkEffectFn5
                 Nothing -> do
                   error $
                     "Programming error: non-element with attr-internal tag"
-            pure $ toDekuElement elt
+            nllll <- querySelectorAll (QuerySelector "[data-deku-elt-internal]")
+              (Element.toParentNode elt)
+            arrrrrr <- NodeList.toArray nllll
+            foreachE arrrrrr \nd -> do
+              case Element.fromNode nd of
+                Just asElt -> do
+                  eltTag <- getAttribute "data-deku-elt-internal" asElt
+                  case eltTag >>= flip Object.lookup nuts of
+                    Just (Nut replacementNode) -> do
+                      -- todo: does this map have a runtime hit?
+                      x' <- parentNode (Element.toNode asElt)
+                      case x' >>= Element.fromNode of
+                        Nothing ->
+                          error
+                            "Programming error: could not find parent for pursx element"
+                        Just x -> do
+                          myNut <- runEffectFn2 replacementNode
+                            ( PSR
+                                { parent: toDekuElement x
+                                , fromPortal: false
+                                , unsubs: []
+                                , beacon: Nothing
+                                }
+                            )
+                            di
+                          case myNut of
+                            DekuElementOutcome eo -> replaceChild
+                              (Element.toNode (fromDekuElement eo))
+                              (Element.toNode asElt)
+                              (Element.toNode x)
+                            DekuTextOutcome to -> replaceChild
+                              (Text.toNode (fromDekuText to))
+                              (Element.toNode asElt)
+                              (Element.toNode x)
+                            DekuBeaconOutcome bo -> do
+                              runEffectFn3
+                                attributeBeaconFullRangeParentProto
+                                false
+                                ( \i -> insertBefore i (Element.toNode asElt)
+                                    (Element.toNode x)
+                                )
+                                (Comment.toNode (fromDekuBeacon bo))
+                              remove (Element.toChildNode asElt)
+                            NoOutcome -> pure unit
+                    Nothing -> do
+                      error $ "Programming error: att not found in pursx"
+                Nothing -> do
+                  error $
+                    "Programming error: non-element with attr-internal tag"
+            ooo <- runMaybeT do
+              asn <- MaybeT $ firstChild (Element.toNode elt)
+              tn <- MaybeT $ pure $ Element.fromNode asn
+              pure $ toDekuElement tn
+            case ooo of
+              Just oooo' -> pure oooo'
+              Nothing -> do
+                error $
+                  "Programming error: document parser does not yield first element"
+                failure
           Nothing -> do
             error $ "Programming error: document parser yielded non-document"
             failure

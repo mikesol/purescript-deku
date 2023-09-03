@@ -1,8 +1,8 @@
 const tests = require("./output/Test.Main");
 const { Just, Nothing } = require("./output/Data.Maybe");
 const di = require("./output/Deku.Interpret");
-const doTest = (name, closure) => {
-  it(name, async () => {
+const doTest = (name, closure, ionly) => {
+  (ionly ? it.only : it)(name, async () => {
     await closure(async (myTest, myScript) => {
       if (!myTest) {
         throw new Error(`Cannot find test named ${name}`);
@@ -995,10 +995,10 @@ describe("deku", () => {
     doTest(
       "has dyn appearing in the correct composable order when used at beginning",
       (f) =>
-        f(tests.dynAppearsCorrectlyAtBeginning, (usingSSR) => {
+        f(tests.dynAppearsCorrectlyAtBeginning, () => {
           const $ = require("jquery");
           // text, span, start beacon, end beacon, button
-          const base = usingSSR ? 6 : 5;
+          const base = 5;
           expect($("#div0").contents().length).toBe(base);
           expect($($("#div0").contents()[0]).text()).toBe("foo");
           expect($($("#div0").contents()[base - 4]).text()).toBe("bar");
@@ -1011,6 +1011,7 @@ describe("deku", () => {
           expect($($("#div0").contents()[base - 2]).text()).toBe("0");
           // index is now 5 as it has moved back by 1
           $($("#div0").contents()[base]).trigger("click");
+          console.log("DIV3", $("#div0").prop("outerHTML"));
           expect($("#div0").contents().length).toBe(base + 2);
           // has again shifted button by 1
           expect($($("#div0").contents()[base + 1]).text()).toBe("incr");
@@ -1096,6 +1097,17 @@ describe("deku", () => {
         expect($("#dyn2").index()).toBeLessThan($("#dyn4").index());
         // for kicks
         expect($("#dyn4").index()).toBeGreaterThan($("#dyn0").index());
+      })
+    );
+
+    doTest("pursx adds listeners", (f) =>
+      f(tests.pursXWiresUp, () => {
+        const $ = require("jquery");
+        expect($("#span0").text()).toBe("");
+        $("#px").trigger("click");
+        expect($("#span0").text()).toBe("hello");
+        $("#inny").trigger("click");
+        expect($("#span0").text()).toBe("goodbye");
       })
     );
 

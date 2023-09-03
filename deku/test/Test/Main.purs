@@ -3,16 +3,12 @@ module Test.Main where
 import Prelude
 
 import Control.Alt ((<|>))
-import Control.Monad.ST.Global (Global)
-import Control.Monad.ST.Internal (ST)
 import Control.Plus (empty)
-import Data.Array (replicate, (!!), (..))
-import Data.Array as Array
+import Data.Array ((..))
 import Data.Filterable (compact, filter)
-import Data.Foldable (intercalate, for_, traverse_)
+import Data.Foldable (intercalate, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.Maybe (Maybe(..), fromMaybe, maybe)
-import Data.Traversable (sequence)
+import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Control (text, text_)
@@ -22,15 +18,13 @@ import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
-import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynWith, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
-import Deku.Hooks as DH
+import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Pursx ((~~))
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import Effect.Random (random, randomInt)
-import FRP.Event (fold, mapAccum, folded, keepLatest, makeEvent, subscribe)
-import FRP.Poll (Poll, merge, mergeMap, poll, stToPoll)
-import Record (union)
+import Effect.Random (random)
+import FRP.Event (fold, mapAccum)
+import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
 import Type.Proxy (Proxy(..))
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
@@ -168,13 +162,20 @@ insertsAtCorrectPositions = D.div [ DA.id_ "div0" ]
   [ text_ "foo"
   , D.span [ DA.id_ "div1" ] [ text_ "bar" ]
   , Deku.do
-      -- if we just used insert_ here, it would go in
-      -- linear order
-      -- here, we scramble the order and make sure that the dyns
-      -- are inserted in the scrambled order so that they read
-      -- 0-1-2-3-4 from top to bottom
+      -- the mapping represents the final state given the insert order
+      -- which should be 0-1-3-2-4
+      -- if you follow the list below from left to right and treat each
+      -- index as a position, that's what you'll get
+      let
+        mporder i
+          | i == 0 = 0
+          | i == 1 = 1
+          | i == 2 = 3
+          | i == 3 = 2
+          | i == 4 = 4
+          | otherwise = 42
       { value: i } <- useDyn
-        ((Tuple <*> identity) <$> mergeMap (pure >>> pure) [ 3, 0, 4, 2, 1 ])
+        (mergeMapPure (\i -> Tuple (Just i) $ mporder i) [ 3, 0, 4, 2, 1 ])
       D.span [ DA.id_ ("dyn" <> show i) ] [ text_ (show i) ]
   ]
 
@@ -279,6 +280,25 @@ pursXComposes = Deku.do
   D.div [ DA.id_ "div0" ]
     [ (Proxy :: _ "<h1 id=\"px\">début ~me~ fin</h1>") ~~
         { me: fixed [ text_ "milieu", text_ " ", text_ "après-milieu" ] }
+    ]
+
+pursXWiresUp :: Nut
+pursXWiresUp = Deku.do
+  setMessage /\ message <- useState'
+  D.div [ DA.id_ "div0" ]
+    [ (Proxy :: _ "<div><h1 id=\"px\" ~evt~ >début ~me~ fin</h1></div>") ~~
+        { me: fixed
+            [ text_ "milieu"
+            , text_ " "
+            , D.span
+                [ DL.click_ \_ -> setMessage "goodbye"
+                , DA.id_ "inny"
+                ]
+                [ text_ "après-milieu" ]
+            ]
+        , evt: DL.click_ \_ -> setMessage "hello"
+        }
+    , D.span [ DA.id_ "span0" ] [ text message ]
     ]
 
 switchersCompose :: Nut

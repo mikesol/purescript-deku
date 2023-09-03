@@ -4,7 +4,7 @@ workspace:
   extra_packages:
     hyrule:
       git: "https://github.com/mikesol/purescript-hyrule.git"
-      ref: "dece754"
+      ref: "91ade16"
       dependencies:
         - effect
         - js-timers

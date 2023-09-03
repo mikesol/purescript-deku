@@ -703,7 +703,7 @@ eltAttribution = mkEffectFn3
       runEffectFn4 attributeDynParentForElement (DekuChild elt)
         y.start
         y.end
-        Nothing
+        y.pos
 
 handleAtts
   :: forall e
