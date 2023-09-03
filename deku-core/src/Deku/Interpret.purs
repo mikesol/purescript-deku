@@ -27,13 +27,13 @@ import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
 import Debug (spy)
 import Deku.Attribute (Cb(..), Key(..), Value(..), unsafeAttribute)
-import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), Tag(..), Verb(..), eltAttribution, handleAtts)
+import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), Tag(..), Verb(..), handleAtts)
 import Deku.Core as Core
 import Deku.JSWeakRef (WeakRef)
 import Effect (Effect, foreachE)
 import Effect.Console (error)
 import Effect.Ref (read)
-import Effect.Uncurried (EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, mkEffectFn6, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
 import Safe.Coerce (coerce)
@@ -534,8 +534,8 @@ matchTildes nodeContent =
 data ListList a = KeepGoing (List a) (ListList a) | Stop
 
 makePursxEffect :: Core.MakePursx
-makePursxEffect = mkEffectFn6
-  \(Html html) (Verb verb) atts nuts di (PSR ps) -> do
+makePursxEffect = mkEffectFn5
+  \(Html html) (Verb verb) atts nuts di -> do
     let
       foldedHtml = foldrWithIndex
         ( \i _ -> String.replace (String.Pattern $ verb <> i <> verb)
@@ -567,15 +567,11 @@ makePursxEffect = mkEffectFn6
         iii <- runMaybeT do
           o <- MaybeT $ pure $ fromDocument elt'
           oo <- MaybeT $ HTMLDocument.body o
-          let elt =  HTMLElement.toElement oo
-          asn <- MaybeT $ firstChild (Element.toNode elt)
-          tn <- MaybeT $ pure $ Element.fromNode asn
-          pure tn
+          pure $ HTMLElement.toElement oo
         case iii of
           Just elt -> do
-            runEffectFn3 eltAttribution (PSR ps) di (toDekuElement elt)
             nl <- querySelectorAll (QuerySelector "[data-deku-attr-internal]")
-              (Element.toParentNode (fromDekuElement ps.parent))
+              (Element.toParentNode elt)
             arr <- NodeList.toArray nl
             obj <- liftST STObject.new
             foreachE arr \nd -> do
@@ -595,7 +591,7 @@ makePursxEffect = mkEffectFn6
                   error $
                     "Programming error: non-element with attr-internal tag"
             nllll <- querySelectorAll (QuerySelector "[data-deku-elt-internal]")
-              (Element.toParentNode (fromDekuElement ps.parent))
+              (Element.toParentNode elt)
             arrrrrr <- NodeList.toArray nllll
             foreachE arrrrrr \nd -> do
               case Element.fromNode nd of
@@ -643,7 +639,16 @@ makePursxEffect = mkEffectFn6
                 Nothing -> do
                   error $
                     "Programming error: non-element with attr-internal tag"
-            pure $ toDekuElement elt
+            ooo <- runMaybeT do
+              asn <- MaybeT $ firstChild (Element.toNode elt)
+              tn <- MaybeT $ pure $ Element.fromNode asn
+              pure $ toDekuElement tn
+            case ooo of
+              Just oooo' -> pure oooo'
+              Nothing -> do
+                error $
+                  "Programming error: document parser does not yield first element"
+                failure
           Nothing -> do
             error $ "Programming error: document parser yielded non-document"
             failure
