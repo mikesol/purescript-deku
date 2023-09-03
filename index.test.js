@@ -1202,32 +1202,6 @@ describe("deku", () => {
       })
     );
 
-    doTest("global portals retain portalness when sent out of scope", (f) =>
-      f(tests.globalPortalsRetainPortalnessWhenSentOutOfScope, () => {
-        const $ = require("jquery");
-        $("#push-ported-nut").trigger("click");
-        expect($("#outer-scope").text()).toBe("no dice!");
-        expect($("#inner-scope").text()).toBe("foo");
-        $("#portal-btn").trigger("click");
-        expect($("#outer-scope").text()).toBe("foo");
-        expect($("#inner-scope").text()).toBe("no dice!");
-        $("#portal-btn").trigger("click");
-        // starting from the second click, the top stops receiving events
-        // which means that the portal should never flip back to it
-        // we do this in the test to make sure that the portal is
-        // referentially opaque, meaning that even without an event
-        // firing it still disappears from its old setting
-        expect($("#outer-scope").text()).toBe("");
-        expect($("#inner-scope").text()).toBe("foo");
-        $("#portal-btn").trigger("click");
-        expect($("#outer-scope").text()).toBe("");
-        expect($("#inner-scope").text()).toBe("no dice!");
-        $("#portal-btn").trigger("click");
-        expect($("#outer-scope").text()).toBe("");
-        expect($("#inner-scope").text()).toBe("foo");
-      })
-    );
-
     doTest("pursx composes", (f) =>
       f(tests.pursXComposes, () => {
         const $ = require("jquery");

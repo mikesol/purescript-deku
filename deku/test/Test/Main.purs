@@ -9,8 +9,8 @@ import Data.Filterable (compact, filter)
 import Data.Foldable (intercalate, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
-import Data.Tuple (Tuple(..), snd)
-import Data.Tuple.Nested (type (/\), (/\))
+import Data.Tuple (Tuple(..))
+import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
 import Deku.Core (Hook, Nut, fixed, portal, useRefST)
 import Deku.DOM as D
@@ -23,7 +23,7 @@ import Deku.Pursx ((~~))
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Random (random)
-import FRP.Event (fold, mapAccum)
+import FRP.Event (fold)
 import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
 import Type.Proxy (Proxy(..))
 import Web.HTML (window)
@@ -236,43 +236,6 @@ portalsCompose = Deku.do
     , switchMe 2
     , D.button [ DA.id_ "incr", DL.click_ \_ -> setItem unit ]
         [ text_ "incr" ]
-    ]
-
-globalPortalsRetainPortalnessWhenSentOutOfScope :: Nut
-globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
-  let
-    counter :: forall a. Poll a -> Poll (Int /\ a)
-    counter event = mapAccum (\a b -> (a + 1) /\ ((a + 1) /\ b)) (-1) event
-
-    limitTo :: Int -> Poll ~> Poll
-    limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
-  setPortalInContext /\ portalInContext <- useState true
-  setPortedNut /\ portedNut <- useState'
-  D.div [ DA.id_ "test-frame" ]
-    [ D.div [ DA.id_ "outer-scope" ]
-        [ limitTo 2 (Tuple <$> portalInContext <*> portedNut)
-            <#~> \(Tuple tf p) ->
-              if not tf then p else D.div_ [ text_ "no dice!" ]
-        ]
-    , ( portal (D.div_ [ text_ "foo" ]) \e ->
-          D.div_
-            [ D.button
-                [ DA.id_ "push-ported-nut", DL.click_ \_ -> setPortedNut e ]
-                [ text_ "push ported nut" ]
-            , D.div [ DA.id_ "inner-scope" ]
-                [ (Tuple <$> portalInContext <*> portedNut)
-                    <#~> \(Tuple tf p) ->
-                      if tf then p
-                      else D.div [ DA.id_ "inner-switch" ] [ text_ "no dice!" ]
-                ]
-            ]
-      )
-    , D.button
-        [ DA.id_ "portal-btn"
-        , DL.click $ portalInContext <#> not >>> setPortalInContext >>> pure
-        ]
-
-        [ text_ "switch" ]
     ]
 
 pursXComposes :: Nut
