@@ -29,10 +29,11 @@ import Deku.Attribute (Cb(..), Key(..), Value(..), unsafeAttribute)
 import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), Tag(..), Verb(..), handleAtts)
 import Deku.Core as Core
 import Deku.JSWeakRef (WeakRef)
+import Deku.UnsafeDOM (createElement, appendChild, createElementNS, insertBefore, unsafeParentNode)
 import Effect (Effect)
 import Effect.Console (error)
 import Effect.Ref (read)
-import Effect.Uncurried (EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Event (fastForeachE)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
@@ -45,10 +46,10 @@ import Web.DOM as Node
 import Web.DOM.ChildNode (remove)
 import Web.DOM.Comment as Comment
 import Web.DOM.DOMParser (makeDOMParser, parseHTMLFromString)
-import Web.DOM.Document (createComment, createElement, createElementNS, createTextNode)
+import Web.DOM.Document (createComment, createTextNode)
 import Web.DOM.Element (getAttribute, removeAttribute, setAttribute, toChildNode, toEventTarget)
 import Web.DOM.Element as Element
-import Web.DOM.Node (appendChild, childNodes, firstChild, insertBefore, nextSibling, nodeTypeIndex, parentNode, replaceChild, setTextContent, textContent)
+import Web.DOM.Node (childNodes, firstChild, nextSibling, nodeTypeIndex, replaceChild, setTextContent, textContent)
 import Web.DOM.NodeList as NodeList
 import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.DOM.Text as Text
@@ -93,11 +94,9 @@ fromDekuText = unsafeCoerce
 
 makeElementEffect :: Core.MakeElement
 makeElementEffect = mkEffectFn2 \ns tag -> do
-  doc <- window >>= document
   elt <- case coerce ns :: Maybe String of
-    Nothing -> createElement (toUpper (coerce tag)) (toDocument doc)
-    Just ns' -> createElementNS (Just $ coerce ns') (toUpper (coerce tag))
-      (toDocument doc)
+    Nothing -> runEffectFn1 createElement (toUpper (coerce tag))
+    Just ns' -> runEffectFn2 createElementNS (coerce ns') (toUpper (coerce tag))
   pure $ toDekuElement elt
 
 d3kU = "d3kU" :: String
@@ -136,13 +135,10 @@ ffwd { n, node, cpos } = do
 
 doInsertAtEnd' :: Node.Node -> DekuBeacon -> Effect Unit
 doInsertAtEnd' nd end = do
-  pn <- parentNode (Comment.toNode (fromDekuBeacon end))
-  case pn of
-    Just x -> insertBefore nd
+  x <- runEffectFn1 unsafeParentNode (Comment.toNode (fromDekuBeacon end))
+  runEffectFn3 insertBefore nd
       (Comment.toNode (fromDekuBeacon end))
       x
-    Nothing -> error
-      "Programming error: parent node missing in attributeDynParentForNodeEffect (3)"
 
 attributeDynParentForNodeEffect
   :: EffectFn4 Node.Node DekuBeacon
@@ -158,11 +154,8 @@ attributeDynParentForNodeEffect = mkEffectFn4
         let
           go (Left { curSib, cpos }) = do
             if cpos >= pos then do
-              par <- parentNode curSib
-              case par of
-                Just x -> insertBefore nd curSib x
-                Nothing -> error
-                  "Programming error: parent node missing in attributeDynParentForNodeEffect (1)"
+              x <- runEffectFn1 unsafeParentNode curSib
+              runEffectFn3 insertBefore nd curSib x
               pure $ Done unit
             else
               ifM
@@ -202,9 +195,9 @@ attributeDynParentForNodeEffectLucky = mkEffectFn4
       doInsertAtEnd = doInsertAtEnd' nd end
       startNode = Comment.toNode (fromDekuBeacon start)
       endNode = Comment.toNode (fromDekuBeacon end)
-    par' <- parentNode startNode
-    case mpos, par' of
-      Just pos, Just par -> do
+    par <- runEffectFn1 unsafeParentNode startNode
+    case mpos of
+      Just pos -> do
         cn <- childNodes par
         asArr <- NodeList.toArray cn
         let startIx' = Array.findIndex (unsafeRefEq startNode) asArr
@@ -214,8 +207,8 @@ attributeDynParentForNodeEffectLucky = mkEffectFn4
             doInsertAtEnd
           else do
             for_ (asArr !! (startIx + 1 + max pos 0)) \nn ->
-              insertBefore nd nn par
-      _, _ -> doInsertAtEnd
+              runEffectFn3 insertBefore nd nn par
+      _ -> doInsertAtEnd
 
 attributeDynParentForElementEffect :: Core.AttributeDynParentForElement
 attributeDynParentForElementEffect = mkEffectFn5
@@ -252,13 +245,13 @@ attributeDynParentForTextEffect = mkEffectFn5
 attributeElementParentEffect :: Core.AttributeElementParent
 attributeElementParentEffect = mkEffectFn2
   \(DekuChild child) (DekuParent parent) -> do
-    appendChild (Element.toNode (fromDekuElement child))
+    runEffectFn2 appendChild (Element.toNode (fromDekuElement child))
       (Element.toNode (fromDekuElement parent))
 
 attributeTextParentEffect :: Core.AttributeTextParent
 attributeTextParentEffect = mkEffectFn2
   \txt (DekuParent parent) -> do
-    appendChild (Text.toNode (fromDekuText txt))
+    runEffectFn2 appendChild (Text.toNode (fromDekuText txt))
       (Element.toNode (fromDekuElement parent))
 
 makeOpenBeaconEffect :: Core.MakeBeacon
@@ -275,7 +268,7 @@ makeCloseBeaconEffect = do
 
 attributeBeaconParentEffect :: Core.AttributeBeaconParent
 attributeBeaconParentEffect = mkEffectFn2 \beacon (DekuParent parent) -> do
-  appendChild (Comment.toNode (fromDekuBeacon beacon))
+  runEffectFn2 appendChild (Comment.toNode (fromDekuBeacon beacon))
     (Element.toNode (fromDekuElement parent))
 
 attributeDynParentForBeaconsEffect :: Core.AttributeDynParentForBeacons
@@ -284,12 +277,8 @@ attributeDynParentForBeaconsEffect = mkEffectFn5
     let oo = Comment.toNode (fromDekuBeacon o)
     let ii = Comment.toNode (fromDekuBeacon i)
     runEffectFn4 attributeDynParentForNodeEffect oo start end mpos
-    p <- parentNode oo
-    case p of
-      Just x -> insertBefore ii oo x
-      Nothing -> do
-        error
-          "Programming error: parent node missing in attributeDynParentForBeaconsEffect"
+    x <- runEffectFn1 unsafeParentNode oo
+    runEffectFn3 insertBefore ii oo x
 
 attributeBeaconFullRangeParentProto
   :: EffectFn3 Boolean (Node.Node -> Effect Unit) Node.Node Unit
@@ -337,7 +326,7 @@ attributeBeaconFullRangeParentEffect = mkEffectFn2
   \stBeacon (DekuParent parent) -> runEffectFn3
     attributeBeaconFullRangeParentProto
     false
-    (flip appendChild (Element.toNode (fromDekuElement parent)))
+    (\i -> runEffectFn2 appendChild i (Element.toNode (fromDekuElement parent)))
     (Comment.toNode (fromDekuBeacon stBeacon))
 
 attributeDynParentForBeaconFullRangeEffect
@@ -351,15 +340,15 @@ attributeDynParentForBeaconFullRangeEffect = mkEffectFn4
       leftB
       rightB
       mpos
-    par <- parentNode (Comment.toNode (fromDekuBeacon stBeacon))
+    par' <- runEffectFn1 unsafeParentNode (Comment.toNode (fromDekuBeacon stBeacon))
     ns <- nextSibling (Comment.toNode (fromDekuBeacon stBeacon))
-    case par, ns, nsOld of
-      Just par', Just ns', Just nso -> runEffectFn3
+    case ns, nsOld of
+      Just ns', Just nso -> runEffectFn3
         attributeBeaconFullRangeParentProto
         true
-        (\i -> insertBefore i ns' par')
+        (\i -> runEffectFn3 insertBefore i ns' par')
         nso
-      _, _, _ -> error
+      _, _ -> error
         "Programming error: attributeDynParentForBeaconFullRangeEffect cannot find parent"
 
 makeTextEffect :: Core.MakeText
@@ -603,8 +592,8 @@ makePursxEffect = mkEffectFn5
                   case eltTag >>= flip Object.lookup nuts of
                     Just (Nut replacementNode) -> do
                       -- todo: does this map have a runtime hit?
-                      x' <- parentNode (Element.toNode asElt)
-                      case x' >>= Element.fromNode of
+                      x' <- runEffectFn1 unsafeParentNode (Element.toNode asElt)
+                      case Element.fromNode x' of
                         Nothing ->
                           error
                             "Programming error: could not find parent for pursx element"
@@ -631,7 +620,7 @@ makePursxEffect = mkEffectFn5
                               runEffectFn3
                                 attributeBeaconFullRangeParentProto
                                 false
-                                ( \i -> insertBefore i (Element.toNode asElt)
+                                ( \i -> runEffectFn3 insertBefore i (Element.toNode asElt)
                                     (Element.toNode x)
                                 )
                                 (Comment.toNode (fromDekuBeacon bo))
