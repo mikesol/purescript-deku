@@ -60,6 +60,8 @@ newtype PSR = PSR
         }
   }
 
+derive instance Newtype PSR _
+
 data DekuOutcome
   = DekuElementOutcome DekuElement
   | DekuTextOutcome DekuText
@@ -173,8 +175,8 @@ newtype Html = Html String
 newtype Verb = Verb String
 -- | Type used by Deku backends to make pursx. For internal use only unless you're writing a custom backend.
 type MakePursx =
-  EffectFn5 Html Verb (Object.Object (Poll (Attribute')))
-    (Object.Object Nut)
+  EffectFn5 Html Verb (Object.Object PursXable)
+    PSR
     DOMInterpret
     DekuElement
 
@@ -930,13 +932,15 @@ portal (Nut toBeam) f = Nut $ mkEffectFn2
 
 -- pursx
 
+data PursXable = PXAttr (Poll Attribute') | PXStr String | PXNut Nut
+
 class
   PursxToElement (rl :: RL.RowList Type) (r :: Row Type)
   | rl -> r where
   pursxToElement
     :: Proxy rl
     -> { | r }
-    -> { atts :: Object.Object (Poll Attribute'), nuts :: Object.Object Nut }
+    -> Object.Object PursXable
 
 instance pursxToElementConsNut ::
   ( Row.Cons key Nut r' r
@@ -950,7 +954,7 @@ instance pursxToElementConsNut ::
   pursxToElement _ r = do
     let
       o = pursxToElement (Proxy :: Proxy rest) r
-    o { nuts = Object.insert (reflectType pxk) (get pxk r) o.nuts }
+    Object.insert (reflectType pxk) (PXNut (get pxk r)) o
     where
     pxk = Proxy :: _ key
 
@@ -966,20 +970,33 @@ else instance pursxToElementConsAttr ::
   pursxToElement _ r = do
     let
       o = pursxToElement (Proxy :: Proxy rest) r
-    o
-      { atts = Object.insert (reflectType pxk)
-          (unsafeUnAttribute <$> (get pxk r))
-          o.atts
-      }
+    Object.insert (reflectType pxk)
+          (PXAttr (unsafeUnAttribute <$> (get pxk r)))
+          o
+    where
+    pxk = Proxy :: _ key
+
+else instance pursxToElementConsStr ::
+  ( Row.Cons key String r' r
+  , PursxToElement rest r
+  , Reflectable key String
+  , IsSymbol key
+  ) =>
+  PursxToElement
+    (RL.Cons key String rest)
+    r where
+  pursxToElement _ r = do
+    let
+      o = pursxToElement (Proxy :: Proxy rest) r
+    Object.insert (reflectType pxk)
+          (PXStr (get pxk r))
+          o
     where
     pxk = Proxy :: _ key
 
 instance pursxToElementNil ::
   PursxToElement RL.Nil r where
-  pursxToElement _ _ =
-    { atts: Object.empty
-    , nuts: Object.empty
-    }
+  pursxToElement _ _ = Object.empty
 
 unsafeMakePursx
   :: forall r rl
@@ -1007,17 +1024,16 @@ unsafeMakePursx' verb html r = Nut $ mkEffectFn2
      ) ->
     do
       let
-        { atts, nuts } = pursxToElement
+        asn = pursxToElement
           (Proxy :: _ rl)
           r
       elt <- runEffectFn5 makePursx (Html html) (Verb verb)
-        atts
-        nuts
+        asn
+        ps
         di
 
       unsubs <- liftST $ STArray.new
       when (not (null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
-      runEffectFn3 eltAttribution ps di elt
       runEffectFn2 oneOffFinalizationRegistry elt (thunker unsubs)
       pure $ DekuElementOutcome elt

@@ -254,7 +254,7 @@ pursXWiresUp :: Nut
 pursXWiresUp = Deku.do
   setMessage /\ message <- useState'
   D.div [ DA.id_ "div0" ]
-    [ (Proxy :: _ "<div><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>") ~~
+    [ (Proxy :: _ "<div ~mykls~><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>") ~~
         { me: fixed
             [ text_ "milieu"
             , text_ " "
@@ -265,6 +265,7 @@ pursXWiresUp = Deku.do
                 [ text_ "après-milieu" ]
             ]
         , evt: DL.click_ \_ -> setMessage "hello"
+        , mykls: DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
         }
     , D.span [ DA.id_ "span0" ] [ text message ]
     ]

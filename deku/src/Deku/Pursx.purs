@@ -51,7 +51,8 @@ class
     (newTail :: Symbol)
   | verb acc head tail pursi -> purso newTail
 
-instance (Row.Cons acc (Nut) pursi purso) => DoVerbForDOM verb acc verb tail pursi purso tail
+instance (Row.Cons acc Nut pursi purso) => DoVerbForDOM verb acc verb tail pursi purso tail
+else instance (Row.Cons acc String pursi purso) => DoVerbForDOM verb acc verb tail pursi purso tail
 else instance
   ( Sym.Append acc anything acc2
   , Sym.Cons x y tail

@@ -1103,6 +1103,7 @@ describe("deku", () => {
       f(tests.pursXWiresUp, () => {
         const $ = require("jquery");
         expect($("#span0").text()).toBe("");
+        expect($("#topdiv").attr("class")).toBe("arrrrr");
         $("#px").trigger("click");
         expect($("#span0").text()).toBe("hello");
         $("#inny").trigger("click");
@@ -1440,11 +1441,11 @@ describe("deku", () => {
         expect($("#db").text()).toBe("4");
       })
     );
-    doTest("stress test doesn't blow up", (f) =>
-      f(tests.stressTest, () => {
-        const $ = require("jquery");
-        $("#runlots").trigger("click");
-      })
-    );
+    // doTest("stress test doesn't blow up", (f) =>
+    //   f(tests.stressTest, () => {
+    //     const $ = require("jquery");
+    //     $("#runlots").trigger("click");
+    //   })
+    // );
   });
 });

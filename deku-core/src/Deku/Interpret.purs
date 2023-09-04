@@ -7,7 +7,6 @@ module Deku.Interpret where
 
 import Prelude
 
-import Control.Monad.Maybe.Trans (MaybeT(..), runMaybeT)
 import Control.Monad.Rec.Class (Step(..), tailRecM)
 import Control.Monad.ST.Class (liftST)
 import Data.Array ((!!))
@@ -21,19 +20,20 @@ import Data.Foldable (for_)
 import Data.FoldableWithIndex (foldrWithIndex)
 import Data.List (List(..), (:))
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Newtype (unwrap)
 import Data.String (toUpper)
 import Data.String as String
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
 import Deku.Attribute (Cb(..), Key(..), Value(..), unsafeAttribute)
-import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), Tag(..), Verb(..), handleAtts)
+import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), PursXable(..), Tag(..), Verb(..), eltAttribution, handleAtts)
 import Deku.Core as Core
 import Deku.JSWeakRef (WeakRef)
-import Deku.UnsafeDOM (createElement, appendChild, createElementNS, insertBefore, unsafeParentNode)
+import Deku.UnsafeDOM (appendChild, cloneTemplate, createElement, createElementNS, insertBefore, outerHTML, toTemplate, unsafeParentNode)
 import Effect (Effect)
 import Effect.Console (error)
 import Effect.Ref (read)
-import Effect.Uncurried (EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Event (fastForeachE)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
@@ -45,11 +45,10 @@ import Web.DOM (Comment, Element, Text)
 import Web.DOM as Node
 import Web.DOM.ChildNode (remove)
 import Web.DOM.Comment as Comment
-import Web.DOM.DOMParser (makeDOMParser, parseHTMLFromString)
 import Web.DOM.Document (createComment, createTextNode)
 import Web.DOM.Element (getAttribute, removeAttribute, setAttribute, toChildNode, toEventTarget)
 import Web.DOM.Element as Element
-import Web.DOM.Node (childNodes, firstChild, nextSibling, nodeTypeIndex, replaceChild, setTextContent, textContent)
+import Web.DOM.Node (childNodes, nextSibling, nodeTypeIndex, replaceChild, setTextContent, textContent)
 import Web.DOM.NodeList as NodeList
 import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.DOM.Text as Text
@@ -58,9 +57,7 @@ import Web.Event.Event as Web
 import Web.Event.EventTarget (addEventListener, eventListener, removeEventListener)
 import Web.HTML (window)
 import Web.HTML.HTMLButtonElement as HTMLButtonElement
-import Web.HTML.HTMLDocument (fromDocument, toDocument)
-import Web.HTML.HTMLDocument as HTMLDocument
-import Web.HTML.HTMLElement as HTMLElement
+import Web.HTML.HTMLDocument (toDocument)
 import Web.HTML.HTMLFieldSetElement as HTMLFieldSetElement
 import Web.HTML.HTMLInputElement as HTMLInputElement
 import Web.HTML.HTMLKeygenElement as HTMLKeygenElement
@@ -137,8 +134,8 @@ doInsertAtEnd' :: Node.Node -> DekuBeacon -> Effect Unit
 doInsertAtEnd' nd end = do
   x <- runEffectFn1 unsafeParentNode (Comment.toNode (fromDekuBeacon end))
   runEffectFn3 insertBefore nd
-      (Comment.toNode (fromDekuBeacon end))
-      x
+    (Comment.toNode (fromDekuBeacon end))
+    x
 
 attributeDynParentForNodeEffect
   :: EffectFn4 Node.Node DekuBeacon
@@ -340,7 +337,8 @@ attributeDynParentForBeaconFullRangeEffect = mkEffectFn4
       leftB
       rightB
       mpos
-    par' <- runEffectFn1 unsafeParentNode (Comment.toNode (fromDekuBeacon stBeacon))
+    par' <- runEffectFn1 unsafeParentNode
+      (Comment.toNode (fromDekuBeacon stBeacon))
     ns <- nextSibling (Comment.toNode (fromDekuBeacon stBeacon))
     case ns, nsOld of
       Just ns', Just nso -> runEffectFn3
@@ -526,124 +524,118 @@ matchTildes nodeContent =
 
 data ListList a = KeepGoing (List a) (ListList a) | Stop
 
+queryAttrWithParent :: EffectFn2 String Element (Array Node.Node)
+queryAttrWithParent = mkEffectFn2 \att me -> do
+    nl <- querySelectorAll (QuerySelector ("[" <> att <> "]"))
+      (Element.toParentNode me)
+    hasAttr <- getAttribute att me
+    arr <- NodeList.toArray nl
+    pure (maybe arr (Array.snoc arr) (hasAttr $> Element.toNode me))
+
 makePursxEffect :: Core.MakePursx
 makePursxEffect = mkEffectFn5
-  \(Html html) (Verb verb) atts nuts di -> do
+  \(Html html) (Verb verb) replacements ps di -> do
     let
-      foldedHtml = foldrWithIndex
-        ( \i _ -> String.replace (String.Pattern $ verb <> i <> verb)
-            ( String.Replacement $
-                "<span data-deku-elt-internal=\""
-                  <> i
-                  <>
-                    "\"></span>"
-            )
+      { foldedHtml, nuts, atts } = foldrWithIndex
+        ( \i v r -> case v of
+            PXNut n -> r
+              { foldedHtml = String.replace (String.Pattern $ verb <> i <> verb)
+                  ( String.Replacement $
+                      "<span data-deku-elt-internal=\""
+                        <> i
+                        <>
+                          "\"></span>"
+                  )
+                  r.foldedHtml
+              , nuts = Object.insert i n r.nuts
+              }
+            PXAttr a -> r
+              { foldedHtml = String.replace (String.Pattern $ verb <> i <> verb)
+                  ( String.Replacement $ "data-deku-attr-internal=\"" <> i <>
+                      "\""
+                  )
+                  r.foldedHtml
+              , atts = Object.insert i a r.atts
+              }
+            PXStr s -> r
+              { foldedHtml = String.replace (String.Pattern $ verb <> i <> verb)
+                  (String.Replacement $ s)
+                  r.foldedHtml
+              }
         )
-        ( foldrWithIndex
-            ( \i _ -> String.replace (String.Pattern $ verb <> i <> verb)
-                (String.Replacement $ "data-deku-attr-internal=\"" <> i <> "\"")
-            )
-            html
-            atts
-        )
-        nuts
-    dp <- makeDOMParser
-    h <- parseHTMLFromString foldedHtml dp
-    let failure = runEffectFn2 makeElementEffect Nothing (Tag "div")
-    case h of
-      Left err -> do
-        error $
-          "Programming error: makePursxEffect type-level validation failed: " <>
-            err
-        failure
-      Right elt' -> do
-        iii <- runMaybeT do
-          o <- MaybeT $ pure $ fromDocument elt'
-          oo <- MaybeT $ HTMLDocument.body o
-          pure $ HTMLElement.toElement oo
-        case iii of
-          Just elt -> do
-            nl <- querySelectorAll (QuerySelector "[data-deku-attr-internal]")
-              (Element.toParentNode elt)
-            arr <- NodeList.toArray nl
-            runEffectFn2 fastForeachE arr $ mkEffectFn1 \nd -> do
-              case Element.fromNode nd of
-                Just asElt -> do
-                  obj <- liftST STObject.new
-                  attTag <- getAttribute "data-deku-attr-internal" asElt
-                  case attTag >>= flip Object.lookup atts of
-                    Just att -> do
-                      star <- liftST $ STArray.new
-                      -- todo: does this map have a runtime hit?
-                      handleAtts di obj (toDekuElement asElt) star
-                        [ (map unsafeAttribute att) ]
-                    Nothing -> do
-                      error $ "Programming error: att not found in pursx"
-                Nothing -> do
-                  error $
-                    "Programming error: non-element with attr-internal tag"
-            nllll <- querySelectorAll (QuerySelector "[data-deku-elt-internal]")
-              (Element.toParentNode elt)
-            arrrrrr <- NodeList.toArray nllll
-            runEffectFn2 fastForeachE arrrrrr $ mkEffectFn1 \nd -> do
-              case Element.fromNode nd of
-                Just asElt -> do
-                  eltTag <- getAttribute "data-deku-elt-internal" asElt
-                  case eltTag >>= flip Object.lookup nuts of
-                    Just (Nut replacementNode) -> do
-                      -- todo: does this map have a runtime hit?
-                      x' <- runEffectFn1 unsafeParentNode (Element.toNode asElt)
-                      case Element.fromNode x' of
-                        Nothing ->
-                          error
-                            "Programming error: could not find parent for pursx element"
-                        Just x -> do
-                          myNut <- runEffectFn2 replacementNode
-                            ( PSR
-                                { parent: toDekuElement x
-                                , fromPortal: false
-                                , unsubs: []
-                                , beacon: Nothing
-                                }
-                            )
-                            di
-                          case myNut of
-                            DekuElementOutcome eo -> replaceChild
-                              (Element.toNode (fromDekuElement eo))
-                              (Element.toNode asElt)
-                              (Element.toNode x)
-                            DekuTextOutcome to -> replaceChild
-                              (Text.toNode (fromDekuText to))
-                              (Element.toNode asElt)
-                              (Element.toNode x)
-                            DekuBeaconOutcome bo -> do
-                              runEffectFn3
-                                attributeBeaconFullRangeParentProto
-                                false
-                                ( \i -> runEffectFn3 insertBefore i (Element.toNode asElt)
-                                    (Element.toNode x)
-                                )
-                                (Comment.toNode (fromDekuBeacon bo))
-                              remove (Element.toChildNode asElt)
-                            NoOutcome -> pure unit
-                    Nothing -> do
-                      error $ "Programming error: att not found in pursx"
-                Nothing -> do
-                  error $
-                    "Programming error: non-element with attr-internal tag"
-            ooo <- runMaybeT do
-              asn <- MaybeT $ firstChild (Element.toNode elt)
-              tn <- MaybeT $ pure $ Element.fromNode asn
-              pure $ toDekuElement tn
-            case ooo of
-              Just oooo' -> pure oooo'
-              Nothing -> do
-                error $
-                  "Programming error: document parser does not yield first element"
-                failure
-          Nothing -> do
-            error $ "Programming error: document parser yielded non-document"
-            failure
+        { atts: Object.empty, nuts: Object.empty, foldedHtml: html }
+        replacements
+    eltX <- runEffectFn1 toTemplate foldedHtml
+    elt <- runEffectFn1 cloneTemplate eltX
+    runEffectFn3 eltAttribution ps di (toDekuElement elt)
+    arr <- runEffectFn2 queryAttrWithParent "data-deku-attr-internal" elt
+    runEffectFn2 fastForeachE arr $ mkEffectFn1 \nd -> do
+      case Element.fromNode nd of
+        Just asElt -> do
+          obj <- liftST STObject.new
+          attTag <- getAttribute "data-deku-attr-internal" asElt
+          case attTag >>= flip Object.lookup atts of
+            Just att -> do
+              star <- liftST $ STArray.new
+              -- todo: does this map have a runtime hit?
+              handleAtts di obj (toDekuElement asElt) star
+                [ (map unsafeAttribute att) ]
+            Nothing -> do
+              error $ ("Programming error: att not found in pursx " <> show attTag <> " " <> show (Object.keys atts))
+        Nothing -> do
+          error $
+            "Programming error: non-element with attr-internal tag"
+    arrrrrr <- runEffectFn2 queryAttrWithParent "data-deku-elt-internal" elt
+    runEffectFn2 fastForeachE arrrrrr $ mkEffectFn1 \nd -> do
+      case Element.fromNode nd of
+        Just asElt -> do
+          eltTag <- getAttribute "data-deku-elt-internal" asElt
+          case eltTag >>= flip Object.lookup nuts of
+            Just (Nut replacementNode) -> do
+              -- todo: does this map have a runtime hit?
+              x' <- runEffectFn1 unsafeParentNode (Element.toNode asElt)
+              case Element.fromNode x' of
+                Nothing ->
+                  error
+                    "Programming error: could not find parent for pursx element"
+                Just x -> do
+                  myNut <- runEffectFn2 replacementNode
+                    ( PSR
+                        { parent: toDekuElement x
+                        , fromPortal: false
+                        , unsubs: []
+                        , beacon: Nothing
+                        }
+                    )
+                    di
+                  case myNut of
+                    DekuElementOutcome eo -> replaceChild
+                      (Element.toNode (fromDekuElement eo))
+                      (Element.toNode asElt)
+                      (Element.toNode x)
+                    DekuTextOutcome to -> replaceChild
+                      (Text.toNode (fromDekuText to))
+                      (Element.toNode asElt)
+                      (Element.toNode x)
+                    DekuBeaconOutcome bo -> do
+                      runEffectFn3
+                        attributeBeaconFullRangeParentProto
+                        false
+                        ( \i -> runEffectFn3 insertBefore i
+                            (Element.toNode asElt)
+                            (Element.toNode x)
+                        )
+                        (Comment.toNode (fromDekuBeacon bo))
+                      remove (Element.toChildNode asElt)
+                    NoOutcome -> pure unit
+            Nothing -> do
+              ohtml <- runEffectFn1 outerHTML asElt
+              parhtml <- runEffectFn1 outerHTML (fromDekuElement (unwrap ps).parent)
+              error $ ("Programming error: nut not found in pursx " <> show eltTag <> " " <> html <> show (Object.keys atts) <> " " <> show (Object.keys nuts) <> " " <> ohtml <> " @@ " <> parhtml)
+        Nothing -> do
+          error $
+            "Programming error: non-element with attr-internal tag"
+    pure (toDekuElement elt)
 
 fullDOMInterpret :: Core.DOMInterpret
 fullDOMInterpret = Core.DOMInterpret
