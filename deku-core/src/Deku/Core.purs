@@ -92,8 +92,13 @@ type MakeElement =
 type SendToPosForDyn = EffectFn4 Int DekuBeacon DekuBeacon DekuBeacon
   Unit
 
-type SendToPosForElement = EffectFn5 (Ref Boolean) Int DekuElement DekuBeacon DekuBeacon Unit
-type SendToPosForText = EffectFn5 (Ref Boolean) Int DekuText DekuBeacon DekuBeacon Unit
+type SendToPosForElement = EffectFn5 (Ref Boolean) Int DekuElement DekuBeacon
+  DekuBeacon
+  Unit
+
+type SendToPosForText = EffectFn5 (Ref Boolean) Int DekuText DekuBeacon
+  DekuBeacon
+  Unit
 
 type RemoveForDyn = EffectFn2 Boolean DekuBeacon Unit
 type RemoveForElement = EffectFn2 Boolean DekuElement Unit
@@ -292,20 +297,21 @@ fixed nuts = Nut $ mkEffectFn2
             y.start
             y.end
             Nothing
+      let
+        myPSR = PSR $ psr
+          { unsubs = []
+          , fromPortal = false
+          , beacon = Just
+              { start: dbStart
+              , end: dbEnd
+              , lucky
+              , pos: Nothing
+              , lifecycle: Nothing
+              }
+          }
       runEffectFn2 fastForeachE nuts $ mkEffectFn1 \(Nut nut) -> do
         void $ runEffectFn2 nut
-          ( PSR $ psr
-              { unsubs = []
-              , fromPortal = false
-              , beacon = Just
-                  { start: dbStart
-                  , end: dbEnd
-                  , lucky
-                  , pos: Nothing
-                  , lifecycle: Nothing
-                  }
-              }
-          )
+          myPSR
           di
       for_ (getLifecycle psr.beacon) \{ l, s, e } -> do
         runEffectFn8 actOnLifecycleForDyn
@@ -553,7 +559,8 @@ useDynWith p d f = Nut $ mkEffectFn2
             drStart <- runEffectFn1 deref wrStart
             drEnd <- runEffectFn1 deref wrEnd
             case toMaybe drStart, toMaybe drEnd of
-              Just dbStartx, Just dbEndy -> runEffectFn1 (oh'hi dbStartx dbEndy) yy
+              Just dbStartx, Just dbEndy -> runEffectFn1 (oh'hi dbStartx dbEndy)
+                yy
               _, _ -> do
                 -- only need to run on head as head is reference
                 thunker unsubs
@@ -576,7 +583,8 @@ useDynWith p d f = Nut $ mkEffectFn2
       pure $ DekuBeaconOutcome dbStart
 
 actOnLifecycleForText
-  :: EffectFn8 Boolean (Ref Boolean) (STArray.STArray Global (Effect Unit)) (Poll DekuDynamic)
+  :: EffectFn8 Boolean (Ref Boolean) (STArray.STArray Global (Effect Unit))
+       (Poll DekuDynamic)
        DOMInterpret
        DekuText
        DekuBeacon
@@ -667,7 +675,8 @@ actOnLifecycleForDyn = mkEffectFn8
     runListener oh'hi associations p
 
 actOnLifecycleForElement
-  :: EffectFn8 Boolean (Ref Boolean) (STArray.STArray Global (Effect Unit)) (Poll DekuDynamic)
+  :: EffectFn8 Boolean (Ref Boolean) (STArray.STArray Global (Effect Unit))
+       (Poll DekuDynamic)
        DOMInterpret
        DekuElement
        DekuBeacon
