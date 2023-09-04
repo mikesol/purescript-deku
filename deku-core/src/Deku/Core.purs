@@ -29,10 +29,10 @@ import Deku.Attribute (Attribute, Attribute', AttributeValue(..), Cb, Key(..), V
 import Deku.Do as Deku
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
-import Effect (Effect, foreachE)
+import Effect (Effect)
 import Effect.Ref (Ref, new, write)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn8, mkEffectFn2, mkEffectFn3, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
-import FRP.Event (subscribe)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn8, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
+import FRP.Event (fastForeachE, fastForeachThunkE, subscribe, subscribeO)
 import FRP.Event as Event
 import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
@@ -240,21 +240,21 @@ getLifecycle mb = do
 thunker :: STArray.STArray Global (Effect Unit) -> Effect Unit
 thunker unsubs = do
   unsubsX <- liftST $ STArray.unsafeFreeze unsubs
-  foreachE unsubsX identity
+  runEffectFn1 fastForeachThunkE unsubsX
 
 runListener
-  :: (DekuDynamic -> Effect Unit)
+  :: EffectFn1 DekuDynamic Unit
   -> STArray.STArray Global (Effect Unit)
   -> Poll DekuDynamic
   -> Effect Unit
 runListener oh'hi associations = go
   where
   handleEvent y = do
-    uu <- subscribe y oh'hi
+    uu <- runEffectFn2 subscribeO y oh'hi
     void $ liftST $ STArray.push uu associations
   go = case _ of
     OnlyEvent x -> handleEvent x
-    OnlyPure x -> foreachE x oh'hi
+    OnlyPure x -> runEffectFn2 fastForeachE x oh'hi
     OnlyPoll x -> do
       pump <- liftST $ Event.create
       handleEvent (UPoll.sample x pump.event)
@@ -292,7 +292,7 @@ fixed nuts = Nut $ mkEffectFn2
             y.start
             y.end
             Nothing
-      foreachE nuts \(Nut nut) -> do
+      runEffectFn2 fastForeachE nuts $ mkEffectFn1 \(Nut nut) -> do
         void $ runEffectFn2 nut
           ( PSR $ psr
               { unsubs = []
@@ -514,7 +514,7 @@ useDynWith p d f = Nut $ mkEffectFn2
       let those' = eventOrBust p
       let that' = pollOrBust p
       let
-        oh'hi sstaaarrrrrt eeeeeennnnd (Tuple mpos value) = do
+        oh'hi sstaaarrrrrt eeeeeennnnd = mkEffectFn1 \(Tuple mpos value) -> do
           let sendTo = d.sendTo value
           let remove = d.remove value
           sendTo' <- liftST $ Poll.create
@@ -544,7 +544,7 @@ useDynWith p d f = Nut $ mkEffectFn2
                 }
             )
             di
-      for_ this' \t -> foreachE t $ oh'hi dbStart dbEnd
+      for_ this' \t -> runEffectFn2 fastForeachE t (oh'hi dbStart dbEnd)
       let
         handleEvent t = do
           wrStart <- runEffectFn1 weakRef dbStart
@@ -553,7 +553,7 @@ useDynWith p d f = Nut $ mkEffectFn2
             drStart <- runEffectFn1 deref wrStart
             drEnd <- runEffectFn1 deref wrEnd
             case toMaybe drStart, toMaybe drEnd of
-              Just dbStartx, Just dbEndy -> oh'hi dbStartx dbEndy yy
+              Just dbStartx, Just dbEndy -> runEffectFn1 (oh'hi dbStartx dbEndy) yy
               _, _ -> do
                 -- only need to run on head as head is reference
                 thunker unsubs
@@ -597,7 +597,7 @@ actOnLifecycleForText = mkEffectFn8
     startAnchorWr <- runEffectFn1 weakRef startAnchor'
     endAnchorWr <- runEffectFn1 weakRef endAnchor'
     let
-      oh'hi x = do
+      oh'hi = mkEffectFn1 \x -> do
         txtX <- runEffectFn1 deref txtWr
         startAnchorX <- runEffectFn1 deref startAnchorWr
         endAnchorX <- runEffectFn1 deref endAnchorWr
@@ -642,7 +642,7 @@ actOnLifecycleForDyn = mkEffectFn8
     startAnchorWr <- runEffectFn1 weakRef startAnchor'
     endAnchorWr <- runEffectFn1 weakRef endAnchor'
     let
-      oh'hi x = do
+      oh'hi = mkEffectFn1 \x -> do
         dbStartX <- runEffectFn1 deref dbStartWr
         dbEndX <- runEffectFn1 deref dbEndWr
         startAnchorX <- runEffectFn1 deref startAnchorWr
@@ -690,7 +690,7 @@ actOnLifecycleForElement = mkEffectFn8
     startAnchorWr <- runEffectFn1 weakRef startAnchor'
     endAnchorWr <- runEffectFn1 weakRef endAnchor'
     let
-      oh'hi x = do
+      oh'hi = mkEffectFn1 \x -> do
         eltX <- runEffectFn1 deref eltWr
         startAnchorX <- runEffectFn1 deref startAnchorWr
         endAnchorX <- runEffectFn1 deref endAnchorWr
@@ -735,7 +735,7 @@ handleAtts
 handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts =
   do
     let
-      oh'hi'attr eeeee att = do
+      oh'hi'attr eeeee = mkEffectFn1 \att -> do
         let { key, value } = unsafeUnAttribute att
         case value of
           Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
@@ -746,19 +746,20 @@ handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts
         uu <- subscribe y \x -> do
           drf <- runEffectFn1 deref wr
           case toMaybe drf of
-            Just yy -> oh'hi'attr yy x
+            Just yy -> runEffectFn1 (oh'hi'attr yy) x
             Nothing -> thunker unsubs
         void $ liftST $ STArray.push uu unsubs
       handleAttrPoll y = do
         pump <- liftST $ Event.create
         handleAttrEvent (UPoll.sample y pump.event)
         pump.push identity
-    foreachE atts case _ of
-      OnlyPure x -> foreachE x $ oh'hi'attr elt
+    let ohi = oh'hi'attr elt
+    runEffectFn2 fastForeachE atts $ mkEffectFn1 \ii -> case ii of
+      OnlyPure x -> runEffectFn2 fastForeachE x ohi
       OnlyEvent y -> handleAttrEvent y
       OnlyPoll y -> handleAttrPoll y
       PureAndPoll x y -> do
-        foreachE x $ oh'hi'attr elt
+        runEffectFn2 fastForeachE x ohi
         handleAttrPoll y
 
 elementify
@@ -784,7 +785,7 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
       obj <- liftST $ STObject.new
       handleAtts di obj elt unsubs atts
       let
-        oh'hi (Nut nut) = do
+        oh'hi = mkEffectFn1 \(Nut nut) -> do
           void $ runEffectFn2 nut
             ( PSR $ psr
                 { beacon = Nothing
@@ -794,7 +795,7 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
                 }
             )
             di
-      foreachE nuts oh'hi
+      runEffectFn2 fastForeachE nuts oh'hi
       for_ (getLifecycle psr.beacon) \{ l, s, e, lucky } -> runEffectFn8
         actOnLifecycleForElement
         psr.fromPortal

@@ -29,10 +29,11 @@ import Deku.Attribute (Cb(..), Key(..), Value(..), unsafeAttribute)
 import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), Tag(..), Verb(..), handleAtts)
 import Deku.Core as Core
 import Deku.JSWeakRef (WeakRef)
-import Effect (Effect, foreachE)
+import Effect (Effect)
 import Effect.Console (error)
 import Effect.Ref (read)
 import Effect.Uncurried (EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import FRP.Event (fastForeachE)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
 import Safe.Coerce (coerce)
@@ -572,7 +573,7 @@ makePursxEffect = mkEffectFn5
             nl <- querySelectorAll (QuerySelector "[data-deku-attr-internal]")
               (Element.toParentNode elt)
             arr <- NodeList.toArray nl
-            foreachE arr \nd -> do
+            runEffectFn2 fastForeachE arr $ mkEffectFn1 \nd -> do
               case Element.fromNode nd of
                 Just asElt -> do
                   obj <- liftST STObject.new
@@ -591,7 +592,7 @@ makePursxEffect = mkEffectFn5
             nllll <- querySelectorAll (QuerySelector "[data-deku-elt-internal]")
               (Element.toParentNode elt)
             arrrrrr <- NodeList.toArray nllll
-            foreachE arrrrrr \nd -> do
+            runEffectFn2 fastForeachE arrrrrr $ mkEffectFn1 \nd -> do
               case Element.fromNode nd of
                 Just asElt -> do
                   eltTag <- getAttribute "data-deku-elt-internal" asElt
