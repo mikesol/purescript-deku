@@ -373,6 +373,64 @@ newtype FeI e = FeI
 
 newtype FeO e = FeO { f :: Boolean -> e -> Effect Unit, e :: e }
 
+disableables ∷ List (Exists FeI)
+disableables =
+  mkExists
+    ( FeI
+        { e: HTMLButtonElement.fromElement
+        , f: HTMLButtonElement.setDisabled
+        }
+    )
+    : mkExists
+        ( FeI
+            { e: HTMLInputElement.fromElement
+            , f: HTMLInputElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLFieldSetElement.fromElement
+            , f: HTMLFieldSetElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLKeygenElement.fromElement
+            , f: HTMLKeygenElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLLinkElement.fromElement
+            , f: HTMLLinkElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLOptGroupElement.fromElement
+            , f: HTMLOptGroupElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLOptionElement.fromElement
+            , f: HTMLOptionElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLSelectElement.fromElement
+            , f: HTMLSelectElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLTextAreaElement.fromElement
+            , f: HTMLTextAreaElement.setDisabled
+            }
+        )
+    : Nil
+
 getDisableable :: Element -> List (Exists FeI) -> Maybe (Exists FeO)
 getDisableable elt = go
   where
@@ -401,63 +459,9 @@ setPropEffect = mkEffectFn3 \elt' (Key k) (Value v) -> do
           HTMLInputElement.setChecked (v == "true") ie
       | k == "disabled"
       , Just fe <-
-          getDisableable elt
-            ( mkExists
-                ( FeI
-                    { e: HTMLButtonElement.fromElement
-                    , f: HTMLButtonElement.setDisabled
-                    }
-                )
-                : mkExists
-                    ( FeI
-                        { e: HTMLInputElement.fromElement
-                        , f: HTMLInputElement.setDisabled
-                        }
-                    )
-                : mkExists
-                    ( FeI
-                        { e: HTMLFieldSetElement.fromElement
-                        , f: HTMLFieldSetElement.setDisabled
-                        }
-                    )
-                : mkExists
-                    ( FeI
-                        { e: HTMLKeygenElement.fromElement
-                        , f: HTMLKeygenElement.setDisabled
-                        }
-                    )
-                : mkExists
-                    ( FeI
-                        { e: HTMLLinkElement.fromElement
-                        , f: HTMLLinkElement.setDisabled
-                        }
-                    )
-                : mkExists
-                    ( FeI
-                        { e: HTMLOptGroupElement.fromElement
-                        , f: HTMLOptGroupElement.setDisabled
-                        }
-                    )
-                : mkExists
-                    ( FeI
-                        { e: HTMLOptionElement.fromElement
-                        , f: HTMLOptionElement.setDisabled
-                        }
-                    )
-                : mkExists
-                    ( FeI
-                        { e: HTMLSelectElement.fromElement
-                        , f: HTMLSelectElement.setDisabled
-                        }
-                    )
-                : mkExists
-                    ( FeI
-                        { e: HTMLTextAreaElement.fromElement
-                        , f: HTMLTextAreaElement.setDisabled
-                        }
-                    )
-                : Nil
-            ) = runExists (\(FeO { f, e }) -> f (v == "true") e) fe
+          getDisableable elt disableables = runExists
+          (\(FeO { f, e }) -> f (v == "true") e)
+          fe
       | otherwise = setAttribute k v elt
   o
 
