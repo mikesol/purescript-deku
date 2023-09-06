@@ -26,6 +26,15 @@ instance
   ) =>
   RLReverse (RL.Cons k v o) x
 
+class RLReverses (l :: RL.RowList (RL.RowList Symbol)) (o :: RL.RowList (RL.RowList Symbol)) | l -> o
+
+instance RLReverses RL.Nil RL.Nil
+instance
+  ( RLReverses o o'
+  , RLReverse v v'
+  ) =>
+  RLReverses (RL.Cons k v o) (RL.Cons k v' o')
+
 class SymbolsToArray :: forall k. RL.RowList k -> Constraint
 class SymbolsToArray rl where
   symbolsToArray :: Proxy rl -> Array String
