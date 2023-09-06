@@ -5,7 +5,8 @@ import Prelude
 
 import Data.Maybe (Maybe(..), maybe)
 import Deku.Core (Nut(..), PSR(..))
-import Deku.Interpret (fullDOMInterpret, toDekuElement)
+import Deku.FullDOMInterpret (fullDOMInterpret)
+import Deku.Interpret (toDekuElement)
 import Effect (Effect)
 import Effect.Exception (error, throwException)
 import Effect.Uncurried (runEffectFn2)

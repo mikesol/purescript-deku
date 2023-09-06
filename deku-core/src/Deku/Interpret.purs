@@ -636,35 +636,3 @@ makePursxEffect = mkEffectFn5
           error $
             "Programming error: non-element with attr-internal tag"
     pure (toDekuElement elt)
-
-fullDOMInterpret :: Core.DOMInterpret
-fullDOMInterpret = Core.DOMInterpret
-  { makeElement: makeElementEffect
-  , setProp: setPropEffect
-  , setCb: setCbEffect
-  , unsetAttribute: unsetAttributeEffect
-  , attributeElementParent: attributeElementParentEffect
-  , attributeDynParentForElement: attributeDynParentForElementEffect
-  , sendToPosForElement: sendToPosForElementEffect
-  , removeForElement: removeForElementEffect
-  --
-  , makeOpenBeacon: makeOpenBeaconEffect
-  , makeCloseBeacon: makeCloseBeaconEffect
-  , attributeBeaconParent: attributeBeaconParentEffect
-  , attributeDynParentForBeacons: attributeDynParentForBeaconsEffect
-  , attributeBeaconFullRangeParent: attributeBeaconFullRangeParentEffect
-  , attributeDynParentForBeaconFullRange:
-      attributeDynParentForBeaconFullRangeEffect
-  , sendToPosForDyn: sendToPosForDynEffect
-  , removeForDyn: removeForDynEffect
-  --
-  , makeText: makeTextEffect
-  , setText: setTextEffect
-  , attributeTextParent: attributeTextParentEffect
-  , attributeDynParentForText: attributeDynParentForTextEffect
-  , sendToPosForText: sendToPosForTextEffect
-  , removeForText: removeForTextEffect
-  --
-  , makePursx: makePursxEffect
-  --
-  }
