@@ -20,7 +20,7 @@ class
 
 instance endOfTheLine ::
   ( Reflectable html String
-  , PXStart "~" " " html r
+  , PXStart "~" " " html r p
   , RL.RowToList r rl
   , PursxToElement rl r
   ) =>
@@ -45,7 +45,7 @@ class
 
 instance endOfTheLineV ::
   ( Reflectable html String
-  , PXStart "~" " " html r
+  , PXStart "~" " " html r p
   , RL.RowToList r rl
   , PursxToElement rl r
   ) =>
