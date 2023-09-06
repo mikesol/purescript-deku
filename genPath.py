@@ -1,3 +1,4 @@
+DEBUG = True
 def genD(n, d):
     C = "{0:b}".format(d)
     C = ("0" * (n + 1 - len(C))) + C
@@ -79,25 +80,31 @@ def genP(n, d):
     C = "{0:b}".format(d)
     C = ("0" * (n + 1 - len(C))) + C
     C = C.replace("0", "X").replace("1", "Y")
+    DB = lambda x: f'let _ = spy "{C}{x}" true' if DEBUG else ''
     T = f"""---
 instance PathWalker a r => PathWalker (Path.{C}DownGroup a) r where
   walk = mkEffectFn4 \_ r di e -> do
+    {DB("DownGroup")}
     p <- runEffectFn1 {C.lower()}DownGroup e
     runEffectFn4 walk (Proxy :: _ a) r di p
 instance PathWalker a r => PathWalker (Path.{C}RightGroup a) r where
   walk = mkEffectFn4 \_ r di e -> do
+    {DB("RightGroup")}
     p <- runEffectFn1 {C.lower()}RightGroup e
     runEffectFn4 walk (Proxy :: _ a) r di p
 instance (RL.RowToList r rl, ProcessInstructions r rl, PathWalker a r) => PathWalker (Path.{C}ContGroupWithMarkers zz a) r where
   walk = mkEffectFn4 \_ r di e -> do
+    {DB("ContGroupWithMarkers")}
     runEffectFn4 processInstructions (Proxy :: _ rl) r di e
     runEffectFn4 walk (Proxy :: _ a) r di e
 instance (PathWalker a r, PathWalker b r) => PathWalker (Path.{C}TwoContGroups a b) r where
   walk = mkEffectFn4 \_ r di e -> do
+    {DB("TwoContGroups")}
     runEffectFn4 walk (Proxy :: _ a) r di e
     runEffectFn4 walk (Proxy :: _ b) r di e
 instance (PathWalker a r, PathWalker b r, RL.RowToList r rl, ProcessInstructions r rl) => PathWalker (Path.{C}TwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn4 \_ r di e -> do
+    {DB("TwoContGroupsWithMarkers")}
     runEffectFn4 processInstructions (Proxy :: _ rl) r di e
     runEffectFn4 walk (Proxy :: _ a) r di e
     runEffectFn4 walk (Proxy :: _ b) r di e
@@ -138,10 +145,10 @@ if __name__ == '__main__':
     for y in range(2 << (R-1)):
         oprint(genT(R-1, y))
     #####
-    qprint("""module Deku.PathWalker where
+    qprint(f"""module Deku.PathWalker where
 
 import Prelude
-
+{"import Debug(spy)" if DEBUG else ""}
 import Control.Monad.ST.Class (liftST)
 import Data.Array.ST as STArray
 import Data.Maybe (Maybe(..))
@@ -174,14 +181,15 @@ foreign import splitTextAndReturnReplacement :: EffectFn2 String  MElement Text
 
 class PathWalker :: Path.Path -> Row Type -> Constraint
 class PathWalker p r | p -> r where
-  walk :: EffectFn4 (Proxy p) { | r } DOMInterpret MElement Unit
+  walk :: EffectFn4 (Proxy p) {{ | r }} DOMInterpret MElement Unit
 
 class ProcessInstructions :: Row Type -> RL.RowList Type -> Constraint
 class ProcessInstructions r rl | rl -> r where
-  processInstructions :: EffectFn4 (Proxy rl) { | r } DOMInterpret MElement Unit
+  processInstructions :: EffectFn4 (Proxy rl) {{ | r }} DOMInterpret MElement Unit
 
 instance (RL.RowToList r rl, ProcessInstructions r rl) => PathWalker (Path.MarkerGroup a) r where
   walk = mkEffectFn4 \_ r di e -> do
+    {'let _ = spy "MarkerGroup" r' if DEBUG else ''}
     runEffectFn4 processInstructions (Proxy :: _ rl) r di e
 
 instance (IsSymbol k, R.Cons k v r' r, ProcessInstructions r c) => ProcessInstructions r (RL.Cons k String c) where
@@ -196,11 +204,11 @@ instance (IsSymbol k, R.Cons k (Poll (Attribute e)) r' r, ProcessInstructions r 
       [  get (Proxy :: _ k) r ]
 
 instance (IsSymbol k, R.Cons k Nut r' r, ProcessInstructions r c) => ProcessInstructions r (RL.Cons k Nut c) where
-  processInstructions = mkEffectFn4 \_ r di@(DOMInterpret { makeElement }) e -> do
+  processInstructions = mkEffectFn4 \_ r di@(DOMInterpret {{ makeElement }}) e -> do
     fauxPar <- runEffectFn2 makeElement Nothing (Tag "template")
     let Nut nut = get (Proxy :: _ k) r
     let par = mEltParent e
-    o <- runEffectFn2 nut (PSR { unsubs: [], parent: fauxPar, beacon: Nothing, fromPortal: false }) di
+    o <- runEffectFn2 nut (PSR {{ unsubs: [], parent: fauxPar, beacon: Nothing, fromPortal: false }}) di
     t <- runEffectFn2 splitTextAndReturnReplacement (reflectSymbol (Proxy :: _ k)) e
     case o of
       DekuElementOutcome eo -> replaceChild
