@@ -2,6 +2,9 @@ module Deku.Path where
 
 import Data.Array as Array
 import Data.Symbol (class IsSymbol, reflectSymbol)
+import Deku.Attribute (Attribute)
+import Deku.Core (Nut)
+import FRP.Poll as Poll
 import Prim.RowList as RL
 import Type.Proxy (Proxy(..))
 
@@ -35,6 +38,7 @@ instance
   ) =>
   RLReverses (RL.Cons k v o) (RL.Cons k v' o')
 
+-- | In this class, we only pull out attribute symbols
 class SymbolsToArray :: forall k. RL.RowList k -> Constraint
 class SymbolsToArray rl where
   symbolsToArray :: Proxy rl -> Array String
@@ -42,8 +46,14 @@ class SymbolsToArray rl where
 instance SymbolsToArray RL.Nil where
   symbolsToArray _ = []
 
-instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k v c) where
+instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k (Poll.Poll (Attribute e)) c) where
   symbolsToArray _ = Array.cons (reflectSymbol (Proxy :: _ k)) (symbolsToArray (Proxy :: _ c))
+
+instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k String c) where
+  symbolsToArray _ = symbolsToArray (Proxy :: _ c)
+
+instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k Nut c) where
+  symbolsToArray _ =  symbolsToArray (Proxy :: _ c)
 
 data Marker
 

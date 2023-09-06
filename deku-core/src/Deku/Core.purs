@@ -27,7 +27,6 @@ import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), Cb, Key(..), Value(..), unsafeUnAttribute)
 import Deku.Do as Deku
-import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
 import Effect (Effect)
 import Effect.Ref (Ref, new, write)
@@ -997,43 +996,3 @@ else instance pursxToElementConsStr ::
 instance pursxToElementNil ::
   PursxToElement RL.Nil r where
   pursxToElement _ _ = Object.empty
-
-unsafeMakePursx
-  :: forall r rl
-   . RL.RowToList r rl
-  => PursxToElement rl r
-  => String
-  -> { | r }
-  -> Nut
-unsafeMakePursx = unsafeMakePursx' "~"
-
-unsafeMakePursx'
-  :: forall r rl
-   . RL.RowToList r rl
-  => PursxToElement rl r
-  => String
-  -> String
-  -> { | r }
-  -> Nut
-unsafeMakePursx' verb html r = Nut $ mkEffectFn2
-  \ps@(PSR psr)
-   di@
-     ( DOMInterpret
-         { makePursx
-         }
-     ) ->
-    do
-      let
-        asn = pursxToElement
-          (Proxy :: _ rl)
-          r
-      elt <- runEffectFn5 makePursx (Html html) (Verb verb)
-        asn
-        ps
-        di
-
-      unsubs <- liftST $ STArray.new
-      when (not (null psr.unsubs)) do
-        void $ liftST $ STArray.pushAll psr.unsubs unsubs
-      runEffectFn2 oneOffFinalizationRegistry elt (thunker unsubs)
-      pure $ DekuElementOutcome elt
