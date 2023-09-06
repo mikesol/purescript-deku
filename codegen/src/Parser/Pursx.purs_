@@ -34,7 +34,7 @@ instance
 class PXTagPreName (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb head tail onezero pursi pathi -> purso patho trailing
 --
 class PXTagName (verb :: Symbol) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb tag head tail onezero pursi pathi -> purso patho trailing
-instance (Sym.Cons q r tail, PXBody  verb q r onezero pursi pathi purso patho trailing, Sym.Cons x y trailing, PreEndTagFromTrailing x y tag newTrailing) => PXTagName  verb tag ">" tail onezero pursi pathi purso patho newTrailing
+instance (Sym.Cons q r tail, PXBody  verb q r (RL.Cons "0" "0" onezero) pursi pathi purso patho trailing, Sym.Cons x y trailing, PreEndTagFromTrailing x y tag newTrailing) => PXTagName  verb tag ">" tail onezero pursi pathi purso patho newTrailing
 --
 class PreEndTagFromTrailing (head :: Symbol) (tail :: Symbol) (tag :: Symbol) (newTrailing :: Symbol) | head tail -> tag newTrailing
 --
@@ -79,7 +79,7 @@ else instance
   , PXBody  verb mm bb onezero pursi pathi purso patho newTrailing
   ) =>
   CloseOrRepeat  verb "!" tail onezero pursi pathi purso patho newTrailing
-else instance (PXTagPreName  verb anything tail (RL.Cons "0" "0" onezero) () () pursm pathm trailing, Row.Union pursi pursm pursz, Row.Union pathi pathm pathz, Sym.Cons x y trailing, PXBody  verb x y (RL.Cons "1" "1" onezero) pursz pathz purso patho newTrailing) => CloseOrRepeat  verb anything tail onezero pursi pathi purso patho newTrailing
+else instance (PXTagPreName  verb anything tail onezero () () pursm pathm trailing, Row.Union pursi pursm pursz, Row.Union pathi pathm pathz, Sym.Cons x y trailing, PXBody  verb x y (RL.Cons "1" "1" onezero) pursz pathz purso patho newTrailing) => CloseOrRepeat  verb anything tail onezero pursi pathi purso patho newTrailing
 instance (Sym.Cons x y tail, CloseOrRepeat  verb x y onezero pursi pathi purso patho trailing) => PXBody  verb "<" tail onezero pursi pathi purso patho trailing
 else instance (Sym.Cons x y tail, DoVerbForDOM  verb "" x y onezero pursi pathi pursx pathx newTail, Sym.Cons xx yy newTail, PXBody  verb xx yy onezero pursx pathx purso patho trailing) => PXBody  verb verb tail onezero pursi pathi purso patho trailing
 else instance (Sym.Cons x y tail, PXBody  verb x y onezero pursi pathi purso patho trailing) => PXBody  verb anything tail onezero pursi pathi purso patho trailing

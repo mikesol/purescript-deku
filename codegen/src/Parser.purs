@@ -198,7 +198,7 @@ pxTagPreAttrName { name } =
                 []
             , declInstance Nothing
                 [ cons q r tail
-                , typeApp pxBodyClass [ verb, q, r, onezero, pursi,pathi, purso, patho, trailing ]
+                , typeApp pxBodyClass [ verb, q, r, (rlcons (typeString "0") (typeString "0") onezero), pursi,pathi, purso, patho, trailing ]
                 , cons x y trailing
                 , typeApp preEndTagFromTrailingClass [ x, y, tag, newTrailing ]
                 ]

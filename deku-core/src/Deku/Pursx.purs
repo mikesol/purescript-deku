@@ -15,12 +15,12 @@ import Deku.Path (symbolsToArray)
 import Deku.Path as Path
 import Deku.PathWalker (MElement)
 import Deku.PathWalker as PW
-import Deku.Pursx.Unsafe (unsafeMakePursx)
 import Deku.PursxParser as PxP
 import Deku.UnsafeDOM (cloneTemplate, toTemplate)
 import Effect.Uncurried (EffectFn4, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
 import Literals.Undefined (undefined)
 import Prim.RowList as RL
+import Prim.TypeError (class Warn, Above, Quote, Text)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -31,10 +31,14 @@ makePursx
   => RL.RowToList r rl
   => RL.RowToList p pl
   => Path.SymbolsToArray rl
+  -- => Warn (Above (Text "PL") (Quote (Proxy pl)))
   => Path.RLReverses pl plr
+  -- => Warn (Above (Text "PLR") (Quote (Proxy plr)))
   => Path.Process plr path
   => Path.Scrunch path scrunched
+  => Warn (Above (Text "Path") (Quote path))
   => PW.PathWalker scrunched r
+  => Warn (Above (Text "Scrunched") (Quote scrunched))
   => Proxy html
   -> { | r }
   -> Nut
@@ -79,4 +83,3 @@ makePursx' _ _ r = Nut $ mkEffectFn2
 
 
 infixr 5 makePursx as ~~
-infixr 5 unsafeMakePursx as ~!~

@@ -12,6 +12,10 @@ cons :: Type Void -> Type Void -> Type Void -> Type Void
 cons h t symbol = unsafePartial $
   typeApp (typeCtor "Sym.Cons") [ h, t, symbol ]
 
+rlcons :: Type Void -> Type Void -> Type Void -> Type Void
+rlcons k v t = unsafePartial $
+  typeApp (typeCtor "RL.Cons") [ k, v, t ]
+
 append :: Type Void -> Type Void -> Type Void -> Type Void
 append l r a = unsafePartial $
   typeApp (typeCtor "Sym.Append") [ l, r, a ]

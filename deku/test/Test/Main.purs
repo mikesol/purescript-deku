@@ -613,6 +613,7 @@ useHotRantWorks = Deku.do
     , guard presence $ framed "db"
     ]
 
+
 -- begin stress test
 
 randomAdjectives :: Array String

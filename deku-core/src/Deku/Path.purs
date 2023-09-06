@@ -6,6 +6,7 @@ import Deku.Attribute (Attribute)
 import Deku.Core (Nut)
 import FRP.Poll as Poll
 import Prim.RowList as RL
+import Prim.TypeError (class Warn, Above, Quote, Text)
 import Type.Proxy (Proxy(..))
 
 class
@@ -14,8 +15,6 @@ class
     (b :: RL.RowList Symbol)
     (c :: RL.RowList Symbol)
   | a b -> c
-  , a c -> b
-  , b c -> a
 
 instance RLAppend RL.Nil b b
 else instance (RLAppend a b c) => RLAppend (RL.Cons k v a) b (RL.Cons k v c)
@@ -100,6 +99,12 @@ class
     (o :: Path)
   | d m r -> o
 
+-- a bit inefficient?
+-- it'll add a couple more thunks for these simple cases
+-- we can devise a raccourci if needed
+instance
+  Judgment RL.Nil RL.Nil RL.Nil (MarkerGroup RL.Nil)
+
 instance
   Process (RL.Cons a b c) o =>
   Judgment (RL.Cons a b c) RL.Nil RL.Nil (DownGroup o)
@@ -114,13 +119,19 @@ instance
   Judgment (RL.Cons a b c)
     (RL.Cons d e f)
     RL.Nil
-    (ContGroupWithMarkers (RL.Cons d e f) o)
+    (ContGroupWithMarkers (RL.Cons d e f) (DownGroup o))
 
+instance
+  Process (RL.Cons a b c) o =>
+  Judgment RL.Nil
+    (RL.Cons d e f)
+    (RL.Cons a b c)
+    (ContGroupWithMarkers (RL.Cons d e f) (RightGroup o))
 instance
   ( Process (RL.Cons a b c) o
   , Process (RL.Cons d e f) p
   ) =>
-  Judgment (RL.Cons a b c) RL.Nil (RL.Cons d e f) (TwoContGroups o p)
+  Judgment (RL.Cons a b c) RL.Nil (RL.Cons d e f) (TwoContGroups (DownGroup o) (RightGroup p))
 
 instance
   ( Process (RL.Cons a b c) o
@@ -1031,6 +1042,22 @@ foreign import data YYYYYYTwoContGroupsWithMarkers :: RL.RowList Symbol -> Path 
 class Scrunch (i :: Path) (o :: Path) | i -> o
 
 
+
+
+instance (Scrunch (XDownGroup a) o) => Scrunch (DownGroup (DownGroup a)) o
+instance (Scrunch (YDownGroup a) o) => Scrunch (DownGroup (RightGroup a)) o
+instance Scrunch (DownGroup (MarkerGroup a)) (DownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (DownGroup (ContGroupWithMarkers a b)) (DownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (DownGroup (TwoContGroups a b)) (DownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (DownGroup (TwoContGroupsWithMarkers z a b)) (DownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XRightGroup a) o) => Scrunch (RightGroup (DownGroup a)) o
+instance (Scrunch (YRightGroup a) o) => Scrunch (RightGroup (RightGroup a)) o
+instance Scrunch (RightGroup (MarkerGroup a)) (RightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (RightGroup (ContGroupWithMarkers a b)) (RightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (RightGroup (TwoContGroups a b)) (RightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (RightGroup (TwoContGroupsWithMarkers z a b)) (RightGroup (TwoContGroupsWithMarkers z c d))
+
 ---- level 0
 
 
@@ -1519,8 +1546,11 @@ instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYRightGroup (TwoContGroupsWit
 
 ---- final
 
-
 instance Scrunch (MarkerGroup a) (MarkerGroup a)
+instance (Scrunch b c) => Scrunch (ContGroupWithMarkers a b) (ContGroupWithMarkers a c)
+instance (Scrunch a c, Scrunch b d) => Scrunch (TwoContGroups a b) (TwoContGroups c d)
+instance (Scrunch a c, Scrunch b d) => Scrunch (TwoContGroupsWithMarkers z a b) (TwoContGroupsWithMarkers z c d)
+
 
 
 instance Scrunch (XXXXXXDownGroup a) (XXXXXXDownGroup a)

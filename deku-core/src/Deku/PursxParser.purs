@@ -530,7 +530,7 @@ instance
 
 instance
   ( Sym.Cons q r tail
-  , PXBody verb q r onezero pursi pathi purso patho trailing
+  , PXBody verb q r (RL.Cons "0" "0" onezero) pursi pathi purso patho trailing
   , Sym.Cons x y trailing
   , PreEndTagFromTrailing x y tag newTrailing
   ) =>
@@ -880,7 +880,7 @@ instance
   PXTagPreAttrName verb hasAttributed tag "/" tail onezero purs path purs path trailing
 else instance
   ( Sym.Cons q r tail
-  , PXBody verb q r onezero pursi pathi purso patho trailing
+  , PXBody verb q r (RL.Cons "0" "0" onezero) pursi pathi purso patho trailing
   , Sym.Cons x y trailing
   , PreEndTagFromTrailing x y tag newTrailing
   ) =>
@@ -2202,7 +2202,7 @@ else instance
   ) =>
   CloseOrRepeat verb "!" tail onezero pursi pathi purso patho newTrailing
 else instance
-  ( PXTagPreName verb anything tail (RL.Cons "0" "0" onezero) () () pursm pathm trailing
+  ( PXTagPreName verb anything tail onezero () () pursm pathm trailing
   , Row.Union pursi pursm pursz
   , Row.Union pathi pathm pathz
   , Sym.Cons x y trailing
