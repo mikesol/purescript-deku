@@ -1,19 +1,13 @@
-module Deku.Pursx where
+module Deku.PursxParser where
 
-import Data.Reflectable (class Reflectable, reflectType)
 import Deku.Attribute (Attribute)
 import Deku.Core (Nut)
-import Deku.Pursx.Unsafe (class PursxToElement, unsafeMakePursx, unsafeMakePursx')
 import Deku.DOM (class TagToDeku)
 import FRP.Poll (Poll)
 import Prim.Boolean (False, True)
 import Prim.Row as Row
 import Prim.RowList as RL
 import Prim.Symbol as Sym
-import Type.Proxy (Proxy(..))
-
-pursx :: forall s. Proxy s
-pursx = Proxy
 
 class DoVerbForAttr (verb :: Symbol) (tag :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type) (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (newTail :: Symbol) | verb acc head tail onezero pursi pathi -> purso patho newTail
 instance (TagToDeku tag deku,  Row.Cons acc (Poll (Attribute deku)) pursi purso, Row.Cons acc onezero pathi patho) => DoVerbForAttr verb tag acc verb tail onezero pursi pathi purso patho tail
@@ -89,39 +83,3 @@ else instance (PXTagPreName  verb anything tail (RL.Cons "0" "0" onezero) () () 
 instance (Sym.Cons x y tail, CloseOrRepeat  verb x y onezero pursi pathi purso patho trailing) => PXBody  verb "<" tail onezero pursi pathi purso patho trailing
 else instance (Sym.Cons x y tail, DoVerbForDOM  verb "" x y onezero pursi pathi pursx pathx newTail, Sym.Cons xx yy newTail, PXBody  verb xx yy onezero pursx pathx purso patho trailing) => PXBody  verb verb tail onezero pursi pathi purso patho trailing
 else instance (Sym.Cons x y tail, PXBody  verb x y onezero pursi pathi purso patho trailing) => PXBody  verb anything tail onezero pursi pathi purso patho trailing
-
-psx
-  :: forall (html :: Symbol)
-   . Reflectable html String
-  => PXStart "~" " " html () ()
-  => PursxToElement RL.Nil ()
-  => Proxy html
-  -> Nut
-psx px = makePursx px {}
-
-makePursx
-  :: forall (html :: Symbol) p r rl
-   . Reflectable html String
-  => PXStart "~" " " html r p
-  => RL.RowToList r rl
-  => PursxToElement rl r
-  => Proxy html
-  -> { | r }
-  -> Nut
-makePursx = makePursx' (Proxy :: _ "~")
-
-makePursx'
-  :: forall verb (html :: Symbol) p r rl
-   . Reflectable html String
-  => Reflectable verb String
-  => PXStart verb " " html r p
-  => RL.RowToList r rl
-  => PursxToElement rl r
-  => Proxy verb
-  -> Proxy html
-  -> { | r }
-  -> Nut
-makePursx' verb html = unsafeMakePursx' (reflectType verb) (reflectType html)
-
-infixr 5 makePursx as ~~
-infixr 5 unsafeMakePursx as ~!~
