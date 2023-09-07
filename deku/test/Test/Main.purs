@@ -3,32 +3,43 @@ module Test.Main where
 import Prelude
 
 import Control.Alt ((<|>))
+import Control.Monad.Rec.Class (Step(..), tailRecM)
 import Control.Monad.ST.Class (liftST)
 import Control.Plus (empty)
 import Data.Array ((!!), (..))
 import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Filterable (compact, filter)
+import Data.Foldable (for_, intercalate)
 import Data.Foldable (for_, intercalate, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple (Tuple(..))
+import Data.Tuple (Tuple(..), fst)
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut, dynOptions, fixed, portal, useRefST)
+import Deku.Core (Hook, Nut, fixed, portal, useRefST)
+import Deku.Core (Nut, fixed)
+import Deku.DOM (Attribute)
 import Deku.DOM as D
+import Deku.DOM as DOM
 import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
+import Deku.Hooks (dynOptions, useDynAtEndWith, (<#~>))
 import Deku.Hooks as DH
+import Deku.Pursx ((~~))
 import Deku.Pursx (useTemplateWith, (~~))
 import Deku.Toplevel (runInBody)
 import Effect (Effect, foreachE)
 import Effect.Random (random, randomInt)
+import Effect.Random (randomInt)
 import FRP.Event (fold, folded, keepLatest)
 import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, mergePure, stToPoll)
+import FRP.Poll (Poll, mergePure)
 import Record (union)
 import Type.Proxy (Proxy(..))
 import Web.HTML (window)
@@ -691,15 +702,20 @@ makeRow
   ∷ forall a
    . { n :: Int
      , excl :: Int -> Poll a
+     , selectbox :: Int -> Poll Unit
+     , unselectbox :: Int -> Poll Unit
      , selectMe :: Int -> Effect Unit
      , removeMe :: Effect Unit
      , label :: String
      }
   → Nut
-makeRow { n, excl, selectMe, removeMe, label } = rowTemplate ~~
-  { label: fixed [ text_ label, text $ folded (excl n $> "!!!") ]
+makeRow { n, excl, selectMe, removeMe, selectbox, unselectbox, label } = rowTemplate
+  { label: fixed [ text_ label, text $ folded (excl n $> " !!!") ]
   , select: DL.click_ \_ -> selectMe n
   , remove: DL.click_ \_ -> removeMe
+  , selected: selectbox n
+  , unselected: unselectbox n
+  , n
   }
 
 bootstrapWith
@@ -707,46 +723,85 @@ bootstrapWith
    . { appendRows :: Poll (Array (Tuple Int String))
      , rowbox :: Int -> Poll Unit
      , selectMe :: Int -> Effect Unit
-     , removeMe :: Effect Unit -> Effect Unit
+     , removeMe :: ((Int -> Effect Unit) -> Effect Unit) -> Effect Unit
      , selectbox :: Int -> Poll Unit
      , unselectbox :: Int -> Poll Unit
-     , swap :: Poll Boolean
+     , swap :: Int -> Poll Int
      , arr :: Array (Tuple Int String)
      | r
      }
   -> Nut
-bootstrapWith { selectMe, arr, removeMe, swap, appendRows, rowbox } = Deku.do
+bootstrapWith { selectMe, arr, removeMe, swap, appendRows, rowbox, selectbox, unselectbox } = Deku.do
   { value: Tuple index label, remove } <-
     useDynAtEndWith
       (mergePure arr <|> keepLatest (map mergePure appendRows))
       $ dynOptions
-          { sendTo = case _ of
-              -- verify this
-              Tuple 1 _ -> swap <#> if _ then 1 else 998
-              Tuple 998 _ -> swap <#> if _ then 998 else 1
-              _ -> empty
-
+          { sendTo = fst >>> swap
           }
-  makeRow { n: index, label, excl: rowbox, selectMe, removeMe: removeMe remove }
+  makeRow { n: index, label, excl: rowbox, selectMe, removeMe: removeMe \f -> f index *> remove, selectbox, unselectbox }
 
-tableBody
+
+bootstrapWith2
+  :: forall r
+   . { appendRows :: Poll (Array (Tuple Int String))
+     , rowbox :: Int -> Poll Unit
+     , selectMe :: Int -> Effect Unit
+     , removeMe :: ((Int -> Effect Unit) -> Effect Unit) -> Effect Unit
+     , selectbox :: Int -> Poll Unit
+     , unselectbox :: Int -> Poll Unit
+     , swap :: Int -> Poll Int
+     , arr :: Array (Tuple Int String)
+     | r
+     }
+  -> Nut
+bootstrapWith2 { selectMe, arr, removeMe, swap, appendRows, rowbox, selectbox, unselectbox } = Deku.do
+  { value: Tuple index label, remove } <-
+    useTemplateWith @"""<tr ~sel~ ><td class="col-md-1"> ~num~ </td><td class="col-md-4"><a ~select~ class="lbl">~label~</a></td><td class="col-md-1"><a ~remove~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
+      (map (Nothing /\ _) (mergePure arr <|> keepLatest (map mergePure appendRows)))
+      $ dynOptions
+          { sendTo = fst >>> swap
+          }
+  makeRow2 { n: index, label, excl: rowbox, remover: removeMe \f -> f index *> remove }
+  where
+  makeRow2 { n, excl, remover, label } = rowTemplate2
+    { label: fixed [ text_ label, text $ folded (excl n $> " !!!") ]
+    , select: DL.click_ \_ -> selectMe n
+    , remove: DL.click_ \_ -> remover
+    , selected: selectbox n
+    , unselected: unselectbox n
+    , n
+    }
+  rowTemplate2 { n, select, selected, unselected, label, remove } =
+                { sel: merge
+                      [ DA.klass $ selected $> "danger"
+                      , DA.unset DA.klass (unselected $> unit)
+                      ]
+                  , num: text_ $ show (n + 1)
+                  , select
+                  , label
+                  , remove
+                  }
+  
+makeTable
   :: { rowBuilder :: Poll RowBuilder
      , appendRows :: Poll (Array (Tuple Int String))
-     , swap :: Poll Boolean
+     , swap :: Int -> Poll Int
      , pushToRow :: { address :: Int, payload :: Unit } -> Effect Unit
      , rowbox :: Int -> Poll Unit
      , selectbox :: Int -> Poll Unit
      , unselectbox :: Int -> Poll Unit
      , selectMe :: Int -> Effect Unit
-     , removeMe :: Effect Unit -> Effect Unit
+     , removeMe :: ((Int -> Effect Unit) -> Effect Unit) -> Effect Unit
      }
   -> Nut
-tableBody i = Deku.do
-  D.tbody [ DA.id_ "tbody" ]
-    [ i.rowBuilder <#~> case _ of
-        AddRows arr -> bootstrapWith
-          $ i `union` { arr }
-        Clear -> mempty
+makeTable i = do
+  D.table [ DA.klass_ "table table-hover table-striped test-data" ]
+    [ D.tbody [ DA.id_ "tbody" ]
+        [ i.rowBuilder <#~> case _ of
+            AddRows arr -> bootstrapWith2
+              $ i `union` { arr }
+            Clear -> mempty
+        ]
     ]
 
 data RowBuilder = AddRows (Array (Tuple Int String)) | Clear
@@ -767,20 +822,39 @@ genRows offset n = do
     liftST $ void $ STArray.push (Tuple (offset + i) label) arr
   liftST $ STArray.freeze arr
 
+data RowTransform = Start Int Int | Add Int Int | Swap | Delete Int | ClearRows
+
+doRowTransform :: Array Int -> RowTransform -> Array Int
+doRowTransform a (Add i o) = a <> (i .. (o - 1))
+doRowTransform _ (Start i o) = (i .. (o - 1))
+doRowTransform a Swap = fromMaybe a do
+  l <- a !! 1
+  r <- a !! 998
+  o <- Array.updateAt 998 l a
+  Array.updateAt 1 r o
+doRowTransform a (Delete v) = Array.delete v a
+doRowTransform _ ClearRows = []
+
+rowBuilderToN :: Int -> RowBuilder -> Int
+rowBuilderToN b (AddRows arr) = Array.length arr + b
+rowBuilderToN _ Clear = 0
+
 stressTest :: Nut
 stressTest = Deku.do
   setRowBuilder /\ rowBuilder <- DH.useState'
   setAppendRows /\ appendRows <- DH.useState'
-  incrementRows' /\ nRows <- DH.useState Nothing
-  nRowsRef <- DH.useRef 0 (fromMaybe 0 <$> nRows)
-  setSwap /\ swap <- DH.useState'
+  incrementRows /\ nRowsRaw <- DH.useState'
+  nRows <- DH.useRant (fold add 0 nRowsRaw)
+  nRowsRef <- DH.useRef 0 nRows
+  setRowTransformer /\ rowTransformerRaw <- DH.useState'
+  rowTransformer <- DH.useRant (fold doRowTransform [] rowTransformerRaw)
+  rowTransformerRef <- DH.useRef [] rowTransformer
+  setSwap /\ swap <- DH.useMailboxed
   pushToRow /\ rowbox <- DH.useMailboxed
   pushToSelect /\ selectbox <- DH.useMailboxed
   pushToUnselect /\ unselectbox <- DH.useMailboxed
   setCurrentSelection /\ currentSelection <- DH.useHot Nothing
   selectionRef <- DH.useRef Nothing currentSelection
-  let incrementRows = incrementRows' <<< Just
-  let clearRows = incrementRows' Nothing
   let
     selectMe index = do
       pushToSelect { address: index, payload: unit }
@@ -789,16 +863,17 @@ stressTest = Deku.do
       for_ s \i -> do
         pushToUnselect { address: i, payload: unit }
     removeMe rmEffect = do
-      rmEffect
+      rmEffect (setRowTransformer <<< Delete)
       setCurrentSelection Nothing
   let
-    adder f n = do
+    adder b f n = do
       r <- nRowsRef
       rows <- genRows r n
+      setRowTransformer $ (if b then Start else Add) r (r + n)
       incrementRows n *> f rows
-  let rowAdder = adder (setRowBuilder <<< AddRows)
+  let rowAdder = adder true (setRowBuilder <<< AddRows)
   body ~~
-    { tbody: tableBody
+    { table: makeTable
         { selectMe
         , removeMe
         , selectbox
@@ -809,21 +884,61 @@ stressTest = Deku.do
         , pushToRow
         , rowbox
         }
-    , c1000: DL.click_ \_ -> clearRows *> rowAdder 1000
-    , c10000: DL.click_ \_ -> clearRows *> rowAdder 10000
-    , append: DL.click_ \_ -> adder setAppendRows 1000
-    , clear: DL.click_ \_ -> clearRows *> setRowBuilder Clear
-    , swap: DL.runOn DL.click $ merge [ pure false, swap ] <#> not >>> setSwap
-    , update: DL.runOn DL.click $ fold (\a b -> maybe 0 (add a) b) 0 nRows <#>
-        \n -> do
-          for_ (0 .. (n / 10 - 1)) \i -> do
-            pushToRow { address: i * 10, payload: unit }
+    , c1000: DL.click_ \_ -> rowAdder 1000
+    , c10000: DL.click_ \_ -> rowAdder 10000
+    , append: DL.click_ \_ -> adder false setAppendRows 1000
+    , clear: DL.click_ \_ -> do
+        setRowTransformer ClearRows
+        setRowBuilder Clear
+    , swap: DL.click_ \_ -> do
+        a <- rowTransformerRef
+        let
+          swappies = ado
+            l <- a !! 1
+            r <- a !! 998
+            in Tuple l r
+        for_ swappies \(Tuple l r) -> do
+          setSwap { address: r, payload: 1 }
+          setSwap { address: l, payload: 998 }
+        setRowTransformer Swap
+    , update: DL.runOn DL.click $ rowTransformer <#>
+        \arr -> do
+          let
+            go { i } = case arr !! i of
+              Nothing -> pure $ Done unit
+              Just head -> pushToRow { address: head, payload: unit } $> Loop { i: i + 10 }
+          tailRecM go { i: 0 }
     }
 
-rowTemplate =
-  Proxy
-    :: Proxy
-         """<tr><td class="col-md-1"></td><td class="col-md-4"><a ~select~ class="lbl">~label~</a></td><td class="col-md-1"><a ~remove~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
+
+
+rowTemplate
+  :: { label :: Nut
+     , n :: Int
+     , selected :: Poll Unit
+     , unselected :: Poll Unit
+     , select :: Poll (Attribute (DOM.HTMLAnchorElement ()))
+     , remove :: Poll (Attribute (DOM.HTMLAnchorElement ()))
+     }
+  -> Nut
+rowTemplate { n, select, selected, unselected, label, remove } = D.tr
+  [ DA.klass $ selected $> "danger"
+  , DA.unset DA.klass (unselected $> unit)
+  ]
+  [ D.td [ DA.klass_ "col-md-1" ] [ text_ $ show (n + 1) ]
+  , D.td [ DA.klass_ "col-md-4" ]
+      [ D.a [ select, DA.klass_ "lbl" ] [ label ] ]
+  , D.td [ DA.klass_ "col-md-1" ]
+      [ D.a [ remove, DA.klass_ "remove" ]
+          [ D.span
+              [ DA.klass_ "remove glyphicon glyphicon-remove"
+              , DA.ariaHidden_ "true"
+              ]
+              []
+          ]
+      ]
+  , D.td [ DA.klass_ "col-md-6" ] []
+  ]
 
 body =
   Proxy
@@ -833,7 +948,7 @@ body =
         <div class="jumbotron">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>VanillaJS-"keyed"</h1>
+                    <h1>Deku-"keyed"</h1>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
@@ -859,9 +974,7 @@ body =
                 </div>
             </div>
         </div>
-        <table class="table table-hover table-striped test-data">
-            ~tbody~
-        </table>
+        ~table~
         <span class="preloadicon glyphicon glyphicon-remove" aria-hidden="true"></span>
     </div>
 </div>"""

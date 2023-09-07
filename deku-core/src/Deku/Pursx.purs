@@ -72,9 +72,9 @@ makePursx
   -- => Warn (Above (Text "PLR") (Quote (Proxy plr)))
   => Path.Process plr path
   => Path.Scrunch path scrunched
-  => Warn (Above (Text "Path") (Quote path))
+  -- => Warn (Above (Text "Path") (Quote path))
   => PW.PathWalker scrunched r
-  => Warn (Above (Text "Scrunched") (Quote scrunched))
+  -- => Warn (Above (Text "Scrunched") (Quote scrunched))
   => Proxy html
   -> { | r }
   -> Nut
@@ -158,9 +158,9 @@ useTemplateWith
   -- => Warn (Above (Text "PLR") (Quote (Proxy plr)))
   => Path.Process plr path
   => Path.Scrunch path scrunched
-  => Warn (Above (Text "Path") (Quote path))
+  -- => Warn (Above (Text "Path") (Quote path))
   => PW.PathWalker scrunched r
-  => Warn (Above (Text "Scrunched") (Quote scrunched))
+  -- => Warn (Above (Text "Scrunched") (Quote scrunched))
   => Poll (Tuple (Maybe Int) value)
   -> DynOptions value
   -> Hook'

@@ -1,4 +1,4 @@
-DEBUG = True
+DEBUG = False
 def genD(n, d):
     C = "{0:b}".format(d)
     C = ("0" * (n + 1 - len(C))) + C
