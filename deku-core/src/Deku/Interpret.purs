@@ -30,11 +30,10 @@ import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuP
 import Deku.Core as Core
 import Deku.JSWeakRef (WeakRef)
 import Deku.UnsafeDOM (appendChild, cloneTemplate, createElement, createElementNS, insertBefore, outerHTML, toTemplate, unsafeParentNode)
-import Effect (Effect)
+import Effect (Effect, foreachE)
 import Effect.Console (error)
 import Effect.Ref (read)
 import Effect.Uncurried (EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
-import FRP.Event (fastForeachE)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
 import Safe.Coerce (coerce)
@@ -569,7 +568,7 @@ makePursxEffect = mkEffectFn5
     elt <- runEffectFn1 cloneTemplate eltX
     runEffectFn3 eltAttribution ps di (toDekuElement elt)
     arr <- runEffectFn2 queryAttrWithParent "data-deku-attr-internal" elt
-    runEffectFn2 fastForeachE arr $ mkEffectFn1 \nd -> do
+    foreachE arr \nd -> do
       case Element.fromNode nd of
         Just asElt -> do
           obj <- liftST STObject.new
@@ -586,7 +585,7 @@ makePursxEffect = mkEffectFn5
           error $
             "Programming error: non-element with attr-internal tag"
     arrrrrr <- runEffectFn2 queryAttrWithParent "data-deku-elt-internal" elt
-    runEffectFn2 fastForeachE arrrrrr $ mkEffectFn1 \nd -> do
+    foreachE arrrrrr \nd -> do
       case Element.fromNode nd of
         Just asElt -> do
           eltTag <- getAttribute "data-deku-elt-internal" asElt

@@ -28,7 +28,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), Cb, Key(..), Value(..), unsafeUnAttribute)
 import Deku.Do as Deku
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
-import Effect (Effect)
+import Effect (Effect, foreachE)
 import Effect.Ref (Ref, new, write)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn8, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
 import FRP.Event (fastForeachE, fastForeachThunkE, subscribe, subscribeO)
@@ -764,7 +764,7 @@ handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts
         handleAttrEvent (UPoll.sample y pump.event)
         pump.push identity
     let ohi = oh'hi'attr elt
-    runEffectFn2 fastForeachE atts $ mkEffectFn1 \ii -> case ii of
+    foreachE atts \ii -> case ii of
       OnlyPure x -> runEffectFn2 fastForeachE x ohi
       OnlyEvent y -> handleAttrEvent y
       OnlyPoll y -> handleAttrPoll y
