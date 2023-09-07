@@ -10,17 +10,13 @@ import Data.Array ((!!), (..))
 import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Filterable (compact, filter)
-import Data.Foldable (for_, intercalate)
 import Data.Foldable (for_, intercalate, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Tuple (Tuple(..))
 import Data.Tuple (Tuple(..), fst)
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
 import Deku.Core (Hook, Nut, fixed, portal, useRefST)
-import Deku.Core (Nut, fixed)
 import Deku.DOM (Attribute)
 import Deku.DOM as D
 import Deku.DOM as DOM
@@ -29,17 +25,13 @@ import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
-import Deku.Hooks (dynOptions, useDynAtEndWith, (<#~>))
 import Deku.Hooks as DH
-import Deku.Pursx ((~~))
 import Deku.Pursx (useTemplateWith, (~~))
 import Deku.Toplevel (runInBody)
 import Effect (Effect, foreachE)
 import Effect.Random (random, randomInt)
-import Effect.Random (randomInt)
 import FRP.Event (fold, folded, keepLatest)
 import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, mergePure, stToPoll)
-import FRP.Poll (Poll, mergePure)
 import Record (union)
 import Type.Proxy (Proxy(..))
 import Web.HTML (window)
