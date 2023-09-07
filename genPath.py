@@ -199,7 +199,7 @@ import Web.DOM.Text as Text
 
 data MElement
 
-foreign import processString :: EffectFn2 String MElement Unit
+foreign import processString :: EffectFn3 String String MElement Unit
 foreign import mEltElt :: MElement -> Element
 foreign import mEltParent :: MElement -> Element
 foreign import splitTextAndReturnReplacement :: EffectFn2 String  MElement Text
@@ -225,12 +225,14 @@ instance (ProcessInstructions r a) => PathWalker (Path.MarkerGroup a) r where
     runEffectFn4 processInstructions (Proxy :: _ a) r di e
 
 instance (IsSymbol k, R.Cons k v r' r, ProcessInstruction k v, ProcessInstructions r c) => ProcessInstructions r (RL.Cons k k c) where
-  processInstructions = mkEffectFn4 \_ r di e -> runEffectFn4 processInstruction (Proxy :: _ k) (get (Proxy :: _ k) r) di e
+  processInstructions = mkEffectFn4 \_ r di e -> do
+      runEffectFn4 processInstruction (Proxy :: _ k) (get (Proxy :: _ k) r) di e
+      runEffectFn4 processInstructions (Proxy :: _ c) r di e
 
-instance ProcessInstruction k String where
-  processInstruction = mkEffectFn4 \\_ s _ e -> do
+instance IsSymbol k => ProcessInstruction k String where
+  processInstruction = mkEffectFn4 \\k s _ e -> do
     {'let _ = spy ("PIString@") {s,e}' if DEBUG else ''}
-    runEffectFn2 processString s e
+    runEffectFn3 processString (reflectSymbol k) s e
 
 instance ProcessInstruction k (Poll (Attribute e)) where
   processInstruction = mkEffectFn4 \\_ att di e -> do
@@ -276,19 +278,19 @@ instance IsSymbol k => ProcessInstruction k Nut where
             jprint(genJ(x, y))
             qprint(genJJ(x, y))
     jprint(f'''
-export const processString = (s, {{e}}) => {{
-  // Get the previous sibling of the element
-  {'console.log("processString", e.outerHTML);' if DEBUG else ''}
-  let textNode = e.previousSibling;
-  {'console.log("processString", textNode.textContent);' if DEBUG else ''}
+export const processString = (k, s, {{p,e}}) => {{
+  {'console.log("processString", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
+  // Get the previous sibling (text node) of the element
+  let textNode = e ? e.previousSibling : p.lastChild;
+  {'console.log("processString", s, textNode, textNode.textContent);' if DEBUG else ''}
 
   // Ensure the previous sibling is actually a text node. If it isn't, this will not work.
   if (textNode && textNode.nodeType === 3) {{  // 3 is the nodeType for a Text node
     let replacement = s;
     if (replacement !== undefined) {{
-      textNode.nodeValue = textNode.nodeValue.replace("~" + s + "~", replacement);
+      textNode.nodeValue = textNode.nodeValue.replace("~" + k + "~", replacement);
     }} else {{
-      console.error("Programming error: no replacement for " + s + " found in object");
+      console.error("Programming error: no replacement for " + k + " found in object");
     }}
   }} else {{
     console.error("Programming error: previous node not a text node");

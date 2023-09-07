@@ -15,7 +15,7 @@ import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut, fixed, portal, useRefST)
+import Deku.Core (Hook, Nut, dynOptions, fixed, portal, useRefST)
 import Deku.DOM as D
 import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
@@ -23,7 +23,7 @@ import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Hooks as DH
-import Deku.Pursx ((~~))
+import Deku.Pursx (useTemplateWith, (~~))
 import Deku.Toplevel (runInBody)
 import Effect (Effect, foreachE)
 import Effect.Random (random, randomInt)
@@ -216,10 +216,11 @@ tabbedNavigationWithPursx = Deku.do
         0 -> (Proxy :: _ "<h1 id=\"home\">home</h1>") ~~ {}
         1 -> (Proxy :: _ "<h1 id=\"about\">about ~me~</h1>") ~~
           { me: text_ "deku" }
-        _ -> (Proxy :: _ "<h1 id=\"contact\">contact ~a~ at ~b~ ~c~</h1>") ~~
+        _ -> (Proxy :: _ "<h1 id=\"contact\">contact ~a~ at ~b~ ~c~ ~d~</h1>") ~~
           { a: D.span_ [ text_ "mike" ]
-          , b: text_ "site.com"
-          , c: (Proxy :: _ "<h1 id=\"thanks\">thanks</h1>") ~~ {}
+          , b: text_ "site"
+          , c: "dot com"
+          , d: (Proxy :: _ "<h1 id=\"thanks\">thanks</h1>") ~~ {}
           }
     ]
 
@@ -268,6 +269,15 @@ pursXWiresUp = Deku.do
         , mykls: DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
         }
     , D.span [ DA.id_ "span0" ] [ text message ]
+    ]
+
+templatesWork :: Nut
+templatesWork = Deku.do
+  D.div [ DA.id_ "div0" ]
+    [ Deku.do
+        { value, sendTo } <- useTemplateWith @"<div>hello ~world~<button ~atts~>x</button></div>" (mergePure [Tuple Nothing "Helsinki", Tuple Nothing "Stockholm", Tuple Nothing "Copenhagen"]) dynOptions
+        { atts: merge [DL.click_ \_ -> sendTo 0
+        , DA.id_ value], world: value }
     ]
 
 switchersCompose :: Nut

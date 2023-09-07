@@ -328,6 +328,7 @@ fixed nuts = Nut $ mkEffectFn2
 
 -- hooks
 
+type Hook' a r = (a -> r) -> Nut
 type Hook a = (a -> Nut) -> Nut
 
 useDeflect :: forall a. Poll a -> Hook (Poll a)

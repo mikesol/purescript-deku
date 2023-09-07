@@ -15,7 +15,6 @@ else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr ve
 --
 class DoVerbForDOM (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type) (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (newTail :: Symbol) |  verb acc head tail onezero pursi pathi -> purso patho newTail
 instance (Row.Cons acc Nut pursi purso, Row.Cons acc onezero pathi patho) => DoVerbForDOM  verb acc verb tail onezero pursi pathi purso patho tail
-else instance (Row.Cons acc String pursi purso, Row.Cons acc onezero pathi patho) => DoVerbForDOM  verb acc verb tail onezero pursi pathi purso patho tail
 else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForDOM  verb acc2 x y onezero pursi pathi purso patho newTail) => DoVerbForDOM  verb acc anything tail onezero pursi pathi purso patho newTail
 --
 class IsWhiteSpace (space :: Symbol)

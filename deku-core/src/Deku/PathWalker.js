@@ -507,19 +507,19 @@ export const yyyyyyDownGroup = ({p,e}) => { const start = e; console.log('yyyyyy
 export const yyyyyyRightGroup = ({p,e}) => { const start = p; console.log('yyyyyyRightGroup', start.outerHTML,e.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling? e.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.outerHTML : 'NO_E'); return { p: start, e: e.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling }};
     
 
-export const processString = (s, {e}) => {
-  // Get the previous sibling of the element
-  console.log("processString", e.outerHTML);
-  let textNode = e.previousSibling;
-  console.log("processString", textNode.textContent);
+export const processString = (k, s, {p,e}) => {
+  console.log("processString", e ? e.outerHTML: `NO_E `+p.outerHTML);
+  // Get the previous sibling (text node) of the element
+  let textNode = e ? e.previousSibling : p.lastChild;
+  console.log("processString", s, textNode, textNode.textContent);
 
   // Ensure the previous sibling is actually a text node. If it isn't, this will not work.
   if (textNode && textNode.nodeType === 3) {  // 3 is the nodeType for a Text node
     let replacement = s;
     if (replacement !== undefined) {
-      textNode.nodeValue = textNode.nodeValue.replace("~" + s + "~", replacement);
+      textNode.nodeValue = textNode.nodeValue.replace("~" + k + "~", replacement);
     } else {
-      console.error("Programming error: no replacement for " + s + " found in object");
+      console.error("Programming error: no replacement for " + k + " found in object");
     }
   } else {
     console.error("Programming error: previous node not a text node");

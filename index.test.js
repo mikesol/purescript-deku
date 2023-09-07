@@ -1108,7 +1108,16 @@ describe("deku", () => {
         expect($("#span0").text()).toBe("hello");
         $("#inny").trigger("click");
         expect($("#span0").text()).toBe("goodbye");
-      }), true
+      })
+    );
+
+    doTest("templates work", (f) =>
+      f(tests.templatesWork, () => {
+        const $ = require("jquery");
+        expect($("#div0").text()).toBe("hello Helsinkixhello Stockholmxhello Copenhagenx");
+        $("#Stockholm").trigger("click");
+        expect($("#div0").text()).toBe("hello Stockholmxhello Helsinkixhello Copenhagenx");
+      })
     );
 
     doTest("sends to position correctly when elt is fixed", (f) =>
@@ -1170,7 +1179,7 @@ describe("deku", () => {
         expect($("#about").text()).toBe("about deku");
         $("#contact-btn").trigger("click");
         expect($("#about").length === 0);
-        expect($("#contact").text()).toBe("contact mike at site.com thanks");
+        expect($("#contact").text()).toBe("contact mike at site dot com thanks");
       })
     );
 

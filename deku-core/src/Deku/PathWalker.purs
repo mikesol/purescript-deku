@@ -27,7 +27,7 @@ import Web.DOM.Text as Text
 
 data MElement
 
-foreign import processString :: EffectFn2 String MElement Unit
+foreign import processString :: EffectFn3 String String MElement Unit
 foreign import mEltElt :: MElement -> Element
 foreign import mEltParent :: MElement -> Element
 foreign import splitTextAndReturnReplacement :: EffectFn2 String  MElement Text
@@ -53,12 +53,14 @@ instance (ProcessInstructions r a) => PathWalker (Path.MarkerGroup a) r where
     runEffectFn4 processInstructions (Proxy :: _ a) r di e
 
 instance (IsSymbol k, R.Cons k v r' r, ProcessInstruction k v, ProcessInstructions r c) => ProcessInstructions r (RL.Cons k k c) where
-  processInstructions = mkEffectFn4 \_ r di e -> runEffectFn4 processInstruction (Proxy :: _ k) (get (Proxy :: _ k) r) di e
+  processInstructions = mkEffectFn4 \_ r di e -> do
+      runEffectFn4 processInstruction (Proxy :: _ k) (get (Proxy :: _ k) r) di e
+      runEffectFn4 processInstructions (Proxy :: _ c) r di e
 
-instance ProcessInstruction k String where
-  processInstruction = mkEffectFn4 \_ s _ e -> do
+instance IsSymbol k => ProcessInstruction k String where
+  processInstruction = mkEffectFn4 \k s _ e -> do
     let _ = spy ("PIString@") {s,e}
-    runEffectFn2 processString s e
+    runEffectFn3 processString (reflectSymbol k) s e
 
 instance ProcessInstruction k (Poll (Attribute e)) where
   processInstruction = mkEffectFn4 \_ att di e -> do
