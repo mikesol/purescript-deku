@@ -25,7 +25,7 @@ import Data.String (toUpper)
 import Data.String as String
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
-import Deku.Attribute (Cb(..), Key(..), Value(..), unsafeAttribute)
+import Deku.Attribute (Cb(..), Key(..), Value(..))
 import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), PursXable(..), Tag(..), Verb(..), eltAttribution, handleAtts)
 import Deku.Core as Core
 import Deku.JSWeakRef (WeakRef)
@@ -579,7 +579,7 @@ makePursxEffect = mkEffectFn5
               star <- liftST $ STArray.new
               -- todo: does this map have a runtime hit?
               handleAtts di obj (toDekuElement asElt) star
-                [ (map unsafeAttribute att) ]
+                [ att ]
             Nothing -> do
               error $ ("Programming error: att not found in pursx " <> show attTag <> " " <> show (Object.keys atts))
         Nothing -> do

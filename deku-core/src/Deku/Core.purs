@@ -736,18 +736,17 @@ eltAttribution = mkEffectFn3
         y.pos
 
 handleAtts
-  :: forall e
-   . DOMInterpret
+  :: DOMInterpret
   -> STObject.STObject Global EventListener
   -> DekuElement
   -> STArray.STArray Global (Effect Unit)
-  -> Array (Poll (Attribute e))
+  -> Array (Poll Attribute')
   -> Effect Unit
 handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts =
   do
     let
       oh'hi'attr eeeee = mkEffectFn1 \att -> do
-        let { key, value } = unsafeUnAttribute att
+        let { key, value } = att
         case value of
           Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
           Cb' cb -> runEffectFn4 setCb eeeee (Key key) cb obj
@@ -794,7 +793,7 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
       runEffectFn3 eltAttribution ps di elt
       obj <- liftST $ STObject.new
-      handleAtts di obj elt unsubs atts
+      handleAtts di obj elt unsubs (map (map unsafeUnAttribute) atts)
       let
         oh'hi = mkEffectFn1 \(Nut nut) -> do
           void $ runEffectFn2 nut

@@ -507,7 +507,7 @@ export const yyyyyyDownGroup = ({p,e}) => { const start = e;  return { p: start,
 export const yyyyyyRightGroup = ({p,e}) => { const start = p;  return { p: start, e: e.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling }};
     
 
-export const processString = (k, s, {p,e}) => {
+export const processStringImpl = (k, s, {p,e}) => {
   
   // Get the previous sibling (text node) of the element
   let textNode = e ? e.previousSibling : p.lastChild;

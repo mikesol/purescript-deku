@@ -6,7 +6,6 @@ import Deku.Attribute (Attribute)
 import Deku.Core (Nut)
 import FRP.Poll as Poll
 import Prim.RowList as RL
-import Prim.TypeError (class Warn, Above, Quote, Text)
 import Type.Proxy (Proxy(..))
 
 class

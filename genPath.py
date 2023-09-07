@@ -102,31 +102,31 @@ def genP(n, d):
     DB = lambda x: f'let _ = spy "{C}{x}" true' if DEBUG else ''
     T = f"""---
 instance PathWalker a r => PathWalker (Path.{C}DownGroup a) r where
-  walk = mkEffectFn4 \_ r di e -> do
+  walk = mkEffectFn5 \instr _ r di e -> do
     {DB("DownGroup")}
     p <- runEffectFn1 {C.lower()}{"D" if n >= 0 else "d"}ownGroup e
-    runEffectFn4 walk (Proxy :: _ a) r di p
+    runEffectFn5 walk instr (Proxy :: _ a) r di p
 instance PathWalker a r => PathWalker (Path.{C}RightGroup a) r where
-  walk = mkEffectFn4 \_ r di e -> do
+  walk = mkEffectFn5 \instr _ r di e -> do
     {DB("RightGroup")}
     p <- runEffectFn1 {C.lower()}{"R" if n >= 0 else "r"}ightGroup e
-    runEffectFn4 walk (Proxy :: _ a) r di p
+    runEffectFn5 walk instr (Proxy :: _ a) r di p
 instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.{C}ContGroupWithMarkers zz a) r where
-  walk = mkEffectFn4 \_ r di e -> do
+  walk = mkEffectFn5 \instr _ r di e -> do
     {DB("ContGroupWithMarkers")}
-    runEffectFn4 processInstructions (Proxy :: _ zz) r di e
-    runEffectFn4 walk (Proxy :: _ a) r di e
+    runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
+    runEffectFn5 walk instr (Proxy :: _ a) r di e
 instance (PathWalker a r, PathWalker b r) => PathWalker (Path.{C}TwoContGroups a b) r where
-  walk = mkEffectFn4 \_ r di e -> do
+  walk = mkEffectFn5 \instr _ r di e -> do
     {DB("TwoContGroups")}
-    runEffectFn4 walk (Proxy :: _ a) r di e
-    runEffectFn4 walk (Proxy :: _ b) r di e
+    runEffectFn5 walk instr (Proxy :: _ a) r di e
+    runEffectFn5 walk instr (Proxy :: _ b) r di e
 instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.{C}TwoContGroupsWithMarkers zz a b) r where
-  walk = mkEffectFn4 \_ r di e -> do
+  walk = mkEffectFn5 \instr _ r di e -> do
     {DB("TwoContGroupsWithMarkers")}
-    runEffectFn4 processInstructions (Proxy :: _ zz) r di e
-    runEffectFn4 walk (Proxy :: _ a) r di e
-    runEffectFn4 walk (Proxy :: _ b) r di e
+    runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
+    runEffectFn5 walk instr (Proxy :: _ a) r di e
+    runEffectFn5 walk instr (Proxy :: _ b) r di e
 """
     return T
 O = []
@@ -178,11 +178,11 @@ import Control.Monad.ST.Class (liftST)
 import Data.Array.ST as STArray
 import Data.Maybe (Maybe(..))
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Deku.Attribute (Attribute)
+import Deku.Attribute (Attribute, Attribute', unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), handleAtts)
 import Deku.Interpret (attributeBeaconFullRangeParentProto, fromDekuBeacon, fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Path as Path
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, mkEffectFn3, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Poll (Poll)
 import Foreign.Object.ST as STObject
 import Prim.Row as R
@@ -199,56 +199,66 @@ import Web.DOM.Text as Text
 
 data MElement
 
-foreign import processString :: EffectFn3 String String MElement Unit
+foreign import processStringImpl :: EffectFn3 String String MElement Unit
 foreign import mEltElt :: MElement -> Element
 foreign import mEltParent :: MElement -> Element
 foreign import splitTextAndReturnReplacement :: EffectFn2 String  MElement Text
 
+type InstructionSignature i = EffectFn4 String i DOMInterpret MElement Unit
+newtype InstructionDelegate = InstructionDelegate {{
+  processString :: InstructionSignature String,
+  processAttribute :: InstructionSignature (Poll Attribute'),
+  processNut :: InstructionSignature Nut
+}}
+
 class PathWalker :: Path.Path -> Row Type -> Constraint
 class PathWalker p r | p -> r where
-  walk :: EffectFn4 (Proxy p) {{ | r }} DOMInterpret MElement Unit
+  walk :: EffectFn5 InstructionDelegate (Proxy p) {{ | r }} DOMInterpret MElement Unit
 
 class ProcessInstruction :: Symbol -> Type -> Constraint
 class ProcessInstruction s i where
-  processInstruction :: EffectFn4 (Proxy s) i DOMInterpret MElement Unit
+  processInstruction :: EffectFn5 InstructionDelegate (Proxy s) i DOMInterpret MElement Unit
 
 class ProcessInstructions :: Row Type -> RL.RowList Symbol -> Constraint
 class ProcessInstructions r rl | rl -> r where
-  processInstructions :: EffectFn4 (Proxy rl) {{ | r }} DOMInterpret MElement Unit
+  processInstructions :: EffectFn5 InstructionDelegate (Proxy rl) {{ | r }} DOMInterpret MElement Unit
 
 instance ProcessInstructions r RL.Nil where
-  processInstructions = mkEffectFn4 \_ _ _ _ -> pure unit
+  processInstructions = mkEffectFn5 \_ _ _ _ _ -> pure unit
 
 instance (ProcessInstructions r a) => PathWalker (Path.MarkerGroup a) r where
-  walk = mkEffectFn4 \_ r di e -> do
+  walk = mkEffectFn5 \instr _ r di e -> do
     {'let _ = spy "MarkerGroup" r' if DEBUG else ''}
-    runEffectFn4 processInstructions (Proxy :: _ a) r di e
+    runEffectFn5 processInstructions instr (Proxy :: _ a) r di e
 
 instance (IsSymbol k, R.Cons k v r' r, ProcessInstruction k v, ProcessInstructions r c) => ProcessInstructions r (RL.Cons k k c) where
-  processInstructions = mkEffectFn4 \_ r di e -> do
-      runEffectFn4 processInstruction (Proxy :: _ k) (get (Proxy :: _ k) r) di e
-      runEffectFn4 processInstructions (Proxy :: _ c) r di e
+  processInstructions = mkEffectFn5 \instr _ r di e -> do
+      runEffectFn5 processInstruction instr (Proxy :: _ k) (get (Proxy :: _ k) r) di e
+      runEffectFn5 processInstructions instr (Proxy :: _ c) r di e
 
 instance IsSymbol k => ProcessInstruction k String where
-  processInstruction = mkEffectFn4 \\k s _ e -> do
+  processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processString }}) k s di e -> do
     {'let _ = spy ("PIString@") {s,e}' if DEBUG else ''}
-    runEffectFn3 processString (reflectSymbol k) s e
+    runEffectFn4 processString (reflectSymbol k) s di e
 
-instance ProcessInstruction k (Poll (Attribute e)) where
-  processInstruction = mkEffectFn4 \\_ att di e -> do
-    {'let _ = spy ("PIAtt@") e' if DEBUG else ''}
+processAttPursx :: InstructionSignature (Poll Attribute')
+processAttPursx = mkEffectFn4 \\_ att di e -> do
     obj <- liftST STObject.new
     star <- liftST $ STArray.new
     handleAtts di obj (toDekuElement (mEltElt e)) star
       [  att ]
 
-instance IsSymbol k => ProcessInstruction k Nut where
-  processInstruction = mkEffectFn4 \\k (Nut nut) di@(DOMInterpret {{ makeElement }}) e -> do
+instance IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where
+  processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processAttribute }}) k att di e -> do
+    runEffectFn4 processAttribute (reflectSymbol k) (map unsafeUnAttribute att) di e
+
+processNutPursx :: InstructionSignature Nut
+processNutPursx = mkEffectFn4 \\k (Nut nut) di@(DOMInterpret {{ makeElement }}) e -> do
     {'let _ = spy ("PINut") e' if DEBUG else ''}
     fauxPar <- runEffectFn2 makeElement Nothing (Tag "template")
     let par = mEltParent e
     o <- runEffectFn2 nut (PSR {{ unsubs: [], parent: fauxPar, beacon: Nothing, fromPortal: false }}) di
-    t <- runEffectFn2 splitTextAndReturnReplacement (reflectSymbol k) e
+    t <- runEffectFn2 splitTextAndReturnReplacement k e
     case o of
       DekuElementOutcome eo -> replaceChild
         (Element.toNode (fromDekuElement eo))
@@ -269,6 +279,10 @@ instance IsSymbol k => ProcessInstruction k Nut where
           (Comment.toNode (fromDekuBeacon bo))
         remove (Text.toChildNode t)
       NoOutcome -> pure unit
+
+instance IsSymbol k => ProcessInstruction k Nut where
+  processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processNut }}) k nut di e -> do
+    runEffectFn4 processNut (reflectSymbol k) nut di e
 """)
     jprint(genJ(-1, -1))
     qprint(genJJ(-1, -1))
@@ -278,7 +292,7 @@ instance IsSymbol k => ProcessInstruction k Nut where
             jprint(genJ(x, y))
             qprint(genJJ(x, y))
     jprint(f'''
-export const processString = (k, s, {{p,e}}) => {{
+export const processStringImpl = (k, s, {{p,e}}) => {{
   {'console.log("processString", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
   let textNode = e ? e.previousSibling : p.lastChild;

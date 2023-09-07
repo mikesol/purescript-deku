@@ -18,13 +18,13 @@ import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.JSWeakRef (deref, weakRef)
 import Deku.Path (symbolsToArray)
 import Deku.Path as Path
-import Deku.PathWalker (MElement)
+import Deku.PathWalker (InstructionDelegate(..), MElement, processAttPursx, processNutPursx, processStringImpl)
 import Deku.PathWalker as PW
 import Deku.PursxParser as PxP
 import Deku.UnsafeDOM (cloneTemplate, toTemplate)
 import Effect (Effect)
 import Effect.Ref (new)
-import Effect.Uncurried (EffectFn4, mkEffectFn1, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
+import Effect.Uncurried (EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
 import FRP.Event (fastForeachE, subscribe)
 import FRP.Event as Event
 import FRP.Poll (Poll)
@@ -32,7 +32,6 @@ import FRP.Poll as Poll
 import FRP.Poll.Unoptimized as UPoll
 import Literals.Undefined (undefined)
 import Prim.RowList as RL
-import Prim.TypeError (class Warn, Above, Quote, Text)
 import Type.Equality (class TypeEquals)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
@@ -118,10 +117,15 @@ makePursx' _ _ r = Nut $ mkEffectFn2
       elt <- runEffectFn1 cloneTemplate eltX
       let unsafeMElement = unsafeCoerce { p: undefined, e: elt }
       runEffectFn3 eltAttribution ps di (toDekuElement elt)
-      runEffectFn4
+      runEffectFn5
         ( PW.walk
-            :: EffectFn4 (Proxy scrunched) { | r } DOMInterpret MElement Unit
+            :: EffectFn5 InstructionDelegate (Proxy scrunched) { | r } DOMInterpret MElement Unit
         )
+        (InstructionDelegate {
+                processString: mkEffectFn4 \a b _ d -> runEffectFn3 processStringImpl a b d,
+                processAttribute: mkEffectFn4 \a b c d -> runEffectFn4 processAttPursx a b c d,
+                processNut: mkEffectFn4 \a b c d -> runEffectFn4 processNutPursx a b c d
+            })
         scrunch
         r
         di
@@ -231,11 +235,16 @@ useTemplateWith p d f = Nut $ mkEffectFn2
             sstaaarrrrrt
             eeeeeennnnd
             mpos
-          runEffectFn4
+          runEffectFn5
             ( PW.walk
-                :: EffectFn4 (Proxy scrunched) { | r } DOMInterpret MElement
+                :: EffectFn5 InstructionDelegate (Proxy scrunched) { | r } DOMInterpret MElement
                      Unit
             )
+            (InstructionDelegate {
+                processString: mkEffectFn4 \a b _ dd -> runEffectFn3 processStringImpl a b dd,
+                processAttribute: mkEffectFn4 \a b c dd -> runEffectFn4 processAttPursx a b c dd,
+                processNut: mkEffectFn4 \a b c dd -> runEffectFn4 processNutPursx a b c dd
+            })
             scrunch
             r
             di
