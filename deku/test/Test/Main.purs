@@ -796,11 +796,12 @@ makeTable
   -> Nut
 makeTable i = do
   D.table [ DA.klass_ "table table-hover table-striped test-data" ]
-    [  i.rowBuilder <#~> case _ of
-            AddRows arr -> D.tbody [ DA.id_ "tbody" ] [bootstrapWith2 $ i `union` { arr }]
-              
+    [ D.tbody [ DA.id_ "tbody" ]
+        [ i.rowBuilder <#~> case _ of
+            AddRows arr -> bootstrapWith2
+              $ i `union` { arr }
             Clear -> mempty
-        
+        ]
     ]
 
 data RowBuilder = AddRows (Array (Tuple Int String)) | Clear

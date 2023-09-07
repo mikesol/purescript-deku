@@ -23,7 +23,6 @@ import Deku.PathWalker as PW
 import Deku.PursxParser as PxP
 import Deku.UnsafeDOM (cloneTemplate, toTemplate)
 import Effect (Effect)
-import Effect.Exception (error, throwException)
 import Effect.Ref (new)
 import Effect.Uncurried (EffectFn4, mkEffectFn1, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
 import FRP.Event (fastForeachE, subscribe)
@@ -37,10 +36,6 @@ import Prim.TypeError (class Warn, Above, Quote, Text)
 import Type.Equality (class TypeEquals)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
-import Web.DOM.Document (createDocumentFragment)
-import Web.HTML (window)
-import Web.HTML.HTMLDocument (toDocument)
-import Web.HTML.Window (document)
 
 class StringSubstitutionsAreKosher
   :: RL.RowList Type -> RL.RowList Type -> Constraint
@@ -182,7 +177,6 @@ useTemplateWith p d f = Nut $ mkEffectFn2
          , attributeDynParentForBeacons
          , makeOpenBeacon
          , makeCloseBeacon
-         , attributeElementParent
          }
      ) ->
     do
@@ -199,7 +193,6 @@ useTemplateWith p d f = Nut $ mkEffectFn2
           (reflectSymbol htmlProxy)
           syms
       eltX <- runEffectFn1 toTemplate html
-      df <- window >>= map (map toDocument) document >>= createDocumentFragment
       lucky <- new true
       for_ psr.beacon (_.lucky >>> notLucky)
       dbStart <- makeOpenBeacon
@@ -207,8 +200,15 @@ useTemplateWith p d f = Nut $ mkEffectFn2
       when (not (null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
       dbEnd <- makeCloseBeacon
-      runEffectFn2 attributeBeaconParent dbStart (DekuParent (unsafeCoerce df))
-      runEffectFn2 attributeBeaconParent dbEnd (DekuParent (unsafeCoerce df))
+      case psr.beacon of
+        Nothing -> do
+          runEffectFn2 attributeBeaconParent dbStart (DekuParent psr.parent)
+          runEffectFn2 attributeBeaconParent dbEnd (DekuParent psr.parent)
+        Just y -> do
+          runEffectFn5 attributeDynParentForBeacons dbStart dbEnd
+            y.start
+            y.end
+            Nothing
       let this' = pureOrBust p
       let those' = eventOrBust p
       let that' = pollOrBust p
@@ -258,11 +258,6 @@ useTemplateWith p d f = Nut $ mkEffectFn2
             sstaaarrrrrt
             eeeeeennnnd
       for_ this' \t -> runEffectFn2 fastForeachE t (oh'hi dbStart dbEnd)
-      case psr.beacon of
-        Nothing -> do
-          runEffectFn2 attributeElementParent (DekuChild (unsafeCoerce df)) (DekuParent psr.parent)
-        Just y -> do
-          throwException $ error "implement me"
       let
         handleEvent t = do
           wrStart <- runEffectFn1 weakRef dbStart
