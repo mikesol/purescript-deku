@@ -174,6 +174,15 @@ makePursx' _ _ r = Nut $ mkEffectFn2
 
 infixr 5 makePursx as ~~
 
+-- todo: in general, this is part of a strategy to limit the number of
+-- event listeners
+-- DOM lore dictates that, whenever you have a collection with lots of
+-- event listeners, you should have a single event listener on the parent
+-- however, testing reveals that this doesn't speed stuff up in a statistically
+-- significant way. that could be because the algo itself is inefficient or
+-- that DOM lore is simply untrue. in case there's no advantage to limiting
+-- the number of listeners, the easier solution is just to use handleAtts
+-- and to forego the complexity of this alternative route
 pxHandleAtts
   :: EffectFn7 DOMInterpret
                   (STObject.STObject Global Boolean)

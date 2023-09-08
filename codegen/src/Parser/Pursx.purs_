@@ -1,20 +1,19 @@
 module Deku.PursxParser where
 
 import Deku.Attribute (Attribute)
-import Deku.Core (Nut)
 import Deku.DOM (class TagToDeku)
-import FRP.Poll (Poll)
 import Prim.Boolean (False, True)
+improt Deku.PxTypes as PxTypes
 import Prim.Row as Row
 import Prim.RowList as RL
 import Prim.Symbol as Sym
 
 class DoVerbForAttr (verb :: Symbol) (tag :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type) (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (newTail :: Symbol) | verb acc head tail onezero pursi pathi -> purso patho newTail
-instance (TagToDeku tag deku,  Row.Cons acc (Poll (Attribute deku)) pursi purso, Row.Cons acc onezero pathi patho) => DoVerbForAttr verb tag acc verb tail onezero pursi pathi purso patho tail
+instance (Row.Cons acc PxTypes.PxAtt pursi purso, Row.Cons acc onezero pathi patho) => DoVerbForAttr verb tag acc verb tail onezero pursi pathi purso patho tail
 else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y onezero pursi pathi purso patho newTail) => DoVerbForAttr verb tag acc anything tail onezero pursi pathi purso patho newTail
 --
 class DoVerbForDOM (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type) (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (newTail :: Symbol) |  verb acc head tail onezero pursi pathi -> purso patho newTail
-instance (Row.Cons acc Nut pursi purso, Row.Cons acc onezero pathi patho) => DoVerbForDOM  verb acc verb tail onezero pursi pathi purso patho tail
+instance (Row.Cons acc PxTypes.PxNut pursi purso, Row.Cons acc onezero pathi patho) => DoVerbForDOM  verb acc verb tail onezero pursi pathi purso patho tail
 else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForDOM  verb acc2 x y onezero pursi pathi purso patho newTail) => DoVerbForDOM  verb acc anything tail onezero pursi pathi purso patho newTail
 --
 class IsWhiteSpace (space :: Symbol)

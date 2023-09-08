@@ -173,7 +173,8 @@ type SetCb =
   EffectFn4 DekuElement Key Cb (STObject.STObject Global EventListener) Unit
 
 type SetDelegateCb =
-  EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb)) Unit
+  EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb))
+    Unit
 
 newtype Html = Html String
 newtype Verb = Verb String
@@ -976,8 +977,8 @@ else instance pursxToElementConsAttr ::
     let
       o = pursxToElement (Proxy :: Proxy rest) r
     Object.insert (reflectType pxk)
-          (PXAttr (unsafeUnAttribute <$> (get pxk r)))
-          o
+      (PXAttr (unsafeUnAttribute <$> (get pxk r)))
+      o
     where
     pxk = Proxy :: _ key
 
@@ -994,8 +995,8 @@ else instance pursxToElementConsStr ::
     let
       o = pursxToElement (Proxy :: Proxy rest) r
     Object.insert (reflectType pxk)
-          (PXStr (get pxk r))
-          o
+      (PXStr (get pxk r))
+      o
     where
     pxk = Proxy :: _ key
 

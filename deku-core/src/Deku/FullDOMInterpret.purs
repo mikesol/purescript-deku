@@ -1,6 +1,5 @@
 module Deku.FullDOMInterpret where
 
-
 import Deku.Core as Core
 import Deku.Interpret as I
 

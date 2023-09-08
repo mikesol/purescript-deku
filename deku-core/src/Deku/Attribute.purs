@@ -74,14 +74,15 @@ unset' = Unset'
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
 data AttributeValue = Prop' String | Cb' Cb | Unset'
 
-type Attribute' = { key :: String
+type Attribute' =
+  { key :: String
   , value :: AttributeValue
   }
 
 -- | Low level representation of key-value pairs for attributes and listeners.
 -- | In general, this type is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
-newtype Attribute :: forall k . k -> Type
+newtype Attribute :: forall k. k -> Type
 newtype Attribute i = Attribute Attribute'
 
 -- | For internal use only, exported to be used by other modules. Ignore this.

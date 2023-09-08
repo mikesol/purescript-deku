@@ -71,13 +71,14 @@ useRefST
   :: forall a
    . a
   -> Poll a
-  -> Effect (Effect Unit /\  ST Global a)
+  -> Effect (Effect Unit /\ ST Global a)
 useRefST a e = do
   r <- liftST $ STRef.new a
   ep <- liftST $ Event.create
-  u <- Event.subscribe (sample e ep.event) \aa -> liftST $ void $ STRef.write aa r
+  u <- Event.subscribe (sample e ep.event) \aa -> liftST $ void $ STRef.write aa
+    r
   ep.push identity
-  pure (u /\  STRef.read r)
+  pure (u /\ STRef.read r)
 
 -- | A hook that provides an event creator instead of events. Event creators turn into events when
 -- | given an address, at which point they listen for a payload. This is useful when listening to
