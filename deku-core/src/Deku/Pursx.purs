@@ -21,7 +21,7 @@ import Deku.Path as Path
 import Deku.PathWalker (InstructionDelegate(..), MElement, processAttPursx, processNutPursx, processStringImpl)
 import Deku.PathWalker as PW
 import Deku.PursxParser as PxP
-import Deku.UnsafeDOM (cloneTemplate, toTemplate)
+import Deku.UnsafeDOM (cloneElement, cloneTemplate, getTemplateFirstChild, toTemplate)
 import Effect (Effect, foreachE)
 import Effect.Ref (new)
 import Effect.Uncurried (EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
@@ -197,6 +197,7 @@ useTemplateWith p d f = Nut $ mkEffectFn2
           (reflectSymbol htmlProxy)
           syms
       eltX <- runEffectFn1 toTemplate html
+      tfc <- runEffectFn1 getTemplateFirstChild eltX
       lucky <- new true
       for_ psr.beacon (_.lucky >>> notLucky)
       dbStart <- makeOpenBeacon
@@ -228,7 +229,7 @@ useTemplateWith p d f = Nut $ mkEffectFn2
               , remove: remove'.push DekuRemove
               , sendTo: DekuSendToPos >>> sendTo'.push
               }
-          elt <- runEffectFn1 cloneTemplate eltX
+          elt <- runEffectFn1 cloneElement tfc
           let unsafeMElement = unsafeCoerce { p: undefined, e: elt }
           runEffectFn5 attributeDynParentForElementEffect lucky
             (DekuChild (toDekuElement elt))

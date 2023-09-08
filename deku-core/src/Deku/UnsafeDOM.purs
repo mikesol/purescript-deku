@@ -14,6 +14,8 @@ foreign import createElementNS :: EffectFn2 String String Element
 foreign import insertBefore :: EffectFn3 Node Node Node Unit
 foreign import appendChild :: EffectFn2 Node Node Unit
 foreign import toTemplate :: EffectFn1 String HTMLTemplateElement
+foreign import getTemplateFirstChild :: EffectFn1 HTMLTemplateElement Element
+foreign import cloneElement :: EffectFn1 Element Element
 foreign import cloneTemplate :: EffectFn1 HTMLTemplateElement Element
 foreign import outerHTML :: EffectFn1 Element String
 foreign import addEventListener ::EffectFn4 EventType EventListener Boolean EventTarget Unit
