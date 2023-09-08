@@ -182,7 +182,7 @@ import Deku.Attribute (Attribute, Attribute', unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), handleAtts)
 import Deku.Interpret (attributeBeaconFullRangeParentProto, fromDekuBeacon, fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Path as Path
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Poll (Poll)
 import Foreign.Object.ST as STObject
 import Prim.Row as R
@@ -203,7 +203,7 @@ foreign import processStringImpl :: EffectFn3 String String MElement Unit
 foreign import mEltElt :: MElement -> Element
 foreign import mEltParent :: MElement -> Element
 foreign import splitTextAndReturnReplacement :: EffectFn2 String  MElement Text
-
+foreign import returnReplacement :: EffectFn2 String  MElement Text
 type InstructionSignature i = EffectFn4 String i DOMInterpret MElement Unit
 newtype InstructionDelegate = InstructionDelegate {{
   processString :: InstructionSignature String,
@@ -252,13 +252,13 @@ instance IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where
   processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processAttribute }}) k att di e -> do
     runEffectFn4 processAttribute (reflectSymbol k) (map unsafeUnAttribute att) di e
 
-processNutPursx :: InstructionSignature Nut
-processNutPursx = mkEffectFn4 \\k (Nut nut) di@(DOMInterpret {{ makeElement }}) e -> do
+processNutPursx :: EffectFn2 String  MElement Text ->  InstructionSignature Nut
+processNutPursx splitter = mkEffectFn4 \\k (Nut nut) di@(DOMInterpret {{ makeElement }}) e -> do
     {'let _ = spy ("PINut") e' if DEBUG else ''}
     fauxPar <- runEffectFn2 makeElement Nothing (Tag "template")
     let par = mEltParent e
     o <- runEffectFn2 nut (PSR {{ unsubs: [], parent: fauxPar, beacon: Nothing, fromPortal: false }}) di
-    t <- runEffectFn2 splitTextAndReturnReplacement k e
+    t <- runEffectFn2 splitter k e
     case o of
       DekuElementOutcome eo -> replaceChild
         (Element.toNode (fromDekuElement eo))
@@ -315,10 +315,10 @@ export const mEltParent = x => x.p;
 export const splitTextAndReturnReplacement = (s, {{p,e}}) => {{
   {'console.log("splitTextAndReturnReplacement", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
+  let targetString = "~" + s + "~";
   let textNode = e ? e.previousSibling : p.lastChild;
   {'console.log("splitTextAndReturnReplacementPREV", textNode, textNode.textContent);' if DEBUG else ''}
   if (textNode && textNode.nodeType === 3) {{  // 3 is the nodeType for a Text node
-    let targetString = "~" + s + "~";
     let index = textNode.nodeValue.indexOf(targetString);
 
     if (index !== -1) {{
@@ -336,6 +336,24 @@ export const splitTextAndReturnReplacement = (s, {{p,e}}) => {{
   throw new Error("Programming error: previous node not a text node or target string not found: "+s);
 }};
 
+export const returnReplacement = (s, {{p,e}}) => {{
+  {'console.log("returnReplacement", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
+  // Get the previous sibling (text node) of the element
+  let targetString = "~" + s + "~";
+  let textNode = e ? e.previousSibling : p.lastChild;
+  while (textNode) {{
+    {'console.log("returnReplacement", textNode, textNode.textContent);' if DEBUG else ''}
+    if (textNode.nodeType === 3) {{  // 3 is the nodeType for a Text node
+      let index = textNode.nodeValue.indexOf(targetString);
+      if (index !== -1) {{
+        return textNode;
+      }}
+    }} else {{
+        throw new Error("Programming error: previous node not a text node or target string not found: "+s);
+    }}
+    textNode = textNode.previousSibling;
+  }}
+}};
 ''')
     R = 6
     qprint("----------- new section")

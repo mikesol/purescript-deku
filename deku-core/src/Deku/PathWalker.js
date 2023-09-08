@@ -530,10 +530,10 @@ export const mEltParent = x => x.p;
 export const splitTextAndReturnReplacement = (s, {p,e}) => {
   
   // Get the previous sibling (text node) of the element
+  let targetString = "~" + s + "~";
   let textNode = e ? e.previousSibling : p.lastChild;
   
   if (textNode && textNode.nodeType === 3) {  // 3 is the nodeType for a Text node
-    let targetString = "~" + s + "~";
     let index = textNode.nodeValue.indexOf(targetString);
 
     if (index !== -1) {
@@ -551,3 +551,21 @@ export const splitTextAndReturnReplacement = (s, {p,e}) => {
   throw new Error("Programming error: previous node not a text node or target string not found: "+s);
 };
 
+export const returnReplacement = (s, {p,e}) => {
+  
+  // Get the previous sibling (text node) of the element
+  let targetString = "~" + s + "~";
+  let textNode = e ? e.previousSibling : p.lastChild;
+  while (textNode) {
+    
+    if (textNode.nodeType === 3) {  // 3 is the nodeType for a Text node
+      let index = textNode.nodeValue.indexOf(targetString);
+      if (index !== -1) {
+        return textNode;
+      }
+    } else {
+        throw new Error("Programming error: previous node not a text node or target string not found: "+s);
+    }
+    textNode = textNode.previousSibling;
+  }
+};

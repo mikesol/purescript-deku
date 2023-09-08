@@ -3,6 +3,7 @@ module Test.Main where
 import Prelude
 
 import Control.Alt ((<|>))
+import Control.Apply (lift2)
 import Control.Monad.Rec.Class (Step(..), tailRecM)
 import Control.Monad.ST.Class (liftST)
 import Control.Plus (empty)
@@ -756,7 +757,7 @@ bootstrapWith2 { selectMe, arr, removeMe, swap, appendRows, rowbox, selectbox, u
   makeRow2 { n: index, label, excl: rowbox, remover: removeMe \f -> f index *> remove }
   where
   makeRow2 { n, excl, remover, label } = rowTemplate2
-    { label: fixed [ text_ label, text $ folded (excl n $> " !!!") ]
+    { label: text $ lift2 append (pure label) (pure "" <|> (folded (excl n $> " !!!")))
     , select: DL.click_ \_ -> selectMe n
     , remove: DL.click_ \_ -> remover
     , selected: selectbox n
@@ -768,7 +769,7 @@ bootstrapWith2 { selectMe, arr, removeMe, swap, appendRows, rowbox, selectbox, u
                       [ DA.klass $ selected $> "danger"
                       , DA.unset DA.klass (unselected $> unit)
                       ]
-                  , num: text_ $ show (n + 1)
+                  , num: show (n + 1)
                   , select
                   , label
                   , remove

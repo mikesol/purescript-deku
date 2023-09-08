@@ -28,6 +28,7 @@ import Data.String.Regex.Flags (global)
 import Deku.Attribute (Cb(..), Key(..), Value(..))
 import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), PursXable(..), Tag(..), Verb(..), eltAttribution, handleAtts)
 import Deku.Core as Core
+import Deku.JSMap as JSMap
 import Deku.JSWeakRef (WeakRef)
 import Deku.UnsafeDOM (appendChild, cloneTemplate, createElement, createElementNS, insertBefore, outerHTML, toTemplate, unsafeParentNode)
 import Effect (Effect, foreachE)
@@ -39,7 +40,7 @@ import Foreign.Object.ST as STObject
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
 import Unsafe.Reference (unsafeRefEq)
-import Untagged.Union (type (|+|))
+import Untagged.Union (type (|+|), toEither1)
 import Web.DOM (Comment, Element, Text)
 import Web.DOM as Node
 import Web.DOM.ChildNode (remove)
@@ -51,7 +52,7 @@ import Web.DOM.Node (childNodes, nextSibling, nodeTypeIndex, replaceChild, setTe
 import Web.DOM.NodeList as NodeList
 import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.DOM.Text as Text
-import Web.Event.Event (EventType(..))
+import Web.Event.Event (EventType(..), target)
 import Web.Event.Event as Web
 import Web.Event.EventTarget (addEventListener, eventListener, removeEventListener)
 import Web.HTML (window)
@@ -451,6 +452,21 @@ setPropEffect = mkEffectFn3 \elt' (Key k) (Value v) -> do
       | otherwise = setAttribute k v elt
   o
 
+setDelegateCbEffect :: Core.SetDelegateCb
+setDelegateCbEffect = mkEffectFn3 \elt' (Key k) mp ->
+  do -- EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb)) Unit
+    let eventType = EventType k
+    let eventTarget = toEventTarget (fromDekuElement elt')
+    nl <- eventListener \ev -> do
+      for_ (target ev >>= Element.fromEventTarget) \t -> do
+        oo <- runEffectFn2 JSMap.getImpl t mp
+        case toEither1 oo of
+          Left _ -> pure unit
+          Right obj -> case Object.lookup k obj of
+            Just (Cb cb) -> void $ cb ev
+            Nothing -> pure unit
+    addEventListener eventType nl false eventTarget
+
 setCbEffect :: Core.SetCb
 setCbEffect = mkEffectFn4 \elt' (Key k) (Cb v) stobj -> do
   if k == "@self@" then do
@@ -525,11 +541,11 @@ data ListList a = KeepGoing (List a) (ListList a) | Stop
 
 queryAttrWithParent :: EffectFn2 String Element (Array Node.Node)
 queryAttrWithParent = mkEffectFn2 \att me -> do
-    nl <- querySelectorAll (QuerySelector ("[" <> att <> "]"))
-      (Element.toParentNode me)
-    hasAttr <- getAttribute att me
-    arr <- NodeList.toArray nl
-    pure (maybe arr (Array.snoc arr) (hasAttr $> Element.toNode me))
+  nl <- querySelectorAll (QuerySelector ("[" <> att <> "]"))
+    (Element.toParentNode me)
+  hasAttr <- getAttribute att me
+  arr <- NodeList.toArray nl
+  pure (maybe arr (Array.snoc arr) (hasAttr $> Element.toNode me))
 
 makePursxEffect :: Core.MakePursx
 makePursxEffect = mkEffectFn5
@@ -580,7 +596,11 @@ makePursxEffect = mkEffectFn5
               handleAtts di obj (toDekuElement asElt) star
                 [ att ]
             Nothing -> do
-              error $ ("Programming error: att not found in pursx " <> show attTag <> " " <> show (Object.keys atts))
+              error $
+                ( "Programming error: att not found in pursx " <> show attTag
+                    <> " "
+                    <> show (Object.keys atts)
+                )
         Nothing -> do
           error $
             "Programming error: non-element with attr-internal tag"
@@ -629,8 +649,20 @@ makePursxEffect = mkEffectFn5
                     NoOutcome -> pure unit
             Nothing -> do
               ohtml <- runEffectFn1 outerHTML asElt
-              parhtml <- runEffectFn1 outerHTML (fromDekuElement (unwrap ps).parent)
-              error $ ("Programming error: nut not found in pursx " <> show eltTag <> " " <> html <> show (Object.keys atts) <> " " <> show (Object.keys nuts) <> " " <> ohtml <> " @@ " <> parhtml)
+              parhtml <- runEffectFn1 outerHTML
+                (fromDekuElement (unwrap ps).parent)
+              error $
+                ( "Programming error: nut not found in pursx " <> show eltTag
+                    <> " "
+                    <> html
+                    <> show (Object.keys atts)
+                    <> " "
+                    <> show (Object.keys nuts)
+                    <> " "
+                    <> ohtml
+                    <> " @@ "
+                    <> parhtml
+                )
         Nothing -> do
           error $
             "Programming error: non-element with attr-internal tag"

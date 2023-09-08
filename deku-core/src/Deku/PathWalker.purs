@@ -31,7 +31,7 @@ foreign import processStringImpl :: EffectFn3 String String MElement Unit
 foreign import mEltElt :: MElement -> Element
 foreign import mEltParent :: MElement -> Element
 foreign import splitTextAndReturnReplacement :: EffectFn2 String  MElement Text
-
+foreign import returnReplacement :: EffectFn2 String  MElement Text
 type InstructionSignature i = EffectFn4 String i DOMInterpret MElement Unit
 newtype InstructionDelegate = InstructionDelegate {
   processString :: InstructionSignature String,
@@ -80,13 +80,13 @@ instance IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where
   processInstruction = mkEffectFn5 \(InstructionDelegate { processAttribute }) k att di e -> do
     runEffectFn4 processAttribute (reflectSymbol k) (map unsafeUnAttribute att) di e
 
-processNutPursx :: InstructionSignature Nut
-processNutPursx = mkEffectFn4 \k (Nut nut) di@(DOMInterpret { makeElement }) e -> do
+processNutPursx :: EffectFn2 String  MElement Text ->  InstructionSignature Nut
+processNutPursx splitter = mkEffectFn4 \k (Nut nut) di@(DOMInterpret { makeElement }) e -> do
     
     fauxPar <- runEffectFn2 makeElement Nothing (Tag "template")
     let par = mEltParent e
     o <- runEffectFn2 nut (PSR { unsubs: [], parent: fauxPar, beacon: Nothing, fromPortal: false }) di
-    t <- runEffectFn2 splitTextAndReturnReplacement k e
+    t <- runEffectFn2 splitter k e
     case o of
       DekuElementOutcome eo -> replaceChild
         (Element.toNode (fromDekuElement eo))
@@ -109,7 +109,7 @@ processNutPursx = mkEffectFn4 \k (Nut nut) di@(DOMInterpret { makeElement }) e -
       NoOutcome -> pure unit
 
 instance IsSymbol k => ProcessInstruction k Nut where
-  processInstruction = mkEffectFn5 \(InstructionDelegate { processNut }) k nut di@(DOMInterpret { makeElement }) e -> do
+  processInstruction = mkEffectFn5 \(InstructionDelegate { processNut }) k nut di e -> do
     runEffectFn4 processNut (reflectSymbol k) nut di e
 
 foreign import downGroup :: EffectFn1 MElement MElement

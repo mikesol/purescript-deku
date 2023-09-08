@@ -27,6 +27,7 @@ import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), Cb, Key(..), Value(..), unsafeUnAttribute)
 import Deku.Do as Deku
+import Deku.JSMap as JSMap
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
 import Effect (Effect, foreachE)
 import Effect.Ref (Ref, new, write)
@@ -43,6 +44,7 @@ import Prim.RowList as RL
 import Record (get)
 import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
+import Web.DOM as Element
 import Web.Event.EventTarget (EventListener)
 
 newtype PSR = PSR
@@ -170,6 +172,9 @@ type SetProp = EffectFn3 DekuElement Key Value Unit
 type SetCb =
   EffectFn4 DekuElement Key Cb (STObject.STObject Global EventListener) Unit
 
+type SetDelegateCb =
+  EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb)) Unit
+
 newtype Html = Html String
 newtype Verb = Verb String
 -- | Type used by Deku backends to make pursx. For internal use only unless you're writing a custom backend.
@@ -195,6 +200,7 @@ newtype DOMInterpret = DOMInterpret
   { makeElement :: MakeElement
   , setProp :: SetProp
   , setCb :: SetCb
+  , setDelegateCb :: SetDelegateCb
   , unsetAttribute :: UnsetAttribute
   , attributeElementParent :: AttributeElementParent
   , attributeDynParentForElement :: AttributeDynParentForElement
