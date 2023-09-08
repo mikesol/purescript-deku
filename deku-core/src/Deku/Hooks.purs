@@ -30,6 +30,7 @@ module Deku.Hooks
   , useRant
   , useHotRant
   , useDeflect
+  , useMemoized
   , useState'
   , useRant'
   , useRef
@@ -164,6 +165,23 @@ useDeflect e f = Nut go'
     -- we `once e` in case it has an initial value
     let Nut nf = f p
     subscribe (sample (__internalDekuFlatten nf i di) ee) identity
+
+useMemoized :: forall x. Poll x -> Hook (Poll x)
+useMemoized xs f = Nut go'
+  where
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
+
+  go
+    :: forall payload
+     . Node' payload
+  go i di = behaving' \_ ee _ subscribe -> do
+    memo <- Poll.createPure
+
+    let Nut nf = f memo.poll
+    subscribe ( sample ( __internalDekuFlatten nf i di ) ee ) identity
+    -- important to subscribe after initial event to not miss `pure` values
+    subscribe ( sample_ xs ee ) \_ -> memo.push
 
 -- | A hook to work with memoized values that lack an initial value. See [`useRant'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.
 
@@ -325,18 +343,15 @@ useDynAtEnd b = useDynAtEndWith b dynOptions
 -- | approach, see the `useDyn` hook.
 switcher :: forall a. (a -> Nut) -> Poll a -> Nut
 switcher f poll = Deku.do
-  ctr <- useRant (counter poll)
-  dctr <- useDeflect (counter poll)
-  { value } <- useDynAtBeginningWith (ctr <|> dctr) $ dynOptions
+  ctr <- useMemoized $ mapWithIndex Tuple poll
+
+  { value } <- useDynAtBeginningWith ctr $ dynOptions
     { remove = \(Tuple oldV _) -> filterMap
         (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
         ctr
     }
+
   f (snd value)
-  where
-  counter = mapAccum fn 0
-    where
-    fn a b = (a + 1) /\ (a /\ b)
 
 cycle :: Poll Nut -> Nut
 cycle = switcher identity
