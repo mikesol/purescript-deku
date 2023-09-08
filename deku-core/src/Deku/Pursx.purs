@@ -22,10 +22,10 @@ import Deku.PathWalker (InstructionDelegate(..), MElement, processAttPursx, proc
 import Deku.PathWalker as PW
 import Deku.PursxParser as PxP
 import Deku.UnsafeDOM (cloneTemplate, toTemplate)
-import Effect (Effect)
+import Effect (Effect, foreachE)
 import Effect.Ref (new)
 import Effect.Uncurried (EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
-import FRP.Event (fastForeachE, subscribe)
+import FRP.Event (subscribe)
 import FRP.Event as Event
 import FRP.Poll (Poll)
 import FRP.Poll as Poll
@@ -266,7 +266,8 @@ useTemplateWith p d f = Nut $ mkEffectFn2
             (toDekuElement elt)
             sstaaarrrrrt
             eeeeeennnnd
-      for_ this' \t -> runEffectFn2 fastForeachE t (oh'hi dbStart dbEnd)
+      let ohi = oh'hi dbStart dbEnd
+      for_ this' \t -> foreachE t \a -> runEffectFn1 ohi a
       let
         handleEvent t = do
           wrStart <- runEffectFn1 weakRef dbStart
