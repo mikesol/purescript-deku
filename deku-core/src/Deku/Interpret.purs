@@ -29,7 +29,7 @@ import Deku.Attribute (Cb(..), Key(..), Value(..))
 import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), PursXable(..), Tag(..), Verb(..), eltAttribution, handleAtts)
 import Deku.Core as Core
 import Deku.JSWeakRef (WeakRef)
-import Deku.UnsafeDOM (appendChild, cloneTemplate, createElement, createElementNS, insertBefore, outerHTML, toTemplate, unsafeParentNode)
+import Deku.UnsafeDOM (addEventListener, appendChild, cloneTemplate, createElement, createElementNS, insertBefore, outerHTML, removeEventListener, toTemplate, unsafeParentNode)
 import Effect (Effect, foreachE)
 import Effect.Console (error)
 import Effect.Ref (read)
@@ -53,7 +53,7 @@ import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.DOM.Text as Text
 import Web.Event.Event (EventType(..))
 import Web.Event.Event as Web
-import Web.Event.EventTarget (addEventListener, eventListener, removeEventListener)
+import Web.Event.EventTarget (eventListener)
 import Web.HTML (window)
 import Web.HTML.HTMLButtonElement as HTMLButtonElement
 import Web.HTML.HTMLDocument (toDocument)
@@ -459,9 +459,9 @@ setCbEffect = mkEffectFn4 \elt' (Key k) (Cb v) stobj -> do
     l <- liftST $ STObject.peek k stobj
     let eventType = EventType k
     let eventTarget = toEventTarget (fromDekuElement elt')
-    for_ l \toRemove -> removeEventListener eventType toRemove false eventTarget
+    for_ l \toRemove -> runEffectFn4 removeEventListener eventType toRemove false eventTarget
     nl <- eventListener v
-    addEventListener eventType nl false eventTarget
+    runEffectFn4 addEventListener eventType nl false eventTarget
     liftST $ void $ STObject.poke k nl stobj
 
 unsetAttributeEffect :: Core.UnsetAttribute
@@ -471,7 +471,7 @@ unsetAttributeEffect = mkEffectFn3 \elt' (Key k) stobj -> do
   let eventType = EventType k
   let eventTarget = toEventTarget asElt
   for_ l \toRemove -> do
-    removeEventListener eventType toRemove false eventTarget
+    runEffectFn4 removeEventListener eventType toRemove false eventTarget
     liftST $ STObject.delete k stobj
   removeAttribute k asElt
 
