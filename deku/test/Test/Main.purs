@@ -22,7 +22,7 @@ import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
-import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynWith, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
+import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Hooks as DH
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx ((~~))
@@ -650,6 +650,16 @@ lotsOfSwitching = Deku.do
         [ item <#~> if _ then text_ "hello" else text_ "goodbye"
         ]
     ]
+
+pureSwitches :: Nut
+pureSwitches = Deku.do
+  _ /\ elem <- useState'
+  let
+    initial :: Poll Unit
+    initial = merge $ Array.replicate 5 $ pure unit
+
+  ( initial <|> elem ) <#~> \e ->
+    D.span [ DA.klass_ "switcherelem" ] [ text_ $ show e ]
 
 useHotRantWorks :: Nut
 useHotRantWorks = Deku.do
