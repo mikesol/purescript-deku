@@ -576,8 +576,7 @@ makePursxEffect = mkEffectFn5
           case attTag >>= flip Object.lookup atts of
             Just att -> do
               star <- liftST $ STArray.new
-              -- todo: does this map have a runtime hit?
-              handleAtts di obj (toDekuElement asElt) star
+              runEffectFn5 handleAtts di obj (toDekuElement asElt) star
                 [ att ]
             Nothing -> do
               error $ ("Programming error: att not found in pursx " <> show attTag <> " " <> show (Object.keys atts))

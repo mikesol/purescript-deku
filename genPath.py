@@ -245,7 +245,7 @@ processAttPursx :: InstructionSignature (Poll Attribute')
 processAttPursx = mkEffectFn4 \\_ att di e -> do
     obj <- liftST STObject.new
     star <- liftST $ STArray.new
-    handleAtts di obj (toDekuElement (mEltElt e)) star
+    runEffectFn5 handleAtts di obj (toDekuElement (mEltElt e)) star
       [  att ]
 
 instance IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where

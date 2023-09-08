@@ -10,7 +10,7 @@ import Deku.Attribute (Attribute, Attribute', unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), handleAtts)
 import Deku.Interpret (attributeBeaconFullRangeParentProto, fromDekuBeacon, fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Path as Path
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Poll (Poll)
 import Foreign.Object.ST as STObject
 import Prim.Row as R
@@ -73,7 +73,7 @@ processAttPursx :: InstructionSignature (Poll Attribute')
 processAttPursx = mkEffectFn4 \_ att di e -> do
     obj <- liftST STObject.new
     star <- liftST $ STArray.new
-    handleAtts di obj (toDekuElement (mEltElt e)) star
+    runEffectFn5 handleAtts di obj (toDekuElement (mEltElt e)) star
       [  att ]
 
 instance IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where
@@ -109,7 +109,7 @@ processNutPursx = mkEffectFn4 \k (Nut nut) di@(DOMInterpret { makeElement }) e -
       NoOutcome -> pure unit
 
 instance IsSymbol k => ProcessInstruction k Nut where
-  processInstruction = mkEffectFn5 \(InstructionDelegate { processNut }) k nut di@(DOMInterpret { makeElement }) e -> do
+  processInstruction = mkEffectFn5 \(InstructionDelegate { processNut }) k nut di e -> do
     runEffectFn4 processNut (reflectSymbol k) nut di e
 
 foreign import downGroup :: EffectFn1 MElement MElement

@@ -30,7 +30,7 @@ import Deku.Do as Deku
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
 import Effect (Effect, foreachE)
 import Effect.Ref (Ref, new, write)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn8, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn8, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn5, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
 import FRP.Event (fastForeachE, fastForeachThunkE, subscribe, subscribeO)
 import FRP.Event as Event
 import FRP.Poll (Poll(..))
@@ -736,41 +736,42 @@ eltAttribution = mkEffectFn3
         y.pos
 
 handleAtts
-  :: DOMInterpret
-  -> STObject.STObject Global EventListener
-  -> DekuElement
-  -> STArray.STArray Global (Effect Unit)
-  -> Array (Poll Attribute')
-  -> Effect Unit
-handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts =
-  do
-    let
-      oh'hi'attr eeeee = mkEffectFn1 \att -> do
-        let { key, value } = att
-        case value of
-          Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
-          Cb' cb -> runEffectFn4 setCb eeeee (Key key) cb obj
-          Unset' -> runEffectFn3 unsetAttribute eeeee (Key key) obj
-      handleAttrEvent y = do
-        wr <- runEffectFn1 weakRef elt
-        uu <- subscribe y \x -> do
-          drf <- runEffectFn1 deref wr
-          case toMaybe drf of
-            Just yy -> runEffectFn1 (oh'hi'attr yy) x
-            Nothing -> thunker unsubs
-        void $ liftST $ STArray.push uu unsubs
-      handleAttrPoll y = do
-        pump <- liftST $ Event.create
-        handleAttrEvent (UPoll.sample y pump.event)
-        pump.push identity
-    let ohi = oh'hi'attr elt
-    foreachE atts \ii -> case ii of
-      OnlyPure x -> runEffectFn2 fastForeachE x ohi
-      OnlyEvent y -> handleAttrEvent y
-      OnlyPoll y -> handleAttrPoll y
-      PureAndPoll x y -> do
-        runEffectFn2 fastForeachE x ohi
-        handleAttrPoll y
+  :: EffectFn5 DOMInterpret
+       (STObject.STObject Global EventListener)
+       DekuElement
+       (STArray.STArray Global (Effect Unit))
+       (Array (Poll Attribute'))
+       Unit
+handleAtts = mkEffectFn5
+  \(DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts ->
+    do
+      let
+        oh'hi'attr eeeee = mkEffectFn1 \att -> do
+          let { key, value } = att
+          case value of
+            Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
+            Cb' cb -> runEffectFn4 setCb eeeee (Key key) cb obj
+            Unset' -> runEffectFn3 unsetAttribute eeeee (Key key) obj
+        handleAttrEvent y = do
+          wr <- runEffectFn1 weakRef elt
+          uu <- subscribe y \x -> do
+            drf <- runEffectFn1 deref wr
+            case toMaybe drf of
+              Just yy -> runEffectFn1 (oh'hi'attr yy) x
+              Nothing -> thunker unsubs
+          void $ liftST $ STArray.push uu unsubs
+        handleAttrPoll y = do
+          pump <- liftST $ Event.create
+          handleAttrEvent (UPoll.sample y pump.event)
+          pump.push identity
+      let ohi = oh'hi'attr elt
+      foreachE atts \ii -> case ii of
+        OnlyPure x -> runEffectFn2 fastForeachE x ohi
+        OnlyEvent y -> handleAttrEvent y
+        OnlyPoll y -> handleAttrPoll y
+        PureAndPoll x y -> do
+          runEffectFn2 fastForeachE x ohi
+          handleAttrPoll y
 
 elementify
   :: forall element
@@ -793,7 +794,8 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
       runEffectFn3 eltAttribution ps di elt
       obj <- liftST $ STObject.new
-      handleAtts di obj elt unsubs (map (map unsafeUnAttribute) atts)
+      runEffectFn5 handleAtts di obj elt unsubs
+        (map (map unsafeUnAttribute) atts)
       let
         oh'hi = mkEffectFn1 \(Nut nut) -> do
           void $ runEffectFn2 nut
@@ -970,8 +972,8 @@ else instance pursxToElementConsAttr ::
     let
       o = pursxToElement (Proxy :: Proxy rest) r
     Object.insert (reflectType pxk)
-          (PXAttr (unsafeUnAttribute <$> (get pxk r)))
-          o
+      (PXAttr (unsafeUnAttribute <$> (get pxk r)))
+      o
     where
     pxk = Proxy :: _ key
 
@@ -988,8 +990,8 @@ else instance pursxToElementConsStr ::
     let
       o = pursxToElement (Proxy :: Proxy rest) r
     Object.insert (reflectType pxk)
-          (PXStr (get pxk r))
-          o
+      (PXStr (get pxk r))
+      o
     where
     pxk = Proxy :: _ key
 
