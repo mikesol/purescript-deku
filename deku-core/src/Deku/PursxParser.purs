@@ -1,7 +1,9 @@
 module Deku.PursxParser where
 
-import Deku.PxTypes as PxTypes
+import Deku.Attribute (Attribute)
+import Deku.DOM (class TagToDeku)
 import Prim.Boolean (False, True)
+import Deku.PxTypes as PxTypes
 import Prim.Row as Row
 import Prim.RowList as RL
 import Prim.Symbol as Sym
@@ -31,17 +33,7 @@ else instance
   , Sym.Cons x y tail
   , DoVerbForAttr verb tag acc2 x y onezero pursi pathi purso patho newTail
   ) =>
-  DoVerbForAttr verb
-    tag
-    acc
-    anything
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    newTail
+  DoVerbForAttr verb tag acc anything tail onezero pursi pathi purso patho newTail
 
 --
 class
@@ -59,12 +51,7 @@ class
   | verb acc head tail onezero pursi pathi -> purso patho newTail
 
 instance
-  ( Row.Cons acc PxTypes.PxAtt pursi purso
-  , Row.Cons acc onezero pathi patho
-  ) =>
-  DoVerbForDOM verb acc verb tail onezero pursi pathi purso patho tail
-else instance
-  ( Row.Cons acc String pursi purso
+  ( Row.Cons acc PxTypes.PxNut pursi purso
   , Row.Cons acc onezero pathi patho
   ) =>
   DoVerbForDOM verb acc verb tail onezero pursi pathi purso patho tail
@@ -79,12 +66,7 @@ else instance
 class IsWhiteSpace (space :: Symbol)
 
 instance IsWhiteSpace ""
-else instance
-  ( Sym.Cons x y s
-  , IsSingleWhiteSpace x
-  , IsWhiteSpace y
-  ) =>
-  IsWhiteSpace s
+else instance (Sym.Cons x y s, IsSingleWhiteSpace x, IsWhiteSpace y) => IsWhiteSpace s
 
 class IsSingleWhiteSpace (s :: Symbol)
 
@@ -101,24 +83,9 @@ class
     (path :: Row (RL.RowList Symbol))
   | verb head tail -> purs path
 
-instance
-  ( Sym.Cons x y tail
-  , PXStart verb x y purs path
-  ) =>
-  PXStart verb " " tail purs path
-
-instance
-  ( Sym.Cons x y tail
-  , PXStart verb x y purs path
-  ) =>
-  PXStart verb "\t" tail purs path
-
-instance
-  ( Sym.Cons x y tail
-  , PXStart verb x y purs path
-  ) =>
-  PXStart verb "\n" tail purs path
-
+instance (Sym.Cons x y tail, PXStart verb x y purs path) => PXStart verb " " tail purs path
+instance (Sym.Cons x y tail, PXStart verb x y purs path) => PXStart verb "\t" tail purs path
+instance (Sym.Cons x y tail, PXStart verb x y purs path) => PXStart verb "\n" tail purs path
 instance
   ( Sym.Cons x y tail
   , PXTagPreName verb x y RL.Nil () () purso patho trailing
@@ -564,11 +531,7 @@ instance
 
 --
 class
-  PreEndTagFromTrailing
-    (head :: Symbol)
-    (tail :: Symbol)
-    (tag :: Symbol)
-    (newTrailing :: Symbol)
+  PreEndTagFromTrailing (head :: Symbol) (tail :: Symbol) (tag :: Symbol) (newTrailing :: Symbol)
   | head tail -> tag newTrailing
 
 instance
@@ -589,113 +552,33 @@ instance
   ) =>
   PreEndTagFromTrailing "\n" tail tag trailing
 
-instance
-  EndTagFromTrailing "a" tail "" tag trailing =>
-  PreEndTagFromTrailing "a" tail tag trailing
-
-instance
-  EndTagFromTrailing "b" tail "" tag trailing =>
-  PreEndTagFromTrailing "b" tail tag trailing
-
-instance
-  EndTagFromTrailing "c" tail "" tag trailing =>
-  PreEndTagFromTrailing "c" tail tag trailing
-
-instance
-  EndTagFromTrailing "d" tail "" tag trailing =>
-  PreEndTagFromTrailing "d" tail tag trailing
-
-instance
-  EndTagFromTrailing "e" tail "" tag trailing =>
-  PreEndTagFromTrailing "e" tail tag trailing
-
-instance
-  EndTagFromTrailing "f" tail "" tag trailing =>
-  PreEndTagFromTrailing "f" tail tag trailing
-
-instance
-  EndTagFromTrailing "g" tail "" tag trailing =>
-  PreEndTagFromTrailing "g" tail tag trailing
-
-instance
-  EndTagFromTrailing "h" tail "" tag trailing =>
-  PreEndTagFromTrailing "h" tail tag trailing
-
-instance
-  EndTagFromTrailing "i" tail "" tag trailing =>
-  PreEndTagFromTrailing "i" tail tag trailing
-
-instance
-  EndTagFromTrailing "j" tail "" tag trailing =>
-  PreEndTagFromTrailing "j" tail tag trailing
-
-instance
-  EndTagFromTrailing "k" tail "" tag trailing =>
-  PreEndTagFromTrailing "k" tail tag trailing
-
-instance
-  EndTagFromTrailing "l" tail "" tag trailing =>
-  PreEndTagFromTrailing "l" tail tag trailing
-
-instance
-  EndTagFromTrailing "m" tail "" tag trailing =>
-  PreEndTagFromTrailing "m" tail tag trailing
-
-instance
-  EndTagFromTrailing "n" tail "" tag trailing =>
-  PreEndTagFromTrailing "n" tail tag trailing
-
-instance
-  EndTagFromTrailing "o" tail "" tag trailing =>
-  PreEndTagFromTrailing "o" tail tag trailing
-
-instance
-  EndTagFromTrailing "p" tail "" tag trailing =>
-  PreEndTagFromTrailing "p" tail tag trailing
-
-instance
-  EndTagFromTrailing "q" tail "" tag trailing =>
-  PreEndTagFromTrailing "q" tail tag trailing
-
-instance
-  EndTagFromTrailing "r" tail "" tag trailing =>
-  PreEndTagFromTrailing "r" tail tag trailing
-
-instance
-  EndTagFromTrailing "s" tail "" tag trailing =>
-  PreEndTagFromTrailing "s" tail tag trailing
-
-instance
-  EndTagFromTrailing "t" tail "" tag trailing =>
-  PreEndTagFromTrailing "t" tail tag trailing
-
-instance
-  EndTagFromTrailing "u" tail "" tag trailing =>
-  PreEndTagFromTrailing "u" tail tag trailing
-
-instance
-  EndTagFromTrailing "v" tail "" tag trailing =>
-  PreEndTagFromTrailing "v" tail tag trailing
-
-instance
-  EndTagFromTrailing "w" tail "" tag trailing =>
-  PreEndTagFromTrailing "w" tail tag trailing
-
-instance
-  EndTagFromTrailing "x" tail "" tag trailing =>
-  PreEndTagFromTrailing "x" tail tag trailing
-
-instance
-  EndTagFromTrailing "y" tail "" tag trailing =>
-  PreEndTagFromTrailing "y" tail tag trailing
-
-instance
-  EndTagFromTrailing "z" tail "" tag trailing =>
-  PreEndTagFromTrailing "z" tail tag trailing
-
-instance
-  EndTagFromTrailing "-" tail "" tag trailing =>
-  PreEndTagFromTrailing "-" tail tag trailing
+instance EndTagFromTrailing "a" tail "" tag trailing => PreEndTagFromTrailing "a" tail tag trailing
+instance EndTagFromTrailing "b" tail "" tag trailing => PreEndTagFromTrailing "b" tail tag trailing
+instance EndTagFromTrailing "c" tail "" tag trailing => PreEndTagFromTrailing "c" tail tag trailing
+instance EndTagFromTrailing "d" tail "" tag trailing => PreEndTagFromTrailing "d" tail tag trailing
+instance EndTagFromTrailing "e" tail "" tag trailing => PreEndTagFromTrailing "e" tail tag trailing
+instance EndTagFromTrailing "f" tail "" tag trailing => PreEndTagFromTrailing "f" tail tag trailing
+instance EndTagFromTrailing "g" tail "" tag trailing => PreEndTagFromTrailing "g" tail tag trailing
+instance EndTagFromTrailing "h" tail "" tag trailing => PreEndTagFromTrailing "h" tail tag trailing
+instance EndTagFromTrailing "i" tail "" tag trailing => PreEndTagFromTrailing "i" tail tag trailing
+instance EndTagFromTrailing "j" tail "" tag trailing => PreEndTagFromTrailing "j" tail tag trailing
+instance EndTagFromTrailing "k" tail "" tag trailing => PreEndTagFromTrailing "k" tail tag trailing
+instance EndTagFromTrailing "l" tail "" tag trailing => PreEndTagFromTrailing "l" tail tag trailing
+instance EndTagFromTrailing "m" tail "" tag trailing => PreEndTagFromTrailing "m" tail tag trailing
+instance EndTagFromTrailing "n" tail "" tag trailing => PreEndTagFromTrailing "n" tail tag trailing
+instance EndTagFromTrailing "o" tail "" tag trailing => PreEndTagFromTrailing "o" tail tag trailing
+instance EndTagFromTrailing "p" tail "" tag trailing => PreEndTagFromTrailing "p" tail tag trailing
+instance EndTagFromTrailing "q" tail "" tag trailing => PreEndTagFromTrailing "q" tail tag trailing
+instance EndTagFromTrailing "r" tail "" tag trailing => PreEndTagFromTrailing "r" tail tag trailing
+instance EndTagFromTrailing "s" tail "" tag trailing => PreEndTagFromTrailing "s" tail tag trailing
+instance EndTagFromTrailing "t" tail "" tag trailing => PreEndTagFromTrailing "t" tail tag trailing
+instance EndTagFromTrailing "u" tail "" tag trailing => PreEndTagFromTrailing "u" tail tag trailing
+instance EndTagFromTrailing "v" tail "" tag trailing => PreEndTagFromTrailing "v" tail tag trailing
+instance EndTagFromTrailing "w" tail "" tag trailing => PreEndTagFromTrailing "w" tail tag trailing
+instance EndTagFromTrailing "x" tail "" tag trailing => PreEndTagFromTrailing "x" tail tag trailing
+instance EndTagFromTrailing "y" tail "" tag trailing => PreEndTagFromTrailing "y" tail tag trailing
+instance EndTagFromTrailing "z" tail "" tag trailing => PreEndTagFromTrailing "z" tail tag trailing
+instance EndTagFromTrailing "-" tail "" tag trailing => PreEndTagFromTrailing "-" tail tag trailing
 
 --
 class
@@ -987,828 +870,192 @@ class
 
 instance
   Sym.Cons ">" trailing tail =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "/"
-    tail
-    onezero
-    purs
-    path
-    purs
-    path
-    trailing
+  PXTagPreAttrName verb hasAttributed tag "/" tail onezero purs path purs path trailing
 else instance
   ( Sym.Cons q r tail
   , PXBody verb q r (RL.Cons "0" "0" onezero) pursi pathi purso patho trailing
   , Sym.Cons x y trailing
   , PreEndTagFromTrailing x y tag newTrailing
   ) =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    ">"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    newTrailing
+  PXTagPreAttrName verb hasAttributed tag ">" tail onezero pursi pathi purso patho newTrailing
 else instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPreAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    " "
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPreAttrName verb hasAttributed tag " " tail onezero pursi pathi purso patho trailing
 else instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPreAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "\t"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPreAttrName verb hasAttributed tag "\t" tail onezero pursi pathi purso patho trailing
 else instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPreAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "\n"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPreAttrName verb hasAttributed tag "\n" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "a" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "a"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "a" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "a" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "b" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "b"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "b" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "b" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "c" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "c"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "c" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "c" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "d" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "d"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "d" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "d" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "e" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "e"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "e" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "e" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "f" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "f"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "f" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "f" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "g" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "g"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "g" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "g" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "h" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "h"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "h" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "h" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "i" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "i"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "i" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "i" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "j" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "j"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "j" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "j" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "k" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "k"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "k" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "k" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "l" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "l"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "l" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "l" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "m" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "m"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "m" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "m" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "n" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "n"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "n" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "n" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "o" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "o"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "o" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "o" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "p" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "p"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "p" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "p" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "q" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "q"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "q" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "q" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "r" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "r"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "r" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "r" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "s" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "s"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "s" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "s" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "t" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "t"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "t" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "t" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "u" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "u"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "u" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "u" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "v" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "v"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "v" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "v" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "w" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "w"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "w" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "w" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "x" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "x"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "x" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "x" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "y" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "y"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "y" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "y" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "z" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "z"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "z" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "z" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "A" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "A"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "A" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "A" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "B" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "B"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "B" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "B" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "C" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "C"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "C" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "C" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "D" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "D"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "D" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "D" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "E" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "E"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "E" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "E" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "F" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "F"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "F" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "F" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "G" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "G"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "G" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "G" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "H" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "H"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "H" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "H" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "I" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "I"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "I" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "I" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "J" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "J"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "J" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "J" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "K" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "K"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "K" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "K" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "L" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "L"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "L" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "L" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "M" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "M"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "M" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "M" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "N" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "N"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "N" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "N" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "O" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "O"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "O" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "O" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "P" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "P"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "P" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "P" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "Q" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "Q"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "Q" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "Q" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "R" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "R"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "R" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "R" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "S" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "S"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "S" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "S" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "T" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "T"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "T" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "T" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "U" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "U"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "U" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "U" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "V" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "V"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "V" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "V" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "W" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "W"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "W" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "W" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "X" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "X"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "X" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "X" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "Y" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "Y"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "Y" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "Y" tail onezero pursi pathi purso patho trailing
 else instance
-  PXTagAttrName verb hasAttributed tag "Z" tail onezero pursi pathi purso patho
-    trailing =>
-  PXTagPreAttrName verb
-    hasAttributed
-    tag
-    "Z"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "Z" tail onezero pursi pathi purso patho trailing =>
+  PXTagPreAttrName verb hasAttributed tag "Z" tail onezero pursi pathi purso patho trailing
 else instance
   ( Sym.Cons x y tail
   , DoVerbForAttr verb tag "" x y onezero pursi pathi pursx pathx newTail
   , Sym.Cons xx yy newTail
-  , PXTagPreAttrName verb True tag xx yy onezero pursx pathx purso patho
-      trailing
+  , PXTagPreAttrName verb True tag xx yy onezero pursx pathx purso patho trailing
   ) =>
-  PXTagPreAttrName verb
-    False
-    tag
-    verb
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPreAttrName verb False tag verb tail onezero pursi pathi purso patho trailing
 
 --
 class
@@ -1828,1142 +1075,405 @@ class
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "a"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "b"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "c"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "d"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "e"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "f"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "a" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "b" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "c" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "d" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "e" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "f" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "g" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "h" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "i" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "j" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "k" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "l" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "m" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "n" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "o" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "p" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "q" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "r" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "s" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "t" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "u" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "v" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "w" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "x" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "y" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "z" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "A" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "B" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "C" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "D" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "E" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "F" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "G" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "H" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "I" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "J" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "K" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "L" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "M" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "N" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "O" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "P" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "Q" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "R" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "S" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "T" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "U" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "V" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "W" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "X" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "Y" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "Z" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "-" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "0" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "1" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "2" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "3" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "4" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "5" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "6" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "7" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "8" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "9" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag " " tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "\t" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrName verb hasAttributed tag "\n" tail onezero pursi pathi purso patho trailing
+
+instance
   ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPreAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "g"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "h"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "i"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "j"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "k"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "l"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "m"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "n"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "o"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "p"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "q"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "r"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "s"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "t"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "u"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "v"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "w"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "x"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "y"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "z"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "A"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "B"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "C"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "D"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "E"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "F"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "G"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "H"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "I"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "J"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "K"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "L"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "M"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "N"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "O"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "P"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "Q"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "R"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "S"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "T"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "U"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "V"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "W"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "X"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "Y"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "Z"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "-"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "0"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "1"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "2"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "3"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "4"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "5"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "6"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "7"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "8"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "9"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    " "
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "\t"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "\n"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagPreAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrName verb
-    hasAttributed
-    tag
-    "="
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrName verb hasAttributed tag "=" tail onezero pursi pathi purso patho trailing
 
 --
 class
@@ -2983,71 +1493,27 @@ class
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPostAttrName verb
-    hasAttributed
-    tag
-    " "
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPostAttrName verb hasAttributed tag " " tail onezero pursi pathi purso patho trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPostAttrName verb
-    hasAttributed
-    tag
-    "\t"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPostAttrName verb hasAttributed tag "\t" tail onezero pursi pathi purso patho trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPostAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPostAttrName verb
-    hasAttributed
-    tag
-    "\n"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPostAttrName verb hasAttributed tag "\n" tail onezero pursi pathi purso patho trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPreAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPostAttrName verb
-    hasAttributed
-    tag
-    "="
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPostAttrName verb hasAttributed tag "=" tail onezero pursi pathi purso patho trailing
 
 --
 class
@@ -3067,71 +1533,27 @@ class
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPreAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPreAttrValue verb
-    hasAttributed
-    tag
-    " "
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPreAttrValue verb hasAttributed tag " " tail onezero pursi pathi purso patho trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPreAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPreAttrValue verb
-    hasAttributed
-    tag
-    "\t"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPreAttrValue verb hasAttributed tag "\t" tail onezero pursi pathi purso patho trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagPreAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPreAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPreAttrValue verb
-    hasAttributed
-    tag
-    "\n"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPreAttrValue verb hasAttributed tag "\n" tail onezero pursi pathi purso patho trailing
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagPreAttrValue verb
-    hasAttributed
-    tag
-    "\""
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagPreAttrValue verb hasAttributed tag "\"" tail onezero pursi pathi purso patho trailing
 
 --
 class
@@ -3151,1550 +1573,549 @@ class
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "a"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "b"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "c"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "d"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "e"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "f"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "a" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "b" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "c" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "d" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "e" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "f" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "g" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "h" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "i" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "j" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "k" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "l" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "m" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "n" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "o" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "p" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "q" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "r" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "s" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "t" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "u" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "v" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "w" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "x" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "y" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "z" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "A" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "B" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "C" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "D" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "E" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "F" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "G" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "H" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "I" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "J" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "K" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "L" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "M" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "N" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "O" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "P" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "Q" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "R" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "S" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "T" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "U" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "V" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "W" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "X" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "Y" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "Z" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "0" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "1" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "2" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "3" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "4" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "5" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "6" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "7" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "8" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "9" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag ":" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "," tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag ";" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "'" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "!" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "?" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "@" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "#" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "$" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "%" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "^" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "&" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "*" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "(" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag ")" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "_" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "-" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "=" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "`" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "~" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "<" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag ">" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "/" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "." tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "\\" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag " " tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "\t" tail onezero pursi pathi purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValue verb hasAttributed tag "\n" tail onezero pursi pathi purso patho trailing
+
+instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
+  , PXTagPreAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "g"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "h"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "i"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "j"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "k"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "l"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "m"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "n"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "o"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "p"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "q"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "r"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "s"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "t"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "u"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "v"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "w"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "x"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "y"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "z"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "A"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "B"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "C"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "D"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "E"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "F"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "G"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "H"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "I"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "J"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "K"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "L"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "M"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "N"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "O"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "P"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "Q"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "R"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "S"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "T"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "U"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "V"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "W"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "X"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "Y"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "Z"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "0"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "1"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "2"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "3"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "4"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "5"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "6"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "7"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "8"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "9"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    ":"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    ","
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    ";"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "'"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "!"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "?"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "@"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "#"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "$"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "%"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "^"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "&"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "*"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "("
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    ")"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "_"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "-"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "="
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "`"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "~"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "<"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    ">"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "/"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "."
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "\\"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    " "
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "\t"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "\n"
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagPreAttrName verb hasAttributed tag x y onezero pursi pathi purso patho
-      trailing
-  ) =>
-  PXTagAttrValue verb
-    hasAttributed
-    tag
-    "\""
-    tail
-    onezero
-    pursi
-    pathi
-    purso
-    patho
-    trailing
+  PXTagAttrValue verb hasAttributed tag "\"" tail onezero pursi pathi purso patho trailing
 
 class
   PXBody
@@ -4778,8 +2199,7 @@ else instance
   , Row.Union pursi pursm pursz
   , Row.Union pathi pathm pathz
   , Sym.Cons x y trailing
-  , PXBody verb x y (RL.Cons "1" "1" onezero) pursz pathz purso patho
-      newTrailing
+  , PXBody verb x y (RL.Cons "1" "1" onezero) pursz pathz purso patho newTrailing
   ) =>
   CloseOrRepeat verb anything tail onezero pursi pathi purso patho newTrailing
 

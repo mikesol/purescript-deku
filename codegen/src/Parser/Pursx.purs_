@@ -3,7 +3,7 @@ module Deku.PursxParser where
 import Deku.Attribute (Attribute)
 import Deku.DOM (class TagToDeku)
 import Prim.Boolean (False, True)
-improt Deku.PxTypes as PxTypes
+import Deku.PxTypes as PxTypes
 import Prim.Row as Row
 import Prim.RowList as RL
 import Prim.Symbol as Sym

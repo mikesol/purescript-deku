@@ -1,54 +1,55 @@
-module Deku.Pursx where
+module Deku.Pursx
+  ( pursx
+  , pursx'
+  , template
+  , class PursxSubstitutions
+  , class ToElementCache
+  , class TemplateSubstitutions
+  , class EmptyMe
+  , emptyMe
+  ) where
 
 import Prelude
 
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
-import Control.Plus (class Plus, empty)
+import Control.Plus (empty)
 import Data.Array (null)
 import Data.Array as Array
 import Data.Array.ST as STArray
-import Data.Either (Either(..))
 import Data.Foldable (foldr, for_)
-import Data.Maybe (Maybe(..))
-import Data.Nullable (toMaybe)
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.String as String
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple (Tuple(..))
-import Deku.Attribute (Attribute', AttributeValue(..), Cb, Key(..), Value(..))
-import Deku.Core (DOMInterpret(..), DekuChild(..), DekuDynamic(..), DekuElement, DekuOutcome(..), DekuParent(..), DynOptions, Hook', Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, eventOrBust, getLifecycle, notLucky, pollOrBust, pureOrBust, thunker)
-import Deku.Interpret (attributeDynParentForElementEffect, fromDekuElement, toDekuElement)
+import Deku.Attribute (Attribute, AttributeValue(..), Key(..), Value(..), unsafeUnAttribute)
+import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForElement, eltAttribution, getLifecycle, notLucky, runListener, text, thunker)
+import Deku.Interpret (attributeDynParentForElementEffect, toDekuElement, toDekuText)
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
-import Deku.JSMap as JSMap
-import Deku.JSWeakRef (deref, weakRef)
-import Deku.Path (symbolsToArray)
+import Deku.Path (symbolsForAttsToArray)
 import Deku.Path as Path
 import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, processAttPursx, processNutPursx, processStringImpl, returnReplacement, splitTextAndReturnReplacement)
 import Deku.PathWalker as PW
 import Deku.PursxParser as PxP
+import Deku.PxTypes (PxAtt, PxNut)
+import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some)
+import Deku.Some as Some
 import Deku.UnsafeDOM (cloneTemplate, toTemplate, unsafeFirstChild)
-import Effect (Effect, foreachE)
+import Effect (foreachE)
+import Effect.Exception (error, throwException)
 import Effect.Ref (new)
-import Effect.Uncurried (EffectFn1, EffectFn5, EffectFn7, mkEffectFn1, mkEffectFn2, mkEffectFn4, mkEffectFn7, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn7, runEffectFn8)
-import FRP.Event (fastForeachE, subscribe)
-import FRP.Event as Event
-import FRP.Poll (Poll(..))
-import FRP.Poll as Poll
-import FRP.Poll.Unoptimized as UPoll
-import Foreign.Object (Object)
-import Foreign.Object as Object
+import Effect.Uncurried (EffectFn1, EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
+import FRP.Poll (Poll)
 import Foreign.Object.ST as STObject
 import Literals.Undefined (undefined)
 import Prim.Row as R
+import Prim.Row as Row
 import Prim.RowList as RL
 import Record as Record
-import Type.Equality (class TypeEquals)
+import Record.Unsafe (unsafeGet)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
-import Untagged.Union (toEither1)
-import Web.DOM (Element)
 import Web.DOM.DocumentFragment as DocumentFragment
-import Web.DOM.Element (removeAttribute)
 import Web.HTML.HTMLTemplateElement as HtmlTemplateElement
 
 class EmptyMe (r :: Row Type) (rl :: RL.RowList Type) | rl -> r where
@@ -57,81 +58,111 @@ class EmptyMe (r :: Row Type) (rl :: RL.RowList Type) | rl -> r where
 instance EmptyMe () RL.Nil where
   emptyMe _ = {}
 
-instance  (IsSymbol k, Plus f, R.Lacks k r', R.Cons k (f a) r' r, EmptyMe r' rl) => EmptyMe r (RL.Cons k (f a) rl) where
+instance
+  ( IsSymbol k
+  , R.Lacks k r'
+  -- we go from an array to a single attribute
+  -- because of the way `walk` works
+  , R.Cons k (Poll (Attribute e)) r' r
+  , EmptyMe r' rl
+  ) =>
+  EmptyMe r (RL.Cons k (Array (Attribute e)) rl) where
   emptyMe _ = Record.insert (Proxy :: _ k) empty (emptyMe (Proxy :: _ rl))
-else instance  (IsSymbol k,  Monoid m, R.Lacks k r', R.Cons k m r' r, EmptyMe r' rl) => EmptyMe r (RL.Cons k m rl) where
-  emptyMe _ = Record.insert (Proxy :: _ k) mempty (emptyMe (Proxy :: _ rl))
-
-class StringSubstitutionsAreKosher
-  :: RL.RowList Type -> RL.RowList Type -> Constraint
-class StringSubstitutionsAreKosher nostr str | str -> nostr
-
-instance StringSubstitutionsAreKosher RL.Nil RL.Nil
 
 instance
-  StringSubstitutionsAreKosher c d =>
-  StringSubstitutionsAreKosher (RL.Cons k Nut c) (RL.Cons k String d)
-
-else instance
-  StringSubstitutionsAreKosher c d =>
-  StringSubstitutionsAreKosher (RL.Cons k Nut c) (RL.Cons k Nut d)
-
-else instance
-  ( TypeEquals a b
-  , StringSubstitutionsAreKosher c d
+  ( IsSymbol k
+  , R.Lacks k r'
+  , R.Cons k (Poll String) r' r
+  , EmptyMe r' rl
   ) =>
-  StringSubstitutionsAreKosher (RL.Cons k (a) c)
-    (RL.Cons k (b) d)
+  EmptyMe r (RL.Cons k String rl) where
+  emptyMe _ = Record.insert (Proxy :: _ k) empty (emptyMe (Proxy :: _ rl))
 
-makePursx
-  :: forall (html :: Symbol) p pl r0 rl0 r rl plr path scrunched
+class PursxSubstitutions
+  :: RL.RowList Type -> Row Type -> Constraint
+class PursxSubstitutions nostr str | nostr -> str
+
+instance PursxSubstitutions RL.Nil ()
+
+instance
+  (Row.Cons k Nut d r, PursxSubstitutions c d) =>
+  PursxSubstitutions (RL.Cons k PxNut c) r
+
+instance
+  ( Row.Cons k (Poll (Attribute deku)) d r, PursxSubstitutions c d
+  ) =>
+  PursxSubstitutions (RL.Cons k PxAtt c)
+    r
+
+class TemplateSubstitutions
+  :: RL.RowList Type -> Row Type -> Constraint
+class TemplateSubstitutions nostr str | nostr -> str
+
+instance TemplateSubstitutions RL.Nil ()
+
+instance
+  (Row.Cons k String d r, TemplateSubstitutions c d) =>
+  TemplateSubstitutions (RL.Cons k PxNut c) r
+
+else instance
+  ( Row.Cons k (Array (Attribute deku)) d r, TemplateSubstitutions c d
+  ) =>
+  TemplateSubstitutions (RL.Cons k PxAtt c)
+    r
+
+class ToElementCache (rl :: RL.RowList Type) (r :: Row Type) | rl -> r
+
+instance ToElementCache RL.Nil ()
+instance
+  ( Row.Cons k (EffectOp a) r' r
+  , ToElementCache c r'
+  ) =>
+  ToElementCache (RL.Cons k a c) r
+
+pursx
+  :: forall (@html :: Symbol) p pl r0 rl0 r rl plr path scrunched
    . IsSymbol html
   => PxP.PXStart "~" " " html r0 p
   => RL.RowToList r0 rl0
   => RL.RowToList r rl
-  => StringSubstitutionsAreKosher rl0 rl
+  => PursxSubstitutions rl0 r
   => RL.RowToList p pl
-  => Path.SymbolsToArray rl
-  -- => Warn (Above (Text "PL") (Quote (Proxy pl)))
+  => Path.SymbolsForAttsToArray rl
   => Path.RLReverses pl plr
-  -- => Warn (Above (Text "PLR") (Quote (Proxy plr)))
   => Path.Process plr path
   => Path.Scrunch path scrunched
-  -- => Warn (Above (Text "Path") (Quote path))
   => PW.PathWalker scrunched r
-  -- => Warn (Above (Text "Scrunched") (Quote scrunched))
-  => Proxy html
-  -> { | r }
+  => { | r }
   -> Nut
-makePursx = makePursx' (Proxy :: _ "~")
+pursx = pursx' @"~" @html
 
-makePursx'
-  :: forall verb (html :: Symbol) r0 rl0 p pl r rl plr path scrunched
+pursx'
+  :: forall @verb (@html :: Symbol) r0 rl0 p pl r rl plr path scrunched
    . IsSymbol html
   => IsSymbol verb
   => PxP.PXStart verb " " html r0 p
   => RL.RowToList r0 rl0
   => RL.RowToList r rl
-  => StringSubstitutionsAreKosher rl0 rl
+  => PursxSubstitutions rl0 r
   => RL.RowToList p pl
-  => Path.SymbolsToArray rl
+  => Path.SymbolsForAttsToArray rl
   => Path.RLReverses pl plr
   => Path.Process plr path
   => Path.Scrunch path scrunched
   => PW.PathWalker scrunched r
-  => Proxy verb
-  -> Proxy html
-  -> { | r }
+  => { | r }
   -> Nut
-makePursx' _ _ r = Nut $ mkEffectFn2
+pursx' r = Nut $ mkEffectFn2
   \ps@(PSR psr)
    di ->
     do
       let
+        -- various proxies
         rlProxy = Proxy :: _ rl
         htmlProxy = Proxy :: _ html
         scrunch = Proxy :: _ scrunched
-        syms = symbolsToArray rlProxy
+        syms = symbolsForAttsToArray rlProxy
+        -- remove all ~s~ from the html attributes
         html = foldr
           ( \pat h -> String.replaceAll (String.Pattern ("~" <> pat <> "~"))
               (String.Replacement "")
@@ -139,27 +170,60 @@ makePursx' _ _ r = Nut $ mkEffectFn2
           )
           (reflectSymbol htmlProxy)
           syms
+      -- turn the pursx i into a template
       eltX <- runEffectFn1 toTemplate html
+      -- clone the template
       elt <- runEffectFn1 cloneTemplate eltX
       let unsafeMElement = unsafeCoerce { p: undefined, e: elt }
       runEffectFn3 eltAttribution ps di (toDekuElement elt)
+      -- walk through the template, getting all of the elements and
+      -- setting up listeners
+      -- for example, processAttPursx handles all of the attributes in
+      -- pursx
       runEffectFn5
         ( PW.walk
-            :: EffectFn5 InstructionDelegate (Proxy scrunched) { | r } DOMInterpret MElement Unit
+            :: EffectFn5 InstructionDelegate (Proxy scrunched) { | r }
+                 DOMInterpret
+                 MElement
+                 Unit
         )
-        (InstructionDelegate {
-                processString: mkEffectFn4 \a b _ d -> runEffectFn3 processStringImpl a b d,
-                processAttribute: mkEffectFn4 \a b c d -> runEffectFn4 processAttPursx a b c d,
-                processNut: mkEffectFn4 \a b c d -> runEffectFn4 (processNutPursx splitTextAndReturnReplacement) a b c d
-            })
+        ( InstructionDelegate
+            { processString: mkEffectFn4 \a b _ d -> runEffectFn3
+                processStringImpl
+                a
+                b
+                d
+            , processAttribute: mkEffectFn4 \a b c d -> runEffectFn4
+                processAttPursx
+                a
+                b
+                c
+                d
+            , processPollString: mkEffectFn4 \a b c d -> runEffectFn4
+                (processNutPursx splitTextAndReturnReplacement)
+                a
+                (text b)
+                c
+                d
+            , processNut: mkEffectFn4 \a b c d -> runEffectFn4
+                (processNutPursx splitTextAndReturnReplacement)
+                a
+                b
+                c
+                d
+            }
+        )
         scrunch
         r
         di
         unsafeMElement
+      -- standard unsub management, just like in elementify
       unsubs <- liftST $ STArray.new
       when (not (Array.null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
+      -- if the element will be finalized, do all cancellations as well
       runEffectFn2 oneOffFinalizationRegistry elt (thunker unsubs)
+      -- standard lifecycle management
       for_ (getLifecycle psr.beacon) \{ l, s, e, lucky } -> runEffectFn8
         actOnLifecycleForElement
         psr.fromPortal
@@ -172,111 +236,51 @@ makePursx' _ _ r = Nut $ mkEffectFn2
         e
       pure $ DekuElementOutcome (toDekuElement elt)
 
-infixr 5 makePursx as ~~
-
--- todo: in general, this is part of a strategy to limit the number of
--- event listeners
--- DOM lore dictates that, whenever you have a collection with lots of
--- event listeners, you should have a single event listener on the parent
--- however, testing reveals that this doesn't speed stuff up in a statistically
--- significant way. that could be because the algo itself is inefficient or
--- that DOM lore is simply untrue. in case there's no advantage to limiting
--- the number of listeners, the easier solution is just to use handleAtts
--- and to forego the complexity of this alternative route
-pxHandleAtts
-  :: EffectFn7 DOMInterpret
-                  (STObject.STObject Global Boolean)
-                  Element
-                  (JSMap.JSMap Element (Object Cb))
-                  Element
-                  (STArray.STArray Global (Effect Unit))
-                  (Array (Poll Attribute'))
-                  Unit
-pxHandleAtts = mkEffectFn7 \(DOMInterpret { setProp, setDelegateCb }) topCache par cache elt unsubs atts ->
-  do
-    let
-      oh'hi'attr :: DekuElement -> EffectFn1 Attribute' Unit
-      oh'hi'attr eeeee = mkEffectFn1 \att -> do
-        let { key, value } = att
-        case value of
-          Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value  v)
-          Cb' cb -> do
-            maybeL <- liftST $ STObject.peek key topCache
-            case maybeL of
-              Just _ -> pure unit
-              Nothing -> do
-                runEffectFn3 setDelegateCb (toDekuElement par) (Key key) cache
-                void $ liftST $ STObject.poke key true topCache
-            myObj <- runEffectFn2 JSMap.getImpl elt cache
-            case toEither1 myObj of
-               Right o -> runEffectFn3 JSMap.setImpl elt (Object.insert key cb o) cache
-               Left _ -> runEffectFn3 JSMap.setImpl elt (Object.singleton key cb) cache
-          -- ugh - this is a dom primitive which sort of breaks the impl contract, find a way
-          -- to remove this
-          Unset' -> removeAttribute key (fromDekuElement eeeee)
-      handleAttrEvent y = do
-        wr <- runEffectFn1 weakRef (toDekuElement elt)
-        uu <- subscribe y \x -> do
-          drf <- runEffectFn1 deref wr
-          case toMaybe drf of
-            Just yy -> runEffectFn1 (oh'hi'attr yy) x
-            Nothing -> thunker unsubs
-        void $ liftST $ STArray.push uu unsubs
-      handleAttrPoll y = do
-        pump <- liftST $ Event.create
-        handleAttrEvent (UPoll.sample y pump.event)
-        pump.push identity
-    let ohi = oh'hi'attr (toDekuElement elt)
-    foreachE atts \ii -> case ii of
-      OnlyPure x -> runEffectFn2 fastForeachE x ohi
-      OnlyEvent y -> handleAttrEvent y
-      OnlyPoll y -> handleAttrPoll y
-      PureAndPoll x y -> do
-        runEffectFn2 fastForeachE x ohi
-        handleAttrPoll y
-
-useTemplateWith
-  :: forall (@html :: Symbol) value p pl r0 rl0 r rl plr path scrunched
+template
+  :: forall (@html :: Symbol) p pl r0 rl0 elementCache r rl rr plr path
+       scrunched withLifecycle maybes rEmpty
    . IsSymbol html
+  -- r0 is the original row we get from parsing the pursx
+  -- it contains all of the attributes and template rows
+  -- pointing to PxNut and PxAtt respectively
   => PxP.PXStart "~" " " html r0 p
+  -- r0 as a rowlist
   => RL.RowToList r0 rl0
+  -- r contains the valid types for this template
+  -- PxAtt -> Poll (Attribute e)
+  -- PxNut -> Poll String
+  => TemplateSubstitutions rl0 r
+  -- turn r to a row list
   => RL.RowToList r rl
-  => StringSubstitutionsAreKosher rl0 rl
+  -- turn p (the path) to a row list
   => RL.RowToList p pl
-  => Path.SymbolsToArray rl
-  => EmptyMe r rl
-  -- => Warn (Above (Text "PL") (Quote (Proxy pl)))
+  -- get all the symbols for atts when we do string replacement
+  => Path.SymbolsForAttsToArray rl
+  -- create a row of empty polls from r
+  -- needed for the walk recurser
+  => EmptyMe rEmpty rl
   => Path.RLReverses pl plr
-  -- => Warn (Above (Text "PLR") (Quote (Proxy plr)))
   => Path.Process plr path
   => Path.Scrunch path scrunched
-  -- => Warn (Above (Text "Path") (Quote path))
-  => PW.PathWalker scrunched r
-  -- => Warn (Above (Text "Scrunched") (Quote scrunched))
-  => Poll (Tuple (Maybe Int) value)
-  -> DynOptions value
-  -> Hook'
-       { value :: value
-       , remove :: Effect Unit
-       , sendTo :: Int -> Effect Unit
-       }
-       { | r }
-useTemplateWith p d f = Nut $ mkEffectFn2
+  => PW.PathWalker scrunched rEmpty
+  => Row.Union (sendTo :: Int, remove :: Unit) r rr
+  => RL.RowToList rr withLifecycle
+  => Labels withLifecycle
+  => AsTypeConstructor EffectOp rr elementCache
+  => AsTypeConstructor Maybe rr maybes
+  => Poll (Tuple String (Some rr))
+  -> Nut
+template p = Nut $ mkEffectFn2
   \(PSR psr)
-   di@
-     ( DOMInterpret
-         { attributeBeaconParent
-         , attributeDynParentForBeacons
-         , makeOpenBeacon
-         , makeCloseBeacon
-         }
-     ) ->
+   (DOMInterpret di) ->
     do
       let
+        -- various proxies
         rlProxy = Proxy :: _ rl
         htmlProxy = Proxy :: _ html
         scrunch = Proxy :: _ scrunched
-        syms = symbolsToArray rlProxy
+        syms = symbolsForAttsToArray rlProxy
+        -- remove all ~foo~ attributes from the html
         html = foldr
           ( \pat h -> String.replaceAll (String.Pattern ("~" <> pat <> "~"))
               (String.Replacement "")
@@ -284,9 +288,15 @@ useTemplateWith p d f = Nut $ mkEffectFn2
           )
           (reflectSymbol htmlProxy)
           syms
-      toplevelListenerCache :: STObject.STObject Global Boolean <- liftST $ STObject.new
-      elementlevelListenerCache :: JSMap.JSMap Element (Object Cb)  <- JSMap.newImpl
+      -- build an element cache
+      -- this will hold references to all of the elements that are hot,
+      -- meaning that we can manipulate according to the template
+      elementCache :: STObject.STObject Global { | elementCache } <- liftST
+        STObject.new
       eltX <- runEffectFn1 toTemplate html
+      -- we set up a dummy cache that we 
+      -- just use so that we can have the same walking al
+      let emptiness = emptyMe (Proxy :: _ rl)
       do
         -- this bloc splits all of the dynamic text nodes into
         -- separate text nodes, which makes recursing over them faster as
@@ -294,119 +304,206 @@ useTemplateWith p d f = Nut $ mkEffectFn2
         ctnt <- HtmlTemplateElement.content eltX
         elt <- runEffectFn1 unsafeFirstChild (DocumentFragment.toNode ctnt)
         runEffectFn5
-            ( PW.walk
-                :: EffectFn5 InstructionDelegate (Proxy scrunched) { | r } DOMInterpret MElement
-                     Unit
-            )
-            (InstructionDelegate {
-                processString: mkEffectFn4 \_ _ _ _ -> pure unit,
-                processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit,
-                processNut: mkEffectFn4 \a _ _ dd -> void $ runEffectFn2 splitTextAndReturnReplacement a dd
-            })
-            scrunch
-            (emptyMe (Proxy :: _ rl))
-            di
-            (unsafeCoerce { p: undefined, e: elt })
+          ( PW.walk
+              :: EffectFn5 InstructionDelegate (Proxy scrunched) { | rEmpty }
+                   DOMInterpret
+                   MElement
+                   Unit
+          )
+          ( InstructionDelegate
+              { processString: mkEffectFn4 \_ _ _ _ -> pure unit
+              , processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit
+              , processPollString: mkEffectFn4 \a _ _ dd -> void $ runEffectFn2
+                  splitTextAndReturnReplacement
+                  a
+                  dd
+              , processNut: mkEffectFn4 \a _ _ dd -> void $ runEffectFn2
+                  splitTextAndReturnReplacement
+                  a
+                  dd
+              }
+          )
+          scrunch
+          emptiness
+          (DOMInterpret di)
+          (unsafeCoerce { p: undefined, e: elt })
+      -- as usual, we start off lucky
+      -- even though this can enver be unlucky as templates can only
+      -- ever be populated with elements (not dyn), we still need it
+      -- just cuz of the type contracts
       lucky <- new true
+      -- alas, our parent is not lucky, for a template is a dyn after all
       for_ psr.beacon (_.lucky >>> notLucky)
-      dbStart <- makeOpenBeacon
+      -- it's a dyn, so we need an opening beacon
+      dbStart <- di.makeOpenBeacon
+      -- the standard unsubs
       unsubs <- liftST $ STArray.new
+      -- normal unsub management
       when (not (null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
-      dbEnd <- makeCloseBeacon
+      -- also need a close beacon
+      dbEnd <- di.makeCloseBeacon
+      -- do the same close beacon management as our dyn friends
       case psr.beacon of
         Nothing -> do
-          runEffectFn2 attributeBeaconParent dbStart (DekuParent psr.parent)
-          runEffectFn2 attributeBeaconParent dbEnd (DekuParent psr.parent)
+          runEffectFn2 di.attributeBeaconParent dbStart (DekuParent psr.parent)
+          runEffectFn2 di.attributeBeaconParent dbEnd (DekuParent psr.parent)
         Just y -> do
-          runEffectFn5 attributeDynParentForBeacons dbStart dbEnd
+          runEffectFn5 di.attributeDynParentForBeacons dbStart dbEnd
             y.start
             y.end
             Nothing
-      let this' = pureOrBust p
-      let those' = eventOrBust p
-      let that' = pollOrBust p
+      -- this is the function that does everything
+      -- everrrryyyyyythingggggg
+      -- the deal is that, when a dyn comes down the pipe
+      -- either it is in the cache or not
+      -- if its not, we WALK and fill the cache
+      -- after it's in the cache, we can look at the `Some`
+      -- and use it to do our attribute and text wizardry
       let
-        oh'hi sstaaarrrrrt eeeeeennnnd = mkEffectFn1 \(Tuple mpos value) -> do
-          let sendTo = d.sendTo value
-          let remove = d.remove value
-          sendTo' <- liftST $ Poll.create
-          remove' <- liftST $ Poll.create
-          let
-            r = f
-              { value
-              , remove: remove'.push DekuRemove
-              , sendTo: DekuSendToPos >>> sendTo'.push
-              }
-          elt <- runEffectFn1 cloneTemplate eltX
-          let unsafeMElement = unsafeCoerce { p: undefined, e: elt }
-          runEffectFn5 attributeDynParentForElementEffect lucky
-            (DekuChild (toDekuElement elt))
-            sstaaarrrrrt
-            eeeeeennnnd
-            mpos
-          runEffectFn5
-            ( PW.walk
-                :: EffectFn5 InstructionDelegate (Proxy scrunched) { | r } DOMInterpret MElement
-                     Unit
-            )
-            (InstructionDelegate {
-                processString: mkEffectFn4 \a b _ dd -> runEffectFn3 processStringImpl a b dd,
-                processAttribute: mkEffectFn4 \_ b _ dd ->
-                  runEffectFn7 pxHandleAtts di toplevelListenerCache (fromDekuElement psr.parent) elementlevelListenerCache (mEltElt dd) unsubs [  b ]
-                ,
-                processNut: mkEffectFn4 \a b c dd -> runEffectFn4 (processNutPursx returnReplacement) a b c dd
-            })
-            scrunch
-            r
-            di
-            unsafeMElement
-          let
-            lifecycle = Poll.merge
-              [ DekuSendToPos <$> sendTo
-              , sendTo'.poll
-              , remove $> DekuRemove
-              , remove'.poll
-              ]
-          runEffectFn8
-            actOnLifecycleForElement
-            psr.fromPortal
-            lucky
-            unsubs
-            lifecycle
-            di
-            (toDekuElement elt)
-            sstaaarrrrrt
-            eeeeeennnnd
-      let ohi = oh'hi dbStart dbEnd
-      for_ this' \t -> foreachE t \a -> runEffectFn1 ohi a
-      let
-        handleEvent t = do
-          wrStart <- runEffectFn1 weakRef dbStart
-          wrEnd <- runEffectFn1 weakRef dbEnd
-          uu <- subscribe t \yy -> do
-            drStart <- runEffectFn1 deref wrStart
-            drEnd <- runEffectFn1 deref wrEnd
-            case toMaybe drStart, toMaybe drEnd of
-              Just dbStartx, Just dbEndy -> runEffectFn1 (oh'hi dbStartx dbEndy)
-                yy
-              _, _ -> do
-                -- only need to run on head as head is reference
-                thunker unsubs
-          void $ liftST $ STArray.push uu unsubs
-      for_ those' handleEvent
-      for_ that' \t -> do
-        pump <- liftST $ Event.create
-        handleEvent (UPoll.sample t pump.event)
-        pump.push identity
-      for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn8
-        actOnLifecycleForDyn
-        psr.fromPortal
-        unsubs
-        l
-        di
-        dbStart
-        dbEnd
-        s
-        e
+        oh'hi sstaaarrrrrt eeeeeennnnd = mkEffectFn1 \(Tuple ix value) -> do
+          liftST (STObject.peek ix elementCache) >>= case _ of
+            -- the elts have been registered already
+            Just elts -> do
+              runEffectFn2 Some.foreachE value elts
+            -- yup, it's that time!
+            -- clone the template, wire up othe elts, etc
+            -- this is the biggie
+            Nothing -> do
+              -- we get all of the values that exist upon creation
+              let proj'd = Some.proj value
+              let mpos = (unsafeGet "sendTo" proj'd :: Maybe Int)
+              -- clone the template
+              elt <- runEffectFn1 cloneTemplate eltX
+              -- wire it up for the walking algo
+              let unsafeMElement = unsafeCoerce { p: undefined, e: elt }
+              -- insert our fledgling element into the dyn
+              runEffectFn5 attributeDynParentForElementEffect lucky
+                (DekuChild (toDekuElement elt))
+                sstaaarrrrrt
+                eeeeeennnnd
+                mpos
+              -- this is our element cache
+              -- we don't even try to have a semblance of type
+              -- safety here
+              -- but we do have unit tests!
+              -- we'll be casting this to { | elementCache } later
+              oooooooooo :: STObject.STObject Global Void <- liftST $
+                STObject.new
+              -- we walk down to cache a bunch of functions in
+              -- `oooooooooo` that will do our element manipulation
+              -- these are either EffectFn1 attribute or
+              -- EffectFn1 text
+              runEffectFn5
+                ( PW.walk
+                    :: EffectFn5 InstructionDelegate (Proxy scrunched) { | rEmpty }
+                         DOMInterpret
+                         MElement
+                         Unit
+                )
+                ( InstructionDelegate
+                    { processString: mkEffectFn4 \_ _ _ _ -> throwException
+                        ( error
+                            "Programming error: template should not be called with a string"
+                        )
+                    , processAttribute: mkEffectFn4 \s _ _ eeeeeeeee -> do
+                        let eeeee = mEltElt eeeeeeeee
+                        obj <- liftST STObject.new
+                        let getter key = liftST $ STObject.peek key obj
+                        let
+                          setter key = void <<< liftST <<< flip
+                            (STObject.poke key)
+                            obj
+                        let delete key = liftST $ void $ STObject.delete key obj
+                        let
+                          effn = mkEffectFn1 \att -> do
+                            let { key, value } = unsafeUnAttribute att
+                            case value of
+                              Prop' v -> runEffectFn3 di.setProp
+                                (toDekuElement eeeee)
+                                (Key key)
+                                (Value v)
+                              Cb' cb -> runEffectFn5 di.setCb
+                                (toDekuElement eeeee)
+                                (Key key)
+                                cb
+                                (getter key)
+                                (setter key)
+                              Unset' -> runEffectFn4 di.unsetAttribute
+                                (toDekuElement eeeee)
+                                (Key key)
+                                (getter key)
+                                (delete key)
+                        for_
+                          (unsafeGet s proj'd :: forall e. Maybe (Array (Attribute e)))
+                          \a ->
+                            foreachE a \i -> runEffectFn1 effn i
+                        void $ liftST $ STObject.poke s
+                          ( ( unsafeCoerce
+                                :: forall t
+                                 . EffectFn1 (Attribute t) Unit
+                                -> Void
+                            ) effn
+                          )
+                          oooooooooo
+                    , processPollString: mkEffectFn4 \s _ _ e' -> do
+                        realDeal <- runEffectFn2 returnReplacement s
+                          e'
+                        runEffectFn2 di.setText (toDekuText realDeal)
+                          (fromMaybe "" (unsafeGet s proj'd :: Maybe String))
+                        let
+                          effn = mkEffectFn1 \str -> runEffectFn2 di.setText
+                            (toDekuText realDeal)
+                            str
+                        void $ liftST $ STObject.poke s
+                          ( ( unsafeCoerce
+                                :: EffectFn1 String Unit -> Void
+                            ) effn
+                          )
+                          oooooooooo
+                    , processNut: mkEffectFn4 \_ _ _ _ -> throwException
+                        ( error
+                            "Programming error: template should not be called with a nut"
+                        )
+                    }
+                )
+                scrunch
+                emptiness
+                (DOMInterpret di)
+                unsafeMElement
+              -- next up, our `oooooooooo` needs to listen for SEND
+              -- and REMOVE events
+              void $ liftST $ flip (STObject.poke "sendTo") oooooooooo
+                $
+                  ( unsafeCoerce
+                      :: EffectFn1 Int Unit -> Void
+                  )
+                $ mkEffectFn1 \i -> do
+                    runEffectFn5 di.sendToPosForElement lucky i
+                      (toDekuElement elt)
+                      dbStart
+                      dbEnd
+              void $ liftST $ flip (STObject.poke "remove") oooooooooo
+                $
+                  ( unsafeCoerce
+                      :: EffectFn1 Unit Unit -> Void
+                  )
+                $ mkEffectFn1 \_ ->
+                    do
+                      runEffectFn2 di.removeForElement
+                        false
+                        (toDekuElement elt)
+                      liftST $ void $ STObject.delete ix elementCache
+              -- finally, we set the element cache so that next time all of
+              -- this is "easier"
+              let
+                uuuuu =
+                  ( unsafeCoerce
+                      :: STObject.STObject Global Void
+                      -> { | elementCache }
+                  ) oooooooooo
+              liftST $ void $ STObject.poke ix uuuuu elementCache
+      -- now that we have our element cache, we do something with it
+      runListener (oh'hi dbStart dbEnd) unsubs p
+      -- finally, return the beacon
       pure $ DekuBeaconOutcome dbStart

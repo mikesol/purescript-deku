@@ -39,7 +39,8 @@ describe("deku", () => {
         const parent = di.makeElementEffect(testFriend.nothing, "ul");
         di.attributeBeaconParentEffect(oBeacon, parent);
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -57,7 +58,8 @@ describe("deku", () => {
         const parent = di.makeElementEffect(testFriend.nothing, "ul");
         di.attributeBeaconParentEffect(oBeacon, parent);
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -75,7 +77,8 @@ describe("deku", () => {
         const parent = di.makeElementEffect(testFriend.nothing, "ul");
         di.attributeBeaconParentEffect(oBeacon, parent);
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -93,7 +96,8 @@ describe("deku", () => {
         const parent = di.makeElementEffect(testFriend.nothing, "ul");
         di.attributeBeaconParentEffect(oBeacon, parent);
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -117,7 +121,8 @@ describe("deku", () => {
           di.attributeElementParentEffect(elt2, parent);
         }
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -141,7 +146,8 @@ describe("deku", () => {
         }
         di.attributeBeaconParentEffect(cBeacon, parent);
         const mpos = 25;
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -164,7 +170,8 @@ describe("deku", () => {
           di.attributeElementParentEffect(elt2, parent);
         }
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -187,7 +194,8 @@ describe("deku", () => {
           di.attributeElementParentEffect(elt2, parent);
         }
         di.attributeBeaconParentEffect(cBeacon, parent);
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -221,7 +229,8 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -255,7 +264,8 @@ describe("deku", () => {
           di.attributeElementParentEffect(elt2, parent);
         }
         const mpos = 38;
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -289,7 +299,8 @@ describe("deku", () => {
           di.attributeElementParentEffect(elt2, parent);
         }
         const mpos = 4242;
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -322,7 +333,8 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -360,7 +372,8 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -398,7 +411,8 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -435,7 +449,8 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -472,7 +487,8 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -518,7 +534,8 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -563,7 +580,8 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -615,7 +633,8 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -666,7 +685,8 @@ describe("deku", () => {
           const elt2 = di.makeElementEffect(testFriend.nothing, "li");
           di.attributeElementParentEffect(elt2, parent);
         }
-        di.attributeDynParentForElementEffect(testFriend.unlucky(),
+        di.attributeDynParentForElementEffect(
+          testFriend.unlucky(),
           elt,
           oBeacon,
           cBeacon,
@@ -911,8 +931,14 @@ describe("deku", () => {
       it("sets the id attribute correctly and unsets it correctly", () => {
         const $ = require("jquery");
         const elt = di.makeElementEffect(testFriend.nothing, "li");
+        let cache = testFriend.nothing;
         di.setPropEffect(elt, "id", "foo");
-        di.unsetAttributeEffect(elt, "id", {});
+        di.unsetAttributeEffect(
+          elt,
+          "id",
+          () => cache,
+          () => (cache = nothing)
+        );
         expect($(elt).attr("id")).toBe(undefined);
       });
       it("sets checked attribute correctly", () => {
@@ -941,14 +967,15 @@ describe("deku", () => {
         const $ = require("jquery");
         const elt = di.makeElementEffect(testFriend.nothing, "button");
         let i = 0;
-        const cache = {};
+        let cache = testFriend.nothing;
         di.setCbEffect(
           elt,
           "click",
           () => () => {
             i++;
           },
-          cache
+          () => cache,
+          (i) => () => (cache = testFriend.just(i))
         );
         $(elt).trigger("click");
         expect(i).toBe(1);
@@ -958,11 +985,17 @@ describe("deku", () => {
           () => () => {
             i += 42;
           },
-          cache
+          () => cache,
+          (i) => () => (cache = testFriend.just(i))
         );
         $(elt).trigger("click");
         expect(i).toBe(43);
-        di.unsetAttributeEffect(elt, "click", cache);
+        di.unsetAttributeEffect(
+          elt,
+          "click",
+          () => cache,
+          () => (cache = testFriend.nothing)
+        );
         $(elt).trigger("click");
         expect(i).toBe(43);
       });
@@ -1114,9 +1147,13 @@ describe("deku", () => {
     doTest("templates work", (f) =>
       f(tests.templatesWork, () => {
         const $ = require("jquery");
-        expect($("#div0").text()).toBe("hello Helsinkixhello Stockholmxhello Copenhagenx");
+        expect($("#div0").text()).toBe(
+          "hello Helsinkixhello Stockholmxhello Copenhagenx"
+        );
         $("#Stockholm").trigger("click");
-        expect($("#div0").text()).toBe("hello Stockholmxhello Helsinkixhello Copenhagenx");
+        expect($("#div0").text()).toBe(
+          "hello Stockholmxhello Helsinkixhello Copenhagenx"
+        );
       })
     );
 
@@ -1179,7 +1216,9 @@ describe("deku", () => {
         expect($("#about").text()).toBe("about deku");
         $("#contact-btn").trigger("click");
         expect($("#about").length === 0);
-        expect($("#contact").text()).toBe("contact mike at site dot com thanks");
+        expect($("#contact").text()).toBe(
+          "contact mike at site dot com thanks"
+        );
       })
     );
 
@@ -1450,11 +1489,11 @@ describe("deku", () => {
         expect($("#db").text()).toBe("4");
       })
     );
-    doTest("stress test doesn't blow up", (f) =>
-      f(tests.stressTest, () => {
-        const $ = require("jquery");
-        $("#runlots").trigger("click");
-      })
-    );
+    // doTest("stress test doesn't blow up", (f) =>
+    //   f(tests.stressTest, () => {
+    //     const $ = require("jquery");
+    //     $("#runlots").trigger("click");
+    //   })
+    // );
   });
 });

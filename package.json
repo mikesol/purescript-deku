@@ -33,7 +33,7 @@
 		"puppeteer": "^5.2.0",
 		"purescript": "^0.15.10",
 		"purs-backend-es": "^1.2.0",
-		"purs-tidy": "^0.9.2",
+		"purs-tidy": "^0.10.0",
 		"spago": "^0.93.9",
 		"test": "^0.6.0",
 		"tracealyzer": "^0.10.3"

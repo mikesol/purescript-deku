@@ -163,14 +163,14 @@ type SetText = EffectFn2 DekuText String Unit
 
 -- | Type used by Deku backends to unset an attribute. For internal use only unless you're writing a custom backend.
 type UnsetAttribute =
-  EffectFn3 DekuElement Key (STObject.STObject Global EventListener) Unit
+  EffectFn4 DekuElement Key (Effect (Maybe EventListener)) (Effect Unit) Unit
 
 -- | Type used by Deku backends to set an attribute. For internal use only unless you're writing a custom backend.
 type SetProp = EffectFn3 DekuElement Key Value Unit
 
 -- | Type used by Deku backends to set a listener. For internal use only unless you're writing a custom backend.
 type SetCb =
-  EffectFn4 DekuElement Key Cb (STObject.STObject Global EventListener) Unit
+  EffectFn5 DekuElement Key Cb (Effect (Maybe EventListener)) (EventListener -> Effect Unit) Unit
 
 type SetDelegateCb =
   EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb))
@@ -256,9 +256,10 @@ thunker unsubs = do
   runEffectFn1 fastForeachThunkE unsubsX
 
 runListener
-  :: EffectFn1 DekuDynamic Unit
+  :: forall a
+   . EffectFn1 a Unit
   -> STArray.STArray Global (Effect Unit)
-  -> Poll DekuDynamic
+  -> Poll a
   -> Effect Unit
 runListener oh'hi associations = go
   where
@@ -756,8 +757,8 @@ handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts
         let { key, value } = att
         case value of
           Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
-          Cb' cb -> runEffectFn4 setCb eeeee (Key key) cb obj
-          Unset' -> runEffectFn3 unsetAttribute eeeee (Key key) obj
+          Cb' cb -> runEffectFn5 setCb eeeee (Key key) cb (liftST $ STObject.peek key obj) (void <<< liftST <<< flip (STObject.poke key) obj)
+          Unset' -> runEffectFn4 unsetAttribute eeeee (Key key) (liftST $ STObject.peek key obj) (liftST $ void $ STObject.delete key obj)
       handleAttrEvent y = do
         wr <- runEffectFn1 weakRef elt
         uu <- subscribe y \x -> do

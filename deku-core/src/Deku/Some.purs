@@ -1,0 +1,92 @@
+module Deku.Some
+  ( Some
+  , inj
+  , proj
+  , class IsSubset
+  , class IsSubsetRL
+  , class Labels
+  , class AsTypeConstructor
+  , class AsTypeConstructorRL
+  , foreachE
+  , labels
+  , EffectOp(..)
+  ) where
+
+import Prelude
+
+import Data.Array as Array
+import Data.Function.Uncurried (Fn4, runFn4)
+import Data.Maybe (Maybe(..))
+import Data.Symbol (class IsSymbol, reflectSymbol)
+import Effect.Uncurried (EffectFn1, EffectFn2)
+import Prim.Row as Row
+import Prim.RowList as RL
+import Type.Proxy (Proxy(..))
+import Unsafe.Coerce (unsafeCoerce)
+
+class IsSubset :: forall k1. Row k1 -> Row k1 -> Constraint
+class IsSubset r1 r2
+
+class IsSubsetRL :: forall k1. RL.RowList k1 -> Row k1 -> Constraint
+class IsSubsetRL r1 r2
+
+instance (RL.RowToList r1 rl1, IsSubsetRL rl1 r2) => IsSubset r1 r2
+instance (Row.Cons k v r2' r2, IsSubsetRL c r2) => IsSubsetRL (RL.Cons k v c) r2
+instance IsSubsetRL RL.Nil r2
+
+class AsTypeConstructor :: forall k1. (Type -> Type) -> Row k1 -> Row k1 -> Constraint
+class AsTypeConstructor f r1 r2 | f r1 -> r2
+
+class AsTypeConstructorRL :: forall k1. (Type -> Type) -> RL.RowList k1 -> Row k1 -> Constraint
+class AsTypeConstructorRL f r1 r2 | f r1 -> r2
+
+instance (RL.RowToList r1 rl1, AsTypeConstructorRL f rl1 r2) => AsTypeConstructor f r1 r2
+instance
+  ( Row.Cons k (f v) r2' r2
+  , AsTypeConstructorRL f c r2'
+  ) =>
+  AsTypeConstructorRL f (RL.Cons k v c) r2
+
+instance AsTypeConstructorRL f RL.Nil ()
+
+class Labels :: forall k1. RL.RowList k1 -> Constraint
+class Labels r1 where
+  labels :: Proxy r1 -> Array String
+
+instance (IsSymbol k, Labels c) => Labels (RL.Cons k v c) where
+  labels _ = Array.cons (reflectSymbol (Proxy :: _ k)) (labels (Proxy :: _ c))
+
+instance Labels RL.Nil where
+  labels _ = []
+
+data Some (r :: Row Type)
+
+inj :: forall r1 r2. IsSubset r1 r2 => { | r1 } -> Some r2
+inj = unsafeCoerce
+
+foreign import projImpl
+  :: forall r1 r2
+   . Fn4 (forall a. a -> Maybe a)
+       (forall a. Maybe a)
+       (Array String)
+       (Some r1)
+       { | r2 }
+
+proj
+  :: forall r2 rl2 r3
+   . RL.RowToList r2 rl2
+  => Labels rl2
+  => AsTypeConstructor Maybe r2 r3
+  => Some r2
+  -> { | r3 }
+proj i = runFn4 projImpl Just Nothing (labels (Proxy :: _ rl2)) i
+
+foreign import foreachEImpl :: forall a b. EffectFn2 a b Unit
+
+newtype EffectOp a = EffectOp (EffectFn1 a Unit)
+
+foreachE
+  :: forall r2 r3
+   . AsTypeConstructor EffectOp r2 r3
+  => EffectFn2 (Some r2) { | r3 }  Unit
+foreachE = unsafeCoerce foreachEImpl

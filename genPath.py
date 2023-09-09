@@ -207,6 +207,7 @@ foreign import returnReplacement :: EffectFn2 String  MElement Text
 type InstructionSignature i = EffectFn4 String i DOMInterpret MElement Unit
 newtype InstructionDelegate = InstructionDelegate {{
   processString :: InstructionSignature String,
+  processPollString :: InstructionSignature (Poll String),
   processAttribute :: InstructionSignature (Poll Attribute'),
   processNut :: InstructionSignature Nut
 }}
@@ -251,6 +252,10 @@ processAttPursx = mkEffectFn4 \\_ att di e -> do
 instance IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where
   processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processAttribute }}) k att di e -> do
     runEffectFn4 processAttribute (reflectSymbol k) (map unsafeUnAttribute att) di e
+
+instance IsSymbol k => ProcessInstruction k (Poll String) where
+  processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processPollString }}) k pstring di e -> do
+    runEffectFn4 processPollString (reflectSymbol k) pstring di e
 
 processNutPursx :: EffectFn2 String  MElement Text ->  InstructionSignature Nut
 processNutPursx splitter = mkEffectFn4 \\k (Nut nut) di@(DOMInterpret {{ makeElement }}) e -> do

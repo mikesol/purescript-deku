@@ -285,10 +285,9 @@ module Deku.DOM.Listeners
   , start_
   ) where
 
-import Control.Applicative (pure) as Applicative
+import Control.Applicative (pure, class Applicative) as Applicative
 import Control.Category ((<<<))
-import Data.Functor (map) as Functor
-import FRP.Poll as FRP.Poll
+import Data.Functor (map, class Functor) as Functor
 import Deku.DOM.Combinators (unset, injectElement, injectElementT, runOn, runOn_, numberOn, numberOn_, checkedOn, checkedOn_, valueOn, valueOn_) as Combinators
 import Deku.Attribute as Deku.Attribute
 import Web.Event.Internal.Types as Web.Event.Internal.Types
@@ -306,9 +305,10 @@ import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 import Web.UIEvent.CompositionEvent as Web.UIEvent.CompositionEvent
 
 volumechange
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (volumechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (volumechange :: Web.Event.Internal.Types.Event | r))
 volumechange = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "volumechange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -316,15 +316,17 @@ volumechange = Functor.map
   )
 
 volumechange_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (volumechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (volumechange :: Web.Event.Internal.Types.Event | r))
 volumechange_ = volumechange <<< Applicative.pure
 
 resize
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (resize :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (resize :: Web.Event.Internal.Types.Event | r))
 resize = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "resize", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -332,15 +334,17 @@ resize = Functor.map
   )
 
 resize_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (resize :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (resize :: Web.Event.Internal.Types.Event | r))
 resize_ = resize <<< Applicative.pure
 
 ratechange
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ratechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (ratechange :: Web.Event.Internal.Types.Event | r))
 ratechange = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "ratechange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -348,15 +352,17 @@ ratechange = Functor.map
   )
 
 ratechange_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ratechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (ratechange :: Web.Event.Internal.Types.Event | r))
 ratechange_ = ratechange <<< Applicative.pure
 
 pause
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (pause :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pause :: Web.Event.Internal.Types.Event | r))
 pause = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pause", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -364,15 +370,17 @@ pause = Functor.map
   )
 
 pause_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (pause :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pause :: Web.Event.Internal.Types.Event | r))
 pause_ = pause <<< Applicative.pure
 
 play
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (play :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (play :: Web.Event.Internal.Types.Event | r))
 play = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "play", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -380,15 +388,17 @@ play = Functor.map
   )
 
 play_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (play :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (play :: Web.Event.Internal.Types.Event | r))
 play_ = play <<< Applicative.pure
 
 timeupdate
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (timeupdate :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (timeupdate :: Web.Event.Internal.Types.Event | r))
 timeupdate = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "timeupdate", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -396,15 +406,17 @@ timeupdate = Functor.map
   )
 
 timeupdate_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (timeupdate :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (timeupdate :: Web.Event.Internal.Types.Event | r))
 timeupdate_ = timeupdate <<< Applicative.pure
 
 durationchange
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (durationchange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (durationchange :: Web.Event.Internal.Types.Event | r))
 durationchange = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "durationchange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -412,15 +424,17 @@ durationchange = Functor.map
   )
 
 durationchange_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (durationchange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (durationchange :: Web.Event.Internal.Types.Event | r))
 durationchange_ = durationchange <<< Applicative.pure
 
 ended
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ended :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (ended :: Web.Event.Internal.Types.Event | r))
 ended = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "ended", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -428,15 +442,17 @@ ended = Functor.map
   )
 
 ended_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ended :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (ended :: Web.Event.Internal.Types.Event | r))
 ended_ = ended <<< Applicative.pure
 
 seeked
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (seeked :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (seeked :: Web.Event.Internal.Types.Event | r))
 seeked = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "seeked", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -444,15 +460,17 @@ seeked = Functor.map
   )
 
 seeked_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (seeked :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (seeked :: Web.Event.Internal.Types.Event | r))
 seeked_ = seeked <<< Applicative.pure
 
 seeking
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (seeking :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (seeking :: Web.Event.Internal.Types.Event | r))
 seeking = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "seeking", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -460,15 +478,17 @@ seeking = Functor.map
   )
 
 seeking_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (seeking :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (seeking :: Web.Event.Internal.Types.Event | r))
 seeking_ = seeking <<< Applicative.pure
 
 waiting
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (waiting :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (waiting :: Web.Event.Internal.Types.Event | r))
 waiting = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "waiting", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -476,15 +496,17 @@ waiting = Functor.map
   )
 
 waiting_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (waiting :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (waiting :: Web.Event.Internal.Types.Event | r))
 waiting_ = waiting <<< Applicative.pure
 
 playing
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (playing :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (playing :: Web.Event.Internal.Types.Event | r))
 playing = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "playing", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -492,15 +514,17 @@ playing = Functor.map
   )
 
 playing_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (playing :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (playing :: Web.Event.Internal.Types.Event | r))
 playing_ = playing <<< Applicative.pure
 
 canplaythrough
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (canplaythrough :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (canplaythrough :: Web.Event.Internal.Types.Event | r))
 canplaythrough = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "canplaythrough", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -508,15 +532,17 @@ canplaythrough = Functor.map
   )
 
 canplaythrough_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (canplaythrough :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (canplaythrough :: Web.Event.Internal.Types.Event | r))
 canplaythrough_ = canplaythrough <<< Applicative.pure
 
 canplay
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (canplay :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (canplay :: Web.Event.Internal.Types.Event | r))
 canplay = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "canplay", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -524,15 +550,17 @@ canplay = Functor.map
   )
 
 canplay_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (canplay :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (canplay :: Web.Event.Internal.Types.Event | r))
 canplay_ = canplay <<< Applicative.pure
 
 loadeddata
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (loadeddata :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (loadeddata :: Web.Event.Internal.Types.Event | r))
 loadeddata = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "loadeddata", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -540,15 +568,17 @@ loadeddata = Functor.map
   )
 
 loadeddata_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (loadeddata :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (loadeddata :: Web.Event.Internal.Types.Event | r))
 loadeddata_ = loadeddata <<< Applicative.pure
 
 loadedmetadata
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (loadedmetadata :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (loadedmetadata :: Web.Event.Internal.Types.Event | r))
 loadedmetadata = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "loadedmetadata", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -556,15 +586,17 @@ loadedmetadata = Functor.map
   )
 
 loadedmetadata_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (loadedmetadata :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (loadedmetadata :: Web.Event.Internal.Types.Event | r))
 loadedmetadata_ = loadedmetadata <<< Applicative.pure
 
 stalled
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (stalled :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (stalled :: Web.Event.Internal.Types.Event | r))
 stalled = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "stalled", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -572,15 +604,17 @@ stalled = Functor.map
   )
 
 stalled_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (stalled :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (stalled :: Web.Event.Internal.Types.Event | r))
 stalled_ = stalled <<< Applicative.pure
 
 emptied
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (emptied :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (emptied :: Web.Event.Internal.Types.Event | r))
 emptied = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "emptied", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -588,15 +622,17 @@ emptied = Functor.map
   )
 
 emptied_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (emptied :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (emptied :: Web.Event.Internal.Types.Event | r))
 emptied_ = emptied <<< Applicative.pure
 
 error
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (error :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (error :: Web.Event.Internal.Types.Event | r))
 error = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "error", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -604,15 +640,17 @@ error = Functor.map
   )
 
 error_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (error :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (error :: Web.Event.Internal.Types.Event | r))
 error_ = error <<< Applicative.pure
 
 abort
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (abort :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (abort :: Web.Event.Internal.Types.Event | r))
 abort = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "abort", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -620,15 +658,17 @@ abort = Functor.map
   )
 
 abort_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (abort :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (abort :: Web.Event.Internal.Types.Event | r))
 abort_ = abort <<< Applicative.pure
 
 suspend
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (suspend :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (suspend :: Web.Event.Internal.Types.Event | r))
 suspend = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "suspend", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -636,15 +676,17 @@ suspend = Functor.map
   )
 
 suspend_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (suspend :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (suspend :: Web.Event.Internal.Types.Event | r))
 suspend_ = suspend <<< Applicative.pure
 
 progress
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (progress :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (progress :: Web.Event.Internal.Types.Event | r))
 progress = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "progress", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -652,15 +694,17 @@ progress = Functor.map
   )
 
 progress_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (progress :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (progress :: Web.Event.Internal.Types.Event | r))
 progress_ = progress <<< Applicative.pure
 
 loadstart
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (loadstart :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (loadstart :: Web.Event.Internal.Types.Event | r))
 loadstart = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "loadstart", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -668,16 +712,17 @@ loadstart = Functor.map
   )
 
 loadstart_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (loadstart :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (loadstart :: Web.Event.Internal.Types.Event | r))
 loadstart_ = loadstart <<< Applicative.pure
 
 removetrack
-  :: forall r
-   . FRP.Poll.Poll (Web.HTML.Event.TrackEvent.TrackEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (removetrack :: Web.HTML.Event.TrackEvent.TrackEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.HTML.Event.TrackEvent.TrackEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (removetrack :: Web.HTML.Event.TrackEvent.TrackEvent | r))
 removetrack = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "removetrack", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -685,16 +730,17 @@ removetrack = Functor.map
   )
 
 removetrack_
-  :: forall r
-   . (Web.HTML.Event.TrackEvent.TrackEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (removetrack :: Web.HTML.Event.TrackEvent.TrackEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.HTML.Event.TrackEvent.TrackEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (removetrack :: Web.HTML.Event.TrackEvent.TrackEvent | r))
 removetrack_ = removetrack <<< Applicative.pure
 
 addtrack
-  :: forall r
-   . FRP.Poll.Poll (Web.HTML.Event.TrackEvent.TrackEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (addtrack :: Web.HTML.Event.TrackEvent.TrackEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.HTML.Event.TrackEvent.TrackEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (addtrack :: Web.HTML.Event.TrackEvent.TrackEvent | r))
 addtrack = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "addtrack", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -702,15 +748,17 @@ addtrack = Functor.map
   )
 
 addtrack_
-  :: forall r
-   . (Web.HTML.Event.TrackEvent.TrackEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (addtrack :: Web.HTML.Event.TrackEvent.TrackEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.HTML.Event.TrackEvent.TrackEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (addtrack :: Web.HTML.Event.TrackEvent.TrackEvent | r))
 addtrack_ = addtrack <<< Applicative.pure
 
 change
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (change :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (change :: Web.Event.Internal.Types.Event | r))
 change = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "change", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -718,15 +766,17 @@ change = Functor.map
   )
 
 change_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (change :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (change :: Web.Event.Internal.Types.Event | r))
 change_ = change <<< Applicative.pure
 
 load
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (load :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (load :: Web.Event.Internal.Types.Event | r))
 load = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "load", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -734,15 +784,17 @@ load = Functor.map
   )
 
 load_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (load :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (load :: Web.Event.Internal.Types.Event | r))
 load_ = load <<< Applicative.pure
 
 cuechange
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (cuechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (cuechange :: Web.Event.Internal.Types.Event | r))
 cuechange = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "cuechange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -750,15 +802,17 @@ cuechange = Functor.map
   )
 
 cuechange_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (cuechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (cuechange :: Web.Event.Internal.Types.Event | r))
 cuechange_ = cuechange <<< Applicative.pure
 
 exit
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (exit :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (exit :: Web.Event.Internal.Types.Event | r))
 exit = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "exit", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -766,15 +820,17 @@ exit = Functor.map
   )
 
 exit_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (exit :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (exit :: Web.Event.Internal.Types.Event | r))
 exit_ = exit <<< Applicative.pure
 
 enter
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (enter :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (enter :: Web.Event.Internal.Types.Event | r))
 enter = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "enter", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -782,16 +838,17 @@ enter = Functor.map
   )
 
 enter_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (enter :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (enter :: Web.Event.Internal.Types.Event | r))
 enter_ = enter <<< Applicative.pure
 
 transitioncancel
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (transitioncancel :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (transitioncancel :: Web.Event.Internal.Types.Event | r))
 transitioncancel = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "transitioncancel", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -799,16 +856,17 @@ transitioncancel = Functor.map
   )
 
 transitioncancel_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (transitioncancel :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (transitioncancel :: Web.Event.Internal.Types.Event | r))
 transitioncancel_ = transitioncancel <<< Applicative.pure
 
 transitionend
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (transitionend :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (transitionend :: Web.Event.Internal.Types.Event | r))
 transitionend = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "transitionend", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -816,16 +874,17 @@ transitionend = Functor.map
   )
 
 transitionend_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (transitionend :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (transitionend :: Web.Event.Internal.Types.Event | r))
 transitionend_ = transitionend <<< Applicative.pure
 
 transitionstart
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (transitionstart :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (transitionstart :: Web.Event.Internal.Types.Event | r))
 transitionstart = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "transitionstart", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -833,16 +892,17 @@ transitionstart = Functor.map
   )
 
 transitionstart_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (transitionstart :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (transitionstart :: Web.Event.Internal.Types.Event | r))
 transitionstart_ = transitionstart <<< Applicative.pure
 
 transitionrun
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (transitionrun :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (transitionrun :: Web.Event.Internal.Types.Event | r))
 transitionrun = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "transitionrun", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -850,16 +910,17 @@ transitionrun = Functor.map
   )
 
 transitionrun_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (transitionrun :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (transitionrun :: Web.Event.Internal.Types.Event | r))
 transitionrun_ = transitionrun <<< Applicative.pure
 
 animationcancel
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (animationcancel :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (animationcancel :: Web.Event.Internal.Types.Event | r))
 animationcancel = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "animationcancel", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -867,16 +928,17 @@ animationcancel = Functor.map
   )
 
 animationcancel_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (animationcancel :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (animationcancel :: Web.Event.Internal.Types.Event | r))
 animationcancel_ = animationcancel <<< Applicative.pure
 
 animationend
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (animationend :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (animationend :: Web.Event.Internal.Types.Event | r))
 animationend = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "animationend", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -884,16 +946,17 @@ animationend = Functor.map
   )
 
 animationend_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (animationend :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (animationend :: Web.Event.Internal.Types.Event | r))
 animationend_ = animationend <<< Applicative.pure
 
 animationiteration
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (animationiteration :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (animationiteration :: Web.Event.Internal.Types.Event | r))
 animationiteration = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "animationiteration", value: _ }
       <<< Deku.Attribute.cb'
@@ -902,16 +965,17 @@ animationiteration = Functor.map
   )
 
 animationiteration_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (animationiteration :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (animationiteration :: Web.Event.Internal.Types.Event | r))
 animationiteration_ = animationiteration <<< Applicative.pure
 
 animationstart
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (animationstart :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (animationstart :: Web.Event.Internal.Types.Event | r))
 animationstart = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "animationstart", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -919,15 +983,17 @@ animationstart = Functor.map
   )
 
 animationstart_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (animationstart :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (animationstart :: Web.Event.Internal.Types.Event | r))
 animationstart_ = animationstart <<< Applicative.pure
 
 lostpointercapture
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        ( Deku.Attribute.Attribute
            (lostpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent | r)
        )
@@ -939,18 +1005,20 @@ lostpointercapture = Functor.map
   )
 
 lostpointercapture_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        ( Deku.Attribute.Attribute
            (lostpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent | r)
        )
 lostpointercapture_ = lostpointercapture <<< Applicative.pure
 
 gotpointercapture
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        ( Deku.Attribute.Attribute
            (gotpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent | r)
        )
@@ -961,19 +1029,20 @@ gotpointercapture = Functor.map
   )
 
 gotpointercapture_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        ( Deku.Attribute.Attribute
            (gotpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent | r)
        )
 gotpointercapture_ = gotpointercapture <<< Applicative.pure
 
 pointerleave
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerleave :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerleave :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerleave = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerleave", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -981,17 +1050,17 @@ pointerleave = Functor.map
   )
 
 pointerleave_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerleave :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerleave :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerleave_ = pointerleave <<< Applicative.pure
 
 pointerout
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerout :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerout :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerout = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerout", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -999,17 +1068,17 @@ pointerout = Functor.map
   )
 
 pointerout_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerout :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerout :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerout_ = pointerout <<< Applicative.pure
 
 pointercancel
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointercancel :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointercancel :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointercancel = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointercancel", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1017,17 +1086,17 @@ pointercancel = Functor.map
   )
 
 pointercancel_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointercancel :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointercancel :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointercancel_ = pointercancel <<< Applicative.pure
 
 pointerup
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerup :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerup :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerup = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerup", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1035,16 +1104,17 @@ pointerup = Functor.map
   )
 
 pointerup_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerup :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerup :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerup_ = pointerup <<< Applicative.pure
 
 pointerrawupdate
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        (Deku.Attribute.Attribute (pointerrawupdate :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerrawupdate = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerrawupdate", value: _ } <<< Deku.Attribute.cb'
@@ -1053,17 +1123,18 @@ pointerrawupdate = Functor.map
   )
 
 pointerrawupdate_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        (Deku.Attribute.Attribute (pointerrawupdate :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerrawupdate_ = pointerrawupdate <<< Applicative.pure
 
 pointermove
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointermove :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointermove :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointermove = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointermove", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1071,17 +1142,17 @@ pointermove = Functor.map
   )
 
 pointermove_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointermove :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointermove :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointermove_ = pointermove <<< Applicative.pure
 
 pointerdown
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerdown :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerdown :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerdown = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerdown", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1089,17 +1160,17 @@ pointerdown = Functor.map
   )
 
 pointerdown_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerdown :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerdown :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerdown_ = pointerdown <<< Applicative.pure
 
 pointerenter
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerenter :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerenter :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerenter = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerenter", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1107,17 +1178,17 @@ pointerenter = Functor.map
   )
 
 pointerenter_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerenter :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerenter :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerenter_ = pointerenter <<< Applicative.pure
 
 pointerover
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerover :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerover :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerover = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerover", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1125,16 +1196,17 @@ pointerover = Functor.map
   )
 
 pointerover_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (pointerover :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pointerover :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerover_ = pointerover <<< Applicative.pure
 
 dragend
-  :: forall r
-   . FRP.Poll.Poll (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dragend :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dragend :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragend = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "dragend", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1142,15 +1214,17 @@ dragend = Functor.map
   )
 
 dragend_
-  :: forall r
-   . (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dragend :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dragend :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragend_ = dragend <<< Applicative.pure
 
 drop
-  :: forall r
-   . FRP.Poll.Poll (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (drop :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (drop :: Web.HTML.Event.DragEvent.DragEvent | r))
 drop = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "drop", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1158,15 +1232,17 @@ drop = Functor.map
   )
 
 drop_
-  :: forall r
-   . (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (drop :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (drop :: Web.HTML.Event.DragEvent.DragEvent | r))
 drop_ = drop <<< Applicative.pure
 
 dragover
-  :: forall r
-   . FRP.Poll.Poll (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dragover :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dragover :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragover = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "dragover", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1174,15 +1250,17 @@ dragover = Functor.map
   )
 
 dragover_
-  :: forall r
-   . (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dragover :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dragover :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragover_ = dragover <<< Applicative.pure
 
 dragleave
-  :: forall r
-   . FRP.Poll.Poll (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dragleave :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dragleave :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragleave = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "dragleave", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1190,15 +1268,17 @@ dragleave = Functor.map
   )
 
 dragleave_
-  :: forall r
-   . (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dragleave :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dragleave :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragleave_ = dragleave <<< Applicative.pure
 
 dragenter
-  :: forall r
-   . FRP.Poll.Poll (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dragenter :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dragenter :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragenter = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "dragenter", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1206,15 +1286,17 @@ dragenter = Functor.map
   )
 
 dragenter_
-  :: forall r
-   . (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dragenter :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dragenter :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragenter_ = dragenter <<< Applicative.pure
 
 drag
-  :: forall r
-   . FRP.Poll.Poll (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (drag :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (drag :: Web.HTML.Event.DragEvent.DragEvent | r))
 drag = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "drag", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1222,15 +1304,17 @@ drag = Functor.map
   )
 
 drag_
-  :: forall r
-   . (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (drag :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (drag :: Web.HTML.Event.DragEvent.DragEvent | r))
 drag_ = drag <<< Applicative.pure
 
 dragstart
-  :: forall r
-   . FRP.Poll.Poll (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dragstart :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dragstart :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragstart = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "dragstart", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1238,16 +1322,17 @@ dragstart = Functor.map
   )
 
 dragstart_
-  :: forall r
-   . (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dragstart :: Web.HTML.Event.DragEvent.DragEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dragstart :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragstart_ = dragstart <<< Applicative.pure
 
 domNodeRemovedFromDocument
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domNodeRemovedFromDocument :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domNodeRemovedFromDocument :: Web.Event.Internal.Types.Event | r))
 domNodeRemovedFromDocument = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMNodeRemovedFromDocument", value: _ }
       <<< Deku.Attribute.cb'
@@ -1256,16 +1341,17 @@ domNodeRemovedFromDocument = Functor.map
   )
 
 domNodeRemovedFromDocument_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domNodeRemovedFromDocument :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domNodeRemovedFromDocument :: Web.Event.Internal.Types.Event | r))
 domNodeRemovedFromDocument_ = domNodeRemovedFromDocument <<< Applicative.pure
 
 domNodeRemoved
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (domNodeRemoved :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domNodeRemoved :: Web.Event.Internal.Types.Event | r))
 domNodeRemoved = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMNodeRemoved", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1273,15 +1359,17 @@ domNodeRemoved = Functor.map
   )
 
 domNodeRemoved_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (domNodeRemoved :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domNodeRemoved :: Web.Event.Internal.Types.Event | r))
 domNodeRemoved_ = domNodeRemoved <<< Applicative.pure
 
 domNodeInsertedIntoDocument
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f
        (Deku.Attribute.Attribute (domNodeInsertedIntoDocument :: Web.Event.Internal.Types.Event | r))
 domNodeInsertedIntoDocument = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMNodeInsertedIntoDocument", value: _ }
@@ -1291,17 +1379,18 @@ domNodeInsertedIntoDocument = Functor.map
   )
 
 domNodeInsertedIntoDocument_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f
        (Deku.Attribute.Attribute (domNodeInsertedIntoDocument :: Web.Event.Internal.Types.Event | r))
 domNodeInsertedIntoDocument_ = domNodeInsertedIntoDocument <<< Applicative.pure
 
 domNodeInserted
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domNodeInserted :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domNodeInserted :: Web.Event.Internal.Types.Event | r))
 domNodeInserted = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMNodeInserted", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1309,17 +1398,17 @@ domNodeInserted = Functor.map
   )
 
 domNodeInserted_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domNodeInserted :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domNodeInserted :: Web.Event.Internal.Types.Event | r))
 domNodeInserted_ = domNodeInserted <<< Applicative.pure
 
 domCharacterDataModified
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domCharacterDataModified :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domCharacterDataModified :: Web.Event.Internal.Types.Event | r))
 domCharacterDataModified = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMCharacterDataModified", value: _ }
       <<< Deku.Attribute.cb'
@@ -1328,17 +1417,17 @@ domCharacterDataModified = Functor.map
   )
 
 domCharacterDataModified_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domCharacterDataModified :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domCharacterDataModified :: Web.Event.Internal.Types.Event | r))
 domCharacterDataModified_ = domCharacterDataModified <<< Applicative.pure
 
 domSubtreeModified
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domSubtreeModified :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domSubtreeModified :: Web.Event.Internal.Types.Event | r))
 domSubtreeModified = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMSubtreeModified", value: _ }
       <<< Deku.Attribute.cb'
@@ -1347,16 +1436,17 @@ domSubtreeModified = Functor.map
   )
 
 domSubtreeModified_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domSubtreeModified :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domSubtreeModified :: Web.Event.Internal.Types.Event | r))
 domSubtreeModified_ = domSubtreeModified <<< Applicative.pure
 
 unload
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (unload :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (unload :: Web.Event.Internal.Types.Event | r))
 unload = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "unload", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1364,16 +1454,17 @@ unload = Functor.map
   )
 
 unload_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (unload :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (unload :: Web.Event.Internal.Types.Event | r))
 unload_ = unload <<< Applicative.pure
 
 touchcancel
-  :: forall r
-   . FRP.Poll.Poll (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (touchcancel :: Web.TouchEvent.TouchEvent.TouchEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (touchcancel :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchcancel = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "touchcancel", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1381,17 +1472,17 @@ touchcancel = Functor.map
   )
 
 touchcancel_
-  :: forall r
-   . (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (touchcancel :: Web.TouchEvent.TouchEvent.TouchEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (touchcancel :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchcancel_ = touchcancel <<< Applicative.pure
 
 touchmove
-  :: forall r
-   . FRP.Poll.Poll (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (touchmove :: Web.TouchEvent.TouchEvent.TouchEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (touchmove :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchmove = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "touchmove", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1399,16 +1490,17 @@ touchmove = Functor.map
   )
 
 touchmove_
-  :: forall r
-   . (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (touchmove :: Web.TouchEvent.TouchEvent.TouchEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (touchmove :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchmove_ = touchmove <<< Applicative.pure
 
 touchend
-  :: forall r
-   . FRP.Poll.Poll (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (touchend :: Web.TouchEvent.TouchEvent.TouchEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (touchend :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchend = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "touchend", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1416,16 +1508,17 @@ touchend = Functor.map
   )
 
 touchend_
-  :: forall r
-   . (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (touchend :: Web.TouchEvent.TouchEvent.TouchEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (touchend :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchend_ = touchend <<< Applicative.pure
 
 touchstart
-  :: forall r
-   . FRP.Poll.Poll (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (touchstart :: Web.TouchEvent.TouchEvent.TouchEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (touchstart :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchstart = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "touchstart", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1433,17 +1526,17 @@ touchstart = Functor.map
   )
 
 touchstart_
-  :: forall r
-   . (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (touchstart :: Web.TouchEvent.TouchEvent.TouchEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (touchstart :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchstart_ = touchstart <<< Applicative.pure
 
 visibilitychange
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (visibilitychange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (visibilitychange :: Web.Event.Internal.Types.Event | r))
 visibilitychange = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "visibilitychange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1451,17 +1544,17 @@ visibilitychange = Functor.map
   )
 
 visibilitychange_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (visibilitychange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (visibilitychange :: Web.Event.Internal.Types.Event | r))
 visibilitychange_ = visibilitychange <<< Applicative.pure
 
 readystatechange
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (readystatechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (readystatechange :: Web.Event.Internal.Types.Event | r))
 readystatechange = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "readystatechange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1469,17 +1562,17 @@ readystatechange = Functor.map
   )
 
 readystatechange_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (readystatechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (readystatechange :: Web.Event.Internal.Types.Event | r))
 readystatechange_ = readystatechange <<< Applicative.pure
 
 domContentLoaded
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domContentLoaded :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domContentLoaded :: Web.Event.Internal.Types.Event | r))
 domContentLoaded = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMContentLoaded", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1487,16 +1580,17 @@ domContentLoaded = Functor.map
   )
 
 domContentLoaded_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domContentLoaded :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domContentLoaded :: Web.Event.Internal.Types.Event | r))
 domContentLoaded_ = domContentLoaded <<< Applicative.pure
 
 domFocusOut
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (domFocusOut :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domFocusOut :: Web.UIEvent.FocusEvent.FocusEvent | r))
 domFocusOut = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMFocusOut", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1504,15 +1598,17 @@ domFocusOut = Functor.map
   )
 
 domFocusOut_
-  :: forall r
-   . (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (domFocusOut :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domFocusOut :: Web.UIEvent.FocusEvent.FocusEvent | r))
 domFocusOut_ = domFocusOut <<< Applicative.pure
 
 domFocusIn
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (domFocusIn :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domFocusIn :: Web.UIEvent.FocusEvent.FocusEvent | r))
 domFocusIn = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMFocusIn", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1520,15 +1616,17 @@ domFocusIn = Functor.map
   )
 
 domFocusIn_
-  :: forall r
-   . (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (domFocusIn :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domFocusIn :: Web.UIEvent.FocusEvent.FocusEvent | r))
 domFocusIn_ = domFocusIn <<< Applicative.pure
 
 focusout
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (focusout :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (focusout :: Web.UIEvent.FocusEvent.FocusEvent | r))
 focusout = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "focusout", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1536,15 +1634,17 @@ focusout = Functor.map
   )
 
 focusout_
-  :: forall r
-   . (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (focusout :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (focusout :: Web.UIEvent.FocusEvent.FocusEvent | r))
 focusout_ = focusout <<< Applicative.pure
 
 focusin
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (focusin :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (focusin :: Web.UIEvent.FocusEvent.FocusEvent | r))
 focusin = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "focusin", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1552,15 +1652,17 @@ focusin = Functor.map
   )
 
 focusin_
-  :: forall r
-   . (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (focusin :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (focusin :: Web.UIEvent.FocusEvent.FocusEvent | r))
 focusin_ = focusin <<< Applicative.pure
 
 focus
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (focus :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (focus :: Web.UIEvent.FocusEvent.FocusEvent | r))
 focus = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "focus", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1568,15 +1670,17 @@ focus = Functor.map
   )
 
 focus_
-  :: forall r
-   . (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (focus :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (focus :: Web.UIEvent.FocusEvent.FocusEvent | r))
 focus_ = focus <<< Applicative.pure
 
 blur
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (blur :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (blur :: Web.UIEvent.FocusEvent.FocusEvent | r))
 blur = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "blur", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1584,16 +1688,17 @@ blur = Functor.map
   )
 
 blur_
-  :: forall r
-   . (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (blur :: Web.UIEvent.FocusEvent.FocusEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (blur :: Web.UIEvent.FocusEvent.FocusEvent | r))
 blur_ = blur <<< Applicative.pure
 
 unhandledrejection
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (unhandledrejection :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (unhandledrejection :: Web.Event.Internal.Types.Event | r))
 unhandledrejection = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "unhandledrejection", value: _ }
       <<< Deku.Attribute.cb'
@@ -1602,16 +1707,17 @@ unhandledrejection = Functor.map
   )
 
 unhandledrejection_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (unhandledrejection :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (unhandledrejection :: Web.Event.Internal.Types.Event | r))
 unhandledrejection_ = unhandledrejection <<< Applicative.pure
 
 storage
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (storage :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (storage :: Web.Event.Internal.Types.Event | r))
 storage = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "storage", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1619,16 +1725,17 @@ storage = Functor.map
   )
 
 storage_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (storage :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (storage :: Web.Event.Internal.Types.Event | r))
 storage_ = storage <<< Applicative.pure
 
 rejectionhandled
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (rejectionhandled :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (rejectionhandled :: Web.Event.Internal.Types.Event | r))
 rejectionhandled = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "rejectionhandled", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1636,16 +1743,17 @@ rejectionhandled = Functor.map
   )
 
 rejectionhandled_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (rejectionhandled :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (rejectionhandled :: Web.Event.Internal.Types.Event | r))
 rejectionhandled_ = rejectionhandled <<< Applicative.pure
 
 popstate
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (popstate :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (popstate :: Web.Event.Internal.Types.Event | r))
 popstate = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "popstate", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1653,15 +1761,17 @@ popstate = Functor.map
   )
 
 popstate_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (popstate :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (popstate :: Web.Event.Internal.Types.Event | r))
 popstate_ = popstate <<< Applicative.pure
 
 pageshow
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (pageshow :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pageshow :: Web.Event.Internal.Types.Event | r))
 pageshow = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pageshow", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1669,15 +1779,17 @@ pageshow = Functor.map
   )
 
 pageshow_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (pageshow :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pageshow :: Web.Event.Internal.Types.Event | r))
 pageshow_ = pageshow <<< Applicative.pure
 
 pagehide
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (pagehide :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pagehide :: Web.Event.Internal.Types.Event | r))
 pagehide = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pagehide", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1685,15 +1797,17 @@ pagehide = Functor.map
   )
 
 pagehide_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (pagehide :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (pagehide :: Web.Event.Internal.Types.Event | r))
 pagehide_ = pagehide <<< Applicative.pure
 
 online
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (online :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (online :: Web.Event.Internal.Types.Event | r))
 online = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "online", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1701,15 +1815,17 @@ online = Functor.map
   )
 
 online_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (online :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (online :: Web.Event.Internal.Types.Event | r))
 online_ = online <<< Applicative.pure
 
 offline
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (offline :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (offline :: Web.Event.Internal.Types.Event | r))
 offline = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "offline", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1717,15 +1833,17 @@ offline = Functor.map
   )
 
 offline_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (offline :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (offline :: Web.Event.Internal.Types.Event | r))
 offline_ = offline <<< Applicative.pure
 
 messageerror
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (messageerror :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (messageerror :: Web.Event.Internal.Types.Event | r))
 messageerror = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "messageerror", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1733,15 +1851,17 @@ messageerror = Functor.map
   )
 
 messageerror_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (messageerror :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (messageerror :: Web.Event.Internal.Types.Event | r))
 messageerror_ = messageerror <<< Applicative.pure
 
 message
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (message :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (message :: Web.Event.Internal.Types.Event | r))
 message = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "message", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1749,15 +1869,17 @@ message = Functor.map
   )
 
 message_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (message :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (message :: Web.Event.Internal.Types.Event | r))
 message_ = message <<< Applicative.pure
 
 languagechange
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (languagechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (languagechange :: Web.Event.Internal.Types.Event | r))
 languagechange = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "languagechange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1765,15 +1887,17 @@ languagechange = Functor.map
   )
 
 languagechange_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (languagechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (languagechange :: Web.Event.Internal.Types.Event | r))
 languagechange_ = languagechange <<< Applicative.pure
 
 hashchange
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (hashchange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (hashchange :: Web.Event.Internal.Types.Event | r))
 hashchange = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "hashchange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1781,15 +1905,17 @@ hashchange = Functor.map
   )
 
 hashchange_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (hashchange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (hashchange :: Web.Event.Internal.Types.Event | r))
 hashchange_ = hashchange <<< Applicative.pure
 
 beforeunload
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (beforeunload :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (beforeunload :: Web.Event.Internal.Types.Event | r))
 beforeunload = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "beforeunload", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1797,15 +1923,17 @@ beforeunload = Functor.map
   )
 
 beforeunload_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (beforeunload :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (beforeunload :: Web.Event.Internal.Types.Event | r))
 beforeunload_ = beforeunload <<< Applicative.pure
 
 beforeprint
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (beforeprint :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (beforeprint :: Web.Event.Internal.Types.Event | r))
 beforeprint = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "beforeprint", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1813,15 +1941,17 @@ beforeprint = Functor.map
   )
 
 beforeprint_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (beforeprint :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (beforeprint :: Web.Event.Internal.Types.Event | r))
 beforeprint_ = beforeprint <<< Applicative.pure
 
 afterprint
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (afterprint :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (afterprint :: Web.Event.Internal.Types.Event | r))
 afterprint = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "afterprint", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1829,15 +1959,17 @@ afterprint = Functor.map
   )
 
 afterprint_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (afterprint :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (afterprint :: Web.Event.Internal.Types.Event | r))
 afterprint_ = afterprint <<< Applicative.pure
 
 beforetoggle
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (beforetoggle :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (beforetoggle :: Web.Event.Internal.Types.Event | r))
 beforetoggle = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "beforetoggle", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1845,15 +1977,17 @@ beforetoggle = Functor.map
   )
 
 beforetoggle_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (beforetoggle :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (beforetoggle :: Web.Event.Internal.Types.Event | r))
 beforetoggle_ = beforetoggle <<< Applicative.pure
 
 beforematch
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (beforematch :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (beforematch :: Web.Event.Internal.Types.Event | r))
 beforematch = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "beforematch", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1861,15 +1995,17 @@ beforematch = Functor.map
   )
 
 beforematch_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (beforematch :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (beforematch :: Web.Event.Internal.Types.Event | r))
 beforematch_ = beforematch <<< Applicative.pure
 
 close
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (close :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (close :: Web.Event.Internal.Types.Event | r))
 close = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "close", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1877,15 +2013,17 @@ close = Functor.map
   )
 
 close_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (close :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (close :: Web.Event.Internal.Types.Event | r))
 close_ = close <<< Applicative.pure
 
 cancel
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (cancel :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (cancel :: Web.Event.Internal.Types.Event | r))
 cancel = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "cancel", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1893,15 +2031,17 @@ cancel = Functor.map
   )
 
 cancel_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (cancel :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (cancel :: Web.Event.Internal.Types.Event | r))
 cancel_ = cancel <<< Applicative.pure
 
 select
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (select :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (select :: Web.Event.Internal.Types.Event | r))
 select = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "select", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1909,15 +2049,17 @@ select = Functor.map
   )
 
 select_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (select :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (select :: Web.Event.Internal.Types.Event | r))
 select_ = select <<< Applicative.pure
 
 invalid
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (invalid :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (invalid :: Web.Event.Internal.Types.Event | r))
 invalid = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "invalid", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1925,16 +2067,17 @@ invalid = Functor.map
   )
 
 invalid_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (invalid :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (invalid :: Web.Event.Internal.Types.Event | r))
 invalid_ = invalid <<< Applicative.pure
 
 keypress
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
 keypress = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "keypress", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1942,17 +2085,17 @@ keypress = Functor.map
   )
 
 keypress_
-  :: forall r
-   . (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
 keypress_ = keypress <<< Applicative.pure
 
 domAttrModified
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domAttrModified :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domAttrModified :: Web.Event.Internal.Types.Event | r))
 domAttrModified = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMAttrModified", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1960,16 +2103,17 @@ domAttrModified = Functor.map
   )
 
 domAttrModified_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (domAttrModified :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domAttrModified :: Web.Event.Internal.Types.Event | r))
 domAttrModified_ = domAttrModified <<< Applicative.pure
 
 domActivate
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.UIEvent.UIEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (domActivate :: Web.UIEvent.UIEvent.UIEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.UIEvent.UIEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domActivate :: Web.UIEvent.UIEvent.UIEvent | r))
 domActivate = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "DOMActivate", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1977,15 +2121,17 @@ domActivate = Functor.map
   )
 
 domActivate_
-  :: forall r
-   . (Web.UIEvent.UIEvent.UIEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (domActivate :: Web.UIEvent.UIEvent.UIEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.UIEvent.UIEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domActivate :: Web.UIEvent.UIEvent.UIEvent | r))
 domActivate_ = domActivate <<< Applicative.pure
 
 wheel
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (wheel :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (wheel :: Web.Event.Internal.Types.Event | r))
 wheel = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "wheel", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1993,15 +2139,17 @@ wheel = Functor.map
   )
 
 wheel_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (wheel :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (wheel :: Web.Event.Internal.Types.Event | r))
 wheel_ = wheel <<< Applicative.pure
 
 mouseup
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mouseup :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mouseup :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseup = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "mouseup", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2009,15 +2157,17 @@ mouseup = Functor.map
   )
 
 mouseup_
-  :: forall r
-   . (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mouseup :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mouseup :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseup_ = mouseup <<< Applicative.pure
 
 mouseover
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mouseover :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mouseover :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseover = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "mouseover", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2025,15 +2175,17 @@ mouseover = Functor.map
   )
 
 mouseover_
-  :: forall r
-   . (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mouseover :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mouseover :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseover_ = mouseover <<< Applicative.pure
 
 mouseout
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mouseout :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mouseout :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseout = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "mouseout", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2041,15 +2193,17 @@ mouseout = Functor.map
   )
 
 mouseout_
-  :: forall r
-   . (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mouseout :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mouseout :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseout_ = mouseout <<< Applicative.pure
 
 mousemove
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mousemove :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mousemove :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mousemove = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "mousemove", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2057,15 +2211,17 @@ mousemove = Functor.map
   )
 
 mousemove_
-  :: forall r
-   . (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mousemove :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mousemove :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mousemove_ = mousemove <<< Applicative.pure
 
 mouseleave
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mouseleave :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mouseleave :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseleave = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "mouseleave", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2073,15 +2229,17 @@ mouseleave = Functor.map
   )
 
 mouseleave_
-  :: forall r
-   . (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mouseleave :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mouseleave :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseleave_ = mouseleave <<< Applicative.pure
 
 mouseenter
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mouseenter :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mouseenter :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseenter = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "mouseenter", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2089,15 +2247,17 @@ mouseenter = Functor.map
   )
 
 mouseenter_
-  :: forall r
-   . (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mouseenter :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mouseenter :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseenter_ = mouseenter <<< Applicative.pure
 
 mousedown
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mousedown :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mousedown :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mousedown = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "mousedown", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2105,15 +2265,17 @@ mousedown = Functor.map
   )
 
 mousedown_
-  :: forall r
-   . (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mousedown :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mousedown :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mousedown_ = mousedown <<< Applicative.pure
 
 keyup
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (keyup :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (keyup :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
 keyup = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "keyup", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2121,16 +2283,17 @@ keyup = Functor.map
   )
 
 keyup_
-  :: forall r
-   . (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (keyup :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (keyup :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
 keyup_ = keyup <<< Applicative.pure
 
 keydown
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (keydown :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (keydown :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
 keydown = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "keydown", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2138,16 +2301,17 @@ keydown = Functor.map
   )
 
 keydown_
-  :: forall r
-   . (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (keydown :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (keydown :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
 keydown_ = keydown <<< Applicative.pure
 
 input
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (input :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (input :: Web.Event.Internal.Types.Event | r))
 input = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "input", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2155,15 +2319,17 @@ input = Functor.map
   )
 
 input_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (input :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (input :: Web.Event.Internal.Types.Event | r))
 input_ = input <<< Applicative.pure
 
 dblclick
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dblclick :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dblclick :: Web.UIEvent.MouseEvent.MouseEvent | r))
 dblclick = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "dblclick", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2171,16 +2337,17 @@ dblclick = Functor.map
   )
 
 dblclick_
-  :: forall r
-   . (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dblclick :: Web.UIEvent.MouseEvent.MouseEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dblclick :: Web.UIEvent.MouseEvent.MouseEvent | r))
 dblclick_ = dblclick <<< Applicative.pure
 
 contextmenu
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 contextmenu = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "contextmenu", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2188,16 +2355,17 @@ contextmenu = Functor.map
   )
 
 contextmenu_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 contextmenu_ = contextmenu <<< Applicative.pure
 
 compositionend
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        ( Deku.Attribute.Attribute
            (compositionend :: Web.UIEvent.CompositionEvent.CompositionEvent | r)
        )
@@ -2208,18 +2376,20 @@ compositionend = Functor.map
   )
 
 compositionend_
-  :: forall r
-   . (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        ( Deku.Attribute.Attribute
            (compositionend :: Web.UIEvent.CompositionEvent.CompositionEvent | r)
        )
 compositionend_ = compositionend <<< Applicative.pure
 
 compositionupdate
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        ( Deku.Attribute.Attribute
            (compositionupdate :: Web.UIEvent.CompositionEvent.CompositionEvent | r)
        )
@@ -2230,18 +2400,20 @@ compositionupdate = Functor.map
   )
 
 compositionupdate_
-  :: forall r
-   . (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        ( Deku.Attribute.Attribute
            (compositionupdate :: Web.UIEvent.CompositionEvent.CompositionEvent | r)
        )
 compositionupdate_ = compositionupdate <<< Applicative.pure
 
 compositionstart
-  :: forall r
-   . FRP.Poll.Poll (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        ( Deku.Attribute.Attribute
            (compositionstart :: Web.UIEvent.CompositionEvent.CompositionEvent | r)
        )
@@ -2252,19 +2424,20 @@ compositionstart = Functor.map
   )
 
 compositionstart_
-  :: forall r
-   . (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.CompositionEvent.CompositionEvent -> Effect.Effect Data.Unit.Unit)
+  -> f
        ( Deku.Attribute.Attribute
            (compositionstart :: Web.UIEvent.CompositionEvent.CompositionEvent | r)
        )
 compositionstart_ = compositionstart <<< Applicative.pure
 
 click
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 click = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "click", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2272,16 +2445,17 @@ click = Functor.map
   )
 
 click_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 click_ = click <<< Applicative.pure
 
 beforeinput
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (beforeinput :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (beforeinput :: Web.Event.Internal.Types.Event | r))
 beforeinput = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "beforeinput", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2289,16 +2463,17 @@ beforeinput = Functor.map
   )
 
 beforeinput_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (beforeinput :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (beforeinput :: Web.Event.Internal.Types.Event | r))
 beforeinput_ = beforeinput <<< Applicative.pure
 
 auxclick
-  :: forall r
-   . FRP.Poll.Poll (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 auxclick = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "auxclick", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2306,16 +2481,17 @@ auxclick = Functor.map
   )
 
 auxclick_
-  :: forall r
-   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 auxclick_ = auxclick <<< Applicative.pure
 
 connect
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (connect :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (connect :: Web.Event.Internal.Types.Event | r))
 connect = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "connect", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2323,16 +2499,17 @@ connect = Functor.map
   )
 
 connect_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (connect :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (connect :: Web.Event.Internal.Types.Event | r))
 connect_ = connect <<< Applicative.pure
 
 contextrestored
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (contextrestored :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (contextrestored :: Web.Event.Internal.Types.Event | r))
 contextrestored = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "contextrestored", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2340,16 +2517,17 @@ contextrestored = Functor.map
   )
 
 contextrestored_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (contextrestored :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (contextrestored :: Web.Event.Internal.Types.Event | r))
 contextrestored_ = contextrestored <<< Applicative.pure
 
 contextlost
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (contextlost :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (contextlost :: Web.Event.Internal.Types.Event | r))
 contextlost = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "contextlost", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2357,16 +2535,17 @@ contextlost = Functor.map
   )
 
 contextlost_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (contextlost :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (contextlost :: Web.Event.Internal.Types.Event | r))
 contextlost_ = contextlost <<< Applicative.pure
 
 navigatesuccess
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (navigatesuccess :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (navigatesuccess :: Web.Event.Internal.Types.Event | r))
 navigatesuccess = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "navigatesuccess", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2374,16 +2553,17 @@ navigatesuccess = Functor.map
   )
 
 navigatesuccess_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (navigatesuccess :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (navigatesuccess :: Web.Event.Internal.Types.Event | r))
 navigatesuccess_ = navigatesuccess <<< Applicative.pure
 
 navigateerror
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (navigateerror :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (navigateerror :: Web.Event.Internal.Types.Event | r))
 navigateerror = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "navigateerror", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2391,15 +2571,17 @@ navigateerror = Functor.map
   )
 
 navigateerror_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (navigateerror :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (navigateerror :: Web.Event.Internal.Types.Event | r))
 navigateerror_ = navigateerror <<< Applicative.pure
 
 navigate
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (navigate :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (navigate :: Web.Event.Internal.Types.Event | r))
 navigate = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "navigate", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2407,16 +2589,17 @@ navigate = Functor.map
   )
 
 navigate_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (navigate :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (navigate :: Web.Event.Internal.Types.Event | r))
 navigate_ = navigate <<< Applicative.pure
 
 currententrychange
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (currententrychange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (currententrychange :: Web.Event.Internal.Types.Event | r))
 currententrychange = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "currententrychange", value: _ }
       <<< Deku.Attribute.cb'
@@ -2425,16 +2608,17 @@ currententrychange = Functor.map
   )
 
 currententrychange_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll
-       (Deku.Attribute.Attribute (currententrychange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (currententrychange :: Web.Event.Internal.Types.Event | r))
 currententrychange_ = currententrychange <<< Applicative.pure
 
 dispose
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dispose :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dispose :: Web.Event.Internal.Types.Event | r))
 dispose = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "dispose", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2442,15 +2626,17 @@ dispose = Functor.map
   )
 
 dispose_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dispose :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dispose :: Web.Event.Internal.Types.Event | r))
 dispose_ = dispose <<< Applicative.pure
 
 open
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (open :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (open :: Web.Event.Internal.Types.Event | r))
 open = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "open", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2458,15 +2644,17 @@ open = Functor.map
   )
 
 open_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (open :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (open :: Web.Event.Internal.Types.Event | r))
 open_ = open <<< Applicative.pure
 
 submit
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (submit :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (submit :: Web.Event.Internal.Types.Event | r))
 submit = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "submit", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2474,15 +2662,17 @@ submit = Functor.map
   )
 
 submit_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (submit :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (submit :: Web.Event.Internal.Types.Event | r))
 submit_ = submit <<< Applicative.pure
 
 reset
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (reset :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (reset :: Web.Event.Internal.Types.Event | r))
 reset = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "reset", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2490,15 +2680,17 @@ reset = Functor.map
   )
 
 reset_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (reset :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (reset :: Web.Event.Internal.Types.Event | r))
 reset_ = reset <<< Applicative.pure
 
 formdata
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (formdata :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (formdata :: Web.Event.Internal.Types.Event | r))
 formdata = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "formdata", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2506,15 +2698,17 @@ formdata = Functor.map
   )
 
 formdata_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (formdata :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (formdata :: Web.Event.Internal.Types.Event | r))
 formdata_ = formdata <<< Applicative.pure
 
 toggle
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (toggle :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (toggle :: Web.Event.Internal.Types.Event | r))
 toggle = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "toggle", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2522,15 +2716,17 @@ toggle = Functor.map
   )
 
 toggle_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (toggle :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (toggle :: Web.Event.Internal.Types.Event | r))
 toggle_ = toggle <<< Applicative.pure
 
 devicechange
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (devicechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (devicechange :: Web.Event.Internal.Types.Event | r))
 devicechange = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "devicechange", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2538,15 +2734,17 @@ devicechange = Functor.map
   )
 
 devicechange_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (devicechange :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (devicechange :: Web.Event.Internal.Types.Event | r))
 devicechange_ = devicechange <<< Applicative.pure
 
 captureaction
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (captureaction :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (captureaction :: Web.Event.Internal.Types.Event | r))
 captureaction = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "captureaction", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2554,15 +2752,17 @@ captureaction = Functor.map
   )
 
 captureaction_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (captureaction :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (captureaction :: Web.Event.Internal.Types.Event | r))
 captureaction_ = captureaction <<< Applicative.pure
 
 unmute
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (unmute :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (unmute :: Web.Event.Internal.Types.Event | r))
 unmute = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "unmute", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2570,15 +2770,17 @@ unmute = Functor.map
   )
 
 unmute_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (unmute :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (unmute :: Web.Event.Internal.Types.Event | r))
 unmute_ = unmute <<< Applicative.pure
 
 mute
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mute :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mute :: Web.Event.Internal.Types.Event | r))
 mute = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "mute", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2586,15 +2788,17 @@ mute = Functor.map
   )
 
 mute_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (mute :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (mute :: Web.Event.Internal.Types.Event | r))
 mute_ = mute <<< Applicative.pure
 
 resume
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (resume :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (resume :: Web.Event.Internal.Types.Event | r))
 resume = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "resume", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2602,15 +2806,17 @@ resume = Functor.map
   )
 
 resume_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (resume :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (resume :: Web.Event.Internal.Types.Event | r))
 resume_ = resume <<< Applicative.pure
 
 dataavailable
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dataavailable :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dataavailable :: Web.Event.Internal.Types.Event | r))
 dataavailable = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "dataavailable", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2618,15 +2824,17 @@ dataavailable = Functor.map
   )
 
 dataavailable_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dataavailable :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dataavailable :: Web.Event.Internal.Types.Event | r))
 dataavailable_ = dataavailable <<< Applicative.pure
 
 stop
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (stop :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (stop :: Web.Event.Internal.Types.Event | r))
 stop = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "stop", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2634,15 +2842,17 @@ stop = Functor.map
   )
 
 stop_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (stop :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (stop :: Web.Event.Internal.Types.Event | r))
 stop_ = stop <<< Applicative.pure
 
 start
-  :: forall r
-   . FRP.Poll.Poll (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (start :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (start :: Web.Event.Internal.Types.Event | r))
 start = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "start", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2650,7 +2860,8 @@ start = Functor.map
   )
 
 start_
-  :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (start :: Web.Event.Internal.Types.Event | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (start :: Web.Event.Internal.Types.Event | r))
 start_ = start <<< Applicative.pure

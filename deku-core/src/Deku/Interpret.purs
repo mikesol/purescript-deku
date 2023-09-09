@@ -468,27 +468,27 @@ setDelegateCbEffect = mkEffectFn3 \elt' (Key k) mp ->
     addEventListener eventType nl false eventTarget
 
 setCbEffect :: Core.SetCb
-setCbEffect = mkEffectFn4 \elt' (Key k) (Cb v) stobj -> do
+setCbEffect = mkEffectFn5 \elt' (Key k) (Cb v) getter setter -> do
   if k == "@self@" then do
     void $ v ((unsafeCoerce :: DekuElement -> Web.Event) elt')
   else do
-    l <- liftST $ STObject.peek k stobj
+    l <- getter
     let eventType = EventType k
     let eventTarget = toEventTarget (fromDekuElement elt')
     for_ l \toRemove -> removeEventListener eventType toRemove false eventTarget
     nl <- eventListener v
     addEventListener eventType nl false eventTarget
-    liftST $ void $ STObject.poke k nl stobj
+    setter nl
 
 unsetAttributeEffect :: Core.UnsetAttribute
-unsetAttributeEffect = mkEffectFn3 \elt' (Key k) stobj -> do
-  l <- liftST $ STObject.peek k stobj
+unsetAttributeEffect = mkEffectFn4 \elt' (Key k) getter rm -> do
+  l <- getter
   let asElt = fromDekuElement elt'
   let eventType = EventType k
   let eventTarget = toEventTarget asElt
   for_ l \toRemove -> do
     removeEventListener eventType toRemove false eventTarget
-    liftST $ STObject.delete k stobj
+    rm
   removeAttribute k asElt
 
 setTextEffect :: Core.SetText

@@ -204,6 +204,10 @@ typePolled :: Type Void -> Type Void
 typePolled t =
     unsafePartial $ typeApp ( typeCtor "FRP.Poll.Poll" ) $ pure t
 
+typeFunked ::  String -> Type Void -> Type Void
+typeFunked f t =
+    unsafePartial $ typeApp ( typeVar f ) $ pure t
+
 typeAttributed :: Type Void -> Type Void
 typeAttributed t =
     unsafePartial $ typeApp ( typeCtor "Deku.Attribute.Attribute" ) $ pure t
