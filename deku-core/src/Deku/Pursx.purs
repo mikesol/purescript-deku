@@ -29,7 +29,7 @@ import Deku.Interpret (attributeDynParentForElementEffect, toDekuElement, toDeku
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.Path (symbolsForAttsToArray)
 import Deku.Path as Path
-import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, processAttPursx, processNutPursx, processStringImpl, returnReplacement, splitTextAndReturnReplacement)
+import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, mEltify, processAttPursx, processNutPursx, processStringImpl, returnReplacement, splitTextAndReturnReplacement)
 import Deku.PathWalker as PW
 import Deku.PursxParser as PxP
 import Deku.PxTypes (PxAtt, PxNut)
@@ -42,7 +42,6 @@ import Effect.Ref (new)
 import Effect.Uncurried (EffectFn1, EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
 import FRP.Poll (Poll)
 import Foreign.Object.ST as STObject
-import Literals.Undefined (undefined)
 import Prim.Row as R
 import Prim.Row as Row
 import Prim.RowList as RL
@@ -52,6 +51,7 @@ import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.DocumentFragment as DocumentFragment
+import Web.DOM.Element as Element
 import Web.HTML.HTMLTemplateElement as HtmlTemplateElement
 
 class EmptyMe (r :: Row Type) (rl :: RL.RowList Type) | rl -> r where
@@ -182,7 +182,7 @@ pursx' r = Nut $ mkEffectFn2
       eltX <- runEffectFn1 toTemplate html
       -- clone the template
       elt <- runEffectFn1 cloneTemplate eltX
-      let unsafeMElement = unsafeCoerce { p: undefined, e: elt }
+      let unsafeMElement = mEltify (Element.toNode elt)
       runEffectFn3 eltAttribution ps di (toDekuElement elt)
       -- walk through the template, getting all of the elements and
       -- setting up listeners
@@ -334,7 +334,7 @@ template p = Nut $ mkEffectFn2
           scrunch
           emptiness
           (DOMInterpret di)
-          (unsafeCoerce { p: undefined, e: elt })
+          (unsafeCoerce (mEltify elt))
       -- as usual, we start off lucky
       -- even though this can enver be unlucky as templates can only
       -- ever be populated with elements (not dyn), we still need it
@@ -384,7 +384,7 @@ template p = Nut $ mkEffectFn2
               -- clone the template
               elt <- runEffectFn1 cloneTemplate eltX
               -- wire it up for the walking algo
-              let unsafeMElement = unsafeCoerce { p: undefined, e: elt }
+              let unsafeMElement = mEltify (Element.toNode elt)
               -- insert our fledgling element into the dyn
               runEffectFn5 attributeDynParentForElementEffect lucky
                 (DekuChild (toDekuElement elt))

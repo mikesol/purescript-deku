@@ -192,6 +192,7 @@ import Type.Proxy (Proxy(..))
 import Web.DOM (Element, Text)
 import Web.DOM.ChildNode (remove)
 import Web.DOM.Comment as Comment
+import Web.DOM.Node as Node
 import Web.DOM.Element as Element
 import Web.DOM.Node (replaceChild)
 import Deku.UnsafeDOM (insertBefore)
@@ -201,6 +202,7 @@ data MElement
 
 foreign import processStringImpl :: EffectFn3 String String MElement Unit
 foreign import mEltElt :: MElement -> Element
+foreign import mEltify :: Node.Node -> MElement
 foreign import mEltParent :: MElement -> Element
 foreign import splitTextAndReturnReplacement :: EffectFn2 String  MElement Text
 foreign import returnReplacement :: EffectFn2 String  MElement Text
@@ -317,6 +319,7 @@ export const processStringImpl = (k, s, {{p,e}}) => {{
 }};
 export const mEltElt = x => x.e;
 export const mEltParent = x => x.p;
+export const mEltify = e => ({{p:undefined, e}});
 export const splitTextAndReturnReplacement = (s, {{ p, e }}) => {{
   {'console.log("splitTextAndReturnReplacement", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element

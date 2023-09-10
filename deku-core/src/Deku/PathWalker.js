@@ -527,6 +527,7 @@ export const processStringImpl = (k, s, {p,e}) => {
 };
 export const mEltElt = x => x.e;
 export const mEltParent = x => x.p;
+export const mEltify = e => ({p:undefined, e});
 export const splitTextAndReturnReplacement = (s, { p, e }) => {
   
   // Get the previous sibling (text node) of the element
