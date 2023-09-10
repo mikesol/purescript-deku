@@ -3,15 +3,50 @@ module Deku.DOM.Combinators where
 import Prelude
 
 import Data.Foldable (for_)
+import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeAttribute, unsafeUnAttribute)
 import Deku.DOM.Self as Self
+import Deku.Some (class IsSubsetRL)
+import Deku.Some as Some
 import Effect (Effect)
 import Effect.Aff (Milliseconds(..), delay, launchAff_)
 import Effect.Class (liftEffect)
+import Prim.RowList as RL
 import Type.Proxy (Proxy)
 import Web.DOM (Element)
 import Web.Event.Event as Web
 import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
+
+templated_
+  :: forall f r sr rl
+   . Functor f
+  => RL.RowToList r rl
+  => IsSubsetRL rl sr
+  => f String
+  -> Record r
+  -> f (Tuple String (Some.Some sr))
+templated_ e v = e <#> \s -> Tuple s $ Some.inj v
+
+templatedMap_
+  :: forall f a r sr rl
+   . Functor f
+  => RL.RowToList r rl
+  => IsSubsetRL rl sr
+  => f (Tuple String a)
+  -> (a -> Record r)
+  -> f (Tuple String (Some.Some sr))
+templatedMap_ e v = e <#> \(Tuple s i) -> Tuple s $ Some.inj (v i)
+
+templated
+  :: forall ix f a r sr rl
+   . Functor f
+  => RL.RowToList r rl
+  => IsSubsetRL rl sr
+  => Show ix
+  => f (Tuple ix a)
+  -> (ix -> a -> Record r)
+  -> f (Tuple String (Some.Some sr))
+templated e v = e <#> \(Tuple i s) -> Tuple (show i) $ Some.inj (v i s)
 
 -- | Runs an effect when the element triggers the given event. 
 runOn
