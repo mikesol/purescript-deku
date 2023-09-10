@@ -290,6 +290,18 @@ templatesWork = Deku.do
           ]
     ]
 
+templatesWork2 :: Nut
+templatesWork2 = Deku.do
+  D.div [ DA.id_ "div0" ]
+    [ template @"<div id=\"testing\">~test~ ~ing~</div>"
+        $ pure
+        $ Tuple "0"
+        $ Some.inj
+            { test: "hello"
+            , ing: "world"
+            }
+    ]
+
 switchersCompose :: Nut
 switchersCompose = Deku.do
   let

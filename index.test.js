@@ -1156,7 +1156,14 @@ describe("deku", () => {
         );
       })
     );
-
+    doTest("templates work 2", (f) =>
+      f(tests.templatesWork2, () => {
+        const $ = require("jquery");
+        expect($("#testing").text()).toBe(
+          "hello world"
+        );
+      })
+    );
     doTest("sends to position correctly when elt is fixed", (f) =>
       f(tests.sendsToPositionFixed, () => {
         const $ = require("jquery");

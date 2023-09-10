@@ -317,13 +317,37 @@ export const processStringImpl = (k, s, {{p,e}}) => {{
 }};
 export const mEltElt = x => x.e;
 export const mEltParent = x => x.p;
-export const splitTextAndReturnReplacement = (s, {{p,e}}) => {{
+export const splitTextAndReturnReplacement = (s, {{ p, e }}) => {{
   {'console.log("splitTextAndReturnReplacement", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
   let targetString = "~" + s + "~";
   let textNode = e ? e.previousSibling : p.lastChild;
   {'console.log("splitTextAndReturnReplacementPREV", textNode, textNode.textContent);' if DEBUG else ''}
-  if (textNode && textNode.nodeType === 3) {{  // 3 is the nodeType for a Text node
+  while (textNode) {{
+    if (textNode.nodeType === 3) {{
+      // 3 is the nodeType for a Text node
+      let index = textNode.nodeValue.indexOf(targetString);
+
+      if (index !== -1) {{
+        // Split the text node at the starting index of the target string
+        let afterTextNode = textNode.splitText(index);
+
+        // Split the afterTextNode at the end index of the target string to isolate it
+        afterTextNode.splitText(targetString.length);
+
+        // Return the newly created text node containing the target string
+        return afterTextNode;
+      }}
+    }} else {{
+      throw new Error(
+        "Programming error: previous node not a text node or target string not found: " +
+          s
+      );
+    }}
+    textNode = textNode.previousSibling;
+  }}
+  if (textNode && textNode.nodeType === 3) {{
+    // 3 is the nodeType for a Text node
     let index = textNode.nodeValue.indexOf(targetString);
 
     if (index !== -1) {{
@@ -338,7 +362,10 @@ export const splitTextAndReturnReplacement = (s, {{p,e}}) => {{
     }}
   }}
 
-  throw new Error("Programming error: previous node not a text node or target string not found: "+s);
+  throw new Error(
+    "Programming error: previous node not a text node or target string not found: " +
+      s
+  );
 }};
 
 export const returnReplacement = (s, {{p,e}}) => {{
