@@ -85,11 +85,14 @@ class PursxSubstitutions nostr str | nostr -> str
 instance PursxSubstitutions RL.Nil ()
 
 instance
-  (Row.Cons k Nut d r, PursxSubstitutions c d) =>
+  ( Row.Cons k Nut d r
+  , PursxSubstitutions c d
+  ) =>
   PursxSubstitutions (RL.Cons k PxNut c) r
 
 instance
-  ( Row.Cons k (Poll (Attribute deku)) d r, PursxSubstitutions c d
+  ( Row.Cons k (Poll (Attribute deku)) d r
+  , PursxSubstitutions c d
   ) =>
   PursxSubstitutions (RL.Cons k PxAtt c)
     r
@@ -101,11 +104,14 @@ class TemplateSubstitutions nostr str | nostr -> str
 instance TemplateSubstitutions RL.Nil ()
 
 instance
-  (Row.Cons k String d r, TemplateSubstitutions c d) =>
+  ( Row.Cons k String d r
+  , TemplateSubstitutions c d
+  ) =>
   TemplateSubstitutions (RL.Cons k PxNut c) r
 
 else instance
-  ( Row.Cons k (Array (Attribute deku)) d r, TemplateSubstitutions c d
+  ( Row.Cons k (Array (Attribute deku)) d r
+  , TemplateSubstitutions c d
   ) =>
   TemplateSubstitutions (RL.Cons k PxAtt c)
     r
@@ -396,7 +402,8 @@ template p = Nut $ mkEffectFn2
               -- EffectFn1 text
               runEffectFn5
                 ( PW.walk
-                    :: EffectFn5 InstructionDelegate (Proxy scrunched) { | rEmpty }
+                    :: EffectFn5 InstructionDelegate (Proxy scrunched)
+                         { | rEmpty }
                          DOMInterpret
                          MElement
                          Unit
@@ -416,7 +423,8 @@ template p = Nut $ mkEffectFn2
                             obj
                         let delete key = liftST $ void $ STObject.delete key obj
                         let
-                          effn = mkEffectFn1 \att -> do
+                          effn :: forall t. EffectFn1 (Array (Attribute t)) Unit
+                          effn = mkEffectFn1 \atts -> foreachE atts \att -> do
                             let { key, value } = unsafeUnAttribute att
                             case value of
                               Prop' v -> runEffectFn3 di.setProp
@@ -435,13 +443,15 @@ template p = Nut $ mkEffectFn2
                                 (getter key)
                                 (delete key)
                         for_
-                          (unsafeGet s proj'd :: forall e. Maybe (Array (Attribute e)))
+                          ( unsafeGet s proj'd
+                              :: forall e. Maybe (Array (Attribute e))
+                          )
                           \a ->
-                            foreachE a \i -> runEffectFn1 effn i
+                            runEffectFn1 effn a
                         void $ liftST $ STObject.poke s
                           ( ( unsafeCoerce
                                 :: forall t
-                                 . EffectFn1 (Attribute t) Unit
+                                 . EffectFn1 (Array (Attribute t)) Unit
                                 -> Void
                             ) effn
                           )
