@@ -22,6 +22,7 @@ import Data.Identity (Identity(..))
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.String as String
 import Data.Symbol (class IsSymbol, reflectSymbol)
+import Data.TraversableWithIndex (traverseWithIndex)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, AttributeValue(..), Key(..), Value(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForElement, eltAttribution, getLifecycle, notLucky, runListener, text, thunker)
@@ -29,7 +30,7 @@ import Deku.Interpret (attributeDynParentForElementEffect, toDekuElement, toDeku
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.Path (symbolsForAttsToArray)
 import Deku.Path as Path
-import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, mEltify, processAttPursx, processNutPursx, processStringImpl, returnReplacement, splitTextAndReturnReplacement)
+import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, mEltify, processAttPursx, processNutPursx, processStringImpl, returnReplacement, returnReplacementIndex, splitTextAndReturnReplacement)
 import Deku.PathWalker as PW
 import Deku.PursxParser as PxP
 import Deku.PxTypes (PxAtt, PxNut)
@@ -41,7 +42,9 @@ import Effect.Exception (error, throwException)
 import Effect.Ref (new)
 import Effect.Uncurried (EffectFn1, EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
 import FRP.Poll (Poll)
+import Foreign.Object as Object
 import Foreign.Object.ST as STObject
+import Foreign.Object.Unsafe (unsafeIndex)
 import Prim.Row as R
 import Prim.Row as Row
 import Prim.RowList as RL
@@ -301,6 +304,11 @@ template p = Nut $ mkEffectFn2
       -- meaning that we can manipulate according to the template
       elementCache :: STObject.STObject Global { | elementCache } <- liftST
         STObject.new
+      -- we don't want to recurse over text nodes constantly checking their content
+      -- so we create a cache that helps us with that (we'll see)
+      -- it used later
+      isStringCache :: STObject.STObject Global MElement  <- liftST
+        STObject.new
       eltX <- runEffectFn1 toTemplate html
       -- we set up a dummy cache that we 
       -- just use so that we can have the same walking al
@@ -322,22 +330,29 @@ template p = Nut $ mkEffectFn2
         runEffectFn5
           walker
           ( InstructionDelegate
-              { processString: mkEffectFn4 \_ _ _ _ -> pure unit
+              { processString: mkEffectFn4 \_ _ _ _ -> throwException
+                        ( error
+                            "Programming error: template should not be called with a string"
+                        )
               , processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit
-              , processPollString: mkEffectFn4 \a _ _ dd -> void $ runEffectFn2
-                  splitTextAndReturnReplacement
-                  a
-                  dd
-              , processNut: mkEffectFn4 \a _ _ dd -> void $ runEffectFn2
-                  splitTextAndReturnReplacement
-                  a
-                  dd
+              , processPollString: mkEffectFn4 \a _ _ dd -> do
+                  void $ liftST $ STObject.poke a dd isStringCache
+                  void $ runEffectFn2
+                      splitTextAndReturnReplacement
+                      a
+                      dd
+              , processNut: mkEffectFn4 \_ _ _ _ -> throwException
+                        ( error
+                            "Programming error: template should not be called with a string"
+                        )
               }
           )
           scrunch
           emptiness
           (DOMInterpret di)
           (unsafeCoerce (mEltify elt))
+      let frozenIsStringcache = (unsafeCoerce :: STObject.STObject Global MElement -> Object.Object MElement) isStringCache
+      indices <- traverseWithIndex (\k v -> runEffectFn2 returnReplacementIndex k v) frozenIsStringcache
       -- as usual, we start off lucky
       -- even though this can enver be unlucky as templates can only
       -- ever be populated with elements (not dyn), we still need it
@@ -457,7 +472,8 @@ template p = Nut $ mkEffectFn2
                           )
                           oooooooooo
                     , processPollString: mkEffectFn4 \s _ _ e' -> do
-                        realDeal <- runEffectFn2 returnReplacement s
+                        let iiiii = unsafeIndex indices s
+                        realDeal <- runEffectFn2 returnReplacement iiiii
                           e'
                         runEffectFn2 di.setText (toDekuText realDeal)
                           (coerce (fromMaybe (Identity "") (unsafeGet s proj'd :: Maybe (Identity String))))

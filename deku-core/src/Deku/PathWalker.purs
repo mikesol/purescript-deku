@@ -33,7 +33,8 @@ foreign import mEltElt :: MElement -> Element
 foreign import mEltify :: Node.Node -> MElement
 foreign import mEltParent :: MElement -> Element
 foreign import splitTextAndReturnReplacement :: EffectFn2 String  MElement Text
-foreign import returnReplacement :: EffectFn2 String  MElement Text
+foreign import returnReplacement :: EffectFn2 Int  MElement Text
+foreign import returnReplacementIndex :: EffectFn2 String  MElement Int
 type InstructionSignature i = EffectFn4 String i DOMInterpret MElement Unit
 newtype InstructionDelegate = InstructionDelegate {
   processString :: InstructionSignature String,

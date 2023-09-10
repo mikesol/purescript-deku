@@ -579,21 +579,35 @@ export const splitTextAndReturnReplacement = (s, e) => {
   );
 };
 
-export const returnReplacement = (s, e) => {
+export const returnReplacement = (i, e) => {
+  
+  // Get the previous sibling (text node) of the element
+  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
+  let ii = 0;
+  while (ii < i) {
+    ii++;
+    textNode = textNode.previousSibling;
+  }
+  return textNode;
+};
+
+export const returnReplacementIndex = (s, e) => {
   
   // Get the previous sibling (text node) of the element
   let targetString = "~" + s + "~";
   let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
+  let i = 0;
   while (textNode) {
     
     if (textNode.nodeType === 3) {  // 3 is the nodeType for a Text node
       let index = textNode.nodeValue.indexOf(targetString);
       if (index !== -1) {
-        return textNode;
+        return i;
       }
     } else {
         throw new Error("Programming error: previous node not a text node or target string not found: "+s);
     }
+    i++;
     textNode = textNode.previousSibling;
   }
 };
