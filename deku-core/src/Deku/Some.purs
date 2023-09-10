@@ -2,6 +2,9 @@ module Deku.Some
   ( Some
   , inj
   , proj
+  , projWithProof
+  , projProof
+  , LabelProof
   , class IsSubset
   , class IsSubsetRL
   , class Labels
@@ -72,6 +75,9 @@ foreign import projImpl
        (Some r1)
        { | r2 }
 
+newtype LabelProof :: RL.RowList Type -> Type
+newtype LabelProof r = LabelProof (Array String)
+
 proj
   :: forall r2 rl2 r3
    . RL.RowToList r2 rl2
@@ -80,6 +86,19 @@ proj
   => Some r2
   -> { | r3 }
 proj i = runFn4 projImpl Just Nothing (labels (Proxy :: _ rl2)) i
+
+projProof :: forall @rl2 a. Labels rl2 => (LabelProof rl2 -> a) -> a
+projProof f = f (LabelProof (labels (Proxy :: _ rl2)))
+
+projWithProof
+  :: forall r2 rl2 r3
+   . RL.RowToList r2 rl2
+  => Labels rl2
+  => AsTypeConstructor Maybe r2 r3
+  => LabelProof rl2
+  -> Some r2
+  -> { | r3 }
+projWithProof (LabelProof proof) i = runFn4 projImpl Just Nothing proof i
 
 foreign import foreachEImpl :: forall a b. EffectFn2 a b Unit
 

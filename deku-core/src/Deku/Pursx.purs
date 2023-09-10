@@ -33,7 +33,7 @@ import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, mEltify, pro
 import Deku.PathWalker as PW
 import Deku.PursxParser as PxP
 import Deku.PxTypes (PxAtt, PxNut)
-import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some)
+import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some, projProof)
 import Deku.Some as Some
 import Deku.UnsafeDOM (cloneTemplate, toTemplate, unsafeFirstChild)
 import Effect (foreachE)
@@ -280,7 +280,7 @@ template
   -> Nut
 template p = Nut $ mkEffectFn2
   \(PSR psr)
-   (DOMInterpret di) ->
+   (DOMInterpret di) -> projProof @withLifecycle \proof ->
     do
       let
         -- various proxies
@@ -379,7 +379,7 @@ template p = Nut $ mkEffectFn2
             -- this is the biggie
             Nothing -> do
               -- we get all of the values that exist upon creation
-              let proj'd = Some.proj value
+              let proj'd = Some.projWithProof proof value
               let mpos = (unsafeGet "sendTo" proj'd :: Maybe Int)
               -- clone the template
               elt <- runEffectFn1 cloneTemplate eltX
