@@ -101,27 +101,27 @@ def genP(n, d):
       C = C.replace("0", "X").replace("1", "Y")
     DB = lambda x: f'let _ = spy "{C}{x}" true' if DEBUG else ''
     T = f"""---
-instance PathWalker a r => PathWalker (Path.{C}DownGroup a) r where
+instance pathWalker{C}DownGroup :: PathWalker a r => PathWalker (Path.{C}DownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     {DB("DownGroup")}
     p <- runEffectFn1 {C.lower()}{"D" if n >= 0 else "d"}ownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.{C}RightGroup a) r where
+instance pathWalker{C}RightGroup :: PathWalker a r => PathWalker (Path.{C}RightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     {DB("RightGroup")}
     p <- runEffectFn1 {C.lower()}{"R" if n >= 0 else "r"}ightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.{C}ContGroupWithMarkers zz a) r where
+instance pathWalker{C}ContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.{C}ContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     {DB("ContGroupWithMarkers")}
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.{C}TwoContGroups a b) r where
+instance pathWalker{C}TwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.{C}TwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     {DB("TwoContGroups")}
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.{C}TwoContGroupsWithMarkers zz a b) r where
+instance pathWalker{C}TwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.{C}TwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     {DB("TwoContGroupsWithMarkers")}
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -129,6 +129,24 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 """
     return T
+
+
+def genI(n, d):
+    C = None
+    if n < 0:
+        C = ''
+    else:
+      C = "{0:b}".format(d)
+      C = ("0" * (n + 1 - len(C))) + C
+      C = C.replace("0", "X").replace("1", "Y")
+    T = f"""-- @inline export pathWalker{C}DownGroup(..).walk always
+-- @inline export pathWalker{C}RightGroup(..).walk always
+-- @inline export pathWalker{C}ContGroupWithMarkers(..).walk always
+-- @inline export pathWalker{C}TwoContGroups(..).walk always
+-- @inline export pathWalker{C}TwoContGroupsWithMarkers(..).walk always
+"""
+    return T
+
 O = []
 
 
@@ -161,16 +179,29 @@ if __name__ == '__main__':
         for y in range(2 << x):
             oprint(genC(x, y))
     oprint("\n\n---- final\n")
-    oprint("""instance Scrunch (MarkerGroup a) (MarkerGroup a)
-instance (Scrunch b c) => Scrunch (ContGroupWithMarkers a b) (ContGroupWithMarkers a c)
-instance (Scrunch a c, Scrunch b d) => Scrunch (TwoContGroups a b) (TwoContGroups c d)
-instance (Scrunch a c, Scrunch b d) => Scrunch (TwoContGroupsWithMarkers z a b) (TwoContGroupsWithMarkers z c d)
+    oprint("""instance scrunchMarkerGroup :: Scrunch (MarkerGroup a) (MarkerGroup a)
+instance scrunchContGroupWithMarkers :: (Scrunch b c) => Scrunch (ContGroupWithMarkers a b) (ContGroupWithMarkers a c)
+instance scrunchTwoContGroups :: (Scrunch a c, Scrunch b d) => Scrunch (TwoContGroups a b) (TwoContGroups c d)
+instance scrunchTwoContGroupsWithMarkers :: (Scrunch a c, Scrunch b d) => Scrunch (TwoContGroupsWithMarkers z a b) (TwoContGroupsWithMarkers z c d)
 
 """)
     for y in range(2 << (R-1)):
         oprint(genT(R-1, y))
+    INLINES = []
+    def iprint(z):
+        INLINES.append(z)
+    iprint(genI(-1, -1))
+    for x in range(R):
+        for y in range(2 << x):
+            iprint(genI(x, y))
+    ILL = '\n'.join(INLINES)
     #####
-    qprint(f"""module Deku.PathWalker where
+    qprint(f"""-- @inline export processInstructionsNil.processInstructions always
+-- @inline export processInstructionsCons(..).processInstructions always
+-- @inline export pathWalkerMarkerGroup(..).walk always
+{ILL}
+
+module Deku.PathWalker where
 
 import Prelude
 {"import Debug(spy)" if DEBUG else ""}
@@ -226,20 +257,20 @@ class ProcessInstructions :: Row Type -> RL.RowList Symbol -> Constraint
 class ProcessInstructions r rl | rl -> r where
   processInstructions :: EffectFn5 InstructionDelegate (Proxy rl) {{ | r }} DOMInterpret MElement Unit
 
-instance ProcessInstructions r RL.Nil where
+instance processInstructionsNil :: ProcessInstructions r RL.Nil where
   processInstructions = mkEffectFn5 \_ _ _ _ _ -> pure unit
 
-instance (ProcessInstructions r a) => PathWalker (Path.MarkerGroup a) r where
+instance pathWalkerMarkerGroup :: (ProcessInstructions r a) => PathWalker (Path.MarkerGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     {'let _ = spy "MarkerGroup" r' if DEBUG else ''}
     runEffectFn5 processInstructions instr (Proxy :: _ a) r di e
 
-instance (IsSymbol k, R.Cons k v r' r, ProcessInstruction k v, ProcessInstructions r c) => ProcessInstructions r (RL.Cons k k c) where
+instance processInstructionsCons :: (IsSymbol k, R.Cons k v r' r, ProcessInstruction k v, ProcessInstructions r c) => ProcessInstructions r (RL.Cons k k c) where
   processInstructions = mkEffectFn5 \instr _ r di e -> do
       runEffectFn5 processInstruction instr (Proxy :: _ k) (get (Proxy :: _ k) r) di e
       runEffectFn5 processInstructions instr (Proxy :: _ c) r di e
 
-instance IsSymbol k => ProcessInstruction k String where
+instance processInstructionString :: IsSymbol k => ProcessInstruction k String where
   processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processString }}) k s di e -> do
     {'let _ = spy ("PIString@") {s,e}' if DEBUG else ''}
     runEffectFn4 processString (reflectSymbol k) s di e
@@ -251,11 +282,11 @@ processAttPursx = mkEffectFn4 \\_ att di e -> do
     handleAtts di obj (toDekuElement (mEltElt e)) star
       [  att ]
 
-instance IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where
+instance processInstructionPollAtt :: IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where
   processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processAttribute }}) k att di e -> do
     runEffectFn4 processAttribute (reflectSymbol k) (map unsafeUnAttribute att) di e
 
-instance IsSymbol k => ProcessInstruction k (Poll String) where
+instance processInstructionPollString :: IsSymbol k => ProcessInstruction k (Poll String) where
   processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processPollString }}) k pstring di e -> do
     runEffectFn4 processPollString (reflectSymbol k) pstring di e
 
@@ -287,7 +318,7 @@ processNutPursx splitter = mkEffectFn4 \\k (Nut nut) di@(DOMInterpret {{ makeEle
         remove (Text.toChildNode t)
       NoOutcome -> pure unit
 
-instance IsSymbol k => ProcessInstruction k Nut where
+instance processInstructionNut :: IsSymbol k => ProcessInstruction k Nut where
   processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processNut }}) k nut di e -> do
     runEffectFn4 processNut (reflectSymbol k) nut di e
 """)

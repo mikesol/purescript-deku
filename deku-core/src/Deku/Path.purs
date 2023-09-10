@@ -1588,10 +1588,10 @@ instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYRightGroup (TwoContGroupsWit
 
 ---- final
 
-instance Scrunch (MarkerGroup a) (MarkerGroup a)
-instance (Scrunch b c) => Scrunch (ContGroupWithMarkers a b) (ContGroupWithMarkers a c)
-instance (Scrunch a c, Scrunch b d) => Scrunch (TwoContGroups a b) (TwoContGroups c d)
-instance (Scrunch a c, Scrunch b d) => Scrunch (TwoContGroupsWithMarkers z a b) (TwoContGroupsWithMarkers z c d)
+instance scrunchMarkerGroup :: Scrunch (MarkerGroup a) (MarkerGroup a)
+instance scrunchContGroupWithMarkers :: (Scrunch b c) => Scrunch (ContGroupWithMarkers a b) (ContGroupWithMarkers a c)
+instance scrunchTwoContGroups :: (Scrunch a c, Scrunch b d) => Scrunch (TwoContGroups a b) (TwoContGroups c d)
+instance scrunchTwoContGroupsWithMarkers :: (Scrunch a c, Scrunch b d) => Scrunch (TwoContGroupsWithMarkers z a b) (TwoContGroupsWithMarkers z c d)
 
 
 

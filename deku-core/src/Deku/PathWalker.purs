@@ -1,3 +1,769 @@
+-- @inline export processInstructionsNil.processInstructions always
+-- @inline export processInstructionsCons(..).processInstructions always
+-- @inline export pathWalkerMarkerGroup(..).walk always
+-- @inline export pathWalkerDownGroup(..).walk always
+-- @inline export pathWalkerRightGroup(..).walk always
+-- @inline export pathWalkerContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerTwoContGroups(..).walk always
+-- @inline export pathWalkerTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXDownGroup(..).walk always
+-- @inline export pathWalkerXRightGroup(..).walk always
+-- @inline export pathWalkerXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXTwoContGroups(..).walk always
+-- @inline export pathWalkerXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYDownGroup(..).walk always
+-- @inline export pathWalkerYRightGroup(..).walk always
+-- @inline export pathWalkerYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYTwoContGroups(..).walk always
+-- @inline export pathWalkerYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXDownGroup(..).walk always
+-- @inline export pathWalkerXXRightGroup(..).walk always
+-- @inline export pathWalkerXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYDownGroup(..).walk always
+-- @inline export pathWalkerXYRightGroup(..).walk always
+-- @inline export pathWalkerXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXDownGroup(..).walk always
+-- @inline export pathWalkerYXRightGroup(..).walk always
+-- @inline export pathWalkerYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYDownGroup(..).walk always
+-- @inline export pathWalkerYYRightGroup(..).walk always
+-- @inline export pathWalkerYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXDownGroup(..).walk always
+-- @inline export pathWalkerXXXRightGroup(..).walk always
+-- @inline export pathWalkerXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYDownGroup(..).walk always
+-- @inline export pathWalkerXXYRightGroup(..).walk always
+-- @inline export pathWalkerXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXDownGroup(..).walk always
+-- @inline export pathWalkerXYXRightGroup(..).walk always
+-- @inline export pathWalkerXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYDownGroup(..).walk always
+-- @inline export pathWalkerXYYRightGroup(..).walk always
+-- @inline export pathWalkerXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXDownGroup(..).walk always
+-- @inline export pathWalkerYXXRightGroup(..).walk always
+-- @inline export pathWalkerYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYDownGroup(..).walk always
+-- @inline export pathWalkerYXYRightGroup(..).walk always
+-- @inline export pathWalkerYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXDownGroup(..).walk always
+-- @inline export pathWalkerYYXRightGroup(..).walk always
+-- @inline export pathWalkerYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYDownGroup(..).walk always
+-- @inline export pathWalkerYYYRightGroup(..).walk always
+-- @inline export pathWalkerYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXXDownGroup(..).walk always
+-- @inline export pathWalkerXXXXRightGroup(..).walk always
+-- @inline export pathWalkerXXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXYDownGroup(..).walk always
+-- @inline export pathWalkerXXXYRightGroup(..).walk always
+-- @inline export pathWalkerXXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYXDownGroup(..).walk always
+-- @inline export pathWalkerXXYXRightGroup(..).walk always
+-- @inline export pathWalkerXXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYYDownGroup(..).walk always
+-- @inline export pathWalkerXXYYRightGroup(..).walk always
+-- @inline export pathWalkerXXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXXDownGroup(..).walk always
+-- @inline export pathWalkerXYXXRightGroup(..).walk always
+-- @inline export pathWalkerXYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXYDownGroup(..).walk always
+-- @inline export pathWalkerXYXYRightGroup(..).walk always
+-- @inline export pathWalkerXYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYXDownGroup(..).walk always
+-- @inline export pathWalkerXYYXRightGroup(..).walk always
+-- @inline export pathWalkerXYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYYDownGroup(..).walk always
+-- @inline export pathWalkerXYYYRightGroup(..).walk always
+-- @inline export pathWalkerXYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXXDownGroup(..).walk always
+-- @inline export pathWalkerYXXXRightGroup(..).walk always
+-- @inline export pathWalkerYXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXYDownGroup(..).walk always
+-- @inline export pathWalkerYXXYRightGroup(..).walk always
+-- @inline export pathWalkerYXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYXDownGroup(..).walk always
+-- @inline export pathWalkerYXYXRightGroup(..).walk always
+-- @inline export pathWalkerYXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYYDownGroup(..).walk always
+-- @inline export pathWalkerYXYYRightGroup(..).walk always
+-- @inline export pathWalkerYXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXXDownGroup(..).walk always
+-- @inline export pathWalkerYYXXRightGroup(..).walk always
+-- @inline export pathWalkerYYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXYDownGroup(..).walk always
+-- @inline export pathWalkerYYXYRightGroup(..).walk always
+-- @inline export pathWalkerYYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYXDownGroup(..).walk always
+-- @inline export pathWalkerYYYXRightGroup(..).walk always
+-- @inline export pathWalkerYYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYYDownGroup(..).walk always
+-- @inline export pathWalkerYYYYRightGroup(..).walk always
+-- @inline export pathWalkerYYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXXXDownGroup(..).walk always
+-- @inline export pathWalkerXXXXXRightGroup(..).walk always
+-- @inline export pathWalkerXXXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXXYDownGroup(..).walk always
+-- @inline export pathWalkerXXXXYRightGroup(..).walk always
+-- @inline export pathWalkerXXXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXYXDownGroup(..).walk always
+-- @inline export pathWalkerXXXYXRightGroup(..).walk always
+-- @inline export pathWalkerXXXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXYYDownGroup(..).walk always
+-- @inline export pathWalkerXXXYYRightGroup(..).walk always
+-- @inline export pathWalkerXXXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYXXDownGroup(..).walk always
+-- @inline export pathWalkerXXYXXRightGroup(..).walk always
+-- @inline export pathWalkerXXYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYXYDownGroup(..).walk always
+-- @inline export pathWalkerXXYXYRightGroup(..).walk always
+-- @inline export pathWalkerXXYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYYXDownGroup(..).walk always
+-- @inline export pathWalkerXXYYXRightGroup(..).walk always
+-- @inline export pathWalkerXXYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYYYDownGroup(..).walk always
+-- @inline export pathWalkerXXYYYRightGroup(..).walk always
+-- @inline export pathWalkerXXYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXXXDownGroup(..).walk always
+-- @inline export pathWalkerXYXXXRightGroup(..).walk always
+-- @inline export pathWalkerXYXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXXYDownGroup(..).walk always
+-- @inline export pathWalkerXYXXYRightGroup(..).walk always
+-- @inline export pathWalkerXYXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXYXDownGroup(..).walk always
+-- @inline export pathWalkerXYXYXRightGroup(..).walk always
+-- @inline export pathWalkerXYXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXYYDownGroup(..).walk always
+-- @inline export pathWalkerXYXYYRightGroup(..).walk always
+-- @inline export pathWalkerXYXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYXXDownGroup(..).walk always
+-- @inline export pathWalkerXYYXXRightGroup(..).walk always
+-- @inline export pathWalkerXYYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYXYDownGroup(..).walk always
+-- @inline export pathWalkerXYYXYRightGroup(..).walk always
+-- @inline export pathWalkerXYYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYYXDownGroup(..).walk always
+-- @inline export pathWalkerXYYYXRightGroup(..).walk always
+-- @inline export pathWalkerXYYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYYYDownGroup(..).walk always
+-- @inline export pathWalkerXYYYYRightGroup(..).walk always
+-- @inline export pathWalkerXYYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXXXDownGroup(..).walk always
+-- @inline export pathWalkerYXXXXRightGroup(..).walk always
+-- @inline export pathWalkerYXXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXXYDownGroup(..).walk always
+-- @inline export pathWalkerYXXXYRightGroup(..).walk always
+-- @inline export pathWalkerYXXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXYXDownGroup(..).walk always
+-- @inline export pathWalkerYXXYXRightGroup(..).walk always
+-- @inline export pathWalkerYXXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXYYDownGroup(..).walk always
+-- @inline export pathWalkerYXXYYRightGroup(..).walk always
+-- @inline export pathWalkerYXXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYXXDownGroup(..).walk always
+-- @inline export pathWalkerYXYXXRightGroup(..).walk always
+-- @inline export pathWalkerYXYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYXYDownGroup(..).walk always
+-- @inline export pathWalkerYXYXYRightGroup(..).walk always
+-- @inline export pathWalkerYXYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYYXDownGroup(..).walk always
+-- @inline export pathWalkerYXYYXRightGroup(..).walk always
+-- @inline export pathWalkerYXYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYYYDownGroup(..).walk always
+-- @inline export pathWalkerYXYYYRightGroup(..).walk always
+-- @inline export pathWalkerYXYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXXXDownGroup(..).walk always
+-- @inline export pathWalkerYYXXXRightGroup(..).walk always
+-- @inline export pathWalkerYYXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXXYDownGroup(..).walk always
+-- @inline export pathWalkerYYXXYRightGroup(..).walk always
+-- @inline export pathWalkerYYXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXYXDownGroup(..).walk always
+-- @inline export pathWalkerYYXYXRightGroup(..).walk always
+-- @inline export pathWalkerYYXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXYYDownGroup(..).walk always
+-- @inline export pathWalkerYYXYYRightGroup(..).walk always
+-- @inline export pathWalkerYYXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYXXDownGroup(..).walk always
+-- @inline export pathWalkerYYYXXRightGroup(..).walk always
+-- @inline export pathWalkerYYYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYXYDownGroup(..).walk always
+-- @inline export pathWalkerYYYXYRightGroup(..).walk always
+-- @inline export pathWalkerYYYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYYXDownGroup(..).walk always
+-- @inline export pathWalkerYYYYXRightGroup(..).walk always
+-- @inline export pathWalkerYYYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYYYDownGroup(..).walk always
+-- @inline export pathWalkerYYYYYRightGroup(..).walk always
+-- @inline export pathWalkerYYYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXXXXDownGroup(..).walk always
+-- @inline export pathWalkerXXXXXXRightGroup(..).walk always
+-- @inline export pathWalkerXXXXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXXXYDownGroup(..).walk always
+-- @inline export pathWalkerXXXXXYRightGroup(..).walk always
+-- @inline export pathWalkerXXXXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXXYXDownGroup(..).walk always
+-- @inline export pathWalkerXXXXYXRightGroup(..).walk always
+-- @inline export pathWalkerXXXXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXXYYDownGroup(..).walk always
+-- @inline export pathWalkerXXXXYYRightGroup(..).walk always
+-- @inline export pathWalkerXXXXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXYXXDownGroup(..).walk always
+-- @inline export pathWalkerXXXYXXRightGroup(..).walk always
+-- @inline export pathWalkerXXXYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXYXYDownGroup(..).walk always
+-- @inline export pathWalkerXXXYXYRightGroup(..).walk always
+-- @inline export pathWalkerXXXYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXYYXDownGroup(..).walk always
+-- @inline export pathWalkerXXXYYXRightGroup(..).walk always
+-- @inline export pathWalkerXXXYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXXYYYDownGroup(..).walk always
+-- @inline export pathWalkerXXXYYYRightGroup(..).walk always
+-- @inline export pathWalkerXXXYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXXYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXXYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYXXXDownGroup(..).walk always
+-- @inline export pathWalkerXXYXXXRightGroup(..).walk always
+-- @inline export pathWalkerXXYXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYXXYDownGroup(..).walk always
+-- @inline export pathWalkerXXYXXYRightGroup(..).walk always
+-- @inline export pathWalkerXXYXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYXYXDownGroup(..).walk always
+-- @inline export pathWalkerXXYXYXRightGroup(..).walk always
+-- @inline export pathWalkerXXYXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYXYYDownGroup(..).walk always
+-- @inline export pathWalkerXXYXYYRightGroup(..).walk always
+-- @inline export pathWalkerXXYXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYYXXDownGroup(..).walk always
+-- @inline export pathWalkerXXYYXXRightGroup(..).walk always
+-- @inline export pathWalkerXXYYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYYXYDownGroup(..).walk always
+-- @inline export pathWalkerXXYYXYRightGroup(..).walk always
+-- @inline export pathWalkerXXYYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYYYXDownGroup(..).walk always
+-- @inline export pathWalkerXXYYYXRightGroup(..).walk always
+-- @inline export pathWalkerXXYYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXXYYYYDownGroup(..).walk always
+-- @inline export pathWalkerXXYYYYRightGroup(..).walk always
+-- @inline export pathWalkerXXYYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXXYYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXXYYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXXXXDownGroup(..).walk always
+-- @inline export pathWalkerXYXXXXRightGroup(..).walk always
+-- @inline export pathWalkerXYXXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXXXYDownGroup(..).walk always
+-- @inline export pathWalkerXYXXXYRightGroup(..).walk always
+-- @inline export pathWalkerXYXXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXXYXDownGroup(..).walk always
+-- @inline export pathWalkerXYXXYXRightGroup(..).walk always
+-- @inline export pathWalkerXYXXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXXYYDownGroup(..).walk always
+-- @inline export pathWalkerXYXXYYRightGroup(..).walk always
+-- @inline export pathWalkerXYXXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXYXXDownGroup(..).walk always
+-- @inline export pathWalkerXYXYXXRightGroup(..).walk always
+-- @inline export pathWalkerXYXYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXYXYDownGroup(..).walk always
+-- @inline export pathWalkerXYXYXYRightGroup(..).walk always
+-- @inline export pathWalkerXYXYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXYYXDownGroup(..).walk always
+-- @inline export pathWalkerXYXYYXRightGroup(..).walk always
+-- @inline export pathWalkerXYXYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYXYYYDownGroup(..).walk always
+-- @inline export pathWalkerXYXYYYRightGroup(..).walk always
+-- @inline export pathWalkerXYXYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYXYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYXYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYXXXDownGroup(..).walk always
+-- @inline export pathWalkerXYYXXXRightGroup(..).walk always
+-- @inline export pathWalkerXYYXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYXXYDownGroup(..).walk always
+-- @inline export pathWalkerXYYXXYRightGroup(..).walk always
+-- @inline export pathWalkerXYYXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYXYXDownGroup(..).walk always
+-- @inline export pathWalkerXYYXYXRightGroup(..).walk always
+-- @inline export pathWalkerXYYXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYXYYDownGroup(..).walk always
+-- @inline export pathWalkerXYYXYYRightGroup(..).walk always
+-- @inline export pathWalkerXYYXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYYXXDownGroup(..).walk always
+-- @inline export pathWalkerXYYYXXRightGroup(..).walk always
+-- @inline export pathWalkerXYYYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYYXYDownGroup(..).walk always
+-- @inline export pathWalkerXYYYXYRightGroup(..).walk always
+-- @inline export pathWalkerXYYYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYYYXDownGroup(..).walk always
+-- @inline export pathWalkerXYYYYXRightGroup(..).walk always
+-- @inline export pathWalkerXYYYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerXYYYYYDownGroup(..).walk always
+-- @inline export pathWalkerXYYYYYRightGroup(..).walk always
+-- @inline export pathWalkerXYYYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerXYYYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerXYYYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXXXXDownGroup(..).walk always
+-- @inline export pathWalkerYXXXXXRightGroup(..).walk always
+-- @inline export pathWalkerYXXXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXXXYDownGroup(..).walk always
+-- @inline export pathWalkerYXXXXYRightGroup(..).walk always
+-- @inline export pathWalkerYXXXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXXYXDownGroup(..).walk always
+-- @inline export pathWalkerYXXXYXRightGroup(..).walk always
+-- @inline export pathWalkerYXXXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXXYYDownGroup(..).walk always
+-- @inline export pathWalkerYXXXYYRightGroup(..).walk always
+-- @inline export pathWalkerYXXXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXYXXDownGroup(..).walk always
+-- @inline export pathWalkerYXXYXXRightGroup(..).walk always
+-- @inline export pathWalkerYXXYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXYXYDownGroup(..).walk always
+-- @inline export pathWalkerYXXYXYRightGroup(..).walk always
+-- @inline export pathWalkerYXXYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXYYXDownGroup(..).walk always
+-- @inline export pathWalkerYXXYYXRightGroup(..).walk always
+-- @inline export pathWalkerYXXYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXXYYYDownGroup(..).walk always
+-- @inline export pathWalkerYXXYYYRightGroup(..).walk always
+-- @inline export pathWalkerYXXYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXXYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXXYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYXXXDownGroup(..).walk always
+-- @inline export pathWalkerYXYXXXRightGroup(..).walk always
+-- @inline export pathWalkerYXYXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYXXYDownGroup(..).walk always
+-- @inline export pathWalkerYXYXXYRightGroup(..).walk always
+-- @inline export pathWalkerYXYXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYXYXDownGroup(..).walk always
+-- @inline export pathWalkerYXYXYXRightGroup(..).walk always
+-- @inline export pathWalkerYXYXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYXYYDownGroup(..).walk always
+-- @inline export pathWalkerYXYXYYRightGroup(..).walk always
+-- @inline export pathWalkerYXYXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYYXXDownGroup(..).walk always
+-- @inline export pathWalkerYXYYXXRightGroup(..).walk always
+-- @inline export pathWalkerYXYYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYYXYDownGroup(..).walk always
+-- @inline export pathWalkerYXYYXYRightGroup(..).walk always
+-- @inline export pathWalkerYXYYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYYYXDownGroup(..).walk always
+-- @inline export pathWalkerYXYYYXRightGroup(..).walk always
+-- @inline export pathWalkerYXYYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYXYYYYDownGroup(..).walk always
+-- @inline export pathWalkerYXYYYYRightGroup(..).walk always
+-- @inline export pathWalkerYXYYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYXYYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYXYYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXXXXDownGroup(..).walk always
+-- @inline export pathWalkerYYXXXXRightGroup(..).walk always
+-- @inline export pathWalkerYYXXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXXXYDownGroup(..).walk always
+-- @inline export pathWalkerYYXXXYRightGroup(..).walk always
+-- @inline export pathWalkerYYXXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXXYXDownGroup(..).walk always
+-- @inline export pathWalkerYYXXYXRightGroup(..).walk always
+-- @inline export pathWalkerYYXXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXXYYDownGroup(..).walk always
+-- @inline export pathWalkerYYXXYYRightGroup(..).walk always
+-- @inline export pathWalkerYYXXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXYXXDownGroup(..).walk always
+-- @inline export pathWalkerYYXYXXRightGroup(..).walk always
+-- @inline export pathWalkerYYXYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXYXYDownGroup(..).walk always
+-- @inline export pathWalkerYYXYXYRightGroup(..).walk always
+-- @inline export pathWalkerYYXYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXYYXDownGroup(..).walk always
+-- @inline export pathWalkerYYXYYXRightGroup(..).walk always
+-- @inline export pathWalkerYYXYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYXYYYDownGroup(..).walk always
+-- @inline export pathWalkerYYXYYYRightGroup(..).walk always
+-- @inline export pathWalkerYYXYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYXYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYXYYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYXXXDownGroup(..).walk always
+-- @inline export pathWalkerYYYXXXRightGroup(..).walk always
+-- @inline export pathWalkerYYYXXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYXXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYXXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYXXYDownGroup(..).walk always
+-- @inline export pathWalkerYYYXXYRightGroup(..).walk always
+-- @inline export pathWalkerYYYXXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYXXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYXXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYXYXDownGroup(..).walk always
+-- @inline export pathWalkerYYYXYXRightGroup(..).walk always
+-- @inline export pathWalkerYYYXYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYXYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYXYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYXYYDownGroup(..).walk always
+-- @inline export pathWalkerYYYXYYRightGroup(..).walk always
+-- @inline export pathWalkerYYYXYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYXYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYXYYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYYXXDownGroup(..).walk always
+-- @inline export pathWalkerYYYYXXRightGroup(..).walk always
+-- @inline export pathWalkerYYYYXXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYYXXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYYXXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYYXYDownGroup(..).walk always
+-- @inline export pathWalkerYYYYXYRightGroup(..).walk always
+-- @inline export pathWalkerYYYYXYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYYXYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYYXYTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYYYXDownGroup(..).walk always
+-- @inline export pathWalkerYYYYYXRightGroup(..).walk always
+-- @inline export pathWalkerYYYYYXContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYYYXTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYYYXTwoContGroupsWithMarkers(..).walk always
+
+-- @inline export pathWalkerYYYYYYDownGroup(..).walk always
+-- @inline export pathWalkerYYYYYYRightGroup(..).walk always
+-- @inline export pathWalkerYYYYYYContGroupWithMarkers(..).walk always
+-- @inline export pathWalkerYYYYYYTwoContGroups(..).walk always
+-- @inline export pathWalkerYYYYYYTwoContGroupsWithMarkers(..).walk always
+
+
 module Deku.PathWalker where
 
 import Prelude
@@ -54,20 +820,20 @@ class ProcessInstructions :: Row Type -> RL.RowList Symbol -> Constraint
 class ProcessInstructions r rl | rl -> r where
   processInstructions :: EffectFn5 InstructionDelegate (Proxy rl) { | r } DOMInterpret MElement Unit
 
-instance ProcessInstructions r RL.Nil where
+instance processInstructionsNil :: ProcessInstructions r RL.Nil where
   processInstructions = mkEffectFn5 \_ _ _ _ _ -> pure unit
 
-instance (ProcessInstructions r a) => PathWalker (Path.MarkerGroup a) r where
+instance pathWalkerMarkerGroup :: (ProcessInstructions r a) => PathWalker (Path.MarkerGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ a) r di e
 
-instance (IsSymbol k, R.Cons k v r' r, ProcessInstruction k v, ProcessInstructions r c) => ProcessInstructions r (RL.Cons k k c) where
+instance processInstructionsCons :: (IsSymbol k, R.Cons k v r' r, ProcessInstruction k v, ProcessInstructions r c) => ProcessInstructions r (RL.Cons k k c) where
   processInstructions = mkEffectFn5 \instr _ r di e -> do
       runEffectFn5 processInstruction instr (Proxy :: _ k) (get (Proxy :: _ k) r) di e
       runEffectFn5 processInstructions instr (Proxy :: _ c) r di e
 
-instance IsSymbol k => ProcessInstruction k String where
+instance processInstructionString :: IsSymbol k => ProcessInstruction k String where
   processInstruction = mkEffectFn5 \(InstructionDelegate { processString }) k s di e -> do
     
     runEffectFn4 processString (reflectSymbol k) s di e
@@ -79,11 +845,11 @@ processAttPursx = mkEffectFn4 \_ att di e -> do
     handleAtts di obj (toDekuElement (mEltElt e)) star
       [  att ]
 
-instance IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where
+instance processInstructionPollAtt :: IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where
   processInstruction = mkEffectFn5 \(InstructionDelegate { processAttribute }) k att di e -> do
     runEffectFn4 processAttribute (reflectSymbol k) (map unsafeUnAttribute att) di e
 
-instance IsSymbol k => ProcessInstruction k (Poll String) where
+instance processInstructionPollString :: IsSymbol k => ProcessInstruction k (Poll String) where
   processInstruction = mkEffectFn5 \(InstructionDelegate { processPollString }) k pstring di e -> do
     runEffectFn4 processPollString (reflectSymbol k) pstring di e
 
@@ -115,7 +881,7 @@ processNutPursx splitter = mkEffectFn4 \k (Nut nut) di@(DOMInterpret { makeEleme
         remove (Text.toChildNode t)
       NoOutcome -> pure unit
 
-instance IsSymbol k => ProcessInstruction k Nut where
+instance processInstructionNut :: IsSymbol k => ProcessInstruction k Nut where
   processInstruction = mkEffectFn5 \(InstructionDelegate { processNut }) k nut di e -> do
     runEffectFn4 processNut (reflectSymbol k) nut di e
 
@@ -508,27 +1274,27 @@ foreign import yyyyyyRightGroup :: EffectFn1 MElement MElement
 
 ----------- new section
 ---
-instance PathWalker a r => PathWalker (Path.DownGroup a) r where
+instance pathWalkerDownGroup :: PathWalker a r => PathWalker (Path.DownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 downGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.RightGroup a) r where
+instance pathWalkerRightGroup :: PathWalker a r => PathWalker (Path.RightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 rightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.ContGroupWithMarkers zz a) r where
+instance pathWalkerContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.ContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.TwoContGroups a b) r where
+instance pathWalkerTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.TwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.TwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.TwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -537,27 +1303,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
 
 ---- level 0
 ---
-instance PathWalker a r => PathWalker (Path.XDownGroup a) r where
+instance pathWalkerXDownGroup :: PathWalker a r => PathWalker (Path.XDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XRightGroup a) r where
+instance pathWalkerXRightGroup :: PathWalker a r => PathWalker (Path.XRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XContGroupWithMarkers zz a) r where
+instance pathWalkerXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XTwoContGroups a b) r where
+instance pathWalkerXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -565,27 +1331,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YDownGroup a) r where
+instance pathWalkerYDownGroup :: PathWalker a r => PathWalker (Path.YDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YRightGroup a) r where
+instance pathWalkerYRightGroup :: PathWalker a r => PathWalker (Path.YRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YContGroupWithMarkers zz a) r where
+instance pathWalkerYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YTwoContGroups a b) r where
+instance pathWalkerYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -594,27 +1360,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
 
 ---- level 1
 ---
-instance PathWalker a r => PathWalker (Path.XXDownGroup a) r where
+instance pathWalkerXXDownGroup :: PathWalker a r => PathWalker (Path.XXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXRightGroup a) r where
+instance pathWalkerXXRightGroup :: PathWalker a r => PathWalker (Path.XXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXContGroupWithMarkers zz a) r where
+instance pathWalkerXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXTwoContGroups a b) r where
+instance pathWalkerXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -622,27 +1388,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYDownGroup a) r where
+instance pathWalkerXYDownGroup :: PathWalker a r => PathWalker (Path.XYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYRightGroup a) r where
+instance pathWalkerXYRightGroup :: PathWalker a r => PathWalker (Path.XYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYContGroupWithMarkers zz a) r where
+instance pathWalkerXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYTwoContGroups a b) r where
+instance pathWalkerXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -650,27 +1416,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXDownGroup a) r where
+instance pathWalkerYXDownGroup :: PathWalker a r => PathWalker (Path.YXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXRightGroup a) r where
+instance pathWalkerYXRightGroup :: PathWalker a r => PathWalker (Path.YXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXContGroupWithMarkers zz a) r where
+instance pathWalkerYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXTwoContGroups a b) r where
+instance pathWalkerYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -678,27 +1444,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYDownGroup a) r where
+instance pathWalkerYYDownGroup :: PathWalker a r => PathWalker (Path.YYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYRightGroup a) r where
+instance pathWalkerYYRightGroup :: PathWalker a r => PathWalker (Path.YYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYContGroupWithMarkers zz a) r where
+instance pathWalkerYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYTwoContGroups a b) r where
+instance pathWalkerYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -707,27 +1473,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
 
 ---- level 2
 ---
-instance PathWalker a r => PathWalker (Path.XXXDownGroup a) r where
+instance pathWalkerXXXDownGroup :: PathWalker a r => PathWalker (Path.XXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXRightGroup a) r where
+instance pathWalkerXXXRightGroup :: PathWalker a r => PathWalker (Path.XXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXContGroupWithMarkers zz a) r where
+instance pathWalkerXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXTwoContGroups a b) r where
+instance pathWalkerXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -735,27 +1501,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYDownGroup a) r where
+instance pathWalkerXXYDownGroup :: PathWalker a r => PathWalker (Path.XXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYRightGroup a) r where
+instance pathWalkerXXYRightGroup :: PathWalker a r => PathWalker (Path.XXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYContGroupWithMarkers zz a) r where
+instance pathWalkerXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYTwoContGroups a b) r where
+instance pathWalkerXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -763,27 +1529,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXDownGroup a) r where
+instance pathWalkerXYXDownGroup :: PathWalker a r => PathWalker (Path.XYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXRightGroup a) r where
+instance pathWalkerXYXRightGroup :: PathWalker a r => PathWalker (Path.XYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXContGroupWithMarkers zz a) r where
+instance pathWalkerXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXTwoContGroups a b) r where
+instance pathWalkerXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -791,27 +1557,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYDownGroup a) r where
+instance pathWalkerXYYDownGroup :: PathWalker a r => PathWalker (Path.XYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYRightGroup a) r where
+instance pathWalkerXYYRightGroup :: PathWalker a r => PathWalker (Path.XYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYContGroupWithMarkers zz a) r where
+instance pathWalkerXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYTwoContGroups a b) r where
+instance pathWalkerXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -819,27 +1585,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXDownGroup a) r where
+instance pathWalkerYXXDownGroup :: PathWalker a r => PathWalker (Path.YXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXRightGroup a) r where
+instance pathWalkerYXXRightGroup :: PathWalker a r => PathWalker (Path.YXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXContGroupWithMarkers zz a) r where
+instance pathWalkerYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXTwoContGroups a b) r where
+instance pathWalkerYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -847,27 +1613,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYDownGroup a) r where
+instance pathWalkerYXYDownGroup :: PathWalker a r => PathWalker (Path.YXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYRightGroup a) r where
+instance pathWalkerYXYRightGroup :: PathWalker a r => PathWalker (Path.YXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYContGroupWithMarkers zz a) r where
+instance pathWalkerYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYTwoContGroups a b) r where
+instance pathWalkerYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -875,27 +1641,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXDownGroup a) r where
+instance pathWalkerYYXDownGroup :: PathWalker a r => PathWalker (Path.YYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXRightGroup a) r where
+instance pathWalkerYYXRightGroup :: PathWalker a r => PathWalker (Path.YYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXContGroupWithMarkers zz a) r where
+instance pathWalkerYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXTwoContGroups a b) r where
+instance pathWalkerYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -903,27 +1669,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYDownGroup a) r where
+instance pathWalkerYYYDownGroup :: PathWalker a r => PathWalker (Path.YYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYRightGroup a) r where
+instance pathWalkerYYYRightGroup :: PathWalker a r => PathWalker (Path.YYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYContGroupWithMarkers zz a) r where
+instance pathWalkerYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYTwoContGroups a b) r where
+instance pathWalkerYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -932,27 +1698,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
 
 ---- level 3
 ---
-instance PathWalker a r => PathWalker (Path.XXXXDownGroup a) r where
+instance pathWalkerXXXXDownGroup :: PathWalker a r => PathWalker (Path.XXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXXRightGroup a) r where
+instance pathWalkerXXXXRightGroup :: PathWalker a r => PathWalker (Path.XXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXContGroupWithMarkers zz a) r where
+instance pathWalkerXXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXTwoContGroups a b) r where
+instance pathWalkerXXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -960,27 +1726,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXYDownGroup a) r where
+instance pathWalkerXXXYDownGroup :: PathWalker a r => PathWalker (Path.XXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXYRightGroup a) r where
+instance pathWalkerXXXYRightGroup :: PathWalker a r => PathWalker (Path.XXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYContGroupWithMarkers zz a) r where
+instance pathWalkerXXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYTwoContGroups a b) r where
+instance pathWalkerXXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -988,27 +1754,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYXDownGroup a) r where
+instance pathWalkerXXYXDownGroup :: PathWalker a r => PathWalker (Path.XXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYXRightGroup a) r where
+instance pathWalkerXXYXRightGroup :: PathWalker a r => PathWalker (Path.XXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXContGroupWithMarkers zz a) r where
+instance pathWalkerXXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXTwoContGroups a b) r where
+instance pathWalkerXXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1016,27 +1782,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYYDownGroup a) r where
+instance pathWalkerXXYYDownGroup :: PathWalker a r => PathWalker (Path.XXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYYRightGroup a) r where
+instance pathWalkerXXYYRightGroup :: PathWalker a r => PathWalker (Path.XXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYContGroupWithMarkers zz a) r where
+instance pathWalkerXXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYTwoContGroups a b) r where
+instance pathWalkerXXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1044,27 +1810,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXXDownGroup a) r where
+instance pathWalkerXYXXDownGroup :: PathWalker a r => PathWalker (Path.XYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXXRightGroup a) r where
+instance pathWalkerXYXXRightGroup :: PathWalker a r => PathWalker (Path.XYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXContGroupWithMarkers zz a) r where
+instance pathWalkerXYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXTwoContGroups a b) r where
+instance pathWalkerXYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1072,27 +1838,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXYDownGroup a) r where
+instance pathWalkerXYXYDownGroup :: PathWalker a r => PathWalker (Path.XYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXYRightGroup a) r where
+instance pathWalkerXYXYRightGroup :: PathWalker a r => PathWalker (Path.XYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYContGroupWithMarkers zz a) r where
+instance pathWalkerXYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYTwoContGroups a b) r where
+instance pathWalkerXYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1100,27 +1866,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYXDownGroup a) r where
+instance pathWalkerXYYXDownGroup :: PathWalker a r => PathWalker (Path.XYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYXRightGroup a) r where
+instance pathWalkerXYYXRightGroup :: PathWalker a r => PathWalker (Path.XYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXContGroupWithMarkers zz a) r where
+instance pathWalkerXYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXTwoContGroups a b) r where
+instance pathWalkerXYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1128,27 +1894,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYYDownGroup a) r where
+instance pathWalkerXYYYDownGroup :: PathWalker a r => PathWalker (Path.XYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYYRightGroup a) r where
+instance pathWalkerXYYYRightGroup :: PathWalker a r => PathWalker (Path.XYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYContGroupWithMarkers zz a) r where
+instance pathWalkerXYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYTwoContGroups a b) r where
+instance pathWalkerXYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1156,27 +1922,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXXDownGroup a) r where
+instance pathWalkerYXXXDownGroup :: PathWalker a r => PathWalker (Path.YXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXXRightGroup a) r where
+instance pathWalkerYXXXRightGroup :: PathWalker a r => PathWalker (Path.YXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXContGroupWithMarkers zz a) r where
+instance pathWalkerYXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXTwoContGroups a b) r where
+instance pathWalkerYXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1184,27 +1950,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXYDownGroup a) r where
+instance pathWalkerYXXYDownGroup :: PathWalker a r => PathWalker (Path.YXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXYRightGroup a) r where
+instance pathWalkerYXXYRightGroup :: PathWalker a r => PathWalker (Path.YXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYContGroupWithMarkers zz a) r where
+instance pathWalkerYXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYTwoContGroups a b) r where
+instance pathWalkerYXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1212,27 +1978,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYXDownGroup a) r where
+instance pathWalkerYXYXDownGroup :: PathWalker a r => PathWalker (Path.YXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYXRightGroup a) r where
+instance pathWalkerYXYXRightGroup :: PathWalker a r => PathWalker (Path.YXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXContGroupWithMarkers zz a) r where
+instance pathWalkerYXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXTwoContGroups a b) r where
+instance pathWalkerYXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1240,27 +2006,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYYDownGroup a) r where
+instance pathWalkerYXYYDownGroup :: PathWalker a r => PathWalker (Path.YXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYYRightGroup a) r where
+instance pathWalkerYXYYRightGroup :: PathWalker a r => PathWalker (Path.YXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYContGroupWithMarkers zz a) r where
+instance pathWalkerYXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYTwoContGroups a b) r where
+instance pathWalkerYXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1268,27 +2034,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXXDownGroup a) r where
+instance pathWalkerYYXXDownGroup :: PathWalker a r => PathWalker (Path.YYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXXRightGroup a) r where
+instance pathWalkerYYXXRightGroup :: PathWalker a r => PathWalker (Path.YYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXContGroupWithMarkers zz a) r where
+instance pathWalkerYYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXTwoContGroups a b) r where
+instance pathWalkerYYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1296,27 +2062,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXYDownGroup a) r where
+instance pathWalkerYYXYDownGroup :: PathWalker a r => PathWalker (Path.YYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXYRightGroup a) r where
+instance pathWalkerYYXYRightGroup :: PathWalker a r => PathWalker (Path.YYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYContGroupWithMarkers zz a) r where
+instance pathWalkerYYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYTwoContGroups a b) r where
+instance pathWalkerYYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1324,27 +2090,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYXDownGroup a) r where
+instance pathWalkerYYYXDownGroup :: PathWalker a r => PathWalker (Path.YYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYXRightGroup a) r where
+instance pathWalkerYYYXRightGroup :: PathWalker a r => PathWalker (Path.YYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXContGroupWithMarkers zz a) r where
+instance pathWalkerYYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXTwoContGroups a b) r where
+instance pathWalkerYYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1352,27 +2118,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYYDownGroup a) r where
+instance pathWalkerYYYYDownGroup :: PathWalker a r => PathWalker (Path.YYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYYRightGroup a) r where
+instance pathWalkerYYYYRightGroup :: PathWalker a r => PathWalker (Path.YYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYContGroupWithMarkers zz a) r where
+instance pathWalkerYYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYTwoContGroups a b) r where
+instance pathWalkerYYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1381,27 +2147,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
 
 ---- level 4
 ---
-instance PathWalker a r => PathWalker (Path.XXXXXDownGroup a) r where
+instance pathWalkerXXXXXDownGroup :: PathWalker a r => PathWalker (Path.XXXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXXXRightGroup a) r where
+instance pathWalkerXXXXXRightGroup :: PathWalker a r => PathWalker (Path.XXXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXXContGroupWithMarkers zz a) r where
+instance pathWalkerXXXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXXTwoContGroups a b) r where
+instance pathWalkerXXXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1409,27 +2175,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXXYDownGroup a) r where
+instance pathWalkerXXXXYDownGroup :: PathWalker a r => PathWalker (Path.XXXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXXYRightGroup a) r where
+instance pathWalkerXXXXYRightGroup :: PathWalker a r => PathWalker (Path.XXXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXYContGroupWithMarkers zz a) r where
+instance pathWalkerXXXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXYTwoContGroups a b) r where
+instance pathWalkerXXXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1437,27 +2203,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXYXDownGroup a) r where
+instance pathWalkerXXXYXDownGroup :: PathWalker a r => PathWalker (Path.XXXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXYXRightGroup a) r where
+instance pathWalkerXXXYXRightGroup :: PathWalker a r => PathWalker (Path.XXXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYXContGroupWithMarkers zz a) r where
+instance pathWalkerXXXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYXTwoContGroups a b) r where
+instance pathWalkerXXXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1465,27 +2231,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXYYDownGroup a) r where
+instance pathWalkerXXXYYDownGroup :: PathWalker a r => PathWalker (Path.XXXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXYYRightGroup a) r where
+instance pathWalkerXXXYYRightGroup :: PathWalker a r => PathWalker (Path.XXXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYYContGroupWithMarkers zz a) r where
+instance pathWalkerXXXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYYTwoContGroups a b) r where
+instance pathWalkerXXXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1493,27 +2259,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYXXDownGroup a) r where
+instance pathWalkerXXYXXDownGroup :: PathWalker a r => PathWalker (Path.XXYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYXXRightGroup a) r where
+instance pathWalkerXXYXXRightGroup :: PathWalker a r => PathWalker (Path.XXYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXXContGroupWithMarkers zz a) r where
+instance pathWalkerXXYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXXTwoContGroups a b) r where
+instance pathWalkerXXYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1521,27 +2287,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYXYDownGroup a) r where
+instance pathWalkerXXYXYDownGroup :: PathWalker a r => PathWalker (Path.XXYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYXYRightGroup a) r where
+instance pathWalkerXXYXYRightGroup :: PathWalker a r => PathWalker (Path.XXYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXYContGroupWithMarkers zz a) r where
+instance pathWalkerXXYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXYTwoContGroups a b) r where
+instance pathWalkerXXYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1549,27 +2315,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYYXDownGroup a) r where
+instance pathWalkerXXYYXDownGroup :: PathWalker a r => PathWalker (Path.XXYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYYXRightGroup a) r where
+instance pathWalkerXXYYXRightGroup :: PathWalker a r => PathWalker (Path.XXYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYXContGroupWithMarkers zz a) r where
+instance pathWalkerXXYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYXTwoContGroups a b) r where
+instance pathWalkerXXYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1577,27 +2343,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYYYDownGroup a) r where
+instance pathWalkerXXYYYDownGroup :: PathWalker a r => PathWalker (Path.XXYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYYYRightGroup a) r where
+instance pathWalkerXXYYYRightGroup :: PathWalker a r => PathWalker (Path.XXYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYYContGroupWithMarkers zz a) r where
+instance pathWalkerXXYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYYTwoContGroups a b) r where
+instance pathWalkerXXYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1605,27 +2371,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXXXDownGroup a) r where
+instance pathWalkerXYXXXDownGroup :: PathWalker a r => PathWalker (Path.XYXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXXXRightGroup a) r where
+instance pathWalkerXYXXXRightGroup :: PathWalker a r => PathWalker (Path.XYXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXXContGroupWithMarkers zz a) r where
+instance pathWalkerXYXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXXTwoContGroups a b) r where
+instance pathWalkerXYXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1633,27 +2399,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXXYDownGroup a) r where
+instance pathWalkerXYXXYDownGroup :: PathWalker a r => PathWalker (Path.XYXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXXYRightGroup a) r where
+instance pathWalkerXYXXYRightGroup :: PathWalker a r => PathWalker (Path.XYXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXYContGroupWithMarkers zz a) r where
+instance pathWalkerXYXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXYTwoContGroups a b) r where
+instance pathWalkerXYXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1661,27 +2427,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXYXDownGroup a) r where
+instance pathWalkerXYXYXDownGroup :: PathWalker a r => PathWalker (Path.XYXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXYXRightGroup a) r where
+instance pathWalkerXYXYXRightGroup :: PathWalker a r => PathWalker (Path.XYXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYXContGroupWithMarkers zz a) r where
+instance pathWalkerXYXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYXTwoContGroups a b) r where
+instance pathWalkerXYXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1689,27 +2455,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXYYDownGroup a) r where
+instance pathWalkerXYXYYDownGroup :: PathWalker a r => PathWalker (Path.XYXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXYYRightGroup a) r where
+instance pathWalkerXYXYYRightGroup :: PathWalker a r => PathWalker (Path.XYXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYYContGroupWithMarkers zz a) r where
+instance pathWalkerXYXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYYTwoContGroups a b) r where
+instance pathWalkerXYXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1717,27 +2483,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYXXDownGroup a) r where
+instance pathWalkerXYYXXDownGroup :: PathWalker a r => PathWalker (Path.XYYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYXXRightGroup a) r where
+instance pathWalkerXYYXXRightGroup :: PathWalker a r => PathWalker (Path.XYYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXXContGroupWithMarkers zz a) r where
+instance pathWalkerXYYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXXTwoContGroups a b) r where
+instance pathWalkerXYYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1745,27 +2511,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYXYDownGroup a) r where
+instance pathWalkerXYYXYDownGroup :: PathWalker a r => PathWalker (Path.XYYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYXYRightGroup a) r where
+instance pathWalkerXYYXYRightGroup :: PathWalker a r => PathWalker (Path.XYYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXYContGroupWithMarkers zz a) r where
+instance pathWalkerXYYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXYTwoContGroups a b) r where
+instance pathWalkerXYYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1773,27 +2539,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYYXDownGroup a) r where
+instance pathWalkerXYYYXDownGroup :: PathWalker a r => PathWalker (Path.XYYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYYXRightGroup a) r where
+instance pathWalkerXYYYXRightGroup :: PathWalker a r => PathWalker (Path.XYYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYXContGroupWithMarkers zz a) r where
+instance pathWalkerXYYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYXTwoContGroups a b) r where
+instance pathWalkerXYYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1801,27 +2567,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYYYDownGroup a) r where
+instance pathWalkerXYYYYDownGroup :: PathWalker a r => PathWalker (Path.XYYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYYYRightGroup a) r where
+instance pathWalkerXYYYYRightGroup :: PathWalker a r => PathWalker (Path.XYYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYYContGroupWithMarkers zz a) r where
+instance pathWalkerXYYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYYTwoContGroups a b) r where
+instance pathWalkerXYYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1829,27 +2595,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXXXDownGroup a) r where
+instance pathWalkerYXXXXDownGroup :: PathWalker a r => PathWalker (Path.YXXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXXXRightGroup a) r where
+instance pathWalkerYXXXXRightGroup :: PathWalker a r => PathWalker (Path.YXXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXXContGroupWithMarkers zz a) r where
+instance pathWalkerYXXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXXTwoContGroups a b) r where
+instance pathWalkerYXXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1857,27 +2623,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXXYDownGroup a) r where
+instance pathWalkerYXXXYDownGroup :: PathWalker a r => PathWalker (Path.YXXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXXYRightGroup a) r where
+instance pathWalkerYXXXYRightGroup :: PathWalker a r => PathWalker (Path.YXXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXYContGroupWithMarkers zz a) r where
+instance pathWalkerYXXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXYTwoContGroups a b) r where
+instance pathWalkerYXXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1885,27 +2651,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXYXDownGroup a) r where
+instance pathWalkerYXXYXDownGroup :: PathWalker a r => PathWalker (Path.YXXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXYXRightGroup a) r where
+instance pathWalkerYXXYXRightGroup :: PathWalker a r => PathWalker (Path.YXXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYXContGroupWithMarkers zz a) r where
+instance pathWalkerYXXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYXTwoContGroups a b) r where
+instance pathWalkerYXXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1913,27 +2679,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXYYDownGroup a) r where
+instance pathWalkerYXXYYDownGroup :: PathWalker a r => PathWalker (Path.YXXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXYYRightGroup a) r where
+instance pathWalkerYXXYYRightGroup :: PathWalker a r => PathWalker (Path.YXXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYYContGroupWithMarkers zz a) r where
+instance pathWalkerYXXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYYTwoContGroups a b) r where
+instance pathWalkerYXXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1941,27 +2707,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYXXDownGroup a) r where
+instance pathWalkerYXYXXDownGroup :: PathWalker a r => PathWalker (Path.YXYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYXXRightGroup a) r where
+instance pathWalkerYXYXXRightGroup :: PathWalker a r => PathWalker (Path.YXYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXXContGroupWithMarkers zz a) r where
+instance pathWalkerYXYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXXTwoContGroups a b) r where
+instance pathWalkerYXYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1969,27 +2735,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYXYDownGroup a) r where
+instance pathWalkerYXYXYDownGroup :: PathWalker a r => PathWalker (Path.YXYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYXYRightGroup a) r where
+instance pathWalkerYXYXYRightGroup :: PathWalker a r => PathWalker (Path.YXYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXYContGroupWithMarkers zz a) r where
+instance pathWalkerYXYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXYTwoContGroups a b) r where
+instance pathWalkerYXYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -1997,27 +2763,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYYXDownGroup a) r where
+instance pathWalkerYXYYXDownGroup :: PathWalker a r => PathWalker (Path.YXYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYYXRightGroup a) r where
+instance pathWalkerYXYYXRightGroup :: PathWalker a r => PathWalker (Path.YXYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYXContGroupWithMarkers zz a) r where
+instance pathWalkerYXYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYXTwoContGroups a b) r where
+instance pathWalkerYXYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2025,27 +2791,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYYYDownGroup a) r where
+instance pathWalkerYXYYYDownGroup :: PathWalker a r => PathWalker (Path.YXYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYYYRightGroup a) r where
+instance pathWalkerYXYYYRightGroup :: PathWalker a r => PathWalker (Path.YXYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYYContGroupWithMarkers zz a) r where
+instance pathWalkerYXYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYYTwoContGroups a b) r where
+instance pathWalkerYXYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2053,27 +2819,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXXXDownGroup a) r where
+instance pathWalkerYYXXXDownGroup :: PathWalker a r => PathWalker (Path.YYXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXXXRightGroup a) r where
+instance pathWalkerYYXXXRightGroup :: PathWalker a r => PathWalker (Path.YYXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXXContGroupWithMarkers zz a) r where
+instance pathWalkerYYXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXXTwoContGroups a b) r where
+instance pathWalkerYYXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2081,27 +2847,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXXYDownGroup a) r where
+instance pathWalkerYYXXYDownGroup :: PathWalker a r => PathWalker (Path.YYXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXXYRightGroup a) r where
+instance pathWalkerYYXXYRightGroup :: PathWalker a r => PathWalker (Path.YYXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXYContGroupWithMarkers zz a) r where
+instance pathWalkerYYXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXYTwoContGroups a b) r where
+instance pathWalkerYYXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2109,27 +2875,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXYXDownGroup a) r where
+instance pathWalkerYYXYXDownGroup :: PathWalker a r => PathWalker (Path.YYXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXYXRightGroup a) r where
+instance pathWalkerYYXYXRightGroup :: PathWalker a r => PathWalker (Path.YYXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYXContGroupWithMarkers zz a) r where
+instance pathWalkerYYXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYXTwoContGroups a b) r where
+instance pathWalkerYYXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2137,27 +2903,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXYYDownGroup a) r where
+instance pathWalkerYYXYYDownGroup :: PathWalker a r => PathWalker (Path.YYXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXYYRightGroup a) r where
+instance pathWalkerYYXYYRightGroup :: PathWalker a r => PathWalker (Path.YYXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYYContGroupWithMarkers zz a) r where
+instance pathWalkerYYXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYYTwoContGroups a b) r where
+instance pathWalkerYYXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2165,27 +2931,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYXXDownGroup a) r where
+instance pathWalkerYYYXXDownGroup :: PathWalker a r => PathWalker (Path.YYYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYXXRightGroup a) r where
+instance pathWalkerYYYXXRightGroup :: PathWalker a r => PathWalker (Path.YYYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXXContGroupWithMarkers zz a) r where
+instance pathWalkerYYYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXXTwoContGroups a b) r where
+instance pathWalkerYYYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2193,27 +2959,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYXYDownGroup a) r where
+instance pathWalkerYYYXYDownGroup :: PathWalker a r => PathWalker (Path.YYYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYXYRightGroup a) r where
+instance pathWalkerYYYXYRightGroup :: PathWalker a r => PathWalker (Path.YYYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXYContGroupWithMarkers zz a) r where
+instance pathWalkerYYYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXYTwoContGroups a b) r where
+instance pathWalkerYYYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2221,27 +2987,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYYXDownGroup a) r where
+instance pathWalkerYYYYXDownGroup :: PathWalker a r => PathWalker (Path.YYYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYYXRightGroup a) r where
+instance pathWalkerYYYYXRightGroup :: PathWalker a r => PathWalker (Path.YYYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYXContGroupWithMarkers zz a) r where
+instance pathWalkerYYYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYXTwoContGroups a b) r where
+instance pathWalkerYYYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2249,27 +3015,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYYYDownGroup a) r where
+instance pathWalkerYYYYYDownGroup :: PathWalker a r => PathWalker (Path.YYYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYYYRightGroup a) r where
+instance pathWalkerYYYYYRightGroup :: PathWalker a r => PathWalker (Path.YYYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYYContGroupWithMarkers zz a) r where
+instance pathWalkerYYYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYYTwoContGroups a b) r where
+instance pathWalkerYYYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2278,27 +3044,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
 
 ---- level 5
 ---
-instance PathWalker a r => PathWalker (Path.XXXXXXDownGroup a) r where
+instance pathWalkerXXXXXXDownGroup :: PathWalker a r => PathWalker (Path.XXXXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXXXXRightGroup a) r where
+instance pathWalkerXXXXXXRightGroup :: PathWalker a r => PathWalker (Path.XXXXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXXXContGroupWithMarkers zz a) r where
+instance pathWalkerXXXXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXXXTwoContGroups a b) r where
+instance pathWalkerXXXXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2306,27 +3072,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXXXYDownGroup a) r where
+instance pathWalkerXXXXXYDownGroup :: PathWalker a r => PathWalker (Path.XXXXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXXXYRightGroup a) r where
+instance pathWalkerXXXXXYRightGroup :: PathWalker a r => PathWalker (Path.XXXXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXXYContGroupWithMarkers zz a) r where
+instance pathWalkerXXXXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXXYTwoContGroups a b) r where
+instance pathWalkerXXXXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2334,27 +3100,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXXYXDownGroup a) r where
+instance pathWalkerXXXXYXDownGroup :: PathWalker a r => PathWalker (Path.XXXXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXXYXRightGroup a) r where
+instance pathWalkerXXXXYXRightGroup :: PathWalker a r => PathWalker (Path.XXXXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXYXContGroupWithMarkers zz a) r where
+instance pathWalkerXXXXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXYXTwoContGroups a b) r where
+instance pathWalkerXXXXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2362,27 +3128,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXXYYDownGroup a) r where
+instance pathWalkerXXXXYYDownGroup :: PathWalker a r => PathWalker (Path.XXXXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXXYYRightGroup a) r where
+instance pathWalkerXXXXYYRightGroup :: PathWalker a r => PathWalker (Path.XXXXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXYYContGroupWithMarkers zz a) r where
+instance pathWalkerXXXXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXYYTwoContGroups a b) r where
+instance pathWalkerXXXXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2390,27 +3156,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXYXXDownGroup a) r where
+instance pathWalkerXXXYXXDownGroup :: PathWalker a r => PathWalker (Path.XXXYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXYXXRightGroup a) r where
+instance pathWalkerXXXYXXRightGroup :: PathWalker a r => PathWalker (Path.XXXYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYXXContGroupWithMarkers zz a) r where
+instance pathWalkerXXXYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYXXTwoContGroups a b) r where
+instance pathWalkerXXXYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2418,27 +3184,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXYXYDownGroup a) r where
+instance pathWalkerXXXYXYDownGroup :: PathWalker a r => PathWalker (Path.XXXYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXYXYRightGroup a) r where
+instance pathWalkerXXXYXYRightGroup :: PathWalker a r => PathWalker (Path.XXXYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYXYContGroupWithMarkers zz a) r where
+instance pathWalkerXXXYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYXYTwoContGroups a b) r where
+instance pathWalkerXXXYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2446,27 +3212,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXYYXDownGroup a) r where
+instance pathWalkerXXXYYXDownGroup :: PathWalker a r => PathWalker (Path.XXXYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXYYXRightGroup a) r where
+instance pathWalkerXXXYYXRightGroup :: PathWalker a r => PathWalker (Path.XXXYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYYXContGroupWithMarkers zz a) r where
+instance pathWalkerXXXYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYYXTwoContGroups a b) r where
+instance pathWalkerXXXYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2474,27 +3240,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXXYYYDownGroup a) r where
+instance pathWalkerXXXYYYDownGroup :: PathWalker a r => PathWalker (Path.XXXYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXXYYYRightGroup a) r where
+instance pathWalkerXXXYYYRightGroup :: PathWalker a r => PathWalker (Path.XXXYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxxyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYYYContGroupWithMarkers zz a) r where
+instance pathWalkerXXXYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXXYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYYYTwoContGroups a b) r where
+instance pathWalkerXXXYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXXYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXXYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXXYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2502,27 +3268,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYXXXDownGroup a) r where
+instance pathWalkerXXYXXXDownGroup :: PathWalker a r => PathWalker (Path.XXYXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYXXXRightGroup a) r where
+instance pathWalkerXXYXXXRightGroup :: PathWalker a r => PathWalker (Path.XXYXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXXXContGroupWithMarkers zz a) r where
+instance pathWalkerXXYXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXXXTwoContGroups a b) r where
+instance pathWalkerXXYXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2530,27 +3296,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYXXYDownGroup a) r where
+instance pathWalkerXXYXXYDownGroup :: PathWalker a r => PathWalker (Path.XXYXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYXXYRightGroup a) r where
+instance pathWalkerXXYXXYRightGroup :: PathWalker a r => PathWalker (Path.XXYXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXXYContGroupWithMarkers zz a) r where
+instance pathWalkerXXYXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXXYTwoContGroups a b) r where
+instance pathWalkerXXYXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2558,27 +3324,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYXYXDownGroup a) r where
+instance pathWalkerXXYXYXDownGroup :: PathWalker a r => PathWalker (Path.XXYXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYXYXRightGroup a) r where
+instance pathWalkerXXYXYXRightGroup :: PathWalker a r => PathWalker (Path.XXYXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXYXContGroupWithMarkers zz a) r where
+instance pathWalkerXXYXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXYXTwoContGroups a b) r where
+instance pathWalkerXXYXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2586,27 +3352,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYXYYDownGroup a) r where
+instance pathWalkerXXYXYYDownGroup :: PathWalker a r => PathWalker (Path.XXYXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYXYYRightGroup a) r where
+instance pathWalkerXXYXYYRightGroup :: PathWalker a r => PathWalker (Path.XXYXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXYYContGroupWithMarkers zz a) r where
+instance pathWalkerXXYXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXYYTwoContGroups a b) r where
+instance pathWalkerXXYXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2614,27 +3380,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYYXXDownGroup a) r where
+instance pathWalkerXXYYXXDownGroup :: PathWalker a r => PathWalker (Path.XXYYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYYXXRightGroup a) r where
+instance pathWalkerXXYYXXRightGroup :: PathWalker a r => PathWalker (Path.XXYYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYXXContGroupWithMarkers zz a) r where
+instance pathWalkerXXYYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYXXTwoContGroups a b) r where
+instance pathWalkerXXYYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2642,27 +3408,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYYXYDownGroup a) r where
+instance pathWalkerXXYYXYDownGroup :: PathWalker a r => PathWalker (Path.XXYYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYYXYRightGroup a) r where
+instance pathWalkerXXYYXYRightGroup :: PathWalker a r => PathWalker (Path.XXYYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYXYContGroupWithMarkers zz a) r where
+instance pathWalkerXXYYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYXYTwoContGroups a b) r where
+instance pathWalkerXXYYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2670,27 +3436,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYYYXDownGroup a) r where
+instance pathWalkerXXYYYXDownGroup :: PathWalker a r => PathWalker (Path.XXYYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYYYXRightGroup a) r where
+instance pathWalkerXXYYYXRightGroup :: PathWalker a r => PathWalker (Path.XXYYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYYXContGroupWithMarkers zz a) r where
+instance pathWalkerXXYYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYYXTwoContGroups a b) r where
+instance pathWalkerXXYYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2698,27 +3464,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XXYYYYDownGroup a) r where
+instance pathWalkerXXYYYYDownGroup :: PathWalker a r => PathWalker (Path.XXYYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XXYYYYRightGroup a) r where
+instance pathWalkerXXYYYYRightGroup :: PathWalker a r => PathWalker (Path.XXYYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xxyyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYYYContGroupWithMarkers zz a) r where
+instance pathWalkerXXYYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XXYYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYYYTwoContGroups a b) r where
+instance pathWalkerXXYYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XXYYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXXYYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XXYYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2726,27 +3492,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXXXXDownGroup a) r where
+instance pathWalkerXYXXXXDownGroup :: PathWalker a r => PathWalker (Path.XYXXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXXXXRightGroup a) r where
+instance pathWalkerXYXXXXRightGroup :: PathWalker a r => PathWalker (Path.XYXXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXXXContGroupWithMarkers zz a) r where
+instance pathWalkerXYXXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXXXTwoContGroups a b) r where
+instance pathWalkerXYXXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2754,27 +3520,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXXXYDownGroup a) r where
+instance pathWalkerXYXXXYDownGroup :: PathWalker a r => PathWalker (Path.XYXXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXXXYRightGroup a) r where
+instance pathWalkerXYXXXYRightGroup :: PathWalker a r => PathWalker (Path.XYXXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXXYContGroupWithMarkers zz a) r where
+instance pathWalkerXYXXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXXYTwoContGroups a b) r where
+instance pathWalkerXYXXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2782,27 +3548,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXXYXDownGroup a) r where
+instance pathWalkerXYXXYXDownGroup :: PathWalker a r => PathWalker (Path.XYXXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXXYXRightGroup a) r where
+instance pathWalkerXYXXYXRightGroup :: PathWalker a r => PathWalker (Path.XYXXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXYXContGroupWithMarkers zz a) r where
+instance pathWalkerXYXXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXYXTwoContGroups a b) r where
+instance pathWalkerXYXXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2810,27 +3576,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXXYYDownGroup a) r where
+instance pathWalkerXYXXYYDownGroup :: PathWalker a r => PathWalker (Path.XYXXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXXYYRightGroup a) r where
+instance pathWalkerXYXXYYRightGroup :: PathWalker a r => PathWalker (Path.XYXXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXYYContGroupWithMarkers zz a) r where
+instance pathWalkerXYXXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXYYTwoContGroups a b) r where
+instance pathWalkerXYXXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2838,27 +3604,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXYXXDownGroup a) r where
+instance pathWalkerXYXYXXDownGroup :: PathWalker a r => PathWalker (Path.XYXYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXYXXRightGroup a) r where
+instance pathWalkerXYXYXXRightGroup :: PathWalker a r => PathWalker (Path.XYXYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYXXContGroupWithMarkers zz a) r where
+instance pathWalkerXYXYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYXXTwoContGroups a b) r where
+instance pathWalkerXYXYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2866,27 +3632,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXYXYDownGroup a) r where
+instance pathWalkerXYXYXYDownGroup :: PathWalker a r => PathWalker (Path.XYXYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXYXYRightGroup a) r where
+instance pathWalkerXYXYXYRightGroup :: PathWalker a r => PathWalker (Path.XYXYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYXYContGroupWithMarkers zz a) r where
+instance pathWalkerXYXYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYXYTwoContGroups a b) r where
+instance pathWalkerXYXYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2894,27 +3660,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXYYXDownGroup a) r where
+instance pathWalkerXYXYYXDownGroup :: PathWalker a r => PathWalker (Path.XYXYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXYYXRightGroup a) r where
+instance pathWalkerXYXYYXRightGroup :: PathWalker a r => PathWalker (Path.XYXYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYYXContGroupWithMarkers zz a) r where
+instance pathWalkerXYXYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYYXTwoContGroups a b) r where
+instance pathWalkerXYXYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2922,27 +3688,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYXYYYDownGroup a) r where
+instance pathWalkerXYXYYYDownGroup :: PathWalker a r => PathWalker (Path.XYXYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYXYYYRightGroup a) r where
+instance pathWalkerXYXYYYRightGroup :: PathWalker a r => PathWalker (Path.XYXYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyxyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYYYContGroupWithMarkers zz a) r where
+instance pathWalkerXYXYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYXYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYYYTwoContGroups a b) r where
+instance pathWalkerXYXYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYXYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYXYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYXYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2950,27 +3716,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYXXXDownGroup a) r where
+instance pathWalkerXYYXXXDownGroup :: PathWalker a r => PathWalker (Path.XYYXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYXXXRightGroup a) r where
+instance pathWalkerXYYXXXRightGroup :: PathWalker a r => PathWalker (Path.XYYXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXXXContGroupWithMarkers zz a) r where
+instance pathWalkerXYYXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXXXTwoContGroups a b) r where
+instance pathWalkerXYYXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -2978,27 +3744,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYXXYDownGroup a) r where
+instance pathWalkerXYYXXYDownGroup :: PathWalker a r => PathWalker (Path.XYYXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYXXYRightGroup a) r where
+instance pathWalkerXYYXXYRightGroup :: PathWalker a r => PathWalker (Path.XYYXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXXYContGroupWithMarkers zz a) r where
+instance pathWalkerXYYXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXXYTwoContGroups a b) r where
+instance pathWalkerXYYXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3006,27 +3772,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYXYXDownGroup a) r where
+instance pathWalkerXYYXYXDownGroup :: PathWalker a r => PathWalker (Path.XYYXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYXYXRightGroup a) r where
+instance pathWalkerXYYXYXRightGroup :: PathWalker a r => PathWalker (Path.XYYXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXYXContGroupWithMarkers zz a) r where
+instance pathWalkerXYYXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXYXTwoContGroups a b) r where
+instance pathWalkerXYYXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3034,27 +3800,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYXYYDownGroup a) r where
+instance pathWalkerXYYXYYDownGroup :: PathWalker a r => PathWalker (Path.XYYXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYXYYRightGroup a) r where
+instance pathWalkerXYYXYYRightGroup :: PathWalker a r => PathWalker (Path.XYYXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXYYContGroupWithMarkers zz a) r where
+instance pathWalkerXYYXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXYYTwoContGroups a b) r where
+instance pathWalkerXYYXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3062,27 +3828,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYYXXDownGroup a) r where
+instance pathWalkerXYYYXXDownGroup :: PathWalker a r => PathWalker (Path.XYYYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYYXXRightGroup a) r where
+instance pathWalkerXYYYXXRightGroup :: PathWalker a r => PathWalker (Path.XYYYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYXXContGroupWithMarkers zz a) r where
+instance pathWalkerXYYYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYXXTwoContGroups a b) r where
+instance pathWalkerXYYYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3090,27 +3856,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYYXYDownGroup a) r where
+instance pathWalkerXYYYXYDownGroup :: PathWalker a r => PathWalker (Path.XYYYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYYXYRightGroup a) r where
+instance pathWalkerXYYYXYRightGroup :: PathWalker a r => PathWalker (Path.XYYYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYXYContGroupWithMarkers zz a) r where
+instance pathWalkerXYYYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYXYTwoContGroups a b) r where
+instance pathWalkerXYYYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3118,27 +3884,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYYYXDownGroup a) r where
+instance pathWalkerXYYYYXDownGroup :: PathWalker a r => PathWalker (Path.XYYYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYYYXRightGroup a) r where
+instance pathWalkerXYYYYXRightGroup :: PathWalker a r => PathWalker (Path.XYYYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYYXContGroupWithMarkers zz a) r where
+instance pathWalkerXYYYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYYXTwoContGroups a b) r where
+instance pathWalkerXYYYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3146,27 +3912,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.XYYYYYDownGroup a) r where
+instance pathWalkerXYYYYYDownGroup :: PathWalker a r => PathWalker (Path.XYYYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.XYYYYYRightGroup a) r where
+instance pathWalkerXYYYYYRightGroup :: PathWalker a r => PathWalker (Path.XYYYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 xyyyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYYYContGroupWithMarkers zz a) r where
+instance pathWalkerXYYYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.XYYYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYYYTwoContGroups a b) r where
+instance pathWalkerXYYYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.XYYYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerXYYYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.XYYYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3174,27 +3940,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXXXXDownGroup a) r where
+instance pathWalkerYXXXXXDownGroup :: PathWalker a r => PathWalker (Path.YXXXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXXXXRightGroup a) r where
+instance pathWalkerYXXXXXRightGroup :: PathWalker a r => PathWalker (Path.YXXXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXXXContGroupWithMarkers zz a) r where
+instance pathWalkerYXXXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXXXTwoContGroups a b) r where
+instance pathWalkerYXXXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3202,27 +3968,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXXXYDownGroup a) r where
+instance pathWalkerYXXXXYDownGroup :: PathWalker a r => PathWalker (Path.YXXXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXXXYRightGroup a) r where
+instance pathWalkerYXXXXYRightGroup :: PathWalker a r => PathWalker (Path.YXXXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXXYContGroupWithMarkers zz a) r where
+instance pathWalkerYXXXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXXYTwoContGroups a b) r where
+instance pathWalkerYXXXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3230,27 +3996,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXXYXDownGroup a) r where
+instance pathWalkerYXXXYXDownGroup :: PathWalker a r => PathWalker (Path.YXXXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXXYXRightGroup a) r where
+instance pathWalkerYXXXYXRightGroup :: PathWalker a r => PathWalker (Path.YXXXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXYXContGroupWithMarkers zz a) r where
+instance pathWalkerYXXXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXYXTwoContGroups a b) r where
+instance pathWalkerYXXXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3258,27 +4024,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXXYYDownGroup a) r where
+instance pathWalkerYXXXYYDownGroup :: PathWalker a r => PathWalker (Path.YXXXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXXYYRightGroup a) r where
+instance pathWalkerYXXXYYRightGroup :: PathWalker a r => PathWalker (Path.YXXXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXYYContGroupWithMarkers zz a) r where
+instance pathWalkerYXXXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXYYTwoContGroups a b) r where
+instance pathWalkerYXXXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3286,27 +4052,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXYXXDownGroup a) r where
+instance pathWalkerYXXYXXDownGroup :: PathWalker a r => PathWalker (Path.YXXYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXYXXRightGroup a) r where
+instance pathWalkerYXXYXXRightGroup :: PathWalker a r => PathWalker (Path.YXXYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYXXContGroupWithMarkers zz a) r where
+instance pathWalkerYXXYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYXXTwoContGroups a b) r where
+instance pathWalkerYXXYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3314,27 +4080,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXYXYDownGroup a) r where
+instance pathWalkerYXXYXYDownGroup :: PathWalker a r => PathWalker (Path.YXXYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXYXYRightGroup a) r where
+instance pathWalkerYXXYXYRightGroup :: PathWalker a r => PathWalker (Path.YXXYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYXYContGroupWithMarkers zz a) r where
+instance pathWalkerYXXYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYXYTwoContGroups a b) r where
+instance pathWalkerYXXYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3342,27 +4108,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXYYXDownGroup a) r where
+instance pathWalkerYXXYYXDownGroup :: PathWalker a r => PathWalker (Path.YXXYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXYYXRightGroup a) r where
+instance pathWalkerYXXYYXRightGroup :: PathWalker a r => PathWalker (Path.YXXYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYYXContGroupWithMarkers zz a) r where
+instance pathWalkerYXXYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYYXTwoContGroups a b) r where
+instance pathWalkerYXXYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3370,27 +4136,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXXYYYDownGroup a) r where
+instance pathWalkerYXXYYYDownGroup :: PathWalker a r => PathWalker (Path.YXXYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXXYYYRightGroup a) r where
+instance pathWalkerYXXYYYRightGroup :: PathWalker a r => PathWalker (Path.YXXYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxxyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYYYContGroupWithMarkers zz a) r where
+instance pathWalkerYXXYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXXYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYYYTwoContGroups a b) r where
+instance pathWalkerYXXYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXXYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXXYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXXYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3398,27 +4164,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYXXXDownGroup a) r where
+instance pathWalkerYXYXXXDownGroup :: PathWalker a r => PathWalker (Path.YXYXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYXXXRightGroup a) r where
+instance pathWalkerYXYXXXRightGroup :: PathWalker a r => PathWalker (Path.YXYXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXXXContGroupWithMarkers zz a) r where
+instance pathWalkerYXYXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXXXTwoContGroups a b) r where
+instance pathWalkerYXYXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3426,27 +4192,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYXXYDownGroup a) r where
+instance pathWalkerYXYXXYDownGroup :: PathWalker a r => PathWalker (Path.YXYXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYXXYRightGroup a) r where
+instance pathWalkerYXYXXYRightGroup :: PathWalker a r => PathWalker (Path.YXYXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXXYContGroupWithMarkers zz a) r where
+instance pathWalkerYXYXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXXYTwoContGroups a b) r where
+instance pathWalkerYXYXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3454,27 +4220,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYXYXDownGroup a) r where
+instance pathWalkerYXYXYXDownGroup :: PathWalker a r => PathWalker (Path.YXYXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYXYXRightGroup a) r where
+instance pathWalkerYXYXYXRightGroup :: PathWalker a r => PathWalker (Path.YXYXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXYXContGroupWithMarkers zz a) r where
+instance pathWalkerYXYXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXYXTwoContGroups a b) r where
+instance pathWalkerYXYXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3482,27 +4248,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYXYYDownGroup a) r where
+instance pathWalkerYXYXYYDownGroup :: PathWalker a r => PathWalker (Path.YXYXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYXYYRightGroup a) r where
+instance pathWalkerYXYXYYRightGroup :: PathWalker a r => PathWalker (Path.YXYXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXYYContGroupWithMarkers zz a) r where
+instance pathWalkerYXYXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXYYTwoContGroups a b) r where
+instance pathWalkerYXYXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3510,27 +4276,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYYXXDownGroup a) r where
+instance pathWalkerYXYYXXDownGroup :: PathWalker a r => PathWalker (Path.YXYYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYYXXRightGroup a) r where
+instance pathWalkerYXYYXXRightGroup :: PathWalker a r => PathWalker (Path.YXYYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYXXContGroupWithMarkers zz a) r where
+instance pathWalkerYXYYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYXXTwoContGroups a b) r where
+instance pathWalkerYXYYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3538,27 +4304,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYYXYDownGroup a) r where
+instance pathWalkerYXYYXYDownGroup :: PathWalker a r => PathWalker (Path.YXYYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYYXYRightGroup a) r where
+instance pathWalkerYXYYXYRightGroup :: PathWalker a r => PathWalker (Path.YXYYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYXYContGroupWithMarkers zz a) r where
+instance pathWalkerYXYYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYXYTwoContGroups a b) r where
+instance pathWalkerYXYYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3566,27 +4332,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYYYXDownGroup a) r where
+instance pathWalkerYXYYYXDownGroup :: PathWalker a r => PathWalker (Path.YXYYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYYYXRightGroup a) r where
+instance pathWalkerYXYYYXRightGroup :: PathWalker a r => PathWalker (Path.YXYYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYYXContGroupWithMarkers zz a) r where
+instance pathWalkerYXYYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYYXTwoContGroups a b) r where
+instance pathWalkerYXYYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3594,27 +4360,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YXYYYYDownGroup a) r where
+instance pathWalkerYXYYYYDownGroup :: PathWalker a r => PathWalker (Path.YXYYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YXYYYYRightGroup a) r where
+instance pathWalkerYXYYYYRightGroup :: PathWalker a r => PathWalker (Path.YXYYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yxyyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYYYContGroupWithMarkers zz a) r where
+instance pathWalkerYXYYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YXYYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYYYTwoContGroups a b) r where
+instance pathWalkerYXYYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YXYYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYXYYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YXYYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3622,27 +4388,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXXXXDownGroup a) r where
+instance pathWalkerYYXXXXDownGroup :: PathWalker a r => PathWalker (Path.YYXXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXXXXRightGroup a) r where
+instance pathWalkerYYXXXXRightGroup :: PathWalker a r => PathWalker (Path.YYXXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXXXContGroupWithMarkers zz a) r where
+instance pathWalkerYYXXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXXXTwoContGroups a b) r where
+instance pathWalkerYYXXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3650,27 +4416,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXXXYDownGroup a) r where
+instance pathWalkerYYXXXYDownGroup :: PathWalker a r => PathWalker (Path.YYXXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXXXYRightGroup a) r where
+instance pathWalkerYYXXXYRightGroup :: PathWalker a r => PathWalker (Path.YYXXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXXYContGroupWithMarkers zz a) r where
+instance pathWalkerYYXXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXXYTwoContGroups a b) r where
+instance pathWalkerYYXXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3678,27 +4444,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXXYXDownGroup a) r where
+instance pathWalkerYYXXYXDownGroup :: PathWalker a r => PathWalker (Path.YYXXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXXYXRightGroup a) r where
+instance pathWalkerYYXXYXRightGroup :: PathWalker a r => PathWalker (Path.YYXXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXYXContGroupWithMarkers zz a) r where
+instance pathWalkerYYXXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXYXTwoContGroups a b) r where
+instance pathWalkerYYXXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3706,27 +4472,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXXYYDownGroup a) r where
+instance pathWalkerYYXXYYDownGroup :: PathWalker a r => PathWalker (Path.YYXXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXXYYRightGroup a) r where
+instance pathWalkerYYXXYYRightGroup :: PathWalker a r => PathWalker (Path.YYXXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXYYContGroupWithMarkers zz a) r where
+instance pathWalkerYYXXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXYYTwoContGroups a b) r where
+instance pathWalkerYYXXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3734,27 +4500,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXYXXDownGroup a) r where
+instance pathWalkerYYXYXXDownGroup :: PathWalker a r => PathWalker (Path.YYXYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXYXXRightGroup a) r where
+instance pathWalkerYYXYXXRightGroup :: PathWalker a r => PathWalker (Path.YYXYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYXXContGroupWithMarkers zz a) r where
+instance pathWalkerYYXYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYXXTwoContGroups a b) r where
+instance pathWalkerYYXYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3762,27 +4528,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXYXYDownGroup a) r where
+instance pathWalkerYYXYXYDownGroup :: PathWalker a r => PathWalker (Path.YYXYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXYXYRightGroup a) r where
+instance pathWalkerYYXYXYRightGroup :: PathWalker a r => PathWalker (Path.YYXYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYXYContGroupWithMarkers zz a) r where
+instance pathWalkerYYXYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYXYTwoContGroups a b) r where
+instance pathWalkerYYXYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3790,27 +4556,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXYYXDownGroup a) r where
+instance pathWalkerYYXYYXDownGroup :: PathWalker a r => PathWalker (Path.YYXYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXYYXRightGroup a) r where
+instance pathWalkerYYXYYXRightGroup :: PathWalker a r => PathWalker (Path.YYXYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYYXContGroupWithMarkers zz a) r where
+instance pathWalkerYYXYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYYXTwoContGroups a b) r where
+instance pathWalkerYYXYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3818,27 +4584,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYXYYYDownGroup a) r where
+instance pathWalkerYYXYYYDownGroup :: PathWalker a r => PathWalker (Path.YYXYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYXYYYRightGroup a) r where
+instance pathWalkerYYXYYYRightGroup :: PathWalker a r => PathWalker (Path.YYXYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyxyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYYYContGroupWithMarkers zz a) r where
+instance pathWalkerYYXYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYXYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYYYTwoContGroups a b) r where
+instance pathWalkerYYXYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYXYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYXYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYXYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3846,27 +4612,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYXXXDownGroup a) r where
+instance pathWalkerYYYXXXDownGroup :: PathWalker a r => PathWalker (Path.YYYXXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYXXXRightGroup a) r where
+instance pathWalkerYYYXXXRightGroup :: PathWalker a r => PathWalker (Path.YYYXXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXXXContGroupWithMarkers zz a) r where
+instance pathWalkerYYYXXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXXXTwoContGroups a b) r where
+instance pathWalkerYYYXXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYXXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3874,27 +4640,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYXXYDownGroup a) r where
+instance pathWalkerYYYXXYDownGroup :: PathWalker a r => PathWalker (Path.YYYXXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYXXYRightGroup a) r where
+instance pathWalkerYYYXXYRightGroup :: PathWalker a r => PathWalker (Path.YYYXXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXXYContGroupWithMarkers zz a) r where
+instance pathWalkerYYYXXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXXYTwoContGroups a b) r where
+instance pathWalkerYYYXXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYXXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3902,27 +4668,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYXYXDownGroup a) r where
+instance pathWalkerYYYXYXDownGroup :: PathWalker a r => PathWalker (Path.YYYXYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYXYXRightGroup a) r where
+instance pathWalkerYYYXYXRightGroup :: PathWalker a r => PathWalker (Path.YYYXYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXYXContGroupWithMarkers zz a) r where
+instance pathWalkerYYYXYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXYXTwoContGroups a b) r where
+instance pathWalkerYYYXYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYXYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3930,27 +4696,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYXYYDownGroup a) r where
+instance pathWalkerYYYXYYDownGroup :: PathWalker a r => PathWalker (Path.YYYXYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYXYYRightGroup a) r where
+instance pathWalkerYYYXYYRightGroup :: PathWalker a r => PathWalker (Path.YYYXYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyxyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXYYContGroupWithMarkers zz a) r where
+instance pathWalkerYYYXYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYXYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXYYTwoContGroups a b) r where
+instance pathWalkerYYYXYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYXYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYXYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYXYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3958,27 +4724,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYYXXDownGroup a) r where
+instance pathWalkerYYYYXXDownGroup :: PathWalker a r => PathWalker (Path.YYYYXXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyxxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYYXXRightGroup a) r where
+instance pathWalkerYYYYXXRightGroup :: PathWalker a r => PathWalker (Path.YYYYXXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyxxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYXXContGroupWithMarkers zz a) r where
+instance pathWalkerYYYYXXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYXXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYXXTwoContGroups a b) r where
+instance pathWalkerYYYYXXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYXXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYXXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYYXXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYXXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -3986,27 +4752,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYYXYDownGroup a) r where
+instance pathWalkerYYYYXYDownGroup :: PathWalker a r => PathWalker (Path.YYYYXYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyxyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYYXYRightGroup a) r where
+instance pathWalkerYYYYXYRightGroup :: PathWalker a r => PathWalker (Path.YYYYXYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyxyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYXYContGroupWithMarkers zz a) r where
+instance pathWalkerYYYYXYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYXYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYXYTwoContGroups a b) r where
+instance pathWalkerYYYYXYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYXYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYXYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYYXYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYXYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -4014,27 +4780,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYYYXDownGroup a) r where
+instance pathWalkerYYYYYXDownGroup :: PathWalker a r => PathWalker (Path.YYYYYXDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyyxDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYYYXRightGroup a) r where
+instance pathWalkerYYYYYXRightGroup :: PathWalker a r => PathWalker (Path.YYYYYXRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyyxRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYYXContGroupWithMarkers zz a) r where
+instance pathWalkerYYYYYXContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYYXContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYYXTwoContGroups a b) r where
+instance pathWalkerYYYYYXTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYYXTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYYXTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYYYXTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYYXTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
@@ -4042,27 +4808,27 @@ instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalke
     runEffectFn5 walk instr (Proxy :: _ b) r di e
 
 ---
-instance PathWalker a r => PathWalker (Path.YYYYYYDownGroup a) r where
+instance pathWalkerYYYYYYDownGroup :: PathWalker a r => PathWalker (Path.YYYYYYDownGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyyyDownGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance PathWalker a r => PathWalker (Path.YYYYYYRightGroup a) r where
+instance pathWalkerYYYYYYRightGroup :: PathWalker a r => PathWalker (Path.YYYYYYRightGroup a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     p <- runEffectFn1 yyyyyyRightGroup e
     runEffectFn5 walk instr (Proxy :: _ a) r di p
-instance (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYYYContGroupWithMarkers zz a) r where
+instance pathWalkerYYYYYYContGroupWithMarkers :: (ProcessInstructions r zz, PathWalker a r) => PathWalker (Path.YYYYYYContGroupWithMarkers zz a) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e
     runEffectFn5 walk instr (Proxy :: _ a) r di e
-instance (PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYYYTwoContGroups a b) r where
+instance pathWalkerYYYYYYTwoContGroups ::(PathWalker a r, PathWalker b r) => PathWalker (Path.YYYYYYTwoContGroups a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 walk instr (Proxy :: _ a) r di e
     runEffectFn5 walk instr (Proxy :: _ b) r di e
-instance (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYYYTwoContGroupsWithMarkers zz a b) r where
+instance pathWalkerYYYYYYTwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b r, ProcessInstructions r zz) => PathWalker (Path.YYYYYYTwoContGroupsWithMarkers zz a b) r where
   walk = mkEffectFn5 \instr _ r di e -> do
     
     runEffectFn5 processInstructions instr (Proxy :: _ zz) r di e

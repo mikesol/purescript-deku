@@ -93,7 +93,6 @@ projProof f = f (LabelProof (labels (Proxy :: _ rl2)))
 projWithProof
   :: forall r2 rl2 r3
    . RL.RowToList r2 rl2
-  => Labels rl2
   => AsTypeConstructor Maybe r2 r3
   => LabelProof rl2
   -> Some r2
