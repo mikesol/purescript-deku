@@ -73,10 +73,10 @@ def genJ(n, d):
     fullDown = f'e.firstElementChild{T}'
     fullNext = f'e.nextElementSibling{T}'
     downs = ('e','e.firstElementChild') if LT == 0 else (fullDown[:fullDown.rfind('.firstElementChild')], 'start'+ fullDown[fullDown.rfind('.firstElementChild'):] )
-    nexts = ('p','e.nextElementSibling') if LT == 0 else ('p',fullNext) if 'firstElementChild' not in fullNext else (fullNext[:fullNext.rfind('.firstElementChild')], 'start'+ fullNext[fullNext.rfind('.firstElementChild'):] )
+    nexts = ('e.parentNode','e.nextElementSibling') if LT == 0 else ('e',fullNext) if 'firstElementChild' not in fullNext else (fullNext[:fullNext.rfind('.firstElementChild')], 'start'+ fullNext[fullNext.rfind('.firstElementChild'):] )
     return f'''
-export const {C.lower()}{'D' if n >= 0 else 'd'}ownGroup = ({{p,e}}) => {{ const start = {downs[0]}; {f"console.log('{C.lower()}{'D' if n >= 0 else 'd'}ownGroup', start.outerHTML,{downs[1]} ? {downs[1]}.outerHTML : 'NO_E');" if DEBUG else ""} return {{ p: start, e: {downs[1]} }}}};
-export const {C.lower()}{'R' if n >= 0 else 'r'}ightGroup = ({{p,e}}) => {{ const start = {nexts[0]}; {f"console.log('{C.lower()}{'R' if n >= 0 else 'r'}ightGroup', start.outerHTML,{nexts[1]}? {nexts[1]}.outerHTML : 'NO_E');" if DEBUG else ""} return {{ p: {'start' if n >= 0 else 'p' }, e: {nexts[1]} }}}};
+export const {C.lower()}{'D' if n >= 0 else 'd'}ownGroup = (e) => {{ const start = {downs[0]}; const next = {downs[1]}; {f"console.log('{C.lower()}{'D' if n >= 0 else 'd'}ownGroup', start.outerHTML,{downs[1]} ? {downs[1]}.outerHTML : 'NO_E');" if DEBUG else ""} return next === null ? (() => start) : next }};
+export const {C.lower()}{'R' if n >= 0 else 'r'}ightGroup = (e) => {{ const start = {nexts[0]}; const next = {nexts[1]};  {f"console.log('{C.lower()}{'R' if n >= 0 else 'r'}ightGroup', start.outerHTML,{nexts[1]}? {nexts[1]}.outerHTML : 'NO_E');" if DEBUG else ""} return next === null ? (() => start) : next }};
     '''
 
 def genJJ(n, d):
@@ -299,10 +299,10 @@ instance IsSymbol k => ProcessInstruction k Nut where
             jprint(genJ(x, y))
             qprint(genJJ(x, y))
     jprint(f'''
-export const processStringImpl = (k, s, {{p,e}}) => {{
+export const processStringImpl = (k, s, e) => {{
   {'console.log("processString", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
-  let textNode = e ? e.previousSibling : p.lastChild;
+  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   {'console.log("processString", s, textNode, textNode.textContent);' if DEBUG else ''}
 
   // Ensure the previous sibling is actually a text node. If it isn't, this will not work.
@@ -317,14 +317,14 @@ export const processStringImpl = (k, s, {{p,e}}) => {{
     console.error("Programming error: previous node not a text node");
   }}
 }};
-export const mEltElt = x => x.e;
-export const mEltParent = x => x.p;
-export const mEltify = e => ({{p:undefined, e}});
-export const splitTextAndReturnReplacement = (s, {{ p, e }}) => {{
+export const mEltElt = e => e;
+export const mEltParent = x => typeof x === 'function' ? x() : x.parentNode;
+export const mEltify = e => e;
+export const splitTextAndReturnReplacement = (s, e) => {{
   {'console.log("splitTextAndReturnReplacement", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
   let targetString = "~" + s + "~";
-  let textNode = e ? e.previousSibling : p.lastChild;
+  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   {'console.log("splitTextAndReturnReplacementPREV", textNode, textNode.textContent);' if DEBUG else ''}
   while (textNode) {{
     if (textNode.nodeType === 3) {{
@@ -371,11 +371,11 @@ export const splitTextAndReturnReplacement = (s, {{ p, e }}) => {{
   );
 }};
 
-export const returnReplacement = (s, {{p,e}}) => {{
+export const returnReplacement = (s, e) => {{
   {'console.log("returnReplacement", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
   let targetString = "~" + s + "~";
-  let textNode = e ? e.previousSibling : p.lastChild;
+  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   while (textNode) {{
     {'console.log("returnReplacement", textNode, textNode.textContent);' if DEBUG else ''}
     if (textNode.nodeType === 3) {{  // 3 is the nodeType for a Text node
