@@ -305,6 +305,14 @@ template p = Nut $ mkEffectFn2
       -- we set up a dummy cache that we 
       -- just use so that we can have the same walking al
       let emptiness = emptyMe (Proxy :: _ rl)
+      -- we know we'll need this walk many times, so
+      -- we take it out of the loop
+      let walker = PW.walk
+                    :: EffectFn5 InstructionDelegate (Proxy scrunched)
+                        { | rEmpty }
+                        DOMInterpret
+                        MElement
+                        Unit
       do
         -- this bloc splits all of the dynamic text nodes into
         -- separate text nodes, which makes recursing over them faster as
@@ -312,12 +320,7 @@ template p = Nut $ mkEffectFn2
         ctnt <- HtmlTemplateElement.content eltX
         elt <- runEffectFn1 unsafeFirstChild (DocumentFragment.toNode ctnt)
         runEffectFn5
-          ( PW.walk
-              :: EffectFn5 InstructionDelegate (Proxy scrunched) { | rEmpty }
-                   DOMInterpret
-                   MElement
-                   Unit
-          )
+          walker
           ( InstructionDelegate
               { processString: mkEffectFn4 \_ _ _ _ -> pure unit
               , processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit
@@ -361,6 +364,7 @@ template p = Nut $ mkEffectFn2
             y.start
             y.end
             Nothing
+
       -- this is the function that does everything
       -- everrrryyyyyythingggggg
       -- the deal is that, when a dyn comes down the pipe
@@ -403,13 +407,7 @@ template p = Nut $ mkEffectFn2
               -- these are either EffectFn1 attribute or
               -- EffectFn1 text
               runEffectFn5
-                ( PW.walk
-                    :: EffectFn5 InstructionDelegate (Proxy scrunched)
-                         { | rEmpty }
-                         DOMInterpret
-                         MElement
-                         Unit
-                )
+                walker
                 ( InstructionDelegate
                     { processString: mkEffectFn4 \_ _ _ _ -> throwException
                         ( error

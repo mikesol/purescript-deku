@@ -131,21 +131,21 @@ instance pathWalker{C}TwoContGroupsWithMarkers :: (PathWalker a r, PathWalker b 
     return T
 
 
-def genI(n, d):
-    C = None
-    if n < 0:
-        C = ''
-    else:
-      C = "{0:b}".format(d)
-      C = ("0" * (n + 1 - len(C))) + C
-      C = C.replace("0", "X").replace("1", "Y")
-    T = f"""-- @inline export pathWalker{C}DownGroup(..).walk always
--- @inline export pathWalker{C}RightGroup(..).walk always
--- @inline export pathWalker{C}ContGroupWithMarkers(..).walk always
--- @inline export pathWalker{C}TwoContGroups(..).walk always
--- @inline export pathWalker{C}TwoContGroupsWithMarkers(..).walk always
-"""
-    return T
+# def genI(n, d):
+#     C = None
+#     if n < 0:
+#         C = ''
+#     else:
+#       C = "{0:b}".format(d)
+#       C = ("0" * (n + 1 - len(C))) + C
+#       C = C.replace("0", "X").replace("1", "Y")
+#     T = f"""-- @inline export pathWalker{C}DownGroup(..).walk always
+# -- @inline export pathWalker{C}RightGroup(..).walk always
+# -- @inline export pathWalker{C}ContGroupWithMarkers(..).walk always
+# -- @inline export pathWalker{C}TwoContGroups(..).walk always
+# -- @inline export pathWalker{C}TwoContGroupsWithMarkers(..).walk always
+# """
+#     return T
 
 O = []
 
@@ -187,21 +187,21 @@ instance scrunchTwoContGroupsWithMarkers :: (Scrunch a c, Scrunch b d) => Scrunc
 """)
     for y in range(2 << (R-1)):
         oprint(genT(R-1, y))
-    INLINES = []
-    def iprint(z):
-        INLINES.append(z)
-    iprint(genI(-1, -1))
-    for x in range(R):
-        for y in range(2 << x):
-            iprint(genI(x, y))
-    ILL = '\n'.join(INLINES)
+#     INLINES = []
+#     def iprint(z):
+#         INLINES.append(z)
+#     iprint(genI(-1, -1))
+#     for x in range(R):
+#         for y in range(2 << x):
+#             iprint(genI(x, y))
+#     ILL = '\n'.join(INLINES)
+#     INLINES = """-- @inline export processInstructionsNil.processInstructions always
+# -- @inline export processInstructionsCons(..).processInstructions always
+# -- @inline export pathWalkerMarkerGroup(..).walk always
+# {ILL}
+# """
     #####
-    qprint(f"""-- @inline export processInstructionsNil.processInstructions always
--- @inline export processInstructionsCons(..).processInstructions always
--- @inline export pathWalkerMarkerGroup(..).walk always
-{ILL}
-
-module Deku.PathWalker where
+    qprint(f"""module Deku.PathWalker where
 
 import Prelude
 {"import Debug(spy)" if DEBUG else ""}
