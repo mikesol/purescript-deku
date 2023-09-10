@@ -30,7 +30,7 @@ import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuP
 import Deku.Core as Core
 import Deku.JSMap as JSMap
 import Deku.JSWeakRef (WeakRef)
-import Deku.UnsafeDOM (appendChild, cloneTemplate, createElement, createElementNS, insertBefore, outerHTML, toTemplate, unsafeParentNode)
+import Deku.UnsafeDOM (addEventListener, appendChild, cloneTemplate, createElement, createElementNS, eventListener, insertBefore, outerHTML, removeEventListener, setTextContent, toTemplate, unsafeParentNode)
 import Effect (Effect, foreachE)
 import Effect.Console (error)
 import Effect.Ref (read)
@@ -48,13 +48,12 @@ import Web.DOM.Comment as Comment
 import Web.DOM.Document (createComment, createTextNode)
 import Web.DOM.Element (getAttribute, removeAttribute, setAttribute, toChildNode, toEventTarget)
 import Web.DOM.Element as Element
-import Web.DOM.Node (childNodes, nextSibling, nodeTypeIndex, replaceChild, setTextContent, textContent)
+import Web.DOM.Node (childNodes, nextSibling, nodeTypeIndex, replaceChild, textContent)
 import Web.DOM.NodeList as NodeList
 import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.DOM.Text as Text
 import Web.Event.Event (EventType(..), target)
 import Web.Event.Event as Web
-import Web.Event.EventTarget (addEventListener, eventListener, removeEventListener)
 import Web.HTML (window)
 import Web.HTML.HTMLButtonElement as HTMLButtonElement
 import Web.HTML.HTMLDocument (toDocument)
@@ -457,7 +456,7 @@ setDelegateCbEffect = mkEffectFn3 \elt' (Key k) mp ->
   do -- EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb)) Unit
     let eventType = EventType k
     let eventTarget = toEventTarget (fromDekuElement elt')
-    nl <- eventListener \ev -> do
+    nl <- runEffectFn1 eventListener $ mkEffectFn1 \ev -> do
       for_ (target ev >>= Element.fromEventTarget) \t -> do
         oo <- runEffectFn2 JSMap.getImpl t mp
         case toEither1 oo of
@@ -465,7 +464,7 @@ setDelegateCbEffect = mkEffectFn3 \elt' (Key k) mp ->
           Right obj -> case Object.lookup k obj of
             Just (Cb cb) -> void $ cb ev
             Nothing -> pure unit
-    addEventListener eventType nl false eventTarget
+    runEffectFn4 addEventListener eventType nl false eventTarget
 
 setCbEffect :: Core.SetCb
 setCbEffect = mkEffectFn5 \elt' (Key k) (Cb v) getter setter -> do
@@ -475,9 +474,11 @@ setCbEffect = mkEffectFn5 \elt' (Key k) (Cb v) getter setter -> do
     l <- getter
     let eventType = EventType k
     let eventTarget = toEventTarget (fromDekuElement elt')
-    for_ l \toRemove -> removeEventListener eventType toRemove false eventTarget
-    nl <- eventListener v
-    addEventListener eventType nl false eventTarget
+    for_ l \toRemove -> runEffectFn4 removeEventListener eventType toRemove
+      false
+      eventTarget
+    nl <- runEffectFn1 eventListener $ mkEffectFn1 v
+    runEffectFn4 addEventListener eventType nl false eventTarget
     setter nl
 
 unsetAttributeEffect :: Core.UnsetAttribute
@@ -487,14 +488,14 @@ unsetAttributeEffect = mkEffectFn4 \elt' (Key k) getter rm -> do
   let eventType = EventType k
   let eventTarget = toEventTarget asElt
   for_ l \toRemove -> do
-    removeEventListener eventType toRemove false eventTarget
+    runEffectFn4 removeEventListener eventType toRemove false eventTarget
     rm
   removeAttribute k asElt
 
 setTextEffect :: Core.SetText
 setTextEffect = mkEffectFn2 \txt' str -> do
   let txt = fromDekuText txt'
-  setTextContent str (Text.toNode txt)
+  runEffectFn2 setTextContent str (Text.toNode txt)
 
 -- for the send pos family of functions
 -- we remove first
