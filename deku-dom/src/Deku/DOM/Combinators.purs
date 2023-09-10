@@ -42,11 +42,21 @@ templated
    . Functor f
   => RL.RowToList r rl
   => IsSubsetRL rl sr
-  => Show ix
-  => f (Tuple ix a)
+  => (ix -> String)
+  -> f (Tuple ix a)
   -> (ix -> a -> Record r)
   -> f (Tuple String (Some.Some sr))
-templated e v = e <#> \(Tuple i s) -> Tuple (show i) $ Some.inj (v i s)
+templated sh e v = e <#> \(Tuple i s) -> Tuple (sh i) $ Some.inj (v i s)
+
+templatedS
+  :: forall f a r sr rl
+   . Functor f
+  => RL.RowToList r rl
+  => IsSubsetRL rl sr
+  => f (Tuple String a)
+  -> (String -> a -> Record r)
+  -> f (Tuple String (Some.Some sr))
+templatedS = templated identity
 
 -- | Runs an effect when the element triggers the given event. 
 runOn

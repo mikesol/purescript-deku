@@ -15,12 +15,11 @@ import Deku.Control (text, text_)
 import Deku.Core (Hook, Nut, fixed, portal, useRefST)
 import Deku.DOM as D
 import Deku.DOM.Attributes as DA
-import Deku.DOM.Combinators (injectElementT)
+import Deku.DOM.Combinators (injectElementT, templatedMap_, templated_)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Pursx (template, pursx)
-import Deku.Some as Some
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Random (random)
@@ -272,20 +271,16 @@ templatesWork = Deku.do
   D.div [ DA.id_ "div0" ]
     [ template @"<div>hello ~world~<button ~atts~>x</button></div>" $
         merge
-          [ sendTo <#> \(Tuple s i) -> Tuple s $ Some.inj
-              { sendTo: i
-              }
+          [ templatedMap_ sendTo { sendTo: _ }
           , [ "Helsinki", "Stockholm", "Copenhagen" ] # mergeMap \s ->
-              pure
-                $ Tuple s
-                $ Some.inj
-                    { atts:
-                        [ DL.click_ \_ ->
-                            setSendTo $ Tuple s 0
-                        , DA.id_ s
-                        ]
-                    , world: pure s
-                    }
+              templated_ (pure s)
+                { atts:
+                    [ DL.click_ \_ ->
+                        setSendTo $ Tuple s 0
+                    , DA.id_ s
+                    ]
+                , world: pure s
+                }
           ]
     ]
 
@@ -293,9 +288,7 @@ templatesWork2 :: Nut
 templatesWork2 = Deku.do
   D.div [ DA.id_ "div0" ]
     [ template @"<div id=\"testing\">~test~ ~ing~</div>"
-        $ pure
-        $ Tuple "0"
-        $ Some.inj
+        $ templated_ (pure "0")
             { test: pure "hello"
             , ing: pure "world"
             }
