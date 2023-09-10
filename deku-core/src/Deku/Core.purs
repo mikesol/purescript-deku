@@ -170,7 +170,9 @@ type SetProp = EffectFn3 DekuElement Key Value Unit
 
 -- | Type used by Deku backends to set a listener. For internal use only unless you're writing a custom backend.
 type SetCb =
-  EffectFn5 DekuElement Key Cb (Effect (Maybe EventListener)) (EventListener -> Effect Unit) Unit
+  EffectFn5 DekuElement Key Cb (Effect (Maybe EventListener))
+    (EventListener -> Effect Unit)
+    Unit
 
 type SetDelegateCb =
   EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb))
@@ -273,7 +275,12 @@ runListener oh'hi associations = go
       pump <- liftST $ Event.create
       handleEvent (UPoll.sample x pump.event)
       pump.push identity
-    PureAndPoll x y -> go (OnlyPure x) *> go (OnlyPoll y)
+    PureAndEvent x y -> do
+      go (OnlyPure x)
+      go (OnlyEvent y)
+    PureAndPoll x y -> do
+      go (OnlyPure x)
+      go (OnlyPoll y)
 
 notLucky :: Ref Boolean -> Effect Unit
 notLucky = write false
@@ -757,8 +764,12 @@ handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts
         let { key, value } = att
         case value of
           Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
-          Cb' cb -> runEffectFn5 setCb eeeee (Key key) cb (liftST $ STObject.peek key obj) (void <<< liftST <<< flip (STObject.poke key) obj)
-          Unset' -> runEffectFn4 unsetAttribute eeeee (Key key) (liftST $ STObject.peek key obj) (liftST $ void $ STObject.delete key obj)
+          Cb' cb -> runEffectFn5 setCb eeeee (Key key) cb
+            (liftST $ STObject.peek key obj)
+            (void <<< liftST <<< flip (STObject.poke key) obj)
+          Unset' -> runEffectFn4 unsetAttribute eeeee (Key key)
+            (liftST $ STObject.peek key obj)
+            (liftST $ void $ STObject.delete key obj)
       handleAttrEvent y = do
         wr <- runEffectFn1 weakRef elt
         uu <- subscribe y \x -> do
@@ -772,13 +783,19 @@ handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts
         handleAttrEvent (UPoll.sample y pump.event)
         pump.push identity
     let ohi = oh'hi'attr elt
-    foreachE atts \ii -> case ii of
-      OnlyPure x -> runEffectFn2 fastForeachE x ohi
-      OnlyEvent y -> handleAttrEvent y
-      OnlyPoll y -> handleAttrPoll y
-      PureAndPoll x y -> do
-        runEffectFn2 fastForeachE x ohi
-        handleAttrPoll y
+    let
+      go ii = case ii of
+        OnlyPure x -> runEffectFn2 fastForeachE x ohi
+        OnlyEvent y -> handleAttrEvent y
+        OnlyPoll y -> handleAttrPoll y
+        PureAndEvent x y -> do
+          go (OnlyPure x)
+          go (OnlyEvent y)
+        PureAndPoll x y -> do
+          go (OnlyPure x)
+          go (OnlyPoll y)
+
+    foreachE atts \ii -> go ii
 
 elementify
   :: forall element
