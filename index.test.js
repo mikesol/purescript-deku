@@ -1496,11 +1496,11 @@ describe("deku", () => {
         expect($("#db").text()).toBe("4");
       })
     );
-    // doTest("stress test doesn't blow up", (f) =>
-    //   f(tests.stressTest, () => {
-    //     const $ = require("jquery");
-    //     $("#runlots").trigger("click");
-    //   })
-    // );
+    doTest("stress test doesn't blow up", (f) =>
+      f(tests.stressTest, () => {
+        const $ = require("jquery");
+        $("#runlots").trigger("click");
+      })
+    );
   });
 });
