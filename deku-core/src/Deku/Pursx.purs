@@ -18,6 +18,7 @@ import Data.Array (null)
 import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Foldable (foldr, for_)
+import Data.Identity (Identity(..))
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.String as String
 import Data.Symbol (class IsSymbol, reflectSymbol)
@@ -47,6 +48,7 @@ import Prim.Row as Row
 import Prim.RowList as RL
 import Record as Record
 import Record.Unsafe (unsafeGet)
+import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.DocumentFragment as DocumentFragment
@@ -66,7 +68,7 @@ instance
   , R.Cons k (Poll (Attribute e)) r' r
   , EmptyMe r' rl
   ) =>
-  EmptyMe r (RL.Cons k (Array (Attribute e)) rl) where
+  EmptyMe r (RL.Cons k (Array (Identity (Attribute e)) ) rl) where
   emptyMe _ = Record.insert (Proxy :: _ k) empty (emptyMe (Proxy :: _ rl))
 
 instance
@@ -75,7 +77,7 @@ instance
   , R.Cons k (Poll String) r' r
   , EmptyMe r' rl
   ) =>
-  EmptyMe r (RL.Cons k String rl) where
+  EmptyMe r (RL.Cons k (Identity String) rl) where
   emptyMe _ = Record.insert (Proxy :: _ k) empty (emptyMe (Proxy :: _ rl))
 
 class PursxSubstitutions
@@ -104,13 +106,13 @@ class TemplateSubstitutions nostr str | nostr -> str
 instance TemplateSubstitutions RL.Nil ()
 
 instance
-  ( Row.Cons k String d r
+  ( Row.Cons k (Identity String) d r
   , TemplateSubstitutions c d
   ) =>
   TemplateSubstitutions (RL.Cons k PxNut c) r
 
 else instance
-  ( Row.Cons k (Array (Attribute deku)) d r
+  ( Row.Cons k (Array (Identity (Attribute deku)) ) d r
   , TemplateSubstitutions c d
   ) =>
   TemplateSubstitutions (RL.Cons k PxAtt c)
@@ -423,8 +425,8 @@ template p = Nut $ mkEffectFn2
                             obj
                         let delete key = liftST $ void $ STObject.delete key obj
                         let
-                          effn :: forall t. EffectFn1 (Array (Attribute t)) Unit
-                          effn = mkEffectFn1 \atts -> foreachE atts \att -> do
+                          effn :: forall t. EffectFn1 (Array (Identity (Attribute t))) Unit
+                          effn = mkEffectFn1 \atts -> foreachE atts \(Identity att) -> do
                             let { key, value } = unsafeUnAttribute att
                             case value of
                               Prop' v -> runEffectFn3 di.setProp
@@ -444,14 +446,14 @@ template p = Nut $ mkEffectFn2
                                 (delete key)
                         for_
                           ( unsafeGet s proj'd
-                              :: forall e. Maybe (Array (Attribute e))
+                              :: forall e. Maybe (Array (Identity (Attribute e)))
                           )
                           \a ->
                             runEffectFn1 effn a
                         void $ liftST $ STObject.poke s
                           ( ( unsafeCoerce
                                 :: forall t
-                                 . EffectFn1 (Array (Attribute t)) Unit
+                                 . EffectFn1 (Array (Identity (Attribute t))) Unit
                                 -> Void
                             ) effn
                           )
@@ -460,14 +462,14 @@ template p = Nut $ mkEffectFn2
                         realDeal <- runEffectFn2 returnReplacement s
                           e'
                         runEffectFn2 di.setText (toDekuText realDeal)
-                          (fromMaybe "" (unsafeGet s proj'd :: Maybe String))
+                          (coerce (fromMaybe (Identity "") (unsafeGet s proj'd :: Maybe (Identity String))))
                         let
-                          effn = mkEffectFn1 \str -> runEffectFn2 di.setText
+                          effn = mkEffectFn1 \(Identity str) -> runEffectFn2 di.setText
                             (toDekuText realDeal)
                             str
                         void $ liftST $ STObject.poke s
                           ( ( unsafeCoerce
-                                :: EffectFn1 String Unit -> Void
+                                :: EffectFn1 (Identity String) Unit -> Void
                             ) effn
                           )
                           oooooooooo

@@ -15,7 +15,7 @@ import Deku.Control (text, text_)
 import Deku.Core (Hook, Nut, fixed, portal, useRefST)
 import Deku.DOM as D
 import Deku.DOM.Attributes as DA
-import Deku.DOM.Combinators (injectElementT, templated_)
+import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
@@ -23,7 +23,6 @@ import Deku.Pursx (template, pursx)
 import Deku.Some as Some
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
-import Effect.Console (log, logShow)
 import Effect.Random (random)
 import FRP.Event (fold)
 import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
@@ -281,11 +280,11 @@ templatesWork = Deku.do
                 $ Tuple s
                 $ Some.inj
                     { atts:
-                        [ templated_ DL.click_ \_ ->
+                        [ DL.click_ \_ ->
                             setSendTo $ Tuple s 0
-                        , templated_ DA.id_ s
+                        , DA.id_ s
                         ]
-                    , world: s
+                    , world: pure s
                     }
           ]
     ]
@@ -297,8 +296,8 @@ templatesWork2 = Deku.do
         $ pure
         $ Tuple "0"
         $ Some.inj
-            { test: "hello"
-            , ing: "world"
+            { test: pure "hello"
+            , ing: pure "world"
             }
     ]
 

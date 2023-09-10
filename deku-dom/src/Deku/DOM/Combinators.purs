@@ -3,37 +3,15 @@ module Deku.DOM.Combinators where
 import Prelude
 
 import Data.Foldable (for_)
-import Data.Identity (Identity(..))
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeAttribute, unsafeUnAttribute)
 import Deku.DOM.Self as Self
 import Effect (Effect)
 import Effect.Aff (Milliseconds(..), delay, launchAff_)
 import Effect.Class (liftEffect)
-import Safe.Coerce (coerce)
 import Type.Proxy (Proxy)
 import Web.DOM (Element)
 import Web.Event.Event as Web
 import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
-
-templated
-  :: forall a b
-   . ( forall f
-        . Functor f => f a
-       -> f b
-     )
-  -> a
-  -> b
-templated f a = coerce (f (Identity a))
-
-templated_
-  :: forall a b
-   . ( forall f
-        . Applicative f => a
-       -> f b
-     )
-  -> a
-  -> b
-templated_ f a = (coerce :: Identity _ -> _) (f a)
 
 -- | Runs an effect when the element triggers the given event. 
 runOn

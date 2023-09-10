@@ -1,6 +1,7 @@
 module Deku.Path where
 
 import Data.Array as Array
+import Data.Identity (Identity)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Attribute (Attribute)
 import Deku.Core (Nut)
@@ -72,7 +73,17 @@ instance
   symbolsForAttsToArray _ = Array.cons (reflectSymbol (Proxy :: _ k))
     (symbolsForAttsToArray (Proxy :: _ c))
 
+instance
+  ( IsSymbol k
+  , SymbolsForAttsToArray c
+  ) =>
+  SymbolsForAttsToArray (RL.Cons k (Array (Identity (Attribute e))) c) where
+  symbolsForAttsToArray _ = Array.cons (reflectSymbol (Proxy :: _ k))
+    (symbolsForAttsToArray (Proxy :: _ c))
+
 instance (IsSymbol k, SymbolsForAttsToArray c) => SymbolsForAttsToArray (RL.Cons k String c) where
+  symbolsForAttsToArray _ = symbolsForAttsToArray (Proxy :: _ c)
+instance (IsSymbol k, SymbolsForAttsToArray c) => SymbolsForAttsToArray (RL.Cons k (Identity String) c) where
   symbolsForAttsToArray _ = symbolsForAttsToArray (Proxy :: _ c)
 
 instance (IsSymbol k, SymbolsForAttsToArray c) => SymbolsForAttsToArray (RL.Cons k Nut c) where
