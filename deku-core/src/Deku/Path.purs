@@ -3,6 +3,7 @@ module Deku.Path where
 import Data.Array as Array
 import Data.Identity (Identity)
 import Data.Symbol (class IsSymbol, reflectSymbol)
+import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute)
 import Deku.Core (Nut)
 import FRP.Poll as Poll
@@ -42,55 +43,59 @@ instance
   RLReverses (RL.Cons k v o) (RL.Cons k v' o')
 
 -- | In this class, we only pull out attribute symbols
-class SymbolsForAttsToArray :: forall k. RL.RowList k -> Constraint
-class SymbolsForAttsToArray rl where
-  symbolsForAttsToArray :: Proxy rl -> Array String
+class SymbolsToArray :: forall k. RL.RowList k -> Constraint
+class SymbolsToArray rl where
+  symbolsToArray :: Proxy rl -> Array (Tuple Boolean String)
 
-instance SymbolsForAttsToArray RL.Nil where
-  symbolsForAttsToArray _ = []
-
-instance
-  ( IsSymbol k
-  , SymbolsForAttsToArray c
-  ) =>
-  SymbolsForAttsToArray (RL.Cons k (Poll.Poll (Attribute e)) c) where
-  symbolsForAttsToArray _ = Array.cons (reflectSymbol (Proxy :: _ k))
-    (symbolsForAttsToArray (Proxy :: _ c))
+instance SymbolsToArray RL.Nil where
+  symbolsToArray _ = []
 
 instance
   ( IsSymbol k
-  , SymbolsForAttsToArray c
+  , SymbolsToArray c
   ) =>
-  SymbolsForAttsToArray (RL.Cons k (Attribute e) c) where
-  symbolsForAttsToArray _ = Array.cons (reflectSymbol (Proxy :: _ k))
-    (symbolsForAttsToArray (Proxy :: _ c))
+  SymbolsToArray (RL.Cons k (Poll.Poll (Attribute e)) c) where
+  symbolsToArray _ = Array.cons (Tuple true (reflectSymbol (Proxy :: _ k)))
+    (symbolsToArray (Proxy :: _ c))
 
 instance
   ( IsSymbol k
-  , SymbolsForAttsToArray c
+  , SymbolsToArray c
   ) =>
-  SymbolsForAttsToArray (RL.Cons k (Array (Attribute e)) c) where
-  symbolsForAttsToArray _ = Array.cons (reflectSymbol (Proxy :: _ k))
-    (symbolsForAttsToArray (Proxy :: _ c))
+  SymbolsToArray (RL.Cons k (Attribute e) c) where
+  symbolsToArray _ = Array.cons (Tuple true (reflectSymbol (Proxy :: _ k)))
+    (symbolsToArray (Proxy :: _ c))
 
 instance
   ( IsSymbol k
-  , SymbolsForAttsToArray c
+  , SymbolsToArray c
   ) =>
-  SymbolsForAttsToArray (RL.Cons k (Array (Identity (Attribute e))) c) where
-  symbolsForAttsToArray _ = Array.cons (reflectSymbol (Proxy :: _ k))
-    (symbolsForAttsToArray (Proxy :: _ c))
+  SymbolsToArray (RL.Cons k (Array (Attribute e)) c) where
+  symbolsToArray _ = Array.cons (Tuple true (reflectSymbol (Proxy :: _ k)))
+    (symbolsToArray (Proxy :: _ c))
 
-instance (IsSymbol k, SymbolsForAttsToArray c) => SymbolsForAttsToArray (RL.Cons k String c) where
-  symbolsForAttsToArray _ = symbolsForAttsToArray (Proxy :: _ c)
-instance (IsSymbol k, SymbolsForAttsToArray c) => SymbolsForAttsToArray (RL.Cons k (Identity String) c) where
-  symbolsForAttsToArray _ = symbolsForAttsToArray (Proxy :: _ c)
+instance
+  ( IsSymbol k
+  , SymbolsToArray c
+  ) =>
+  SymbolsToArray (RL.Cons k (Array (Identity (Attribute e))) c) where
+  symbolsToArray _ = Array.cons (Tuple true (reflectSymbol (Proxy :: _ k)))
+    (symbolsToArray (Proxy :: _ c))
 
-instance (IsSymbol k, SymbolsForAttsToArray c) => SymbolsForAttsToArray (RL.Cons k Nut c) where
-  symbolsForAttsToArray _ = symbolsForAttsToArray (Proxy :: _ c)
+instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k String c) where
+  symbolsToArray _ = Array.cons (Tuple false (reflectSymbol (Proxy :: _ k)))
+    (symbolsToArray (Proxy :: _ c))
+instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k (Identity String) c) where
+  symbolsToArray _ = Array.cons (Tuple false (reflectSymbol (Proxy :: _ k)))
+    (symbolsToArray (Proxy :: _ c))
 
-instance (IsSymbol k, SymbolsForAttsToArray c) => SymbolsForAttsToArray (RL.Cons k (Poll.Poll String) c) where
-  symbolsForAttsToArray _ = symbolsForAttsToArray (Proxy :: _ c)
+instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k Nut c) where
+  symbolsToArray _ = Array.cons (Tuple false (reflectSymbol (Proxy :: _ k)))
+    (symbolsToArray (Proxy :: _ c))
+
+instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k (Poll.Poll String) c) where
+  symbolsToArray _ = Array.cons (Tuple false (reflectSymbol (Proxy :: _ k)))
+    (symbolsToArray (Proxy :: _ c))
 
 data Marker
 

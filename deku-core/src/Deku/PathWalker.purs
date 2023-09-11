@@ -10,7 +10,7 @@ import Deku.Attribute (Attribute, Attribute', unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), handleAtts)
 import Deku.Interpret (attributeBeaconFullRangeParentProto, fromDekuBeacon, fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Path as Path
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Poll (Poll)
 import Foreign.Object.ST as STObject
 import Prim.Row as R
@@ -28,16 +28,14 @@ import Web.DOM.Text as Text
 
 data MElement
 
-foreign import processStringImpl :: EffectFn3 String String MElement Unit
 foreign import mEltElt :: MElement -> Element
 foreign import mEltify :: Node.Node -> MElement
 foreign import mEltParent :: MElement -> Element
-foreign import splitTextAndReturnReplacement :: EffectFn2 String  MElement Text
-foreign import returnReplacement :: EffectFn2 Int  MElement Text
+foreign import returnReplacementNoIndex :: EffectFn2 String  MElement Text
+foreign import returnReplacement :: EffectFn2 Int  MElement Node.Node
 foreign import returnReplacementIndex :: EffectFn2 String  MElement Int
 type InstructionSignature i = EffectFn4 String i DOMInterpret MElement Unit
 newtype InstructionDelegate = InstructionDelegate {
-  processString :: InstructionSignature String,
   processPollString :: InstructionSignature (Poll String),
   processAttribute :: InstructionSignature (Poll Attribute'),
   processNut :: InstructionSignature Nut
@@ -67,11 +65,6 @@ instance processInstructionsCons :: (IsSymbol k, R.Cons k v r' r, ProcessInstruc
   processInstructions = mkEffectFn5 \instr _ r di e -> do
       runEffectFn5 processInstruction instr (Proxy :: _ k) (get (Proxy :: _ k) r) di e
       runEffectFn5 processInstructions instr (Proxy :: _ c) r di e
-
-instance processInstructionString :: IsSymbol k => ProcessInstruction k String where
-  processInstruction = mkEffectFn5 \(InstructionDelegate { processString }) k s di e -> do
-    
-    runEffectFn4 processString (reflectSymbol k) s di e
 
 processAttPursx :: InstructionSignature (Poll Attribute')
 processAttPursx = mkEffectFn4 \_ att di e -> do

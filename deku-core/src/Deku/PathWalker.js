@@ -507,70 +507,25 @@ export const yyyyyyDownGroup = (e) => { const start = e; const next = start.firs
 export const yyyyyyRightGroup = (e) => { const start = e; const next = e.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling;   return next === null ? (() => start) : next };
     
 
-export const processStringImpl = (k, s, e) => {
-  
-  // Get the previous sibling (text node) of the element
-  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
-  
-
-  // Ensure the previous sibling is actually a text node. If it isn't, this will not work.
-  if (textNode && textNode.nodeType === 3) {  // 3 is the nodeType for a Text node
-    let replacement = s;
-    if (replacement !== undefined) {
-      textNode.nodeValue = textNode.nodeValue.replace("~" + k + "~", replacement);
-    } else {
-      console.error("Programming error: no replacement for " + k + " found in object");
-    }
-  } else {
-    console.error("Programming error: previous node not a text node");
-  }
-};
 export const mEltElt = e => e;
 export const mEltParent = x => typeof x === 'function' ? x() : x.parentNode;
 export const mEltify = e => e;
-export const splitTextAndReturnReplacement = (s, e) => {
+export const returnReplacementNoIndex = (s, e) => {
   
   // Get the previous sibling (text node) of the element
   let targetString = "~" + s + "~";
-  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
+  let iterNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   
-  while (textNode) {
-    if (textNode.nodeType === 3) {
-      // 3 is the nodeType for a Text node
-      let index = textNode.nodeValue.indexOf(targetString);
+  while (iterNode) {
+    if (iterNode.nodeType === 8) {
+      // 8 is the nodeType for a Comment node
+      let index = iterNode.textContent.indexOf(targetString);
 
       if (index !== -1) {
-        // Split the text node at the starting index of the target string
-        let afterTextNode = textNode.splitText(index);
-
-        // Split the afterTextNode at the end index of the target string to isolate it
-        afterTextNode.splitText(targetString.length);
-
-        // Return the newly created text node containing the target string
-        return afterTextNode;
+        return iterNode;
       }
-    } else {
-      throw new Error(
-        "Programming error: previous node not a text node or target string not found: " +
-          s
-      );
     }
-    textNode = textNode.previousSibling;
-  }
-  if (textNode && textNode.nodeType === 3) {
-    // 3 is the nodeType for a Text node
-    let index = textNode.nodeValue.indexOf(targetString);
-
-    if (index !== -1) {
-      // Split the text node at the starting index of the target string
-      let afterTextNode = textNode.splitText(index);
-
-      // Split the afterTextNode at the end index of the target string to isolate it
-      afterTextNode.splitText(targetString.length);
-
-      // Return the newly created text node containing the target string
-      return afterTextNode;
-    }
+    iterNode = iterNode.previousSibling;
   }
 
   throw new Error(
@@ -582,32 +537,31 @@ export const splitTextAndReturnReplacement = (s, e) => {
 export const returnReplacement = (i, e) => {
   
   // Get the previous sibling (text node) of the element
-  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
+  let iterNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   let ii = 0;
   while (ii < i) {
     ii++;
-    textNode = textNode.previousSibling;
+    iterNode = iterNode.previousSibling;
   }
-  return textNode;
+  return iterNode;
 };
 
 export const returnReplacementIndex = (s, e) => {
   
   // Get the previous sibling (text node) of the element
   let targetString = "~" + s + "~";
-  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
+  let iterNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   let i = 0;
-  while (textNode) {
+  while (iterNode) {
     
-    if (textNode.nodeType === 3) {  // 3 is the nodeType for a Text node
-      let index = textNode.nodeValue.indexOf(targetString);
+    if (iterNode.nodeType === 8) {  // 8 is the nodeType for a Comment node
+      let index = iterNode.textContent.indexOf(targetString);
       if (index !== -1) {
         return i;
       }
-    } else {
-        throw new Error("Programming error: previous node not a text node or target string not found: "+s);
     }
     i++;
-    textNode = textNode.previousSibling;
+    iterNode = iterNode.previousSibling;
   }
+  throw new Error("Programming error: previous node not a text node or target string not found: "+s);
 };

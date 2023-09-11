@@ -26,17 +26,17 @@ import Data.TraversableWithIndex (traverseWithIndex)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, AttributeValue(..), Key(..), Value(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForElement, eltAttribution, getLifecycle, notLucky, runListener, text, thunker)
-import Deku.Interpret (attributeDynParentForElementEffect, toDekuElement, toDekuText)
+import Deku.Interpret (attributeDynParentForElementEffect, fromDekuText, toDekuElement, toDekuText)
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
-import Deku.Path (symbolsForAttsToArray)
+import Deku.Path (symbolsToArray)
 import Deku.Path as Path
-import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, mEltify, processAttPursx, processNutPursx, processStringImpl, returnReplacement, returnReplacementIndex, splitTextAndReturnReplacement)
+import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, mEltify, processAttPursx, processNutPursx, returnReplacement, returnReplacementIndex, returnReplacementNoIndex)
 import Deku.PathWalker as PW
 import Deku.PursxParser as PxP
 import Deku.PxTypes (PxAtt, PxNut)
 import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some, projProof)
 import Deku.Some as Some
-import Deku.UnsafeDOM (cloneTemplate, toTemplate, unsafeFirstChild)
+import Deku.UnsafeDOM (cloneTemplate, toTemplate, unsafeFirstChild, unsafeParentNode)
 import Effect (foreachE)
 import Effect.Exception (error, throwException)
 import Effect.Ref (new)
@@ -55,6 +55,9 @@ import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.DocumentFragment as DocumentFragment
 import Web.DOM.Element as Element
+import Web.DOM.Node (nodeTypeIndex, replaceChild)
+import Web.DOM.Node as Node
+import Web.DOM.Text as Text
 import Web.HTML.HTMLTemplateElement as HtmlTemplateElement
 
 class EmptyMe (r :: Row Type) (rl :: RL.RowList Type) | rl -> r where
@@ -71,7 +74,7 @@ instance
   , R.Cons k (Poll (Attribute e)) r' r
   , EmptyMe r' rl
   ) =>
-  EmptyMe r (RL.Cons k (Array (Identity (Attribute e)) ) rl) where
+  EmptyMe r (RL.Cons k (Array (Identity (Attribute e))) rl) where
   emptyMe _ = Record.insert (Proxy :: _ k) empty (emptyMe (Proxy :: _ rl))
 
 instance
@@ -115,7 +118,7 @@ instance
   TemplateSubstitutions (RL.Cons k PxNut c) r
 
 else instance
-  ( Row.Cons k (Array (Identity (Attribute deku)) ) d r
+  ( Row.Cons k (Array (Identity (Attribute deku))) d r
   , TemplateSubstitutions c d
   ) =>
   TemplateSubstitutions (RL.Cons k PxAtt c)
@@ -138,7 +141,7 @@ pursx
   => RL.RowToList r rl
   => PursxSubstitutions rl0 r
   => RL.RowToList p pl
-  => Path.SymbolsForAttsToArray rl
+  => Path.SymbolsToArray rl
   => Path.RLReverses pl plr
   => Path.Process plr path
   => Path.Scrunch path scrunched
@@ -156,7 +159,7 @@ pursx'
   => RL.RowToList r rl
   => PursxSubstitutions rl0 r
   => RL.RowToList p pl
-  => Path.SymbolsForAttsToArray rl
+  => Path.SymbolsToArray rl
   => Path.RLReverses pl plr
   => Path.Process plr path
   => Path.Scrunch path scrunched
@@ -170,14 +173,21 @@ pursx' r = Nut $ mkEffectFn2
       let
         -- various proxies
         rlProxy = Proxy :: _ rl
+        verbProxy = Proxy :: _ verb
+        verbSymbol = reflectSymbol verbProxy
         htmlProxy = Proxy :: _ html
         scrunch = Proxy :: _ scrunched
-        syms = symbolsForAttsToArray rlProxy
+        syms = symbolsToArray rlProxy
         -- remove all ~s~ from the html attributes
         html = foldr
-          ( \pat h -> String.replaceAll (String.Pattern ("~" <> pat <> "~"))
-              (String.Replacement "")
-              h
+          ( \(Tuple isAtt pat) h ->
+              String.replaceAll
+                (String.Pattern (verbSymbol <> pat <> verbSymbol))
+                ( String.Replacement $
+                    if isAtt then ""
+                    else "<!--" <> verbSymbol <> pat <> verbSymbol <> "-->"
+                )
+                h
           )
           (reflectSymbol htmlProxy)
           syms
@@ -199,25 +209,20 @@ pursx' r = Nut $ mkEffectFn2
                  Unit
         )
         ( InstructionDelegate
-            { processString: mkEffectFn4 \a b _ d -> runEffectFn3
-                processStringImpl
-                a
-                b
-                d
-            , processAttribute: mkEffectFn4 \a b c d -> runEffectFn4
+            { processAttribute: mkEffectFn4 \a b c d -> runEffectFn4
                 processAttPursx
                 a
                 b
                 c
                 d
             , processPollString: mkEffectFn4 \a b c d -> runEffectFn4
-                (processNutPursx splitTextAndReturnReplacement)
+                (processNutPursx returnReplacementNoIndex)
                 a
                 (text b)
                 c
                 d
             , processNut: mkEffectFn4 \a b c d -> runEffectFn4
-                (processNutPursx splitTextAndReturnReplacement)
+                (processNutPursx returnReplacementNoIndex)
                 a
                 b
                 c
@@ -266,7 +271,7 @@ template
   -- turn p (the path) to a row list
   => RL.RowToList p pl
   -- get all the symbols for atts when we do string replacement
-  => Path.SymbolsForAttsToArray rl
+  => Path.SymbolsToArray rl
   -- create a row of empty polls from r
   -- needed for the walk recurser
   => EmptyMe rEmpty rl
@@ -274,6 +279,8 @@ template
   => Path.Process plr path
   => Path.Scrunch path scrunched
   => PW.PathWalker scrunched rEmpty
+  => Row.Lacks "sendTo" r
+  => Row.Lacks "remove" r
   => Row.Union (sendTo :: Int, remove :: Unit) r rr
   => RL.RowToList rr withLifecycle
   => Labels withLifecycle
@@ -289,13 +296,20 @@ template p = Nut $ mkEffectFn2
         -- various proxies
         rlProxy = Proxy :: _ rl
         htmlProxy = Proxy :: _ html
+        verbProxy = Proxy :: _ "~"
+        verbSymbol = reflectSymbol verbProxy
         scrunch = Proxy :: _ scrunched
-        syms = symbolsForAttsToArray rlProxy
+        syms = symbolsToArray rlProxy
         -- remove all ~foo~ attributes from the html
         html = foldr
-          ( \pat h -> String.replaceAll (String.Pattern ("~" <> pat <> "~"))
-              (String.Replacement "")
-              h
+          ( \(Tuple isAtt pat) h ->
+              String.replaceAll
+                (String.Pattern (verbSymbol <> pat <> verbSymbol))
+                ( String.Replacement $
+                    if isAtt then ""
+                    else "<!--" <> verbSymbol <> pat <> verbSymbol <> "-->"
+                )
+                h
           )
           (reflectSymbol htmlProxy)
           syms
@@ -307,7 +321,7 @@ template p = Nut $ mkEffectFn2
       -- we don't want to recurse over text nodes constantly checking their content
       -- so we create a cache that helps us with that (we'll see)
       -- it used later
-      isStringCache :: STObject.STObject Global MElement  <- liftST
+      isStringCache :: STObject.STObject Global MElement <- liftST
         STObject.new
       eltX <- runEffectFn1 toTemplate html
       -- we set up a dummy cache that we 
@@ -315,12 +329,14 @@ template p = Nut $ mkEffectFn2
       let emptiness = emptyMe (Proxy :: _ rl)
       -- we know we'll need this walk many times, so
       -- we take it out of the loop
-      let walker = PW.walk
-                    :: EffectFn5 InstructionDelegate (Proxy scrunched)
-                        { | rEmpty }
-                        DOMInterpret
-                        MElement
-                        Unit
+      let
+        walker =
+          PW.walk
+            :: EffectFn5 InstructionDelegate (Proxy scrunched)
+                 { | rEmpty }
+                 DOMInterpret
+                 MElement
+                 Unit
       do
         -- this bloc splits all of the dynamic text nodes into
         -- separate text nodes, which makes recursing over them faster as
@@ -330,29 +346,31 @@ template p = Nut $ mkEffectFn2
         runEffectFn5
           walker
           ( InstructionDelegate
-              { processString: mkEffectFn4 \_ _ _ _ -> throwException
-                        ( error
-                            "Programming error: template should not be called with a string"
-                        )
-              , processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit
+              { processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit
               , processPollString: mkEffectFn4 \a _ _ dd -> do
                   void $ liftST $ STObject.poke a dd isStringCache
                   void $ runEffectFn2
-                      splitTextAndReturnReplacement
-                      a
-                      dd
+                    returnReplacementNoIndex
+                    a
+                    dd
               , processNut: mkEffectFn4 \_ _ _ _ -> throwException
-                        ( error
-                            "Programming error: template should not be called with a string"
-                        )
+                  ( error
+                      "Programming error: template should not be called with a string"
+                  )
               }
           )
           scrunch
           emptiness
           (DOMInterpret di)
           (unsafeCoerce (mEltify elt))
-      let frozenIsStringcache = (unsafeCoerce :: STObject.STObject Global MElement -> Object.Object MElement) isStringCache
-      indices <- traverseWithIndex (\k v -> runEffectFn2 returnReplacementIndex k v) frozenIsStringcache
+      let
+        frozenIsStringcache =
+          ( unsafeCoerce
+              :: STObject.STObject Global MElement -> Object.Object MElement
+          ) isStringCache
+      indices <- traverseWithIndex
+        (\k v -> runEffectFn2 returnReplacementIndex k v)
+        frozenIsStringcache
       -- as usual, we start off lucky
       -- even though this can enver be unlucky as templates can only
       -- ever be populated with elements (not dyn), we still need it
@@ -424,11 +442,7 @@ template p = Nut $ mkEffectFn2
               runEffectFn5
                 walker
                 ( InstructionDelegate
-                    { processString: mkEffectFn4 \_ _ _ _ -> throwException
-                        ( error
-                            "Programming error: template should not be called with a string"
-                        )
-                    , processAttribute: mkEffectFn4 \s _ _ eeeeeeeee -> do
+                    { processAttribute: mkEffectFn4 \s _ _ eeeeeeeee -> do
                         let eeeee = mEltElt eeeeeeeee
                         obj <- liftST STObject.new
                         let getter key = liftST $ STObject.peek key obj
@@ -438,47 +452,70 @@ template p = Nut $ mkEffectFn2
                             obj
                         let delete key = liftST $ void $ STObject.delete key obj
                         let
-                          effn :: forall t. EffectFn1 (Array (Identity (Attribute t))) Unit
-                          effn = mkEffectFn1 \atts -> foreachE atts \(Identity att) -> do
-                            let { key, value } = unsafeUnAttribute att
-                            case value of
-                              Prop' v -> runEffectFn3 di.setProp
-                                (toDekuElement eeeee)
-                                (Key key)
-                                (Value v)
-                              Cb' cb -> runEffectFn5 di.setCb
-                                (toDekuElement eeeee)
-                                (Key key)
-                                cb
-                                (getter key)
-                                (setter key)
-                              Unset' -> runEffectFn4 di.unsetAttribute
-                                (toDekuElement eeeee)
-                                (Key key)
-                                (getter key)
-                                (delete key)
+                          effn
+                            :: forall t
+                             . EffectFn1 (Array (Identity (Attribute t))) Unit
+                          effn = mkEffectFn1 \atts -> foreachE atts
+                            \(Identity att) -> do
+                              let { key, value } = unsafeUnAttribute att
+                              case value of
+                                Prop' v -> runEffectFn3 di.setProp
+                                  (toDekuElement eeeee)
+                                  (Key key)
+                                  (Value v)
+                                Cb' cb -> runEffectFn5 di.setCb
+                                  (toDekuElement eeeee)
+                                  (Key key)
+                                  cb
+                                  (getter key)
+                                  (setter key)
+                                Unset' -> runEffectFn4 di.unsetAttribute
+                                  (toDekuElement eeeee)
+                                  (Key key)
+                                  (getter key)
+                                  (delete key)
                         for_
                           ( unsafeGet s proj'd
-                              :: forall e. Maybe (Array (Identity (Attribute e)))
+                              :: forall e
+                               . Maybe (Array (Identity (Attribute e)))
                           )
                           \a ->
                             runEffectFn1 effn a
                         void $ liftST $ STObject.poke s
                           ( ( unsafeCoerce
                                 :: forall t
-                                 . EffectFn1 (Array (Identity (Attribute t))) Unit
+                                 . EffectFn1 (Array (Identity (Attribute t)))
+                                     Unit
                                 -> Void
                             ) effn
                           )
                           oooooooooo
                     , processPollString: mkEffectFn4 \s _ _ e' -> do
                         let iiiii = unsafeIndex indices s
-                        realDeal <- runEffectFn2 returnReplacement iiiii
+                        realDeal0 <- runEffectFn2 returnReplacement iiiii
                           e'
+                        realDeal <-
+                          if nodeTypeIndex realDeal0 == 3 then pure
+                            ((unsafeCoerce :: Node.Node -> Text.Text) realDeal0)
+                          else do
+                            nt <- runEffectFn1 di.makeText Nothing
+                            par <- runEffectFn1 unsafeParentNode realDeal0
+                            replaceChild
+                              (Text.toNode $ fromDekuText nt)
+                              realDeal0
+                              par
+                            pure (fromDekuText nt)
                         runEffectFn2 di.setText (toDekuText realDeal)
-                          (coerce (fromMaybe (Identity "") (unsafeGet s proj'd :: Maybe (Identity String))))
+                          ( coerce
+                              ( fromMaybe (Identity "")
+                                  ( unsafeGet s proj'd
+                                      :: Maybe (Identity String)
+                                  )
+                              )
+                          )
                         let
-                          effn = mkEffectFn1 \(Identity str) -> runEffectFn2 di.setText
+                          effn = mkEffectFn1 \(Identity str) -> runEffectFn2
+                            di.setText
                             (toDekuText realDeal)
                             str
                         void $ liftST $ STObject.poke s

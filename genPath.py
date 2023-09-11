@@ -213,7 +213,7 @@ import Deku.Attribute (Attribute, Attribute', unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), handleAtts)
 import Deku.Interpret (attributeBeaconFullRangeParentProto, fromDekuBeacon, fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Path as Path
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Poll (Poll)
 import Foreign.Object.ST as STObject
 import Prim.Row as R
@@ -231,16 +231,14 @@ import Web.DOM.Text as Text
 
 data MElement
 
-foreign import processStringImpl :: EffectFn3 String String MElement Unit
 foreign import mEltElt :: MElement -> Element
 foreign import mEltify :: Node.Node -> MElement
 foreign import mEltParent :: MElement -> Element
-foreign import splitTextAndReturnReplacement :: EffectFn2 String  MElement Text
-foreign import returnReplacement :: EffectFn2 Int  MElement Text
+foreign import returnReplacementNoIndex :: EffectFn2 String  MElement Text
+foreign import returnReplacement :: EffectFn2 Int  MElement Node.Node
 foreign import returnReplacementIndex :: EffectFn2 String  MElement Int
 type InstructionSignature i = EffectFn4 String i DOMInterpret MElement Unit
 newtype InstructionDelegate = InstructionDelegate {{
-  processString :: InstructionSignature String,
   processPollString :: InstructionSignature (Poll String),
   processAttribute :: InstructionSignature (Poll Attribute'),
   processNut :: InstructionSignature Nut
@@ -270,11 +268,6 @@ instance processInstructionsCons :: (IsSymbol k, R.Cons k v r' r, ProcessInstruc
   processInstructions = mkEffectFn5 \instr _ r di e -> do
       runEffectFn5 processInstruction instr (Proxy :: _ k) (get (Proxy :: _ k) r) di e
       runEffectFn5 processInstructions instr (Proxy :: _ c) r di e
-
-instance processInstructionString :: IsSymbol k => ProcessInstruction k String where
-  processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processString }}) k s di e -> do
-    {'let _ = spy ("PIString@") {s,e}' if DEBUG else ''}
-    runEffectFn4 processString (reflectSymbol k) s di e
 
 processAttPursx :: InstructionSignature (Poll Attribute')
 processAttPursx = mkEffectFn4 \\_ att di e -> do
@@ -331,70 +324,25 @@ instance processInstructionNut :: IsSymbol k => ProcessInstruction k Nut where
             jprint(genJ(x, y))
             qprint(genJJ(x, y))
     jprint(f'''
-export const processStringImpl = (k, s, e) => {{
-  {'console.log("processString", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
-  // Get the previous sibling (text node) of the element
-  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
-  {'console.log("processString", s, textNode, textNode.textContent);' if DEBUG else ''}
-
-  // Ensure the previous sibling is actually a text node. If it isn't, this will not work.
-  if (textNode && textNode.nodeType === 3) {{  // 3 is the nodeType for a Text node
-    let replacement = s;
-    if (replacement !== undefined) {{
-      textNode.nodeValue = textNode.nodeValue.replace("~" + k + "~", replacement);
-    }} else {{
-      console.error("Programming error: no replacement for " + k + " found in object");
-    }}
-  }} else {{
-    console.error("Programming error: previous node not a text node");
-  }}
-}};
 export const mEltElt = e => e;
 export const mEltParent = x => typeof x === 'function' ? x() : x.parentNode;
 export const mEltify = e => e;
-export const splitTextAndReturnReplacement = (s, e) => {{
-  {'console.log("splitTextAndReturnReplacement", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
+export const returnReplacementNoIndex = (s, e) => {{
+  {'console.log("returnReplacementNoIndex", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
   let targetString = "~" + s + "~";
-  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
-  {'console.log("splitTextAndReturnReplacementPREV", textNode, textNode.textContent);' if DEBUG else ''}
-  while (textNode) {{
-    if (textNode.nodeType === 3) {{
-      // 3 is the nodeType for a Text node
-      let index = textNode.nodeValue.indexOf(targetString);
+  let iterNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
+  {'console.log("returnReplacementNoIndexPREV", iterNode, iterNode.textContent);' if DEBUG else ''}
+  while (iterNode) {{
+    if (iterNode.nodeType === 8) {{
+      // 8 is the nodeType for a Comment node
+      let index = iterNode.textContent.indexOf(targetString);
 
       if (index !== -1) {{
-        // Split the text node at the starting index of the target string
-        let afterTextNode = textNode.splitText(index);
-
-        // Split the afterTextNode at the end index of the target string to isolate it
-        afterTextNode.splitText(targetString.length);
-
-        // Return the newly created text node containing the target string
-        return afterTextNode;
+        return iterNode;
       }}
-    }} else {{
-      throw new Error(
-        "Programming error: previous node not a text node or target string not found: " +
-          s
-      );
     }}
-    textNode = textNode.previousSibling;
-  }}
-  if (textNode && textNode.nodeType === 3) {{
-    // 3 is the nodeType for a Text node
-    let index = textNode.nodeValue.indexOf(targetString);
-
-    if (index !== -1) {{
-      // Split the text node at the starting index of the target string
-      let afterTextNode = textNode.splitText(index);
-
-      // Split the afterTextNode at the end index of the target string to isolate it
-      afterTextNode.splitText(targetString.length);
-
-      // Return the newly created text node containing the target string
-      return afterTextNode;
-    }}
+    iterNode = iterNode.previousSibling;
   }}
 
   throw new Error(
@@ -406,34 +354,33 @@ export const splitTextAndReturnReplacement = (s, e) => {{
 export const returnReplacement = (i, e) => {{
   {'console.log("returnReplacement", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
-  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
+  let iterNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   let ii = 0;
   while (ii < i) {{
     ii++;
-    textNode = textNode.previousSibling;
+    iterNode = iterNode.previousSibling;
   }}
-  return textNode;
+  return iterNode;
 }};
 
 export const returnReplacementIndex = (s, e) => {{
   {'console.log("returnReplacement", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
   let targetString = "~" + s + "~";
-  let textNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
+  let iterNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   let i = 0;
-  while (textNode) {{
-    {'console.log("returnReplacement", textNode, textNode.textContent);' if DEBUG else ''}
-    if (textNode.nodeType === 3) {{  // 3 is the nodeType for a Text node
-      let index = textNode.nodeValue.indexOf(targetString);
+  while (iterNode) {{
+    {'console.log("returnReplacement", iterNode, iterNode.textContent);' if DEBUG else ''}
+    if (iterNode.nodeType === 8) {{  // 8 is the nodeType for a Comment node
+      let index = iterNode.textContent.indexOf(targetString);
       if (index !== -1) {{
         return i;
       }}
-    }} else {{
-        throw new Error("Programming error: previous node not a text node or target string not found: "+s);
     }}
     i++;
-    textNode = textNode.previousSibling;
+    iterNode = iterNode.previousSibling;
   }}
+  throw new Error("Programming error: previous node not a text node or target string not found: "+s);
 }};
 ''')
     R = 6
