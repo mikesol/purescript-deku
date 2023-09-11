@@ -174,7 +174,7 @@ if __name__ == '__main__':
             oprint(genD(x, y))
     oprint("\n\nclass Scrunch (i :: Path) (o :: Path) | i -> o\n\n")
     oprint(genC(-1, -1))
-    for x in range(R - 2):
+    for x in range(R - 1):
         oprint(f"---- level {x}")
         for y in range(2 << x):
             oprint(genC(x, y))

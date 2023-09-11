@@ -1589,6 +1589,519 @@ instance (Scrunch b c) => Scrunch (YYYYRightGroup (ContGroupWithMarkers a b)) (Y
 instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYRightGroup (TwoContGroups a b)) (YYYYRightGroup (TwoContGroups c d))
 instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYRightGroup (TwoContGroupsWithMarkers z a b)) (YYYYRightGroup (TwoContGroupsWithMarkers z c d))
 
+---- level 4
+
+
+instance (Scrunch (XXXXXXDownGroup a) o) => Scrunch (XXXXXDownGroup (DownGroup a)) o
+instance (Scrunch (YXXXXXDownGroup a) o) => Scrunch (XXXXXDownGroup (RightGroup a)) o
+instance Scrunch (XXXXXDownGroup (MarkerGroup a)) (XXXXXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXXXXDownGroup (ContGroupWithMarkers a b)) (XXXXXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXXXDownGroup (TwoContGroups a b)) (XXXXXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXXXDownGroup (TwoContGroupsWithMarkers z a b)) (XXXXXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXXXXXRightGroup a) o) => Scrunch (XXXXXRightGroup (DownGroup a)) o
+instance (Scrunch (YXXXXXRightGroup a) o) => Scrunch (XXXXXRightGroup (RightGroup a)) o
+instance Scrunch (XXXXXRightGroup (MarkerGroup a)) (XXXXXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXXXXRightGroup (ContGroupWithMarkers a b)) (XXXXXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXXXRightGroup (TwoContGroups a b)) (XXXXXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXXXRightGroup (TwoContGroupsWithMarkers z a b)) (XXXXXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXXXXYDownGroup a) o) => Scrunch (XXXXYDownGroup (DownGroup a)) o
+instance (Scrunch (YXXXXYDownGroup a) o) => Scrunch (XXXXYDownGroup (RightGroup a)) o
+instance Scrunch (XXXXYDownGroup (MarkerGroup a)) (XXXXYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXXXYDownGroup (ContGroupWithMarkers a b)) (XXXXYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXXYDownGroup (TwoContGroups a b)) (XXXXYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXXYDownGroup (TwoContGroupsWithMarkers z a b)) (XXXXYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXXXXYRightGroup a) o) => Scrunch (XXXXYRightGroup (DownGroup a)) o
+instance (Scrunch (YXXXXYRightGroup a) o) => Scrunch (XXXXYRightGroup (RightGroup a)) o
+instance Scrunch (XXXXYRightGroup (MarkerGroup a)) (XXXXYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXXXYRightGroup (ContGroupWithMarkers a b)) (XXXXYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXXYRightGroup (TwoContGroups a b)) (XXXXYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXXYRightGroup (TwoContGroupsWithMarkers z a b)) (XXXXYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXXXYXDownGroup a) o) => Scrunch (XXXYXDownGroup (DownGroup a)) o
+instance (Scrunch (YXXXYXDownGroup a) o) => Scrunch (XXXYXDownGroup (RightGroup a)) o
+instance Scrunch (XXXYXDownGroup (MarkerGroup a)) (XXXYXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXXYXDownGroup (ContGroupWithMarkers a b)) (XXXYXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXYXDownGroup (TwoContGroups a b)) (XXXYXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXYXDownGroup (TwoContGroupsWithMarkers z a b)) (XXXYXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXXXYXRightGroup a) o) => Scrunch (XXXYXRightGroup (DownGroup a)) o
+instance (Scrunch (YXXXYXRightGroup a) o) => Scrunch (XXXYXRightGroup (RightGroup a)) o
+instance Scrunch (XXXYXRightGroup (MarkerGroup a)) (XXXYXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXXYXRightGroup (ContGroupWithMarkers a b)) (XXXYXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXYXRightGroup (TwoContGroups a b)) (XXXYXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXYXRightGroup (TwoContGroupsWithMarkers z a b)) (XXXYXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXXXYYDownGroup a) o) => Scrunch (XXXYYDownGroup (DownGroup a)) o
+instance (Scrunch (YXXXYYDownGroup a) o) => Scrunch (XXXYYDownGroup (RightGroup a)) o
+instance Scrunch (XXXYYDownGroup (MarkerGroup a)) (XXXYYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXXYYDownGroup (ContGroupWithMarkers a b)) (XXXYYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXYYDownGroup (TwoContGroups a b)) (XXXYYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXYYDownGroup (TwoContGroupsWithMarkers z a b)) (XXXYYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXXXYYRightGroup a) o) => Scrunch (XXXYYRightGroup (DownGroup a)) o
+instance (Scrunch (YXXXYYRightGroup a) o) => Scrunch (XXXYYRightGroup (RightGroup a)) o
+instance Scrunch (XXXYYRightGroup (MarkerGroup a)) (XXXYYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXXYYRightGroup (ContGroupWithMarkers a b)) (XXXYYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXYYRightGroup (TwoContGroups a b)) (XXXYYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXXYYRightGroup (TwoContGroupsWithMarkers z a b)) (XXXYYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXXYXXDownGroup a) o) => Scrunch (XXYXXDownGroup (DownGroup a)) o
+instance (Scrunch (YXXYXXDownGroup a) o) => Scrunch (XXYXXDownGroup (RightGroup a)) o
+instance Scrunch (XXYXXDownGroup (MarkerGroup a)) (XXYXXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXYXXDownGroup (ContGroupWithMarkers a b)) (XXYXXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYXXDownGroup (TwoContGroups a b)) (XXYXXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYXXDownGroup (TwoContGroupsWithMarkers z a b)) (XXYXXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXXYXXRightGroup a) o) => Scrunch (XXYXXRightGroup (DownGroup a)) o
+instance (Scrunch (YXXYXXRightGroup a) o) => Scrunch (XXYXXRightGroup (RightGroup a)) o
+instance Scrunch (XXYXXRightGroup (MarkerGroup a)) (XXYXXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXYXXRightGroup (ContGroupWithMarkers a b)) (XXYXXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYXXRightGroup (TwoContGroups a b)) (XXYXXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYXXRightGroup (TwoContGroupsWithMarkers z a b)) (XXYXXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXXYXYDownGroup a) o) => Scrunch (XXYXYDownGroup (DownGroup a)) o
+instance (Scrunch (YXXYXYDownGroup a) o) => Scrunch (XXYXYDownGroup (RightGroup a)) o
+instance Scrunch (XXYXYDownGroup (MarkerGroup a)) (XXYXYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXYXYDownGroup (ContGroupWithMarkers a b)) (XXYXYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYXYDownGroup (TwoContGroups a b)) (XXYXYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYXYDownGroup (TwoContGroupsWithMarkers z a b)) (XXYXYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXXYXYRightGroup a) o) => Scrunch (XXYXYRightGroup (DownGroup a)) o
+instance (Scrunch (YXXYXYRightGroup a) o) => Scrunch (XXYXYRightGroup (RightGroup a)) o
+instance Scrunch (XXYXYRightGroup (MarkerGroup a)) (XXYXYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXYXYRightGroup (ContGroupWithMarkers a b)) (XXYXYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYXYRightGroup (TwoContGroups a b)) (XXYXYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYXYRightGroup (TwoContGroupsWithMarkers z a b)) (XXYXYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXXYYXDownGroup a) o) => Scrunch (XXYYXDownGroup (DownGroup a)) o
+instance (Scrunch (YXXYYXDownGroup a) o) => Scrunch (XXYYXDownGroup (RightGroup a)) o
+instance Scrunch (XXYYXDownGroup (MarkerGroup a)) (XXYYXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXYYXDownGroup (ContGroupWithMarkers a b)) (XXYYXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYYXDownGroup (TwoContGroups a b)) (XXYYXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYYXDownGroup (TwoContGroupsWithMarkers z a b)) (XXYYXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXXYYXRightGroup a) o) => Scrunch (XXYYXRightGroup (DownGroup a)) o
+instance (Scrunch (YXXYYXRightGroup a) o) => Scrunch (XXYYXRightGroup (RightGroup a)) o
+instance Scrunch (XXYYXRightGroup (MarkerGroup a)) (XXYYXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXYYXRightGroup (ContGroupWithMarkers a b)) (XXYYXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYYXRightGroup (TwoContGroups a b)) (XXYYXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYYXRightGroup (TwoContGroupsWithMarkers z a b)) (XXYYXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXXYYYDownGroup a) o) => Scrunch (XXYYYDownGroup (DownGroup a)) o
+instance (Scrunch (YXXYYYDownGroup a) o) => Scrunch (XXYYYDownGroup (RightGroup a)) o
+instance Scrunch (XXYYYDownGroup (MarkerGroup a)) (XXYYYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXYYYDownGroup (ContGroupWithMarkers a b)) (XXYYYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYYYDownGroup (TwoContGroups a b)) (XXYYYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYYYDownGroup (TwoContGroupsWithMarkers z a b)) (XXYYYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXXYYYRightGroup a) o) => Scrunch (XXYYYRightGroup (DownGroup a)) o
+instance (Scrunch (YXXYYYRightGroup a) o) => Scrunch (XXYYYRightGroup (RightGroup a)) o
+instance Scrunch (XXYYYRightGroup (MarkerGroup a)) (XXYYYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XXYYYRightGroup (ContGroupWithMarkers a b)) (XXYYYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYYYRightGroup (TwoContGroups a b)) (XXYYYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XXYYYRightGroup (TwoContGroupsWithMarkers z a b)) (XXYYYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXYXXXDownGroup a) o) => Scrunch (XYXXXDownGroup (DownGroup a)) o
+instance (Scrunch (YXYXXXDownGroup a) o) => Scrunch (XYXXXDownGroup (RightGroup a)) o
+instance Scrunch (XYXXXDownGroup (MarkerGroup a)) (XYXXXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYXXXDownGroup (ContGroupWithMarkers a b)) (XYXXXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXXXDownGroup (TwoContGroups a b)) (XYXXXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXXXDownGroup (TwoContGroupsWithMarkers z a b)) (XYXXXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXYXXXRightGroup a) o) => Scrunch (XYXXXRightGroup (DownGroup a)) o
+instance (Scrunch (YXYXXXRightGroup a) o) => Scrunch (XYXXXRightGroup (RightGroup a)) o
+instance Scrunch (XYXXXRightGroup (MarkerGroup a)) (XYXXXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYXXXRightGroup (ContGroupWithMarkers a b)) (XYXXXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXXXRightGroup (TwoContGroups a b)) (XYXXXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXXXRightGroup (TwoContGroupsWithMarkers z a b)) (XYXXXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXYXXYDownGroup a) o) => Scrunch (XYXXYDownGroup (DownGroup a)) o
+instance (Scrunch (YXYXXYDownGroup a) o) => Scrunch (XYXXYDownGroup (RightGroup a)) o
+instance Scrunch (XYXXYDownGroup (MarkerGroup a)) (XYXXYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYXXYDownGroup (ContGroupWithMarkers a b)) (XYXXYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXXYDownGroup (TwoContGroups a b)) (XYXXYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXXYDownGroup (TwoContGroupsWithMarkers z a b)) (XYXXYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXYXXYRightGroup a) o) => Scrunch (XYXXYRightGroup (DownGroup a)) o
+instance (Scrunch (YXYXXYRightGroup a) o) => Scrunch (XYXXYRightGroup (RightGroup a)) o
+instance Scrunch (XYXXYRightGroup (MarkerGroup a)) (XYXXYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYXXYRightGroup (ContGroupWithMarkers a b)) (XYXXYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXXYRightGroup (TwoContGroups a b)) (XYXXYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXXYRightGroup (TwoContGroupsWithMarkers z a b)) (XYXXYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXYXYXDownGroup a) o) => Scrunch (XYXYXDownGroup (DownGroup a)) o
+instance (Scrunch (YXYXYXDownGroup a) o) => Scrunch (XYXYXDownGroup (RightGroup a)) o
+instance Scrunch (XYXYXDownGroup (MarkerGroup a)) (XYXYXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYXYXDownGroup (ContGroupWithMarkers a b)) (XYXYXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXYXDownGroup (TwoContGroups a b)) (XYXYXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXYXDownGroup (TwoContGroupsWithMarkers z a b)) (XYXYXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXYXYXRightGroup a) o) => Scrunch (XYXYXRightGroup (DownGroup a)) o
+instance (Scrunch (YXYXYXRightGroup a) o) => Scrunch (XYXYXRightGroup (RightGroup a)) o
+instance Scrunch (XYXYXRightGroup (MarkerGroup a)) (XYXYXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYXYXRightGroup (ContGroupWithMarkers a b)) (XYXYXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXYXRightGroup (TwoContGroups a b)) (XYXYXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXYXRightGroup (TwoContGroupsWithMarkers z a b)) (XYXYXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXYXYYDownGroup a) o) => Scrunch (XYXYYDownGroup (DownGroup a)) o
+instance (Scrunch (YXYXYYDownGroup a) o) => Scrunch (XYXYYDownGroup (RightGroup a)) o
+instance Scrunch (XYXYYDownGroup (MarkerGroup a)) (XYXYYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYXYYDownGroup (ContGroupWithMarkers a b)) (XYXYYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXYYDownGroup (TwoContGroups a b)) (XYXYYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXYYDownGroup (TwoContGroupsWithMarkers z a b)) (XYXYYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXYXYYRightGroup a) o) => Scrunch (XYXYYRightGroup (DownGroup a)) o
+instance (Scrunch (YXYXYYRightGroup a) o) => Scrunch (XYXYYRightGroup (RightGroup a)) o
+instance Scrunch (XYXYYRightGroup (MarkerGroup a)) (XYXYYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYXYYRightGroup (ContGroupWithMarkers a b)) (XYXYYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXYYRightGroup (TwoContGroups a b)) (XYXYYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYXYYRightGroup (TwoContGroupsWithMarkers z a b)) (XYXYYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXYYXXDownGroup a) o) => Scrunch (XYYXXDownGroup (DownGroup a)) o
+instance (Scrunch (YXYYXXDownGroup a) o) => Scrunch (XYYXXDownGroup (RightGroup a)) o
+instance Scrunch (XYYXXDownGroup (MarkerGroup a)) (XYYXXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYYXXDownGroup (ContGroupWithMarkers a b)) (XYYXXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYXXDownGroup (TwoContGroups a b)) (XYYXXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYXXDownGroup (TwoContGroupsWithMarkers z a b)) (XYYXXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXYYXXRightGroup a) o) => Scrunch (XYYXXRightGroup (DownGroup a)) o
+instance (Scrunch (YXYYXXRightGroup a) o) => Scrunch (XYYXXRightGroup (RightGroup a)) o
+instance Scrunch (XYYXXRightGroup (MarkerGroup a)) (XYYXXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYYXXRightGroup (ContGroupWithMarkers a b)) (XYYXXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYXXRightGroup (TwoContGroups a b)) (XYYXXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYXXRightGroup (TwoContGroupsWithMarkers z a b)) (XYYXXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXYYXYDownGroup a) o) => Scrunch (XYYXYDownGroup (DownGroup a)) o
+instance (Scrunch (YXYYXYDownGroup a) o) => Scrunch (XYYXYDownGroup (RightGroup a)) o
+instance Scrunch (XYYXYDownGroup (MarkerGroup a)) (XYYXYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYYXYDownGroup (ContGroupWithMarkers a b)) (XYYXYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYXYDownGroup (TwoContGroups a b)) (XYYXYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYXYDownGroup (TwoContGroupsWithMarkers z a b)) (XYYXYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXYYXYRightGroup a) o) => Scrunch (XYYXYRightGroup (DownGroup a)) o
+instance (Scrunch (YXYYXYRightGroup a) o) => Scrunch (XYYXYRightGroup (RightGroup a)) o
+instance Scrunch (XYYXYRightGroup (MarkerGroup a)) (XYYXYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYYXYRightGroup (ContGroupWithMarkers a b)) (XYYXYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYXYRightGroup (TwoContGroups a b)) (XYYXYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYXYRightGroup (TwoContGroupsWithMarkers z a b)) (XYYXYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXYYYXDownGroup a) o) => Scrunch (XYYYXDownGroup (DownGroup a)) o
+instance (Scrunch (YXYYYXDownGroup a) o) => Scrunch (XYYYXDownGroup (RightGroup a)) o
+instance Scrunch (XYYYXDownGroup (MarkerGroup a)) (XYYYXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYYYXDownGroup (ContGroupWithMarkers a b)) (XYYYXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYYXDownGroup (TwoContGroups a b)) (XYYYXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYYXDownGroup (TwoContGroupsWithMarkers z a b)) (XYYYXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXYYYXRightGroup a) o) => Scrunch (XYYYXRightGroup (DownGroup a)) o
+instance (Scrunch (YXYYYXRightGroup a) o) => Scrunch (XYYYXRightGroup (RightGroup a)) o
+instance Scrunch (XYYYXRightGroup (MarkerGroup a)) (XYYYXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYYYXRightGroup (ContGroupWithMarkers a b)) (XYYYXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYYXRightGroup (TwoContGroups a b)) (XYYYXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYYXRightGroup (TwoContGroupsWithMarkers z a b)) (XYYYXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XXYYYYDownGroup a) o) => Scrunch (XYYYYDownGroup (DownGroup a)) o
+instance (Scrunch (YXYYYYDownGroup a) o) => Scrunch (XYYYYDownGroup (RightGroup a)) o
+instance Scrunch (XYYYYDownGroup (MarkerGroup a)) (XYYYYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYYYYDownGroup (ContGroupWithMarkers a b)) (XYYYYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYYYDownGroup (TwoContGroups a b)) (XYYYYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYYYDownGroup (TwoContGroupsWithMarkers z a b)) (XYYYYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XXYYYYRightGroup a) o) => Scrunch (XYYYYRightGroup (DownGroup a)) o
+instance (Scrunch (YXYYYYRightGroup a) o) => Scrunch (XYYYYRightGroup (RightGroup a)) o
+instance Scrunch (XYYYYRightGroup (MarkerGroup a)) (XYYYYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (XYYYYRightGroup (ContGroupWithMarkers a b)) (XYYYYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYYYRightGroup (TwoContGroups a b)) (XYYYYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (XYYYYRightGroup (TwoContGroupsWithMarkers z a b)) (XYYYYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYXXXXDownGroup a) o) => Scrunch (YXXXXDownGroup (DownGroup a)) o
+instance (Scrunch (YYXXXXDownGroup a) o) => Scrunch (YXXXXDownGroup (RightGroup a)) o
+instance Scrunch (YXXXXDownGroup (MarkerGroup a)) (YXXXXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXXXXDownGroup (ContGroupWithMarkers a b)) (YXXXXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXXXDownGroup (TwoContGroups a b)) (YXXXXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXXXDownGroup (TwoContGroupsWithMarkers z a b)) (YXXXXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYXXXXRightGroup a) o) => Scrunch (YXXXXRightGroup (DownGroup a)) o
+instance (Scrunch (YYXXXXRightGroup a) o) => Scrunch (YXXXXRightGroup (RightGroup a)) o
+instance Scrunch (YXXXXRightGroup (MarkerGroup a)) (YXXXXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXXXXRightGroup (ContGroupWithMarkers a b)) (YXXXXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXXXRightGroup (TwoContGroups a b)) (YXXXXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXXXRightGroup (TwoContGroupsWithMarkers z a b)) (YXXXXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYXXXYDownGroup a) o) => Scrunch (YXXXYDownGroup (DownGroup a)) o
+instance (Scrunch (YYXXXYDownGroup a) o) => Scrunch (YXXXYDownGroup (RightGroup a)) o
+instance Scrunch (YXXXYDownGroup (MarkerGroup a)) (YXXXYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXXXYDownGroup (ContGroupWithMarkers a b)) (YXXXYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXXYDownGroup (TwoContGroups a b)) (YXXXYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXXYDownGroup (TwoContGroupsWithMarkers z a b)) (YXXXYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYXXXYRightGroup a) o) => Scrunch (YXXXYRightGroup (DownGroup a)) o
+instance (Scrunch (YYXXXYRightGroup a) o) => Scrunch (YXXXYRightGroup (RightGroup a)) o
+instance Scrunch (YXXXYRightGroup (MarkerGroup a)) (YXXXYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXXXYRightGroup (ContGroupWithMarkers a b)) (YXXXYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXXYRightGroup (TwoContGroups a b)) (YXXXYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXXYRightGroup (TwoContGroupsWithMarkers z a b)) (YXXXYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYXXYXDownGroup a) o) => Scrunch (YXXYXDownGroup (DownGroup a)) o
+instance (Scrunch (YYXXYXDownGroup a) o) => Scrunch (YXXYXDownGroup (RightGroup a)) o
+instance Scrunch (YXXYXDownGroup (MarkerGroup a)) (YXXYXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXXYXDownGroup (ContGroupWithMarkers a b)) (YXXYXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXYXDownGroup (TwoContGroups a b)) (YXXYXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXYXDownGroup (TwoContGroupsWithMarkers z a b)) (YXXYXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYXXYXRightGroup a) o) => Scrunch (YXXYXRightGroup (DownGroup a)) o
+instance (Scrunch (YYXXYXRightGroup a) o) => Scrunch (YXXYXRightGroup (RightGroup a)) o
+instance Scrunch (YXXYXRightGroup (MarkerGroup a)) (YXXYXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXXYXRightGroup (ContGroupWithMarkers a b)) (YXXYXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXYXRightGroup (TwoContGroups a b)) (YXXYXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXYXRightGroup (TwoContGroupsWithMarkers z a b)) (YXXYXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYXXYYDownGroup a) o) => Scrunch (YXXYYDownGroup (DownGroup a)) o
+instance (Scrunch (YYXXYYDownGroup a) o) => Scrunch (YXXYYDownGroup (RightGroup a)) o
+instance Scrunch (YXXYYDownGroup (MarkerGroup a)) (YXXYYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXXYYDownGroup (ContGroupWithMarkers a b)) (YXXYYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXYYDownGroup (TwoContGroups a b)) (YXXYYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXYYDownGroup (TwoContGroupsWithMarkers z a b)) (YXXYYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYXXYYRightGroup a) o) => Scrunch (YXXYYRightGroup (DownGroup a)) o
+instance (Scrunch (YYXXYYRightGroup a) o) => Scrunch (YXXYYRightGroup (RightGroup a)) o
+instance Scrunch (YXXYYRightGroup (MarkerGroup a)) (YXXYYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXXYYRightGroup (ContGroupWithMarkers a b)) (YXXYYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXYYRightGroup (TwoContGroups a b)) (YXXYYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXXYYRightGroup (TwoContGroupsWithMarkers z a b)) (YXXYYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYXYXXDownGroup a) o) => Scrunch (YXYXXDownGroup (DownGroup a)) o
+instance (Scrunch (YYXYXXDownGroup a) o) => Scrunch (YXYXXDownGroup (RightGroup a)) o
+instance Scrunch (YXYXXDownGroup (MarkerGroup a)) (YXYXXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXYXXDownGroup (ContGroupWithMarkers a b)) (YXYXXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYXXDownGroup (TwoContGroups a b)) (YXYXXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYXXDownGroup (TwoContGroupsWithMarkers z a b)) (YXYXXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYXYXXRightGroup a) o) => Scrunch (YXYXXRightGroup (DownGroup a)) o
+instance (Scrunch (YYXYXXRightGroup a) o) => Scrunch (YXYXXRightGroup (RightGroup a)) o
+instance Scrunch (YXYXXRightGroup (MarkerGroup a)) (YXYXXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXYXXRightGroup (ContGroupWithMarkers a b)) (YXYXXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYXXRightGroup (TwoContGroups a b)) (YXYXXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYXXRightGroup (TwoContGroupsWithMarkers z a b)) (YXYXXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYXYXYDownGroup a) o) => Scrunch (YXYXYDownGroup (DownGroup a)) o
+instance (Scrunch (YYXYXYDownGroup a) o) => Scrunch (YXYXYDownGroup (RightGroup a)) o
+instance Scrunch (YXYXYDownGroup (MarkerGroup a)) (YXYXYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXYXYDownGroup (ContGroupWithMarkers a b)) (YXYXYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYXYDownGroup (TwoContGroups a b)) (YXYXYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYXYDownGroup (TwoContGroupsWithMarkers z a b)) (YXYXYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYXYXYRightGroup a) o) => Scrunch (YXYXYRightGroup (DownGroup a)) o
+instance (Scrunch (YYXYXYRightGroup a) o) => Scrunch (YXYXYRightGroup (RightGroup a)) o
+instance Scrunch (YXYXYRightGroup (MarkerGroup a)) (YXYXYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXYXYRightGroup (ContGroupWithMarkers a b)) (YXYXYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYXYRightGroup (TwoContGroups a b)) (YXYXYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYXYRightGroup (TwoContGroupsWithMarkers z a b)) (YXYXYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYXYYXDownGroup a) o) => Scrunch (YXYYXDownGroup (DownGroup a)) o
+instance (Scrunch (YYXYYXDownGroup a) o) => Scrunch (YXYYXDownGroup (RightGroup a)) o
+instance Scrunch (YXYYXDownGroup (MarkerGroup a)) (YXYYXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXYYXDownGroup (ContGroupWithMarkers a b)) (YXYYXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYYXDownGroup (TwoContGroups a b)) (YXYYXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYYXDownGroup (TwoContGroupsWithMarkers z a b)) (YXYYXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYXYYXRightGroup a) o) => Scrunch (YXYYXRightGroup (DownGroup a)) o
+instance (Scrunch (YYXYYXRightGroup a) o) => Scrunch (YXYYXRightGroup (RightGroup a)) o
+instance Scrunch (YXYYXRightGroup (MarkerGroup a)) (YXYYXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXYYXRightGroup (ContGroupWithMarkers a b)) (YXYYXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYYXRightGroup (TwoContGroups a b)) (YXYYXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYYXRightGroup (TwoContGroupsWithMarkers z a b)) (YXYYXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYXYYYDownGroup a) o) => Scrunch (YXYYYDownGroup (DownGroup a)) o
+instance (Scrunch (YYXYYYDownGroup a) o) => Scrunch (YXYYYDownGroup (RightGroup a)) o
+instance Scrunch (YXYYYDownGroup (MarkerGroup a)) (YXYYYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXYYYDownGroup (ContGroupWithMarkers a b)) (YXYYYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYYYDownGroup (TwoContGroups a b)) (YXYYYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYYYDownGroup (TwoContGroupsWithMarkers z a b)) (YXYYYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYXYYYRightGroup a) o) => Scrunch (YXYYYRightGroup (DownGroup a)) o
+instance (Scrunch (YYXYYYRightGroup a) o) => Scrunch (YXYYYRightGroup (RightGroup a)) o
+instance Scrunch (YXYYYRightGroup (MarkerGroup a)) (YXYYYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YXYYYRightGroup (ContGroupWithMarkers a b)) (YXYYYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYYYRightGroup (TwoContGroups a b)) (YXYYYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YXYYYRightGroup (TwoContGroupsWithMarkers z a b)) (YXYYYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYYXXXDownGroup a) o) => Scrunch (YYXXXDownGroup (DownGroup a)) o
+instance (Scrunch (YYYXXXDownGroup a) o) => Scrunch (YYXXXDownGroup (RightGroup a)) o
+instance Scrunch (YYXXXDownGroup (MarkerGroup a)) (YYXXXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYXXXDownGroup (ContGroupWithMarkers a b)) (YYXXXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXXXDownGroup (TwoContGroups a b)) (YYXXXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXXXDownGroup (TwoContGroupsWithMarkers z a b)) (YYXXXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYYXXXRightGroup a) o) => Scrunch (YYXXXRightGroup (DownGroup a)) o
+instance (Scrunch (YYYXXXRightGroup a) o) => Scrunch (YYXXXRightGroup (RightGroup a)) o
+instance Scrunch (YYXXXRightGroup (MarkerGroup a)) (YYXXXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYXXXRightGroup (ContGroupWithMarkers a b)) (YYXXXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXXXRightGroup (TwoContGroups a b)) (YYXXXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXXXRightGroup (TwoContGroupsWithMarkers z a b)) (YYXXXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYYXXYDownGroup a) o) => Scrunch (YYXXYDownGroup (DownGroup a)) o
+instance (Scrunch (YYYXXYDownGroup a) o) => Scrunch (YYXXYDownGroup (RightGroup a)) o
+instance Scrunch (YYXXYDownGroup (MarkerGroup a)) (YYXXYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYXXYDownGroup (ContGroupWithMarkers a b)) (YYXXYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXXYDownGroup (TwoContGroups a b)) (YYXXYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXXYDownGroup (TwoContGroupsWithMarkers z a b)) (YYXXYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYYXXYRightGroup a) o) => Scrunch (YYXXYRightGroup (DownGroup a)) o
+instance (Scrunch (YYYXXYRightGroup a) o) => Scrunch (YYXXYRightGroup (RightGroup a)) o
+instance Scrunch (YYXXYRightGroup (MarkerGroup a)) (YYXXYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYXXYRightGroup (ContGroupWithMarkers a b)) (YYXXYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXXYRightGroup (TwoContGroups a b)) (YYXXYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXXYRightGroup (TwoContGroupsWithMarkers z a b)) (YYXXYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYYXYXDownGroup a) o) => Scrunch (YYXYXDownGroup (DownGroup a)) o
+instance (Scrunch (YYYXYXDownGroup a) o) => Scrunch (YYXYXDownGroup (RightGroup a)) o
+instance Scrunch (YYXYXDownGroup (MarkerGroup a)) (YYXYXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYXYXDownGroup (ContGroupWithMarkers a b)) (YYXYXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXYXDownGroup (TwoContGroups a b)) (YYXYXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXYXDownGroup (TwoContGroupsWithMarkers z a b)) (YYXYXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYYXYXRightGroup a) o) => Scrunch (YYXYXRightGroup (DownGroup a)) o
+instance (Scrunch (YYYXYXRightGroup a) o) => Scrunch (YYXYXRightGroup (RightGroup a)) o
+instance Scrunch (YYXYXRightGroup (MarkerGroup a)) (YYXYXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYXYXRightGroup (ContGroupWithMarkers a b)) (YYXYXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXYXRightGroup (TwoContGroups a b)) (YYXYXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXYXRightGroup (TwoContGroupsWithMarkers z a b)) (YYXYXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYYXYYDownGroup a) o) => Scrunch (YYXYYDownGroup (DownGroup a)) o
+instance (Scrunch (YYYXYYDownGroup a) o) => Scrunch (YYXYYDownGroup (RightGroup a)) o
+instance Scrunch (YYXYYDownGroup (MarkerGroup a)) (YYXYYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYXYYDownGroup (ContGroupWithMarkers a b)) (YYXYYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXYYDownGroup (TwoContGroups a b)) (YYXYYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXYYDownGroup (TwoContGroupsWithMarkers z a b)) (YYXYYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYYXYYRightGroup a) o) => Scrunch (YYXYYRightGroup (DownGroup a)) o
+instance (Scrunch (YYYXYYRightGroup a) o) => Scrunch (YYXYYRightGroup (RightGroup a)) o
+instance Scrunch (YYXYYRightGroup (MarkerGroup a)) (YYXYYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYXYYRightGroup (ContGroupWithMarkers a b)) (YYXYYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXYYRightGroup (TwoContGroups a b)) (YYXYYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYXYYRightGroup (TwoContGroupsWithMarkers z a b)) (YYXYYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYYYXXDownGroup a) o) => Scrunch (YYYXXDownGroup (DownGroup a)) o
+instance (Scrunch (YYYYXXDownGroup a) o) => Scrunch (YYYXXDownGroup (RightGroup a)) o
+instance Scrunch (YYYXXDownGroup (MarkerGroup a)) (YYYXXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYYXXDownGroup (ContGroupWithMarkers a b)) (YYYXXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYXXDownGroup (TwoContGroups a b)) (YYYXXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYXXDownGroup (TwoContGroupsWithMarkers z a b)) (YYYXXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYYYXXRightGroup a) o) => Scrunch (YYYXXRightGroup (DownGroup a)) o
+instance (Scrunch (YYYYXXRightGroup a) o) => Scrunch (YYYXXRightGroup (RightGroup a)) o
+instance Scrunch (YYYXXRightGroup (MarkerGroup a)) (YYYXXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYYXXRightGroup (ContGroupWithMarkers a b)) (YYYXXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYXXRightGroup (TwoContGroups a b)) (YYYXXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYXXRightGroup (TwoContGroupsWithMarkers z a b)) (YYYXXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYYYXYDownGroup a) o) => Scrunch (YYYXYDownGroup (DownGroup a)) o
+instance (Scrunch (YYYYXYDownGroup a) o) => Scrunch (YYYXYDownGroup (RightGroup a)) o
+instance Scrunch (YYYXYDownGroup (MarkerGroup a)) (YYYXYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYYXYDownGroup (ContGroupWithMarkers a b)) (YYYXYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYXYDownGroup (TwoContGroups a b)) (YYYXYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYXYDownGroup (TwoContGroupsWithMarkers z a b)) (YYYXYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYYYXYRightGroup a) o) => Scrunch (YYYXYRightGroup (DownGroup a)) o
+instance (Scrunch (YYYYXYRightGroup a) o) => Scrunch (YYYXYRightGroup (RightGroup a)) o
+instance Scrunch (YYYXYRightGroup (MarkerGroup a)) (YYYXYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYYXYRightGroup (ContGroupWithMarkers a b)) (YYYXYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYXYRightGroup (TwoContGroups a b)) (YYYXYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYXYRightGroup (TwoContGroupsWithMarkers z a b)) (YYYXYRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYYYYXDownGroup a) o) => Scrunch (YYYYXDownGroup (DownGroup a)) o
+instance (Scrunch (YYYYYXDownGroup a) o) => Scrunch (YYYYXDownGroup (RightGroup a)) o
+instance Scrunch (YYYYXDownGroup (MarkerGroup a)) (YYYYXDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYYYXDownGroup (ContGroupWithMarkers a b)) (YYYYXDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYXDownGroup (TwoContGroups a b)) (YYYYXDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYXDownGroup (TwoContGroupsWithMarkers z a b)) (YYYYXDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYYYYXRightGroup a) o) => Scrunch (YYYYXRightGroup (DownGroup a)) o
+instance (Scrunch (YYYYYXRightGroup a) o) => Scrunch (YYYYXRightGroup (RightGroup a)) o
+instance Scrunch (YYYYXRightGroup (MarkerGroup a)) (YYYYXRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYYYXRightGroup (ContGroupWithMarkers a b)) (YYYYXRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYXRightGroup (TwoContGroups a b)) (YYYYXRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYXRightGroup (TwoContGroupsWithMarkers z a b)) (YYYYXRightGroup (TwoContGroupsWithMarkers z c d))
+
+
+
+instance (Scrunch (XYYYYYDownGroup a) o) => Scrunch (YYYYYDownGroup (DownGroup a)) o
+instance (Scrunch (YYYYYYDownGroup a) o) => Scrunch (YYYYYDownGroup (RightGroup a)) o
+instance Scrunch (YYYYYDownGroup (MarkerGroup a)) (YYYYYDownGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYYYYDownGroup (ContGroupWithMarkers a b)) (YYYYYDownGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYYDownGroup (TwoContGroups a b)) (YYYYYDownGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYYDownGroup (TwoContGroupsWithMarkers z a b)) (YYYYYDownGroup (TwoContGroupsWithMarkers z c d))
+---
+instance (Scrunch (XYYYYYRightGroup a) o) => Scrunch (YYYYYRightGroup (DownGroup a)) o
+instance (Scrunch (YYYYYYRightGroup a) o) => Scrunch (YYYYYRightGroup (RightGroup a)) o
+instance Scrunch (YYYYYRightGroup (MarkerGroup a)) (YYYYYRightGroup (MarkerGroup a))
+instance (Scrunch b c) => Scrunch (YYYYYRightGroup (ContGroupWithMarkers a b)) (YYYYYRightGroup (ContGroupWithMarkers a c))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYYRightGroup (TwoContGroups a b)) (YYYYYRightGroup (TwoContGroups c d))
+instance (Scrunch a c, Scrunch b d) => Scrunch (YYYYYRightGroup (TwoContGroupsWithMarkers z a b)) (YYYYYRightGroup (TwoContGroupsWithMarkers z c d))
+
 
 
 ---- final
