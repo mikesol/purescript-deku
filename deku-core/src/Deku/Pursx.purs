@@ -25,7 +25,7 @@ import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.TraversableWithIndex (traverseWithIndex)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, AttributeValue(..), Key(..), Value(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForElement, eltAttribution, getLifecycle, notLucky, runListener, text, thunker)
+import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, getLifecycle, notLucky, runListener, text, thunker)
 import Deku.Interpret (attributeDynParentForElementEffect, fromDekuText, toDekuElement, toDekuText)
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.Path (symbolsToArray)
@@ -290,7 +290,7 @@ template
   -> Nut
 template p = Nut $ mkEffectFn2
   \(PSR psr)
-   (DOMInterpret di) -> projProof @withLifecycle \proof ->
+   di'@(DOMInterpret di) -> projProof @withLifecycle \proof ->
     do
       let
         -- various proxies
@@ -568,5 +568,16 @@ template p = Nut $ mkEffectFn2
               liftST $ void $ STObject.poke ix uuuuu elementCache
       -- now that we have our element cache, we do something with it
       runListener (oh'hi dbStart dbEnd) unsubs p
+      -- listen to the lifecycle
+      for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn8
+        actOnLifecycleForDyn
+        psr.fromPortal
+        unsubs
+        l
+        di'
+        dbStart
+        dbEnd
+        s
+        e
       -- finally, return the beacon
       pure $ DekuBeaconOutcome dbStart
