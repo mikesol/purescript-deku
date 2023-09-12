@@ -10,7 +10,7 @@ import Deku.Attribute (Attribute, Attribute', unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), handleAtts)
 import Deku.Interpret (attributeBeaconFullRangeParentProto, fromDekuBeacon, fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Path as Path
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Poll (Poll)
 import Foreign.Object.ST as STObject
 import Prim.Row as R
@@ -31,9 +31,9 @@ data MElement
 foreign import mEltElt :: MElement -> Element
 foreign import mEltify :: Node.Node -> MElement
 foreign import mEltParent :: MElement -> Element
-foreign import returnReplacementNoIndex :: EffectFn2 String  MElement Text
+foreign import returnReplacementNoIndex :: EffectFn3 String String MElement Text
 foreign import returnReplacement :: EffectFn2 Int  MElement Node.Node
-foreign import returnReplacementIndex :: EffectFn2 String  MElement Int
+foreign import returnReplacementIndex :: EffectFn3 String String MElement Int
 type InstructionSignature i = EffectFn4 String i DOMInterpret MElement Unit
 newtype InstructionDelegate = InstructionDelegate {
   processPollString :: InstructionSignature (Poll String),

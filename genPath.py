@@ -213,7 +213,7 @@ import Deku.Attribute (Attribute, Attribute', unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), handleAtts)
 import Deku.Interpret (attributeBeaconFullRangeParentProto, fromDekuBeacon, fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Path as Path
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Poll (Poll)
 import Foreign.Object.ST as STObject
 import Prim.Row as R
@@ -234,9 +234,9 @@ data MElement
 foreign import mEltElt :: MElement -> Element
 foreign import mEltify :: Node.Node -> MElement
 foreign import mEltParent :: MElement -> Element
-foreign import returnReplacementNoIndex :: EffectFn2 String  MElement Text
+foreign import returnReplacementNoIndex :: EffectFn3 String String MElement Text
 foreign import returnReplacement :: EffectFn2 Int  MElement Node.Node
-foreign import returnReplacementIndex :: EffectFn2 String  MElement Int
+foreign import returnReplacementIndex :: EffectFn3 String String MElement Int
 type InstructionSignature i = EffectFn4 String i DOMInterpret MElement Unit
 newtype InstructionDelegate = InstructionDelegate {{
   processPollString :: InstructionSignature (Poll String),
@@ -284,7 +284,7 @@ instance processInstructionPollString :: IsSymbol k => ProcessInstruction k (Pol
   processInstruction = mkEffectFn5 \\(InstructionDelegate {{ processPollString }}) k pstring di e -> do
     runEffectFn4 processPollString (reflectSymbol k) pstring di e
 
-processNutPursx :: EffectFn2 String  MElement Text ->  InstructionSignature Nut
+processNutPursx :: EffectFn2 String MElement Text ->  InstructionSignature Nut
 processNutPursx splitter = mkEffectFn4 \\k (Nut nut) di@(DOMInterpret {{ makeElement }}) e -> do
     {'let _ = spy ("PINut") e' if DEBUG else ''}
     fauxPar <- runEffectFn2 makeElement Nothing (Tag "template")
@@ -327,10 +327,10 @@ instance processInstructionNut :: IsSymbol k => ProcessInstruction k Nut where
 export const mEltElt = e => e;
 export const mEltParent = x => typeof x === 'function' ? x() : x.parentNode;
 export const mEltify = e => e;
-export const returnReplacementNoIndex = (s, e) => {{
+export const returnReplacementNoIndex = (verb, s, e) => {{
   {'console.log("returnReplacementNoIndex", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
-  let targetString = "~" + s + "~";
+  let targetString = verb + s + verb;
   let iterNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   {'console.log("returnReplacementNoIndexPREV", iterNode, iterNode.textContent);' if DEBUG else ''}
   while (iterNode) {{
@@ -363,10 +363,10 @@ export const returnReplacement = (i, e) => {{
   return iterNode;
 }};
 
-export const returnReplacementIndex = (s, e) => {{
+export const returnReplacementIndex = (verb, s, e) => {{
   {'console.log("returnReplacement", e ? e.outerHTML: `NO_E `+p.outerHTML);' if DEBUG else ''}
   // Get the previous sibling (text node) of the element
-  let targetString = "~" + s + "~";
+  let targetString = verb + s + verb;
   let iterNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   let i = 0;
   while (iterNode) {{

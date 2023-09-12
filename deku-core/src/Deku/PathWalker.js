@@ -510,10 +510,10 @@ export const yyyyyyRightGroup = (e) => { const start = e; const next = e.nextEle
 export const mEltElt = e => e;
 export const mEltParent = x => typeof x === 'function' ? x() : x.parentNode;
 export const mEltify = e => e;
-export const returnReplacementNoIndex = (s, e) => {
+export const returnReplacementNoIndex = (verb, s, e) => {
   
   // Get the previous sibling (text node) of the element
-  let targetString = "~" + s + "~";
+  let targetString = verb + s + verb;
   let iterNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   
   while (iterNode) {
@@ -546,10 +546,10 @@ export const returnReplacement = (i, e) => {
   return iterNode;
 };
 
-export const returnReplacementIndex = (s, e) => {
+export const returnReplacementIndex = (verb, s, e) => {
   
   // Get the previous sibling (text node) of the element
-  let targetString = "~" + s + "~";
+  let targetString = verb + s + verb;
   let iterNode = typeof e !== 'function' ? e.previousSibling : e().lastChild;
   let i = 0;
   while (iterNode) {

@@ -216,13 +216,13 @@ pursx' r = Nut $ mkEffectFn2
                 c
                 d
             , processPollString: mkEffectFn4 \a b c d -> runEffectFn4
-                (processNutPursx returnReplacementNoIndex)
+                (processNutPursx (mkEffectFn2 \q z -> runEffectFn3 returnReplacementNoIndex verbSymbol q z) )
                 a
                 (text b)
                 c
                 d
             , processNut: mkEffectFn4 \a b c d -> runEffectFn4
-                (processNutPursx returnReplacementNoIndex)
+                (processNutPursx (mkEffectFn2 \q z -> runEffectFn3 returnReplacementNoIndex verbSymbol q z))
                 a
                 b
                 c
@@ -349,8 +349,9 @@ template p = Nut $ mkEffectFn2
               { processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit
               , processPollString: mkEffectFn4 \a _ _ dd -> do
                   void $ liftST $ STObject.poke a dd isStringCache
-                  void $ runEffectFn2
+                  void $ runEffectFn3
                     returnReplacementNoIndex
+                    verbSymbol
                     a
                     dd
               , processNut: mkEffectFn4 \_ _ _ _ -> throwException
@@ -369,7 +370,7 @@ template p = Nut $ mkEffectFn2
               :: STObject.STObject Global MElement -> Object.Object MElement
           ) isStringCache
       indices <- traverseWithIndex
-        (\k v -> runEffectFn2 returnReplacementIndex k v)
+        (\k v -> runEffectFn3 returnReplacementIndex verbSymbol k v)
         frozenIsStringcache
       -- as usual, we start off lucky
       -- even though this can enver be unlucky as templates can only
