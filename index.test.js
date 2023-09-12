@@ -1164,6 +1164,12 @@ describe("deku", () => {
         );
       })
     );
+    doTest("ocarina pursx doesn't crash", (f) =>
+      f(tests.ocarinaExample, () => {
+        const $ = require("jquery");
+      })
+    );
+    
     doTest("sends to position correctly when elt is fixed", (f) =>
       f(tests.sendsToPositionFixed, () => {
         const $ = require("jquery");

@@ -187,7 +187,7 @@ instance
   Judgment (RL.Cons a b c)
     (RL.Cons x y z)
     (RL.Cons d e f)
-    (TwoContGroupsWithMarkers (RL.Cons x y z) o p)
+    (TwoContGroupsWithMarkers (RL.Cons x y z) (DownGroup o) (RightGroup p))
 
 class Process (p :: RL.RowList (RL.RowList Symbol)) (o :: Path) | p -> o
 

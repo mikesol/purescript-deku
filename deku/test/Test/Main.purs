@@ -3,40 +3,40 @@ module Test.Main where
 import Prelude
 
 import Control.Alt ((<|>))
+import Control.Monad.Rec.Class (Step(..), tailRecM)
+import Control.Monad.ST.Class (liftST)
 import Control.Plus (empty)
+import Data.Array ((!!), (..))
+import Data.Array as Array
+import Data.Array.ST as STArray
 import Data.Filterable (compact, filter)
 import Data.Foldable (intercalate, for_, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
+import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Tuple (Tuple(..), fst)
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut, fixed, portal, useRefST)
+import Deku.Core (Hook, Nut(..), fixed, portal, useRefST)
+import Deku.DOM (Attribute)
 import Deku.DOM as D
+import Deku.DOM as DOM
 import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT, templatedMap_, templated_, templated)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
+import Deku.Hooks as DH
 import Deku.Pursx (template, pursx)
 import Deku.Toplevel (runInBody)
+import Effect (Effect, foreachE)
 import Effect.Random (random, randomInt)
+import FRP.Event (fold, keepLatest, mapAccum)
 import FRP.Poll (Poll, merge, mergeMap, mergePure, mergeMapPure, stToPoll)
+import Foreign.Object as Object
+import Record (union)
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
 import Web.HTML.Window (alert)
-import Control.Monad.Rec.Class (Step(..), tailRecM)
-import Control.Monad.ST.Class (liftST)
-import Data.Array ((!!), (..))
-import Data.Array as Array
-import Data.Array.ST as STArray
-import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Tuple (Tuple(..), fst)
-import Deku.DOM (Attribute)
-import Deku.DOM as DOM
-import Deku.Hooks as DH
-import Effect (Effect, foreachE)
-import FRP.Event (fold, keepLatest, mapAccum)
-import Foreign.Object as Object
-import Record (union)
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
@@ -646,6 +646,16 @@ useHotRantWorks = Deku.do
     , guard presence $ framed "db"
     ]
 
+
+
+ocarinaExample :: Nut
+ocarinaExample = pursx @OcarinaPx {
+  allpass: text_ "hello allpass"
+  , analyser: text_ "hello analyser"
+  , drumroll: text_ "hello drumroll"
+  , next: DA.id_ "hello"
+  , toc: text_ "This is a table of contents"
+}
 -- begin stress test
 
 randomAdjectives :: Array String
@@ -942,3 +952,28 @@ type Body =
     </div>
 </div>"""
 -- end stress test
+
+type OcarinaPx = """<div>
+  <h1>Audio Units</h1>
+
+  <h3>There sure are a lot of them!</h3>
+  <p>
+    This section provides a tour of the web audio nodes provided by the Web Audio API and, by extension, Ocarina. There are only two omissions:</p>
+    <ul>
+      <li>Audio Worklet Nodes</li>
+      <li>Multi-channel audio</li>
+    </ul>
+    <p>Both of these will be covered in later sections.</p>
+
+  <p>
+    This section is long and should be read like those passages in the Bible that list who was the child of who: DILIGENTLY AND COPIOUSLY. That said, if you want to skip around, here's a table of contents.
+  </p>
+  ~toc~
+  <p>And now, without further ado... (~drumroll~) Here are some audio nodes!</p>
+
+  ~allpass~
+  ~analyser~
+
+  <h2>Next steps</h2>
+  <p>Phew, that was a lot of audio units! In the next section, we'll make them come alive thanks to the magic of <a ~next~ style="cursor:pointer;">events</a>.</p>
+</div>"""
