@@ -1,7 +1,5 @@
 module Deku.PursxParser where
 
-import Deku.Attribute (Attribute)
-import Deku.DOM (class TagToDeku)
 import Prim.Boolean (False, True)
 import Deku.PxTypes as PxTypes
 import Prim.Row as Row
