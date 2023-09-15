@@ -11,17 +11,23 @@ module Deku.Some
   , class AsTypeConstructor
   , class AsTypeConstructorRL
   , foreachE
+  , foreachEInv
   , labels
+  , foreachEWith
+  , foreachEWithInv
   , EffectOp(..)
+  , EffectOpWith(..)
   ) where
 
 import Prelude
 
 import Data.Array as Array
+import Data.Const (Const)
 import Data.Function.Uncurried (Fn4, runFn4)
 import Data.Maybe (Maybe(..))
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Effect.Uncurried (EffectFn1, EffectFn2)
+import Effect (Effect)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
 import Prim.Row as Row
 import Prim.RowList as RL
 import Type.Proxy (Proxy(..))
@@ -100,11 +106,35 @@ projWithProof
 projWithProof (LabelProof proof) i = runFn4 projImpl Just Nothing proof i
 
 foreign import foreachEImpl :: forall a b. EffectFn2 a b Unit
+foreign import foreachEInvImpl :: forall a b c. EffectFn3 a b c Unit
+foreign import foreachEWithImpl :: forall a b c. EffectFn3 a b c Unit
+foreign import foreachEWithInvImpl :: forall a b c d. EffectFn4 a b c d Unit
 
 newtype EffectOp a = EffectOp (EffectFn1 a Unit)
+newtype EffectOpWith b a = EffectOpWith (EffectFn2 b a Unit)
 
 foreachE
   :: forall r2 r3
    . AsTypeConstructor EffectOp r2 r3
   => EffectFn2 (Some r2) { | r3 }  Unit
 foreachE = unsafeCoerce foreachEImpl
+
+foreachEInv
+  :: forall r2 r3 r4
+   . AsTypeConstructor EffectOp r2 r3
+  => AsTypeConstructor (Const (Effect Unit)) r2 r4
+  => EffectFn3 (Some r2) { | r3 } { | r4 } Unit
+foreachEInv = unsafeCoerce foreachEInvImpl
+
+foreachEWith
+  :: forall a r2 r3
+   . AsTypeConstructor (EffectOpWith a) r2 r3
+  => EffectFn3 a (Some r2) { | r3 }  Unit
+foreachEWith = unsafeCoerce foreachEWithImpl
+
+foreachEWithInv
+  :: forall a r2 r3 r4
+   . AsTypeConstructor (EffectOpWith a) r2 r3
+  => AsTypeConstructor (Const (EffectFn1 a Unit)) r2 r4
+  => EffectFn4 a (Some r2) { | r3 } { | r4 } Unit
+foreachEWithInv = unsafeCoerce foreachEWithInvImpl

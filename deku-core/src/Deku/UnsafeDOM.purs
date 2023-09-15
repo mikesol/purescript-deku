@@ -8,7 +8,9 @@ import Web.Event.Event (Event, EventType)
 import Web.Event.EventTarget (EventListener, EventTarget)
 import Web.HTML (HTMLTemplateElement)
 
+foreign import unsafeGetElementById :: EffectFn1 String Element
 foreign import unsafeParentNode :: EffectFn1 Node Node
+foreign import unsafeParentElement :: EffectFn1 Element Element
 foreign import unsafeFirstChild :: EffectFn1 Node Node
 foreign import createElement :: EffectFn1 String Element
 foreign import createElementNS :: EffectFn2 String String Element
@@ -38,3 +40,5 @@ foreign import eventListener
   :: forall a
    . EffectFn1 (EffectFn1 Event a)
        EventListener
+
+foreign import insertAdjacentHTML :: EffectFn3 String String Element Unit

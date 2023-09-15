@@ -5,6 +5,8 @@ module Deku.DOM
   ( module Deku.Control
   , module Deku.Attribute
   , class TagToDeku
+  , class TagToCtor
+  , ctor
   , html
   , html_
   , html__
@@ -534,6 +536,10 @@ import Web.UIEvent.CompositionEvent as Web.UIEvent.CompositionEvent
 import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
 
 class TagToDeku (tag :: Symbol) (interface :: Row Type) | tag -> interface
+class TagToCtor (tag :: Symbol) (interface :: Row Type) | tag -> interface where
+  ctor
+    :: Proxy tag -> Array (FRP.Poll.Poll (Deku.Attribute.Attribute interface)) -> Array Nut -> Nut
+
 type ARIAMixin (r :: Row Type) =
   ( __tag :: Proxy "ARIAMixin"
   , ariaValuetext :: String
@@ -1375,6 +1381,9 @@ instance TagToDeku "html" (HTMLHtmlElement ())
 html :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHtmlElement ()))) -> Array Nut -> Nut
 html = elementify Nothing "html"
 
+instance TagToCtor "html" (HTMLHtmlElement ()) where
+  ctor _ = html
+
 html_ :: Array Nut -> Nut
 html_ = html []
 
@@ -1385,6 +1394,9 @@ instance TagToDeku "head" (HTMLHeadElement ())
 
 head :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadElement ()))) -> Array Nut -> Nut
 head = elementify Nothing "head"
+
+instance TagToCtor "head" (HTMLHeadElement ()) where
+  ctor _ = head
 
 head_ :: Array Nut -> Nut
 head_ = head []
@@ -1397,6 +1409,9 @@ instance TagToDeku "title" (HTMLTitleElement ())
 title :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTitleElement ()))) -> Array Nut -> Nut
 title = elementify Nothing "title"
 
+instance TagToCtor "title" (HTMLTitleElement ()) where
+  ctor _ = title
+
 title_ :: Array Nut -> Nut
 title_ = title []
 
@@ -1407,6 +1422,9 @@ instance TagToDeku "base" (HTMLBaseElement ())
 
 base :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLBaseElement ()))) -> Array Nut -> Nut
 base = elementify Nothing "base"
+
+instance TagToCtor "base" (HTMLBaseElement ()) where
+  ctor _ = base
 
 base_ :: Array Nut -> Nut
 base_ = base []
@@ -1419,6 +1437,9 @@ instance TagToDeku "link" (HTMLLinkElement ())
 link :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLLinkElement ()))) -> Array Nut -> Nut
 link = elementify Nothing "link"
 
+instance TagToCtor "link" (HTMLLinkElement ()) where
+  ctor _ = link
+
 link_ :: Array Nut -> Nut
 link_ = link []
 
@@ -1429,6 +1450,9 @@ instance TagToDeku "meta" (HTMLMetaElement ())
 
 meta :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLMetaElement ()))) -> Array Nut -> Nut
 meta = elementify Nothing "meta"
+
+instance TagToCtor "meta" (HTMLMetaElement ()) where
+  ctor _ = meta
 
 meta_ :: Array Nut -> Nut
 meta_ = meta []
@@ -1441,6 +1465,9 @@ instance TagToDeku "style" (HTMLStyleElement ())
 style :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLStyleElement ()))) -> Array Nut -> Nut
 style = elementify Nothing "style"
 
+instance TagToCtor "style" (HTMLStyleElement ()) where
+  ctor _ = style
+
 style_ :: Array Nut -> Nut
 style_ = style []
 
@@ -1451,6 +1478,9 @@ instance TagToDeku "body" (HTMLBodyElement ())
 
 body :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLBodyElement ()))) -> Array Nut -> Nut
 body = elementify Nothing "body"
+
+instance TagToCtor "body" (HTMLBodyElement ()) where
+  ctor _ = body
 
 body_ :: Array Nut -> Nut
 body_ = body []
@@ -1463,6 +1493,9 @@ instance TagToDeku "article" (HTMLElement ())
 article :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 article = elementify Nothing "article"
 
+instance TagToCtor "article" (HTMLElement ()) where
+  ctor _ = article
+
 article_ :: Array Nut -> Nut
 article_ = article []
 
@@ -1473,6 +1506,9 @@ instance TagToDeku "section" (HTMLElement ())
 
 section :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 section = elementify Nothing "section"
+
+instance TagToCtor "section" (HTMLElement ()) where
+  ctor _ = section
 
 section_ :: Array Nut -> Nut
 section_ = section []
@@ -1485,6 +1521,9 @@ instance TagToDeku "nav" (HTMLElement ())
 nav :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 nav = elementify Nothing "nav"
 
+instance TagToCtor "nav" (HTMLElement ()) where
+  ctor _ = nav
+
 nav_ :: Array Nut -> Nut
 nav_ = nav []
 
@@ -1495,6 +1534,9 @@ instance TagToDeku "aside" (HTMLElement ())
 
 aside :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 aside = elementify Nothing "aside"
+
+instance TagToCtor "aside" (HTMLElement ()) where
+  ctor _ = aside
 
 aside_ :: Array Nut -> Nut
 aside_ = aside []
@@ -1507,6 +1549,9 @@ instance TagToDeku "h1" (HTMLHeadingElement ())
 h1 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
 h1 = elementify Nothing "h1"
 
+instance TagToCtor "h1" (HTMLHeadingElement ()) where
+  ctor _ = h1
+
 h1_ :: Array Nut -> Nut
 h1_ = h1 []
 
@@ -1517,6 +1562,9 @@ instance TagToDeku "h2" (HTMLHeadingElement ())
 
 h2 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
 h2 = elementify Nothing "h2"
+
+instance TagToCtor "h2" (HTMLHeadingElement ()) where
+  ctor _ = h2
 
 h2_ :: Array Nut -> Nut
 h2_ = h2 []
@@ -1529,6 +1577,9 @@ instance TagToDeku "h3" (HTMLHeadingElement ())
 h3 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
 h3 = elementify Nothing "h3"
 
+instance TagToCtor "h3" (HTMLHeadingElement ()) where
+  ctor _ = h3
+
 h3_ :: Array Nut -> Nut
 h3_ = h3 []
 
@@ -1539,6 +1590,9 @@ instance TagToDeku "h4" (HTMLHeadingElement ())
 
 h4 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
 h4 = elementify Nothing "h4"
+
+instance TagToCtor "h4" (HTMLHeadingElement ()) where
+  ctor _ = h4
 
 h4_ :: Array Nut -> Nut
 h4_ = h4 []
@@ -1551,6 +1605,9 @@ instance TagToDeku "h5" (HTMLHeadingElement ())
 h5 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
 h5 = elementify Nothing "h5"
 
+instance TagToCtor "h5" (HTMLHeadingElement ()) where
+  ctor _ = h5
+
 h5_ :: Array Nut -> Nut
 h5_ = h5 []
 
@@ -1561,6 +1618,9 @@ instance TagToDeku "h6" (HTMLHeadingElement ())
 
 h6 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
 h6 = elementify Nothing "h6"
+
+instance TagToCtor "h6" (HTMLHeadingElement ()) where
+  ctor _ = h6
 
 h6_ :: Array Nut -> Nut
 h6_ = h6 []
@@ -1573,6 +1633,9 @@ instance TagToDeku "hgroup" (HTMLElement ())
 hgroup :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 hgroup = elementify Nothing "hgroup"
 
+instance TagToCtor "hgroup" (HTMLElement ()) where
+  ctor _ = hgroup
+
 hgroup_ :: Array Nut -> Nut
 hgroup_ = hgroup []
 
@@ -1583,6 +1646,9 @@ instance TagToDeku "header" (HTMLElement ())
 
 header :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 header = elementify Nothing "header"
+
+instance TagToCtor "header" (HTMLElement ()) where
+  ctor _ = header
 
 header_ :: Array Nut -> Nut
 header_ = header []
@@ -1595,6 +1661,9 @@ instance TagToDeku "footer" (HTMLElement ())
 footer :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 footer = elementify Nothing "footer"
 
+instance TagToCtor "footer" (HTMLElement ()) where
+  ctor _ = footer
+
 footer_ :: Array Nut -> Nut
 footer_ = footer []
 
@@ -1605,6 +1674,9 @@ instance TagToDeku "address" (HTMLElement ())
 
 address :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 address = elementify Nothing "address"
+
+instance TagToCtor "address" (HTMLElement ()) where
+  ctor _ = address
 
 address_ :: Array Nut -> Nut
 address_ = address []
@@ -1617,6 +1689,9 @@ instance TagToDeku "p" (HTMLParagraphElement ())
 p :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLParagraphElement ()))) -> Array Nut -> Nut
 p = elementify Nothing "p"
 
+instance TagToCtor "p" (HTMLParagraphElement ()) where
+  ctor _ = p
+
 p_ :: Array Nut -> Nut
 p_ = p []
 
@@ -1628,6 +1703,9 @@ instance TagToDeku "hr" (HTMLHRElement ())
 hr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHRElement ()))) -> Array Nut -> Nut
 hr = elementify Nothing "hr"
 
+instance TagToCtor "hr" (HTMLHRElement ()) where
+  ctor _ = hr
+
 hr_ :: Array Nut -> Nut
 hr_ = hr []
 
@@ -1638,6 +1716,9 @@ instance TagToDeku "pre" (HTMLPreElement ())
 
 pre :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLPreElement ()))) -> Array Nut -> Nut
 pre = elementify Nothing "pre"
+
+instance TagToCtor "pre" (HTMLPreElement ()) where
+  ctor _ = pre
 
 pre_ :: Array Nut -> Nut
 pre_ = pre []
@@ -1651,6 +1732,9 @@ blockquote
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLQuoteElement ()))) -> Array Nut -> Nut
 blockquote = elementify Nothing "blockquote"
 
+instance TagToCtor "blockquote" (HTMLQuoteElement ()) where
+  ctor _ = blockquote
+
 blockquote_ :: Array Nut -> Nut
 blockquote_ = blockquote []
 
@@ -1661,6 +1745,9 @@ instance TagToDeku "ol" (HTMLOListElement ())
 
 ol :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLOListElement ()))) -> Array Nut -> Nut
 ol = elementify Nothing "ol"
+
+instance TagToCtor "ol" (HTMLOListElement ()) where
+  ctor _ = ol
 
 ol_ :: Array Nut -> Nut
 ol_ = ol []
@@ -1673,6 +1760,9 @@ instance TagToDeku "ul" (HTMLUListElement ())
 ul :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUListElement ()))) -> Array Nut -> Nut
 ul = elementify Nothing "ul"
 
+instance TagToCtor "ul" (HTMLUListElement ()) where
+  ctor _ = ul
+
 ul_ :: Array Nut -> Nut
 ul_ = ul []
 
@@ -1683,6 +1773,9 @@ instance TagToDeku "menu" (HTMLMenuElement ())
 
 menu :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLMenuElement ()))) -> Array Nut -> Nut
 menu = elementify Nothing "menu"
+
+instance TagToCtor "menu" (HTMLMenuElement ()) where
+  ctor _ = menu
 
 menu_ :: Array Nut -> Nut
 menu_ = menu []
@@ -1695,6 +1788,9 @@ instance TagToDeku "li" (HTMLLIElement ())
 li :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLLIElement ()))) -> Array Nut -> Nut
 li = elementify Nothing "li"
 
+instance TagToCtor "li" (HTMLLIElement ()) where
+  ctor _ = li
+
 li_ :: Array Nut -> Nut
 li_ = li []
 
@@ -1705,6 +1801,9 @@ instance TagToDeku "dl" (HTMLDListElement ())
 
 dl :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDListElement ()))) -> Array Nut -> Nut
 dl = elementify Nothing "dl"
+
+instance TagToCtor "dl" (HTMLDListElement ()) where
+  ctor _ = dl
 
 dl_ :: Array Nut -> Nut
 dl_ = dl []
@@ -1717,6 +1816,9 @@ instance TagToDeku "dt" (HTMLElement ())
 dt :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 dt = elementify Nothing "dt"
 
+instance TagToCtor "dt" (HTMLElement ()) where
+  ctor _ = dt
+
 dt_ :: Array Nut -> Nut
 dt_ = dt []
 
@@ -1727,6 +1829,9 @@ instance TagToDeku "dd" (HTMLElement ())
 
 dd :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 dd = elementify Nothing "dd"
+
+instance TagToCtor "dd" (HTMLElement ()) where
+  ctor _ = dd
 
 dd_ :: Array Nut -> Nut
 dd_ = dd []
@@ -1739,6 +1844,9 @@ instance TagToDeku "figure" (HTMLElement ())
 figure :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 figure = elementify Nothing "figure"
 
+instance TagToCtor "figure" (HTMLElement ()) where
+  ctor _ = figure
+
 figure_ :: Array Nut -> Nut
 figure_ = figure []
 
@@ -1749,6 +1857,9 @@ instance TagToDeku "figcaption" (HTMLElement ())
 
 figcaption :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 figcaption = elementify Nothing "figcaption"
+
+instance TagToCtor "figcaption" (HTMLElement ()) where
+  ctor _ = figcaption
 
 figcaption_ :: Array Nut -> Nut
 figcaption_ = figcaption []
@@ -1761,6 +1872,9 @@ instance TagToDeku "main" (HTMLElement ())
 main :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 main = elementify Nothing "main"
 
+instance TagToCtor "main" (HTMLElement ()) where
+  ctor _ = main
+
 main_ :: Array Nut -> Nut
 main_ = main []
 
@@ -1771,6 +1885,9 @@ instance TagToDeku "search" (HTMLElement ())
 
 search :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 search = elementify Nothing "search"
+
+instance TagToCtor "search" (HTMLElement ()) where
+  ctor _ = search
 
 search_ :: Array Nut -> Nut
 search_ = search []
@@ -1783,6 +1900,9 @@ instance TagToDeku "div" (HTMLDivElement ())
 div :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDivElement ()))) -> Array Nut -> Nut
 div = elementify Nothing "div"
 
+instance TagToCtor "div" (HTMLDivElement ()) where
+  ctor _ = div
+
 div_ :: Array Nut -> Nut
 div_ = div []
 
@@ -1793,6 +1913,9 @@ instance TagToDeku "a" (HTMLAnchorElement ())
 
 a :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLAnchorElement ()))) -> Array Nut -> Nut
 a = elementify Nothing "a"
+
+instance TagToCtor "a" (HTMLAnchorElement ()) where
+  ctor _ = a
 
 a_ :: Array Nut -> Nut
 a_ = a []
@@ -1805,6 +1928,9 @@ instance TagToDeku "em" (HTMLElement ())
 em :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 em = elementify Nothing "em"
 
+instance TagToCtor "em" (HTMLElement ()) where
+  ctor _ = em
+
 em_ :: Array Nut -> Nut
 em_ = em []
 
@@ -1815,6 +1941,9 @@ instance TagToDeku "strong" (HTMLElement ())
 
 strong :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 strong = elementify Nothing "strong"
+
+instance TagToCtor "strong" (HTMLElement ()) where
+  ctor _ = strong
 
 strong_ :: Array Nut -> Nut
 strong_ = strong []
@@ -1827,6 +1956,9 @@ instance TagToDeku "small" (HTMLElement ())
 small :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 small = elementify Nothing "small"
 
+instance TagToCtor "small" (HTMLElement ()) where
+  ctor _ = small
+
 small_ :: Array Nut -> Nut
 small_ = small []
 
@@ -1837,6 +1969,9 @@ instance TagToDeku "s" (HTMLElement ())
 
 s :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 s = elementify Nothing "s"
+
+instance TagToCtor "s" (HTMLElement ()) where
+  ctor _ = s
 
 s_ :: Array Nut -> Nut
 s_ = s []
@@ -1849,6 +1984,9 @@ instance TagToDeku "cite" (HTMLElement ())
 cite :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 cite = elementify Nothing "cite"
 
+instance TagToCtor "cite" (HTMLElement ()) where
+  ctor _ = cite
+
 cite_ :: Array Nut -> Nut
 cite_ = cite []
 
@@ -1859,6 +1997,9 @@ instance TagToDeku "q" (HTMLQuoteElement ())
 
 q :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLQuoteElement ()))) -> Array Nut -> Nut
 q = elementify Nothing "q"
+
+instance TagToCtor "q" (HTMLQuoteElement ()) where
+  ctor _ = q
 
 q_ :: Array Nut -> Nut
 q_ = q []
@@ -1871,6 +2012,9 @@ instance TagToDeku "dfn" (HTMLElement ())
 dfn :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 dfn = elementify Nothing "dfn"
 
+instance TagToCtor "dfn" (HTMLElement ()) where
+  ctor _ = dfn
+
 dfn_ :: Array Nut -> Nut
 dfn_ = dfn []
 
@@ -1881,6 +2025,9 @@ instance TagToDeku "abbr" (HTMLElement ())
 
 abbr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 abbr = elementify Nothing "abbr"
+
+instance TagToCtor "abbr" (HTMLElement ()) where
+  ctor _ = abbr
 
 abbr_ :: Array Nut -> Nut
 abbr_ = abbr []
@@ -1893,6 +2040,9 @@ instance TagToDeku "ruby" (HTMLElement ())
 ruby :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 ruby = elementify Nothing "ruby"
 
+instance TagToCtor "ruby" (HTMLElement ()) where
+  ctor _ = ruby
+
 ruby_ :: Array Nut -> Nut
 ruby_ = ruby []
 
@@ -1903,6 +2053,9 @@ instance TagToDeku "rt" (HTMLElement ())
 
 rt :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 rt = elementify Nothing "rt"
+
+instance TagToCtor "rt" (HTMLElement ()) where
+  ctor _ = rt
 
 rt_ :: Array Nut -> Nut
 rt_ = rt []
@@ -1915,6 +2068,9 @@ instance TagToDeku "rp" (HTMLElement ())
 rp :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 rp = elementify Nothing "rp"
 
+instance TagToCtor "rp" (HTMLElement ()) where
+  ctor _ = rp
+
 rp_ :: Array Nut -> Nut
 rp_ = rp []
 
@@ -1925,6 +2081,9 @@ instance TagToDeku "data" (HTMLDataElement ())
 
 xdata :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDataElement ()))) -> Array Nut -> Nut
 xdata = elementify Nothing "data"
+
+instance TagToCtor "data" (HTMLDataElement ()) where
+  ctor _ = xdata
 
 xdata_ :: Array Nut -> Nut
 xdata_ = xdata []
@@ -1937,6 +2096,9 @@ instance TagToDeku "time" (HTMLTimeElement ())
 time :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTimeElement ()))) -> Array Nut -> Nut
 time = elementify Nothing "time"
 
+instance TagToCtor "time" (HTMLTimeElement ()) where
+  ctor _ = time
+
 time_ :: Array Nut -> Nut
 time_ = time []
 
@@ -1947,6 +2109,9 @@ instance TagToDeku "code" (HTMLElement ())
 
 code :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 code = elementify Nothing "code"
+
+instance TagToCtor "code" (HTMLElement ()) where
+  ctor _ = code
 
 code_ :: Array Nut -> Nut
 code_ = code []
@@ -1959,6 +2124,9 @@ instance TagToDeku "var" (HTMLElement ())
 var :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 var = elementify Nothing "var"
 
+instance TagToCtor "var" (HTMLElement ()) where
+  ctor _ = var
+
 var_ :: Array Nut -> Nut
 var_ = var []
 
@@ -1969,6 +2137,9 @@ instance TagToDeku "samp" (HTMLElement ())
 
 samp :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 samp = elementify Nothing "samp"
+
+instance TagToCtor "samp" (HTMLElement ()) where
+  ctor _ = samp
 
 samp_ :: Array Nut -> Nut
 samp_ = samp []
@@ -1981,6 +2152,9 @@ instance TagToDeku "kbd" (HTMLElement ())
 kbd :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 kbd = elementify Nothing "kbd"
 
+instance TagToCtor "kbd" (HTMLElement ()) where
+  ctor _ = kbd
+
 kbd_ :: Array Nut -> Nut
 kbd_ = kbd []
 
@@ -1991,6 +2165,9 @@ instance TagToDeku "sub" (HTMLElement ())
 
 sub :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 sub = elementify Nothing "sub"
+
+instance TagToCtor "sub" (HTMLElement ()) where
+  ctor _ = sub
 
 sub_ :: Array Nut -> Nut
 sub_ = sub []
@@ -2003,6 +2180,9 @@ instance TagToDeku "sup" (HTMLElement ())
 sup :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 sup = elementify Nothing "sup"
 
+instance TagToCtor "sup" (HTMLElement ()) where
+  ctor _ = sup
+
 sup_ :: Array Nut -> Nut
 sup_ = sup []
 
@@ -2013,6 +2193,9 @@ instance TagToDeku "i" (HTMLElement ())
 
 i :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 i = elementify Nothing "i"
+
+instance TagToCtor "i" (HTMLElement ()) where
+  ctor _ = i
 
 i_ :: Array Nut -> Nut
 i_ = i []
@@ -2025,6 +2208,9 @@ instance TagToDeku "b" (HTMLElement ())
 b :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 b = elementify Nothing "b"
 
+instance TagToCtor "b" (HTMLElement ()) where
+  ctor _ = b
+
 b_ :: Array Nut -> Nut
 b_ = b []
 
@@ -2035,6 +2221,9 @@ instance TagToDeku "u" (HTMLElement ())
 
 u :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 u = elementify Nothing "u"
+
+instance TagToCtor "u" (HTMLElement ()) where
+  ctor _ = u
 
 u_ :: Array Nut -> Nut
 u_ = u []
@@ -2047,6 +2236,9 @@ instance TagToDeku "mark" (HTMLElement ())
 mark :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 mark = elementify Nothing "mark"
 
+instance TagToCtor "mark" (HTMLElement ()) where
+  ctor _ = mark
+
 mark_ :: Array Nut -> Nut
 mark_ = mark []
 
@@ -2057,6 +2249,9 @@ instance TagToDeku "bdi" (HTMLElement ())
 
 bdi :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 bdi = elementify Nothing "bdi"
+
+instance TagToCtor "bdi" (HTMLElement ()) where
+  ctor _ = bdi
 
 bdi_ :: Array Nut -> Nut
 bdi_ = bdi []
@@ -2069,6 +2264,9 @@ instance TagToDeku "bdo" (HTMLElement ())
 bdo :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 bdo = elementify Nothing "bdo"
 
+instance TagToCtor "bdo" (HTMLElement ()) where
+  ctor _ = bdo
+
 bdo_ :: Array Nut -> Nut
 bdo_ = bdo []
 
@@ -2079,6 +2277,9 @@ instance TagToDeku "span" (HTMLSpanElement ())
 
 span :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLSpanElement ()))) -> Array Nut -> Nut
 span = elementify Nothing "span"
+
+instance TagToCtor "span" (HTMLSpanElement ()) where
+  ctor _ = span
 
 span_ :: Array Nut -> Nut
 span_ = span []
@@ -2091,6 +2292,9 @@ instance TagToDeku "br" (HTMLBRElement ())
 br :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLBRElement ()))) -> Array Nut -> Nut
 br = elementify Nothing "br"
 
+instance TagToCtor "br" (HTMLBRElement ()) where
+  ctor _ = br
+
 br_ :: Array Nut -> Nut
 br_ = br []
 
@@ -2101,6 +2305,9 @@ instance TagToDeku "wbr" (HTMLElement ())
 
 wbr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 wbr = elementify Nothing "wbr"
+
+instance TagToCtor "wbr" (HTMLElement ()) where
+  ctor _ = wbr
 
 wbr_ :: Array Nut -> Nut
 wbr_ = wbr []
@@ -2113,6 +2320,9 @@ instance TagToDeku "ins" (HTMLModElement ())
 ins :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLModElement ()))) -> Array Nut -> Nut
 ins = elementify Nothing "ins"
 
+instance TagToCtor "ins" (HTMLModElement ()) where
+  ctor _ = ins
+
 ins_ :: Array Nut -> Nut
 ins_ = ins []
 
@@ -2123,6 +2333,9 @@ instance TagToDeku "del" (HTMLModElement ())
 
 del :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLModElement ()))) -> Array Nut -> Nut
 del = elementify Nothing "del"
+
+instance TagToCtor "del" (HTMLModElement ()) where
+  ctor _ = del
 
 del_ :: Array Nut -> Nut
 del_ = del []
@@ -2136,6 +2349,9 @@ picture
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLPictureElement ()))) -> Array Nut -> Nut
 picture = elementify Nothing "picture"
 
+instance TagToCtor "picture" (HTMLPictureElement ()) where
+  ctor _ = picture
+
 picture_ :: Array Nut -> Nut
 picture_ = picture []
 
@@ -2148,6 +2364,9 @@ source
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLSourceElement ()))) -> Array Nut -> Nut
 source = elementify Nothing "source"
 
+instance TagToCtor "source" (HTMLSourceElement ()) where
+  ctor _ = source
+
 source_ :: Array Nut -> Nut
 source_ = source []
 
@@ -2158,6 +2377,9 @@ instance TagToDeku "img" (HTMLImageElement ())
 
 img :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLImageElement ()))) -> Array Nut -> Nut
 img = elementify Nothing "img"
+
+instance TagToCtor "img" (HTMLImageElement ()) where
+  ctor _ = img
 
 img_ :: Array Nut -> Nut
 img_ = img []
@@ -2171,6 +2393,9 @@ iframe
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLIFrameElement ()))) -> Array Nut -> Nut
 iframe = elementify Nothing "iframe"
 
+instance TagToCtor "iframe" (HTMLIFrameElement ()) where
+  ctor _ = iframe
+
 iframe_ :: Array Nut -> Nut
 iframe_ = iframe []
 
@@ -2181,6 +2406,9 @@ instance TagToDeku "embed" (HTMLEmbedElement ())
 
 embed :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLEmbedElement ()))) -> Array Nut -> Nut
 embed = elementify Nothing "embed"
+
+instance TagToCtor "embed" (HTMLEmbedElement ()) where
+  ctor _ = embed
 
 embed_ :: Array Nut -> Nut
 embed_ = embed []
@@ -2194,6 +2422,9 @@ object
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLObjectElement ()))) -> Array Nut -> Nut
 object = elementify Nothing "object"
 
+instance TagToCtor "object" (HTMLObjectElement ()) where
+  ctor _ = object
+
 object_ :: Array Nut -> Nut
 object_ = object []
 
@@ -2204,6 +2435,9 @@ instance TagToDeku "video" (HTMLVideoElement ())
 
 video :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLVideoElement ()))) -> Array Nut -> Nut
 video = elementify Nothing "video"
+
+instance TagToCtor "video" (HTMLVideoElement ()) where
+  ctor _ = video
 
 video_ :: Array Nut -> Nut
 video_ = video []
@@ -2216,6 +2450,9 @@ instance TagToDeku "audio" (HTMLAudioElement ())
 audio :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLAudioElement ()))) -> Array Nut -> Nut
 audio = elementify Nothing "audio"
 
+instance TagToCtor "audio" (HTMLAudioElement ()) where
+  ctor _ = audio
+
 audio_ :: Array Nut -> Nut
 audio_ = audio []
 
@@ -2226,6 +2463,9 @@ instance TagToDeku "track" (HTMLTrackElement ())
 
 track :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTrackElement ()))) -> Array Nut -> Nut
 track = elementify Nothing "track"
+
+instance TagToCtor "track" (HTMLTrackElement ()) where
+  ctor _ = track
 
 track_ :: Array Nut -> Nut
 track_ = track []
@@ -2238,6 +2478,9 @@ instance TagToDeku "map" (HTMLMapElement ())
 map :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLMapElement ()))) -> Array Nut -> Nut
 map = elementify Nothing "map"
 
+instance TagToCtor "map" (HTMLMapElement ()) where
+  ctor _ = map
+
 map_ :: Array Nut -> Nut
 map_ = map []
 
@@ -2249,6 +2492,9 @@ instance TagToDeku "area" (HTMLAreaElement ())
 area :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLAreaElement ()))) -> Array Nut -> Nut
 area = elementify Nothing "area"
 
+instance TagToCtor "area" (HTMLAreaElement ()) where
+  ctor _ = area
+
 area_ :: Array Nut -> Nut
 area_ = area []
 
@@ -2259,6 +2505,9 @@ instance TagToDeku "table" (HTMLTableElement ())
 
 table :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableElement ()))) -> Array Nut -> Nut
 table = elementify Nothing "table"
+
+instance TagToCtor "table" (HTMLTableElement ()) where
+  ctor _ = table
 
 table_ :: Array Nut -> Nut
 table_ = table []
@@ -2274,6 +2523,9 @@ caption
   -> Nut
 caption = elementify Nothing "caption"
 
+instance TagToCtor "caption" (HTMLTableCaptionElement ()) where
+  ctor _ = caption
+
 caption_ :: Array Nut -> Nut
 caption_ = caption []
 
@@ -2286,6 +2538,9 @@ colgroup
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableColElement ()))) -> Array Nut -> Nut
 colgroup = elementify Nothing "colgroup"
 
+instance TagToCtor "colgroup" (HTMLTableColElement ()) where
+  ctor _ = colgroup
+
 colgroup_ :: Array Nut -> Nut
 colgroup_ = colgroup []
 
@@ -2297,6 +2552,9 @@ instance TagToDeku "col" (HTMLTableColElement ())
 col
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableColElement ()))) -> Array Nut -> Nut
 col = elementify Nothing "col"
+
+instance TagToCtor "col" (HTMLTableColElement ()) where
+  ctor _ = col
 
 col_ :: Array Nut -> Nut
 col_ = col []
@@ -2312,6 +2570,9 @@ tbody
   -> Nut
 tbody = elementify Nothing "tbody"
 
+instance TagToCtor "tbody" (HTMLTableSectionElement ()) where
+  ctor _ = tbody
+
 tbody_ :: Array Nut -> Nut
 tbody_ = tbody []
 
@@ -2325,6 +2586,9 @@ thead
   -> Array Nut
   -> Nut
 thead = elementify Nothing "thead"
+
+instance TagToCtor "thead" (HTMLTableSectionElement ()) where
+  ctor _ = thead
 
 thead_ :: Array Nut -> Nut
 thead_ = thead []
@@ -2340,6 +2604,9 @@ tfoot
   -> Nut
 tfoot = elementify Nothing "tfoot"
 
+instance TagToCtor "tfoot" (HTMLTableSectionElement ()) where
+  ctor _ = tfoot
+
 tfoot_ :: Array Nut -> Nut
 tfoot_ = tfoot []
 
@@ -2350,6 +2617,9 @@ instance TagToDeku "tr" (HTMLTableRowElement ())
 
 tr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableRowElement ()))) -> Array Nut -> Nut
 tr = elementify Nothing "tr"
+
+instance TagToCtor "tr" (HTMLTableRowElement ()) where
+  ctor _ = tr
 
 tr_ :: Array Nut -> Nut
 tr_ = tr []
@@ -2363,6 +2633,9 @@ td
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableCellElement ()))) -> Array Nut -> Nut
 td = elementify Nothing "td"
 
+instance TagToCtor "td" (HTMLTableCellElement ()) where
+  ctor _ = td
+
 td_ :: Array Nut -> Nut
 td_ = td []
 
@@ -2375,6 +2648,9 @@ th
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableCellElement ()))) -> Array Nut -> Nut
 th = elementify Nothing "th"
 
+instance TagToCtor "th" (HTMLTableCellElement ()) where
+  ctor _ = th
+
 th_ :: Array Nut -> Nut
 th_ = th []
 
@@ -2385,6 +2661,9 @@ instance TagToDeku "form" (HTMLFormElement ())
 
 form :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLFormElement ()))) -> Array Nut -> Nut
 form = elementify Nothing "form"
+
+instance TagToCtor "form" (HTMLFormElement ()) where
+  ctor _ = form
 
 form_ :: Array Nut -> Nut
 form_ = form []
@@ -2397,6 +2676,9 @@ instance TagToDeku "label" (HTMLLabelElement ())
 label :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLLabelElement ()))) -> Array Nut -> Nut
 label = elementify Nothing "label"
 
+instance TagToCtor "label" (HTMLLabelElement ()) where
+  ctor _ = label
+
 label_ :: Array Nut -> Nut
 label_ = label []
 
@@ -2407,6 +2689,9 @@ instance TagToDeku "input" (HTMLInputElement ())
 
 input :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLInputElement ()))) -> Array Nut -> Nut
 input = elementify Nothing "input"
+
+instance TagToCtor "input" (HTMLInputElement ()) where
+  ctor _ = input
 
 input_ :: Array Nut -> Nut
 input_ = input []
@@ -2420,6 +2705,9 @@ button
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLButtonElement ()))) -> Array Nut -> Nut
 button = elementify Nothing "button"
 
+instance TagToCtor "button" (HTMLButtonElement ()) where
+  ctor _ = button
+
 button_ :: Array Nut -> Nut
 button_ = button []
 
@@ -2431,6 +2719,9 @@ instance TagToDeku "select" (HTMLSelectElement ())
 select
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLSelectElement ()))) -> Array Nut -> Nut
 select = elementify Nothing "select"
+
+instance TagToCtor "select" (HTMLSelectElement ()) where
+  ctor _ = select
 
 select_ :: Array Nut -> Nut
 select_ = select []
@@ -2444,6 +2735,9 @@ datalist
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDataListElement ()))) -> Array Nut -> Nut
 datalist = elementify Nothing "datalist"
 
+instance TagToCtor "datalist" (HTMLDataListElement ()) where
+  ctor _ = datalist
+
 datalist_ :: Array Nut -> Nut
 datalist_ = datalist []
 
@@ -2455,6 +2749,9 @@ instance TagToDeku "optgroup" (HTMLOptGroupElement ())
 optgroup
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLOptGroupElement ()))) -> Array Nut -> Nut
 optgroup = elementify Nothing "optgroup"
+
+instance TagToCtor "optgroup" (HTMLOptGroupElement ()) where
+  ctor _ = optgroup
 
 optgroup_ :: Array Nut -> Nut
 optgroup_ = optgroup []
@@ -2468,6 +2765,9 @@ option
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLOptionElement ()))) -> Array Nut -> Nut
 option = elementify Nothing "option"
 
+instance TagToCtor "option" (HTMLOptionElement ()) where
+  ctor _ = option
+
 option_ :: Array Nut -> Nut
 option_ = option []
 
@@ -2479,6 +2779,9 @@ instance TagToDeku "textarea" (HTMLTextAreaElement ())
 textarea
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTextAreaElement ()))) -> Array Nut -> Nut
 textarea = elementify Nothing "textarea"
+
+instance TagToCtor "textarea" (HTMLTextAreaElement ()) where
+  ctor _ = textarea
 
 textarea_ :: Array Nut -> Nut
 textarea_ = textarea []
@@ -2492,6 +2795,9 @@ output
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLOutputElement ()))) -> Array Nut -> Nut
 output = elementify Nothing "output"
 
+instance TagToCtor "output" (HTMLOutputElement ()) where
+  ctor _ = output
+
 output_ :: Array Nut -> Nut
 output_ = output []
 
@@ -2504,6 +2810,9 @@ progress
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLProgressElement ()))) -> Array Nut -> Nut
 progress = elementify Nothing "progress"
 
+instance TagToCtor "progress" (HTMLProgressElement ()) where
+  ctor _ = progress
+
 progress_ :: Array Nut -> Nut
 progress_ = progress []
 
@@ -2514,6 +2823,9 @@ instance TagToDeku "meter" (HTMLMeterElement ())
 
 meter :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLMeterElement ()))) -> Array Nut -> Nut
 meter = elementify Nothing "meter"
+
+instance TagToCtor "meter" (HTMLMeterElement ()) where
+  ctor _ = meter
 
 meter_ :: Array Nut -> Nut
 meter_ = meter []
@@ -2527,6 +2839,9 @@ fieldset
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLFieldSetElement ()))) -> Array Nut -> Nut
 fieldset = elementify Nothing "fieldset"
 
+instance TagToCtor "fieldset" (HTMLFieldSetElement ()) where
+  ctor _ = fieldset
+
 fieldset_ :: Array Nut -> Nut
 fieldset_ = fieldset []
 
@@ -2538,6 +2853,9 @@ instance TagToDeku "legend" (HTMLLegendElement ())
 legend
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLLegendElement ()))) -> Array Nut -> Nut
 legend = elementify Nothing "legend"
+
+instance TagToCtor "legend" (HTMLLegendElement ()) where
+  ctor _ = legend
 
 legend_ :: Array Nut -> Nut
 legend_ = legend []
@@ -2551,6 +2869,9 @@ details
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDetailsElement ()))) -> Array Nut -> Nut
 details = elementify Nothing "details"
 
+instance TagToCtor "details" (HTMLDetailsElement ()) where
+  ctor _ = details
+
 details_ :: Array Nut -> Nut
 details_ = details []
 
@@ -2561,6 +2882,9 @@ instance TagToDeku "summary" (HTMLElement ())
 
 summary :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 summary = elementify Nothing "summary"
+
+instance TagToCtor "summary" (HTMLElement ()) where
+  ctor _ = summary
 
 summary_ :: Array Nut -> Nut
 summary_ = summary []
@@ -2574,6 +2898,9 @@ dialog
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDialogElement ()))) -> Array Nut -> Nut
 dialog = elementify Nothing "dialog"
 
+instance TagToCtor "dialog" (HTMLDialogElement ()) where
+  ctor _ = dialog
+
 dialog_ :: Array Nut -> Nut
 dialog_ = dialog []
 
@@ -2586,6 +2913,9 @@ script
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLScriptElement ()))) -> Array Nut -> Nut
 script = elementify Nothing "script"
 
+instance TagToCtor "script" (HTMLScriptElement ()) where
+  ctor _ = script
+
 script_ :: Array Nut -> Nut
 script_ = script []
 
@@ -2596,6 +2926,9 @@ instance TagToDeku "noscript" (HTMLElement ())
 
 noscript :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 noscript = elementify Nothing "noscript"
+
+instance TagToCtor "noscript" (HTMLElement ()) where
+  ctor _ = noscript
 
 noscript_ :: Array Nut -> Nut
 noscript_ = noscript []
@@ -2609,6 +2942,9 @@ template
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTemplateElement ()))) -> Array Nut -> Nut
 template = elementify Nothing "template"
 
+instance TagToCtor "template" (HTMLTemplateElement ()) where
+  ctor _ = template
+
 template_ :: Array Nut -> Nut
 template_ = template []
 
@@ -2619,6 +2955,9 @@ instance TagToDeku "slot" (HTMLSlotElement ())
 
 slot :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLSlotElement ()))) -> Array Nut -> Nut
 slot = elementify Nothing "slot"
+
+instance TagToCtor "slot" (HTMLSlotElement ()) where
+  ctor _ = slot
 
 slot_ :: Array Nut -> Nut
 slot_ = slot []
@@ -2632,6 +2971,9 @@ canvas
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLCanvasElement ()))) -> Array Nut -> Nut
 canvas = elementify Nothing "canvas"
 
+instance TagToCtor "canvas" (HTMLCanvasElement ()) where
+  ctor _ = canvas
+
 canvas_ :: Array Nut -> Nut
 canvas_ = canvas []
 
@@ -2644,6 +2986,9 @@ applet
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
 applet = elementify Nothing "applet"
 
+instance TagToCtor "applet" (HTMLUnknownElement ()) where
+  ctor _ = applet
+
 applet_ :: Array Nut -> Nut
 applet_ = applet []
 
@@ -2654,6 +2999,9 @@ instance TagToDeku "acronym" (HTMLElement ())
 
 acronym :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 acronym = elementify Nothing "acronym"
+
+instance TagToCtor "acronym" (HTMLElement ()) where
+  ctor _ = acronym
 
 acronym_ :: Array Nut -> Nut
 acronym_ = acronym []
@@ -2667,6 +3015,9 @@ bgsound
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
 bgsound = elementify Nothing "bgsound"
 
+instance TagToCtor "bgsound" (HTMLUnknownElement ()) where
+  ctor _ = bgsound
+
 bgsound_ :: Array Nut -> Nut
 bgsound_ = bgsound []
 
@@ -2679,6 +3030,9 @@ dir
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDirectoryElement ()))) -> Array Nut -> Nut
 dir = elementify Nothing "dir"
 
+instance TagToCtor "dir" (HTMLDirectoryElement ()) where
+  ctor _ = dir
+
 dir_ :: Array Nut -> Nut
 dir_ = dir []
 
@@ -2689,6 +3043,9 @@ instance TagToDeku "frame" (HTMLFrameElement ())
 
 frame :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLFrameElement ()))) -> Array Nut -> Nut
 frame = elementify Nothing "frame"
+
+instance TagToCtor "frame" (HTMLFrameElement ()) where
+  ctor _ = frame
 
 frame_ :: Array Nut -> Nut
 frame_ = frame []
@@ -2702,6 +3059,9 @@ frameset
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLFrameSetElement ()))) -> Array Nut -> Nut
 frameset = elementify Nothing "frameset"
 
+instance TagToCtor "frameset" (HTMLFrameSetElement ()) where
+  ctor _ = frameset
+
 frameset_ :: Array Nut -> Nut
 frameset_ = frameset []
 
@@ -2712,6 +3072,9 @@ instance TagToDeku "noframes" (HTMLElement ())
 
 noframes :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 noframes = elementify Nothing "noframes"
+
+instance TagToCtor "noframes" (HTMLElement ()) where
+  ctor _ = noframes
 
 noframes_ :: Array Nut -> Nut
 noframes_ = noframes []
@@ -2725,6 +3088,9 @@ isindex
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
 isindex = elementify Nothing "isindex"
 
+instance TagToCtor "isindex" (HTMLUnknownElement ()) where
+  ctor _ = isindex
+
 isindex_ :: Array Nut -> Nut
 isindex_ = isindex []
 
@@ -2737,6 +3103,9 @@ keygen
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
 keygen = elementify Nothing "keygen"
 
+instance TagToCtor "keygen" (HTMLUnknownElement ()) where
+  ctor _ = keygen
+
 keygen_ :: Array Nut -> Nut
 keygen_ = keygen []
 
@@ -2748,6 +3117,9 @@ instance TagToDeku "listing" (HTMLPreElement ())
 listing :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLPreElement ()))) -> Array Nut -> Nut
 listing = elementify Nothing "listing"
 
+instance TagToCtor "listing" (HTMLPreElement ()) where
+  ctor _ = listing
+
 listing_ :: Array Nut -> Nut
 listing_ = listing []
 
@@ -2758,6 +3130,9 @@ instance TagToDeku "menuitem" (HTMLElement ())
 
 menuitem :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 menuitem = elementify Nothing "menuitem"
+
+instance TagToCtor "menuitem" (HTMLElement ()) where
+  ctor _ = menuitem
 
 menuitem_ :: Array Nut -> Nut
 menuitem_ = menuitem []
@@ -2771,6 +3146,9 @@ nextid
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
 nextid = elementify Nothing "nextid"
 
+instance TagToCtor "nextid" (HTMLUnknownElement ()) where
+  ctor _ = nextid
+
 nextid_ :: Array Nut -> Nut
 nextid_ = nextid []
 
@@ -2781,6 +3159,9 @@ instance TagToDeku "noembed" (HTMLElement ())
 
 noembed :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 noembed = elementify Nothing "noembed"
+
+instance TagToCtor "noembed" (HTMLElement ()) where
+  ctor _ = noembed
 
 noembed_ :: Array Nut -> Nut
 noembed_ = noembed []
@@ -2793,6 +3174,9 @@ instance TagToDeku "param" (HTMLParamElement ())
 param :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLParamElement ()))) -> Array Nut -> Nut
 param = elementify Nothing "param"
 
+instance TagToCtor "param" (HTMLParamElement ()) where
+  ctor _ = param
+
 param_ :: Array Nut -> Nut
 param_ = param []
 
@@ -2803,6 +3187,9 @@ instance TagToDeku "plaintext" (HTMLElement ())
 
 plaintext :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 plaintext = elementify Nothing "plaintext"
+
+instance TagToCtor "plaintext" (HTMLElement ()) where
+  ctor _ = plaintext
 
 plaintext_ :: Array Nut -> Nut
 plaintext_ = plaintext []
@@ -2815,6 +3202,9 @@ instance TagToDeku "rb" (HTMLElement ())
 rb :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 rb = elementify Nothing "rb"
 
+instance TagToCtor "rb" (HTMLElement ()) where
+  ctor _ = rb
+
 rb_ :: Array Nut -> Nut
 rb_ = rb []
 
@@ -2825,6 +3215,9 @@ instance TagToDeku "rtc" (HTMLElement ())
 
 rtc :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 rtc = elementify Nothing "rtc"
+
+instance TagToCtor "rtc" (HTMLElement ()) where
+  ctor _ = rtc
 
 rtc_ :: Array Nut -> Nut
 rtc_ = rtc []
@@ -2837,6 +3230,9 @@ instance TagToDeku "strike" (HTMLElement ())
 strike :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 strike = elementify Nothing "strike"
 
+instance TagToCtor "strike" (HTMLElement ()) where
+  ctor _ = strike
+
 strike_ :: Array Nut -> Nut
 strike_ = strike []
 
@@ -2847,6 +3243,9 @@ instance TagToDeku "xmp" (HTMLPreElement ())
 
 xmp :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLPreElement ()))) -> Array Nut -> Nut
 xmp = elementify Nothing "xmp"
+
+instance TagToCtor "xmp" (HTMLPreElement ()) where
+  ctor _ = xmp
 
 xmp_ :: Array Nut -> Nut
 xmp_ = xmp []
@@ -2859,6 +3258,9 @@ instance TagToDeku "basefont" (HTMLElement ())
 basefont :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 basefont = elementify Nothing "basefont"
 
+instance TagToCtor "basefont" (HTMLElement ()) where
+  ctor _ = basefont
+
 basefont_ :: Array Nut -> Nut
 basefont_ = basefont []
 
@@ -2869,6 +3271,9 @@ instance TagToDeku "big" (HTMLElement ())
 
 big :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 big = elementify Nothing "big"
+
+instance TagToCtor "big" (HTMLElement ()) where
+  ctor _ = big
 
 big_ :: Array Nut -> Nut
 big_ = big []
@@ -2882,6 +3287,9 @@ blink
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
 blink = elementify Nothing "blink"
 
+instance TagToCtor "blink" (HTMLUnknownElement ()) where
+  ctor _ = blink
+
 blink_ :: Array Nut -> Nut
 blink_ = blink []
 
@@ -2893,6 +3301,9 @@ instance TagToDeku "center" (HTMLElement ())
 center :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 center = elementify Nothing "center"
 
+instance TagToCtor "center" (HTMLElement ()) where
+  ctor _ = center
+
 center_ :: Array Nut -> Nut
 center_ = center []
 
@@ -2903,6 +3314,9 @@ instance TagToDeku "font" (HTMLFontElement ())
 
 font :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLFontElement ()))) -> Array Nut -> Nut
 font = elementify Nothing "font"
+
+instance TagToCtor "font" (HTMLFontElement ()) where
+  ctor _ = font
 
 font_ :: Array Nut -> Nut
 font_ = font []
@@ -2916,6 +3330,9 @@ marquee
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLMarqueeElement ()))) -> Array Nut -> Nut
 marquee = elementify Nothing "marquee"
 
+instance TagToCtor "marquee" (HTMLMarqueeElement ()) where
+  ctor _ = marquee
+
 marquee_ :: Array Nut -> Nut
 marquee_ = marquee []
 
@@ -2928,6 +3345,9 @@ multicol
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
 multicol = elementify Nothing "multicol"
 
+instance TagToCtor "multicol" (HTMLUnknownElement ()) where
+  ctor _ = multicol
+
 multicol_ :: Array Nut -> Nut
 multicol_ = multicol []
 
@@ -2938,6 +3358,9 @@ instance TagToDeku "nobr" (HTMLElement ())
 
 nobr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 nobr = elementify Nothing "nobr"
+
+instance TagToCtor "nobr" (HTMLElement ()) where
+  ctor _ = nobr
 
 nobr_ :: Array Nut -> Nut
 nobr_ = nobr []
@@ -2951,6 +3374,9 @@ spacer
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
 spacer = elementify Nothing "spacer"
 
+instance TagToCtor "spacer" (HTMLUnknownElement ()) where
+  ctor _ = spacer
+
 spacer_ :: Array Nut -> Nut
 spacer_ = spacer []
 
@@ -2961,6 +3387,9 @@ instance TagToDeku "tt" (HTMLElement ())
 
 tt :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
 tt = elementify Nothing "tt"
+
+instance TagToCtor "tt" (HTMLElement ()) where
+  ctor _ = tt
 
 tt_ :: Array Nut -> Nut
 tt_ = tt []

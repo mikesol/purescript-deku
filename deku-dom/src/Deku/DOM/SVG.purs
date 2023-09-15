@@ -3,6 +3,8 @@
 -- Any changes may be overwritten.
 module Deku.DOM.SVG
   ( class TagToDeku
+  , class TagToCtor
+  , ctor
   , svg
   , svg_
   , svg__
@@ -284,6 +286,10 @@ import Web.Event.Internal.Types as Web.Event.Internal.Types
 import Deku.DOM (Element, GlobalEventHandlers, HTMLOrSVGElement, WindowEventHandlers)
 
 class TagToDeku (tag :: Symbol) (interface :: Row Type) | tag -> interface
+class TagToCtor (tag :: Symbol) (interface :: Row Type) | tag -> interface where
+  ctor
+    :: Proxy tag -> Array (FRP.Poll.Poll (Deku.Attribute.Attribute interface)) -> Array Nut -> Nut
+
 type SVGClipPathElement (r :: Row Type) =
   ( __tag :: Proxy "SVGClipPathElement"
   , systemLanguage :: String
@@ -960,6 +966,9 @@ instance TagToDeku "svg" (SVGSVGElement ())
 svg :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGSVGElement ()))) -> Array Nut -> Nut
 svg = elementify (Just "http://www.w3.org/2000/svg") "svg"
 
+instance TagToCtor "svg" (SVGSVGElement ()) where
+  ctor _ = svg
+
 svg_ :: Array Nut -> Nut
 svg_ = svg []
 
@@ -971,6 +980,9 @@ instance TagToDeku "g" (SVGGElement ())
 g :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGGElement ()))) -> Array Nut -> Nut
 g = elementify (Just "http://www.w3.org/2000/svg") "g"
 
+instance TagToCtor "g" (SVGGElement ()) where
+  ctor _ = g
+
 g_ :: Array Nut -> Nut
 g_ = g []
 
@@ -981,6 +993,9 @@ instance TagToDeku "defs" (SVGDefsElement ())
 
 defs :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGDefsElement ()))) -> Array Nut -> Nut
 defs = elementify (Just "http://www.w3.org/2000/svg") "defs"
+
+instance TagToCtor "defs" (SVGDefsElement ()) where
+  ctor _ = defs
 
 defs_ :: Array Nut -> Nut
 defs_ = defs []
@@ -994,6 +1009,9 @@ symbol
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGSymbolElement ()))) -> Array Nut -> Nut
 symbol = elementify (Just "http://www.w3.org/2000/svg") "symbol"
 
+instance TagToCtor "symbol" (SVGSymbolElement ()) where
+  ctor _ = symbol
+
 symbol_ :: Array Nut -> Nut
 symbol_ = symbol []
 
@@ -1004,6 +1022,9 @@ instance TagToDeku "use" (SVGUseElement ())
 
 use :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGUseElement ()))) -> Array Nut -> Nut
 use = elementify (Just "http://www.w3.org/2000/svg") "use"
+
+instance TagToCtor "use" (SVGUseElement ()) where
+  ctor _ = use
 
 use_ :: Array Nut -> Nut
 use_ = use []
@@ -1017,6 +1038,9 @@ switch
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGSwitchElement ()))) -> Array Nut -> Nut
 switch = elementify (Just "http://www.w3.org/2000/svg") "switch"
 
+instance TagToCtor "switch" (SVGSwitchElement ()) where
+  ctor _ = switch
+
 switch_ :: Array Nut -> Nut
 switch_ = switch []
 
@@ -1028,6 +1052,9 @@ instance TagToDeku "title" (SVGTitleElement ())
 title :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGTitleElement ()))) -> Array Nut -> Nut
 title = elementify (Just "http://www.w3.org/2000/svg") "title"
 
+instance TagToCtor "title" (SVGTitleElement ()) where
+  ctor _ = title
+
 title_ :: Array Nut -> Nut
 title_ = title []
 
@@ -1038,6 +1065,9 @@ instance TagToDeku "desc" (SVGDescElement ())
 
 desc :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGDescElement ()))) -> Array Nut -> Nut
 desc = elementify (Just "http://www.w3.org/2000/svg") "desc"
+
+instance TagToCtor "desc" (SVGDescElement ()) where
+  ctor _ = desc
 
 desc_ :: Array Nut -> Nut
 desc_ = desc []
@@ -1051,6 +1081,9 @@ metadata
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGMetadataElement ()))) -> Array Nut -> Nut
 metadata = elementify (Just "http://www.w3.org/2000/svg") "metadata"
 
+instance TagToCtor "metadata" (SVGMetadataElement ()) where
+  ctor _ = metadata
+
 metadata_ :: Array Nut -> Nut
 metadata_ = metadata []
 
@@ -1061,6 +1094,9 @@ instance TagToDeku "style" (SVGStyleElement ())
 
 style :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGStyleElement ()))) -> Array Nut -> Nut
 style = elementify (Just "http://www.w3.org/2000/svg") "style"
+
+instance TagToCtor "style" (SVGStyleElement ()) where
+  ctor _ = style
 
 style_ :: Array Nut -> Nut
 style_ = style []
@@ -1073,6 +1109,9 @@ instance TagToDeku "path" (SVGPathElement ())
 path :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGPathElement ()))) -> Array Nut -> Nut
 path = elementify (Just "http://www.w3.org/2000/svg") "path"
 
+instance TagToCtor "path" (SVGPathElement ()) where
+  ctor _ = path
+
 path_ :: Array Nut -> Nut
 path_ = path []
 
@@ -1083,6 +1122,9 @@ instance TagToDeku "rect" (SVGRectElement ())
 
 rect :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGRectElement ()))) -> Array Nut -> Nut
 rect = elementify (Just "http://www.w3.org/2000/svg") "rect"
+
+instance TagToCtor "rect" (SVGRectElement ()) where
+  ctor _ = rect
 
 rect_ :: Array Nut -> Nut
 rect_ = rect []
@@ -1096,6 +1138,9 @@ circle
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGCircleElement ()))) -> Array Nut -> Nut
 circle = elementify (Just "http://www.w3.org/2000/svg") "circle"
 
+instance TagToCtor "circle" (SVGCircleElement ()) where
+  ctor _ = circle
+
 circle_ :: Array Nut -> Nut
 circle_ = circle []
 
@@ -1108,6 +1153,9 @@ ellipse
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGEllipseElement ()))) -> Array Nut -> Nut
 ellipse = elementify (Just "http://www.w3.org/2000/svg") "ellipse"
 
+instance TagToCtor "ellipse" (SVGEllipseElement ()) where
+  ctor _ = ellipse
+
 ellipse_ :: Array Nut -> Nut
 ellipse_ = ellipse []
 
@@ -1118,6 +1166,9 @@ instance TagToDeku "line" (SVGLineElement ())
 
 line :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGLineElement ()))) -> Array Nut -> Nut
 line = elementify (Just "http://www.w3.org/2000/svg") "line"
+
+instance TagToCtor "line" (SVGLineElement ()) where
+  ctor _ = line
 
 line_ :: Array Nut -> Nut
 line_ = line []
@@ -1131,6 +1182,9 @@ polyline
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGPolylineElement ()))) -> Array Nut -> Nut
 polyline = elementify (Just "http://www.w3.org/2000/svg") "polyline"
 
+instance TagToCtor "polyline" (SVGPolylineElement ()) where
+  ctor _ = polyline
+
 polyline_ :: Array Nut -> Nut
 polyline_ = polyline []
 
@@ -1143,6 +1197,9 @@ polygon
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGPolygonElement ()))) -> Array Nut -> Nut
 polygon = elementify (Just "http://www.w3.org/2000/svg") "polygon"
 
+instance TagToCtor "polygon" (SVGPolygonElement ()) where
+  ctor _ = polygon
+
 polygon_ :: Array Nut -> Nut
 polygon_ = polygon []
 
@@ -1154,6 +1211,9 @@ instance TagToDeku "text" (SVGTextElement ())
 text :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGTextElement ()))) -> Array Nut -> Nut
 text = elementify (Just "http://www.w3.org/2000/svg") "text"
 
+instance TagToCtor "text" (SVGTextElement ()) where
+  ctor _ = text
+
 text_ :: Array Nut -> Nut
 text_ = text []
 
@@ -1164,6 +1224,9 @@ instance TagToDeku "tspan" (SVGTSpanElement ())
 
 tspan :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGTSpanElement ()))) -> Array Nut -> Nut
 tspan = elementify (Just "http://www.w3.org/2000/svg") "tspan"
+
+instance TagToCtor "tspan" (SVGTSpanElement ()) where
+  ctor _ = tspan
 
 tspan_ :: Array Nut -> Nut
 tspan_ = tspan []
@@ -1177,6 +1240,9 @@ textPath
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGTextPathElement ()))) -> Array Nut -> Nut
 textPath = elementify (Just "http://www.w3.org/2000/svg") "textPath"
 
+instance TagToCtor "textPath" (SVGTextPathElement ()) where
+  ctor _ = textPath
+
 textPath_ :: Array Nut -> Nut
 textPath_ = textPath []
 
@@ -1187,6 +1253,9 @@ instance TagToDeku "image" (SVGImageElement ())
 
 image :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGImageElement ()))) -> Array Nut -> Nut
 image = elementify (Just "http://www.w3.org/2000/svg") "image"
+
+instance TagToCtor "image" (SVGImageElement ()) where
+  ctor _ = image
 
 image_ :: Array Nut -> Nut
 image_ = image []
@@ -1202,6 +1271,9 @@ foreignObject
   -> Nut
 foreignObject = elementify (Just "http://www.w3.org/2000/svg") "foreignObject"
 
+instance TagToCtor "foreignObject" (SVGForeignObjectElement ()) where
+  ctor _ = foreignObject
+
 foreignObject_ :: Array Nut -> Nut
 foreignObject_ = foreignObject []
 
@@ -1213,6 +1285,9 @@ instance TagToDeku "marker" (SVGMarkerElement ())
 marker
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGMarkerElement ()))) -> Array Nut -> Nut
 marker = elementify (Just "http://www.w3.org/2000/svg") "marker"
+
+instance TagToCtor "marker" (SVGMarkerElement ()) where
+  ctor _ = marker
 
 marker_ :: Array Nut -> Nut
 marker_ = marker []
@@ -1228,6 +1303,9 @@ linearGradient
   -> Nut
 linearGradient = elementify (Just "http://www.w3.org/2000/svg") "linearGradient"
 
+instance TagToCtor "linearGradient" (SVGLinearGradientElement ()) where
+  ctor _ = linearGradient
+
 linearGradient_ :: Array Nut -> Nut
 linearGradient_ = linearGradient []
 
@@ -1242,6 +1320,9 @@ radialGradient
   -> Nut
 radialGradient = elementify (Just "http://www.w3.org/2000/svg") "radialGradient"
 
+instance TagToCtor "radialGradient" (SVGRadialGradientElement ()) where
+  ctor _ = radialGradient
+
 radialGradient_ :: Array Nut -> Nut
 radialGradient_ = radialGradient []
 
@@ -1252,6 +1333,9 @@ instance TagToDeku "stop" (SVGStopElement ())
 
 stop :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGStopElement ()))) -> Array Nut -> Nut
 stop = elementify (Just "http://www.w3.org/2000/svg") "stop"
+
+instance TagToCtor "stop" (SVGStopElement ()) where
+  ctor _ = stop
 
 stop_ :: Array Nut -> Nut
 stop_ = stop []
@@ -1265,6 +1349,9 @@ pattern
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGPatternElement ()))) -> Array Nut -> Nut
 pattern = elementify (Just "http://www.w3.org/2000/svg") "pattern"
 
+instance TagToCtor "pattern" (SVGPatternElement ()) where
+  ctor _ = pattern
+
 pattern_ :: Array Nut -> Nut
 pattern_ = pattern []
 
@@ -1277,6 +1364,9 @@ script
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGScriptElement ()))) -> Array Nut -> Nut
 script = elementify (Just "http://www.w3.org/2000/svg") "script"
 
+instance TagToCtor "script" (SVGScriptElement ()) where
+  ctor _ = script
+
 script_ :: Array Nut -> Nut
 script_ = script []
 
@@ -1288,6 +1378,9 @@ instance TagToDeku "a" (SVGAElement ())
 a :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGAElement ()))) -> Array Nut -> Nut
 a = elementify (Just "http://www.w3.org/2000/svg") "a"
 
+instance TagToCtor "a" (SVGAElement ()) where
+  ctor _ = a
+
 a_ :: Array Nut -> Nut
 a_ = a []
 
@@ -1298,6 +1391,9 @@ instance TagToDeku "view" (SVGViewElement ())
 
 view :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGViewElement ()))) -> Array Nut -> Nut
 view = elementify (Just "http://www.w3.org/2000/svg") "view"
+
+instance TagToCtor "view" (SVGViewElement ()) where
+  ctor _ = view
 
 view_ :: Array Nut -> Nut
 view_ = view []
@@ -1311,6 +1407,9 @@ animate
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGAnimateElement ()))) -> Array Nut -> Nut
 animate = elementify (Just "http://www.w3.org/2000/svg") "animate"
 
+instance TagToCtor "animate" (SVGAnimateElement ()) where
+  ctor _ = animate
+
 animate_ :: Array Nut -> Nut
 animate_ = animate []
 
@@ -1321,6 +1420,9 @@ instance TagToDeku "set" (SVGSetElement ())
 
 set :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGSetElement ()))) -> Array Nut -> Nut
 set = elementify (Just "http://www.w3.org/2000/svg") "set"
+
+instance TagToCtor "set" (SVGSetElement ()) where
+  ctor _ = set
 
 set_ :: Array Nut -> Nut
 set_ = set []
@@ -1336,6 +1438,9 @@ animateMotion
   -> Nut
 animateMotion = elementify (Just "http://www.w3.org/2000/svg") "animateMotion"
 
+instance TagToCtor "animateMotion" (SVGAnimateMotionElement ()) where
+  ctor _ = animateMotion
+
 animateMotion_ :: Array Nut -> Nut
 animateMotion_ = animateMotion []
 
@@ -1346,6 +1451,9 @@ instance TagToDeku "mpath" (SVGMPathElement ())
 
 mpath :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGMPathElement ()))) -> Array Nut -> Nut
 mpath = elementify (Just "http://www.w3.org/2000/svg") "mpath"
+
+instance TagToCtor "mpath" (SVGMPathElement ()) where
+  ctor _ = mpath
 
 mpath_ :: Array Nut -> Nut
 mpath_ = mpath []
@@ -1361,6 +1469,9 @@ animateTransform
   -> Nut
 animateTransform = elementify (Just "http://www.w3.org/2000/svg") "animateTransform"
 
+instance TagToCtor "animateTransform" (SVGAnimateTransformElement ()) where
+  ctor _ = animateTransform
+
 animateTransform_ :: Array Nut -> Nut
 animateTransform_ = animateTransform []
 
@@ -1373,6 +1484,9 @@ filter
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFilterElement ()))) -> Array Nut -> Nut
 filter = elementify (Just "http://www.w3.org/2000/svg") "filter"
 
+instance TagToCtor "filter" (SVGFilterElement ()) where
+  ctor _ = filter
+
 filter_ :: Array Nut -> Nut
 filter_ = filter []
 
@@ -1384,6 +1498,9 @@ instance TagToDeku "feBlend" (SVGFEBlendElement ())
 feBlend
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFEBlendElement ()))) -> Array Nut -> Nut
 feBlend = elementify (Just "http://www.w3.org/2000/svg") "feBlend"
+
+instance TagToCtor "feBlend" (SVGFEBlendElement ()) where
+  ctor _ = feBlend
 
 feBlend_ :: Array Nut -> Nut
 feBlend_ = feBlend []
@@ -1399,6 +1516,9 @@ feColorMatrix
   -> Nut
 feColorMatrix = elementify (Just "http://www.w3.org/2000/svg") "feColorMatrix"
 
+instance TagToCtor "feColorMatrix" (SVGFEColorMatrixElement ()) where
+  ctor _ = feColorMatrix
+
 feColorMatrix_ :: Array Nut -> Nut
 feColorMatrix_ = feColorMatrix []
 
@@ -1413,6 +1533,9 @@ feComponentTransfer
   -> Nut
 feComponentTransfer = elementify (Just "http://www.w3.org/2000/svg") "feComponentTransfer"
 
+instance TagToCtor "feComponentTransfer" (SVGFEComponentTransferElement ()) where
+  ctor _ = feComponentTransfer
+
 feComponentTransfer_ :: Array Nut -> Nut
 feComponentTransfer_ = feComponentTransfer []
 
@@ -1424,6 +1547,9 @@ instance TagToDeku "feFuncR" (SVGFEFuncRElement ())
 feFuncR
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFEFuncRElement ()))) -> Array Nut -> Nut
 feFuncR = elementify (Just "http://www.w3.org/2000/svg") "feFuncR"
+
+instance TagToCtor "feFuncR" (SVGFEFuncRElement ()) where
+  ctor _ = feFuncR
 
 feFuncR_ :: Array Nut -> Nut
 feFuncR_ = feFuncR []
@@ -1437,6 +1563,9 @@ feFuncG
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFEFuncGElement ()))) -> Array Nut -> Nut
 feFuncG = elementify (Just "http://www.w3.org/2000/svg") "feFuncG"
 
+instance TagToCtor "feFuncG" (SVGFEFuncGElement ()) where
+  ctor _ = feFuncG
+
 feFuncG_ :: Array Nut -> Nut
 feFuncG_ = feFuncG []
 
@@ -1448,6 +1577,9 @@ instance TagToDeku "feFuncB" (SVGFEFuncBElement ())
 feFuncB
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFEFuncBElement ()))) -> Array Nut -> Nut
 feFuncB = elementify (Just "http://www.w3.org/2000/svg") "feFuncB"
+
+instance TagToCtor "feFuncB" (SVGFEFuncBElement ()) where
+  ctor _ = feFuncB
 
 feFuncB_ :: Array Nut -> Nut
 feFuncB_ = feFuncB []
@@ -1461,6 +1593,9 @@ feFuncA
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFEFuncAElement ()))) -> Array Nut -> Nut
 feFuncA = elementify (Just "http://www.w3.org/2000/svg") "feFuncA"
 
+instance TagToCtor "feFuncA" (SVGFEFuncAElement ()) where
+  ctor _ = feFuncA
+
 feFuncA_ :: Array Nut -> Nut
 feFuncA_ = feFuncA []
 
@@ -1472,6 +1607,9 @@ instance TagToDeku "feComposite" (SVGFECompositeElement ())
 feComposite
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFECompositeElement ()))) -> Array Nut -> Nut
 feComposite = elementify (Just "http://www.w3.org/2000/svg") "feComposite"
+
+instance TagToCtor "feComposite" (SVGFECompositeElement ()) where
+  ctor _ = feComposite
 
 feComposite_ :: Array Nut -> Nut
 feComposite_ = feComposite []
@@ -1487,6 +1625,9 @@ feConvolveMatrix
   -> Nut
 feConvolveMatrix = elementify (Just "http://www.w3.org/2000/svg") "feConvolveMatrix"
 
+instance TagToCtor "feConvolveMatrix" (SVGFEConvolveMatrixElement ()) where
+  ctor _ = feConvolveMatrix
+
 feConvolveMatrix_ :: Array Nut -> Nut
 feConvolveMatrix_ = feConvolveMatrix []
 
@@ -1500,6 +1641,9 @@ feDiffuseLighting
   -> Array Nut
   -> Nut
 feDiffuseLighting = elementify (Just "http://www.w3.org/2000/svg") "feDiffuseLighting"
+
+instance TagToCtor "feDiffuseLighting" (SVGFEDiffuseLightingElement ()) where
+  ctor _ = feDiffuseLighting
 
 feDiffuseLighting_ :: Array Nut -> Nut
 feDiffuseLighting_ = feDiffuseLighting []
@@ -1515,6 +1659,9 @@ feDisplacementMap
   -> Nut
 feDisplacementMap = elementify (Just "http://www.w3.org/2000/svg") "feDisplacementMap"
 
+instance TagToCtor "feDisplacementMap" (SVGFEDisplacementMapElement ()) where
+  ctor _ = feDisplacementMap
+
 feDisplacementMap_ :: Array Nut -> Nut
 feDisplacementMap_ = feDisplacementMap []
 
@@ -1529,6 +1676,9 @@ feDropShadow
   -> Nut
 feDropShadow = elementify (Just "http://www.w3.org/2000/svg") "feDropShadow"
 
+instance TagToCtor "feDropShadow" (SVGFEDropShadowElement ()) where
+  ctor _ = feDropShadow
+
 feDropShadow_ :: Array Nut -> Nut
 feDropShadow_ = feDropShadow []
 
@@ -1540,6 +1690,9 @@ instance TagToDeku "feFlood" (SVGFEFloodElement ())
 feFlood
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFEFloodElement ()))) -> Array Nut -> Nut
 feFlood = elementify (Just "http://www.w3.org/2000/svg") "feFlood"
+
+instance TagToCtor "feFlood" (SVGFEFloodElement ()) where
+  ctor _ = feFlood
 
 feFlood_ :: Array Nut -> Nut
 feFlood_ = feFlood []
@@ -1555,6 +1708,9 @@ feGaussianBlur
   -> Nut
 feGaussianBlur = elementify (Just "http://www.w3.org/2000/svg") "feGaussianBlur"
 
+instance TagToCtor "feGaussianBlur" (SVGFEGaussianBlurElement ()) where
+  ctor _ = feGaussianBlur
+
 feGaussianBlur_ :: Array Nut -> Nut
 feGaussianBlur_ = feGaussianBlur []
 
@@ -1566,6 +1722,9 @@ instance TagToDeku "feImage" (SVGFEImageElement ())
 feImage
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFEImageElement ()))) -> Array Nut -> Nut
 feImage = elementify (Just "http://www.w3.org/2000/svg") "feImage"
+
+instance TagToCtor "feImage" (SVGFEImageElement ()) where
+  ctor _ = feImage
 
 feImage_ :: Array Nut -> Nut
 feImage_ = feImage []
@@ -1579,6 +1738,9 @@ feMerge
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFEMergeElement ()))) -> Array Nut -> Nut
 feMerge = elementify (Just "http://www.w3.org/2000/svg") "feMerge"
 
+instance TagToCtor "feMerge" (SVGFEMergeElement ()) where
+  ctor _ = feMerge
+
 feMerge_ :: Array Nut -> Nut
 feMerge_ = feMerge []
 
@@ -1590,6 +1752,9 @@ instance TagToDeku "feMergeNode" (SVGFEMergeNodeElement ())
 feMergeNode
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFEMergeNodeElement ()))) -> Array Nut -> Nut
 feMergeNode = elementify (Just "http://www.w3.org/2000/svg") "feMergeNode"
+
+instance TagToCtor "feMergeNode" (SVGFEMergeNodeElement ()) where
+  ctor _ = feMergeNode
 
 feMergeNode_ :: Array Nut -> Nut
 feMergeNode_ = feMergeNode []
@@ -1605,6 +1770,9 @@ feMorphology
   -> Nut
 feMorphology = elementify (Just "http://www.w3.org/2000/svg") "feMorphology"
 
+instance TagToCtor "feMorphology" (SVGFEMorphologyElement ()) where
+  ctor _ = feMorphology
+
 feMorphology_ :: Array Nut -> Nut
 feMorphology_ = feMorphology []
 
@@ -1616,6 +1784,9 @@ instance TagToDeku "feOffset" (SVGFEOffsetElement ())
 feOffset
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFEOffsetElement ()))) -> Array Nut -> Nut
 feOffset = elementify (Just "http://www.w3.org/2000/svg") "feOffset"
+
+instance TagToCtor "feOffset" (SVGFEOffsetElement ()) where
+  ctor _ = feOffset
 
 feOffset_ :: Array Nut -> Nut
 feOffset_ = feOffset []
@@ -1631,6 +1802,9 @@ feSpecularLighting
   -> Nut
 feSpecularLighting = elementify (Just "http://www.w3.org/2000/svg") "feSpecularLighting"
 
+instance TagToCtor "feSpecularLighting" (SVGFESpecularLightingElement ()) where
+  ctor _ = feSpecularLighting
+
 feSpecularLighting_ :: Array Nut -> Nut
 feSpecularLighting_ = feSpecularLighting []
 
@@ -1642,6 +1816,9 @@ instance TagToDeku "feTile" (SVGFETileElement ())
 feTile
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFETileElement ()))) -> Array Nut -> Nut
 feTile = elementify (Just "http://www.w3.org/2000/svg") "feTile"
+
+instance TagToCtor "feTile" (SVGFETileElement ()) where
+  ctor _ = feTile
 
 feTile_ :: Array Nut -> Nut
 feTile_ = feTile []
@@ -1657,6 +1834,9 @@ feTurbulence
   -> Nut
 feTurbulence = elementify (Just "http://www.w3.org/2000/svg") "feTurbulence"
 
+instance TagToCtor "feTurbulence" (SVGFETurbulenceElement ()) where
+  ctor _ = feTurbulence
+
 feTurbulence_ :: Array Nut -> Nut
 feTurbulence_ = feTurbulence []
 
@@ -1670,6 +1850,9 @@ feDistantLight
   -> Array Nut
   -> Nut
 feDistantLight = elementify (Just "http://www.w3.org/2000/svg") "feDistantLight"
+
+instance TagToCtor "feDistantLight" (SVGFEDistantLightElement ()) where
+  ctor _ = feDistantLight
 
 feDistantLight_ :: Array Nut -> Nut
 feDistantLight_ = feDistantLight []
@@ -1685,6 +1868,9 @@ fePointLight
   -> Nut
 fePointLight = elementify (Just "http://www.w3.org/2000/svg") "fePointLight"
 
+instance TagToCtor "fePointLight" (SVGFEPointLightElement ()) where
+  ctor _ = fePointLight
+
 fePointLight_ :: Array Nut -> Nut
 fePointLight_ = fePointLight []
 
@@ -1696,6 +1882,9 @@ instance TagToDeku "feSpotLight" (SVGFESpotLightElement ())
 feSpotLight
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGFESpotLightElement ()))) -> Array Nut -> Nut
 feSpotLight = elementify (Just "http://www.w3.org/2000/svg") "feSpotLight"
+
+instance TagToCtor "feSpotLight" (SVGFESpotLightElement ()) where
+  ctor _ = feSpotLight
 
 feSpotLight_ :: Array Nut -> Nut
 feSpotLight_ = feSpotLight []
@@ -1709,6 +1898,9 @@ clipPath
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGClipPathElement ()))) -> Array Nut -> Nut
 clipPath = elementify (Just "http://www.w3.org/2000/svg") "clipPath"
 
+instance TagToCtor "clipPath" (SVGClipPathElement ()) where
+  ctor _ = clipPath
+
 clipPath_ :: Array Nut -> Nut
 clipPath_ = clipPath []
 
@@ -1719,6 +1911,9 @@ instance TagToDeku "mask" (SVGMaskElement ())
 
 mask :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (SVGMaskElement ()))) -> Array Nut -> Nut
 mask = elementify (Just "http://www.w3.org/2000/svg") "mask"
+
+instance TagToCtor "mask" (SVGMaskElement ()) where
+  ctor _ = mask
 
 mask_ :: Array Nut -> Nut
 mask_ = mask []

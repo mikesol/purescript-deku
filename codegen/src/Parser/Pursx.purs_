@@ -1,36 +1,40 @@
 module Deku.PursxParser where
 
-import Prim.Boolean (False, True)
+import Deku.DOM (class TagToDeku)
 import Deku.PxTypes as PxTypes
+import Prim.Boolean (False, True)
 import Prim.Row as Row
-import Prim.RowList as RL
 import Prim.Symbol as Sym
+import Type.Proxy (Proxy(..))
 
-class DoVerbForAttr (verb :: Symbol) (tag :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type) (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (newTail :: Symbol) | verb acc head tail onezero pursi pathi -> purso patho newTail
-instance (Row.Cons acc PxTypes.PxAtt pursi purso, Row.Cons acc onezero pathi patho) => DoVerbForAttr verb tag acc verb tail onezero pursi pathi purso patho tail
-else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y onezero pursi pathi purso patho newTail) => DoVerbForAttr verb tag acc anything tail onezero pursi pathi purso patho newTail
+pursx :: forall s. Proxy s
+pursx = Proxy
+
+class DoVerbForAttr (verb :: Symbol) (tag :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | verb acc head tail pursi -> purso newTail
+instance (TagToDeku tag deku,  Row.Cons acc (PxTypes.PxAtt deku) pursi purso) => DoVerbForAttr verb tag acc verb tail pursi purso tail
+else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y pursi purso newTail) => DoVerbForAttr verb tag acc anything tail pursi purso newTail
 --
-class DoVerbForDOM (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type) (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (newTail :: Symbol) |  verb acc head tail onezero pursi pathi -> purso patho newTail
-instance (Row.Cons acc PxTypes.PxNut pursi purso, Row.Cons acc onezero pathi patho) => DoVerbForDOM  verb acc verb tail onezero pursi pathi purso patho tail
-else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForDOM  verb acc2 x y onezero pursi pathi purso patho newTail) => DoVerbForDOM  verb acc anything tail onezero pursi pathi purso patho newTail
+class DoVerbForDOM (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) |  verb acc head tail pursi -> purso newTail
+instance (Row.Cons acc PxTypes.PxNut pursi purso) => DoVerbForDOM  verb acc verb tail pursi purso tail
+else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForDOM  verb acc2 x y pursi purso newTail) => DoVerbForDOM  verb acc anything tail pursi purso newTail
 --
 class IsWhiteSpace (space :: Symbol)
 instance IsWhiteSpace ""
 else instance (Sym.Cons x y s, IsSingleWhiteSpace x, IsWhiteSpace y) => IsWhiteSpace s
 class IsSingleWhiteSpace (s :: Symbol)
 
-class PXStart (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (purs :: Row Type) (path :: Row (RL.RowList Symbol)) |  verb head tail -> purs path
+class PXStart (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (purs :: Row Type) |  verb head tail -> purs
 instance
   ( Sym.Cons x y tail
-  , PXTagPreName  verb x y RL.Nil () () purso patho trailing
+  , PXTagPreName  verb x y () purso trailing
   , IsWhiteSpace trailing
-  ) => PXStart  verb "<" tail purso patho
+  ) => PXStart  verb "<" tail purso
 
 --
-class PXTagPreName (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb head tail onezero pursi pathi -> purso patho trailing
+class PXTagPreName (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) |  verb head tail pursi -> purso trailing
 --
-class PXTagName (verb :: Symbol) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb tag head tail onezero pursi pathi -> purso patho trailing
-instance (Sym.Cons q r tail, PXBody  verb q r (RL.Cons "0" "0" onezero) pursi pathi purso patho trailing, Sym.Cons x y trailing, PreEndTagFromTrailing x y tag newTrailing) => PXTagName  verb tag ">" tail onezero pursi pathi purso patho newTrailing
+class PXTagName (verb :: Symbol) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) |  verb tag head tail pursi -> purso trailing
+instance (Sym.Cons q r tail, PXBody  verb q r pursi purso trailing, Sym.Cons x y trailing, PreEndTagFromTrailing x y tag newTrailing) => PXTagName  verb tag ">" tail pursi purso newTrailing
 --
 class PreEndTagFromTrailing (head :: Symbol) (tail :: Symbol) (tag :: Symbol) (newTrailing :: Symbol) | head tail -> tag newTrailing
 --
@@ -38,21 +42,21 @@ class EndTagFromTrailing (head :: Symbol) (tail :: Symbol) (tagAcc :: Symbol) (t
 --
 instance EndTagFromTrailing ">" tail tag tag tail
 --
-class PXTagPreAttrName (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb hasAttributed tag head tail onezero pursi pathi -> purso patho trailing
+class PXTagPreAttrName (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) |  verb hasAttributed tag head tail pursi -> purso trailing
 --
-class PXTagAttrName (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb hasAttributed tag head tail onezero pursi pathi -> purso patho trailing
-instance (Sym.Cons x y tail, PXTagPreAttrValue  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagAttrName  verb hasAttributed tag "=" tail onezero pursi pathi purso patho trailing
+class PXTagAttrName (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) |  verb hasAttributed tag head tail pursi -> purso trailing
+instance (Sym.Cons x y tail, PXTagPreAttrValue  verb hasAttributed tag x y pursi purso trailing) => PXTagAttrName  verb hasAttributed tag "=" tail pursi purso trailing
 --
-class PXTagPostAttrName (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb hasAttributed tag head tail onezero pursi pathi -> purso patho trailing
-instance (Sym.Cons x y tail, PXTagPreAttrValue  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagPostAttrName  verb hasAttributed tag "=" tail onezero pursi pathi purso patho trailing
+class PXTagPostAttrName (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) |  verb hasAttributed tag head tail pursi -> purso trailing
+instance (Sym.Cons x y tail, PXTagPreAttrValue  verb hasAttributed tag x y pursi purso trailing) => PXTagPostAttrName  verb hasAttributed tag "=" tail pursi purso trailing
 --
-class PXTagPreAttrValue (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb hasAttributed tag head tail onezero pursi pathi -> purso patho trailing
-instance (Sym.Cons x y tail, PXTagAttrValue  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagPreAttrValue  verb hasAttributed tag "\"" tail onezero pursi pathi purso patho trailing
+class PXTagPreAttrValue (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) |  verb hasAttributed tag head tail pursi -> purso trailing
+instance (Sym.Cons x y tail, PXTagAttrValue  verb hasAttributed tag x y pursi purso trailing) => PXTagPreAttrValue  verb hasAttributed tag "\"" tail pursi purso trailing
 --
-class PXTagAttrValue (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb hasAttributed tag head tail onezero pursi pathi -> purso patho trailing
+class PXTagAttrValue (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) |  verb hasAttributed tag head tail pursi -> purso trailing
 
-instance (Sym.Cons x y tail, PXTagPreAttrName  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagAttrValue  verb hasAttributed tag "\"" tail onezero pursi pathi purso patho trailing
-class PXBody (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb tail onezero pursi pathi -> purso patho trailing
+instance (Sym.Cons x y tail, PXTagPreAttrName  verb hasAttributed tag x y pursi purso trailing) => PXTagAttrValue  verb hasAttributed tag "\"" tail pursi purso trailing
+class PXBody (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) |  verb tail pursi -> purso trailing
 
 
 class CommendEndCandidate2 (head :: Symbol) (tail :: Symbol) (trailing :: Symbol) | head tail -> trailing
@@ -64,18 +68,18 @@ else instance (Sym.Cons x y tail, SkipUntilCommentEnd x y trailing) => CommendEn
 class SkipUntilCommentEnd (head :: Symbol) (tail :: Symbol) (trailing :: Symbol) | head tail -> trailing
 instance (Sym.Cons x y tail, CommendEndCandidate1 x y trailing)  => SkipUntilCommentEnd "-" tail trailing
 else instance (Sym.Cons x y tail, SkipUntilCommentEnd x y trailing) => SkipUntilCommentEnd anything tail trailing
-class CloseOrRepeat (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb head tail onezero pursi pathi -> purso patho trailing
-instance CloseOrRepeat  verb "/" tail onezero purs path purs path tail
+class CloseOrRepeat (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (trailing :: Symbol) |  verb head tail pursi -> purso trailing
+instance CloseOrRepeat  verb "/" tail purs purs tail
 else instance
   ( Sym.Cons "-" y tail
   , Sym.Cons "-" yy y
   , Sym.Cons x yyy yy
   , SkipUntilCommentEnd x yyy trailing
   , Sym.Cons mm bb trailing
-  , PXBody  verb mm bb onezero pursi pathi purso patho newTrailing
+  , PXBody  verb mm bb pursi purso newTrailing
   ) =>
-  CloseOrRepeat  verb "!" tail onezero pursi pathi purso patho newTrailing
-else instance (PXTagPreName  verb anything tail onezero () () pursm pathm trailing, Row.Union pursi pursm pursz, Row.Union pathi pathm pathz, Sym.Cons x y trailing, PXBody  verb x y (RL.Cons "1" "1" onezero) pursz pathz purso patho newTrailing) => CloseOrRepeat  verb anything tail onezero pursi pathi purso patho newTrailing
-instance (Sym.Cons x y tail, CloseOrRepeat  verb x y onezero pursi pathi purso patho trailing) => PXBody  verb "<" tail onezero pursi pathi purso patho trailing
-else instance (Sym.Cons x y tail, DoVerbForDOM  verb "" x y onezero pursi pathi pursx pathx newTail, Sym.Cons xx yy newTail, PXBody  verb xx yy onezero pursx pathx purso patho trailing) => PXBody  verb verb tail onezero pursi pathi purso patho trailing
-else instance (Sym.Cons x y tail, PXBody  verb x y onezero pursi pathi purso patho trailing) => PXBody  verb anything tail onezero pursi pathi purso patho trailing
+  CloseOrRepeat  verb "!" tail pursi purso newTrailing
+else instance (PXTagPreName  verb anything tail () pursm trailing, Row.Union pursi pursm pursz, Sym.Cons x y trailing, PXBody  verb x y pursz purso newTrailing) => CloseOrRepeat  verb anything tail pursi purso newTrailing
+instance (Sym.Cons x y tail, CloseOrRepeat  verb x y pursi purso trailing) => PXBody  verb "<" tail pursi purso trailing
+else instance (Sym.Cons x y tail, DoVerbForDOM  verb "" x y pursi pursx newTail, Sym.Cons xx yy newTail, PXBody  verb xx yy pursx purso trailing) => PXBody  verb verb tail pursi purso trailing
+else instance (Sym.Cons x y tail, PXBody  verb x y pursi purso trailing) => PXBody  verb anything tail pursi purso trailing

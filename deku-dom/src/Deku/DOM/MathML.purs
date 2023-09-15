@@ -3,6 +3,8 @@
 -- Any changes may be overwritten.
 module Deku.DOM.MathML
   ( class TagToDeku
+  , class TagToCtor
+  , ctor
   , math
   , math_
   , math__
@@ -106,6 +108,10 @@ import Type.Proxy (Proxy)
 import Deku.DOM (Element, GlobalEventHandlers, HTMLOrSVGElement)
 
 class TagToDeku (tag :: Symbol) (interface :: Row Type) | tag -> interface
+class TagToCtor (tag :: Symbol) (interface :: Row Type) | tag -> interface where
+  ctor
+    :: Proxy tag -> Array (FRP.Poll.Poll (Deku.Attribute.Attribute interface)) -> Array Nut -> Nut
+
 type MathMLElement (r :: Row Type) =
   ( __tag :: Proxy "MathMLElement"
   , encoding :: String
@@ -139,6 +145,9 @@ instance TagToDeku "math" (MathMLElement ())
 math :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 math = elementify (Just "http://www.w3.org/1998/Math/MathML") "math"
 
+instance TagToCtor "math" (MathMLElement ()) where
+  ctor _ = math
+
 math_ :: Array Nut -> Nut
 math_ = math []
 
@@ -149,6 +158,9 @@ instance TagToDeku "mtext" (MathMLElement ())
 
 mtext :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mtext = elementify (Just "http://www.w3.org/1998/Math/MathML") "mtext"
+
+instance TagToCtor "mtext" (MathMLElement ()) where
+  ctor _ = mtext
 
 mtext_ :: Array Nut -> Nut
 mtext_ = mtext []
@@ -161,6 +173,9 @@ instance TagToDeku "mi" (MathMLElement ())
 mi :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mi = elementify (Just "http://www.w3.org/1998/Math/MathML") "mi"
 
+instance TagToCtor "mi" (MathMLElement ()) where
+  ctor _ = mi
+
 mi_ :: Array Nut -> Nut
 mi_ = mi []
 
@@ -171,6 +186,9 @@ instance TagToDeku "mn" (MathMLElement ())
 
 mn :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mn = elementify (Just "http://www.w3.org/1998/Math/MathML") "mn"
+
+instance TagToCtor "mn" (MathMLElement ()) where
+  ctor _ = mn
 
 mn_ :: Array Nut -> Nut
 mn_ = mn []
@@ -183,6 +201,9 @@ instance TagToDeku "mo" (MathMLElement ())
 mo :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mo = elementify (Just "http://www.w3.org/1998/Math/MathML") "mo"
 
+instance TagToCtor "mo" (MathMLElement ()) where
+  ctor _ = mo
+
 mo_ :: Array Nut -> Nut
 mo_ = mo []
 
@@ -193,6 +214,9 @@ instance TagToDeku "mspace" (MathMLElement ())
 
 mspace :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mspace = elementify (Just "http://www.w3.org/1998/Math/MathML") "mspace"
+
+instance TagToCtor "mspace" (MathMLElement ()) where
+  ctor _ = mspace
 
 mspace_ :: Array Nut -> Nut
 mspace_ = mspace []
@@ -205,6 +229,9 @@ instance TagToDeku "ms" (MathMLElement ())
 ms :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 ms = elementify (Just "http://www.w3.org/1998/Math/MathML") "ms"
 
+instance TagToCtor "ms" (MathMLElement ()) where
+  ctor _ = ms
+
 ms_ :: Array Nut -> Nut
 ms_ = ms []
 
@@ -215,6 +242,9 @@ instance TagToDeku "mrow" (MathMLElement ())
 
 mrow :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mrow = elementify (Just "http://www.w3.org/1998/Math/MathML") "mrow"
+
+instance TagToCtor "mrow" (MathMLElement ()) where
+  ctor _ = mrow
 
 mrow_ :: Array Nut -> Nut
 mrow_ = mrow []
@@ -227,6 +257,9 @@ instance TagToDeku "mfrac" (MathMLElement ())
 mfrac :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mfrac = elementify (Just "http://www.w3.org/1998/Math/MathML") "mfrac"
 
+instance TagToCtor "mfrac" (MathMLElement ()) where
+  ctor _ = mfrac
+
 mfrac_ :: Array Nut -> Nut
 mfrac_ = mfrac []
 
@@ -237,6 +270,9 @@ instance TagToDeku "msqrt" (MathMLElement ())
 
 msqrt :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 msqrt = elementify (Just "http://www.w3.org/1998/Math/MathML") "msqrt"
+
+instance TagToCtor "msqrt" (MathMLElement ()) where
+  ctor _ = msqrt
 
 msqrt_ :: Array Nut -> Nut
 msqrt_ = msqrt []
@@ -249,6 +285,9 @@ instance TagToDeku "mroot" (MathMLElement ())
 mroot :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mroot = elementify (Just "http://www.w3.org/1998/Math/MathML") "mroot"
 
+instance TagToCtor "mroot" (MathMLElement ()) where
+  ctor _ = mroot
+
 mroot_ :: Array Nut -> Nut
 mroot_ = mroot []
 
@@ -259,6 +298,9 @@ instance TagToDeku "mstyle" (MathMLElement ())
 
 mstyle :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mstyle = elementify (Just "http://www.w3.org/1998/Math/MathML") "mstyle"
+
+instance TagToCtor "mstyle" (MathMLElement ()) where
+  ctor _ = mstyle
 
 mstyle_ :: Array Nut -> Nut
 mstyle_ = mstyle []
@@ -271,6 +313,9 @@ instance TagToDeku "merror" (MathMLElement ())
 merror :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 merror = elementify (Just "http://www.w3.org/1998/Math/MathML") "merror"
 
+instance TagToCtor "merror" (MathMLElement ()) where
+  ctor _ = merror
+
 merror_ :: Array Nut -> Nut
 merror_ = merror []
 
@@ -281,6 +326,9 @@ instance TagToDeku "mpadded" (MathMLElement ())
 
 mpadded :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mpadded = elementify (Just "http://www.w3.org/1998/Math/MathML") "mpadded"
+
+instance TagToCtor "mpadded" (MathMLElement ()) where
+  ctor _ = mpadded
 
 mpadded_ :: Array Nut -> Nut
 mpadded_ = mpadded []
@@ -293,6 +341,9 @@ instance TagToDeku "mphantom" (MathMLElement ())
 mphantom :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mphantom = elementify (Just "http://www.w3.org/1998/Math/MathML") "mphantom"
 
+instance TagToCtor "mphantom" (MathMLElement ()) where
+  ctor _ = mphantom
+
 mphantom_ :: Array Nut -> Nut
 mphantom_ = mphantom []
 
@@ -303,6 +354,9 @@ instance TagToDeku "msub" (MathMLElement ())
 
 msub :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 msub = elementify (Just "http://www.w3.org/1998/Math/MathML") "msub"
+
+instance TagToCtor "msub" (MathMLElement ()) where
+  ctor _ = msub
 
 msub_ :: Array Nut -> Nut
 msub_ = msub []
@@ -315,6 +369,9 @@ instance TagToDeku "msup" (MathMLElement ())
 msup :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 msup = elementify (Just "http://www.w3.org/1998/Math/MathML") "msup"
 
+instance TagToCtor "msup" (MathMLElement ()) where
+  ctor _ = msup
+
 msup_ :: Array Nut -> Nut
 msup_ = msup []
 
@@ -325,6 +382,9 @@ instance TagToDeku "msubsup" (MathMLElement ())
 
 msubsup :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 msubsup = elementify (Just "http://www.w3.org/1998/Math/MathML") "msubsup"
+
+instance TagToCtor "msubsup" (MathMLElement ()) where
+  ctor _ = msubsup
 
 msubsup_ :: Array Nut -> Nut
 msubsup_ = msubsup []
@@ -337,6 +397,9 @@ instance TagToDeku "munder" (MathMLElement ())
 munder :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 munder = elementify (Just "http://www.w3.org/1998/Math/MathML") "munder"
 
+instance TagToCtor "munder" (MathMLElement ()) where
+  ctor _ = munder
+
 munder_ :: Array Nut -> Nut
 munder_ = munder []
 
@@ -347,6 +410,9 @@ instance TagToDeku "mover" (MathMLElement ())
 
 mover :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mover = elementify (Just "http://www.w3.org/1998/Math/MathML") "mover"
+
+instance TagToCtor "mover" (MathMLElement ()) where
+  ctor _ = mover
 
 mover_ :: Array Nut -> Nut
 mover_ = mover []
@@ -360,6 +426,9 @@ munderover
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 munderover = elementify (Just "http://www.w3.org/1998/Math/MathML") "munderover"
 
+instance TagToCtor "munderover" (MathMLElement ()) where
+  ctor _ = munderover
+
 munderover_ :: Array Nut -> Nut
 munderover_ = munderover []
 
@@ -371,6 +440,9 @@ instance TagToDeku "mmultiscripts" (MathMLElement ())
 mmultiscripts
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mmultiscripts = elementify (Just "http://www.w3.org/1998/Math/MathML") "mmultiscripts"
+
+instance TagToCtor "mmultiscripts" (MathMLElement ()) where
+  ctor _ = mmultiscripts
 
 mmultiscripts_ :: Array Nut -> Nut
 mmultiscripts_ = mmultiscripts []
@@ -384,6 +456,9 @@ mprescripts
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mprescripts = elementify (Just "http://www.w3.org/1998/Math/MathML") "mprescripts"
 
+instance TagToCtor "mprescripts" (MathMLElement ()) where
+  ctor _ = mprescripts
+
 mprescripts_ :: Array Nut -> Nut
 mprescripts_ = mprescripts []
 
@@ -394,6 +469,9 @@ instance TagToDeku "mtable" (MathMLElement ())
 
 mtable :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mtable = elementify (Just "http://www.w3.org/1998/Math/MathML") "mtable"
+
+instance TagToCtor "mtable" (MathMLElement ()) where
+  ctor _ = mtable
 
 mtable_ :: Array Nut -> Nut
 mtable_ = mtable []
@@ -406,6 +484,9 @@ instance TagToDeku "mtr" (MathMLElement ())
 mtr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mtr = elementify (Just "http://www.w3.org/1998/Math/MathML") "mtr"
 
+instance TagToCtor "mtr" (MathMLElement ()) where
+  ctor _ = mtr
+
 mtr_ :: Array Nut -> Nut
 mtr_ = mtr []
 
@@ -417,6 +498,9 @@ instance TagToDeku "mtd" (MathMLElement ())
 mtd :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 mtd = elementify (Just "http://www.w3.org/1998/Math/MathML") "mtd"
 
+instance TagToCtor "mtd" (MathMLElement ()) where
+  ctor _ = mtd
+
 mtd_ :: Array Nut -> Nut
 mtd_ = mtd []
 
@@ -427,6 +511,9 @@ instance TagToDeku "maction" (MathMLElement ())
 
 maction :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 maction = elementify (Just "http://www.w3.org/1998/Math/MathML") "maction"
+
+instance TagToCtor "maction" (MathMLElement ()) where
+  ctor _ = maction
 
 maction_ :: Array Nut -> Nut
 maction_ = maction []
@@ -440,6 +527,9 @@ semantics
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 semantics = elementify (Just "http://www.w3.org/1998/Math/MathML") "semantics"
 
+instance TagToCtor "semantics" (MathMLElement ()) where
+  ctor _ = semantics
+
 semantics_ :: Array Nut -> Nut
 semantics_ = semantics []
 
@@ -452,6 +542,9 @@ annotation
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 annotation = elementify (Just "http://www.w3.org/1998/Math/MathML") "annotation"
 
+instance TagToCtor "annotation" (MathMLElement ()) where
+  ctor _ = annotation
+
 annotation_ :: Array Nut -> Nut
 annotation_ = annotation []
 
@@ -463,6 +556,9 @@ instance TagToDeku "annotation-xml" (MathMLElement ())
 annotationXml
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
 annotationXml = elementify (Just "http://www.w3.org/1998/Math/MathML") "annotation-xml"
+
+instance TagToCtor "annotation-xml" (MathMLElement ()) where
+  ctor _ = annotationXml
 
 annotationXml_ :: Array Nut -> Nut
 annotationXml_ = annotationXml []

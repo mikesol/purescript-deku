@@ -1,4 +1,4 @@
 module Deku.PxTypes where
 
-data PxAtt
+data PxAtt (a :: Row Type)
 data PxNut

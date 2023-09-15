@@ -3,7 +3,7 @@ module DOM.Indexed.Element where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Ctor(..), Element, Interface, TagNS, typeArrayed, typeAttributed, typePolled, typeNut, xhtmlNamespace, nominal)
+import DOM.Common (Ctor(..), Element, Interface, TagNS, nominal, typeArrayed, typeAttributed, typeNut, typePolled, typeProxied, xhtmlNamespace)
 import DOM.TypeStub (constructIndex, indexImports)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
@@ -14,7 +14,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Foreign.Object as Foreign
 import PureScript.CST.Types (ClassFundep(..), Declaration, Export, Expr, ImportDecl, Type)
 import Safe.Coerce (coerce)
-import Tidy.Codegen (binderVar, declClass, declImport, declImportAs, declInstance, declSignature, declType, declValue, exportClass, exportType, exportValue, exprApp, exprArray, exprCtor, exprIdent, exprString, importType, importTypeAll, importValue, typeApp, typeArrow, typeCtor, typeRow, typeRowEmpty, typeString, typeVar, typeVarKinded)
+import Tidy.Codegen (binderVar, binderWildcard, classMember, declClass, declImport, declImportAs, declInstance, declSignature, declType, declValue, exportClass, exportType, exportValue, exprApp, exprArray, exprCtor, exprIdent, exprString, importType, importTypeAll, importValue, instValue, typeApp, typeArrow, typeCtor, typeRow, typeRowEmpty, typeString, typeVar, typeVarKinded)
 import Tidy.Codegen.Class (toName)
 import Tidy.Codegen.Common (tokRightArrow)
 
@@ -29,7 +29,7 @@ imports baseMod interfaces =
             "Deku.Attribute"
 
         , declImport "Deku.Control" [ importValue "elementify" ]
-        , declImportAs "Deku.Control" [  ] "DC"
+        , declImportAs "Deku.Control" [] "DC"
         , declImport "Deku.Core" [ importType "Nut" ]
         , declImport "Type.Proxy" [ importType "Proxy" ]
         ]
@@ -58,6 +58,8 @@ exports
 exports interfaces tags = do
   Array.concat
     [ pure $ exportClass "TagToDeku"
+    , pure $ exportClass "TagToCtor"
+    , pure $ exportValue "ctor"
     , bind tags \{ ctor: Ctor tag } -> do
         let shortHand = tag <> "_"
         let shorShortHand = tag <> "__"
@@ -81,6 +83,23 @@ generate interfaces tags = do
             (NEA.singleton (toName "interface"))
         ]
         []
+    , pure $ declClass [] "TagToCtor"
+        [ typeVarKinded "tag" $ typeCtor "Symbol"
+        , typeVarKinded "interface" $ typeApp (typeCtor "Row")
+            [ typeCtor "Type" ]
+        ]
+        [ FundepDetermines (NEA.singleton (toName "tag")) tokRightArrow
+            (NEA.singleton (toName "interface"))
+        ]
+        [ classMember "ctor" do
+            typeArrow
+              [ typeProxied (typeVar "tag")
+              , typeArrayed $ typePolled $ typeAttributed $
+                  (typeVar "interface")
+              , typeApp (typeCtor "Array") [ typeNut ]
+              ]
+              typeNut
+        ]
 
     -- interfaces
     , bind (Foreign.values interfaces) \{ ctor, name, bases, members } ->
@@ -113,7 +132,11 @@ generate interfaces tags = do
             [ exprNamespace ns
             , exprString tag
             ]
-
+        , declInstance Nothing [] "TagToCtor"
+            [ typeString tag, typeApp (typeCtor interface) [ typeRowEmpty ] ]
+            [ instValue "ctor" [ binderWildcard ] do
+                exprIdent ctor
+            ]
         , declSignature shortHand
             $ typeArrow
                 [ typeApp (typeCtor "Array") [ typeNut ]

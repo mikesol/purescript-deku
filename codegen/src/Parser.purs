@@ -111,10 +111,10 @@ pxStart { name } =
     flip map whitespace \ws ->
         declInstance Nothing
             [ cons x y tail
-            , typeApp pxStartClass [ verb, x, y, purs, path ]
+            , typeApp pxStartClass [ verb, x, y, purs ]
             ]
             name
-            [ verb, ws, tail, purs, path ]
+            [ verb, ws, tail, purs ]
             []
 
 
@@ -123,16 +123,16 @@ pxTagPreName { name } = Array.concat
     [ flip map whitespace \ws ->
         declInstance Nothing
             [ cons x y tail
-            , typeApp pxTagPreNameClass [ verb, x, y, onezero, pursi,pathi, purso, patho, trailing ]
+            , typeApp pxTagPreNameClass [ verb, x, y, pursi, purso, trailing ]
             ]
             name
-            [ verb, ws, tail, onezero, pursi,pathi, purso, patho, trailing ]
+            [ verb, ws, tail, pursi, purso, trailing ]
             []
     , flip map lowerCase \match ->
         declInstance Nothing
-            [ typeApp pxTagNameClass [ verb, typeString "", match, tail, onezero, pursi,pathi, purso, patho, trailing ] ]
+            [ typeApp pxTagNameClass [ verb, typeString "", match, tail, pursi, purso, trailing ] ]
             name
-            [ verb, match, tail, onezero, pursi,pathi, purso, patho, trailing ]
+            [ verb, match, tail, pursi, purso, trailing ]
             []
     ]
 
@@ -142,18 +142,18 @@ pxTagName { name } = Array.concat
         declInstance Nothing
             [ cons x y tail
             , append tag_ match tag
-            , typeApp pxTagNameClass [ verb, tag, x, y, onezero, pursi,pathi, purso, patho, trailing ]
+            , typeApp pxTagNameClass [ verb, tag, x, y, pursi, purso, trailing ]
             ]
             name
-            [ verb, tag_, match, tail, onezero, pursi,pathi, purso, patho, trailing ]
+            [ verb, tag_, match, tail, pursi, purso, trailing ]
             []
     , flip map whitespace \ws ->
         declInstance Nothing
             [ cons x y tail
-            , typeApp pxTagPreAttrNameClass [ verb, typeFalse, tag, x, y, onezero, pursi,pathi, purso, patho, trailing ]
+            , typeApp pxTagPreAttrNameClass [ verb, typeFalse, tag, x, y, pursi, purso, trailing ]
             ]
             name
-            [ verb, tag, ws, tail, onezero, pursi,pathi, purso, patho, trailing ]
+            [ verb, tag, ws, tail, pursi, purso, trailing ]
             []
     ]
 
@@ -194,45 +194,45 @@ pxTagPreAttrName { name } =
             [ declInstance Nothing
                 [ cons ( typeString ">" ) trailing tail ]
                 name 
-                [ verb, hasAttributed, tag, typeString "/", tail, onezero, purs, path, purs, path, trailing ]
+                [ verb, hasAttributed, tag, typeString "/", tail, purs, purs, trailing ]
                 []
             , declInstance Nothing
                 [ cons q r tail
-                , typeApp pxBodyClass [ verb, q, r, (rlcons (typeString "0") (typeString "0") onezero), pursi,pathi, purso, patho, trailing ]
+                , typeApp pxBodyClass [ verb, q, r, pursi, purso, trailing ]
                 , cons x y trailing
                 , typeApp preEndTagFromTrailingClass [ x, y, tag, newTrailing ]
                 ]
                 name
-                [ verb, hasAttributed, tag, typeString ">", tail, onezero, pursi,pathi, purso, patho, newTrailing ]
+                [ verb, hasAttributed, tag, typeString ">", tail, pursi, purso, newTrailing ]
                 []
             ]
         $ NEA.prependArray
             ( flip map whitespace \ws ->
                 declInstance Nothing
                     [ cons x y tail
-                    , typeApp pxTagPreAttrNameClass [ verb, hasAttributed, tag, x, y, onezero, pursi,pathi, purso, patho, trailing ]
+                    , typeApp pxTagPreAttrNameClass [ verb, hasAttributed, tag, x, y, pursi, purso, trailing ]
                     ]
                     name
-                    [ verb, hasAttributed, tag, ws, tail, onezero, pursi,pathi, purso, patho, trailing ]
+                    [ verb, hasAttributed, tag, ws, tail, pursi, purso, trailing ]
                     []
             )
         $ NEA.prependArray
             ( flip map letters \match ->
                 declInstance Nothing
-                    [ typeApp pxTagAttrNameClass [ verb, hasAttributed, tag, match, tail, onezero, pursi,pathi, purso, patho, trailing ] ]
+                    [ typeApp pxTagAttrNameClass [ verb, hasAttributed, tag, match, tail, pursi, purso, trailing ] ]
                     name
-                    [ verb, hasAttributed, tag, match, tail, onezero, pursi,pathi, purso, patho, trailing ]
+                    [ verb, hasAttributed, tag, match, tail, pursi, purso, trailing ]
                     []
             )
         $ NEA.singleton
         $ declInstance Nothing
             [ cons x y tail
-            , typeApp doVerbForAttrClass [ verb, tag, typeString "", x, y, onezero, pursi,pathi, pursx, pathx, newTail ]
+            , typeApp doVerbForAttrClass [ verb, tag, typeString "", x, y, pursi, pursx, newTail ]
             , cons xx yy newTail
-            , typeApp pxTagPreAttrNameClass [ verb, typeTrue, tag, xx, yy, onezero, pursx, pathx, purso, patho, trailing ]
+            , typeApp pxTagPreAttrNameClass [ verb, typeTrue, tag, xx, yy, pursx, purso, trailing ]
             ]
             name
-            [ verb, typeFalse, tag, verb, tail, onezero, pursi,pathi, purso, patho, trailing ]
+            [ verb, typeFalse, tag, verb, tail, pursi, purso, trailing ]
             []
     ]
     
@@ -249,18 +249,18 @@ pxTagAttrName { name } = Array.concat
     [ flip map ( lowerCase <> upperCase <> [ typeString "-" ] <> digits ) \match ->
         declInstance Nothing
             [ cons x y tail
-            , typeApp pxTagAttrNameClass [ verb, hasAttributed, tag, x, y, onezero, pursi,pathi, purso, patho, trailing ]
+            , typeApp pxTagAttrNameClass [ verb, hasAttributed, tag, x, y, pursi, purso, trailing ]
             ]
             name
-            [ verb, hasAttributed, tag, match, tail, onezero, pursi,pathi, purso, patho, trailing ]
+            [ verb, hasAttributed, tag, match, tail, pursi, purso, trailing ]
             []
     , flip map whitespace \ws ->
         declInstance Nothing
             [ cons x y tail
-            , typeApp pxTagPostAttrNameClass [ verb, hasAttributed, tag, x, y, onezero, pursi,pathi, purso, patho, trailing ]
+            , typeApp pxTagPostAttrNameClass [ verb, hasAttributed, tag, x, y, pursi, purso, trailing ]
             ]
             name
-            [ verb, hasAttributed, tag, ws, tail, onezero, pursi,pathi, purso, patho, trailing ]
+            [ verb, hasAttributed, tag, ws, tail, pursi, purso, trailing ]
             []
     ]
 
@@ -269,10 +269,10 @@ pxTagPostAttrName { name } =
     flip map whitespace \ws ->
         declInstance Nothing
             [ cons x y tail
-            , typeApp pxTagPostAttrNameClass [ verb, hasAttributed, tag, x, y, onezero, pursi,pathi, purso, patho, trailing ]
+            , typeApp pxTagPostAttrNameClass [ verb, hasAttributed, tag, x, y, pursi, purso, trailing ]
             ]
             name
-            [ verb, hasAttributed, tag, ws, tail, onezero, pursi,pathi, purso, patho, trailing ]
+            [ verb, hasAttributed, tag, ws, tail, pursi, purso, trailing ]
             []
 
 pxTagPreAttrValue :: ClassHead Void -> Array ( Declaration Void )
@@ -280,10 +280,10 @@ pxTagPreAttrValue { name } =
     flip map whitespace \ws ->
         declInstance Nothing
             [ cons x y tail
-            , typeApp pxTagPreAttrValueClass [ verb, hasAttributed, tag, x, y, onezero, pursi,pathi, purso, patho, trailing ]
+            , typeApp pxTagPreAttrValueClass [ verb, hasAttributed, tag, x, y, pursi, purso, trailing ]
             ]
             name
-            [ verb, hasAttributed, tag, ws, tail, onezero, pursi,pathi, purso, patho, trailing ]
+            [ verb, hasAttributed, tag, ws, tail, pursi, purso, trailing ]
             []
 
 pxTagAttrValue :: ClassHead Void -> Array ( Declaration Void )
@@ -291,8 +291,8 @@ pxTagAttrValue { name } =
     flip map ( lowerCase <> upperCase <> digits <> punctuation <> [ typeString "\\" ] <> whitespace ) \match ->
         declInstance Nothing
             [ cons x y tail
-            , typeApp pxTagAttrValueClass [ verb, hasAttributed, tag, x, y, onezero, pursi,pathi, purso, patho, trailing ]
+            , typeApp pxTagAttrValueClass [ verb, hasAttributed, tag, x, y, pursi, purso, trailing ]
             ]
             name
-            [ verb, hasAttributed, tag, match, tail, onezero, pursi,pathi, purso, patho, trailing ]
+            [ verb, hasAttributed, tag, match, tail, pursi, purso, trailing ]
             []

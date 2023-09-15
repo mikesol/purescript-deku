@@ -204,6 +204,11 @@ typePolled :: Type Void -> Type Void
 typePolled t =
     unsafePartial $ typeApp ( typeCtor "FRP.Poll.Poll" ) $ pure t
 
+
+typeProxied :: Type Void -> Type Void
+typeProxied t =
+    unsafePartial $ typeApp ( typeCtor "Proxy" ) $ pure t
+
 typeFunked ::  String -> Type Void -> Type Void
 typeFunked f t =
     unsafePartial $ typeApp ( typeVar f ) $ pure t
