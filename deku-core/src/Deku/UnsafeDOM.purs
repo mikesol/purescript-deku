@@ -2,8 +2,9 @@ module Deku.UnsafeDOM where
 
 import Prelude
 
+import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
-import Web.DOM (Element, Node)
+import Web.DOM (DocumentFragment, Element, Node)
 import Web.Event.Event (Event, EventType)
 import Web.Event.EventTarget (EventListener, EventTarget)
 import Web.HTML (HTMLTemplateElement)
@@ -42,3 +43,5 @@ foreign import eventListener
        EventListener
 
 foreign import insertAdjacentHTML :: EffectFn3 String String Element Unit
+
+foreign import unsafeCreateDocumentFragment :: Effect DocumentFragment

@@ -25,6 +25,7 @@ import Data.Array as Array
 import Data.Const (Const)
 import Data.Function.Uncurried (Fn4, runFn4)
 import Data.Maybe (Maybe(..))
+import Data.Newtype (class Newtype)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
@@ -43,13 +44,20 @@ instance (RL.RowToList r1 rl1, IsSubsetRL rl1 r2) => IsSubset r1 r2
 instance (Row.Cons k v r2' r2, IsSubsetRL c r2) => IsSubsetRL (RL.Cons k v c) r2
 instance IsSubsetRL RL.Nil r2
 
-class AsTypeConstructor :: forall k1. (Type -> Type) -> Row k1 -> Row k1 -> Constraint
+class AsTypeConstructor
+  :: forall k1. (Type -> Type) -> Row k1 -> Row k1 -> Constraint
 class AsTypeConstructor f r1 r2 | f r1 -> r2
 
-class AsTypeConstructorRL :: forall k1. (Type -> Type) -> RL.RowList k1 -> Row k1 -> Constraint
+class AsTypeConstructorRL
+  :: forall k1. (Type -> Type) -> RL.RowList k1 -> Row k1 -> Constraint
 class AsTypeConstructorRL f r1 r2 | f r1 -> r2
 
-instance (RL.RowToList r1 rl1, AsTypeConstructorRL f rl1 r2) => AsTypeConstructor f r1 r2
+instance
+  ( RL.RowToList r1 rl1
+  , AsTypeConstructorRL f rl1 r2
+  ) =>
+  AsTypeConstructor f r1 r2
+
 instance
   ( Row.Cons k (f v) r2' r2
   , AsTypeConstructorRL f c r2'
@@ -111,12 +119,16 @@ foreign import foreachEWithImpl :: forall a b c. EffectFn3 a b c Unit
 foreign import foreachEWithInvImpl :: forall a b c d. EffectFn4 a b c d Unit
 
 newtype EffectOp a = EffectOp (EffectFn1 a Unit)
+
+derive instance Newtype (EffectOp a) _
 newtype EffectOpWith b a = EffectOpWith (EffectFn2 b a Unit)
+
+derive instance Newtype (EffectOpWith b a) _
 
 foreachE
   :: forall r2 r3
    . AsTypeConstructor EffectOp r2 r3
-  => EffectFn2 (Some r2) { | r3 }  Unit
+  => EffectFn2 (Some r2) { | r3 } Unit
 foreachE = unsafeCoerce foreachEImpl
 
 foreachEInv
@@ -129,7 +141,7 @@ foreachEInv = unsafeCoerce foreachEInvImpl
 foreachEWith
   :: forall a r2 r3
    . AsTypeConstructor (EffectOpWith a) r2 r3
-  => EffectFn3 a (Some r2) { | r3 }  Unit
+  => EffectFn3 a (Some r2) { | r3 } Unit
 foreachEWith = unsafeCoerce foreachEWithImpl
 
 foreachEWithInv

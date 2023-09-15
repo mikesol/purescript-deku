@@ -3,31 +3,35 @@
 // not sure if it's worth it creating that object, though
 // which takes time and may outweigh the gains
 export const findComments = (t, p, s) => {
-  if (!(p instanceof Element)) return;
+  if (!p.childNodes) return;
 
   for (let node of p.childNodes) {
     if (node.nodeType === Node.COMMENT_NODE) {
-      if (Object.keys(p).indexOf(t + key) !== -1) {
-        s[key] = node;
+      const tc = node.textContent.split("@!@");
+      if (tc[0] === t) {
+        s[tc[1]] = node;
       }
     }
 
     // Recursively search in child nodes.
-    findComment(node, s);
+    findComments(t, node, s);
   }
 };
 
-export const getComments = (t, p, s) => {
-  const result = { ...s }; // Clone the object to ensure original isn't modified.
-  findComment(t, p, result);
+export const getComments = (t, p) => {
+  const result = {}; // Clone the object to ensure original isn't modified.
+  findComments(t, p, result);
   return result;
 };
+
 const ORDER_ARR = "@-@ord3r";
 const IS_ATT = "@-@i$a++";
 const IX = "@-@!x";
 const TOKEN = "@-@t0k3n";
 const POST = "@-@p0$t";
-const STR = "@-@$+r"
+const STR = "@-@$+r";
+const PVKEY = "@-@pv";
+const CBKEY = "@-@cbk";
 const INITA = "@-@in!tA";
 const INITB = "@-@in!tB";
 export const commentFromCache = (s) => (c) => c[s];
@@ -40,8 +44,8 @@ export const buildStringSplit = (verb, isAtts, token, html$) => {
   const hsplit = html.split(verb);
   for (var i = 1; i < hsplit.length; i = i + 2) {
     const key = hsplit[i];
-    out[ORDER_ARR].append(key);
-    out[IS_ATT] = isAtts[key];
+    out[ORDER_ARR].push(key);
+    out[key + IS_ATT] = isAtts[key];
     out[key + POST] = hsplit[i + 1];
   }
   const splits = [
@@ -52,6 +56,7 @@ export const buildStringSplit = (verb, isAtts, token, html$) => {
   const splitPt = Math.min(...splits);
   out[INITA] = hsplit[0].substring(0, splitPt);
   out[INITB] = hsplit[0].substring(splitPt);
+  return out;
 };
 
 export const newStringSplit = (ix, ss) => {
@@ -60,53 +65,61 @@ export const newStringSplit = (ix, ss) => {
   return out;
 };
 
-export const addIxToStringSplitNoInitValue = (ix, key, ss) => {
-
+export const addIxToStringSplitForStringInitValue = (ix, key, val, ss) => {
+  ss[key + STR] = val;
 };
 
-export const addIxToStringSplitForStringInitValue = () => {
-  /** modify_
-          ( \i ->
-              let
-                b = "<span data-dktt=\"" <> key
-                  <> "\" data-dktk=\""
-                  <> t
-                c = "\">"
-                a = "</span>"
-              in
-                String.replace (String.Pattern $ b <> c <> a)
-                  ( String.Replacement $ b <> " data-dkix=\"" <> ix <> "\"" <> c
-                      <> value
-                      <> a
-                  )
-          )
-          singleH */
+export const addIxToStringSplitForPropInitValue = (ix, key, k, v, ss) => {
+  !ss[key + PVKEY] && (ss[key + PVKEY] = []);
+  ss[key + PVKEY].push([k, v]);
 };
 
-export const addIxToStringSplitForPropInitValue = () => {
-  /**modify_
-              ( \i ->
-                  let
-                    x = "data-dktt=\"" <> key <> "\""
-                  in
-                    String.replace (String.Pattern $ x)
-                      ( String.Replacement $ " " <> value.key <> "=\""
-                          <> value.value
-                          <> "\" "
-                          <> " data-dkix=\""
-                          <> ix
-                          <> "\""
-                          <> x
-                      )
-              )
-              singleH */
+export const addIxToStringSplitForCbInitValue = (ix, key, ss) => {
+  ss[key + CBKEY] = true;
 };
 
-export const addIxToStringSplitForCbInitValue = () => {};
+export const collapseStringSplit = (ss) => {
+  let out = "";
+  const ix = ss[IX];
+  const token = ss[TOKEN];
+  out += ss[INITA];
+  out += ` id="${makeTopLevelId(token, ix)}" `;
+  out += ss[INITB];
+  for (const key of ss[ORDER_ARR]) {
+    if (ss[key + IS_ATT]) {
+      out += ` id="${makeKeyedId(token, ix, key)}"`;
+      if (ss[key + CBKEY]) {
+        out += ` data-dkix="${ix}" data-dktt="${key}" `;
+      }
+      const pvs = ss[key + PVKEY];
+      if (pvs) {
+        for (const [k, v] of pvs) {
+          out += ` ${k}="${v}" `;
+        }
+      }
+    } else {
+      out += `<span id="${makeKeyedId(token, ix, key)}">`;
+      ss[key + STR] && (out += ss[key + STR]);
+      out += "</span>";
+    }
+    out += ss[key + POST];
+  }
+  return out;
+};
 
-export const shrinkHack = (i) => {
+export const makeTopLevelId = (token, ix) => `d3ku!-${token}-${ix}`;
+export const makeKeyedId = (token, ix, key) => `d3ku!-${token}-${ix}-${key}`;
+
+export const lifecycleShrinkHack = (i) => {
   const out = {};
   i["sendTo"] !== undefined && (out["sendTo"] = i["sendTo"]);
   i["remove"] !== undefined && (out["remove"] = i["remove"]);
+  return out;
+};
+
+export const nonLifecycleShrinkHackImpl = (i) => {
+  const out = { ...i };
+  delete out["sendTo"];
+  delete out["remove"];
   return out;
 };

@@ -1150,7 +1150,8 @@ describe("deku", () => {
         expect($("#div0").text()).toBe(
           "hello Helsinkixhello Stockholmxhello Copenhagenx"
         );
-        $("#Stockholm").trigger("click");
+        console.log('preclick');
+        $(".Stockholm").trigger("click");
         expect($("#div0").text()).toBe(
           "hello Stockholmxhello Helsinkixhello Copenhagenx"
         );
@@ -1159,7 +1160,7 @@ describe("deku", () => {
     doTest("templates work 2", (f) =>
       f(tests.templatesWork2, () => {
         const $ = require("jquery");
-        expect($("#testing").text()).toBe(
+        expect($(".testing").text()).toBe(
           "hello world"
         );
       })

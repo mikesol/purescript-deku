@@ -1,5 +1,5 @@
 export const unsafeParentNode = (e) => e.parentNode;
-export const unsafeParentElement = (e) => e.unsafeParentElement;
+export const unsafeParentElement = (e) => e.parentNode;
 export const unsafeFirstChild = (e) => e.firstChild;
 export const createElement = (t) => document.createElement(t);
 export const createElementNS = (ns, t) => document.createElementNS(ns, t);
@@ -24,6 +24,11 @@ export const removeEventListener = (type, listener, useCapture, target) =>
 
 export const eventListener = (fn) => fn;
 
-export const insertAdjacentHTML = (p, h, n) => n.insertAdjacentHTML(p, h);
+export const insertAdjacentHTML = (p, h, n) => {
+  n.insertAdjacentHTML(p, h);
+};
 
 export const unsafeGetElementById = (id) => document.getElementById(id);
+
+export const unsafeCreateDocumentFragment = () =>
+  document.createDocumentFragment();
