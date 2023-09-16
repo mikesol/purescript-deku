@@ -28,7 +28,7 @@ export const commentFromCache = (s) => (c) => c[s];
 
 export const remove = Symbol();
 
-export const makeUnindexedId = (token, key) => `d3ku!-${token}-${key}`;
+export const makeUnindexedId = (token, key) => `d3ku-${token}-${key}`;
 
 export const go = (
   token,
