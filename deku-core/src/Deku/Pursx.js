@@ -46,7 +46,10 @@ export const go = (
       topCache[address] = newNode;
       const eltCache = {};
       for (const [pxKey, isAttr] of Object.entries(attrObj)) {
-        const elt = document.getElementById(makeUnindexedId(token, pxKey));
+        const idToSearch = makeUnindexedId(token, pxKey);
+        // in the case of a detached portal or an element that was recently removed,
+        // elt will be null. in that case, we use selectors on the parent
+        const elt = document.getElementById(idToSearch) || parent.querySelector(`#${idToSearch}`);
         elt.removeAttribute("id");
         if (isAttr) {
           eltCache[pxKey] = elt;
