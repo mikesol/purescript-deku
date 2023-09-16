@@ -25,6 +25,7 @@ import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
+import Data.Variant (match)
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), Cb, Key(..), Value(..), unsafeUnAttribute)
 import Deku.Do as Deku
 import Deku.JSMap as JSMap
@@ -761,15 +762,17 @@ handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts
   do
     let
       oh'hi'attr eeeee = mkEffectFn1 \att -> do
-        let { key, value } = att
-        case value of
-          Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
-          Cb' cb -> runEffectFn5 setCb eeeee (Key key) cb
-            (liftST $ STObject.peek key obj)
-            (void <<< liftST <<< flip (STObject.poke key) obj)
-          Unset' -> runEffectFn4 unsetAttribute eeeee (Key key)
-            (liftST $ STObject.peek key obj)
-            (liftST $ void $ STObject.delete key obj)
+        let { key, value: AttributeValue value } = att
+        match
+          { prop: \v -> runEffectFn3 setProp eeeee (Key key) (Value v)
+          , cb: \cb -> runEffectFn5 setCb eeeee (Key key) cb
+              (liftST $ STObject.peek key obj)
+              (void <<< liftST <<< flip (STObject.poke key) obj)
+          , unset: \_ -> runEffectFn4 unsetAttribute eeeee (Key key)
+              (liftST $ STObject.peek key obj)
+              (liftST $ void $ STObject.delete key obj)
+          }
+          value
       handleAttrEvent y = do
         wr <- runEffectFn1 weakRef elt
         uu <- subscribe y \x -> do

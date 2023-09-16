@@ -26,7 +26,7 @@ import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Hooks as DH
-import Deku.Pursx (template, pursx)
+import Deku.Pursx (pursx, remove, template)
 import Deku.Toplevel (runInBody)
 import Effect (Effect, foreachE)
 import Effect.Random (random, randomInt)
@@ -285,7 +285,7 @@ templatesWork = Deku.do
           templated_ (pure s)
             { atts:
                 [ DL.click_ \_ ->
-                    setSendTo $ Tuple s 0
+                    setSendTo $ { address: s, payload: 0 }
                 , DA.klass_ s
                 ]
             , world: pure s
@@ -718,22 +718,22 @@ randomNouns =
 
 makeRow
   :: forall r
-   . { appendRows :: Poll (Array (Tuple Int String))
-     , swap :: Poll (Tuple String Int)
+   . { appendRows :: Poll (Array { address :: Int, payload :: String })
+     , swap :: Poll { address :: String, payload :: Int }
      , rowbox :: Poll String
      , selectbox :: Poll String
-     , remove :: Poll String
+     , rmv :: Poll String
      , unselectbox :: Poll String
      , selectMe :: Int -> Effect Unit
      , removeMe :: ((Int -> Effect Unit) -> Effect Unit) -> Effect Unit
-     , arr :: Array (Tuple Int String)
+     , arr :: Array { address :: Int, payload :: String }
      | r
      }
   -> Nut
 makeRow
   { selectMe
   , arr
-  , remove
+  , rmv
   , removeMe
   , swap
   , appendRows
@@ -746,17 +746,18 @@ makeRow
     [ DA.id_ "tbody" ] $ merge
     [ templated_ selectbox { sel: [ DA.klass_ "danger" ] }
     , templated_ unselectbox { sel: [ DA.unset DA.klass $ pure unit ] }
-    , templated_ remove { remove: unit }
+    , templated_ rmv { remove }
     , templatedMap_ swap { sendTo: _ }
     , mapAccum
         ( \a b -> case Object.lookup b a of
             Nothing -> Tuple (Object.insert b woah'woah'woah a)
-              (Tuple b woah'woah'woah)
+              { address: b, payload: woah'woah'woah }
             Just e ->
               let
                 updated = e <> woah'woah'woah
               in
-                Tuple (Object.insert b updated a) (Tuple b updated)
+                Tuple (Object.insert b updated a)
+                  { address: b, payload: updated }
         )
         Object.empty
         rowbox `templatedMap_` (pure >>> { excl: _ })
@@ -773,10 +774,10 @@ makeRow
 
 makeTable
   :: { rowBuilder :: Poll RowBuilder
-     , appendRows :: Poll (Array (Tuple Int String))
-     , swap :: Poll (Tuple String Int)
+     , appendRows :: Poll (Array { address :: Int, payload :: String })
+     , swap :: Poll { address :: String, payload :: Int }
      , pushToRow :: Int -> Effect Unit
-     , remove :: Poll String
+     , rmv :: Poll String
      , rowbox :: Poll String
      , selectbox :: Poll String
      , unselectbox :: Poll String
@@ -791,14 +792,14 @@ makeTable i = do
         Clear -> makeRow $ i `union` { arr: [] }
     ]
 
-data RowBuilder = AddRows (Array (Tuple Int String)) | Clear
+data RowBuilder = AddRows (Array { address :: Int, payload :: String }) | Clear
 
 rando :: Array String -> Effect String
 rando a = do
   ri <- randomInt 0 (Array.length a)
   pure $ fromMaybe "foo" (a !! ri)
 
-genRows :: Int -> Int -> Effect (Array (Tuple Int String))
+genRows :: Int -> Int -> Effect (Array { address :: Int, payload :: String })
 genRows offset n = do
   arr <- liftST $ STArray.new
   foreachE (0 .. (n - 1)) \i -> do
@@ -806,7 +807,7 @@ genRows offset n = do
     color <- rando randomColors
     noun <- rando randomNouns
     let label = intercalate " " [ adjective, color, noun ]
-    liftST $ void $ STArray.push (Tuple (offset + i) label) arr
+    liftST $ void $ STArray.push { address: (offset + i), payload: label } arr
   liftST $ STArray.freeze arr
 
 data RowTransform = Start Int Int | Add Int Int | Swap | Delete Int | ClearRows
@@ -837,7 +838,7 @@ stressTest = Deku.do
   rowTransformer <- DH.useRant (fold doRowTransform [] rowTransformerRaw)
   rowTransformerRef <- DH.useRef [] rowTransformer
   setSwap /\ swap <- DH.useState'
-  pushToRemove /\ remove <- DH.useState'
+  pushToRemove /\ rmv <- DH.useState'
   pushToRow /\ rowbox <- DH.useState'
   pushToSelect /\ selectbox <- DH.useState'
   pushToUnselect /\ unselectbox <- DH.useState'
@@ -866,7 +867,7 @@ stressTest = Deku.do
     { table: makeTable
         { selectMe
         , removeMe
-        , remove: map fst remove
+        , rmv: map fst rmv
         , selectbox: map fst selectbox
         , unselectbox: map fst unselectbox
         , rowbox: map fst rowbox
@@ -889,8 +890,8 @@ stressTest = Deku.do
             r <- a !! 998
             in Tuple l r
         for_ swappies \(Tuple l r) -> do
-          setSwap $ Tuple (show r) 1
-          setSwap $ Tuple (show l) 998
+          setSwap $ { address: show r, payload: 1 }
+          setSwap $ { address: show l, payload: 998 }
         setRowTransformer Swap
     , update: DL.runOn DL.click $ rowTransformer <#>
         \arr -> do

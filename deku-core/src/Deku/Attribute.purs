@@ -21,8 +21,10 @@ module Deku.Attribute
 import Prelude
 
 import Data.Newtype (class Newtype)
+import Data.Variant (Variant, inj)
 import Effect (Effect)
 import Safe.Coerce (coerce)
+import Type.Proxy (Proxy(..))
 import Web.Event.Internal.Types (Event)
 
 -- | A callback function that can be used as a value for a listener.
@@ -48,13 +50,13 @@ cb = Cb <<< ((map <<< map) (const true))
 -- | In general, this function is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
 prop' :: String -> AttributeValue
-prop' = Prop'
+prop' p = AttributeValue $ inj (Proxy :: _ "prop") p
 
 -- | Construct a callback for a listener.
 -- | In general, this function is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `click` and `keyUp` instead.
 cb' :: Cb -> AttributeValue
-cb' = Cb'
+cb' c = AttributeValue $ inj (Proxy :: _ "cb") c
 
 -- | Unset an attribute. You should not use this directly but rather
 -- | you can set a value to `unit` to unset it, which calls
@@ -67,12 +69,12 @@ cb' = Cb'
 -- | id_ "foo" <|> delay 2000 (D.Id !:= unit)
 -- | ```
 unset' :: AttributeValue
-unset' = Unset'
+unset' = AttributeValue $ inj (Proxy :: _ "unset") unit
 
 -- | Low-level constructor for attributes and listeners, including their unsetting.
 -- | In general, these constructors are for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
-data AttributeValue = Prop' String | Cb' Cb | Unset'
+newtype AttributeValue = AttributeValue (Variant (prop :: String, cb :: Cb, unset :: Unit))
 
 type Attribute' =
   { key :: String
@@ -97,4 +99,4 @@ unsafeAttribute = Attribute
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
-xdata k v = unsafeAttribute { key: "data-" <> k, value: Prop' v }
+xdata k v = unsafeAttribute { key: "data-" <> k, value: AttributeValue $ inj (Proxy :: _ "prop") v }

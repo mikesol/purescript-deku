@@ -34,3 +34,4 @@ package:
   - web-uievents
   - untagged-union
   - web-dom-parser
+  - variant

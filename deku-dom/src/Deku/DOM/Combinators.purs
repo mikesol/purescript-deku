@@ -3,7 +3,7 @@ module Deku.DOM.Combinators where
 import Prelude
 
 import Data.Foldable (for_)
-import Data.Tuple (Tuple(..))
+import Data.Variant (inj)
 import Deku.Attribute (Attribute, AttributeValue(..), unsafeAttribute, unsafeUnAttribute)
 import Deku.DOM.Self as Self
 import Deku.Some (class IsSubsetRL)
@@ -12,7 +12,7 @@ import Effect (Effect)
 import Effect.Aff (Milliseconds(..), delay, launchAff_)
 import Effect.Class (liftEffect)
 import Prim.RowList as RL
-import Type.Proxy (Proxy)
+import Type.Proxy (Proxy(..))
 import Web.DOM (Element)
 import Web.Event.Event as Web
 import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
@@ -24,18 +24,19 @@ templated_
   => IsSubsetRL rl sr
   => f String
   -> Record r
-  -> f (Tuple String (Some.Some sr))
-templated_ e v = e <#> \s -> Tuple s $ Some.inj v
+  -> f { address :: String, payload :: Some.Some sr }
+templated_ e v = e <#> \s -> { address: s, payload: Some.inj v }
 
 templatedMap_
   :: forall f a r sr rl
    . Functor f
   => RL.RowToList r rl
   => IsSubsetRL rl sr
-  => f (Tuple String a)
+  => f { address :: String, payload :: a }
   -> (a -> Record r)
-  -> f (Tuple String (Some.Some sr))
-templatedMap_ e v = e <#> \(Tuple s i) -> Tuple s $ Some.inj (v i)
+  -> f { address :: String, payload :: Some.Some sr }
+templatedMap_ e v = e <#> \{ address, payload } ->
+  { address, payload: Some.inj (v payload) }
 
 templated
   :: forall ix f a r sr rl
@@ -43,19 +44,20 @@ templated
   => RL.RowToList r rl
   => IsSubsetRL rl sr
   => (ix -> String)
-  -> f (Tuple ix a)
+  -> f { address :: ix, payload :: a }
   -> (ix -> a -> Record r)
-  -> f (Tuple String (Some.Some sr))
-templated sh e v = e <#> \(Tuple i s) -> Tuple (sh i) $ Some.inj (v i s)
+  -> f { address :: String, payload :: Some.Some sr }
+templated sh e v = e <#> \{ address: i, payload: s } ->
+  { address: sh i, payload: Some.inj (v i s) }
 
 templatedS
   :: forall f a r sr rl
    . Functor f
   => RL.RowToList r rl
   => IsSubsetRL rl sr
-  => f (Tuple String a)
+  => f { address :: String, payload :: a }
   -> (String -> a -> Record r)
-  -> f (Tuple String (Some.Some sr))
+  -> f { address :: String, payload :: Some.Some sr }
 templatedS = templated identity
 
 -- | Runs an effect when the element triggers the given event. 
@@ -154,7 +156,9 @@ unset
   -> f e
   -> f (Attribute r)
 unset attr trigger =
-  unsafeAttribute <<< _ { value = Unset' } <<< unsafeUnAttribute <$> attr
+  unsafeAttribute
+    <<< _ { value = AttributeValue $ inj (Proxy :: _ "unset") unit }
+    <<< unsafeUnAttribute <$> attr
     (const mempty <$> trigger)
 
 -- | Sets a listener that injects a primitive DOM element into a closed scope immediately after element creation.

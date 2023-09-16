@@ -11,6 +11,7 @@ export const toTemplate = (s) => {
   template.innerHTML = s;
   return template;
 };
+
 export const cloneTemplate = (template) =>
   template.content.cloneNode(true).firstChild;
 export const outerHTML = (e) => e.outerHTML;
