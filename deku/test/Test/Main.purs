@@ -741,7 +741,7 @@ makeRows
   , unselectbox
   } = Deku.do
   template @"tbody" @"""<tr ~sel~ ><td class="col-md-1"> ~num~ </td><td class="col-md-4"><a ~select~ class="lbl">~label~ ~excl~</a></td><td class="col-md-1"><a ~rm~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
-    []
+    [ DA.id_ "tbody" ]
     clearAll $ merge
     [ templated_ selectbox { sel: [ DA.klass_ "danger" ] }
     , templated_ unselectbox { sel: [ DA.unset DA.klass $ pure unit ] }
