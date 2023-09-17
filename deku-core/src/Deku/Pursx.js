@@ -112,9 +112,7 @@ export const go = (
         const idToSearch = makeUnindexedId(token, pxKey);
         // in the case of a detached portal or an element that was recently removed,
         // elt will be null. in that case, we use selectors on the parent
-        const elt =
-          document.getElementById(idToSearch) ||
-          parent.querySelector(`#${idToSearch}`);
+        const elt = parent.querySelector(`#${idToSearch}`);
         elt.removeAttribute("id");
         if (isAttr) {
           localCache[pxKey] = elt;
