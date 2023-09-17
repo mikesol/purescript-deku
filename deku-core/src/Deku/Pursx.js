@@ -39,6 +39,84 @@ export const removeImpl = (parent, cache, topCache) => {
   topCache.v = {};
 };
 
+// with weakrefs
+const go3 = (parent, payload, topCache, cache, address) => {
+  const localCache = cache[address];
+  for (const [pxKey, pxInstr$] of Object.entries(payload)) {
+    if (typeof pxInstr$ === "number") {
+      ///
+      const tlElt = topCache[address].deref();
+      if (!tlElt) {
+        delete topCache[address];
+        delete cache[address];
+        return;
+      }
+      ///
+      const beforeMe = parent.childNodes[pxInstr$];
+      beforeMe
+        ? parent.insertBefore(tlElt, beforeMe)
+        : parent.appendChild(tlElt);
+    } else if (pxInstr$ === remove) {
+      ///
+      const tlElt = topCache[address].deref();
+      if (!tlElt) {
+        delete topCache[address];
+        delete cache[address];
+        return;
+      }
+      tlElt.remove();
+      ///
+      delete topCache[address];
+      delete cache[address];
+    } else if (typeof pxInstr$ === "string") {
+      ////
+      const elt = localCache[pxKey].deref();
+      if (!elt) {
+        delete topCache[address];
+        delete cache[address];
+        return;
+      }
+      ////
+      elt.textContent = pxInstr$;
+    } else {
+      ////
+      const elt = localCache[pxKey].deref();
+      if (!elt) {
+        delete topCache[address];
+        delete cache[address];
+        return;
+      }
+      ////
+      for (const pxInstr of pxInstr$) {
+        if (pxInstr instanceof String) {
+          elt.textContent = pxInstr;
+        } else if (pxInstr instanceof Number) {
+          const beforeMe = parent.childNodes[pxInstr];
+          beforeMe
+            ? parent.insertBefore(elt, beforeMe)
+            : parent.appendChild(elt);
+        } else if ("prop" === pxInstr.value.type) {
+          elt.setAttribute(pxInstr.key, pxInstr.value.value);
+        } else if ("cb" === pxInstr.value.type) {
+          const oldListener = elt["$$" + pxInstr.key];
+          if (oldListener) {
+            elt.removeEventListener(pxInstr.key, oldListener);
+          }
+          elt.addEventListener(pxInstr.key, (e) => pxInstr.value.value(e)());
+          elt["$$" + pxInstr.key] = pxInstr.value.value;
+        } else {
+          const oldListener = elt["$$" + pxInstr.key];
+          if (oldListener) {
+            elt.removeEventListener(pxInstr.key, oldListener);
+          } else {
+            elt.removeAttribute(pxInstr.key);
+          }
+        }
+      }
+    }
+  }
+};
+// no weakrefs
 const go2 = (parent, payload, tlElt, localCache, topCache, cache, address) => {
   for (const [pxKey, pxInstr$] of Object.entries(payload)) {
     if (typeof pxInstr$ === "number") {
@@ -98,15 +176,11 @@ export const go = (
   const cache = cache$$.v;
   const topCache = topCache$$.v;
   for (const { address, payload } of instrs) {
-    let tlElt;
-    let localCache;
-
     if (!topCache[address]) {
       const newNode = template.content.firstChild.cloneNode(true);
       parent.appendChild(newNode);
-      tlElt = newNode;
       topCache[address] = new WeakRef(newNode);
-      localCache = {};
+      const localCache = {};
       const eltCache = {};
       for (const [pxKey, isAttr] of Object.entries(attrObj)) {
         const idToSearch = makeUnindexedId(token, pxKey);
@@ -125,27 +199,9 @@ export const go = (
         }
       }
       cache[address] = eltCache;
+      go2(parent, payload, newNode, localCache, topCache, cache, address);
     } else {
-      const topDereffed = topCache[address].deref();
-      if (!topDereffed) {
-        for (const unsub of unsubs) {
-          unsub();
-          return;
-        }
-      }
-      tlElt = topDereffed;
-      localCache = {};
-      for (const key of Object.keys(cache[address])) {
-        const dereffed = cache[address][key].deref();
-        if (!dereffed) {
-          for (const unsub of unsubs) {
-            unsub();
-            return;
-          }
-        }
-        localCache[key] = dereffed;
-      }
+      go3(parent, payload, topCache, cache, address)
     }
-    go2(parent, payload, tlElt, localCache, topCache, cache, address);
   }
 };
