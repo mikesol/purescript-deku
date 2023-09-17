@@ -30,14 +30,14 @@ export const remove = Symbol();
 
 export const makeUnindexedId = (token, key) => `d3ku-${token}-${key}`;
 
-export const newElementCache = () => ({v:{}});
-export const newTopLevelCache = () => ({v:{}});
+export const newElementCache = () => ({ v: {} });
+export const newTopLevelCache = () => ({ v: {} });
 
-export const  removeImpl = (parent, cache, topCache) => {
-  parent.textContent = '';
+export const removeImpl = (parent, cache, topCache) => {
+  parent.textContent = "";
   cache.v = {};
   topCache.v = {};
-}
+};
 
 const go2 = (parent, payload, tlElt, localCache, topCache, cache, address) => {
   for (const [pxKey, pxInstr$] of Object.entries(payload)) {
@@ -137,7 +137,7 @@ export const go = (
       }
       tlElt = topDereffed;
       localCache = {};
-      for (const key of Object.keys(localCache)) {
+      for (const key of Object.keys(cache[address])) {
         const dereffed = cache[address][key].deref();
         if (!dereffed) {
           for (const unsub of unsubs) {
