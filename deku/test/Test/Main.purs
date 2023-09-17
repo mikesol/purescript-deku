@@ -33,7 +33,6 @@ import Effect.Random (random, randomInt)
 import FRP.Event (fold, keepLatest, mapAccum)
 import FRP.Poll (Poll, merge, mergeMap, mergePure, mergeMapPure, stToPoll)
 import Foreign.Object as Object
-import Record (union)
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
 import Web.HTML.Window (alert)
@@ -655,6 +654,7 @@ ocarinaExample = pursx @OcarinaPx
 
 -- begin stress test
 
+
 randomAdjectives :: Array String
 randomAdjectives =
   [ "pretty"
@@ -716,66 +716,10 @@ randomNouns =
   , "keyboard"
   ]
 
-makeRow
-  :: forall r
-   . { appendRows :: Poll (Array { address :: Int, payload :: String })
+makeRows
+  :: { appendRows :: Poll (Array { address :: Int, payload :: String })
      , swap :: Poll { address :: String, payload :: Int }
-     , rowbox :: Poll String
-     , selectbox :: Poll String
-     , rmv :: Poll String
-     , unselectbox :: Poll String
-     , selectMe :: Int -> Effect Unit
-     , removeMe :: ((Int -> Effect Unit) -> Effect Unit) -> Effect Unit
-     , arr :: Array { address :: Int, payload :: String }
-     | r
-     }
-  -> Nut
-makeRow
-  { selectMe
-  , arr
-  , rmv
-  , removeMe
-  , swap
-  , appendRows
-  , rowbox
-  , selectbox
-  , unselectbox
-  } = Deku.do
-  template @"tbody"
-    @"""<tr ~sel~ ><td class="col-md-1"> ~num~ </td><td class="col-md-4"><a ~select~ class="lbl">~label~ ~excl~</a></td><td class="col-md-1"><a ~rm~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
-    [ DA.id_ "tbody" ] empty $ merge
-    [ templated_ selectbox { sel: [ DA.klass_ "danger" ] }
-    , templated_ unselectbox { sel: [ DA.unset DA.klass $ pure unit ] }
-    , templated_ rmv { remove }
-    , templatedMap_ swap { sendTo: _ }
-    , mapAccum
-        ( \a b -> case Object.lookup b a of
-            Nothing -> Tuple (Object.insert b woah'woah'woah a)
-              { address: b, payload: woah'woah'woah }
-            Just e ->
-              let
-                updated = e <> woah'woah'woah
-              in
-                Tuple (Object.insert b updated a)
-                  { address: b, payload: updated }
-        )
-        Object.empty
-        rowbox `templatedMap_` (pure >>> { excl: _ })
-    , merge [ mergePure arr, keepLatest (map mergePure appendRows) ]
-        `templated show` \i s ->
-          { num: pure $ show (i + 1)
-          , select: [ DL.click_ \_ -> selectMe i ]
-          , label: pure $ s
-          , rm: [ DL.click_ \_ -> removeMe \f -> f i ]
-          }
-    ]
-  where
-  woah'woah'woah = " !!!"
-
-makeTable
-  :: { rowBuilder :: Poll RowBuilder
-     , appendRows :: Poll (Array { address :: Int, payload :: String })
-     , swap :: Poll { address :: String, payload :: Int }
+     , clearAll :: Poll Unit
      , pushToRow :: Int -> Effect Unit
      , rmv :: Poll String
      , rowbox :: Poll String
@@ -785,14 +729,40 @@ makeTable
      , removeMe :: ((Int -> Effect Unit) -> Effect Unit) -> Effect Unit
      }
   -> Nut
-makeTable i = do
-  D.table [ DA.klass_ "table table-hover table-striped test-data" ]
-    [ i.rowBuilder <#~> case _ of
-        AddRows arr -> makeRow $ i `union` { arr }
-        Clear -> makeRow $ i `union` { arr: [] }
+makeRows
+  { selectMe
+  , rmv
+  , clearAll
+  , removeMe
+  , swap
+  , appendRows
+  , rowbox
+  , selectbox
+  , unselectbox
+  } = Deku.do
+  template @"tbody" @"""<tr ~sel~ ><td class="col-md-1"> ~num~ </td><td class="col-md-4"><a ~select~ class="lbl">~label~ ~excl~</a></td><td class="col-md-1"><a ~rm~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
+    []
+    clearAll $ merge
+    [ templated_ selectbox { sel: [ DA.klass_ "danger" ] }
+    , templated_ unselectbox { sel: [ DA.unset DA.klass $ pure unit ] }
+    , templated_ rmv { remove }
+    , templatedMap_ swap { sendTo: _ }
+    , mapAccum
+        ( \a b -> case Object.lookup b a of
+            Nothing -> Tuple (Object.insert b woah'woah'woah a) { address: b, payload: woah'woah'woah }
+            Just e -> let updated = e <> woah'woah'woah in Tuple (Object.insert b updated a) { address: b, payload: updated }
+        )
+        Object.empty
+        rowbox `templatedMap_` (pure >>> { excl: _ })
+    , keepLatest (map mergePure appendRows) `templated show` \i s ->
+        { num: pure $ show (i + 1)
+        , select: [ DL.click_ \_ -> selectMe i ]
+        , label: pure $ s
+        , rm: [ DL.click_ \_ -> removeMe \f -> f i ]
+        }
     ]
-
-data RowBuilder = AddRows (Array { address :: Int, payload :: String }) | Clear
+  where
+  woah'woah'woah = " !!!"
 
 rando :: Array String -> Effect String
 rando a = do
@@ -807,7 +777,7 @@ genRows offset n = do
     color <- rando randomColors
     noun <- rando randomNouns
     let label = intercalate " " [ adjective, color, noun ]
-    liftST $ void $ STArray.push { address: (offset + i), payload: label } arr
+    liftST $ void $ STArray.push { address: offset + i, payload: label } arr
   liftST $ STArray.freeze arr
 
 data RowTransform = Start Int Int | Add Int Int | Swap | Delete Int | ClearRows
@@ -823,13 +793,8 @@ doRowTransform a Swap = fromMaybe a do
 doRowTransform a (Delete v) = Array.delete v a
 doRowTransform _ ClearRows = []
 
-rowBuilderToN :: Int -> RowBuilder -> Int
-rowBuilderToN b (AddRows arr) = Array.length arr + b
-rowBuilderToN _ Clear = 0
-
 stressTest :: Nut
 stressTest = Deku.do
-  setRowBuilder /\ rowBuilder <- DH.useState'
   setAppendRows /\ appendRows <- DH.useState'
   incrementRows /\ nRowsRaw <- DH.useState'
   nRows <- DH.useRant (fold add 0 nRowsRaw)
@@ -838,6 +803,7 @@ stressTest = Deku.do
   rowTransformer <- DH.useRant (fold doRowTransform [] rowTransformerRaw)
   rowTransformerRef <- DH.useRef [] rowTransformer
   setSwap /\ swap <- DH.useState'
+  setClearAll /\ clearAll <- DH.useState'
   pushToRemove /\ rmv <- DH.useState'
   pushToRow /\ rowbox <- DH.useState'
   pushToSelect /\ selectbox <- DH.useState'
@@ -857,14 +823,17 @@ stressTest = Deku.do
         pushToRemove $ Tuple (show i) unit
       setCurrentSelection Nothing
   let
-    adder b f n = do
+    adder b n = do
       r <- nRowsRef
       rows <- genRows r n
       setRowTransformer $ (if b then Start else Add) r (r + n)
-      incrementRows n *> f rows
-  let rowAdder = adder true (setRowBuilder <<< AddRows)
+      incrementRows n *> setAppendRows rows
+  let
+    clearMe = do
+      setClearAll unit
+      setRowTransformer ClearRows
   pursx @Body
-    { table: makeTable
+    { table: makeRows
         { selectMe
         , removeMe
         , rmv: map fst rmv
@@ -872,16 +841,16 @@ stressTest = Deku.do
         , unselectbox: map fst unselectbox
         , rowbox: map fst rowbox
         , swap
-        , rowBuilder
+        , clearAll
         , appendRows
         , pushToRow: \i -> pushToRow (Tuple (show i) unit)
         }
-    , c1000: DL.click_ \_ -> rowAdder 1000
-    , c10000: DL.click_ \_ -> rowAdder 10000
-    , append: DL.click_ \_ -> adder false setAppendRows 1000
-    , clear: DL.click_ \_ -> do
-        setRowTransformer ClearRows
-        setRowBuilder Clear
+    , c1000: DL.click_ \_ -> clearMe *> adder true 1000
+    , c10000: DL.click_ \_ -> clearMe *> adder true 10000
+    , append: DL.click_ \_ -> do
+        a <- rowTransformerRef
+        adder (Array.null a) 1000
+    , clear: DL.click_ \_ -> clearMe
     , swap: DL.click_ \_ -> do
         a <- rowTransformerRef
         let
@@ -890,16 +859,15 @@ stressTest = Deku.do
             r <- a !! 998
             in Tuple l r
         for_ swappies \(Tuple l r) -> do
-          setSwap $ { address: show r, payload: 1 }
-          setSwap $ { address: show l, payload: 998 }
+          setSwap { address: show r, payload: 1 }
+          setSwap { address: show l, payload: 998 }
         setRowTransformer Swap
     , update: DL.runOn DL.click $ rowTransformer <#>
         \arr -> do
           let
             go { i } = case arr !! i of
               Nothing -> pure $ Done unit
-              Just head -> pushToRow (Tuple (show head) unit) $> Loop
-                { i: i + 10 }
+              Just head -> pushToRow (Tuple (show head) unit) $> Loop { i: i + 10 }
           tailRecM go { i: 0 }
     }
 
@@ -963,11 +931,12 @@ type Body =
                 </div>
             </div>
         </div>
-        ~table~
+        <table class="table table-hover table-striped test-data">
+          ~table~
+        </table>
         <span class="preloadicon glyphicon glyphicon-remove" aria-hidden="true"></span>
     </div>
 </div>"""
-
 -- end stress test
 
 type OcarinaPx =
