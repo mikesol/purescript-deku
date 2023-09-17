@@ -35,7 +35,6 @@ export const newTopLevelCache = () => ({v:{}});
 
 export const  removeImpl = (parent, cache, topCache) => {
   parent.textContent = '';
-  parent.removeChild(parent.lastChild);
   cache.v = {};
   topCache.v = {};
 }
