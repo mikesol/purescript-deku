@@ -41,7 +41,7 @@ import Deku.Some (EffectOp, Some)
 import Deku.UnsafeDOM (cloneTemplate, insertBefore, toTemplate, unsafeCreateDocumentFragment, unsafeParentElement, unsafeParentNode)
 import Effect (Effect, foreachE)
 import Effect.Random (randomInt)
-import Effect.Uncurried (EffectFn2, EffectFn7, mkEffectFn1, mkEffectFn2, mkEffectFn7, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn7, runEffectFn8)
+import Effect.Uncurried (EffectFn2, EffectFn3, EffectFn7, EffectFn8, mkEffectFn1, mkEffectFn2, mkEffectFn7, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn7, runEffectFn8)
 import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
 import Foreign.Object as Object
@@ -62,7 +62,11 @@ import Web.DOM.ParentNode (QuerySelector(..), querySelector)
 import Web.HTML (HTMLTemplateElement)
 
 data CommentCache
+data ElementCache
+data ToplevelCache
 
+foreign import newElementCache :: Effect ElementCache
+foreign import newTopLevelCache :: Effect ToplevelCache
 foreign import makeUnindexedId :: Fn2 PxToken PxKey String
 foreign import commentFromCache :: String -> CommentCache -> Comment.Comment
 foreign import getComments
@@ -367,11 +371,13 @@ foreign import remove :: Remove
 
 foreign import go
   :: forall r
-   . EffectFn7 PxToken DekuElement HTMLTemplateElement (Object.Object Boolean)
-       (STObject.STObject Global (STObject.STObject Global Element))
-       (STObject.STObject Global Element)
+   . EffectFn8 PxToken DekuElement (STArray.STArray Global (Effect Unit)) HTMLTemplateElement (Object.Object Boolean)
+       ElementCache
+       ToplevelCache
        (Array { address :: String, payload :: Some r })
        Unit
+
+foreign import removeImpl :: EffectFn3 DekuElement ElementCache ToplevelCache Unit
 
 template
   :: forall (@tag :: Symbol) (@html :: Symbol) ctor r0 rl0 r
@@ -396,9 +402,10 @@ template
   => RL.RowToList rr rrrl
   => TagToCtor tag ctor
   => Array (Poll (Attribute ctor))
+  -> Poll Unit
   -> Poll { address :: String, payload :: Some rr }
   -> Nut
-template arrrrrrr p = ctor (Proxy :: _ tag) arrrrrrr [ nut ]
+template arrrrrrr rmpoll p = ctor (Proxy :: _ tag) arrrrrrr [ nut ]
   where
   nut = Nut $ mkEffectFn2 \(PSR psr) _ -> do
     let
@@ -431,11 +438,8 @@ template arrrrrrr p = ctor (Proxy :: _ tag) arrrrrrr [ nut ]
     -- build an element cache
     -- this will hold references to all of the elements that are hot,
     -- meaning that we can manipulate according to the template
-    elementCache
-      :: STObject.STObject Global (STObject.STObject Global Element) <-
-      liftST
-        STObject.new
-    topCache :: STObject.STObject Global Element <- liftST STObject.new
+    elementCache <- newElementCache
+    topCache <- newTopLevelCache
     -- alas, our parent is not lucky, for a template is a dyn after all
     for_ psr.beacon (_.lucky >>> notLucky)
     -- the standard unsubs
@@ -445,12 +449,12 @@ template arrrrrrr p = ctor (Proxy :: _ tag) arrrrrrr [ nut ]
       void $ liftST $ STArray.pushAll psr.unsubs unsubs
     -- now that we have our element cache, we do something with it
     case p of
-      OnlyPure x -> runEffectFn7 go (PxToken pxToken) psr.parent eltX syms
+      OnlyPure x -> runEffectFn8 go (PxToken pxToken) psr.parent unsubs eltX syms
         elementCache
         topCache
         x
       OnlyEvent _ -> runListener
-        ( mkEffectFn1 \a -> runEffectFn7 go (PxToken pxToken) psr.parent eltX
+        ( mkEffectFn1 \a -> runEffectFn8 go (PxToken pxToken) psr.parent unsubs eltX
             syms
             elementCache
             topCache
@@ -459,7 +463,7 @@ template arrrrrrr p = ctor (Proxy :: _ tag) arrrrrrr [ nut ]
         unsubs
         p
       OnlyPoll _ -> runListener
-        ( mkEffectFn1 \a -> runEffectFn7 go (PxToken pxToken) psr.parent eltX
+        ( mkEffectFn1 \a -> runEffectFn8 go (PxToken pxToken) psr.parent unsubs eltX
             syms
             elementCache
             topCache
@@ -468,11 +472,11 @@ template arrrrrrr p = ctor (Proxy :: _ tag) arrrrrrr [ nut ]
         unsubs
         p
       PureAndEvent x e -> do
-        runEffectFn7 go (PxToken pxToken) psr.parent eltX syms elementCache
+        runEffectFn8 go (PxToken pxToken) psr.parent unsubs eltX syms elementCache
           topCache
           x
         runListener
-          ( mkEffectFn1 \a -> runEffectFn7 go (PxToken pxToken) psr.parent eltX
+          ( mkEffectFn1 \a -> runEffectFn8 go (PxToken pxToken) psr.parent unsubs eltX
               syms
               elementCache
               topCache
@@ -481,11 +485,11 @@ template arrrrrrr p = ctor (Proxy :: _ tag) arrrrrrr [ nut ]
           unsubs
           (OnlyEvent e)
       PureAndPoll x o -> do
-        runEffectFn7 go (PxToken pxToken) psr.parent eltX syms elementCache
+        runEffectFn8 go (PxToken pxToken) psr.parent unsubs eltX syms elementCache
           topCache
           x
         runListener
-          ( mkEffectFn1 \a -> runEffectFn7 go (PxToken pxToken) psr.parent eltX
+          ( mkEffectFn1 \a -> runEffectFn8 go (PxToken pxToken) psr.parent unsubs eltX
               syms
               elementCache
               topCache
@@ -493,6 +497,8 @@ template arrrrrrr p = ctor (Proxy :: _ tag) arrrrrrr [ nut ]
           )
           unsubs
           (OnlyPoll o)
+    let removal = mkEffectFn1 \_ -> runEffectFn3 removeImpl psr.parent elementCache topCache
+    runListener removal unsubs rmpoll
     -- there's no lifecycle, so no need to bind it
     -- NoOutcome isn't quite right as of course there
     -- is an outcome, but we know it will never be used

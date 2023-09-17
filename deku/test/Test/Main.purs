@@ -278,7 +278,7 @@ templatesWork :: Nut
 templatesWork = Deku.do
   setSendTo /\ sendTo <- useState'
   template @"div" @"<div>hello ~world~<button ~atts~>x</button></div>"
-    [ DA.id_ "div0" ] $
+    [ DA.id_ "div0" ] empty $
     merge
       [ templatedMap_ sendTo { sendTo: _ }
       , [ "Helsinki", "Stockholm", "Copenhagen" ] # mergeMap \s ->
@@ -296,7 +296,7 @@ templatesWork2 :: Nut
 templatesWork2 = Deku.do
   template @"div"
     @"<div class=\"testing\">~test~ ~ing~</div>"
-    [ DA.id_ "div0" ] $ templated_ (pure "0")
+    [ DA.id_ "div0" ] empty $ templated_ (pure "0")
     { test: pure "hello"
     , ing: pure "world"
     }
@@ -743,7 +743,7 @@ makeRow
   } = Deku.do
   template @"tbody"
     @"""<tr ~sel~ ><td class="col-md-1"> ~num~ </td><td class="col-md-4"><a ~select~ class="lbl">~label~ ~excl~</a></td><td class="col-md-1"><a ~rm~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
-    [ DA.id_ "tbody" ] $ merge
+    [ DA.id_ "tbody" ] empty $ merge
     [ templated_ selectbox { sel: [ DA.klass_ "danger" ] }
     , templated_ unselectbox { sel: [ DA.unset DA.klass $ pure unit ] }
     , templated_ rmv { remove }

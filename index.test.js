@@ -1150,7 +1150,6 @@ describe("deku", () => {
         expect($("#div0").text()).toBe(
           "hello Helsinkixhello Stockholmxhello Copenhagenx"
         );
-        console.log('preclick');
         $(".Stockholm").trigger("click");
         expect($("#div0").text()).toBe(
           "hello Stockholmxhello Helsinkixhello Copenhagenx"

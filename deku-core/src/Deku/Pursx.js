@@ -30,78 +30,125 @@ export const remove = Symbol();
 
 export const makeUnindexedId = (token, key) => `d3ku-${token}-${key}`;
 
+export const newElementCache = () => ({v:{}});
+export const newTopLevelCache = () => ({v:{}});
+
+export const  removeImpl = (parent, cache, topCache) => {
+  parent.textContent = '';
+  parent.removeChild(parent.lastChild);
+  cache.v = {};
+  topCache.v = {};
+}
+
+const go2 = (parent, payload, tlElt, localCache, topCache, cache, address) => {
+  for (const [pxKey, pxInstr$] of Object.entries(payload)) {
+    if (typeof pxInstr$ === "number") {
+      const beforeMe = parent.childNodes[pxInstr$];
+      beforeMe
+        ? parent.insertBefore(tlElt, beforeMe)
+        : parent.appendChild(tlElt);
+    } else if (pxInstr$ === remove) {
+      tlElt.remove();
+      delete topCache[address];
+      delete cache[address];
+    } else if (typeof pxInstr$ === "string") {
+      const elt = localCache[pxKey];
+      elt.textContent = pxInstr$;
+    } else {
+      const elt = localCache[pxKey];
+      for (const pxInstr of pxInstr$) {
+        if (pxInstr instanceof String) {
+          elt.textContent = pxInstr;
+        } else if (pxInstr instanceof Number) {
+          const beforeMe = parent.childNodes[pxInstr];
+          beforeMe
+            ? parent.insertBefore(elt, beforeMe)
+            : parent.appendChild(elt);
+        } else if ("prop" === pxInstr.value.type) {
+          elt.setAttribute(pxInstr.key, pxInstr.value.value);
+        } else if ("cb" === pxInstr.value.type) {
+          const oldListener = elt["$$" + pxInstr.key];
+          if (oldListener) {
+            elt.removeEventListener(pxInstr.key, oldListener);
+          }
+          elt.addEventListener(pxInstr.key, (e) => pxInstr.value.value(e)());
+          elt["$$" + pxInstr.key] = pxInstr.value.value;
+        } else {
+          const oldListener = elt["$$" + pxInstr.key];
+          if (oldListener) {
+            elt.removeEventListener(pxInstr.key, oldListener);
+          } else {
+            elt.removeAttribute(pxInstr.key);
+          }
+        }
+      }
+    }
+  }
+};
+
 export const go = (
   token,
   parent,
+  unsubs,
   template,
   attrObj,
-  cache,
-  topCache,
+  cache$$,
+  topCache$$,
   instrs
 ) => {
+  const cache = cache$$.v;
+  const topCache = topCache$$.v;
   for (const { address, payload } of instrs) {
+    let tlElt;
+    let localCache;
+
     if (!topCache[address]) {
       const newNode = template.content.firstChild.cloneNode(true);
       parent.appendChild(newNode);
-      topCache[address] = newNode;
+      tlElt = newNode;
+      topCache[address] = new WeakRef(newNode);
+      localCache = {};
       const eltCache = {};
       for (const [pxKey, isAttr] of Object.entries(attrObj)) {
         const idToSearch = makeUnindexedId(token, pxKey);
         // in the case of a detached portal or an element that was recently removed,
         // elt will be null. in that case, we use selectors on the parent
-        const elt = document.getElementById(idToSearch) || parent.querySelector(`#${idToSearch}`);
+        const elt =
+          document.getElementById(idToSearch) ||
+          parent.querySelector(`#${idToSearch}`);
         elt.removeAttribute("id");
         if (isAttr) {
-          eltCache[pxKey] = elt;
+          localCache[pxKey] = elt;
+          eltCache[pxKey] = new WeakRef(elt);
         } else {
           const text = document.createTextNode("");
           elt.parentNode.replaceChild(text, elt);
-          eltCache[pxKey] = text;
+          localCache[pxKey] = text;
+          eltCache[pxKey] = new WeakRef(text);
         }
       }
       cache[address] = eltCache;
-    }
-    const tlElt = topCache[address];
-    for (const [pxKey, pxInstr$] of Object.entries(payload)) {
-      if (typeof pxInstr$ === "number") {
-        const beforeMe = parent.childNodes[pxInstr$];
-        beforeMe
-          ? parent.insertBefore(tlElt, beforeMe)
-          : parent.appendChild(tlElt);
-      } else if (pxInstr$ === remove) {
-        tlElt.remove();
-      } else if (typeof pxInstr$ === "string") {
-        const elt = cache[address][pxKey];
-        elt.textContent = pxInstr$;
-      } else {
-        const elt = cache[address][pxKey];
-        for (const pxInstr of pxInstr$) {
-          if (pxInstr instanceof String) {
-            elt.textContent = pxInstr;
-          } else if (pxInstr instanceof Number) {
-            const beforeMe = parent.childNodes[pxInstr];
-            beforeMe
-              ? parent.insertBefore(elt, beforeMe)
-              : parent.appendChild(elt);
-          } else if ("prop" === pxInstr.value.type) {
-            elt.setAttribute(pxInstr.key, pxInstr.value.value);
-          } else if ("cb" === pxInstr.value.type) {
-            const oldListener = elt["$$" + pxInstr.key];
-            if (oldListener) {
-              elt.removeEventListener(pxInstr.key, oldListener);
-            }
-            elt.addEventListener(pxInstr.key, (e) => pxInstr.value.value(e)());
-            elt["$$" + pxInstr.key] = pxInstr.value.value;
-          } else {
-            const oldListener = elt["$$" + pxInstr.key];
-            if (oldListener) {
-              elt.removeEventListener(pxInstr.key, oldListener);
-            } else {
-              elt.removeAttribute(pxInstr.key);
-            }
-          }
+    } else {
+      const topDereffed = topCache[address].deref();
+      if (!topDereffed) {
+        for (const unsub of unsubs) {
+          unsub();
+          return;
         }
       }
+      tlElt = topDereffed;
+      localCache = {};
+      for (const key of Object.keys(localCache)) {
+        const dereffed = cache[address][key].deref();
+        if (!dereffed) {
+          for (const unsub of unsubs) {
+            unsub();
+            return;
+          }
+        }
+        localCache[key] = dereffed;
+      }
     }
+    go2(parent, payload, tlElt, localCache, topCache, cache, address);
   }
 };
