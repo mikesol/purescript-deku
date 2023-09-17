@@ -859,8 +859,8 @@ stressTest = Deku.do
             r <- a !! 998
             in Tuple l r
         for_ swappies \(Tuple l r) -> do
-          setSwap { address: show r, payload: 1 }
           setSwap { address: show l, payload: 998 }
+          setSwap { address: show r, payload: 1 }
         setRowTransformer Swap
     , update: DL.runOn DL.click $ rowTransformer <#>
         \arr -> do
