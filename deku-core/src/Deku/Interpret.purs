@@ -527,10 +527,10 @@ removeForDynEffect = mkEffectFn3 \fromPortal l ee -> do
       case fc, lc of
         Just xx, Just yy -> do
           runEffectFn2 setTextContent "" pn
-          runEffectFn2 appendChild pn xx
-          runEffectFn2 appendChild pn (Comment.toNode $ fromDekuBeacon l)
-          runEffectFn2 appendChild pn (Comment.toNode $ fromDekuBeacon ee)
-          runEffectFn2 appendChild pn yy
+          runEffectFn2 appendChild xx pn
+          runEffectFn2 appendChild (Comment.toNode $ fromDekuBeacon l) pn
+          runEffectFn2 appendChild (Comment.toNode $ fromDekuBeacon ee) pn
+          runEffectFn2 appendChild yy pn
         _, _ -> error "Programming error: dyn underfull"
   let
     b = do
