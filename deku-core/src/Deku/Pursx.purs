@@ -37,7 +37,7 @@ import Deku.PursxParser as PxP
 import Deku.PxTypes (PxAtt, PxNut)
 import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some)
 import Deku.Some as Some
-import Deku.UnsafeDOM (cloneTemplate, toTemplate, unsafeFirstChild, unsafeParentNode)
+import Deku.UnsafeDOM (cloneElement, cloneTemplate, toTemplate, unsafeFirstChildAsElement, unsafeParentNode)
 import Effect (foreachE)
 import Effect.Exception (error, throwException)
 import Effect.Ref (new)
@@ -334,11 +334,14 @@ template p = Nut $ mkEffectFn2
     isStringCache :: STObject.STObject Global MElement <- liftST
       STObject.new
     eltX <- runEffectFn1 toTemplate html
+    ctnt <- HtmlTemplateElement.content eltX
+    eltBase <- runEffectFn1 unsafeFirstChildAsElement ((unsafeCoerce :: Node.Node -> Element.Element)  $ DocumentFragment.toNode ctnt)
     -- we set up a dummy cache that we 
     -- just use so that we can have the same walking al
     let emptiness = emptyMe (Proxy :: _ rl)
     -- we know we'll need this walk many times, so
     -- we take it out of the loop
+    eltusMaximus <- runEffectFn1 cloneElement eltBase
     let
       walker =
         PW.walk
@@ -351,8 +354,6 @@ template p = Nut $ mkEffectFn2
       -- this bloc splits all of the dynamic text nodes into
       -- separate text nodes, which makes recursing over them faster as
       -- we only need to do previousNode instead of splitText
-      ctnt <- HtmlTemplateElement.content eltX
-      elt <- runEffectFn1 unsafeFirstChild (DocumentFragment.toNode ctnt)
       runEffectFn5
         walker
         ( InstructionDelegate
@@ -373,7 +374,7 @@ template p = Nut $ mkEffectFn2
         scrunch
         emptiness
         (DOMInterpret di)
-        (unsafeCoerce (mEltify elt))
+        (unsafeCoerce (mEltify $ Element.toNode eltusMaximus))
     let
       frozenIsStringcache =
         ( unsafeCoerce
@@ -487,7 +488,7 @@ template p = Nut $ mkEffectFn2
           -- this is the biggie
           Nothing -> do
             -- clone the template
-            elt <- runEffectFn1 cloneTemplate eltX
+            elt <- runEffectFn1 cloneElement eltBase
             -- wire it up for the walking algo
             let unsafeMElement = mEltify (Element.toNode elt)
             -- insert our fledgling element into the dyn
