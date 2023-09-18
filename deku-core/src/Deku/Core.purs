@@ -292,7 +292,7 @@ newtype DekuParent = DekuParent DekuElement
 type MakeElement =
   EffectFn2 (Maybe Namespace) Tag DekuElement
 
-type SendToPosForDyn = EffectFn4 Int DekuBeacon DekuBeacon DekuBeacon
+type SendToPosForDyn = EffectFn5 Int DekuBeacon DekuBeacon DekuBeacon DekuBeacon
   Unit
 
 type SendToPosForElement = EffectFn5 (Ref Boolean) Int DekuElement DekuBeacon
@@ -303,7 +303,7 @@ type SendToPosForText = EffectFn5 (Ref Boolean) Int DekuText DekuBeacon
   DekuBeacon
   Unit
 
-type RemoveForDyn = EffectFn2 Boolean DekuBeacon Unit
+type RemoveForDyn = EffectFn3 Boolean DekuBeacon DekuBeacon Unit
 type RemoveForElement = EffectFn2 Boolean DekuElement Unit
 type RemoveForText = EffectFn2 Boolean DekuText Unit
 
@@ -876,14 +876,15 @@ actOnLifecycleForDyn = mkEffectFn8
           toMaybe startAnchorX,
           toMaybe endAnchorX
           of
-          Just dbStart, Just _, Just startAnchor, Just endAnchor ->
+          Just dbStart, Just dbEnd, Just startAnchor, Just endAnchor ->
             case x of
-              DekuSendToPos i -> runEffectFn4 sendToPosForDyn i dbStart
+              DekuSendToPos i -> runEffectFn5 sendToPosForDyn i dbStart dbEnd
                 startAnchor
                 endAnchor
-              DekuRemove -> runEffectFn2 removeForDyn
+              DekuRemove -> runEffectFn3 removeForDyn
                 fromPortal
                 dbStart
+                dbEnd
           _, _, _, _ -> do
             -- only need to run on head as head is reference
             thunker associations

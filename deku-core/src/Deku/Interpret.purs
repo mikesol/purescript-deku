@@ -26,7 +26,7 @@ import Data.String (toUpper)
 import Data.String as String
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
-import Deku.Core (Cb(..), Key(..), Value(..), DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), PursXable(..), Tag(..), Verb(..), eltAttribution, handleAtts, toDekuElement, fromDekuElement, toDekuBeacon, fromDekuBeacon, toDekuText, fromDekuText)
+import Deku.Core (Cb(..), DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Key(..), Nut(..), PSR(..), PursXable(..), Tag(..), Value(..), Verb(..), eltAttribution, fromDekuBeacon, fromDekuElement, fromDekuText, handleAtts, toDekuBeacon, toDekuElement, toDekuText)
 import Deku.Core as Core
 import Deku.JSMap as JSMap
 import Deku.JSWeakRef (WeakRef)
@@ -448,7 +448,9 @@ setDelegateCbEffect = mkEffectFn3 \elt' (Key k) mp ->
             Nothing -> pure unit
     runEffectFn4 addEventListener eventType nl false eventTarget
 
-foreign import getPreviousCb :: EffectFn2 String DekuElement (Nullable EventListener)
+foreign import getPreviousCb
+  :: EffectFn2 String DekuElement (Nullable EventListener)
+
 foreign import deletePreviousCb :: EffectFn2 String DekuElement Unit
 foreign import setPreviousCb :: EffectFn3 String EventListener DekuElement Unit
 
@@ -460,7 +462,8 @@ setCbEffect = mkEffectFn3 \elt' (Key k) (Cb v) -> do
     l <- runEffectFn2 getPreviousCb k elt'
     let eventType = EventType k
     let eventTarget = toEventTarget (fromDekuElement elt')
-    for_ (toMaybe l) \toRemove -> runEffectFn4 removeEventListener eventType toRemove
+    for_ (toMaybe l) \toRemove -> runEffectFn4 removeEventListener eventType
+      toRemove
       false
       eventTarget
     nl <- runEffectFn1 eventListener $ mkEffectFn1 v
@@ -486,8 +489,8 @@ setTextEffect = mkEffectFn2 \txt' str -> do
 -- for the send pos family of functions
 -- we remove first
 sendToPosForDynEffect :: Core.SendToPosForDyn
-sendToPosForDynEffect = mkEffectFn4 \i b st ed -> do
-  runEffectFn2 removeForDynEffect true b
+sendToPosForDynEffect = mkEffectFn5 \i b e st ed -> do
+  runEffectFn3 removeForDynEffect true b e
   runEffectFn4 attributeDynParentForBeaconFullRangeEffect b st ed (Just i)
 
 sendToPosForElementEffect :: Core.SendToPosForElement
@@ -503,10 +506,30 @@ sendToPosForTextEffect = mkEffectFn5 \lucky i b st ed -> do
 
 -- for now ignore isPortal elements
 removeForDynEffect :: Core.RemoveForDyn
-removeForDynEffect = mkEffectFn2 \_ l -> do
-  -- todo: is a dyn always an acceptable dummy parent element?
-  e <- runEffectFn2 makeElementEffect Nothing (Tag "div")
-  runEffectFn2 attributeBeaconFullRangeParentEffect l (DekuParent e)
+removeForDynEffect = mkEffectFn3 \fromPortal l ee -> do
+  let
+    cond =
+      if fromPortal then pure false
+      else do
+        cn <- childNodes (Comment.toNode $ fromDekuBeacon l)
+        nl <- NodeList.toArray cn
+        case nl !! 0, nl !! (Array.length nl - 1) of
+          Just a, Just b -> pure
+            ( unsafeRefEq a (Comment.toNode $ fromDekuBeacon l) && unsafeRefEq b
+                (Comment.toNode $ fromDekuBeacon ee)
+            )
+          _, _ -> pure false
+  let
+    a = do
+      pn <- runEffectFn1 unsafeParentNode (Comment.toNode $ fromDekuBeacon l)
+      runEffectFn2 setTextContent "" pn
+      runEffectFn2 appendChild pn (Comment.toNode $ fromDekuBeacon l)
+      runEffectFn2 appendChild pn (Comment.toNode $ fromDekuBeacon ee)
+  let
+    b = do
+      e <- runEffectFn2 makeElementEffect Nothing (Tag "div")
+      runEffectFn2 attributeBeaconFullRangeParentEffect l (DekuParent e)
+  ifM cond a b
 
 removeForElementEffect :: Core.RemoveForElement
 removeForElementEffect = mkEffectFn2 \_ e -> do
