@@ -156,7 +156,10 @@ unset
   => f e
   -> f (Attribute r)
 unset trigger = trigger $> unsafeAttribute (unset'
-  (reflectSymbol (Proxy :: Proxy s)))
+  (fixMe $ reflectSymbol (Proxy :: Proxy s)))
+  where
+  fixMe "klass" = "class"
+  fixMe x = x
 
 -- | Sets a listener that injects a primitive DOM element into a closed scope immediately after element creation.
 -- | Importantly, this does _not happen_ on the same tick as the element creation but rather during the next DOM tick.
