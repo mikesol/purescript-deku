@@ -95,6 +95,7 @@ module Deku.Core
   , useHotRant
   , useMailboxed
   , useRant
+  , useSplit
   , useRant'
   , useRef
   , useRefST
@@ -577,6 +578,18 @@ useRant :: forall a. Poll a -> Hook (Poll a)
 useRant e f = Nut $ mkEffectFn2 \psr di -> do
   { poll, unsubscribe } <- liftST $ Poll.rant e
   runEffectFn2 (coerce $ f poll) (withUnsub (liftST unsubscribe) psr) di
+
+useSplit :: forall a. Poll a -> Hook { first :: Poll a, second :: Poll a }
+useSplit e f = Nut $ mkEffectFn2 \psr di -> do
+  { poll, unsubscribe } <- liftST $ Poll.rant e
+  p0 <- liftST $ Poll.create
+  p1 <- liftST $ Poll.create
+  e0 <- liftST $ Event.create
+  o <- Event.subscribe (Poll.sample poll e0.event) \i -> do
+    p0.push i
+    p1.push i
+  e0.push identity
+  runEffectFn2 (coerce $ f { first: p0.poll, second: p1.poll }) (withUnsub (o *> liftST unsubscribe) psr) di
 
 useRant'
   :: forall t a

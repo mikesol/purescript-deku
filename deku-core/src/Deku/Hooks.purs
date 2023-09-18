@@ -27,7 +27,7 @@ import Control.Alt ((<|>))
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
-import Deku.Core (Nut(..), useDyn, dynOptions, useDeflect, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed, useRant, useRant', useStateTagged', useRef, useRefST, useState, useState')
+import Deku.Core (Nut(..), useSplit, useDyn, dynOptions, useDeflect, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed, useRant, useRant', useStateTagged', useRef, useRefST, useState, useState')
 import Deku.Do as Deku
 import FRP.Event (filterMap, mapAccum)
 import FRP.Poll (Poll)
@@ -48,12 +48,12 @@ guardWith m f = m <#~> case _ of
 -- | approach, see the `useDyn` hook.
 switcher :: forall a. (a -> Nut) -> Poll a -> Nut
 switcher f poll = Deku.do
-  ctr <- useRant (counter poll)
+  { first: ctr1, second: ctr2 } <- useSplit (counter poll)
   dctr <- useDeflect (counter poll)
-  { value } <- useDynAtBeginningWith (ctr <|> dctr) $ dynOptions
+  { value } <- useDynAtBeginningWith (ctr2 <|> dctr) $ dynOptions
     { remove = \(oldV /\ _) -> filterMap
         (\(newV /\ _) -> if newV == oldV + 1 then Just unit else Nothing)
-        ctr
+        ctr1
     }
   f (snd value)
   where
