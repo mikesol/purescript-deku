@@ -47,7 +47,7 @@ import Web.DOM.Comment as Comment
 import Web.DOM.Document (createComment, createTextNode)
 import Web.DOM.Element (getAttribute, removeAttribute, setAttribute, toChildNode, toEventTarget)
 import Web.DOM.Element as Element
-import Web.DOM.Node (childNodes, nextSibling, nodeTypeIndex, replaceChild, textContent)
+import Web.DOM.Node (childNodes, firstChild, lastChild, nextSibling, nodeTypeIndex, replaceChild, textContent)
 import Web.DOM.NodeList as NodeList
 import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.DOM.Text as Text
@@ -514,7 +514,7 @@ removeForDynEffect = mkEffectFn3 \fromPortal l ee -> do
       else do
         cn <- childNodes pn
         nl <- NodeList.toArray cn
-        case nl !! 0, nl !! (Array.length nl - 1) of
+        case nl !! 1, nl !! (Array.length nl - 2) of
           Just a, Just b -> pure
             ( unsafeRefEq a (Comment.toNode $ fromDekuBeacon l) && unsafeRefEq b
                 (Comment.toNode $ fromDekuBeacon ee)
@@ -522,9 +522,16 @@ removeForDynEffect = mkEffectFn3 \fromPortal l ee -> do
           _, _ -> pure false
   let
     a = do
-      runEffectFn2 setTextContent "" pn
-      runEffectFn2 appendChild pn (Comment.toNode $ fromDekuBeacon l)
-      runEffectFn2 appendChild pn (Comment.toNode $ fromDekuBeacon ee)
+      fc <- firstChild pn
+      lc <- lastChild pn
+      case fc, lc of
+        Just xx, Just yy -> do
+          runEffectFn2 setTextContent "" pn
+          runEffectFn2 appendChild pn xx
+          runEffectFn2 appendChild pn (Comment.toNode $ fromDekuBeacon l)
+          runEffectFn2 appendChild pn (Comment.toNode $ fromDekuBeacon ee)
+          runEffectFn2 appendChild pn yy
+        _, _ -> error "Programming error: dyn underfull"
   let
     b = do
       e <- runEffectFn2 makeElementEffect Nothing (Tag "div")
