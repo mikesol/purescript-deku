@@ -507,11 +507,12 @@ sendToPosForTextEffect = mkEffectFn5 \lucky i b st ed -> do
 -- for now ignore isPortal elements
 removeForDynEffect :: Core.RemoveForDyn
 removeForDynEffect = mkEffectFn3 \fromPortal l ee -> do
+  pn <- runEffectFn1 unsafeParentNode (Comment.toNode $ fromDekuBeacon l)
   let
     cond =
       if fromPortal then pure false
       else do
-        cn <- childNodes (Comment.toNode $ fromDekuBeacon l)
+        cn <- childNodes pn
         nl <- NodeList.toArray cn
         case nl !! 0, nl !! (Array.length nl - 1) of
           Just a, Just b -> pure
@@ -521,7 +522,6 @@ removeForDynEffect = mkEffectFn3 \fromPortal l ee -> do
           _, _ -> pure false
   let
     a = do
-      pn <- runEffectFn1 unsafeParentNode (Comment.toNode $ fromDekuBeacon l)
       runEffectFn2 setTextContent "" pn
       runEffectFn2 appendChild pn (Comment.toNode $ fromDekuBeacon l)
       runEffectFn2 appendChild pn (Comment.toNode $ fromDekuBeacon ee)
