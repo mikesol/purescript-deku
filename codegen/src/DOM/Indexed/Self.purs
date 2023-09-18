@@ -49,7 +49,7 @@ generate es =
             $ typeConstrained [ typeApp ( typeCtor "Functor.Functor" ) [ typeVar "f"  ] ]
             $ typeArrow [ typeFunked "f" $ constructArg rawSelf ]
             $ typeFunked "f" $ typeAttributed $ typeVar "r"
-        , declHandler "self" selfKey $ handler $ rawSelf
+        , declHandler "self" $ handler selfKey $ rawSelf
 
         , documentDecl [ "Shorthand version of `self`" ]
             $ declSignature "self_"
@@ -70,7 +70,7 @@ generate es =
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ typeFunked "f" $ selfHandler $ typeVar "e" ]
             $ typeFunked "f" $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
-        , declHandler "selfT" selfKey $ handler rawSelf
+        , declHandler "selfT" $ handler selfKey rawSelf
 
         , documentDecl [ "Shorthand version of `selfT`" ]
             $ declSignature "selfT_"

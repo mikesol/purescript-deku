@@ -3,7 +3,116 @@
 -- | In general, this module is not intended to be used directly, with the
 -- | exception of the `Nut` type signature and, when needed, the `Nut`
 -- | type signature (for which `Nut` is an alias).
-module Deku.Core where
+module Deku.Core
+  ( AssociateUnsubsToBeacon
+  , AssociateUnsubsToElement
+  , AssociateUnsubsToText
+  , Attribute
+  , Attribute'
+  , AttributeBeaconFullRangeParent
+  , AttributeBeaconParent
+  , AttributeDynParentForBeaconFullRange
+  , AttributeDynParentForBeacons
+  , AttributeDynParentForElement
+  , AttributeDynParentForText
+  , AttributeElementParent
+  , AttributeTextParent
+  , Cb(..)
+  , CleanUpBeacon
+  , CleanUpElement
+  , CleanUpText
+  , DOMInterpret(..)
+  , DekuBeacon(..)
+  , DekuChild(..)
+  , DekuDynamic(..)
+  , DekuElement(..)
+  , DekuOutcome(..)
+  , DekuParent(..)
+  , DekuText(..)
+  , DynOptions
+  , Hook
+  , Hook'
+  , Html(..)
+  , Key(..)
+  , MakeBeacon
+  , MakeElement
+  , MakePursx
+  , MakeText
+  , Namespace(..)
+  , Nut(..)
+  , PSR(..)
+  , PursXable(..)
+  , RemoveForDyn
+  , RemoveForElement
+  , RemoveForText
+  , SendToPosForDyn
+  , SendToPosForElement
+  , SendToPosForText
+  , SetCb
+  , SetDelegateCb
+  , SetProp
+  , SetText
+  , Tag(..)
+  , UnsetAttribute
+  , Value(..)
+  , Verb(..)
+  , actOnLifecycleForDyn
+  , actOnLifecycleForElement
+  , actOnLifecycleForText
+  , beaconAttribution
+  , pursxToElement
+  , cb
+  , cb'
+  , class PursxToElement
+  , dynOptions
+  , elementify
+  , eltAttribution
+  , eventOrBust
+  , fixed
+  , getLifecycle
+  , handleAtts
+  , notLucky
+  , pollOrBust
+  , portal
+  , prop'
+  , unset'
+  , pureOrBust
+  , runListener
+  , text
+  , textAttribution
+  , text_
+  , thunker
+  , unsafeAttribute
+  , unsafeUnAttribute
+  , useDeflect
+  , useDyn
+  , useDynAtBeginning
+  , useDynAtBeginningWith
+  , useDynAtEnd
+  , useDynAtEndWith
+  , useDynWith
+  , useHot
+  , useHotRant
+  , useMailboxed
+  , useRant
+  , useRant'
+  , useRef
+  , useRefST
+  , useState
+  , useState'
+  , useStateTagged'
+  , withUnsub
+  , xdata
+  ----
+  , toDekuElement 
+  ,fromDekuElement 
+  , toDekuBeacon
+  , fromDekuBeacon 
+  , toDekuText 
+  , fromDekuText
+  )
+  where
+
 
 import Prelude
 
@@ -25,7 +134,6 @@ import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute (Attribute, Attribute', AttributeValue(..), Cb, Key(..), Value(..), unsafeUnAttribute)
 import Deku.Do as Deku
 import Deku.JSMap as JSMap
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
@@ -38,15 +146,107 @@ import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
 import FRP.Poll.Unoptimized as UPoll
 import Foreign.Object as Object
-import Foreign.Object.ST as STObject
 import Prim.Row as Row
 import Prim.RowList as RL
 import Record (get)
 import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
+import Unsafe.Coerce (unsafeCoerce)
+import Web.DOM (Comment, Element, Text)
 import Web.DOM as Element
-import Web.Event.EventTarget (EventListener)
+import Web.Event.Internal.Types (Event)
 
+
+------
+------
+toDekuElement :: Element -> DekuElement
+toDekuElement = unsafeCoerce
+
+fromDekuElement :: DekuElement -> Element
+fromDekuElement = unsafeCoerce
+
+toDekuBeacon :: Comment -> DekuBeacon
+toDekuBeacon = unsafeCoerce
+
+fromDekuBeacon :: DekuBeacon -> Comment
+fromDekuBeacon = unsafeCoerce
+
+toDekuText :: Text -> DekuText
+toDekuText = unsafeCoerce
+
+fromDekuText :: DekuText -> Text
+fromDekuText = unsafeCoerce
+------
+------
+------
+------
+------
+------
+------
+
+-- | A callback function that can be used as a value for a listener.
+newtype Key = Key String
+newtype Value = Value String
+newtype Cb = Cb (Event -> Effect Boolean)
+
+derive instance newtypeCb :: Newtype Cb _
+instance eqCb :: Eq Cb where
+  eq _ _ = false
+
+instance ordCb :: Ord Cb where
+  compare _ _ = LT
+
+instance showCb :: Show Cb where
+  show _ = "{callback}"
+
+-- | Construct a `cb`. This is an alias for the newtype constructor.
+cb :: (Event -> Effect Unit) -> Cb
+cb = Cb <<< ((map <<< map) (const true))
+
+prop' :: String -> String -> Attribute'
+prop' k v = mkEffectFn2 \e (DOMInterpret { setProp }) ->
+  runEffectFn3 setProp (toDekuElement e) (Key k) (Value v)
+
+cb' :: String -> Cb -> Attribute'
+cb' k v = mkEffectFn2 \e (DOMInterpret { setCb }) ->
+  runEffectFn3 setCb (toDekuElement e) (Key k) v
+
+unset' :: String -> Attribute'
+unset' k =  mkEffectFn2 \e (DOMInterpret { unsetAttribute }) ->
+  runEffectFn2 unsetAttribute (toDekuElement e) (Key k)
+
+type Attribute' = EffectFn2 Element DOMInterpret Unit
+
+-- | Low level representation of key-value pairs for attributes and listeners.
+-- | In general, this type is for internal use only. In practice, you'll use
+-- | the `:=` family of operators and helpers like `style` and `klass` instead.
+newtype Attribute :: forall k. k -> Type
+newtype Attribute i = Attribute Attribute'
+
+-- | For internal use only, exported to be used by other modules. Ignore this.
+unsafeUnAttribute
+  :: forall e. Attribute e -> EffectFn2 Element DOMInterpret Unit
+unsafeUnAttribute = coerce
+
+-- | For internal use only, exported to be used by other modules. Ignore this.
+unsafeAttribute
+  :: forall e. EffectFn2 Element DOMInterpret Unit -> Attribute e
+unsafeAttribute = Attribute
+
+-- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
+xdata :: forall e. String -> String -> Attribute e
+xdata k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setProp }) ->
+  runEffectFn3 setProp (toDekuElement e) (Key $ "data-" <> k) (Value v)
+
+------
+------
+------
+------
+------
+------
+------
+------
+------
 newtype PSR = PSR
   { parent :: DekuElement
   , fromPortal :: Boolean
@@ -163,16 +363,14 @@ type SetText = EffectFn2 DekuText String Unit
 
 -- | Type used by Deku backends to unset an attribute. For internal use only unless you're writing a custom backend.
 type UnsetAttribute =
-  EffectFn4 DekuElement Key (Effect (Maybe EventListener)) (Effect Unit) Unit
+  EffectFn2 DekuElement Key Unit
 
 -- | Type used by Deku backends to set an attribute. For internal use only unless you're writing a custom backend.
 type SetProp = EffectFn3 DekuElement Key Value Unit
 
 -- | Type used by Deku backends to set a listener. For internal use only unless you're writing a custom backend.
 type SetCb =
-  EffectFn5 DekuElement Key Cb (Effect (Maybe EventListener))
-    (EventListener -> Effect Unit)
-    Unit
+  EffectFn3 DekuElement Key Cb Unit
 
 type SetDelegateCb =
   EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb))
@@ -752,48 +950,39 @@ eltAttribution = mkEffectFn3
 
 handleAtts
   :: DOMInterpret
-  -> STObject.STObject Global EventListener
   -> DekuElement
   -> STArray.STArray Global (Effect Unit)
   -> Array (Poll Attribute')
   -> Effect Unit
-handleAtts (DOMInterpret { setProp, setCb, unsetAttribute }) obj elt unsubs atts =
+handleAtts di elt unsubs atts =
   do
     let
-      oh'hi'attr eeeee = mkEffectFn1 \att -> do
-        let { key, value } = att
-        case value of
-          Prop' v -> runEffectFn3 setProp eeeee (Key key) (Value v)
-          Cb' cb -> runEffectFn5 setCb eeeee (Key key) cb
-            (liftST $ STObject.peek key obj)
-            (void <<< liftST <<< flip (STObject.poke key) obj)
-          Unset' -> runEffectFn4 unsetAttribute eeeee (Key key)
-            (liftST $ STObject.peek key obj)
-            (liftST $ void $ STObject.delete key obj)
       handleAttrEvent y = do
         wr <- runEffectFn1 weakRef elt
         uu <- subscribe y \x -> do
           drf <- runEffectFn1 deref wr
           case toMaybe drf of
-            Just yy -> runEffectFn1 (oh'hi'attr yy) x
+            Just yy -> runEffectFn2 x (fromDekuElement yy) di
             Nothing -> thunker unsubs
         void $ liftST $ STArray.push uu unsubs
       handleAttrPoll y = do
         pump <- liftST $ Event.create
         handleAttrEvent (UPoll.sample y pump.event)
         pump.push identity
-    let ohi = oh'hi'attr elt
     let
       go ii = case ii of
-        OnlyPure x -> runEffectFn2 fastForeachE x ohi
+        OnlyPure x -> foreachE x \x' -> do
+          runEffectFn2 x' (fromDekuElement elt) di
         OnlyEvent y -> handleAttrEvent y
         OnlyPoll y -> handleAttrPoll y
         PureAndEvent x y -> do
-          go (OnlyPure x)
-          go (OnlyEvent y)
+          foreachE x \x' -> do
+            runEffectFn2 x' (fromDekuElement elt) di
+          handleAttrEvent y
         PureAndPoll x y -> do
-          go (OnlyPure x)
-          go (OnlyPoll y)
+          foreachE x \x' -> do
+            runEffectFn2 x' (fromDekuElement elt) di
+          handleAttrPoll y
 
     foreachE atts \ii -> go ii
 
@@ -817,8 +1006,7 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
       when (not (null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
       runEffectFn3 eltAttribution ps di elt
-      obj <- liftST $ STObject.new
-      handleAtts di obj elt unsubs (map (map unsafeUnAttribute) atts)
+      handleAtts di elt unsubs (map (map unsafeUnAttribute) atts)
       let
         oh'hi = mkEffectFn1 \(Nut nut) -> do
           void $ runEffectFn2 nut

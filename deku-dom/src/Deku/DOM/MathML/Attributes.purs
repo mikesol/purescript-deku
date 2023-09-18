@@ -62,8 +62,7 @@ encoding
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (encoding :: String | r))
-encoding = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "encoding", value: _ } <<< Deku.Attribute.prop')
+encoding = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "encoding")
 
 encoding_
   :: forall r f
@@ -77,8 +76,7 @@ selection
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (selection :: String | r))
-selection = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "selection", value: _ } <<< Deku.Attribute.prop')
+selection = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "selection")
 
 selection_
   :: forall r f
@@ -92,8 +90,7 @@ actiontype
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (actiontype :: String | r))
-actiontype = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "actiontype", value: _ } <<< Deku.Attribute.prop')
+actiontype = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "actiontype")
 
 actiontype_
   :: forall r f
@@ -107,8 +104,7 @@ accentunder
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (accentunder :: String | r))
-accentunder = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "accentunder", value: _ } <<< Deku.Attribute.prop')
+accentunder = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "accentunder")
 
 accentunder_
   :: forall r f
@@ -122,8 +118,7 @@ accent
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (accent :: String | r))
-accent = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "accent", value: _ } <<< Deku.Attribute.prop')
+accent = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "accent")
 
 accent_
   :: forall r f
@@ -137,8 +132,7 @@ voffset
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (voffset :: String | r))
-voffset = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "voffset", value: _ } <<< Deku.Attribute.prop')
+voffset = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "voffset")
 
 voffset_
   :: forall r f
@@ -152,8 +146,7 @@ lspace
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (lspace :: String | r))
-lspace = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "lspace", value: _ } <<< Deku.Attribute.prop')
+lspace = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "lspace")
 
 lspace_
   :: forall r f
@@ -164,8 +157,7 @@ lspace_ = lspace <<< Applicative.pure
 
 depth
   :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (depth :: String | r))
-depth = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "depth", value: _ } <<< Deku.Attribute.prop')
+depth = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "depth")
 
 depth_
   :: forall r f
@@ -179,8 +171,7 @@ height
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (height :: String | r))
-height = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "height", value: _ } <<< Deku.Attribute.prop')
+height = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "height")
 
 height_
   :: forall r f
@@ -191,8 +182,7 @@ height_ = height <<< Applicative.pure
 
 width
   :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (width :: String | r))
-width = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "width", value: _ } <<< Deku.Attribute.prop')
+width = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "width")
 
 width_
   :: forall r f
@@ -207,7 +197,7 @@ linethickness
   => f String
   -> f (Deku.Attribute.Attribute (linethickness :: String | r))
 linethickness = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "linethickness", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "linethickness")
 
 linethickness_
   :: forall r f
@@ -221,8 +211,7 @@ maxsize
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (maxsize :: String | r))
-maxsize = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "maxsize", value: _ } <<< Deku.Attribute.prop')
+maxsize = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "maxsize")
 
 maxsize_
   :: forall r f
@@ -236,8 +225,7 @@ minsize
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (minsize :: String | r))
-minsize = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "minsize", value: _ } <<< Deku.Attribute.prop')
+minsize = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "minsize")
 
 minsize_
   :: forall r f
@@ -251,8 +239,7 @@ rspace
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (rspace :: String | r))
-rspace = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "rspace", value: _ } <<< Deku.Attribute.prop')
+rspace = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "rspace")
 
 rspace_
   :: forall r f
@@ -267,7 +254,7 @@ movablelimits
   => f String
   -> f (Deku.Attribute.Attribute (movablelimits :: String | r))
 movablelimits = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "movablelimits", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "movablelimits")
 
 movablelimits_
   :: forall r f
@@ -281,8 +268,7 @@ largeop
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (largeop :: String | r))
-largeop = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "largeop", value: _ } <<< Deku.Attribute.prop')
+largeop = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "largeop")
 
 largeop_
   :: forall r f
@@ -296,8 +282,7 @@ symmetric
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (symmetric :: String | r))
-symmetric = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "symmetric", value: _ } <<< Deku.Attribute.prop')
+symmetric = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "symmetric")
 
 symmetric_
   :: forall r f
@@ -311,8 +296,7 @@ stretchy
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (stretchy :: String | r))
-stretchy = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "stretchy", value: _ } <<< Deku.Attribute.prop')
+stretchy = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "stretchy")
 
 stretchy_
   :: forall r f
@@ -323,8 +307,7 @@ stretchy_ = stretchy <<< Applicative.pure
 
 form
   :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (form :: String | r))
-form = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "form", value: _ } <<< Deku.Attribute.prop')
+form = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "form")
 
 form_
   :: forall r f
@@ -338,8 +321,7 @@ separator
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (separator :: String | r))
-separator = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "separator", value: _ } <<< Deku.Attribute.prop')
+separator = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "separator")
 
 separator_
   :: forall r f
@@ -350,8 +332,7 @@ separator_ = separator <<< Applicative.pure
 
 fence
   :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (fence :: String | r))
-fence = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "fence", value: _ } <<< Deku.Attribute.prop')
+fence = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "fence")
 
 fence_
   :: forall r f
@@ -365,8 +346,7 @@ alttext
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (alttext :: String | r))
-alttext = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "alttext", value: _ } <<< Deku.Attribute.prop')
+alttext = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "alttext")
 
 alttext_
   :: forall r f
@@ -380,8 +360,7 @@ display
    . Functor.Functor f
   => f String
   -> f (Deku.Attribute.Attribute (display :: String | r))
-display = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "display", value: _ } <<< Deku.Attribute.prop')
+display = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "display")
 
 display_
   :: forall r f

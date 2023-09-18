@@ -65,9 +65,8 @@ self
   => f (Web.DOM.Element.Element -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute r)
 self = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "@self@", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "@self@" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 -- | Shorthand version of `self`
@@ -88,9 +87,8 @@ selfT
   => f (e -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (__tag :: Proxy name | r))
 selfT = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "@self@", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "@self@" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 -- | Shorthand version of `selfT`

@@ -310,9 +310,8 @@ volumechange
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (volumechange :: Web.Event.Internal.Types.Event | r))
 volumechange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "volumechange", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "volumechange" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 volumechange_
@@ -328,9 +327,8 @@ resize
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (resize :: Web.Event.Internal.Types.Event | r))
 resize = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "resize", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "resize" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 resize_
@@ -346,9 +344,8 @@ ratechange
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (ratechange :: Web.Event.Internal.Types.Event | r))
 ratechange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ratechange", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "ratechange" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 ratechange_
@@ -364,9 +361,8 @@ pause
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pause :: Web.Event.Internal.Types.Event | r))
 pause = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pause", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pause" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pause_
@@ -382,9 +378,8 @@ play
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (play :: Web.Event.Internal.Types.Event | r))
 play = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "play", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "play" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 play_
@@ -400,9 +395,8 @@ timeupdate
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (timeupdate :: Web.Event.Internal.Types.Event | r))
 timeupdate = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "timeupdate", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "timeupdate" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 timeupdate_
@@ -418,9 +412,8 @@ durationchange
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (durationchange :: Web.Event.Internal.Types.Event | r))
 durationchange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "durationchange", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "durationchange" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 durationchange_
@@ -436,9 +429,8 @@ ended
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (ended :: Web.Event.Internal.Types.Event | r))
 ended = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "ended", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "ended" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 ended_
@@ -454,9 +446,8 @@ seeked
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (seeked :: Web.Event.Internal.Types.Event | r))
 seeked = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "seeked", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "seeked" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 seeked_
@@ -472,9 +463,8 @@ seeking
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (seeking :: Web.Event.Internal.Types.Event | r))
 seeking = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "seeking", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "seeking" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 seeking_
@@ -490,9 +480,8 @@ waiting
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (waiting :: Web.Event.Internal.Types.Event | r))
 waiting = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "waiting", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "waiting" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 waiting_
@@ -508,9 +497,8 @@ playing
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (playing :: Web.Event.Internal.Types.Event | r))
 playing = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "playing", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "playing" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 playing_
@@ -526,9 +514,8 @@ canplaythrough
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (canplaythrough :: Web.Event.Internal.Types.Event | r))
 canplaythrough = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "canplaythrough", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "canplaythrough" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 canplaythrough_
@@ -544,9 +531,8 @@ canplay
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (canplay :: Web.Event.Internal.Types.Event | r))
 canplay = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "canplay", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "canplay" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 canplay_
@@ -562,9 +548,8 @@ loadeddata
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (loadeddata :: Web.Event.Internal.Types.Event | r))
 loadeddata = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "loadeddata", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "loadeddata" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 loadeddata_
@@ -580,9 +565,8 @@ loadedmetadata
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (loadedmetadata :: Web.Event.Internal.Types.Event | r))
 loadedmetadata = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "loadedmetadata", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "loadedmetadata" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 loadedmetadata_
@@ -598,9 +582,8 @@ stalled
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (stalled :: Web.Event.Internal.Types.Event | r))
 stalled = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "stalled", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "stalled" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 stalled_
@@ -616,9 +599,8 @@ emptied
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (emptied :: Web.Event.Internal.Types.Event | r))
 emptied = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "emptied", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "emptied" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 emptied_
@@ -634,9 +616,8 @@ error
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (error :: Web.Event.Internal.Types.Event | r))
 error = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "error", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "error" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 error_
@@ -652,9 +633,8 @@ abort
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (abort :: Web.Event.Internal.Types.Event | r))
 abort = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "abort", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "abort" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 abort_
@@ -670,9 +650,8 @@ suspend
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (suspend :: Web.Event.Internal.Types.Event | r))
 suspend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "suspend", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "suspend" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 suspend_
@@ -688,9 +667,8 @@ progress
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (progress :: Web.Event.Internal.Types.Event | r))
 progress = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "progress", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "progress" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 progress_
@@ -706,9 +684,8 @@ loadstart
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (loadstart :: Web.Event.Internal.Types.Event | r))
 loadstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "loadstart", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "loadstart" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 loadstart_
@@ -724,9 +701,8 @@ removetrack
   => f (Web.HTML.Event.TrackEvent.TrackEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (removetrack :: Web.HTML.Event.TrackEvent.TrackEvent | r))
 removetrack = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "removetrack", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "removetrack" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 removetrack_
@@ -742,9 +718,8 @@ addtrack
   => f (Web.HTML.Event.TrackEvent.TrackEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (addtrack :: Web.HTML.Event.TrackEvent.TrackEvent | r))
 addtrack = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "addtrack", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "addtrack" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 addtrack_
@@ -760,9 +735,8 @@ change
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (change :: Web.Event.Internal.Types.Event | r))
 change = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "change", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "change" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 change_
@@ -778,9 +752,8 @@ load
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (load :: Web.Event.Internal.Types.Event | r))
 load = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "load", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "load" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 load_
@@ -796,9 +769,8 @@ cuechange
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (cuechange :: Web.Event.Internal.Types.Event | r))
 cuechange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "cuechange", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "cuechange" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 cuechange_
@@ -814,9 +786,8 @@ exit
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (exit :: Web.Event.Internal.Types.Event | r))
 exit = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "exit", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "exit" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 exit_
@@ -832,9 +803,8 @@ enter
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (enter :: Web.Event.Internal.Types.Event | r))
 enter = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "enter", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "enter" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 enter_
@@ -850,8 +820,7 @@ transitioncancel
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (transitioncancel :: Web.Event.Internal.Types.Event | r))
 transitioncancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "transitioncancel", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "transitioncancel" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -868,9 +837,8 @@ transitionend
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (transitionend :: Web.Event.Internal.Types.Event | r))
 transitionend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "transitionend", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "transitionend" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 transitionend_
@@ -886,8 +854,7 @@ transitionstart
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (transitionstart :: Web.Event.Internal.Types.Event | r))
 transitionstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "transitionstart", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "transitionstart" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -904,9 +871,8 @@ transitionrun
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (transitionrun :: Web.Event.Internal.Types.Event | r))
 transitionrun = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "transitionrun", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "transitionrun" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 transitionrun_
@@ -922,8 +888,7 @@ animationcancel
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (animationcancel :: Web.Event.Internal.Types.Event | r))
 animationcancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "animationcancel", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "animationcancel" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -940,9 +905,8 @@ animationend
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (animationend :: Web.Event.Internal.Types.Event | r))
 animationend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "animationend", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "animationend" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 animationend_
@@ -958,9 +922,7 @@ animationiteration
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (animationiteration :: Web.Event.Internal.Types.Event | r))
 animationiteration = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "animationiteration", value: _ }
-      <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "animationiteration" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -977,9 +939,8 @@ animationstart
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (animationstart :: Web.Event.Internal.Types.Event | r))
 animationstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "animationstart", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "animationstart" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 animationstart_
@@ -998,9 +959,7 @@ lostpointercapture
            (lostpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent | r)
        )
 lostpointercapture = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "lostpointercapture", value: _ }
-      <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "lostpointercapture" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -1023,8 +982,7 @@ gotpointercapture
            (gotpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent | r)
        )
 gotpointercapture = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "gotpointercapture", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "gotpointercapture" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -1044,9 +1002,8 @@ pointerleave
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pointerleave :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerleave = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerleave", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pointerleave" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pointerleave_
@@ -1062,9 +1019,8 @@ pointerout
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pointerout :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerout = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerout", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pointerout" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pointerout_
@@ -1080,9 +1036,8 @@ pointercancel
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pointercancel :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointercancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pointercancel", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pointercancel" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pointercancel_
@@ -1098,9 +1053,8 @@ pointerup
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pointerup :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerup = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerup", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pointerup" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pointerup_
@@ -1117,8 +1071,7 @@ pointerrawupdate
   -> f
        (Deku.Attribute.Attribute (pointerrawupdate :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerrawupdate = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerrawupdate", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pointerrawupdate" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -1136,9 +1089,8 @@ pointermove
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pointermove :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointermove = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pointermove", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pointermove" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pointermove_
@@ -1154,9 +1106,8 @@ pointerdown
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pointerdown :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerdown = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerdown", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pointerdown" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pointerdown_
@@ -1172,9 +1123,8 @@ pointerenter
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pointerenter :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerenter = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerenter", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pointerenter" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pointerenter_
@@ -1190,9 +1140,8 @@ pointerover
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pointerover :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerover = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pointerover", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pointerover" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pointerover_
@@ -1208,9 +1157,8 @@ dragend
   => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (dragend :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "dragend", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "dragend" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 dragend_
@@ -1226,9 +1174,8 @@ drop
   => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (drop :: Web.HTML.Event.DragEvent.DragEvent | r))
 drop = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "drop", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "drop" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 drop_
@@ -1244,9 +1191,8 @@ dragover
   => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (dragover :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragover = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "dragover", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "dragover" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 dragover_
@@ -1262,9 +1208,8 @@ dragleave
   => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (dragleave :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragleave = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "dragleave", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "dragleave" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 dragleave_
@@ -1280,9 +1225,8 @@ dragenter
   => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (dragenter :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragenter = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "dragenter", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "dragenter" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 dragenter_
@@ -1298,9 +1242,8 @@ drag
   => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (drag :: Web.HTML.Event.DragEvent.DragEvent | r))
 drag = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "drag", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "drag" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 drag_
@@ -1316,9 +1259,8 @@ dragstart
   => f (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (dragstart :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "dragstart", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "dragstart" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 dragstart_
@@ -1334,8 +1276,7 @@ domNodeRemovedFromDocument
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (domNodeRemovedFromDocument :: Web.Event.Internal.Types.Event | r))
 domNodeRemovedFromDocument = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMNodeRemovedFromDocument", value: _ }
-      <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMNodeRemovedFromDocument"
       <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
@@ -1353,9 +1294,8 @@ domNodeRemoved
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (domNodeRemoved :: Web.Event.Internal.Types.Event | r))
 domNodeRemoved = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMNodeRemoved", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMNodeRemoved" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 domNodeRemoved_
@@ -1372,8 +1312,7 @@ domNodeInsertedIntoDocument
   -> f
        (Deku.Attribute.Attribute (domNodeInsertedIntoDocument :: Web.Event.Internal.Types.Event | r))
 domNodeInsertedIntoDocument = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMNodeInsertedIntoDocument", value: _ }
-      <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMNodeInsertedIntoDocument"
       <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
@@ -1392,8 +1331,7 @@ domNodeInserted
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (domNodeInserted :: Web.Event.Internal.Types.Event | r))
 domNodeInserted = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMNodeInserted", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMNodeInserted" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -1410,8 +1348,7 @@ domCharacterDataModified
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (domCharacterDataModified :: Web.Event.Internal.Types.Event | r))
 domCharacterDataModified = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMCharacterDataModified", value: _ }
-      <<< Deku.Attribute.cb'
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMCharacterDataModified"
       <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
@@ -1429,9 +1366,7 @@ domSubtreeModified
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (domSubtreeModified :: Web.Event.Internal.Types.Event | r))
 domSubtreeModified = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMSubtreeModified", value: _ }
-      <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMSubtreeModified" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -1448,9 +1383,8 @@ unload
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (unload :: Web.Event.Internal.Types.Event | r))
 unload = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "unload", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "unload" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 unload_
@@ -1466,9 +1400,8 @@ touchcancel
   => f (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (touchcancel :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchcancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "touchcancel", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "touchcancel" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 touchcancel_
@@ -1484,9 +1417,8 @@ touchmove
   => f (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (touchmove :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchmove = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "touchmove", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "touchmove" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 touchmove_
@@ -1502,9 +1434,8 @@ touchend
   => f (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (touchend :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "touchend", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "touchend" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 touchend_
@@ -1520,9 +1451,8 @@ touchstart
   => f (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (touchstart :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "touchstart", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "touchstart" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 touchstart_
@@ -1538,8 +1468,7 @@ visibilitychange
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (visibilitychange :: Web.Event.Internal.Types.Event | r))
 visibilitychange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "visibilitychange", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "visibilitychange" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -1556,8 +1485,7 @@ readystatechange
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (readystatechange :: Web.Event.Internal.Types.Event | r))
 readystatechange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "readystatechange", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "readystatechange" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -1574,8 +1502,7 @@ domContentLoaded
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (domContentLoaded :: Web.Event.Internal.Types.Event | r))
 domContentLoaded = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMContentLoaded", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMContentLoaded" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -1592,9 +1519,8 @@ domFocusOut
   => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (domFocusOut :: Web.UIEvent.FocusEvent.FocusEvent | r))
 domFocusOut = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMFocusOut", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMFocusOut" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 domFocusOut_
@@ -1610,9 +1536,8 @@ domFocusIn
   => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (domFocusIn :: Web.UIEvent.FocusEvent.FocusEvent | r))
 domFocusIn = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMFocusIn", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMFocusIn" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 domFocusIn_
@@ -1628,9 +1553,8 @@ focusout
   => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (focusout :: Web.UIEvent.FocusEvent.FocusEvent | r))
 focusout = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "focusout", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "focusout" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 focusout_
@@ -1646,9 +1570,8 @@ focusin
   => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (focusin :: Web.UIEvent.FocusEvent.FocusEvent | r))
 focusin = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "focusin", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "focusin" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 focusin_
@@ -1664,9 +1587,8 @@ focus
   => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (focus :: Web.UIEvent.FocusEvent.FocusEvent | r))
 focus = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "focus", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "focus" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 focus_
@@ -1682,9 +1604,8 @@ blur
   => f (Web.UIEvent.FocusEvent.FocusEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (blur :: Web.UIEvent.FocusEvent.FocusEvent | r))
 blur = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "blur", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "blur" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 blur_
@@ -1700,9 +1621,7 @@ unhandledrejection
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (unhandledrejection :: Web.Event.Internal.Types.Event | r))
 unhandledrejection = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "unhandledrejection", value: _ }
-      <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "unhandledrejection" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -1719,9 +1638,8 @@ storage
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (storage :: Web.Event.Internal.Types.Event | r))
 storage = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "storage", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "storage" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 storage_
@@ -1737,8 +1655,7 @@ rejectionhandled
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (rejectionhandled :: Web.Event.Internal.Types.Event | r))
 rejectionhandled = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "rejectionhandled", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "rejectionhandled" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -1755,9 +1672,8 @@ popstate
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (popstate :: Web.Event.Internal.Types.Event | r))
 popstate = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "popstate", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "popstate" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 popstate_
@@ -1773,9 +1689,8 @@ pageshow
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pageshow :: Web.Event.Internal.Types.Event | r))
 pageshow = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pageshow", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pageshow" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pageshow_
@@ -1791,9 +1706,8 @@ pagehide
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (pagehide :: Web.Event.Internal.Types.Event | r))
 pagehide = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "pagehide", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "pagehide" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 pagehide_
@@ -1809,9 +1723,8 @@ online
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (online :: Web.Event.Internal.Types.Event | r))
 online = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "online", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "online" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 online_
@@ -1827,9 +1740,8 @@ offline
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (offline :: Web.Event.Internal.Types.Event | r))
 offline = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "offline", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "offline" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 offline_
@@ -1845,9 +1757,8 @@ messageerror
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (messageerror :: Web.Event.Internal.Types.Event | r))
 messageerror = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "messageerror", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "messageerror" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 messageerror_
@@ -1863,9 +1774,8 @@ message
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (message :: Web.Event.Internal.Types.Event | r))
 message = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "message", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "message" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 message_
@@ -1881,9 +1791,8 @@ languagechange
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (languagechange :: Web.Event.Internal.Types.Event | r))
 languagechange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "languagechange", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "languagechange" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 languagechange_
@@ -1899,9 +1808,8 @@ hashchange
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (hashchange :: Web.Event.Internal.Types.Event | r))
 hashchange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "hashchange", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "hashchange" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 hashchange_
@@ -1917,9 +1825,8 @@ beforeunload
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (beforeunload :: Web.Event.Internal.Types.Event | r))
 beforeunload = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "beforeunload", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "beforeunload" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 beforeunload_
@@ -1935,9 +1842,8 @@ beforeprint
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (beforeprint :: Web.Event.Internal.Types.Event | r))
 beforeprint = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "beforeprint", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "beforeprint" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 beforeprint_
@@ -1953,9 +1859,8 @@ afterprint
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (afterprint :: Web.Event.Internal.Types.Event | r))
 afterprint = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "afterprint", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "afterprint" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 afterprint_
@@ -1971,9 +1876,8 @@ beforetoggle
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (beforetoggle :: Web.Event.Internal.Types.Event | r))
 beforetoggle = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "beforetoggle", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "beforetoggle" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 beforetoggle_
@@ -1989,9 +1893,8 @@ beforematch
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (beforematch :: Web.Event.Internal.Types.Event | r))
 beforematch = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "beforematch", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "beforematch" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 beforematch_
@@ -2007,9 +1910,8 @@ close
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (close :: Web.Event.Internal.Types.Event | r))
 close = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "close", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "close" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 close_
@@ -2025,9 +1927,8 @@ cancel
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (cancel :: Web.Event.Internal.Types.Event | r))
 cancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "cancel", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "cancel" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 cancel_
@@ -2043,9 +1944,8 @@ select
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (select :: Web.Event.Internal.Types.Event | r))
 select = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "select", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "select" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 select_
@@ -2061,9 +1961,8 @@ invalid
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (invalid :: Web.Event.Internal.Types.Event | r))
 invalid = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "invalid", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "invalid" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 invalid_
@@ -2079,9 +1978,8 @@ keypress
   => f (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
 keypress = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "keypress", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "keypress" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 keypress_
@@ -2097,8 +1995,7 @@ domAttrModified
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (domAttrModified :: Web.Event.Internal.Types.Event | r))
 domAttrModified = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMAttrModified", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMAttrModified" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -2115,9 +2012,8 @@ domActivate
   => f (Web.UIEvent.UIEvent.UIEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (domActivate :: Web.UIEvent.UIEvent.UIEvent | r))
 domActivate = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "DOMActivate", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMActivate" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 domActivate_
@@ -2133,9 +2029,8 @@ wheel
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (wheel :: Web.Event.Internal.Types.Event | r))
 wheel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "wheel", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "wheel" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 wheel_
@@ -2151,9 +2046,8 @@ mouseup
   => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (mouseup :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseup = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "mouseup", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "mouseup" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 mouseup_
@@ -2169,9 +2063,8 @@ mouseover
   => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (mouseover :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseover = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "mouseover", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "mouseover" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 mouseover_
@@ -2187,9 +2080,8 @@ mouseout
   => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (mouseout :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseout = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "mouseout", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "mouseout" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 mouseout_
@@ -2205,9 +2097,8 @@ mousemove
   => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (mousemove :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mousemove = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "mousemove", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "mousemove" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 mousemove_
@@ -2223,9 +2114,8 @@ mouseleave
   => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (mouseleave :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseleave = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "mouseleave", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "mouseleave" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 mouseleave_
@@ -2241,9 +2131,8 @@ mouseenter
   => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (mouseenter :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mouseenter = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "mouseenter", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "mouseenter" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 mouseenter_
@@ -2259,9 +2148,8 @@ mousedown
   => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (mousedown :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mousedown = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "mousedown", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "mousedown" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 mousedown_
@@ -2277,9 +2165,8 @@ keyup
   => f (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (keyup :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
 keyup = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "keyup", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "keyup" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 keyup_
@@ -2295,9 +2182,8 @@ keydown
   => f (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (keydown :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
 keydown = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "keydown", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "keydown" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 keydown_
@@ -2313,9 +2199,8 @@ input
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (input :: Web.Event.Internal.Types.Event | r))
 input = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "input", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "input" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 input_
@@ -2331,9 +2216,8 @@ dblclick
   => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (dblclick :: Web.UIEvent.MouseEvent.MouseEvent | r))
 dblclick = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "dblclick", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "dblclick" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 dblclick_
@@ -2349,9 +2233,8 @@ contextmenu
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 contextmenu = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "contextmenu", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "contextmenu" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 contextmenu_
@@ -2370,9 +2253,8 @@ compositionend
            (compositionend :: Web.UIEvent.CompositionEvent.CompositionEvent | r)
        )
 compositionend = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "compositionend", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "compositionend" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 compositionend_
@@ -2394,8 +2276,7 @@ compositionupdate
            (compositionupdate :: Web.UIEvent.CompositionEvent.CompositionEvent | r)
        )
 compositionupdate = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "compositionupdate", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "compositionupdate" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -2418,8 +2299,7 @@ compositionstart
            (compositionstart :: Web.UIEvent.CompositionEvent.CompositionEvent | r)
        )
 compositionstart = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "compositionstart", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "compositionstart" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -2439,9 +2319,8 @@ click
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 click = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "click", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "click" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 click_
@@ -2457,9 +2336,8 @@ beforeinput
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (beforeinput :: Web.Event.Internal.Types.Event | r))
 beforeinput = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "beforeinput", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "beforeinput" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 beforeinput_
@@ -2475,9 +2353,8 @@ auxclick
   => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 auxclick = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "auxclick", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "auxclick" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 auxclick_
@@ -2493,9 +2370,8 @@ connect
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (connect :: Web.Event.Internal.Types.Event | r))
 connect = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "connect", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "connect" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 connect_
@@ -2511,8 +2387,7 @@ contextrestored
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (contextrestored :: Web.Event.Internal.Types.Event | r))
 contextrestored = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "contextrestored", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "contextrestored" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -2529,9 +2404,8 @@ contextlost
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (contextlost :: Web.Event.Internal.Types.Event | r))
 contextlost = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "contextlost", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "contextlost" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 contextlost_
@@ -2547,8 +2421,7 @@ navigatesuccess
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (navigatesuccess :: Web.Event.Internal.Types.Event | r))
 navigatesuccess = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "navigatesuccess", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "navigatesuccess" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -2565,9 +2438,8 @@ navigateerror
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (navigateerror :: Web.Event.Internal.Types.Event | r))
 navigateerror = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "navigateerror", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "navigateerror" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 navigateerror_
@@ -2583,9 +2455,8 @@ navigate
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (navigate :: Web.Event.Internal.Types.Event | r))
 navigate = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "navigate", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "navigate" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 navigate_
@@ -2601,9 +2472,7 @@ currententrychange
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (currententrychange :: Web.Event.Internal.Types.Event | r))
 currententrychange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "currententrychange", value: _ }
-      <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "currententrychange" <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
@@ -2620,9 +2489,8 @@ dispose
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (dispose :: Web.Event.Internal.Types.Event | r))
 dispose = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "dispose", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "dispose" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 dispose_
@@ -2638,9 +2506,8 @@ open
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (open :: Web.Event.Internal.Types.Event | r))
 open = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "open", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "open" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 open_
@@ -2656,9 +2523,8 @@ submit
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (submit :: Web.Event.Internal.Types.Event | r))
 submit = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "submit", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "submit" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 submit_
@@ -2674,9 +2540,8 @@ reset
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (reset :: Web.Event.Internal.Types.Event | r))
 reset = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "reset", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "reset" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 reset_
@@ -2692,9 +2557,8 @@ formdata
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (formdata :: Web.Event.Internal.Types.Event | r))
 formdata = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "formdata", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "formdata" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 formdata_
@@ -2710,9 +2574,8 @@ toggle
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (toggle :: Web.Event.Internal.Types.Event | r))
 toggle = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "toggle", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "toggle" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 toggle_
@@ -2728,9 +2591,8 @@ devicechange
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (devicechange :: Web.Event.Internal.Types.Event | r))
 devicechange = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "devicechange", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "devicechange" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 devicechange_
@@ -2746,9 +2608,8 @@ captureaction
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (captureaction :: Web.Event.Internal.Types.Event | r))
 captureaction = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "captureaction", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "captureaction" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 captureaction_
@@ -2764,9 +2625,8 @@ unmute
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (unmute :: Web.Event.Internal.Types.Event | r))
 unmute = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "unmute", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "unmute" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 unmute_
@@ -2782,9 +2642,8 @@ mute
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (mute :: Web.Event.Internal.Types.Event | r))
 mute = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "mute", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "mute" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 mute_
@@ -2800,9 +2659,8 @@ resume
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (resume :: Web.Event.Internal.Types.Event | r))
 resume = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "resume", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "resume" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 resume_
@@ -2818,9 +2676,8 @@ dataavailable
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (dataavailable :: Web.Event.Internal.Types.Event | r))
 dataavailable = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "dataavailable", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "dataavailable" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 dataavailable_
@@ -2836,9 +2693,8 @@ stop
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (stop :: Web.Event.Internal.Types.Event | r))
 stop = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "stop", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "stop" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 stop_
@@ -2854,9 +2710,8 @@ start
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (start :: Web.Event.Internal.Types.Event | r))
 start = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "start", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "start" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 start_

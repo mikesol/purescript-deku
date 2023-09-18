@@ -3,16 +3,18 @@ module Deku.DOM.Combinators where
 import Prelude
 
 import Data.Foldable (for_)
+import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple (Tuple(..))
-import Deku.Attribute (Attribute, AttributeValue(..), unsafeAttribute, unsafeUnAttribute)
+import Deku.Attribute (Attribute, unsafeAttribute, unset')
 import Deku.DOM.Self as Self
 import Deku.Some (class IsSubsetRL)
 import Deku.Some as Some
 import Effect (Effect)
 import Effect.Aff (Milliseconds(..), delay, launchAff_)
 import Effect.Class (liftEffect)
+import Prim.Row as Row
 import Prim.RowList as RL
-import Type.Proxy (Proxy)
+import Type.Proxy (Proxy(..))
 import Web.DOM (Element)
 import Web.Event.Event as Web
 import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
@@ -147,15 +149,14 @@ valueOn_ listener =
 -- | div [ _class "selected" selected, unset _class unselected ] [ text "button" ]
 -- | ```
 unset
-  :: forall e a r f
-   . Functor f
-  => Monoid a
-  => (f a -> f (Attribute r))
-  -> f e
+  :: forall @s v e r' r f
+   . IsSymbol s
+  => Row.Cons s v r' r
+  => Functor f
+  => f e
   -> f (Attribute r)
-unset attr trigger =
-  unsafeAttribute <<< _ { value = Unset' } <<< unsafeUnAttribute <$> attr
-    (const mempty <$> trigger)
+unset trigger = trigger $> unsafeAttribute (unset'
+  (reflectSymbol (Proxy :: Proxy s)))
 
 -- | Sets a listener that injects a primitive DOM element into a closed scope immediately after element creation.
 -- | Importantly, this does _not happen_ on the same tick as the element creation but rather during the next DOM tick.

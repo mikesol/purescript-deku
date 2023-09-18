@@ -210,12 +210,11 @@ import Data.Array.ST as STArray
 import Data.Maybe (Maybe(..))
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Attribute (Attribute, Attribute', unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), handleAtts)
-import Deku.Interpret (attributeBeaconFullRangeParentProto, fromDekuBeacon, fromDekuElement, fromDekuText, toDekuElement)
+import Deku.Core (fromDekuBeacon, fromDekuElement, fromDekuText, toDekuElement, DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), handleAtts)
+import Deku.Interpret (attributeBeaconFullRangeParentProto)
 import Deku.Path as Path
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Poll (Poll)
-import Foreign.Object.ST as STObject
 import Prim.Row as R
 import Prim.RowList as RL
 import Record (get)
@@ -271,9 +270,8 @@ instance processInstructionsCons :: (IsSymbol k, R.Cons k v r' r, ProcessInstruc
 
 processAttPursx :: InstructionSignature (Poll Attribute')
 processAttPursx = mkEffectFn4 \\_ att di e -> do
-    obj <- liftST STObject.new
     star <- liftST $ STArray.new
-    handleAtts di obj (toDekuElement (mEltElt e)) star
+    handleAtts di (toDekuElement (mEltElt e)) star
       [  att ]
 
 instance processInstructionPollAtt :: IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where

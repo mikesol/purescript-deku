@@ -21,12 +21,12 @@ import Data.FoldableWithIndex (foldrWithIndex)
 import Data.List (List(..), (:))
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (unwrap)
+import Data.Nullable (Nullable, toMaybe)
 import Data.String (toUpper)
 import Data.String as String
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
-import Deku.Attribute (Cb(..), Key(..), Value(..))
-import Deku.Core (DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), PursXable(..), Tag(..), Verb(..), eltAttribution, handleAtts)
+import Deku.Core (Cb(..), Key(..), Value(..), DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Nut(..), PSR(..), PursXable(..), Tag(..), Verb(..), eltAttribution, handleAtts, toDekuElement, fromDekuElement, toDekuBeacon, fromDekuBeacon, toDekuText, fromDekuText)
 import Deku.Core as Core
 import Deku.JSMap as JSMap
 import Deku.JSWeakRef (WeakRef)
@@ -36,12 +36,11 @@ import Effect.Console (error)
 import Effect.Ref (read)
 import Effect.Uncurried (EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import Foreign.Object as Object
-import Foreign.Object.ST as STObject
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
 import Unsafe.Reference (unsafeRefEq)
 import Untagged.Union (type (|+|), toEither1)
-import Web.DOM (Comment, Element, Text)
+import Web.DOM (Element)
 import Web.DOM as Node
 import Web.DOM.ChildNode (remove)
 import Web.DOM.Comment as Comment
@@ -54,6 +53,7 @@ import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.DOM.Text as Text
 import Web.Event.Event (EventType(..), target)
 import Web.Event.Event as Web
+import Web.Event.EventTarget (EventListener)
 import Web.HTML (window)
 import Web.HTML.HTMLButtonElement as HTMLButtonElement
 import Web.HTML.HTMLDocument (toDocument)
@@ -69,24 +69,6 @@ import Web.HTML.Window (document)
 
 type MapEntry = (WeakRef DekuElement) |+| (WeakRef DekuBeacon) |+|
   (WeakRef DekuText)
-
-toDekuElement :: Element -> DekuElement
-toDekuElement = unsafeCoerce
-
-fromDekuElement :: DekuElement -> Element
-fromDekuElement = unsafeCoerce
-
-toDekuBeacon :: Comment -> DekuBeacon
-toDekuBeacon = unsafeCoerce
-
-fromDekuBeacon :: DekuBeacon -> Comment
-fromDekuBeacon = unsafeCoerce
-
-toDekuText :: Text -> DekuText
-toDekuText = unsafeCoerce
-
-fromDekuText :: DekuText -> Text
-fromDekuText = unsafeCoerce
 
 makeElementEffect :: Core.MakeElement
 makeElementEffect = mkEffectFn2 \ns tag -> do
@@ -466,30 +448,34 @@ setDelegateCbEffect = mkEffectFn3 \elt' (Key k) mp ->
             Nothing -> pure unit
     runEffectFn4 addEventListener eventType nl false eventTarget
 
+foreign import getPreviousCb :: EffectFn2 String DekuElement (Nullable EventListener)
+foreign import deletePreviousCb :: EffectFn2 String DekuElement Unit
+foreign import setPreviousCb :: EffectFn3 String EventListener DekuElement Unit
+
 setCbEffect :: Core.SetCb
-setCbEffect = mkEffectFn5 \elt' (Key k) (Cb v) getter setter -> do
+setCbEffect = mkEffectFn3 \elt' (Key k) (Cb v) -> do
   if k == "@self@" then do
     void $ v ((unsafeCoerce :: DekuElement -> Web.Event) elt')
   else do
-    l <- getter
+    l <- runEffectFn2 getPreviousCb k elt'
     let eventType = EventType k
     let eventTarget = toEventTarget (fromDekuElement elt')
-    for_ l \toRemove -> runEffectFn4 removeEventListener eventType toRemove
+    for_ (toMaybe l) \toRemove -> runEffectFn4 removeEventListener eventType toRemove
       false
       eventTarget
     nl <- runEffectFn1 eventListener $ mkEffectFn1 v
     runEffectFn4 addEventListener eventType nl false eventTarget
-    setter nl
+    runEffectFn3 setPreviousCb k nl elt'
 
 unsetAttributeEffect :: Core.UnsetAttribute
-unsetAttributeEffect = mkEffectFn4 \elt' (Key k) getter rm -> do
-  l <- getter
+unsetAttributeEffect = mkEffectFn2 \elt' (Key k) -> do
+  l <- runEffectFn2 getPreviousCb k elt'
   let asElt = fromDekuElement elt'
   let eventType = EventType k
   let eventTarget = toEventTarget asElt
-  for_ l \toRemove -> do
+  for_ (toMaybe l) \toRemove -> do
     runEffectFn4 removeEventListener eventType toRemove false eventTarget
-    rm
+    runEffectFn2 deletePreviousCb k elt'
   removeAttribute k asElt
 
 setTextEffect :: Core.SetText
@@ -588,13 +574,12 @@ makePursxEffect = mkEffectFn5
     foreachE arr \nd -> do
       case Element.fromNode nd of
         Just asElt -> do
-          obj <- liftST STObject.new
           attTag <- getAttribute "data-deku-attr-internal" asElt
           case attTag >>= flip Object.lookup atts of
             Just att -> do
               star <- liftST $ STArray.new
               -- todo: does this map have a runtime hit?
-              handleAtts di obj (toDekuElement asElt) star
+              handleAtts di (toDekuElement asElt) star
                 [ att ]
             Nothing -> do
               error $

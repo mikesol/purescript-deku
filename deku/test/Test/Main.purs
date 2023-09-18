@@ -16,7 +16,7 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple (Tuple(..), fst)
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut(..), fixed, portal, useRefST)
+import Deku.Core (Hook, Nut, fixed, portal, useRefST)
 import Deku.DOM (Attribute)
 import Deku.DOM as D
 import Deku.DOM as DOM
@@ -358,7 +358,7 @@ unsetUnsets = Deku.do
     , D.span
         [ DA.id_ "span1"
         , DA.style_ "color:red;"
-        , DA.unset DA.style unset
+        , DA.unset @"style" unset
         ]
         [ text_ "bar" ]
     , D.button [ DA.id_ "unsetter", DL.click_ \_ -> unsetAttr unit ]
@@ -737,7 +737,7 @@ makeRow { selectMe, arr, remove, removeMe, swap, appendRows, rowbox, selectbox, 
   template @"""<tr ~sel~ ><td class="col-md-1"> ~num~ </td><td class="col-md-4"><a ~select~ class="lbl">~label~ ~excl~</a></td><td class="col-md-1"><a ~rm~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
     $ merge
         [ templated_ selectbox { sel: [ DA.klass_ "danger" ] }
-        , templated_ unselectbox { sel: [ DA.unset DA.klass $ pure unit ] }
+        , templated_ unselectbox { sel: [ DA.unset @"klass" $ pure unit ] }
         , templated_ remove { remove: unit }
         , templatedMap_ swap { sendTo: _ }
         , mapAccum
@@ -898,7 +898,7 @@ rowTemplate
   -> Nut
 rowTemplate { n, select, selected, unselected, label, remove } = D.tr
   [ DA.klass $ selected $> "danger"
-  , DA.unset DA.klass (unselected $> unit)
+  , DA.unset @"klass" (unselected $> unit)
   ]
   [ D.td [ DA.klass_ "col-md-1" ] [ text_ $ show (n + 1) ]
   , D.td [ DA.klass_ "col-md-4" ]

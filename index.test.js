@@ -967,15 +967,12 @@ describe("deku", () => {
         const $ = require("jquery");
         const elt = di.makeElementEffect(testFriend.nothing, "button");
         let i = 0;
-        let cache = testFriend.nothing;
         di.setCbEffect(
           elt,
           "click",
           () => () => {
             i++;
           },
-          () => cache,
-          (i) => () => (cache = testFriend.just(i))
         );
         $(elt).trigger("click");
         expect(i).toBe(1);
@@ -985,16 +982,12 @@ describe("deku", () => {
           () => () => {
             i += 42;
           },
-          () => cache,
-          (i) => () => (cache = testFriend.just(i))
         );
         $(elt).trigger("click");
         expect(i).toBe(43);
         di.unsetAttributeEffect(
           elt,
           "click",
-          () => cache,
-          () => (cache = testFriend.nothing)
         );
         $(elt).trigger("click");
         expect(i).toBe(43);

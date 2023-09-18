@@ -56,7 +56,7 @@ generate events =
                 $ typeConstrained [ typeApp ( typeCtor "Functor.Functor" ) [ typeVar "f"  ] ]
                 $ typeArrow [ typeFunked "f" $ constructArg t ]
                 $ typeFunked "f" $ typeAttributed $ typeIndexedAt index indexType
-            , declHandler ctor name $ handler t
+            , declHandler ctor $ handler name t
 
             , declSignature shortHand 
                 $ typeForall [ typeVar "r", typeVar "f" ]

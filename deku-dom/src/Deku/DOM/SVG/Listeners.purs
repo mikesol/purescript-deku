@@ -19,9 +19,8 @@ repeat
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (repeat :: Web.Event.Internal.Types.Event | r))
 repeat = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "repeat", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "repeat" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 repeat_
@@ -37,9 +36,8 @@ end
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (end :: Web.Event.Internal.Types.Event | r))
 end = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "end", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "end" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 end_
@@ -55,9 +53,8 @@ begin
   => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (begin :: Web.Event.Internal.Types.Event | r))
 begin = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "begin", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "begin" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 begin_

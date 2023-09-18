@@ -19,14 +19,14 @@ import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Foldable (foldr, for_)
 import Data.Identity (Identity(..))
-import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Maybe (Maybe(..))
 import Data.String as String
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.TraversableWithIndex (traverseWithIndex)
 import Data.Tuple (Tuple(..))
-import Deku.Attribute (Attribute, AttributeValue(..), Key(..), Value(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, getLifecycle, notLucky, runListener, text, thunker)
-import Deku.Interpret (attributeDynParentForElementEffect, fromDekuText, toDekuElement, toDekuText)
+import Deku.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, fromDekuText, getLifecycle, notLucky, runListener, text, thunker, toDekuElement, toDekuText)
+import Deku.Interpret (attributeDynParentForElementEffect)
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.Path (symbolsToArray)
 import Deku.Path as Path
@@ -49,8 +49,6 @@ import Prim.Row as R
 import Prim.Row as Row
 import Prim.RowList as RL
 import Record as Record
-import Record.Unsafe (unsafeGet)
-import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.DocumentFragment as DocumentFragment
@@ -408,17 +406,13 @@ template p = Nut $ mkEffectFn2
       -- and use it to do our attribute and text wizardry
       let
         oh'hi sstaaarrrrrt eeeeeennnnd = mkEffectFn1 \(Tuple ix value) -> do
-          liftST (STObject.peek ix elementCache) >>= case _ of
+          elts <- liftST (STObject.peek ix elementCache) >>= case _ of
             -- the elts have been registered already
-            Just elts -> do
-              runEffectFn2 Some.foreachE value elts
+            Just elts -> pure elts
             -- yup, it's that time!
             -- clone the template, wire up othe elts, etc
             -- this is the biggie
             Nothing -> do
-              -- we get all of the values that exist upon creation
-              let proj'd = Some.projWithProof proof value
-              let mpos = (unsafeGet "sendTo" proj'd :: Maybe Int)
               -- clone the template
               elt <- runEffectFn1 cloneTemplate eltX
               -- wire it up for the walking algo
@@ -428,7 +422,7 @@ template p = Nut $ mkEffectFn2
                 (DekuChild (toDekuElement elt))
                 sstaaarrrrrt
                 eeeeeennnnd
-                mpos
+                Nothing
               -- this is our element cache
               -- we don't even try to have a semblance of type
               -- safety here
@@ -445,43 +439,13 @@ template p = Nut $ mkEffectFn2
                 ( InstructionDelegate
                     { processAttribute: mkEffectFn4 \s _ _ eeeeeeeee -> do
                         let eeeee = mEltElt eeeeeeeee
-                        obj <- liftST STObject.new
-                        let getter key = liftST $ STObject.peek key obj
-                        let
-                          setter key = void <<< liftST <<< flip
-                            (STObject.poke key)
-                            obj
-                        let delete key = liftST $ void $ STObject.delete key obj
                         let
                           effn
                             :: forall t
                              . EffectFn1 (Array (Identity (Attribute t))) Unit
                           effn = mkEffectFn1 \atts -> foreachE atts
                             \(Identity att) -> do
-                              let { key, value } = unsafeUnAttribute att
-                              case value of
-                                Prop' v -> runEffectFn3 di.setProp
-                                  (toDekuElement eeeee)
-                                  (Key key)
-                                  (Value v)
-                                Cb' cb -> runEffectFn5 di.setCb
-                                  (toDekuElement eeeee)
-                                  (Key key)
-                                  cb
-                                  (getter key)
-                                  (setter key)
-                                Unset' -> runEffectFn4 di.unsetAttribute
-                                  (toDekuElement eeeee)
-                                  (Key key)
-                                  (getter key)
-                                  (delete key)
-                        for_
-                          ( unsafeGet s proj'd
-                              :: forall e
-                               . Maybe (Array (Identity (Attribute e)))
-                          )
-                          \a ->
-                            runEffectFn1 effn a
+                              runEffectFn2 (unsafeUnAttribute att) eeeee (DOMInterpret di)
                         void $ liftST $ STObject.poke s
                           ( ( unsafeCoerce
                                 :: forall t
@@ -506,14 +470,6 @@ template p = Nut $ mkEffectFn2
                               realDeal0
                               par
                             pure (fromDekuText nt)
-                        runEffectFn2 di.setText (toDekuText realDeal)
-                          ( coerce
-                              ( fromMaybe (Identity "")
-                                  ( unsafeGet s proj'd
-                                      :: Maybe (Identity String)
-                                  )
-                              )
-                          )
                         let
                           effn = mkEffectFn1 \(Identity str) -> runEffectFn2
                             di.setText
@@ -567,6 +523,8 @@ template p = Nut $ mkEffectFn2
                       -> { | elementCache }
                   ) oooooooooo
               liftST $ void $ STObject.poke ix uuuuu elementCache
+              pure uuuuu
+          runEffectFn2 Some.foreachE value elts
       -- now that we have our element cache, we do something with it
       runListener (oh'hi dbStart dbEnd) unsubs p
       -- listen to the lifecycle
