@@ -26,7 +26,7 @@ import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.TraversableWithIndex (traverseWithIndex)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, fromDekuText, getLifecycle, notLucky, runListener, text, thunker, toDekuElement, toDekuText)
+import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, fromDekuText, getLifecycle, notLucky, text, thunker, toDekuElement, toDekuText)
 import Deku.Interpret (attributeDynParentForElementEffect)
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.Path (symbolsToArray)
@@ -42,7 +42,10 @@ import Effect (foreachE)
 import Effect.Exception (error, throwException)
 import Effect.Ref (new)
 import Effect.Uncurried (EffectFn1, EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
-import FRP.Poll (Poll)
+import FRP.Event (subscribe)
+import FRP.Event as Event
+import FRP.Poll (Poll(..))
+import FRP.Poll.Unoptimized as UPoll
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
 import Foreign.Object.Unsafe (unsafeIndex)
@@ -297,7 +300,7 @@ template
   => Labels withLifecycle
   => AsTypeConstructor EffectOp rr elementCache
   => AsTypeConstructor Maybe rr maybes
-  => Poll (Tuple String (Some rr))
+  => Poll (Array (Tuple String (Some rr)))
   -> Nut
 template p = Nut $ mkEffectFn2
   \(PSR psr)
@@ -335,7 +338,10 @@ template p = Nut $ mkEffectFn2
       STObject.new
     eltX <- runEffectFn1 toTemplate html
     ctnt <- HtmlTemplateElement.content eltX
-    eltBase <- runEffectFn1 unsafeFirstChildAsElement ((unsafeCoerce :: Node.Node -> Element.Element)  $ DocumentFragment.toNode ctnt)
+    eltBase <- runEffectFn1 unsafeFirstChildAsElement
+      ( (unsafeCoerce :: Node.Node -> Element.Element) $ DocumentFragment.toNode
+          ctnt
+      )
     -- we set up a dummy cache that we 
     -- just use so that we can have the same walking al
     let emptiness = emptyMe (Proxy :: _ rl)
@@ -479,7 +485,7 @@ template p = Nut $ mkEffectFn2
     -- after it's in the cache, we can look at the `Some`
     -- and use it to do our attribute and text wizardry
     let
-      oh'hi sstaaarrrrrt eeeeeennnnd = mkEffectFn1 \(Tuple ix value) -> do
+      oh'hi arr = foreachE arr \(Tuple ix value) -> do
         elts <- liftST (STObject.peek ix elementCache) >>= case _ of
           -- the elts have been registered already
           Just elts -> pure elts
@@ -494,8 +500,8 @@ template p = Nut $ mkEffectFn2
             -- insert our fledgling element into the dyn
             runEffectFn5 attributeDynParentForElementEffect lucky
               (DekuChild (toDekuElement elt))
-              sstaaarrrrrt
-              eeeeeennnnd
+              dbStart
+              dbEnd
               Nothing
             -- this is our element cache
             -- we don't even try to have a semblance of type
@@ -543,7 +549,25 @@ template p = Nut $ mkEffectFn2
             pure uuuuu
         runEffectFn2 Some.foreachE value elts
     -- now that we have our element cache, we do something with it
-    runListener (oh'hi dbStart dbEnd) unsubs p
+    let
+      handleEvent y = do
+        uu <- subscribe y oh'hi
+        void $ liftST $ STArray.push uu unsubs
+    case p of
+      OnlyEvent x -> handleEvent x
+      OnlyPure x -> foreachE x \y -> oh'hi y
+      OnlyPoll x -> do
+        pump <- liftST $ Event.create
+        handleEvent (UPoll.sample x pump.event)
+        pump.push identity
+      PureAndEvent x z -> do
+        foreachE x \y -> oh'hi y
+        handleEvent z
+      PureAndPoll x z -> do
+        foreachE x \y -> oh'hi y
+        pump <- liftST $ Event.create
+        handleEvent (UPoll.sample z pump.event)
+        pump.push identity
     -- listen to the lifecycle
     for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn8
       actOnLifecycleForDyn

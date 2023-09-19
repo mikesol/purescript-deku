@@ -24,20 +24,20 @@ templated_
    . Functor f
   => RL.RowToList r rl
   => IsSubsetRL rl sr
-  => f String
+  => f (Array String)
   -> Record r
-  -> f (Tuple String (Some.Some sr))
-templated_ e v = e <#> \s -> Tuple s $ Some.inj v
+  -> f (Array (Tuple String (Some.Some sr)))
+templated_ e v = map (map \s -> Tuple s $ Some.inj v) e
 
 templatedMap_
   :: forall f a r sr rl
    . Functor f
   => RL.RowToList r rl
   => IsSubsetRL rl sr
-  => f (Tuple String a)
+  => f (Array (Tuple String a))
   -> (a -> Record r)
-  -> f (Tuple String (Some.Some sr))
-templatedMap_ e v = e <#> \(Tuple s i) -> Tuple s $ Some.inj (v i)
+  -> f (Array (Tuple String (Some.Some sr)))
+templatedMap_ e v = map (map \(Tuple s i) -> Tuple s $ Some.inj (v i)) e
 
 templated
   :: forall ix f a r sr rl
@@ -45,19 +45,19 @@ templated
   => RL.RowToList r rl
   => IsSubsetRL rl sr
   => (ix -> String)
-  -> f (Tuple ix a)
+  -> f (Array (Tuple ix a))
   -> (ix -> a -> Record r)
-  -> f (Tuple String (Some.Some sr))
-templated sh e v = e <#> \(Tuple i s) -> Tuple (sh i) $ Some.inj (v i s)
+  -> f (Array (Tuple String (Some.Some sr)))
+templated sh e v = map (map \(Tuple i s) -> Tuple (sh i) $ Some.inj (v i s)) e
 
 templatedS
   :: forall f a r sr rl
    . Functor f
   => RL.RowToList r rl
   => IsSubsetRL rl sr
-  => f (Tuple String a)
+  => f (Array (Tuple String a))
   -> (String -> a -> Record r)
-  -> f (Tuple String (Some.Some sr))
+  -> f (Array (Tuple String (Some.Some sr)))
 templatedS = templated identity
 
 -- | Runs an effect when the element triggers the given event. 
