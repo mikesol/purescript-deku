@@ -82,7 +82,7 @@ instance
   , R.Cons k (Poll String) r' r
   , EmptyMe r' rl
   ) =>
-  EmptyMe r (RL.Cons k (Identity String) rl) where
+  EmptyMe r (RL.Cons k (Function String String) rl) where
   emptyMe _ = Record.insert (Proxy :: _ k) empty (emptyMe (Proxy :: _ rl))
 
 class PursxSubstitutions
@@ -111,7 +111,7 @@ class TemplateSubstitutions nostr str | nostr -> str
 instance TemplateSubstitutions RL.Nil ()
 
 instance
-  ( Row.Cons k (Identity String) d r
+  ( Row.Cons k (Function String String) d r
   , TemplateSubstitutions c d
   ) =>
   TemplateSubstitutions (RL.Cons k PxNut c) r
@@ -455,14 +455,14 @@ template p = Nut $ mkEffectFn2
                   par
                 pure (fromDekuText nt)
             let
-              effn = mkEffectFn1 \(Identity str) -> runEffectFn2
-                di.setText
+              effn = mkEffectFn1 \fstr -> runEffectFn2
+                di.modifyText
                 (toDekuText realDeal)
-                str
+                fstr
             void $ liftST $ STRef.modify
               ( Object.insert s $
                   ( unsafeCoerce
-                      :: EffectFn1 (Identity String) Unit -> Void
+                      :: EffectFn1 (Function String String) Unit -> Void
                   ) effn
               )
               oooooooooo

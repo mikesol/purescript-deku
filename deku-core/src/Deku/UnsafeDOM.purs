@@ -19,6 +19,7 @@ foreign import cloneTemplate :: EffectFn1 HTMLTemplateElement Element
 foreign import cloneElement :: EffectFn1 Element Element
 foreign import outerHTML :: EffectFn1 Element String
 foreign import setTextContent :: EffectFn2 String Node Unit
+foreign import modifyTextContent :: EffectFn2 (String -> String) Node Unit
 foreign import addEventListener
   :: EffectFn4 EventType
        EventListener
