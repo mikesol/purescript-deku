@@ -3,6 +3,7 @@ module Test.Main where
 import Prelude
 
 import Control.Alt ((<|>))
+import Control.Monad.Rec.Class (Step(..), tailRecM)
 import Control.Monad.ST.Class (liftST)
 import Control.Plus (empty)
 import Data.Array ((!!), (..))
@@ -12,10 +13,8 @@ import Data.Filterable (compact, filter)
 import Data.Foldable (intercalate, for_, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Traversable (traverse)
 import Data.Tuple (Tuple(..), fst)
 import Data.Tuple.Nested ((/\))
-import Data.Unfoldable (unfoldr)
 import Deku.Control (text, text_)
 import Deku.Core (Hook, Nut, fixed, portal, useRefST)
 import Deku.DOM (Attribute)
@@ -31,8 +30,8 @@ import Deku.Pursx (template, pursx)
 import Deku.Toplevel (runInBody)
 import Effect (Effect, foreachE)
 import Effect.Random (random, randomInt)
-import FRP.Event (fold, mapAccum)
-import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
+import FRP.Event (fold, keepLatest, mapAccum)
+import FRP.Poll (Poll, merge, mergeMap, mergePure, mergeMapPure, stToPoll)
 import Foreign.Object as Object
 import Record (union)
 import Web.HTML (window)
@@ -283,10 +282,10 @@ templatesWork = Deku.do
         merge
           [ templatedMap_ sendTo { sendTo: _ }
           , [ "Helsinki", "Stockholm", "Copenhagen" ] # mergeMap \s ->
-              templated_ (pure [ s ])
+              templated_ (pure s)
                 { atts:
                     [ DL.click_ \_ ->
-                        setSendTo [ Tuple s 0 ]
+                        setSendTo $ Tuple s 0
                     , DA.id_ s
                     ]
                 , world: pure s
@@ -298,7 +297,7 @@ templatesWork2 :: Nut
 templatesWork2 = Deku.do
   D.div [ DA.id_ "div0" ]
     [ template @"<div id=\"testing\">~test~ ~ing~</div>"
-        $ templated_ (pure [ "0" ])
+        $ templated_ (pure "0")
             { test: pure "hello"
             , ing: pure "world"
             }
@@ -647,15 +646,16 @@ useHotRantWorks = Deku.do
     , guard presence $ framed "db"
     ]
 
+
+
 ocarinaExample :: Nut
-ocarinaExample = pursx @OcarinaPx
-  { allpass: text_ "hello allpass"
+ocarinaExample = pursx @OcarinaPx {
+  allpass: text_ "hello allpass"
   , analyser: text_ "hello analyser"
   , drumroll: text_ "hello drumroll"
   , next: DA.id_ "hello"
   , toc: text_ "This is a table of contents"
-  }
-
+}
 -- begin stress test
 
 randomAdjectives :: Array String
@@ -722,8 +722,8 @@ randomNouns =
 makeRow
   :: forall r
    . { appendRows :: Poll (Array (Tuple Int String))
-     , swap :: Poll (Array (Tuple String Int))
-     , rowbox :: Poll (Array (Tuple String Unit))
+     , swap :: Poll (Tuple String Int)
+     , rowbox :: Poll String
      , selectbox :: Poll String
      , remove :: Poll String
      , unselectbox :: Poll String
@@ -733,38 +733,21 @@ makeRow
      | r
      }
   -> Nut
-makeRow
-  { selectMe
-  , arr
-  , remove
-  , removeMe
-  , swap
-  , appendRows
-  , rowbox
-  , selectbox
-  , unselectbox
-  } = Deku.do
-  template
-    @"""<tr ~sel~ ><td class="col-md-1"> ~num~ </td><td class="col-md-4"><a ~select~ class="lbl">~label~ ~excl~</a></td><td class="col-md-1"><a ~rm~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
+makeRow { selectMe, arr, remove, removeMe, swap, appendRows, rowbox, selectbox, unselectbox } = Deku.do
+  template @"""<tr ~sel~ ><td class="col-md-1"> ~num~ </td><td class="col-md-4"><a ~select~ class="lbl">~label~ ~excl~</a></td><td class="col-md-1"><a ~rm~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
     $ merge
-        [ templated_ (pure <$> selectbox) { sel: [ DA.klass_ "danger" ] }
-        , templated_ (pure <$> unselectbox)
-            { sel: [ DA.unset @"klass" $ pure unit ] }
-        , templated_ (pure <$> remove) { remove: unit }
+        [ templated_ selectbox { sel: [ DA.klass_ "danger" ] }
+        , templated_ unselectbox { sel: [ DA.unset @"klass" $ pure unit ] }
+        , templated_ remove { remove: unit }
         , templatedMap_ swap { sendTo: _ }
         , mapAccum
-            ( \a b' -> flip traverse b' \(Tuple b _) -> case Object.lookup b a of
-                Nothing -> Tuple (Object.insert b woah'woah'woah a)
-                  (Tuple b woah'woah'woah)
-                Just e ->
-                  let
-                    updated = e <> woah'woah'woah
-                  in
-                    Tuple (Object.insert b updated a) (Tuple b updated)
+            ( \a b -> case Object.lookup b a of
+                Nothing -> Tuple (Object.insert b woah'woah'woah a) (Tuple b woah'woah'woah)
+                Just e -> let updated = e <> woah'woah'woah in Tuple (Object.insert b updated a) (Tuple b updated)
             )
             Object.empty
             rowbox `templatedMap_` (pure >>> { excl: _ })
-        , merge [ pure arr, appendRows ] `templated show` \i s ->
+        , merge [ mergePure arr, keepLatest (map mergePure appendRows) ] `templated show` \i s ->
             { num: pure $ show (i + 1)
             , select: [ DL.click_ \_ -> selectMe i ]
             , label: pure $ s
@@ -777,9 +760,10 @@ makeRow
 makeTable
   :: { rowBuilder :: Poll RowBuilder
      , appendRows :: Poll (Array (Tuple Int String))
-     , swap :: Poll (Array (Tuple String Int))
+     , swap :: Poll (Tuple String Int)
+     , pushToRow :: Int -> Effect Unit
      , remove :: Poll String
-     , rowbox :: Poll (Array (Tuple String Unit))
+     , rowbox :: Poll String
      , selectbox :: Poll String
      , unselectbox :: Poll String
      , selectMe :: Int -> Effect Unit
@@ -789,8 +773,7 @@ makeTable
 makeTable i = do
   D.table [ DA.klass_ "table table-hover table-striped test-data" ]
     [ i.rowBuilder <#~> case _ of
-        AddRows arr -> D.tbody [ DA.id_ "tbody" ]
-          [ makeRow $ i `union` { arr } ]
+        AddRows arr -> D.tbody [ DA.id_ "tbody" ] [ makeRow $ i `union` { arr } ]
         Clear -> D.tbody [ DA.id_ "tbody" ] []
     ]
 
@@ -830,7 +813,7 @@ rowBuilderToN b (AddRows arr) = Array.length arr + b
 rowBuilderToN _ Clear = 0
 
 stressTest :: Nut
-stressTest = Deku.do
+stressTest =  Deku.do
   setRowBuilder /\ rowBuilder <- DH.useState'
   setAppendRows /\ appendRows <- DH.useState'
   incrementRows /\ nRowsRaw <- DH.useState'
@@ -872,10 +855,11 @@ stressTest = Deku.do
         , remove: map fst remove
         , selectbox: map fst selectbox
         , unselectbox: map fst unselectbox
-        , rowbox
+        , rowbox: map fst rowbox
         , swap
         , rowBuilder
         , appendRows
+        , pushToRow: \i -> pushToRow (Tuple (show i) unit)
         }
     , c1000: DL.click_ \_ -> rowAdder 1000
     , c10000: DL.click_ \_ -> rowAdder 10000
@@ -891,22 +875,16 @@ stressTest = Deku.do
             r <- a !! 998
             in Tuple l r
         for_ swappies \(Tuple l r) -> do
-          setSwap [ Tuple (show r) 1, Tuple (show l) 998 ]
+          setSwap $ Tuple (show r) 1
+          setSwap $ Tuple (show l) 998
         setRowTransformer Swap
     , update: DL.runOn DL.click $ rowTransformer <#>
-        \arr -> pushToRow
-          ( unfoldr
-              ( \i -> case arr !! i of
-                  Nothing -> Nothing
-                  Just x -> Just (Tuple (Tuple (show x) unit) (x + 10))
-              )
-              0
-          )
-    -- let
-    --   go { i } = case arr !! i of
-    --     Nothing -> pure $ Done unit
-    --     Just head -> pushToRow (Tuple (show head) unit) $> Loop { i: i + 10 }
-    -- tailRecM go { i: 0 }
+        \arr -> do
+          let
+            go { i } = case arr !! i of
+              Nothing -> pure $ Done unit
+              Just head -> pushToRow (Tuple (show head) unit) $> Loop { i: i + 10 }
+          tailRecM go { i: 0 }
     }
 
 rowTemplate
@@ -973,11 +951,9 @@ type Body =
         <span class="preloadicon glyphicon glyphicon-remove" aria-hidden="true"></span>
     </div>
 </div>"""
-
 -- end stress test
 
-type OcarinaPx =
-  """<div>
+type OcarinaPx = """<div>
   <h1>Audio Units</h1>
 
   <h3>There sure are a lot of them!</h3>
