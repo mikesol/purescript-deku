@@ -16,7 +16,6 @@ export const cloneElement = (e) =>
   e.cloneNode(true);
 export const outerHTML = (e) => e.outerHTML;
 export const setTextContent = (value, node) => (node.textContent = value);
-export const modifyTextContent = (fvalue, node) => (node.textContent = fvalue(node.textContent));
 
 export const addEventListener = (type, listener, useCapture, target) =>
   target.addEventListener(type, listener, useCapture);

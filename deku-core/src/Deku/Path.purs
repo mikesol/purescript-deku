@@ -85,7 +85,7 @@ instance
 instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k String c) where
   symbolsToArray _ = Array.cons (Tuple false (reflectSymbol (Proxy :: _ k)))
     (symbolsToArray (Proxy :: _ c))
-instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k (Function String String) c) where
+instance (IsSymbol k, SymbolsToArray c) => SymbolsToArray (RL.Cons k (Identity String) c) where
   symbolsToArray _ = Array.cons (Tuple false (reflectSymbol (Proxy :: _ k)))
     (symbolsToArray (Proxy :: _ c))
 

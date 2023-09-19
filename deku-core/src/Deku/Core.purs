@@ -52,7 +52,6 @@ module Deku.Core
   , SetDelegateCb
   , SetProp
   , SetText
-  , ModifyText
   , Tag(..)
   , UnsetAttribute
   , Value(..)
@@ -363,9 +362,6 @@ type MakeText = EffectFn1 (Maybe String) DekuText
 -- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom backend.
 type SetText = EffectFn2 DekuText String Unit
 
--- | Type used by Deku backends to modify the text of a text element. For internal use only unless you're writing a custom backend.
-type ModifyText = EffectFn2 DekuText (String -> String) Unit
-
 -- | Type used by Deku backends to unset an attribute. For internal use only unless you're writing a custom backend.
 type UnsetAttribute =
   EffectFn2 DekuElement Key Unit
@@ -424,7 +420,6 @@ newtype DOMInterpret = DOMInterpret
   --
   , makeText :: MakeText
   , setText :: SetText
-  , modifyText :: ModifyText
   , attributeTextParent :: AttributeTextParent
   , attributeDynParentForText :: AttributeDynParentForText
   , sendToPosForText :: SendToPosForText

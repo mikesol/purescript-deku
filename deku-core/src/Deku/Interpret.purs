@@ -30,7 +30,7 @@ import Deku.Core (Cb(..), DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..
 import Deku.Core as Core
 import Deku.JSMap as JSMap
 import Deku.JSWeakRef (WeakRef)
-import Deku.UnsafeDOM (addEventListener, appendChild, cloneTemplate, createElement, createElementNS, eventListener, insertBefore, modifyTextContent, outerHTML, removeEventListener, setTextContent, toTemplate, unsafeParentNode)
+import Deku.UnsafeDOM (addEventListener, appendChild, cloneTemplate, createElement, createElementNS, eventListener, insertBefore, outerHTML, removeEventListener, setTextContent, toTemplate, unsafeParentNode)
 import Effect (Effect, foreachE)
 import Effect.Console (error)
 import Effect.Ref (read)
@@ -486,10 +486,6 @@ setTextEffect = mkEffectFn2 \txt' str -> do
   let txt = fromDekuText txt'
   runEffectFn2 setTextContent str (Text.toNode txt)
 
-modifyTextEffect :: Core.ModifyText
-modifyTextEffect = mkEffectFn2 \txt' fstr -> do
-  let txt = fromDekuText txt'
-  runEffectFn2 modifyTextContent fstr (Text.toNode txt)
 -- for the send pos family of functions
 -- we remove first
 sendToPosForDynEffect :: Core.SendToPosForDyn

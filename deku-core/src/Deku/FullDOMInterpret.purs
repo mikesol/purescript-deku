@@ -27,7 +27,6 @@ fullDOMInterpret = Core.DOMInterpret
   --
   , makeText: I.makeTextEffect
   , setText: I.setTextEffect
-  , modifyText: I.modifyTextEffect
   , attributeTextParent: I.attributeTextParentEffect
   , attributeDynParentForText: I.attributeDynParentForTextEffect
   , sendToPosForText: I.sendToPosForTextEffect
