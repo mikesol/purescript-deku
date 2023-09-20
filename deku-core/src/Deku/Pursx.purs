@@ -478,6 +478,7 @@ template p = Nut $ mkEffectFn2
     -- and use it to do our attribute and text wizardry
     let
       oh'hi = mkEffectFn1 \pp -> do
+        unsubs2 <- liftST $ STArray.new
         -- clone the template
         elt <- runEffectFn1 cloneElement eltBase
         -- wire it up for the walking algo
@@ -520,6 +521,8 @@ template p = Nut $ mkEffectFn2
                         runEffectFn2 di.removeForElement
                           false
                           (toDekuElement elt)
+                        u <- liftST $ STArray.unsafeFreeze unsubs2
+                        foreachE u \i -> i
                   }
               )
         -- finally, we set the element cache so that next time all of
@@ -532,7 +535,7 @@ template p = Nut $ mkEffectFn2
 
         runListener
           (mkEffectFn1 \value -> runEffectFn2 Some.foreachE value uuuuu)
-          unsubs
+          unsubs2
           pp
     -- now that we have our element cache, we do something with it
     runListener oh'hi unsubs p
