@@ -21,6 +21,7 @@ import Data.Array.ST as STArray
 import Data.Foldable (foldr, for_)
 import Data.Identity (Identity(..))
 import Data.Maybe (Maybe(..))
+import Data.Nullable (toMaybe)
 import Data.String as String
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.TraversableWithIndex (traverseWithIndex)
@@ -29,6 +30,7 @@ import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, fromDekuText, getLifecycle, notLucky, runListener, text, thunker, toDekuElement, toDekuText)
 import Deku.Interpret (attributeDynParentForElementEffect)
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
+import Deku.JSWeakRef (deref, weakRef)
 import Deku.Path (symbolsToArray)
 import Deku.Path as Path
 import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, mEltify, processAttPursx, processNutPursx, returnReplacement, returnReplacementIndex, returnReplacementNoIndex)
@@ -418,15 +420,18 @@ template p = Nut $ mkEffectFn2
     let
       walkerInstructionDelegate = InstructionDelegate
         { processAttribute: mkEffectFn4 \s _ _ eeeeeeeee -> do
-            let eeeee = mEltElt eeeeeeeee
+            let eeekkee = mEltElt eeeeeeeee
+            eeeee <- runEffectFn1 weakRef eeekkee
             let
               effn
                 :: forall t
                  . EffectFn1 (Array (Identity (Attribute t))) Unit
               effn = mkEffectFn1 \atts -> foreachE atts
                 \(Identity att) -> do
-                  runEffectFn2 (unsafeUnAttribute att) eeeee
-                    (DOMInterpret di)
+                  zz <- runEffectFn1 deref eeeee
+                  for_ (toMaybe zz) \mmmm ->
+                    runEffectFn2 (unsafeUnAttribute att) mmmm
+                      (DOMInterpret di)
             void $ liftST $ STRef.modify
               ( Object.insert s $
                   ( unsafeCoerce
@@ -441,7 +446,7 @@ template p = Nut $ mkEffectFn2
             let iiiii = unsafeIndex indices s
             realDeal0 <- runEffectFn2 returnReplacement iiiii
               e'
-            realDeal <-
+            realDekal <-
               if nodeTypeIndex realDeal0 == 3 then pure
                 ((unsafeCoerce :: Node.Node -> Text.Text) realDeal0)
               else do
@@ -452,11 +457,15 @@ template p = Nut $ mkEffectFn2
                   realDeal0
                   par
                 pure (fromDekuText nt)
+            realDeal <- runEffectFn1 weakRef realDekal
             let
-              effn = mkEffectFn1 \(Identity str) -> runEffectFn2
-                di.setText
-                (toDekuText realDeal)
-                str
+              effn = mkEffectFn1 \(Identity str) -> do
+                zz <- runEffectFn1 deref realDeal
+                for_ (toMaybe zz) \mmmm ->
+                  runEffectFn2
+                    di.setText
+                    (toDekuText mmmm)
+                    str
             void $ liftST $ STRef.modify
               ( Object.insert s $
                   ( unsafeCoerce
@@ -508,19 +517,24 @@ template p = Nut $ mkEffectFn2
           unsafeMElement
         -- next up, our `oooooooooo` needs to listen for SEND
         -- and REMOVE events
+        shmelt <- runEffectFn1 weakRef elt
         void $ liftST $ flip STRef.modify oooooooooo
           $ Object.union
               ( unsafeCoerce
                   { sendTo: mkEffectFn1 \i -> do
-                      runEffectFn5 di.sendToPosForElement lucky i
-                        (toDekuElement elt)
-                        dbStart
-                        dbEnd
+                      gelt' <- runEffectFn1 deref shmelt
+                      for_ (toMaybe gelt') \gelt ->
+                        runEffectFn5 di.sendToPosForElement lucky i
+                          (toDekuElement gelt)
+                          dbStart
+                          dbEnd
                   , remove: mkEffectFn1 \_ ->
                       do
-                        runEffectFn2 di.removeForElement
-                          false
-                          (toDekuElement elt)
+                        gelt' <- runEffectFn1 deref shmelt
+                        for_ (toMaybe gelt') \gelt ->
+                          runEffectFn2 di.removeForElement
+                            false
+                            (toDekuElement gelt)
                         u <- liftST $ STArray.unsafeFreeze unsubs2
                         foreachE u \i -> i
                   }
