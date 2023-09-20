@@ -27,7 +27,7 @@ import Control.Alt ((<|>))
 import Data.Maybe (Maybe(..))
 import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
-import Deku.Core (Nut(..), useSplit, useDyn, dynOptions, useDeflect, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed, useRant, useRant', useStateTagged', useRef, useRefST, useState, useState')
+import Deku.Core (Nut(..), useMailboxedS, useSplit, useDyn, dynOptions, useDeflect, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed, useRant, useRant', useStateTagged', useRef, useRefST, useState, useState')
 import Deku.Do as Deku
 import FRP.Event (filterMap, mapAccum)
 import FRP.Poll (Poll)

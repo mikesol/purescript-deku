@@ -4,7 +4,6 @@ import Prelude
 
 import Data.Foldable (for_)
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, unsafeAttribute, unset')
 import Deku.DOM.Self as Self
 import Deku.Some (class IsSubsetRL)
@@ -20,45 +19,24 @@ import Web.Event.Event as Web
 import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
 
 templated_
-  :: forall f r sr rl
+  :: forall f r sr rl x
    . Functor f
   => RL.RowToList r rl
   => IsSubsetRL rl sr
-  => f String
+  => f x
   -> Record r
-  -> f (Tuple String (Some.Some sr))
-templated_ e v = e <#> \s -> Tuple s $ Some.inj v
+  -> f (Some.Some sr)
+templated_ e v = e <#> \_ -> Some.inj v
 
 templatedMap_
   :: forall f a r sr rl
    . Functor f
   => RL.RowToList r rl
   => IsSubsetRL rl sr
-  => f (Tuple String a)
+  => f a
   -> (a -> Record r)
-  -> f (Tuple String (Some.Some sr))
-templatedMap_ e v = e <#> \(Tuple s i) -> Tuple s $ Some.inj (v i)
-
-templated
-  :: forall ix f a r sr rl
-   . Functor f
-  => RL.RowToList r rl
-  => IsSubsetRL rl sr
-  => (ix -> String)
-  -> f (Tuple ix a)
-  -> (ix -> a -> Record r)
-  -> f (Tuple String (Some.Some sr))
-templated sh e v = e <#> \(Tuple i s) -> Tuple (sh i) $ Some.inj (v i s)
-
-templatedS
-  :: forall f a r sr rl
-   . Functor f
-  => RL.RowToList r rl
-  => IsSubsetRL rl sr
-  => f (Tuple String a)
-  -> (String -> a -> Record r)
-  -> f (Tuple String (Some.Some sr))
-templatedS = templated identity
+  -> f (Some.Some sr)
+templatedMap_ e v = e <#> \i -> Some.inj (v i)
 
 -- | Runs an effect when the element triggers the given event. 
 runOn

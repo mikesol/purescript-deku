@@ -94,6 +94,7 @@ module Deku.Core
   , useHot
   , useHotRant
   , useMailboxed
+  , useMailboxedS
   , useRant
   , useSplit
   , useRant'
@@ -105,15 +106,13 @@ module Deku.Core
   , withUnsub
   , xdata
   ----
-  , toDekuElement 
-  ,fromDekuElement 
+  , toDekuElement
+  , fromDekuElement
   , toDekuBeacon
-  , fromDekuBeacon 
-  , toDekuText 
+  , fromDekuBeacon
+  , toDekuText
   , fromDekuText
-  )
-  where
-
+  ) where
 
 import Prelude
 
@@ -157,7 +156,6 @@ import Web.DOM (Comment, Element, Text)
 import Web.DOM as Element
 import Web.Event.Internal.Types (Event)
 
-
 ------
 ------
 toDekuElement :: Element -> DekuElement
@@ -177,6 +175,7 @@ toDekuText = unsafeCoerce
 
 fromDekuText :: DekuText -> Text
 fromDekuText = unsafeCoerce
+
 ------
 ------
 ------
@@ -213,7 +212,7 @@ cb' k v = mkEffectFn2 \e (DOMInterpret { setCb }) ->
   runEffectFn3 setCb (toDekuElement e) (Key k) v
 
 unset' :: String -> Attribute'
-unset' k =  mkEffectFn2 \e (DOMInterpret { unsetAttribute }) ->
+unset' k = mkEffectFn2 \e (DOMInterpret { unsetAttribute }) ->
   runEffectFn2 unsetAttribute (toDekuElement e) (Key k)
 
 type Attribute' = EffectFn2 Element DOMInterpret Unit
@@ -574,6 +573,16 @@ useMailboxed f = Nut $ mkEffectFn2 \psr di -> do
   { poll, push } <- liftST $ Poll.mailbox
   runEffectFn2 (coerce $ f (push /\ poll)) psr di
 
+useMailboxedS
+  :: forall b
+   . Hook
+       ( ({ address :: String, payload :: b } -> Effect Unit) /\
+           (String -> Poll b)
+       )
+useMailboxedS f = Nut $ mkEffectFn2 \psr di -> do
+  { poll, push } <- liftST $ Poll.mailboxS
+  runEffectFn2 (coerce $ f (push /\ poll)) psr di
+
 useRant :: forall a. Poll a -> Hook (Poll a)
 useRant e f = Nut $ mkEffectFn2 \psr di -> do
   { poll, unsubscribe } <- liftST $ Poll.rant e
@@ -589,7 +598,9 @@ useSplit e f = Nut $ mkEffectFn2 \psr di -> do
     p0.push i
     p1.push i
   e0.push identity
-  runEffectFn2 (coerce $ f { first: p0.poll, second: p1.poll }) (withUnsub (o *> liftST unsubscribe) psr) di
+  runEffectFn2 (coerce $ f { first: p0.poll, second: p1.poll })
+    (withUnsub (o *> liftST unsubscribe) psr)
+    di
 
 useRant'
   :: forall t a

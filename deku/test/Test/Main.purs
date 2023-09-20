@@ -16,22 +16,23 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple (Tuple(..), fst)
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut, fixed, portal, useRefST)
+import Deku.Core (Hook, Nut, fixed, portal, useMailboxedS, useRefST)
 import Deku.DOM (Attribute)
 import Deku.DOM as D
 import Deku.DOM as DOM
 import Deku.DOM.Attributes as DA
-import Deku.DOM.Combinators (injectElementT, templatedMap_, templated_, templated)
+import Deku.DOM.Combinators (injectElementT, templatedMap_, templated_)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Hooks as DH
 import Deku.Pursx (template, pursx)
+import Deku.Some as Some
 import Deku.Toplevel (runInBody)
 import Effect (Effect, foreachE)
 import Effect.Random (random, randomInt)
 import FRP.Event (fold, keepLatest, mapAccum)
-import FRP.Poll (Poll, merge, mergeMap, mergePure, mergeMapPure, stToPoll)
+import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, mergePure, stToPoll)
 import Foreign.Object as Object
 import Record (union)
 import Web.HTML (window)
@@ -276,28 +277,32 @@ pursXWiresUp = Deku.do
 
 templatesWork :: Nut
 templatesWork = Deku.do
-  setSendTo /\ sendTo <- useState'
+  setSendTo /\ sendTo <- useMailboxedS
   D.div [ DA.id_ "div0" ]
     [ template @"<div>hello ~world~<button ~atts~>x</button></div>" $
-        merge
-          [ templatedMap_ sendTo { sendTo: _ }
-          , [ "Helsinki", "Stockholm", "Copenhagen" ] # mergeMap \s ->
-              templated_ (pure s)
-                { atts:
-                    [ DL.click_ \_ ->
-                        setSendTo $ Tuple s 0
-                    , DA.id_ s
-                    ]
-                , world: pure s
-                }
-          ]
+        mergeMapPure (go sendTo setSendTo)
+          [ "Helsinki", "Stockholm", "Copenhagen" ]
+    ]
+  where
+  go sendTo setSendTo s = merge
+    [ templatedMap_ (sendTo s) { sendTo: _ }
+    , pure $ Some.inj
+        { atts:
+            [ DL.click_ \_ ->
+                setSendTo $ { address: s, payload: 0 }
+            , DA.id_ s
+            ]
+        , world: pure s
+        }
     ]
 
 templatesWork2 :: Nut
 templatesWork2 = Deku.do
   D.div [ DA.id_ "div0" ]
     [ template @"<div id=\"testing\">~test~ ~ing~</div>"
-        $ templated_ (pure "0")
+        $ pure
+        $ pure
+        $ Some.inj
             { test: pure "hello"
             , ing: pure "world"
             }
@@ -646,16 +651,15 @@ useHotRantWorks = Deku.do
     , guard presence $ framed "db"
     ]
 
-
-
 ocarinaExample :: Nut
-ocarinaExample = pursx @OcarinaPx {
-  allpass: text_ "hello allpass"
+ocarinaExample = pursx @OcarinaPx
+  { allpass: text_ "hello allpass"
   , analyser: text_ "hello analyser"
   , drumroll: text_ "hello drumroll"
   , next: DA.id_ "hello"
   , toc: text_ "This is a table of contents"
-}
+  }
+
 -- begin stress test
 
 randomAdjectives :: Array String
@@ -733,27 +737,44 @@ makeRow
      | r
      }
   -> Nut
-makeRow { selectMe, arr, remove, removeMe, swap, appendRows, rowbox, selectbox, unselectbox } = Deku.do
-  template @"""<tr ~sel~ ><td class="col-md-1"> ~num~ </td><td class="col-md-4"><a ~select~ class="lbl">~label~ ~excl~</a></td><td class="col-md-1"><a ~rm~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
-    $ merge
-        [ templated_ selectbox { sel: [ DA.klass_ "danger" ] }
-        , templated_ unselectbox { sel: [ DA.unset @"klass" $ pure unit ] }
-        , templated_ remove { remove: unit }
-        , templatedMap_ swap { sendTo: _ }
-        , mapAccum
-            ( \a b -> case Object.lookup b a of
-                Nothing -> Tuple (Object.insert b woah'woah'woah a) (Tuple b woah'woah'woah)
-                Just e -> let updated = e <> woah'woah'woah in Tuple (Object.insert b updated a) (Tuple b updated)
-            )
-            Object.empty
-            rowbox `templatedMap_` (pure >>> { excl: _ })
-        , merge [ mergePure arr, keepLatest (map mergePure appendRows) ] `templated show` \i s ->
-            { num: pure $ show (i + 1)
-            , select: [ DL.click_ \_ -> selectMe i ]
-            , label: pure $ s
-            , rm: [ DL.click_ \_ -> removeMe \f -> f i ]
-            }
-        ]
+makeRow
+  { selectMe
+  , arr
+  , remove
+  , removeMe
+  , swap
+  , appendRows
+  , rowbox
+  , selectbox
+  , unselectbox
+  } = Deku.do
+  template
+    @"""<tr ~sel~ ><td class="col-md-1"> ~num~ </td><td class="col-md-4"><a ~select~ class="lbl">~label~ ~excl~</a></td><td class="col-md-1"><a ~rm~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
+    $ empty
+    --  merge
+    --     [ templated_ selectbox { sel: [ DA.klass_ "danger" ] }
+    --     , templated_ unselectbox { sel: [ DA.unset @"klass" $ pure unit ] }
+    --     , templated_ remove { remove: unit }
+    --     , templatedMap_ swap { sendTo: _ }
+    --     , mapAccum
+    --         ( \a b -> case Object.lookup b a of
+    --             Nothing -> Tuple (Object.insert b woah'woah'woah a)
+    --               (Tuple b woah'woah'woah)
+    --             Just e ->
+    --               let
+    --                 updated = e <> woah'woah'woah
+    --               in
+    --                 Tuple (Object.insert b updated a) (Tuple b updated)
+    --         )
+    --         Object.empty
+    --         rowbox `templatedMap_` (pure >>> { excl: _ })
+    --     -- , merge [ mergePure arr, keepLatest (map mergePure appendRows) ] `templated show` \i s ->
+    --     --     { num: pure $ show (i + 1)
+    --     --     , select: [ DL.click_ \_ -> selectMe i ]
+    --     --     , label: pure $ s
+    --     --     , rm: [ DL.click_ \_ -> removeMe \f -> f i ]
+    --     --     }
+    --     ]
   where
   woah'woah'woah = " !!!"
 
@@ -773,7 +794,8 @@ makeTable
 makeTable i = do
   D.table [ DA.klass_ "table table-hover table-striped test-data" ]
     [ i.rowBuilder <#~> case _ of
-        AddRows arr -> D.tbody [ DA.id_ "tbody" ] [ makeRow $ i `union` { arr } ]
+        AddRows arr -> D.tbody [ DA.id_ "tbody" ]
+          [ makeRow $ i `union` { arr } ]
         Clear -> D.tbody [ DA.id_ "tbody" ] []
     ]
 
@@ -813,7 +835,7 @@ rowBuilderToN b (AddRows arr) = Array.length arr + b
 rowBuilderToN _ Clear = 0
 
 stressTest :: Nut
-stressTest =  Deku.do
+stressTest = Deku.do
   setRowBuilder /\ rowBuilder <- DH.useState'
   setAppendRows /\ appendRows <- DH.useState'
   incrementRows /\ nRowsRaw <- DH.useState'
@@ -883,7 +905,8 @@ stressTest =  Deku.do
           let
             go { i } = case arr !! i of
               Nothing -> pure $ Done unit
-              Just head -> pushToRow (Tuple (show head) unit) $> Loop { i: i + 10 }
+              Just head -> pushToRow (Tuple (show head) unit) $> Loop
+                { i: i + 10 }
           tailRecM go { i: 0 }
     }
 
@@ -951,9 +974,11 @@ type Body =
         <span class="preloadicon glyphicon glyphicon-remove" aria-hidden="true"></span>
     </div>
 </div>"""
+
 -- end stress test
 
-type OcarinaPx = """<div>
+type OcarinaPx =
+  """<div>
   <h1>Audio Units</h1>
 
   <h3>There sure are a lot of them!</h3>

@@ -297,7 +297,7 @@ template
   => Labels withLifecycle
   => AsTypeConstructor EffectOp rr elementCache
   => AsTypeConstructor Maybe rr maybes
-  => Poll (Tuple String (Some rr))
+  => Poll (Poll (Some rr))
   -> Nut
 template p = Nut $ mkEffectFn2
   \(PSR psr)
@@ -323,11 +323,6 @@ template p = Nut $ mkEffectFn2
         )
         (reflectSymbol htmlProxy)
         syms
-    -- build an element cache
-    -- this will hold references to all of the elements that are hot,
-    -- meaning that we can manipulate according to the template
-    elementCache :: STObject.STObject Global { | elementCache } <- liftST
-      STObject.new
     -- we don't want to recurse over text nodes constantly checking their content
     -- so we create a cache that helps us with that (we'll see)
     -- it used later
@@ -335,7 +330,10 @@ template p = Nut $ mkEffectFn2
       STObject.new
     eltX <- runEffectFn1 toTemplate html
     ctnt <- HtmlTemplateElement.content eltX
-    eltBase <- runEffectFn1 unsafeFirstChildAsElement ((unsafeCoerce :: Node.Node -> Element.Element)  $ DocumentFragment.toNode ctnt)
+    eltBase <- runEffectFn1 unsafeFirstChildAsElement
+      ( (unsafeCoerce :: Node.Node -> Element.Element) $ DocumentFragment.toNode
+          ctnt
+      )
     -- we set up a dummy cache that we 
     -- just use so that we can have the same walking al
     let emptiness = emptyMe (Proxy :: _ rl)
@@ -479,71 +477,65 @@ template p = Nut $ mkEffectFn2
     -- after it's in the cache, we can look at the `Some`
     -- and use it to do our attribute and text wizardry
     let
-      oh'hi sstaaarrrrrt eeeeeennnnd = mkEffectFn1 \(Tuple ix value) -> do
-        elts <- liftST (STObject.peek ix elementCache) >>= case _ of
-          -- the elts have been registered already
-          Just elts -> pure elts
-          -- yup, it's that time!
-          -- clone the template, wire up othe elts, etc
-          -- this is the biggie
-          Nothing -> do
-            -- clone the template
-            elt <- runEffectFn1 cloneElement eltBase
-            -- wire it up for the walking algo
-            let unsafeMElement = mEltify (Element.toNode elt)
-            -- insert our fledgling element into the dyn
-            runEffectFn5 attributeDynParentForElementEffect lucky
-              (DekuChild (toDekuElement elt))
-              sstaaarrrrrt
-              eeeeeennnnd
-              Nothing
-            -- this is our element cache
-            -- we don't even try to have a semblance of type
-            -- safety here
-            -- but we do have unit tests!
-            -- we'll be casting this to { | elementCache } later
-            void $ liftST $ STRef.write Object.empty oooooooooo
-            -- we walk down to cache a bunch of functions in
-            -- `oooooooooo` that will do our element manipulation
-            -- these are either EffectFn1 attribute or
-            -- EffectFn1 text
-            runEffectFn5
-              walker
-              walkerInstructionDelegate
-              scrunch
-              emptiness
-              (DOMInterpret di)
-              unsafeMElement
-            -- next up, our `oooooooooo` needs to listen for SEND
-            -- and REMOVE events
-            void $ liftST $ flip STRef.modify oooooooooo
-              $ Object.union
-                  ( unsafeCoerce
-                      { sendTo: mkEffectFn1 \i -> do
-                          runEffectFn5 di.sendToPosForElement lucky i
-                            (toDekuElement elt)
-                            dbStart
-                            dbEnd
-                      , remove: mkEffectFn1 \_ ->
-                          do
-                            runEffectFn2 di.removeForElement
-                              false
-                              (toDekuElement elt)
-                            liftST $ void $ STObject.delete ix elementCache
-                      }
-                  )
-            -- finally, we set the element cache so that next time all of
-            -- this is "easier"
-            uuuuu <- liftST $ STRef.read $
+      oh'hi = mkEffectFn1 \pp -> do
+        -- clone the template
+        elt <- runEffectFn1 cloneElement eltBase
+        -- wire it up for the walking algo
+        let unsafeMElement = mEltify (Element.toNode elt)
+        -- insert our fledgling element into the dyn
+        runEffectFn5 attributeDynParentForElementEffect lucky
+          (DekuChild (toDekuElement elt))
+          dbStart
+          dbEnd
+          Nothing
+        -- this is our element cache
+        -- we don't even try to have a semblance of type
+        -- safety here
+        -- but we do have unit tests!
+        -- we'll be casting this to { | elementCache } later
+        void $ liftST $ STRef.write Object.empty oooooooooo
+        -- we walk down to cache a bunch of functions in
+        -- `oooooooooo` that will do our element manipulation
+        -- these are either EffectFn1 attribute or
+        -- EffectFn1 text
+        runEffectFn5
+          walker
+          walkerInstructionDelegate
+          scrunch
+          emptiness
+          (DOMInterpret di)
+          unsafeMElement
+        -- next up, our `oooooooooo` needs to listen for SEND
+        -- and REMOVE events
+        void $ liftST $ flip STRef.modify oooooooooo
+          $ Object.union
               ( unsafeCoerce
-                  :: STRef.STRef Global (Object.Object Void)
-                  -> STRef.STRef Global { | elementCache }
-              ) oooooooooo
-            liftST $ void $ STObject.poke ix uuuuu elementCache
-            pure uuuuu
-        runEffectFn2 Some.foreachE value elts
+                  { sendTo: mkEffectFn1 \i -> do
+                      runEffectFn5 di.sendToPosForElement lucky i
+                        (toDekuElement elt)
+                        dbStart
+                        dbEnd
+                  , remove: mkEffectFn1 \_ ->
+                      do
+                        runEffectFn2 di.removeForElement
+                          false
+                          (toDekuElement elt)
+                  }
+              )
+        -- finally, we set the element cache so that next time all of
+        -- this is "easier"
+        uuuuu <- liftST $ STRef.read $
+          ( unsafeCoerce
+              :: STRef.STRef Global (Object.Object Void)
+              -> STRef.STRef Global { | elementCache }
+          ) oooooooooo
+
+        runListener
+          (mkEffectFn1 \value -> runEffectFn2 Some.foreachE value uuuuu)
+          unsubs
+          pp
     -- now that we have our element cache, we do something with it
-    runListener (oh'hi dbStart dbEnd) unsubs p
+    runListener oh'hi unsubs p
     -- listen to the lifecycle
     for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn8
       actOnLifecycleForDyn
