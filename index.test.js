@@ -346,6 +346,14 @@ describe("deku", () => {
     })
   );
 
+  doTest( "pure switches", (f) =>
+    f( tests.pureSwitches, () =>
+    {
+      const $ = require("jquery");
+      expect( $(".switcherelem").length).toBe(1)
+    })
+  );
+
   doTest("attributes are correctly unset", (f) =>
     f(tests.unsetUnsets, () => {
       const $ = require("jquery");
