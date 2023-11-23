@@ -12,7 +12,8 @@ import FRP.Poll (Poll)
 import Type.Proxy (Proxy)
 import Web.DOM (Element)
 import Web.Event.Event as Web
-import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
+import Web.HTML.HTMLInputElement as IE
+import Web.HTML.HTMLTextAreaElement as TAE
 
 -- | Runs an effect when the element triggers the given event. 
 runOn :: forall e r
@@ -36,7 +37,7 @@ checkedOn :: forall r
   -> Poll ( Boolean -> Effect Unit )
   -> Poll ( Attribute r )
 checkedOn listener =
-  listener <<< map \push e -> for_ ( Web.target e >>= fromEventTarget ) $ checked >=> push
+  listener <<< map \push e -> for_ ( Web.target e >>= IE.fromEventTarget ) $ IE.checked >=> push
 
 -- | Shorthand version of `checkedOn`.
 checkedOn_ :: forall r
@@ -52,7 +53,7 @@ numberOn :: forall r
   -> Poll ( Number -> Effect Unit )
   -> Poll ( Attribute r )
 numberOn listener =
-  listener <<< map \push e -> for_ ( Web.target e >>= fromEventTarget ) $ valueAsNumber >=> push
+  listener <<< map \push e -> for_ ( Web.target e >>= IE.fromEventTarget ) $ IE.valueAsNumber >=> push
 
 -- | Shorthand version of `numberOn`.
 numberOn_ :: forall r
@@ -68,7 +69,9 @@ valueOn :: forall r
   -> Poll ( String -> Effect Unit )
   -> Poll ( Attribute r )
 valueOn listener =
-  listener <<< map \push e -> for_ ( Web.target e >>= fromEventTarget ) $ value >=> push
+  listener <<< map \push e -> do
+    for_ ( Web.target e >>= IE.fromEventTarget ) $ IE.value >=> push
+    for_ ( Web.target e >>= TAE.fromEventTarget ) $ TAE.value >=> push
 
 -- | Shorthand version of `valueOn`.
 valueOn_ :: forall r
