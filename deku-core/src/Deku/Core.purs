@@ -59,6 +59,7 @@ module Deku.Core
   , actOnLifecycleForDyn
   , actOnLifecycleForElement
   , actOnLifecycleForText
+  , attributeAtYourOwnRisk
   , beaconAttribution
   , pursxToElement
   , cb
@@ -233,10 +234,13 @@ unsafeAttribute
   :: forall e. EffectFn2 Element DOMInterpret Unit -> Attribute e
 unsafeAttribute = Attribute
 
+attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
+attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setProp }) ->
+  runEffectFn3 setProp (toDekuElement e) (Key k) (Value v)
+
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
-xdata k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setProp }) ->
-  runEffectFn3 setProp (toDekuElement e) (Key $ "data-" <> k) (Value v)
+xdata k v = attributeAtYourOwnRisk ("data-" <> k) v
 
 ------
 ------
