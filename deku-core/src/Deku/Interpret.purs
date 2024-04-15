@@ -22,7 +22,6 @@ import Data.List (List(..), (:))
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (unwrap)
 import Data.Nullable (Nullable, toMaybe)
-import Data.String (toUpper)
 import Data.String as String
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
@@ -73,8 +72,8 @@ type MapEntry = (WeakRef DekuElement) |+| (WeakRef DekuBeacon) |+|
 makeElementEffect :: Core.MakeElement
 makeElementEffect = mkEffectFn2 \ns tag -> do
   elt <- case coerce ns :: Maybe String of
-    Nothing -> runEffectFn1 createElement (toUpper (coerce tag))
-    Just ns' -> runEffectFn2 createElementNS (coerce ns') (toUpper (coerce tag))
+    Nothing -> runEffectFn1 createElement (coerce tag)
+    Just ns' -> runEffectFn2 createElementNS (coerce ns') (coerce tag)
   pure $ toDekuElement elt
 
 d3kU = "d3kU" :: String
