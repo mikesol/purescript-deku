@@ -61,7 +61,7 @@ generate = do
         , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/selection-api.json"
         , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-1.json"
         , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-2.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/wai-aria-1.2.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/wai-aria-1.3.json"
 
         , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/html.json"
         , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/touch-events.json"
@@ -75,7 +75,7 @@ generate = do
 
         , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/dom.json"
         , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/html.json"
-        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/wai-aria-1.2.json"
+        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/wai-aria-1.3.json"
 
         , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/html.json"
         ]
@@ -103,7 +103,7 @@ generate = do
 
     mathml <- Parse.parse MathML <$> sequence
         [ fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-core.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-aam.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml4.json"
 
         , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/mathml-core.json"
 

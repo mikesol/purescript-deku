@@ -26,6 +26,8 @@ module Deku.DOM.Attributes
   , popoverAuto
   , draggable
   , draggable_
+  , draggableFalse
+  , draggableTrue
   , enterkeyhint
   , enterkeyhint_
   , enterkeyhintSend
@@ -53,18 +55,27 @@ module Deku.DOM.Attributes
   , autocapitalizeOn
   , autocapitalizeNone
   , autocapitalizeOff
+  , writingsuggestions
+  , writingsuggestions_
+  , writingsuggestionsFalse
+  , writingsuggestionsTrue
   , spellcheck
   , spellcheck_
+  , spellcheckFalse
+  , spellcheckTrue
   , contenteditable
   , contenteditable_
+  , contenteditablePlaintextOnly
+  , contenteditableFalse
+  , contenteditableTrue
   , accesskey
   , accesskey_
   , autofocus
   , autofocus_
   , hidden
   , hidden_
-  , hiddenHidden
   , hiddenUntilFound
+  , hiddenHidden
   , itemprop
   , itemprop_
   , itemref
@@ -88,6 +99,8 @@ module Deku.DOM.Attributes
   , dirLtr
   , translate
   , translate_
+  , translateNo
+  , translateYes
   , lang
   , lang_
   , target
@@ -166,9 +179,11 @@ module Deku.DOM.Attributes
   , rel_
   , relPrev
   , relNext
+  , relTermsOfService
   , relTag
   , relStylesheet
   , relSearch
+  , relPrivacyPolicy
   , relPreload
   , relPrefetch
   , relPreconnect
@@ -183,6 +198,7 @@ module Deku.DOM.Attributes
   , relIcon
   , relHelp
   , relExternal
+  , relExpect
   , relDnsPrefetch
   , relCanonical
   , relBookmark
@@ -401,9 +417,9 @@ module Deku.DOM.Attributes
   , loop_
   , preload
   , preload_
-  , preloadAuto
   , preloadMetadata
   , preloadNone
+  , preloadAuto
   , playsinline
   , playsinline_
   , poster
@@ -467,6 +483,9 @@ module Deku.DOM.Attributes
   , enctypeApplicationXWwwFormUrlencoded
   , formmethod
   , formmethod_
+  , formmethodDialog
+  , formmethodPost
+  , formmethodGet
   , method
   , method_
   , methodDialog
@@ -538,6 +557,16 @@ module Deku.DOM.Attributes
   , async_
   , nomodule
   , nomodule_
+  , shadowrootserializable
+  , shadowrootserializable_
+  , shadowrootclonable
+  , shadowrootclonable_
+  , shadowrootdelegatesfocus
+  , shadowrootdelegatesfocus_
+  , shadowrootmode
+  , shadowrootmode_
+  , shadowrootmodeClosed
+  , shadowrootmodeOpen
   , profile
   , profile_
   , version
@@ -674,6 +703,10 @@ module Deku.DOM.Attributes
   , ariaChecked_
   , ariaBusy
   , ariaBusy_
+  , ariaBrailleroledescription
+  , ariaBrailleroledescription_
+  , ariaBraillelabel
+  , ariaBraillelabel_
   , ariaAutocomplete
   , ariaAutocomplete_
   , ariaAtomic
@@ -831,6 +864,14 @@ draggable_
   -> f (Deku.Attribute.Attribute (draggable :: String | r))
 draggable_ = draggable <<< Applicative.pure
 
+draggableFalse
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (draggable :: String | r))
+draggableFalse = draggable_ "false"
+
+draggableTrue
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (draggable :: String | r))
+draggableTrue = draggable_ "true"
+
 enterkeyhint
   :: forall r f
    . Functor.Functor f
@@ -984,6 +1025,33 @@ autocapitalizeOff
   => f (Deku.Attribute.Attribute (autocapitalize :: String | r))
 autocapitalizeOff = autocapitalize_ "off"
 
+writingsuggestions
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (writingsuggestions :: String | r))
+writingsuggestions = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "writingsuggestions")
+
+writingsuggestions_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (writingsuggestions :: String | r))
+writingsuggestions_ = writingsuggestions <<< Applicative.pure
+
+writingsuggestionsFalse
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (writingsuggestions :: String | r))
+writingsuggestionsFalse = writingsuggestions_ "false"
+
+writingsuggestionsTrue
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (writingsuggestions :: String | r))
+writingsuggestionsTrue = writingsuggestions_ "true"
+
 spellcheck
   :: forall r f
    . Functor.Functor f
@@ -997,6 +1065,18 @@ spellcheck_
   => String
   -> f (Deku.Attribute.Attribute (spellcheck :: String | r))
 spellcheck_ = spellcheck <<< Applicative.pure
+
+spellcheckFalse
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (spellcheck :: String | r))
+spellcheckFalse = spellcheck_ "false"
+
+spellcheckTrue
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (spellcheck :: String | r))
+spellcheckTrue = spellcheck_ "true"
 
 contenteditable
   :: forall r f
@@ -1012,6 +1092,24 @@ contenteditable_
   => String
   -> f (Deku.Attribute.Attribute (contenteditable :: String | r))
 contenteditable_ = contenteditable <<< Applicative.pure
+
+contenteditablePlaintextOnly
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (contenteditable :: String | r))
+contenteditablePlaintextOnly = contenteditable_ "plaintext-only"
+
+contenteditableFalse
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (contenteditable :: String | r))
+contenteditableFalse = contenteditable_ "false"
+
+contenteditableTrue
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (contenteditable :: String | r))
+contenteditableTrue = contenteditable_ "true"
 
 accesskey
   :: forall r f
@@ -1055,13 +1153,13 @@ hidden_
   -> f (Deku.Attribute.Attribute (hidden :: String | r))
 hidden_ = hidden <<< Applicative.pure
 
-hiddenHidden
-  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (hidden :: String | r))
-hiddenHidden = hidden_ "hidden"
-
 hiddenUntilFound
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (hidden :: String | r))
 hiddenUntilFound = hidden_ "until-found"
+
+hiddenHidden
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (hidden :: String | r))
+hiddenHidden = hidden_ "hidden"
 
 itemprop
   :: forall r f
@@ -1199,6 +1297,14 @@ translate_
   => String
   -> f (Deku.Attribute.Attribute (translate :: String | r))
 translate_ = translate <<< Applicative.pure
+
+translateNo
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (translate :: String | r))
+translateNo = translate_ "no"
+
+translateYes
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (translate :: String | r))
+translateYes = translate_ "yes"
 
 lang
   :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (lang :: String | r))
@@ -1625,6 +1731,10 @@ relNext
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (rel :: String | r))
 relNext = rel_ "next"
 
+relTermsOfService
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (rel :: String | r))
+relTermsOfService = rel_ "terms-of-service"
+
 relTag :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (rel :: String | r))
 relTag = rel_ "tag"
 
@@ -1635,6 +1745,10 @@ relStylesheet = rel_ "stylesheet"
 relSearch
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (rel :: String | r))
 relSearch = rel_ "search"
+
+relPrivacyPolicy
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (rel :: String | r))
+relPrivacyPolicy = rel_ "privacy-policy"
 
 relPreload
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (rel :: String | r))
@@ -1691,6 +1805,10 @@ relHelp = rel_ "help"
 relExternal
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (rel :: String | r))
 relExternal = rel_ "external"
+
+relExpect
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (rel :: String | r))
+relExpect = rel_ "expect"
 
 relDnsPrefetch
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (rel :: String | r))
@@ -2980,10 +3098,6 @@ preload_
   -> f (Deku.Attribute.Attribute (preload :: String | r))
 preload_ = preload <<< Applicative.pure
 
-preloadAuto
-  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (preload :: String | r))
-preloadAuto = preload_ "auto"
-
 preloadMetadata
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (preload :: String | r))
 preloadMetadata = preload_ "metadata"
@@ -2991,6 +3105,10 @@ preloadMetadata = preload_ "metadata"
 preloadNone
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (preload :: String | r))
 preloadNone = preload_ "none"
+
+preloadAuto
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (preload :: String | r))
+preloadAuto = preload_ "auto"
 
 playsinline
   :: forall r f
@@ -3373,6 +3491,24 @@ formmethod_
   => String
   -> f (Deku.Attribute.Attribute (formmethod :: String | r))
 formmethod_ = formmethod <<< Applicative.pure
+
+formmethodDialog
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (formmethod :: String | r))
+formmethodDialog = formmethod_ "dialog"
+
+formmethodPost
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (formmethod :: String | r))
+formmethodPost = formmethod_ "post"
+
+formmethodGet
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (formmethod :: String | r))
+formmethodGet = formmethod_ "get"
 
 method
   :: forall r f
@@ -3811,6 +3947,78 @@ nomodule_
   => String
   -> f (Deku.Attribute.Attribute (nomodule :: String | r))
 nomodule_ = nomodule <<< Applicative.pure
+
+shadowrootserializable
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (shadowrootserializable :: String | r))
+shadowrootserializable = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "shadowrootserializable")
+
+shadowrootserializable_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (shadowrootserializable :: String | r))
+shadowrootserializable_ = shadowrootserializable <<< Applicative.pure
+
+shadowrootclonable
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (shadowrootclonable :: String | r))
+shadowrootclonable = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "shadowrootclonable")
+
+shadowrootclonable_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (shadowrootclonable :: String | r))
+shadowrootclonable_ = shadowrootclonable <<< Applicative.pure
+
+shadowrootdelegatesfocus
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (shadowrootdelegatesfocus :: String | r))
+shadowrootdelegatesfocus = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "shadowrootdelegatesfocus")
+
+shadowrootdelegatesfocus_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (shadowrootdelegatesfocus :: String | r))
+shadowrootdelegatesfocus_ = shadowrootdelegatesfocus <<< Applicative.pure
+
+shadowrootmode
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (shadowrootmode :: String | r))
+shadowrootmode = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "shadowrootmode")
+
+shadowrootmode_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (shadowrootmode :: String | r))
+shadowrootmode_ = shadowrootmode <<< Applicative.pure
+
+shadowrootmodeClosed
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (shadowrootmode :: String | r))
+shadowrootmodeClosed = shadowrootmode_ "closed"
+
+shadowrootmodeOpen
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (shadowrootmode :: String | r))
+shadowrootmodeOpen = shadowrootmode_ "open"
 
 profile
   :: forall r f
@@ -4770,6 +4978,36 @@ ariaBusy_
   => String
   -> f (Deku.Attribute.Attribute (ariaBusy :: String | r))
 ariaBusy_ = ariaBusy <<< Applicative.pure
+
+ariaBrailleroledescription
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (ariaBrailleroledescription :: String | r))
+ariaBrailleroledescription = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "aria-brailleroledescription")
+
+ariaBrailleroledescription_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (ariaBrailleroledescription :: String | r))
+ariaBrailleroledescription_ = ariaBrailleroledescription <<< Applicative.pure
+
+ariaBraillelabel
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (ariaBraillelabel :: String | r))
+ariaBraillelabel = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "aria-braillelabel")
+
+ariaBraillelabel_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (ariaBraillelabel :: String | r))
+ariaBraillelabel_ = ariaBraillelabel <<< Applicative.pure
 
 ariaAutocomplete
   :: forall r f
