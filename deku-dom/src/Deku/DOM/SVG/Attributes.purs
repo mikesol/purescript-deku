@@ -376,6 +376,58 @@ module Deku.DOM.SVG.Attributes
   , pointsAtY_
   , pointsAtX
   , pointsAtX_
+  , alignmentBaseline
+  , alignmentBaseline_
+  , baselineShift
+  , baselineShift_
+  , dominantBaseline
+  , dominantBaseline_
+  , fontFamily
+  , fontFamily_
+  , fontSize
+  , fontSize_
+  , fontSizeAdjust
+  , fontSizeAdjust_
+  , fontStretch
+  , fontStretch_
+  , fontStyle
+  , fontStyle_
+  , fontVariant
+  , fontVariant_
+  , fontWeight
+  , fontWeight_
+  , letterSpacing
+  , letterSpacing_
+  , textDecoration
+  , textDecoration_
+  , wordSpacing
+  , wordSpacing_
+  , writingMode
+  , writingMode_
+  , unicodeBidi
+  , unicodeBidi_
+  , pathLength
+  , pathLength_
+  , mask
+  , mask_
+  , opacity
+  , opacity_
+  , overflow
+  , overflow_
+  , clipPath
+  , clipPath_
+  , clipRule
+  , clipRule_
+  , cursor
+  , cursor_
+  , display
+  , display_
+  , transform
+  , transform_
+  , transformOrigin
+  , transformOrigin_
+  , visibility
+  , visibility_
   ) where
 
 import Control.Applicative (pure, class Applicative) as Applicative
@@ -2825,3 +2877,287 @@ pointsAtX_
   => String
   -> f (Deku.Attribute.Attribute (pointsAtX :: String | r))
 pointsAtX_ = pointsAtX <<< Applicative.pure
+
+alignmentBaseline
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (alignmentBaseline :: String | r))
+alignmentBaseline = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< { key: "alignment-baseline", value: _ } <<<
+      Deku.Attribute.prop'
+  )
+
+alignmentBaseline_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (alignmentBaseline :: String | r))
+alignmentBaseline_ = alignmentBaseline <<< Applicative.pure
+
+baselineShift
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (baselineShift :: String | r))
+baselineShift = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "baseline-shift", value: _ } <<< Deku.Attribute.prop')
+
+baselineShift_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (baselineShift :: String | r))
+baselineShift_ = baselineShift <<< Applicative.pure
+
+dominantBaseline
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dominantBaseline :: String | r))
+dominantBaseline = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< { key: "dominant-baseline", value: _ } <<<
+      Deku.Attribute.prop'
+  )
+
+dominantBaseline_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (dominantBaseline :: String | r))
+dominantBaseline_ = dominantBaseline <<< Applicative.pure
+
+fontFamily
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontFamily :: String | r))
+fontFamily = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "font-family", value: _ } <<< Deku.Attribute.prop')
+
+fontFamily_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontFamily :: String | r))
+fontFamily_ = fontFamily <<< Applicative.pure
+
+fontSize
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontSize :: String | r))
+fontSize = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "font-size", value: _ } <<< Deku.Attribute.prop')
+
+fontSize_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontSize :: String | r))
+fontSize_ = fontSize <<< Applicative.pure
+
+fontSizeAdjust
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontSizeAdjust :: String | r))
+fontSizeAdjust = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< { key: "font-size-adjust", value: _ } <<<
+      Deku.Attribute.prop'
+  )
+
+fontSizeAdjust_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontSizeAdjust :: String | r))
+fontSizeAdjust_ = fontSizeAdjust <<< Applicative.pure
+
+fontStretch
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontStretch :: String | r))
+fontStretch = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "font-stretch", value: _ } <<< Deku.Attribute.prop')
+
+fontStretch_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontStretch :: String | r))
+fontStretch_ = fontStretch <<< Applicative.pure
+
+fontStyle
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontStyle :: String | r))
+fontStyle = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "font-style", value: _ } <<< Deku.Attribute.prop')
+
+fontStyle_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontStyle :: String | r))
+fontStyle_ = fontStyle <<< Applicative.pure
+
+fontVariant
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontVariant :: String | r))
+fontVariant = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "font-variant", value: _ } <<< Deku.Attribute.prop')
+
+fontVariant_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontVariant :: String | r))
+fontVariant_ = fontVariant <<< Applicative.pure
+
+fontWeight
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontWeight :: String | r))
+fontWeight = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "font-weight", value: _ } <<< Deku.Attribute.prop')
+
+fontWeight_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (fontWeight :: String | r))
+fontWeight_ = fontWeight <<< Applicative.pure
+
+letterSpacing
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (letterSpacing :: String | r))
+letterSpacing = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "letter-spacing", value: _ } <<< Deku.Attribute.prop')
+
+letterSpacing_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (letterSpacing :: String | r))
+letterSpacing_ = letterSpacing <<< Applicative.pure
+
+textDecoration
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (textDecoration :: String | r))
+textDecoration = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "text-decoration", value: _ } <<< Deku.Attribute.prop')
+
+textDecoration_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (textDecoration :: String | r))
+textDecoration_ = textDecoration <<< Applicative.pure
+
+wordSpacing
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (wordSpacing :: String | r))
+wordSpacing = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "word-spacing", value: _ } <<< Deku.Attribute.prop')
+
+wordSpacing_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (wordSpacing :: String | r))
+wordSpacing_ = wordSpacing <<< Applicative.pure
+
+writingMode
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (writingMode :: String | r))
+writingMode = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "writing-mode", value: _ } <<< Deku.Attribute.prop')
+
+writingMode_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (writingMode :: String | r))
+writingMode_ = writingMode <<< Applicative.pure
+
+unicodeBidi
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (unicodeBidi :: String | r))
+unicodeBidi = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "unicode-bidi", value: _ } <<< Deku.Attribute.prop')
+
+unicodeBidi_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (unicodeBidi :: String | r))
+unicodeBidi_ = unicodeBidi <<< Applicative.pure
+
+pathLength
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (pathLength :: String | r))
+pathLength = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "pathLength", value: _ } <<< Deku.Attribute.prop')
+
+pathLength_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (pathLength :: String | r))
+pathLength_ = pathLength <<< Applicative.pure
+
+mask
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (mask :: String | r))
+mask = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "mask", value: _ } <<< Deku.Attribute.prop')
+
+mask_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (mask :: String | r))
+mask_ = mask <<< Applicative.pure
+
+opacity
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (opacity :: String | r))
+opacity = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "opacity", value: _ } <<< Deku.Attribute.prop')
+
+opacity_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (opacity :: String | r))
+opacity_ = opacity <<< Applicative.pure
+
+overflow
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (overflow :: String | r))
+overflow = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "overflow", value: _ } <<< Deku.Attribute.prop')
+
+overflow_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (overflow :: String | r))
+overflow_ = overflow <<< Applicative.pure
+
+clipPath
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (clipPath :: String | r))
+clipPath = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "clip-path", value: _ } <<< Deku.Attribute.prop')
+
+clipPath_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (clipPath :: String | r))
+clipPath_ = clipPath <<< Applicative.pure
+
+clipRule
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (clipRule :: String | r))
+clipRule = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "clip-rule", value: _ } <<< Deku.Attribute.prop')
+
+clipRule_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (clipRule :: String | r))
+clipRule_ = clipRule <<< Applicative.pure
+
+cursor
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (cursor :: String | r))
+cursor = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "cursor", value: _ } <<< Deku.Attribute.prop')
+
+cursor_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (cursor :: String | r))
+cursor_ = cursor <<< Applicative.pure
+
+display
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (display :: String | r))
+display = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "display", value: _ } <<< Deku.Attribute.prop')
+
+display_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (display :: String | r))
+display_ = display <<< Applicative.pure
+
+transform
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (transform :: String | r))
+transform = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "transform", value: _ } <<< Deku.Attribute.prop')
+
+transform_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (transform :: String | r))
+transform_ = transform <<< Applicative.pure
+
+transformOrigin
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (transformOrigin :: String | r))
+transformOrigin = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< { key: "transform-origin", value: _ } <<<
+      Deku.Attribute.prop'
+  )
+
+transformOrigin_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (transformOrigin :: String | r))
+transformOrigin_ = transformOrigin <<< Applicative.pure
+
+visibility
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (visibility :: String | r))
+visibility = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "visibility", value: _ } <<< Deku.Attribute.prop')
+
+visibility_
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (visibility :: String | r))
+visibility_ = visibility <<< Applicative.pure

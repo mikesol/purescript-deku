@@ -16,6 +16,8 @@ import Prim.RowList as RL
 import Type.Proxy (Proxy(..))
 import Web.DOM (Element)
 import Web.Event.Event as Web
+import Web.HTML.HTMLInputElement as IE
+import Web.HTML.HTMLTextAreaElement as TAE
 import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
 
 templated_

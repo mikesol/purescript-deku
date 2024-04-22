@@ -921,21 +921,21 @@ type SVGViewElement (r :: Row Type) =
 
 type SvgText (r :: Row Type) =
   ( __tag :: Proxy "SvgText"
-  , "alignment-baseline" :: String
-  , "baseline-shift" :: String
-  , "dominant-baseline" :: String
-  , "font-family" :: String
-  , "font-size" :: String
-  , "font-size-adjust" :: String
-  , "font-stretch" :: String
-  , "font-style" :: String
-  , "font-variant" :: String
-  , "font-weight" :: String
-  , "letter-spacing" :: String
-  , "text-decoration" :: String
-  , "word-spacing" :: String
-  , "writing-mode" :: String
-  , "unicode-bidi" :: String
+  , alignmentBaseline :: String
+  , baselineShift :: String
+  , dominantBaseline :: String
+  , fontFamily :: String
+  , fontSize :: String
+  , fontSizeAdjust :: String
+  , fontStretch :: String
+  , fontStyle :: String
+  , fontVariant :: String
+  , fontWeight :: String
+  , letterSpacing :: String
+  , textDecoration :: String
+  , wordSpacing :: String
+  , writingMode :: String
+  , unicodeBidi :: String
   | r
   )
 
@@ -945,12 +945,12 @@ type SvgPresentation (r :: Row Type) =
   , mask :: String
   , opacity :: String
   , overflow :: String
-  , "clip-path" :: String
-  , "clip-rule" :: String
+  , clipPath :: String
+  , clipRule :: String
   , cursor :: String
   , display :: String
   , transform :: String
-  , "transform-origin" :: String
+  , transformOrigin :: String
   , visibility :: String
   | r
   )

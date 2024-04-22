@@ -876,6 +876,7 @@ type HTMLObjectElement (r :: Row Type) =
   , usemap :: String
   , autocomplete :: String
   , disabled :: String
+  , dirname :: String
   , form :: String
   , height :: String
   , width :: String
@@ -1125,6 +1126,7 @@ type HTMLButtonElement (r :: Row Type) =
   , formaction :: String
   , action :: String
   , disabled :: String
+  , dirname :: String
   , name :: String
   , form :: String
   , value :: String
@@ -1137,6 +1139,7 @@ type HTMLSelectElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLSelectElement"
   , autocomplete :: String
   , disabled :: String
+  , dirname :: String
   , name :: String
   , form :: String
   , required :: String
@@ -1185,6 +1188,7 @@ type HTMLOutputElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLOutputElement"
   , autocomplete :: String
   , disabled :: String
+  , dirname :: String
   , name :: String
   , form :: String
   , for :: String
@@ -1209,6 +1213,7 @@ type HTMLFieldSetElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLFieldSetElement"
   , autocomplete :: String
   , disabled :: String
+  , dirname :: String
   , name :: String
   , form :: String
   | HTMLElement r

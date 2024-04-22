@@ -55,6 +55,7 @@ switcher f poll = Deku.do
         (\(newV /\ _) -> if newV == oldV + 1 then Just unit else Nothing)
         ctr1
     }
+
   f (snd value)
   where
   counter = mapAccum fn 0

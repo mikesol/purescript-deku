@@ -95,6 +95,12 @@ instance DecodeJson Member where
             "iterable" ->
                 pure Iterable
 
+            "maplike" ->
+                pure Iterable
+
+            "setlike" ->
+                pure Iterable
+
             _ ->
                 Left $ UnexpectedValue json
 

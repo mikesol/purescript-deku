@@ -21,7 +21,7 @@ import Deku.DOM (Attribute)
 import Deku.DOM as D
 import Deku.DOM as DOM
 import Deku.DOM.Attributes as DA
-import Deku.DOM.Combinators (injectElementT, templatedMap_, templated_)
+import Deku.DOM.Combinators (injectElementT, templatedMap_)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
@@ -31,9 +31,8 @@ import Deku.Some as Some
 import Deku.Toplevel (runInBody)
 import Effect (Effect, foreachE)
 import Effect.Random (random, randomInt)
-import FRP.Event (fold, keepLatest, mapAccum)
-import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, mergePure, stToPoll)
-import Foreign.Object as Object
+import FRP.Event (fold)
+import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
 import Record (union)
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
@@ -625,6 +624,16 @@ lotsOfSwitching = Deku.do
         [ item <#~> if _ then text_ "hello" else text_ "goodbye"
         ]
     ]
+
+pureSwitches :: Nut
+pureSwitches = Deku.do
+  _ /\ elem <- useState'
+  let
+    initial :: Poll Unit
+    initial = merge $ Array.replicate 5 $ pure unit
+
+  ( initial <|> elem ) <#~> \e ->
+    D.span [ DA.klass_ "switcherelem" ] [ text_ $ show e ]
 
 useHotRantWorks :: Nut
 useHotRantWorks = Deku.do
