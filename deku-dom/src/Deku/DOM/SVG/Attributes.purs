@@ -322,6 +322,7 @@ module Deku.DOM.SVG.Attributes
   , kernelUnitLength_
   , edgeMode
   , edgeMode_
+  , edgeModeMirror
   , edgeModeWrap
   , edgeModeDuplicate
   , targetY
@@ -2462,6 +2463,10 @@ edgeMode_
   => String
   -> f (Deku.Attribute.Attribute (edgeMode :: String | r))
 edgeMode_ = edgeMode <<< Applicative.pure
+
+edgeModeMirror
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (edgeMode :: String | r))
+edgeModeMirror = edgeMode_ "mirror"
 
 edgeModeWrap
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (edgeMode :: String | r))
