@@ -581,6 +581,8 @@ type ARIAMixin (r :: Row Type) =
   , ariaColcount :: String
   , ariaChecked :: String
   , ariaBusy :: String
+  , ariaBrailleroledescription :: String
+  , ariaBraillelabel :: String
   , ariaAutocomplete :: String
   , ariaAtomic :: String
   , ariaActivedescendant :: String
@@ -597,6 +599,7 @@ type HTMLElement (r :: Row Type) =
   , enterkeyhint :: String
   , inputmode :: String
   , autocapitalize :: String
+  , writingsuggestions :: String
   , spellcheck :: String
   , contenteditable :: String
   , accesskey :: String
@@ -1225,6 +1228,7 @@ type HTMLLegendElement (r :: Row Type) =
 type HTMLDetailsElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLDetailsElement"
   , open :: String
+  , name :: String
   , toggle :: Web.Event.Internal.Types.Event
   | HTMLElement r
   )
@@ -1232,8 +1236,8 @@ type HTMLDetailsElement (r :: Row Type) =
 type HTMLDialogElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLDialogElement"
   , open :: String
-  , close :: Web.Event.Internal.Types.Event
   , cancel :: Web.Event.Internal.Types.Event
+  , close :: Web.Event.Internal.Types.Event
   | HTMLElement r
   )
 
@@ -1256,7 +1260,15 @@ type HTMLScriptElement (r :: Row Type) =
   | HTMLElement r
   )
 
-type HTMLTemplateElement (r :: Row Type) = (__tag :: Proxy "HTMLTemplateElement" | HTMLElement r)
+type HTMLTemplateElement (r :: Row Type) =
+  ( __tag :: Proxy "HTMLTemplateElement"
+  , shadowrootserializable :: String
+  , shadowrootclonable :: String
+  , shadowrootdelegatesfocus :: String
+  , shadowrootmode :: String
+  | HTMLElement r
+  )
+
 type HTMLSlotElement (r :: Row Type) =
   (__tag :: Proxy "HTMLSlotElement", name :: String | HTMLElement r)
 
@@ -1330,6 +1342,7 @@ type Element (r :: Row Type) =
   , slot :: String
   , id :: String
   , klass :: String
+  , textInput :: Web.Event.Internal.Types.Event
   , keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent
   , domSubtreeModified :: Web.Event.Internal.Types.Event
   , domNodeRemovedFromDocument :: Web.Event.Internal.Types.Event
