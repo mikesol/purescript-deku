@@ -193,12 +193,14 @@ module Deku.DOM.Listeners
   , beforetoggle_
   , beforematch
   , beforematch_
+  , close
+  , close_
+  , cancel
+  , cancel_
   , select
   , select_
   , invalid
   , invalid_
-  , cancel
-  , cancel_
   , textInput
   , textInput_
   , keypress
@@ -245,8 +247,6 @@ module Deku.DOM.Listeners
   , beforeinput_
   , auxclick
   , auxclick_
-  , close
-  , close_
   , connect
   , connect_
   , contextrestored
@@ -1944,6 +1944,40 @@ beforematch_
   -> f (Deku.Attribute.Attribute (beforematch :: Web.Event.Internal.Types.Event | r))
 beforematch_ = beforematch <<< Applicative.pure
 
+close
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (close :: Web.Event.Internal.Types.Event | r))
+close = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "close" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+close_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (close :: Web.Event.Internal.Types.Event | r))
+close_ = close <<< Applicative.pure
+
+cancel
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (cancel :: Web.Event.Internal.Types.Event | r))
+cancel = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "cancel" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+cancel_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (cancel :: Web.Event.Internal.Types.Event | r))
+cancel_ = cancel <<< Applicative.pure
+
 select
   :: forall r f
    . Functor.Functor f
@@ -1977,23 +2011,6 @@ invalid_
   => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (invalid :: Web.Event.Internal.Types.Event | r))
 invalid_ = invalid <<< Applicative.pure
-
-cancel
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (cancel :: Web.Event.Internal.Types.Event | r))
-cancel = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "cancel" <<< Deku.Attribute.cb <<<
-      Unsafe.Coerce.unsafeCoerce
-  )
-
-cancel_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (cancel :: Web.Event.Internal.Types.Event | r))
-cancel_ = cancel <<< Applicative.pure
 
 textInput
   :: forall r f
@@ -2403,23 +2420,6 @@ auxclick_
   => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 auxclick_ = auxclick <<< Applicative.pure
-
-close
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (close :: Web.Event.Internal.Types.Event | r))
-close = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "close" <<< Deku.Attribute.cb <<<
-      Unsafe.Coerce.unsafeCoerce
-  )
-
-close_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (close :: Web.Event.Internal.Types.Event | r))
-close_ = close <<< Applicative.pure
 
 connect
   :: forall r f

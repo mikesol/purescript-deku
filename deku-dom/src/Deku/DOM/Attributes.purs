@@ -403,8 +403,6 @@ module Deku.DOM.Attributes
   , autocompleteBilling
   , autocompleteShipping
   , autocompleteSection
-  , dirname
-  , dirname_
   , form
   , form_
   , xdata
@@ -507,6 +505,8 @@ module Deku.DOM.Attributes
   , minlength_
   , maxlength
   , maxlength_
+  , dirname
+  , dirname_
   , placeholder
   , placeholder_
   , list
@@ -3011,16 +3011,6 @@ autocompleteSection
    . Applicative.Applicative f
   => f (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteSection = autocomplete_ "section-"
-
-dirname
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dirname :: String | r))
-dirname = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "dirname", value: _ } <<< Deku.Attribute.prop')
-
-dirname_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (dirname :: String | r))
-dirname_ = dirname <<< Applicative.pure
 
 form
   :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (form :: String | r))
