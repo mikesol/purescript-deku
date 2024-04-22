@@ -1,78 +1,78 @@
 workspace:
-  package_set:
+  packageSet:
     registry: 31.0.0
   # backend:
   #   cmd: purs-backend-es
   #   args:
   #     - build
-  extra_packages:
+  extraPackages:
     hyrule:
       repo: "https://github.com/mikesol/purescript-hyrule.git"
-      version: "2.5.0"
+      version: "v2.5.0"
       dependencies:
         - effect
         - js-timers
         - web-html
         - unsafe-reference
         - web-uievents
-    tidy: 
+    tidy:
       repo: "https://github.com/natefaubion/purescript-tidy.git"
       version: "v0.10.0"
       dependencies:
-      - arrays
-      - dodo-printer
-      - foldable-traversable
-      - lists
-      - maybe
-      - ordered-collections
-      - partial
-      - prelude
-      - language-cst-parser
-      - strings
-      - tuples
+        - arrays
+        - dodo-printer
+        - foldable-traversable
+        - lists
+        - maybe
+        - ordered-collections
+        - partial
+        - prelude
+        - language-cst-parser
+        - strings
+        - tuples
     tidy-codegen:
       repo: "https://github.com/natefaubion/purescript-tidy-codegen"
       version: "main"
       dependencies:
-      - aff
-      - ansi
-      - arrays
-      - avar
-      - bifunctors
-      - console
-      - control
-      - dodo-printer
-      - effect
-      - either
-      - enums
-      - exceptions
-      - filterable
-      - foldable-traversable
-      - free
-      - identity
-      - integers
-      - language-cst-parser
-      - lazy
-      - lists
-      - maybe
-      - newtype
-      - node-buffer
-      - node-child-process
-      - node-fs-aff
-      - node-path
-      - node-process
-      - node-streams
-      - ordered-collections
-      - parallel
-      - partial
-      - posix-types
-      - prelude
-      - record
-      - safe-coerce
-      - st
-      - strings
-      - tidy
-      - transformers
-      - tuples
-      - type-equality
-      - unicode
+        - aff
+        - ansi
+        - arrays
+        - avar
+        - bifunctors
+        - console
+        - control
+        - dodo-printer
+        - effect
+        - either
+        - enums
+        - exceptions
+        - filterable
+        - foldable-traversable
+        - free
+        - identity
+        - integers
+        - language-cst-parser
+        - lazy
+        - lists
+        - maybe
+        - newtype
+        - node-buffer
+        - node-child-process
+        - node-fs-aff
+        - node-path
+        - node-process
+        - node-streams
+        - ordered-collections
+        - parallel
+        - partial
+        - posix-types
+        - prelude
+        - record
+        - safe-coerce
+        - st
+        - strings
+        - tidy
+        - transformers
+        - tuples
+        - type-equality
+        - unicode
