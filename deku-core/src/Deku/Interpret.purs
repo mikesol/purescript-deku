@@ -3,526 +3,680 @@
 -- | have documentation. If you are not implementing a Deku backend, please ping
 -- | the #frp channel of the PureScript Discord. If enough people are implementing
 -- | Deku backends, someone may document this stuff at some point.
-module Deku.Interpret
-  ( EliminatableInstruction(..)
-  , FFIDOMSnapshot(..)
-  , FunctionOfFFIDOMSnapshotU
-  , FunctionOfArrayInstructionsU
-  , EffectfulExecutor
-  , EffectfulPayload
-  , Instruction(..)
-  , RenderableInstruction(..)
-  , STPayload
-  , forcePayloadE
-  , deferPayloadE
-  , __internalDekuFlatten
-  , fullDOMInterpret
-  , getAllComments
-  , hydratingDOMInterpret
-  , makeFFIDOMSnapshot
-  , setHydrating
-  , ssrDOMInterpret
-  , unSetHydrating
-  ) where
+module Deku.Interpret where
 
 import Prelude
 
-import Bolson.Control as BC
-import Bolson.Core (Scope(..))
-import Control.Monad.ST (ST)
-import Control.Monad.ST.Class (class MonadST, liftST)
-import Control.Monad.ST.Global (Global)
-import Control.Monad.ST.Global as Region
-import Control.Monad.ST.Internal as Ref
+import Control.Monad.Rec.Class (Step(..), tailRecM)
+import Control.Monad.ST.Class (liftST)
+import Data.Array ((!!))
 import Data.Array as Array
+import Data.Array.NonEmpty (toArray)
+import Data.Array.ST as STArray
+import Data.Compactable (compact)
+import Data.Either (Either(..))
+import Data.Exists (Exists, mkExists, runExists)
 import Data.Foldable (for_)
-import Data.List ((:))
-import Data.List as List
-import Data.Map as Map
-import Data.Maybe (Maybe(..), maybe)
-import Data.Monoid.Endo (Endo(..))
+import Data.FoldableWithIndex (foldrWithIndex)
+import Data.List (List(..), (:))
+import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (unwrap)
-import Data.String.Utils (includes)
-import Deku.Core (DOMInterpret(..), Node', Nut(..), Nut', NutF(..), flattenArgs)
+import Data.Nullable (Nullable, toMaybe)
+import Data.String as String
+import Data.String.Regex (match, regex)
+import Data.String.Regex.Flags (global)
+import Deku.Core (Cb(..), DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Key(..), Nut(..), PSR(..), PursXable(..), Tag(..), Value(..), Verb(..), eltAttribution, fromDekuBeacon, fromDekuElement, fromDekuText, handleAtts, toDekuBeacon, toDekuElement, toDekuText)
 import Deku.Core as Core
-import Effect (Effect)
-import FRP.Event (create, subscribe)
-import FRP.Poll (sample)
+import Deku.JSMap as JSMap
+import Deku.JSWeakRef (WeakRef)
+import Deku.UnsafeDOM (addEventListener, appendChild, cloneTemplate, createElement, createElementNS, eventListener, insertBefore, outerHTML, removeEventListener, setTextContent, toTemplate, unsafeParentNode)
+import Effect (Effect, foreachE)
+import Effect.Console (error)
+import Effect.Ref (read)
+import Effect.Uncurried (EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Foreign.Object as Object
 import Safe.Coerce (coerce)
+import Unsafe.Coerce (unsafeCoerce)
+import Unsafe.Reference (unsafeRefEq)
+import Untagged.Union (type (|+|), toEither1)
+import Web.DOM (Element)
+import Web.DOM as Node
+import Web.DOM.ChildNode (remove)
+import Web.DOM.Comment as Comment
+import Web.DOM.Document (createComment, createTextNode)
+import Web.DOM.Element (getAttribute, removeAttribute, setAttribute, toChildNode, toEventTarget)
+import Web.DOM.Element as Element
+import Web.DOM.Node (childNodes, firstChild, lastChild, nextSibling, nodeTypeIndex, replaceChild, textContent)
+import Web.DOM.NodeList as NodeList
+import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
+import Web.DOM.Text as Text
+import Web.Event.Event (EventType(..), target)
+import Web.Event.Event as Web
+import Web.Event.EventTarget (EventListener)
+import Web.HTML (window)
+import Web.HTML.HTMLButtonElement as HTMLButtonElement
+import Web.HTML.HTMLDocument (toDocument)
+import Web.HTML.HTMLFieldSetElement as HTMLFieldSetElement
+import Web.HTML.HTMLInputElement as HTMLInputElement
+import Web.HTML.HTMLKeygenElement as HTMLKeygenElement
+import Web.HTML.HTMLLinkElement as HTMLLinkElement
+import Web.HTML.HTMLOptGroupElement as HTMLOptGroupElement
+import Web.HTML.HTMLOptionElement as HTMLOptionElement
+import Web.HTML.HTMLSelectElement as HTMLSelectElement
+import Web.HTML.HTMLTextAreaElement as HTMLTextAreaElement
+import Web.HTML.Window (document)
 
--- foreign
-data FFIDOMSnapshot
+type MapEntry = (WeakRef DekuElement) |+| (WeakRef DekuBeacon) |+|
+  (WeakRef DekuText)
 
-type FunctionOfFFIDOMSnapshotU =
-  FFIDOMSnapshot -> Effect Unit
+makeElementEffect :: Core.MakeElement
+makeElementEffect = mkEffectFn2 \ns tag -> do
+  elt <- case coerce ns :: Maybe String of
+    Nothing -> runEffectFn1 createElement (coerce tag)
+    Just ns' -> runEffectFn2 createElementNS (coerce ns') (coerce tag)
+  pure $ toDekuElement elt
 
-foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
+d3kU = "d3kU" :: String
+uk3D = "ul3D" :: String
 
-foreign import stateHasKey :: String -> FFIDOMSnapshot -> Effect Boolean
+-- gets the next positional node
+ffwd
+  :: { n :: Int, node :: Node.Node, cpos :: Int }
+  -> Effect
+       ( Step { n :: Int, node :: Node.Node, cpos :: Int }
+           { cpos :: Int, sb :: Maybe Node.Node }
+       )
+ffwd { n, node, cpos } = do
+  nxt <- nextSibling node
+  case nxt, nodeTypeIndex node, n of
+    Nothing, _, _ -> pure $ Done { cpos, sb: Nothing }
+    -- the current node is an element
+    Just nx, 1, 0 -> pure $ Done { cpos, sb: Just nx }
+    -- the current node is text
+    Just nx, 3, 0 -> pure $ Done { cpos, sb: Just nx }
+    Just nx, 8, _ -> do
+      ctext <- textContent node
+      case ctext of
+        i
+          -- the current node starts a dyn
+          | i == d3kU -> pure $ Loop { n: n + 1, node: nx, cpos }
+          -- the current node ends this dyn
+          -- so the next node is out of the dyn
+          | i == uk3D && n == 1 -> pure $ Done { cpos, sb: Just nx }
+          -- the current node closes a dyn
+          | i == uk3D -> pure $ Loop { n: n - 1, node: nx, cpos }
+          -- random comment, carry on
+          | otherwise -> pure $ Loop { n, node: nx, cpos }
+    -- exotic node, carry on
+    Just nx, _, _ -> pure $ Loop { n, node: nx, cpos }
 
-type RunOnJust = forall a. Maybe a -> (a -> Effect Boolean) -> Effect Boolean
+doInsertAtEnd' :: Node.Node -> DekuBeacon -> Effect Unit
+doInsertAtEnd' nd end = do
+  x <- runEffectFn1 unsafeParentNode (Comment.toNode (fromDekuBeacon end))
+  runEffectFn3 insertBefore nd
+    (Comment.toNode (fromDekuBeacon end))
+    x
 
-runOnJust :: RunOnJust
-runOnJust (Just a) f = f a
-runOnJust _ _ = pure false
+attributeDynParentForNodeEffect
+  :: EffectFn4 Node.Node DekuBeacon
+       DekuBeacon
+       (Maybe Int)
+       Unit
+attributeDynParentForNodeEffect = mkEffectFn4
+  \nd start end mpos -> do
+    let
+      doInsertAtEnd = doInsertAtEnd' nd end
+    case mpos of
+      Just pos -> do
+        let
+          go (Left { curSib, cpos }) = do
+            if cpos >= pos then do
+              x <- runEffectFn1 unsafeParentNode curSib
+              runEffectFn3 insertBefore nd curSib x
+              pure $ Done unit
+            else
+              ifM
+                -- have we hit an end binding
+                -- ffwd will never hit this
+                -- so if we hit it it must be the end of the dyn
+                -- we don't need to check for equality with the end
+                -- because "parentheses" are assumed to be balanced
+                ( if nodeTypeIndex curSib /= 8 then pure false
+                  else do
+                    ctext <- textContent curSib
+                    pure $ ctext == uk3D
+                )
+                (doInsertAtEnd $> Done unit)
+                (Loop <<< Right <$> ffwd { n: 0, node: curSib, cpos })
+          go (Right (Loop l)) = Loop <<< Right <$> ffwd l
+          go (Right (Done { sb, cpos })) = do
+            case sb of
+              Just sb' -> do
+                pure $ Loop $ Left { curSib: sb', cpos: cpos + 1 }
+              Nothing -> doInsertAtEnd $> Done unit
+        firstOrEnd <- nextSibling (Comment.toNode (fromDekuBeacon start))
+        case firstOrEnd of
+          Just st -> tailRecM go $ Left { cpos: 0, curSib: st }
+          Nothing -> error
+            "Programming error: no boundary found in attributeDynParentForNodeEffect"
+      Nothing -> doInsertAtEnd
 
-foreign import getAllComments :: FFIDOMSnapshot -> Effect Unit
+attributeDynParentForNodeEffectLucky
+  :: EffectFn4 Node.Node DekuBeacon
+       DekuBeacon
+       (Maybe Int)
+       Unit
+attributeDynParentForNodeEffectLucky = mkEffectFn4
+  \nd start end mpos -> do
+    let
+      doInsertAtEnd = doInsertAtEnd' nd end
+      startNode = Comment.toNode (fromDekuBeacon start)
+      endNode = Comment.toNode (fromDekuBeacon end)
+    par <- runEffectFn1 unsafeParentNode startNode
+    case mpos of
+      Just pos -> do
+        cn <- childNodes par
+        asArr <- NodeList.toArray cn
+        let startIx' = Array.findIndex (unsafeRefEq startNode) asArr
+        let endIx' = Array.findIndex (unsafeRefEq endNode) asArr
+        for_ startIx' \startIx -> for_ endIx' \endIx -> do
+          if pos >= (endIx - startIx) then do
+            doInsertAtEnd
+          else do
+            for_ (asArr !! (startIx + 1 + max pos 0)) \nn ->
+              runEffectFn3 insertBefore nd nn par
+      _ -> doInsertAtEnd
 
-foreign import makeElement_
-  :: RunOnJust
-  -> Boolean
-  -> Core.MakeElement
-  -> FunctionOfFFIDOMSnapshotU
+attributeDynParentForElementEffect :: Core.AttributeDynParentForElement
+attributeDynParentForElementEffect = mkEffectFn5
+  \lucky (DekuChild child) start end mpos -> do
+    l <- read lucky
+    if l then runEffectFn4 attributeDynParentForNodeEffectLucky
+      (Element.toNode (fromDekuElement child))
+      start
+      end
+      mpos
+    else runEffectFn4
+      attributeDynParentForNodeEffect
+      (Element.toNode (fromDekuElement child))
+      start
+      end
+      mpos
 
-foreign import makeDynBeacon_
-  :: RunOnJust
-  -> Boolean
-  -> Core.MakeDynBeacon
-  -> FunctionOfFFIDOMSnapshotU
+attributeDynParentForTextEffect :: Core.AttributeDynParentForText
+attributeDynParentForTextEffect = mkEffectFn5
+  \lucky txt start end mpos -> do
+    l <- read lucky
+    if l then runEffectFn4 attributeDynParentForNodeEffectLucky
+      (Text.toNode (fromDekuText txt))
+      start
+      end
+      mpos
+    else runEffectFn4
+      attributeDynParentForNodeEffect
+      (Text.toNode (fromDekuText txt))
+      start
+      end
+      mpos
 
-foreign import removeDynBeacon_
-  :: Core.RemoveDynBeacon
-  -> FunctionOfFFIDOMSnapshotU
+attributeElementParentEffect :: Core.AttributeElementParent
+attributeElementParentEffect = mkEffectFn2
+  \(DekuChild child) (DekuParent parent) -> do
+    runEffectFn2 appendChild (Element.toNode (fromDekuElement child))
+      (Element.toNode (fromDekuElement parent))
 
-foreign import attributeParent_
-  :: RunOnJust
-  -> Core.AttributeParent
-  -> FunctionOfFFIDOMSnapshotU
+attributeTextParentEffect :: Core.AttributeTextParent
+attributeTextParentEffect = mkEffectFn2
+  \txt (DekuParent parent) -> do
+    runEffectFn2 appendChild (Text.toNode (fromDekuText txt))
+      (Element.toNode (fromDekuElement parent))
 
-foreign import makeRoot_
-  :: Core.MakeRoot
-  -> FunctionOfFFIDOMSnapshotU
+makeOpenBeaconEffect :: Core.MakeBeacon
+makeOpenBeaconEffect = do
+  doc <- window >>= document
+  cm <- createComment d3kU (toDocument doc)
+  pure (toDekuBeacon cm)
 
-foreign import makeText_
-  :: RunOnJust
-  -> Boolean
-  -> (forall a. (a -> Unit) -> Maybe a -> Unit)
-  -> Core.MakeText
-  -> FunctionOfFFIDOMSnapshotU
+makeCloseBeaconEffect :: Core.MakeBeacon
+makeCloseBeaconEffect = do
+  doc <- window >>= document
+  cm <- createComment uk3D (toDocument doc)
+  pure (toDekuBeacon cm)
 
-foreign import setText_
-  :: Core.SetText
-  -> FunctionOfFFIDOMSnapshotU
+attributeBeaconParentEffect :: Core.AttributeBeaconParent
+attributeBeaconParentEffect = mkEffectFn2 \beacon (DekuParent parent) -> do
+  runEffectFn2 appendChild (Comment.toNode (fromDekuBeacon beacon))
+    (Element.toNode (fromDekuElement parent))
 
-foreign import setProp_
-  :: Boolean -> Core.SetProp -> FunctionOfFFIDOMSnapshotU
+attributeDynParentForBeaconsEffect :: Core.AttributeDynParentForBeacons
+attributeDynParentForBeaconsEffect = mkEffectFn5
+  \i o start end mpos -> do
+    let oo = Comment.toNode (fromDekuBeacon o)
+    let ii = Comment.toNode (fromDekuBeacon i)
+    runEffectFn4 attributeDynParentForNodeEffect oo start end mpos
+    x <- runEffectFn1 unsafeParentNode oo
+    runEffectFn3 insertBefore ii oo x
 
-foreign import unsetAttribute_
-  :: Boolean -> Core.UnsetAttribute -> FunctionOfFFIDOMSnapshotU
+attributeBeaconFullRangeParentProto
+  :: EffectFn3 Boolean (Node.Node -> Effect Unit) Node.Node Unit
+attributeBeaconFullRangeParentProto = mkEffectFn3
+  \skipFirst mover initial ->
+    do
+      let
+        go { n, node } = do
+          nxt <- nextSibling node
+          mover node
+          case nxt of
+            Nothing -> do
+              error
+                "Programming error: attributeBeaconFullRangeParentProto out of range"
+              pure $ Done unit
+            Just nx -> case nodeTypeIndex nx of
+              8 -> do
+                ctext <- textContent nx
+                case ctext of
+                  i
+                    | i == d3kU -> pure $ Loop
+                        { n: n + 1, node: nx }
+                    | i == uk3D && n == 0 -> do
+                        mover nx
+                        pure $ Done unit
+                    | i == uk3D -> pure $ Loop
+                        { n: n - 1, node: nx }
+                    | otherwise -> pure $ Loop { n, node: nx }
+              _ -> pure $ Loop { n, node: nx }
+      n <-
+        if not skipFirst then pure 0
+        else do
+          case nodeTypeIndex initial of
+            8 -> do
+              ctext <- textContent initial
+              case ctext of
+                i
+                  | i == d3kU -> pure 1
+                  | otherwise -> pure 0
+            _ -> pure 0
+      tailRecM go { n, node: initial }
 
-foreign import setCb_
-  :: Boolean -> Core.SetCb -> FunctionOfFFIDOMSnapshotU
+attributeBeaconFullRangeParentEffect :: Core.AttributeBeaconFullRangeParent
+attributeBeaconFullRangeParentEffect = mkEffectFn2
+  \stBeacon (DekuParent parent) -> runEffectFn3
+    attributeBeaconFullRangeParentProto
+    false
+    (\i -> runEffectFn2 appendChild i (Element.toNode (fromDekuElement parent)))
+    (Comment.toNode (fromDekuBeacon stBeacon))
 
-foreign import makePursx_
-  :: RunOnJust
-  -> Boolean
-  -> (forall a. (a -> Unit) -> Maybe a -> Unit)
-  -> Core.MakePursx
-  -> FunctionOfFFIDOMSnapshotU
+attributeDynParentForBeaconFullRangeEffect
+  :: Core.AttributeDynParentForBeaconFullRange
+attributeDynParentForBeaconFullRangeEffect = mkEffectFn4
+  \stBeacon leftB rightB mpos -> do
+    nsOld <- nextSibling (Comment.toNode (fromDekuBeacon stBeacon))
+    runEffectFn4
+      attributeDynParentForNodeEffect
+      (Comment.toNode (fromDekuBeacon stBeacon))
+      leftB
+      rightB
+      mpos
+    par' <- runEffectFn1 unsafeParentNode
+      (Comment.toNode (fromDekuBeacon stBeacon))
+    ns <- nextSibling (Comment.toNode (fromDekuBeacon stBeacon))
+    case ns, nsOld of
+      Just ns', Just nso -> runEffectFn3
+        attributeBeaconFullRangeParentProto
+        true
+        (\i -> runEffectFn3 insertBefore i ns' par')
+        nso
+      _, _ -> error
+        "Programming error: attributeDynParentForBeaconFullRangeEffect cannot find parent"
 
-foreign import deleteFromCache_
-  :: Core.DeleteFromCache -> FunctionOfFFIDOMSnapshotU
+makeTextEffect :: Core.MakeText
+makeTextEffect = mkEffectFn1 \mstr -> do
+  doc <- window >>= document
+  txt <- createTextNode (fromMaybe "" mstr) (toDocument doc)
+  pure $ toDekuText txt
 
-foreign import giveNewParent_
-  :: (Int -> Maybe Int)
-  -> RunOnJust
-  -> Core.GiveNewParent EffectfulPayload
-  -> FunctionOfFFIDOMSnapshotU
+newtype FeI e = FeI
+  { f :: Boolean -> e -> Effect Unit, e :: Element -> Maybe e }
 
-giveNewParentOrReconstruct
-  :: DOMInterpret EffectfulPayload
-  -> EffectfulExecutor
-  -> (Int -> Maybe Int)
-  -> RunOnJust
-  -> Core.GiveNewParent EffectfulPayload
-  -> EffectfulPayload
-giveNewParentOrReconstruct
-  di@
-    ( DOMInterpret
-        { associateWithUnsubscribe
+newtype FeO e = FeO { f :: Boolean -> e -> Effect Unit, e :: e }
+
+disableables ∷ List (Exists FeI)
+disableables =
+  mkExists
+    ( FeI
+        { e: HTMLButtonElement.fromElement
+        , f: HTMLButtonElement.setDisabled
         }
     )
-  executor
-  just
-  roj
-  gnp
-  ffi = do
-  let
-    hasIdAndInScope = giveNewParent_ just roj gnp ffi
-    needsFreshNut =
-      do
-        let
-          { dynFamily
-          , ez
-          , parent
-          , pos
-          , raiseId
-          , scope
-          } = gnp
-        myId <- liftST $ Ref.new Nothing
-        let
-          newRaiseId = raiseId *> void <<< liftST <<< flip Ref.write myId <<<
-            Just
-        let
-          ohBehave = __internalDekuFlatten
-            gnp.ctor
-            { dynFamily
-            , ez
-            , deferralPath: gnp.deferralPath
-            , parent: Just parent
-            , pos
-            , raiseId: newRaiseId
-            , scope
+    : mkExists
+        ( FeI
+            { e: HTMLInputElement.fromElement
+            , f: HTMLInputElement.setDisabled
             }
-            di
-        pump <- liftST create
-        unsubscribe <- liftST $ subscribe
-          (sample ohBehave pump.event)
-          executor
-        pump.push identity
-        fetchedId <- liftST $ Ref.read myId
-        for_ fetchedId $ executor <<< associateWithUnsubscribe <<<
-          { unsubscribe, id: _ }
-  hasId <- stateHasKey gnp.id ffi
-  if hasId then do
-    scope <- getScope gnp.id ffi
-    case scope, gnp.scope of
-      Global, _ -> hasIdAndInScope
-      Local x, Local y -> do
-        -- the free thing won't work
-        -- that's fine, though
-        -- we can issue `associateWithUnsubscribe`
-        -- add an `unsubscribe` field in the ffi
-        -- and then thunk this on delete from cache
-        if includes x y then hasIdAndInScope else needsFreshNut
-      _, _ -> needsFreshNut
-  else needsFreshNut
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLFieldSetElement.fromElement
+            , f: HTMLFieldSetElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLKeygenElement.fromElement
+            , f: HTMLKeygenElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLLinkElement.fromElement
+            , f: HTMLLinkElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLOptGroupElement.fromElement
+            , f: HTMLOptGroupElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLOptionElement.fromElement
+            , f: HTMLOptionElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLSelectElement.fromElement
+            , f: HTMLSelectElement.setDisabled
+            }
+        )
+    : mkExists
+        ( FeI
+            { e: HTMLTextAreaElement.fromElement
+            , f: HTMLTextAreaElement.setDisabled
+            }
+        )
+    : Nil
 
-__internalDekuFlatten
-  :: forall payload
-   . NutF payload
-  -> Node' payload
-__internalDekuFlatten c a b = BC.flatten flattenArgs
-  ((coerce :: NutF payload -> Nut' payload) c)
-  a
-  b
-
-foreign import disconnectElement_
-  :: Core.DisconnectElement -> FunctionOfFFIDOMSnapshotU
-
-foreign import associateWithUnsubscribe_
-  :: Core.AssociateWithUnsubscribe -> FunctionOfFFIDOMSnapshotU
-
-foreign import setHydrating :: FunctionOfFFIDOMSnapshotU
-foreign import unSetHydrating :: FunctionOfFFIDOMSnapshotU
-
-foreign import getPos :: String -> FFIDOMSnapshot -> Effect (Maybe Int)
-foreign import getDynFamily :: String -> FFIDOMSnapshot -> Effect (Maybe String)
-foreign import getParent :: String -> FFIDOMSnapshot -> Effect String
-foreign import getScope :: String -> FFIDOMSnapshot -> Effect Scope
-
-fullDOMInterpret
-  :: Ref.STRef Region.Global Int
-  -> Ref.STRef Global (Map.Map (List.List Int) (Array EffectfulPayload))
-  -> EffectfulExecutor
-  -> Core.DOMInterpret EffectfulPayload
-fullDOMInterpret seed deferredCache executor =
-  let
-    l = Core.DOMInterpret
-      { ids: do
-          s <- Ref.read seed
-          void $ Ref.modify (add 1) seed
-          pure s
-      , associateWithUnsubscribe: associateWithUnsubscribe_
-      , deferPayload: deferPayloadE deferredCache
-      , forcePayload: forcePayloadE deferredCache executor
-      , makeElement: makeElement_ runOnJust false
-      , makeDynBeacon: makeDynBeacon_ runOnJust false
-      , attributeParent: attributeParent_ runOnJust
-      , makeRoot: makeRoot_
-      , makeText: makeText_ runOnJust false (maybe unit)
-      , makePursx: makePursx_ runOnJust false (maybe unit)
-      , setProp: setProp_ false
-      , setCb: setCb_ false
-      , unsetAttribute: unsetAttribute_ false
-      , setText: setText_
-      , sendToPos: sendToPos
-      , removeDynBeacon:
-          removeDynBeacon_
-      , deleteFromCache:
-          deleteFromCache_
-      , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just
-          runOnJust
-          gnp
-      , disconnectElement:
-          disconnectElement_
-      }
-  in
-    l
-
-data RenderableInstruction
-  = MakeElement Core.MakeElement
-  | MakeText Core.MakeText
-  | MakeOpenDynBeacon Core.MakeDynBeacon
-  | MakeCloseDynBeacon Core.MakeDynBeacon
-  | MakePursx Core.MakePursx
-  | SetProp Core.SetProp
-  | SetText Core.SetText
-  | UnsetAttribute Core.UnsetAttribute
-
-data EliminatableInstruction
-  = SendToPos Core.SendToPos
-  | MakeRoot Core.MakeRoot
-  | GiveNewParent (Core.GiveNewParent STPayload)
-  | DisconnectElement Core.DisconnectElement
-  | RemoveDynBeacon Core.RemoveDynBeacon
-  | DeleteFromCache Core.DeleteFromCache
-
-data Instruction
-  = RenderableInstruction RenderableInstruction
-  | EliminatableInstruction EliminatableInstruction
-
-ssrMakeElement
-  :: forall r. Core.MakeElement -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrMakeElement a i = void $ Ref.modify
-  (_ <> [ RenderableInstruction $ MakeElement a ])
-  i
-
-ssrMakeDynBeacon
-  :: forall r
-   . Core.MakeDynBeacon
-  -> Ref.STRef r (Array Instruction)
-  -> ST r Unit
-ssrMakeDynBeacon a i = void $ Ref.modify
-  ( _ <>
-      [ RenderableInstruction $ MakeOpenDynBeacon a
-      , RenderableInstruction $ MakeCloseDynBeacon a
-      ]
-  )
-  i
-
-ssrMakeText
-  :: forall r. Core.MakeText -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrMakeText a i = void $ Ref.modify
-  (_ <> [ RenderableInstruction $ MakeText a ])
-  i
-
-ssrMakePursx
-  :: forall r. Core.MakePursx -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrMakePursx a i = void $ Ref.modify
-  (_ <> [ RenderableInstruction $ MakePursx a ])
-  i
-
-ssrSetProp
-  :: forall r. Core.SetProp -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrSetProp a i = void $ Ref.modify (_ <> [ RenderableInstruction $ SetProp a ])
-  i
-
-ssrUnsetAttribute
-  :: forall r
-   . Core.UnsetAttribute
-  -> Ref.STRef r (Array Instruction)
-  -> ST r Unit
-ssrUnsetAttribute a i = void $ Ref.modify
-  (_ <> [ RenderableInstruction $ UnsetAttribute a ])
-  i
-
-ssrSetText
-  :: forall r. Core.SetText -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrSetText a i = void $ Ref.modify (_ <> [ RenderableInstruction $ SetText a ])
-  i
-
-ssrGiveNewParent
-  :: forall r
-   . Core.GiveNewParent STPayload
-  -> Ref.STRef r (Array Instruction)
-  -> ST r Unit
-ssrGiveNewParent a i = void $ Ref.modify
-  (_ <> [ EliminatableInstruction $ GiveNewParent a ])
-  i
-
-ssrMakeRoot
-  :: forall r. Core.MakeRoot -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrMakeRoot a i = void $ Ref.modify
-  (_ <> [ EliminatableInstruction $ MakeRoot a ])
-  i
-
-ssrSendToPos
-  :: forall r. Core.SendToPos -> Ref.STRef r (Array Instruction) -> ST r Unit
-ssrSendToPos a i = void $ Ref.modify
-  (_ <> [ EliminatableInstruction $ SendToPos a ])
-  i
-
-ssrDeleteFromCache
-  :: forall r
-   . Core.DeleteFromCache
-  -> Ref.STRef r (Array Instruction)
-  -> ST r Unit
-ssrDeleteFromCache a i = void $ Ref.modify
-  (_ <> [ EliminatableInstruction $ DeleteFromCache a ])
-  i
-
-ssrRemoveDynBeacon
-  :: forall r
-   . Core.DeleteFromCache
-  -> Ref.STRef r (Array Instruction)
-  -> ST r Unit
-ssrRemoveDynBeacon a i = void $ Ref.modify
-  (_ <> [ EliminatableInstruction $ RemoveDynBeacon a ])
-  i
-
-ssrDisconnectElement
-  :: forall r
-   . Core.DisconnectElement
-  -> Ref.STRef r (Array Instruction)
-  -> ST r Unit
-ssrDisconnectElement a i = void $ Ref.modify
-  (_ <> [ EliminatableInstruction $ DisconnectElement a ])
-  i
-
-deferPayloadE
-  :: forall i o
-   . Functor o
-  => MonadST Global o
-  => Ref.STRef Global
-       (Map.Map (List.List Int) (Array (i -> o Unit)))
-  -> List.List Int
-  -> (i -> o Unit)
-  -> i
-  -> o Unit
-deferPayloadE deferredCache l p _ = do
-  void $ liftST $ Ref.modify
-    ( flip Map.alter l case _ of
-        Nothing -> Just [ p ]
-        Just x -> Just (x <> [ p ])
-    )
-    deferredCache
-
-forcePayloadE
-  :: forall i o
-   . Functor o
-  => MonadST Global o
-  => Ref.STRef Global
-       (Map.Map (List.List Int) (Array (i -> o Unit)))
-  -> ((i -> o Unit) -> o Unit)
-  -> List.List Int
-  -> i
-  -> o Unit
-forcePayloadE deferredCache executor l = fn
+getDisableable :: Element -> List (Exists FeI) -> Maybe (Exists FeO)
+getDisableable elt = go
   where
-  fn _ = do
-    o <- liftST $ Ref.read deferredCache
+  go Nil = Nothing
+  go (x : _)
+    | Just o <-
+        runExists
+          (\(FeI { f, e }) -> e elt <#> \e' -> mkExists (FeO { f, e: e' }))
+          x = Just o
+  go (_ : y) = go y
+
+setPropEffect :: Core.SetProp
+setPropEffect = mkEffectFn3 \elt' (Key k) (Value v) -> do
+  let elt = fromDekuElement elt'
+  let
+    o
+      | k == "value"
+      , Just ie <- HTMLInputElement.fromElement elt = HTMLInputElement.setValue
+          v
+          ie
+      | k == "value"
+      , Just tx <- HTMLTextAreaElement.fromElement elt =
+          HTMLTextAreaElement.setValue v tx
+      | k == "checked"
+      , Just ie <- HTMLInputElement.fromElement elt =
+          HTMLInputElement.setChecked (v == "true") ie
+      | k == "disabled"
+      , Just fe <-
+          getDisableable elt disableables = runExists
+          (\(FeO { f, e }) -> f (v == "true") e)
+          fe
+      | otherwise = setAttribute k v elt
+  o
+
+setDelegateCbEffect :: Core.SetDelegateCb
+setDelegateCbEffect = mkEffectFn3 \elt' (Key k) mp ->
+  do -- EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb)) Unit
+    let eventType = EventType k
+    let eventTarget = toEventTarget (fromDekuElement elt')
+    nl <- runEffectFn1 eventListener $ mkEffectFn1 \ev -> do
+      for_ (target ev >>= Element.fromEventTarget) \t -> do
+        oo <- runEffectFn2 JSMap.getImpl t mp
+        case toEither1 oo of
+          Left _ -> pure unit
+          Right obj -> case Object.lookup k obj of
+            Just (Cb cb) -> void $ cb ev
+            Nothing -> pure unit
+    runEffectFn4 addEventListener eventType nl false eventTarget
+
+foreign import getPreviousCb
+  :: EffectFn2 String DekuElement (Nullable EventListener)
+
+foreign import deletePreviousCb :: EffectFn2 String DekuElement Unit
+foreign import setPreviousCb :: EffectFn3 String EventListener DekuElement Unit
+
+setCbEffect :: Core.SetCb
+setCbEffect = mkEffectFn3 \elt' (Key k) (Cb v) -> do
+  if k == "@self@" then do
+    void $ v ((unsafeCoerce :: DekuElement -> Web.Event) elt')
+  else do
+    l <- runEffectFn2 getPreviousCb k elt'
+    let eventType = EventType k
+    let eventTarget = toEventTarget (fromDekuElement elt')
+    for_ (toMaybe l) \toRemove -> runEffectFn4 removeEventListener eventType
+      toRemove
+      false
+      eventTarget
+    nl <- runEffectFn1 eventListener $ mkEffectFn1 v
+    runEffectFn4 addEventListener eventType nl false eventTarget
+    runEffectFn3 setPreviousCb k nl elt'
+
+unsetAttributeEffect :: Core.UnsetAttribute
+unsetAttributeEffect = mkEffectFn2 \elt' (Key k) -> do
+  l <- runEffectFn2 getPreviousCb k elt'
+  let asElt = fromDekuElement elt'
+  let eventType = EventType k
+  let eventTarget = toEventTarget asElt
+  for_ (toMaybe l) \toRemove -> do
+    runEffectFn4 removeEventListener eventType toRemove false eventTarget
+    runEffectFn2 deletePreviousCb k elt'
+  removeAttribute k asElt
+
+setTextEffect :: Core.SetText
+setTextEffect = mkEffectFn2 \txt' str -> do
+  let txt = fromDekuText txt'
+  runEffectFn2 setTextContent str (Text.toNode txt)
+
+-- for the send pos family of functions
+-- we remove first
+sendToPosForDynEffect :: Core.SendToPosForDyn
+sendToPosForDynEffect = mkEffectFn5 \i b e st ed -> do
+  runEffectFn3 removeForDynEffect true b e
+  runEffectFn4 attributeDynParentForBeaconFullRangeEffect b st ed (Just i)
+
+sendToPosForElementEffect :: Core.SendToPosForElement
+sendToPosForElementEffect = mkEffectFn5 \lucky i b st ed -> do
+  runEffectFn2 removeForElementEffect true b
+  runEffectFn5 attributeDynParentForElementEffect lucky (DekuChild b) st ed
+    (Just i)
+
+sendToPosForTextEffect :: Core.SendToPosForText
+sendToPosForTextEffect = mkEffectFn5 \lucky i b st ed -> do
+  runEffectFn2 removeForTextEffect true b
+  runEffectFn5 attributeDynParentForTextEffect lucky b st ed (Just i)
+
+-- for now ignore isPortal elements
+removeForDynEffect :: Core.RemoveForDyn
+removeForDynEffect = mkEffectFn3 \fromPortal l ee -> do
+  pn <- runEffectFn1 unsafeParentNode (Comment.toNode $ fromDekuBeacon l)
+  let
+    cond =
+      if fromPortal then pure false
+      else do
+        cn <- childNodes pn
+        nl <- NodeList.toArray cn
+        case nl !! 1, nl !! (Array.length nl - 2) of
+          Just a, Just b -> pure
+            ( unsafeRefEq a (Comment.toNode $ fromDekuBeacon l) && unsafeRefEq b
+                (Comment.toNode $ fromDekuBeacon ee)
+            )
+          _, _ -> pure false
+  let
+    a = do
+      fc <- firstChild pn
+      lc <- lastChild pn
+      case fc, lc of
+        Just xx, Just yy -> do
+          runEffectFn2 setTextContent "" pn
+          runEffectFn2 appendChild xx pn
+          runEffectFn2 appendChild yy pn
+        _, _ -> error "Programming error: dyn underfull"
+  let
+    b = do
+      e <- runEffectFn2 makeElementEffect Nothing (Tag "div")
+      runEffectFn2 attributeBeaconFullRangeParentEffect l (DekuParent e)
+  ifM cond a b
+
+removeForElementEffect :: Core.RemoveForElement
+removeForElementEffect = mkEffectFn2 \_ e -> do
+  remove (toChildNode (fromDekuElement e))
+
+removeForTextEffect :: Core.RemoveForText
+removeForTextEffect = mkEffectFn2 \_ t -> do
+  remove (Text.toChildNode (fromDekuText t))
+
+matchTildes :: String -> Array String
+matchTildes nodeContent =
+  case regex "~([^~]+)~" global of
+    Right r ->
+      -- Extract matched content for all matches
+      maybe [] (compact <<< toArray) (match r nodeContent)
+    Left _ -> []
+
+data ListList a = KeepGoing (List a) (ListList a) | Stop
+
+queryAttrWithParent :: EffectFn2 String Element (Array Node.Node)
+queryAttrWithParent = mkEffectFn2 \att me -> do
+  nl <- querySelectorAll (QuerySelector ("[" <> att <> "]"))
+    (Element.toParentNode me)
+  hasAttr <- getAttribute att me
+  arr <- NodeList.toArray nl
+  pure (maybe arr (Array.snoc arr) (hasAttr $> Element.toNode me))
+
+makePursxEffect :: Core.MakePursx
+makePursxEffect = mkEffectFn5
+  \(Html html) (Verb verb) replacements ps di -> do
     let
-      tail = case _ of
-        n : List.Nil -> (n + 1) : List.Nil
-        a : b -> a : tail b
-        x -> x
-      leftBound = Just l
-      rightBound = Just $ tail l
-      { newMap, instructions } = flip (Map.foldSubmap leftBound rightBound) o
-        \k v ->
-          { newMap: Endo (Map.delete k)
-          , instructions: Endo $ Array.cons v
-          }
-    void $ liftST $ Ref.modify (unwrap newMap)
-      deferredCache
-    for_ (join $ unwrap instructions []) executor
-
-type FunctionOfArrayInstructionsU =
-  Ref.STRef Global (Array Instruction) -> ST Global Unit
-
-type STPayload = FunctionOfArrayInstructionsU
-
-type EffectfulPayload = FunctionOfFFIDOMSnapshotU
-
-type EffectfulExecutor = EffectfulPayload -> Effect Unit
-type STExecutor = STPayload -> ST Global Unit
-
-ssrDOMInterpret
-  :: Ref.STRef Global Int
-  -> Ref.STRef Global (Map.Map (List.List Int) (Array STPayload))
-  -> STExecutor
-  -> Core.DOMInterpret STPayload
-ssrDOMInterpret seed deferredCache executor = Core.DOMInterpret
-  { ids: do
-      s <- Ref.read seed
-      void $ Ref.modify (add 1) seed
-      pure s
-  , associateWithUnsubscribe: \_ _ -> pure unit
-  , deferPayload: deferPayloadE deferredCache
-  , forcePayload: forcePayloadE deferredCache executor
-  , makeElement: ssrMakeElement
-  , attributeParent: \_ _ -> pure unit
-  , makeRoot: ssrMakeRoot
-  , makeText: ssrMakeText
-  , makePursx: ssrMakePursx
-  , setProp: ssrSetProp
-  , unsetAttribute: ssrUnsetAttribute
-  , makeDynBeacon: ssrMakeDynBeacon
-  , setCb: \_ _ -> pure unit
-  , setText: ssrSetText
-  , sendToPos: ssrSendToPos
-  , deleteFromCache: ssrDeleteFromCache
-  , removeDynBeacon: ssrRemoveDynBeacon
-  , giveNewParent: ssrGiveNewParent
-  , disconnectElement: ssrDisconnectElement
-  }
-
-sendToPos :: Core.SendToPos -> FunctionOfFFIDOMSnapshotU
-sendToPos a = \state -> do
-  scope <- getScope a.id state
-  parent <- getParent a.id state
-  dynFamily <- getDynFamily a.id state
-  let
-    newA =
-      { scope
-      , parent
-      , dynFamily
-      , id: a.id
-      , deferralPath: List.Nil
-      , pos: Just a.pos
-      , ez: false
-      , raiseId: mempty
-      -- change me!
-      , ctor: (\(Nut x) -> x) mempty
-      }
-  coerce (giveNewParent_ Just runOnJust newA) state
-
-hydratingDOMInterpret
-  :: Ref.STRef Region.Global Int
-  -> Ref.STRef Global (Map.Map (List.List Int) (Array EffectfulPayload))
-  -> EffectfulExecutor
-  -> Core.DOMInterpret EffectfulPayload
-hydratingDOMInterpret seed deferredCache executor =
-  let
-    l = Core.DOMInterpret
-      { ids: do
-          s <- Ref.read seed
-          void $ Ref.modify (add 1) seed
-          pure s
-      , associateWithUnsubscribe: associateWithUnsubscribe_
-      , deferPayload: deferPayloadE deferredCache
-      , forcePayload: forcePayloadE deferredCache executor
-      , makeElement: makeElement_ runOnJust true
-      , makeDynBeacon: makeDynBeacon_ runOnJust true
-      , attributeParent: attributeParent_ runOnJust
-      , makeRoot: makeRoot_
-      , makeText: makeText_ runOnJust true (maybe unit)
-      , makePursx: makePursx_ runOnJust true (maybe unit)
-      , setProp: setProp_ true
-      , setCb: setCb_ true
-      , unsetAttribute: unsetAttribute_ true
-      , setText: setText_
-      , sendToPos: sendToPos
-      , deleteFromCache:
-          deleteFromCache_
-      , removeDynBeacon:
-          removeDynBeacon_
-      , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just
-          runOnJust
-          gnp
-      , disconnectElement:
-          disconnectElement_
-      }
-  in
-    l
+      { foldedHtml, nuts, atts } = foldrWithIndex
+        ( \i v r -> case v of
+            PXNut n -> r
+              { foldedHtml = String.replace (String.Pattern $ verb <> i <> verb)
+                  ( String.Replacement $
+                      "<span data-deku-elt-internal=\""
+                        <> i
+                        <>
+                          "\"></span>"
+                  )
+                  r.foldedHtml
+              , nuts = Object.insert i n r.nuts
+              }
+            PXAttr a -> r
+              { foldedHtml = String.replace (String.Pattern $ verb <> i <> verb)
+                  ( String.Replacement $ "data-deku-attr-internal=\"" <> i <>
+                      "\""
+                  )
+                  r.foldedHtml
+              , atts = Object.insert i a r.atts
+              }
+            PXStr s -> r
+              { foldedHtml = String.replace (String.Pattern $ verb <> i <> verb)
+                  (String.Replacement $ s)
+                  r.foldedHtml
+              }
+        )
+        { atts: Object.empty, nuts: Object.empty, foldedHtml: html }
+        replacements
+    eltX <- runEffectFn1 toTemplate foldedHtml
+    elt <- runEffectFn1 cloneTemplate eltX
+    runEffectFn3 eltAttribution ps di (toDekuElement elt)
+    arr <- runEffectFn2 queryAttrWithParent "data-deku-attr-internal" elt
+    foreachE arr \nd -> do
+      case Element.fromNode nd of
+        Just asElt -> do
+          attTag <- getAttribute "data-deku-attr-internal" asElt
+          case attTag >>= flip Object.lookup atts of
+            Just att -> do
+              star <- liftST $ STArray.new
+              -- todo: does this map have a runtime hit?
+              handleAtts di (toDekuElement asElt) star
+                [ att ]
+            Nothing -> do
+              error $
+                ( "Programming error: att not found in pursx " <> show attTag
+                    <> " "
+                    <> show (Object.keys atts)
+                )
+        Nothing -> do
+          error $
+            "Programming error: non-element with attr-internal tag"
+    arrrrrr <- runEffectFn2 queryAttrWithParent "data-deku-elt-internal" elt
+    foreachE arrrrrr \nd -> do
+      case Element.fromNode nd of
+        Just asElt -> do
+          eltTag <- getAttribute "data-deku-elt-internal" asElt
+          case eltTag >>= flip Object.lookup nuts of
+            Just (Nut replacementNode) -> do
+              -- todo: does this map have a runtime hit?
+              x' <- runEffectFn1 unsafeParentNode (Element.toNode asElt)
+              case Element.fromNode x' of
+                Nothing ->
+                  error
+                    "Programming error: could not find parent for pursx element"
+                Just x -> do
+                  myNut <- runEffectFn2 replacementNode
+                    ( PSR
+                        { parent: toDekuElement x
+                        , fromPortal: false
+                        , unsubs: []
+                        , beacon: Nothing
+                        }
+                    )
+                    di
+                  case myNut of
+                    DekuElementOutcome eo -> replaceChild
+                      (Element.toNode (fromDekuElement eo))
+                      (Element.toNode asElt)
+                      (Element.toNode x)
+                    DekuTextOutcome to -> replaceChild
+                      (Text.toNode (fromDekuText to))
+                      (Element.toNode asElt)
+                      (Element.toNode x)
+                    DekuBeaconOutcome bo -> do
+                      runEffectFn3
+                        attributeBeaconFullRangeParentProto
+                        false
+                        ( \i -> runEffectFn3 insertBefore i
+                            (Element.toNode asElt)
+                            (Element.toNode x)
+                        )
+                        (Comment.toNode (fromDekuBeacon bo))
+                      remove (Element.toChildNode asElt)
+                    NoOutcome -> pure unit
+            Nothing -> do
+              ohtml <- runEffectFn1 outerHTML asElt
+              parhtml <- runEffectFn1 outerHTML
+                (fromDekuElement (unwrap ps).parent)
+              error $
+                ( "Programming error: nut not found in pursx " <> show eltTag
+                    <> " "
+                    <> html
+                    <> show (Object.keys atts)
+                    <> " "
+                    <> show (Object.keys nuts)
+                    <> " "
+                    <> ohtml
+                    <> " @@ "
+                    <> parhtml
+                )
+        Nothing -> do
+          error $
+            "Programming error: non-element with attr-internal tag"
+    pure (toDekuElement elt)

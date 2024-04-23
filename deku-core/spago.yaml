@@ -3,7 +3,6 @@ package:
   dependencies:
   - aff
   - arrays
-  - bolson
   - catenable-lists
   - control
   - effect
@@ -16,6 +15,7 @@ package:
   - hyrule
   - maybe
   - newtype
+  - nullable
   - ordered-collections
   - prelude
   - profunctor
@@ -32,3 +32,5 @@ package:
   - web-events
   - web-html
   - web-uievents
+  - untagged-union
+  - web-dom-parser

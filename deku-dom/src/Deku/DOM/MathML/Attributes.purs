@@ -51,244 +51,320 @@ module Deku.DOM.MathML.Attributes
   , display_
   ) where
 
-import Control.Applicative (pure) as Applicative
+import Control.Applicative (pure, class Applicative) as Applicative
 import Control.Category ((<<<))
-import Data.Functor (map) as Functor
-import FRP.Poll as FRP.Poll
+import Data.Functor (map, class Functor) as Functor
 import Deku.DOM.Combinators (unset) as Combinators
 import Deku.Attribute as Deku.Attribute
 
 encoding
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (encoding :: String | r))
-encoding = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "encoding", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (encoding :: String | r))
+encoding = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "encoding")
 
-encoding_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (encoding :: String | r))
+encoding_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (encoding :: String | r))
 encoding_ = encoding <<< Applicative.pure
 
 selection
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (selection :: String | r))
-selection = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "selection", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (selection :: String | r))
+selection = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "selection")
 
 selection_
-  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (selection :: String | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (selection :: String | r))
 selection_ = selection <<< Applicative.pure
 
 actiontype
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (actiontype :: String | r))
-actiontype = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "actiontype", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (actiontype :: String | r))
+actiontype = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "actiontype")
 
 actiontype_
-  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (actiontype :: String | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (actiontype :: String | r))
 actiontype_ = actiontype <<< Applicative.pure
 
 accentunder
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (accentunder :: String | r))
-accentunder = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "accentunder", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (accentunder :: String | r))
+accentunder = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "accentunder")
 
 accentunder_
-  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (accentunder :: String | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (accentunder :: String | r))
 accentunder_ = accentunder <<< Applicative.pure
 
 accent
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (accent :: String | r))
-accent = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "accent", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (accent :: String | r))
+accent = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "accent")
 
-accent_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (accent :: String | r))
+accent_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (accent :: String | r))
 accent_ = accent <<< Applicative.pure
 
 voffset
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (voffset :: String | r))
-voffset = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "voffset", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (voffset :: String | r))
+voffset = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "voffset")
 
-voffset_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (voffset :: String | r))
+voffset_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (voffset :: String | r))
 voffset_ = voffset <<< Applicative.pure
 
 lspace
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (lspace :: String | r))
-lspace = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "lspace", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (lspace :: String | r))
+lspace = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "lspace")
 
-lspace_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (lspace :: String | r))
+lspace_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (lspace :: String | r))
 lspace_ = lspace <<< Applicative.pure
 
 depth
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (depth :: String | r))
-depth = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "depth", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (depth :: String | r))
+depth = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "depth")
 
-depth_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (depth :: String | r))
+depth_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (depth :: String | r))
 depth_ = depth <<< Applicative.pure
 
 height
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (height :: String | r))
-height = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "height", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (height :: String | r))
+height = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "height")
 
-height_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (height :: String | r))
+height_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (height :: String | r))
 height_ = height <<< Applicative.pure
 
 width
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (width :: String | r))
-width = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "width", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (width :: String | r))
+width = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "width")
 
-width_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (width :: String | r))
+width_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (width :: String | r))
 width_ = width <<< Applicative.pure
 
 linethickness
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (linethickness :: String | r))
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (linethickness :: String | r))
 linethickness = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "linethickness", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "linethickness")
 
 linethickness_
-  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (linethickness :: String | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (linethickness :: String | r))
 linethickness_ = linethickness <<< Applicative.pure
 
 maxsize
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (maxsize :: String | r))
-maxsize = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "maxsize", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (maxsize :: String | r))
+maxsize = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "maxsize")
 
-maxsize_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (maxsize :: String | r))
+maxsize_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (maxsize :: String | r))
 maxsize_ = maxsize <<< Applicative.pure
 
 minsize
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (minsize :: String | r))
-minsize = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "minsize", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (minsize :: String | r))
+minsize = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "minsize")
 
-minsize_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (minsize :: String | r))
+minsize_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (minsize :: String | r))
 minsize_ = minsize <<< Applicative.pure
 
 rspace
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (rspace :: String | r))
-rspace = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "rspace", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (rspace :: String | r))
+rspace = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "rspace")
 
-rspace_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (rspace :: String | r))
+rspace_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (rspace :: String | r))
 rspace_ = rspace <<< Applicative.pure
 
 movablelimits
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (movablelimits :: String | r))
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (movablelimits :: String | r))
 movablelimits = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "movablelimits", value: _ } <<< Deku.Attribute.prop')
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "movablelimits")
 
 movablelimits_
-  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (movablelimits :: String | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (movablelimits :: String | r))
 movablelimits_ = movablelimits <<< Applicative.pure
 
 largeop
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (largeop :: String | r))
-largeop = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "largeop", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (largeop :: String | r))
+largeop = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "largeop")
 
-largeop_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (largeop :: String | r))
+largeop_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (largeop :: String | r))
 largeop_ = largeop <<< Applicative.pure
 
 symmetric
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (symmetric :: String | r))
-symmetric = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "symmetric", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (symmetric :: String | r))
+symmetric = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "symmetric")
 
 symmetric_
-  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (symmetric :: String | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (symmetric :: String | r))
 symmetric_ = symmetric <<< Applicative.pure
 
 stretchy
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (stretchy :: String | r))
-stretchy = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "stretchy", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (stretchy :: String | r))
+stretchy = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "stretchy")
 
-stretchy_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (stretchy :: String | r))
+stretchy_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (stretchy :: String | r))
 stretchy_ = stretchy <<< Applicative.pure
 
 form
-  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (form :: String | r))
-form = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "form", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (form :: String | r))
+form = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "form")
 
-form_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (form :: String | r))
+form_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (form :: String | r))
 form_ = form <<< Applicative.pure
 
 separator
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (separator :: String | r))
-separator = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "separator", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (separator :: String | r))
+separator = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "separator")
 
 separator_
-  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (separator :: String | r))
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (separator :: String | r))
 separator_ = separator <<< Applicative.pure
 
 fence
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (fence :: String | r))
-fence = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "fence", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (fence :: String | r))
+fence = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "fence")
 
-fence_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (fence :: String | r))
+fence_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (fence :: String | r))
 fence_ = fence <<< Applicative.pure
 
 alttext
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (alttext :: String | r))
-alttext = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "alttext", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (alttext :: String | r))
+alttext = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "alttext")
 
-alttext_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (alttext :: String | r))
+alttext_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (alttext :: String | r))
 alttext_ = alttext <<< Applicative.pure
 
 display
-  :: forall r
-   . FRP.Poll.Poll String
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (display :: String | r))
-display = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "display", value: _ } <<< Deku.Attribute.prop')
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (display :: String | r))
+display = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "display")
 
-display_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (display :: String | r))
+display_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (display :: String | r))
 display_ = display <<< Applicative.pure

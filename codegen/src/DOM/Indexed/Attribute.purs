@@ -3,20 +3,19 @@ module DOM.Indexed.Attribute where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Attribute, Ctor(..), Keyword, declHandler, typeAttributed, typePolled, typeIndexedAt)
+import DOM.Common (Attribute, Ctor(..), Keyword, declHandler, typeAttributed, typeFunked, typeIndexedAt)
 import DOM.TypeStub (constructArg, constructIndex, handler, handlerImports)
 import Data.Array as Array
 import PureScript.CST.Types (Declaration, Export, ImportDecl, Type)
-import Tidy.Codegen (binaryOp, declImport, declImportAs, declSignature, declValue, exportModule, exportValue, exprApp, exprIdent, exprOp, exprString, importOp, importValue, typeArrow, typeForall, typeVar)
+import Tidy.Codegen (binaryOp, declImport, declImportAs, declSignature, declValue, exportModule, exportValue, exprApp, exprIdent, exprOp, exprString, importOp, importClass, importValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeVar)
 
 imports :: Partial => Array Attribute -> Array ( ImportDecl Void )
 imports attributes =
     Array.concat
         [ identity
-            [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
+            [ declImportAs "Control.Applicative" [ importValue "pure", importClass "Applicative" ] "Applicative"
             , declImport "Control.Category" [ importOp "<<<" ]
-            , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
-            , declImportAs "FRP.Poll" [] "FRP.Poll"
+            , declImportAs "Data.Functor" [ importValue "map", importClass "Functor" ] "Functor"
             , declImportAs "Deku.DOM.Combinators" [ importValue "unset" ] "Combinators"
             ]
         , handlerImports ( map _.type attributes )
@@ -42,15 +41,17 @@ generate attributes =
         in
             -- generate simple function definition
             [ declSignature ctor
-                $ typeForall [ typeVar "r" ]
-                $ typeArrow [ typePolled $ constructArg t ]
-                $ typePolled $ typeAttributed $ typeIndexedAt index indexType
-            , declHandler ctor name $ handler t
+                $ typeForall [ typeVar "r", typeVar "f" ]
+                $ typeConstrained [ typeApp ( typeCtor "Functor.Functor" ) [ typeVar "f"  ] ]
+                $ typeArrow [ typeFunked "f" $ constructArg t ]
+                $ typeFunked "f" $ typeAttributed $ typeIndexedAt index indexType
+            , declHandler ctor $ handler name t
 
             , declSignature shortHand 
-                $ typeForall [ typeVar "r" ]
+                $ typeForall [ typeVar "r", typeVar "f" ]
+                $ typeConstrained [ typeApp ( typeCtor "Applicative.Applicative" ) [ typeVar "f"  ] ]
                 $ typeArrow [ constructArg t ]
-                $ typePolled $ typeAttributed $ typeIndexedAt index indexType
+                $ typeFunked "f" $ typeAttributed $ typeIndexedAt index indexType
             , declValue shortHand [] $ exprOp ( exprIdent ctor ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ] 
             ]
             -- create additional shorthands for known keywords
@@ -62,7 +63,8 @@ generate attributes =
     generateKeywordShorthand ctor shortHand index indexType { original, name } = do
         let valueName = ctor <> name
         [ declSignature valueName 
-                $ typeForall [ typeVar "r" ]
-                $ typePolled $ typeAttributed $ typeIndexedAt index $ indexType
+                $ typeForall [ typeVar "r", typeVar "f" ]
+                $ typeConstrained [ typeApp ( typeCtor "Applicative.Applicative" ) [ typeVar "f"  ] ]
+                $ typeFunked "f" $ typeAttributed $ typeIndexedAt index $ indexType
         , declValue valueName [] $ exprApp ( exprIdent shortHand ) [ exprString original ] 
         ]

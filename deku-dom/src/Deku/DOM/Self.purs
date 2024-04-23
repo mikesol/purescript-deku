@@ -2,10 +2,9 @@
 -- Any changes may be overwritten.
 module Deku.DOM.Self where
 
-import Control.Applicative (pure) as Applicative
+import Control.Applicative (pure, class Applicative) as Applicative
 import Control.Category ((<<<))
-import Data.Functor (map) as Functor
-import FRP.Poll as FRP.Poll
+import Data.Functor (map, class Functor) as Functor
 import Type.Proxy (Proxy)
 import Deku.Attribute as Deku.Attribute
 import Web.DOM.Element as Web.DOM.Element
@@ -61,42 +60,44 @@ class IsSelf (element :: Type) (name :: Symbol) | element -> name
 -- | when you need to manipulate the element itself, like for example attaching
 -- | properties to it, etc.
 self
-  :: forall r
-   . FRP.Poll.Poll (Web.DOM.Element.Element -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute r)
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.DOM.Element.Element -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute r)
 self = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "@self@", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "@self@" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 -- | Shorthand version of `self`
 self_
-  :: forall r
-   . (Web.DOM.Element.Element -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute r)
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.DOM.Element.Element -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute r)
 self_ = self <<< Applicative.pure
 
 -- | A slightly less permissive version of `Self` that associates Deku Elements to
 -- | the primitive element definitions form `purescript-web`. For example, `A_` from `deku`
 -- | gets translated to `HTMLAnchorElement` from `purescript-web`, etc.
 selfT
-  :: forall name e r
-   . IsSelf e name
-  => FRP.Poll.Poll (e -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (__tag :: Proxy name | r))
+  :: forall name e r f
+   . Functor.Functor f
+  => IsSelf e name
+  => f (e -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (__tag :: Proxy name | r))
 selfT = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< { key: "@self@", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "@self@" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
   )
 
 -- | Shorthand version of `selfT`
 selfT_
-  :: forall name e r
-   . IsSelf e name
+  :: forall name e r f
+   . Applicative.Applicative f
+  => IsSelf e name
   => (e -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Poll.Poll (Deku.Attribute.Attribute (__tag :: Proxy name | r))
+  -> f (Deku.Attribute.Attribute (__tag :: Proxy name | r))
 selfT_ = selfT <<< Applicative.pure
 
 instance IsSelf Web.HTML.HTMLAnchorElement.HTMLAnchorElement "HTMLAnchorElement"

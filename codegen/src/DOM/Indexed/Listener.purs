@@ -3,20 +3,19 @@ module DOM.Indexed.Listener where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Ctor(..), Event, declHandler, typeAttributed, typePolled, typeIndexedAt)
+import DOM.Common (Ctor(..), Event, declHandler, typeAttributed, typeFunked, typeIndexedAt)
 import DOM.TypeStub (constructArg, constructIndex, handler, handlerImports)
 import Data.Array as Array
 import PureScript.CST.Types (Declaration, Export, ImportDecl)
-import Tidy.Codegen (binaryOp, declImport, declImportAs, declSignature, declValue, exportModule, exportValue, exprIdent, exprOp, importOp, importValue, typeArrow, typeForall, typeVar)
+import Tidy.Codegen (binaryOp, declImport, declImportAs, declSignature, declValue, exportModule, exportValue, exprIdent, exprOp, importClass, importOp, importValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeVar)
 
 imports :: Partial => Array Event -> Array ( ImportDecl Void )
 imports events =
     Array.concat
         [ identity
-            [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
+            [ declImportAs "Control.Applicative" [ importValue "pure", importClass "Applicative" ] "Applicative"
             , declImport "Control.Category" [ importOp "<<<" ]
-            , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
-            , declImportAs "FRP.Poll" [] "FRP.Poll"
+            , declImportAs "Data.Functor" [ importValue "map", importClass "Functor" ] "Functor"
             , declImportAs "Deku.DOM.Combinators"
                 ( map importValue
                     [ "unset"
@@ -53,14 +52,16 @@ generate events =
         in
             -- generate simple function definition
             [ declSignature ctor
-                $ typeForall [ typeVar "r" ]
-                $ typeArrow [ typePolled $ constructArg t ]
-                $ typePolled $ typeAttributed $ typeIndexedAt index indexType
-            , declHandler ctor name $ handler t
+                $ typeForall [ typeVar "r", typeVar "f" ]
+                $ typeConstrained [ typeApp ( typeCtor "Functor.Functor" ) [ typeVar "f"  ] ]
+                $ typeArrow [ typeFunked "f" $ constructArg t ]
+                $ typeFunked "f" $ typeAttributed $ typeIndexedAt index indexType
+            , declHandler ctor $ handler name t
 
             , declSignature shortHand 
-                $ typeForall [ typeVar "r" ]
+                $ typeForall [ typeVar "r", typeVar "f" ]
+                $ typeConstrained [ typeApp ( typeCtor "Applicative.Applicative" ) [ typeVar "f"  ] ]
                 $ typeArrow [ constructArg t ]
-                $ typePolled $ typeAttributed $ typeIndexedAt index indexType
+                $ typeFunked "f" $ typeAttributed $ typeIndexedAt index indexType
             , declValue shortHand [] $ exprOp ( exprIdent ctor ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ] 
             ]

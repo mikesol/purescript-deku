@@ -4,7 +4,7 @@ import Prelude
 import Prim hiding (Type)
 
 import DOM.TypeStub (TypeStub(..))
-import Data.Array as Array
+
 import Data.Foldable (foldl)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, un)
@@ -17,7 +17,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (Declaration, Expr, Ident(..), Label, Proper(..), Type)
 import Safe.Coerce (coerce)
-import Tidy.Codegen (binaryOp, declValue, exprApp, exprIdent, exprOp, exprRecord, exprSection, exprString, typeApp, typeCtor, typeRow, typeVar)
+import Tidy.Codegen (declValue, exprApp, exprIdent, exprOp, typeApp, typeCtor, typeRow, typeVar)
 import Tidy.Codegen.Class (class ToName, class ToQualifiedName, defaultToName, toName, toQualifiedName)
 import Tidy.Codegen.Types (BinaryOp, Qualified(..))
 
@@ -185,16 +185,16 @@ capitalize :: String -> String
 capitalize = 
     String.splitAt 1 >>> \{ before, after } -> String.toUpper before <> after
 
-declHandler :: String -> String -> Array ( BinaryOp ( Expr Void ) ) -> Declaration Void
-declHandler name key ops =
+declHandler :: String -> Array ( BinaryOp ( Expr Void ) ) -> Declaration Void
+declHandler name ops =
     unsafePartial
         $ declValue name []
-        $ exprApp ( exprIdent "Functor.map" ) [ exprHandler key ops ]
+        $ exprApp ( exprIdent "Functor.map" ) [ exprHandler ops ]
 
-exprHandler :: Partial => String -> Array ( BinaryOp ( Expr Void ) ) -> Expr Void
-exprHandler key ops =
+exprHandler :: Partial => Array ( BinaryOp ( Expr Void ) ) -> Expr Void
+exprHandler ops =
     exprOp ( exprIdent "Deku.Attribute.unsafeAttribute" )
-        $ Array.cons ( binaryOp "<<<" $ exprRecord [ "key" /\ exprString key, "value" /\ exprSection ] ) ops
+        $ ops
 
 typeArrayed :: Type Void -> Type Void
 typeArrayed t = 
@@ -203,6 +203,10 @@ typeArrayed t =
 typePolled :: Type Void -> Type Void
 typePolled t =
     unsafePartial $ typeApp ( typeCtor "FRP.Poll.Poll" ) $ pure t
+
+typeFunked ::  String -> Type Void -> Type Void
+typeFunked f t =
+    unsafePartial $ typeApp ( typeVar f ) $ pure t
 
 typeAttributed :: Type Void -> Type Void
 typeAttributed t =

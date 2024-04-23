@@ -7,7 +7,7 @@ import Data.Array as Array
 import Data.Generic.Rep (class Generic)
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (Expr, ImportDecl, Type)
-import Tidy.Codegen (binaryOp, declImportAs, exprIdent, typeApp, typeArrow, typeCtor)
+import Tidy.Codegen (binaryOp, declImportAs, exprApp, exprIdent, exprString, typeApp, typeArrow, typeCtor)
 import Tidy.Codegen.Types (BinaryOp)
 
 -- | Intermediate type between `IDLType` and `Type a` so we can implement an `Ord` and `Eq` instance for deduping. 
@@ -110,28 +110,28 @@ indexImports stubs =
             [ "Data.Unit" ] -- unset'
 
 -- | Generates a handler that can convert the type indicated by the `TypeStub` to an `AttributeValue`.
-handler :: forall e . TypeStub -> Array ( BinaryOp ( Expr e ) ) 
-handler = unsafePartial case _ of
+handler :: forall e . String -> TypeStub -> Array ( BinaryOp ( Expr e ) ) 
+handler key = unsafePartial case _ of
     TypeInt ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
+        [ binaryOp "<<<" $ exprApp (exprIdent "Deku.Attribute.prop'") [exprString key]
         , binaryOp "<<<" $ exprIdent "Data.Show.show"
         ]
     
     TypeString ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'" ]
+        [ binaryOp "<<<" $ exprApp (exprIdent "Deku.Attribute.prop'") [exprString key] ]
 
     TypeBoolean ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
+        [ binaryOp "<<<" $ exprApp (exprIdent "Deku.Attribute.prop'") [exprString key]
         , binaryOp "<<<" $ exprIdent "Data.Show.show"
         ]
 
     TypeNumber ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.prop'"
+        [ binaryOp "<<<" $ exprApp (exprIdent "Deku.Attribute.prop'") [exprString key]
         , binaryOp "<<<" $ exprIdent "Data.Show.show"
         ]
     
     TypeEvent _ _ ->
-        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.cb'"
+        [ binaryOp "<<<" $ exprApp (exprIdent "Deku.Attribute.cb'") [exprString key]
         , binaryOp "<<<" $ exprIdent "Deku.Attribute.cb"
         , binaryOp "<<<" $ exprIdent "Unsafe.Coerce.unsafeCoerce"
         ]

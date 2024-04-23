@@ -12,7 +12,28 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Install dependencies
-        run: npm ci
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            .spago
+            ${{ env.spago_global_cache }}
+            output
+          key: >-
+            ${{ hashFiles('pnpm-lock.yaml') }}-
+            ${{ hashFiles('spago.yaml') }}
+      - uses: pnpm/action-setup@v2.2.4
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7.13.2
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Install
+        run: pnpm i
       - name: Test
-        run: npm t
+        run: pnpm t

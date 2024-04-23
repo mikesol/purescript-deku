@@ -4,13 +4,13 @@ import Prelude
 import Prim hiding (Type)
 
 import Comment (documentDecl)
-import DOM.Common (declHandler, selfKey, typeAttributed, typePolled, nominal, typeIndexedAt)
+import DOM.Common (declHandler, nominal, selfKey, typeAttributed, typeFunked, typeIndexedAt)
 import DOM.TypeStub (TypeStub(..), constructArg, constructIndex, handler, handlerImports)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
 import Data.Maybe (Maybe(..))
 import PureScript.CST.Types (Type, ClassFundep(..), Declaration, ImportDecl)
-import Tidy.Codegen (binaryOp, declClass, declImport, declImportAs, declInstance, declSignature, declValue, exprIdent, exprOp, importOp, importType, importValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeString, typeVar, typeVarKinded)
+import Tidy.Codegen (binaryOp, declClass, declImport, declImportAs, declInstance, declSignature, declValue, exprIdent, exprOp, importClass, importOp, importType, importValue, typeApp, typeArrow, typeConstrained, typeCtor, typeForall, typeString, typeVar, typeVarKinded)
 import Tidy.Codegen.Class (toName)
 import Tidy.Codegen.Common (tokRightArrow)
 
@@ -19,10 +19,9 @@ imports :: Partial => Array TypeStub -> Array ( ImportDecl Void )
 imports es =
     Array.concat
         [ identity 
-            [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
+            [ declImportAs "Control.Applicative" [ importValue "pure", importClass "Applicative" ] "Applicative"
             , declImport "Control.Category" [ importOp "<<<" ]
-            , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
-            , declImportAs "FRP.Poll" [] "FRP.Poll"
+            , declImportAs "Data.Functor" [ importValue "map", importClass "Functor" ] "Functor"
             , declImport "Type.Proxy" [ importType "Proxy" ]
             ]
         , handlerImports $ Array.cons rawSelf es
@@ -46,16 +45,18 @@ generate es =
             , "properties to it, etc."
             ]
             $ declSignature "self"
-            $ typeForall [ typeVar "r" ]
-            $ typeArrow [ typePolled $ constructArg rawSelf ]
-            $ typePolled $ typeAttributed $ typeVar "r"
-        , declHandler "self" selfKey $ handler $ rawSelf
+            $ typeForall [ typeVar "r", typeVar "f" ]
+            $ typeConstrained [ typeApp ( typeCtor "Functor.Functor" ) [ typeVar "f"  ] ]
+            $ typeArrow [ typeFunked "f" $ constructArg rawSelf ]
+            $ typeFunked "f" $ typeAttributed $ typeVar "r"
+        , declHandler "self" $ handler selfKey $ rawSelf
 
         , documentDecl [ "Shorthand version of `self`" ]
             $ declSignature "self_"
-            $ typeForall [ typeVar "r" ]
+            $ typeForall [ typeVar "r", typeVar "f" ]
+            $ typeConstrained [ typeApp ( typeCtor "Applicative.Applicative" ) [ typeVar "f"  ] ]
             $ typeArrow [ constructArg rawSelf ]
-            $ typePolled $ typeAttributed $ typeVar "r"
+            $ typeFunked "f" $ typeAttributed $ typeVar "r"
         , declValue "self_" [] $ exprOp ( exprIdent "self" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
         
         , documentDecl 
@@ -64,18 +65,20 @@ generate es =
             , "gets translated to `HTMLAnchorElement` from `purescript-web`, etc."
             ] 
             $ declSignature "selfT"
-            $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
+            $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ,typeVar "f" ]
+            $ typeConstrained [ typeApp ( typeCtor "Functor.Functor" ) [ typeVar "f"  ] ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
-            $ typeArrow [ typePolled $ selfHandler $ typeVar "e" ]
-            $ typePolled $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
-        , declHandler "selfT" selfKey $ handler rawSelf
+            $ typeArrow [ typeFunked "f" $ selfHandler $ typeVar "e" ]
+            $ typeFunked "f" $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
+        , declHandler "selfT" $ handler selfKey rawSelf
 
         , documentDecl [ "Shorthand version of `selfT`" ]
             $ declSignature "selfT_"
-            $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
+            $ typeForall [ typeVar "name", typeVar "e", typeVar "r" , typeVar "f"]
+            $ typeConstrained [ typeApp ( typeCtor "Applicative.Applicative" ) [ typeVar "f"  ] ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ selfHandler $ typeVar "e" ]
-            $ typePolled $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
+            $ typeFunked "f" $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
         , declValue "selfT_" [] $ exprOp ( exprIdent "selfT" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
 
         ]

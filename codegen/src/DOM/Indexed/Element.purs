@@ -28,7 +28,7 @@ imports baseMod interfaces =
         , declImportAs "Deku.Attribute" [ importType "Attribute" ]
             "Deku.Attribute"
 
-        , declImport "Deku.Control" [ importValue "elementify2" ]
+        , declImport "Deku.Control" [ importValue "elementify" ]
         , declImportAs "Deku.Control" [  ] "DC"
         , declImport "Deku.Core" [ importType "Nut" ]
         , declImport "Type.Proxy" [ importType "Proxy" ]
@@ -109,7 +109,7 @@ generate interfaces tags = do
                 , typeApp (typeCtor "Array") [ typeNut ]
                 ]
                 typeNut
-        , declValue ctor [] $ exprApp (exprIdent "elementify2")
+        , declValue ctor [] $ exprApp (exprIdent "elementify")
             [ exprNamespace ns
             , exprString tag
             ]

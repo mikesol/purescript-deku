@@ -519,7 +519,7 @@ import Deku.Control (text, text_) as Deku.Control
 import FRP.Poll as FRP.Poll
 import Data.Maybe (Maybe(..))
 import Deku.Attribute (Attribute) as Deku.Attribute
-import Deku.Control (elementify2)
+import Deku.Control (elementify)
 import Deku.Control as DC
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)
@@ -581,6 +581,8 @@ type ARIAMixin (r :: Row Type) =
   , ariaColcount :: String
   , ariaChecked :: String
   , ariaBusy :: String
+  , ariaBrailleroledescription :: String
+  , ariaBraillelabel :: String
   , ariaAutocomplete :: String
   , ariaAtomic :: String
   , ariaActivedescendant :: String
@@ -597,6 +599,7 @@ type HTMLElement (r :: Row Type) =
   , enterkeyhint :: String
   , inputmode :: String
   , autocapitalize :: String
+  , writingsuggestions :: String
   , spellcheck :: String
   , contenteditable :: String
   , accesskey :: String
@@ -876,7 +879,6 @@ type HTMLObjectElement (r :: Row Type) =
   , usemap :: String
   , autocomplete :: String
   , disabled :: String
-  , dirname :: String
   , form :: String
   , height :: String
   , width :: String
@@ -1126,7 +1128,6 @@ type HTMLButtonElement (r :: Row Type) =
   , formaction :: String
   , action :: String
   , disabled :: String
-  , dirname :: String
   , name :: String
   , form :: String
   , value :: String
@@ -1139,7 +1140,6 @@ type HTMLSelectElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLSelectElement"
   , autocomplete :: String
   , disabled :: String
-  , dirname :: String
   , name :: String
   , form :: String
   , required :: String
@@ -1188,7 +1188,6 @@ type HTMLOutputElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLOutputElement"
   , autocomplete :: String
   , disabled :: String
-  , dirname :: String
   , name :: String
   , form :: String
   , for :: String
@@ -1213,7 +1212,6 @@ type HTMLFieldSetElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLFieldSetElement"
   , autocomplete :: String
   , disabled :: String
-  , dirname :: String
   , name :: String
   , form :: String
   | HTMLElement r
@@ -1225,6 +1223,7 @@ type HTMLLegendElement (r :: Row Type) =
 type HTMLDetailsElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLDetailsElement"
   , open :: String
+  , name :: String
   , toggle :: Web.Event.Internal.Types.Event
   | HTMLElement r
   )
@@ -1256,7 +1255,15 @@ type HTMLScriptElement (r :: Row Type) =
   | HTMLElement r
   )
 
-type HTMLTemplateElement (r :: Row Type) = (__tag :: Proxy "HTMLTemplateElement" | HTMLElement r)
+type HTMLTemplateElement (r :: Row Type) =
+  ( __tag :: Proxy "HTMLTemplateElement"
+  , shadowrootserializable :: String
+  , shadowrootclonable :: String
+  , shadowrootdelegatesfocus :: String
+  , shadowrootmode :: String
+  | HTMLElement r
+  )
+
 type HTMLSlotElement (r :: Row Type) =
   (__tag :: Proxy "HTMLSlotElement", name :: String | HTMLElement r)
 
@@ -1330,6 +1337,7 @@ type Element (r :: Row Type) =
   , slot :: String
   , id :: String
   , klass :: String
+  , textInput :: Web.Event.Internal.Types.Event
   , keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent
   , domSubtreeModified :: Web.Event.Internal.Types.Event
   , domNodeRemovedFromDocument :: Web.Event.Internal.Types.Event
@@ -1378,7 +1386,7 @@ type Element (r :: Row Type) =
 instance TagToDeku "html" (HTMLHtmlElement ())
 
 html :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHtmlElement ()))) -> Array Nut -> Nut
-html = elementify2 Nothing "html"
+html = elementify Nothing "html"
 
 html_ :: Array Nut -> Nut
 html_ = html []
@@ -1389,7 +1397,7 @@ html__ t = html [] [ DC.text_ t ]
 instance TagToDeku "head" (HTMLHeadElement ())
 
 head :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadElement ()))) -> Array Nut -> Nut
-head = elementify2 Nothing "head"
+head = elementify Nothing "head"
 
 head_ :: Array Nut -> Nut
 head_ = head []
@@ -1400,7 +1408,7 @@ head__ t = head [] [ DC.text_ t ]
 instance TagToDeku "title" (HTMLTitleElement ())
 
 title :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTitleElement ()))) -> Array Nut -> Nut
-title = elementify2 Nothing "title"
+title = elementify Nothing "title"
 
 title_ :: Array Nut -> Nut
 title_ = title []
@@ -1411,7 +1419,7 @@ title__ t = title [] [ DC.text_ t ]
 instance TagToDeku "base" (HTMLBaseElement ())
 
 base :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLBaseElement ()))) -> Array Nut -> Nut
-base = elementify2 Nothing "base"
+base = elementify Nothing "base"
 
 base_ :: Array Nut -> Nut
 base_ = base []
@@ -1422,7 +1430,7 @@ base__ t = base [] [ DC.text_ t ]
 instance TagToDeku "link" (HTMLLinkElement ())
 
 link :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLLinkElement ()))) -> Array Nut -> Nut
-link = elementify2 Nothing "link"
+link = elementify Nothing "link"
 
 link_ :: Array Nut -> Nut
 link_ = link []
@@ -1433,7 +1441,7 @@ link__ t = link [] [ DC.text_ t ]
 instance TagToDeku "meta" (HTMLMetaElement ())
 
 meta :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLMetaElement ()))) -> Array Nut -> Nut
-meta = elementify2 Nothing "meta"
+meta = elementify Nothing "meta"
 
 meta_ :: Array Nut -> Nut
 meta_ = meta []
@@ -1444,7 +1452,7 @@ meta__ t = meta [] [ DC.text_ t ]
 instance TagToDeku "style" (HTMLStyleElement ())
 
 style :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLStyleElement ()))) -> Array Nut -> Nut
-style = elementify2 Nothing "style"
+style = elementify Nothing "style"
 
 style_ :: Array Nut -> Nut
 style_ = style []
@@ -1455,7 +1463,7 @@ style__ t = style [] [ DC.text_ t ]
 instance TagToDeku "body" (HTMLBodyElement ())
 
 body :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLBodyElement ()))) -> Array Nut -> Nut
-body = elementify2 Nothing "body"
+body = elementify Nothing "body"
 
 body_ :: Array Nut -> Nut
 body_ = body []
@@ -1466,7 +1474,7 @@ body__ t = body [] [ DC.text_ t ]
 instance TagToDeku "article" (HTMLElement ())
 
 article :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-article = elementify2 Nothing "article"
+article = elementify Nothing "article"
 
 article_ :: Array Nut -> Nut
 article_ = article []
@@ -1477,7 +1485,7 @@ article__ t = article [] [ DC.text_ t ]
 instance TagToDeku "section" (HTMLElement ())
 
 section :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-section = elementify2 Nothing "section"
+section = elementify Nothing "section"
 
 section_ :: Array Nut -> Nut
 section_ = section []
@@ -1488,7 +1496,7 @@ section__ t = section [] [ DC.text_ t ]
 instance TagToDeku "nav" (HTMLElement ())
 
 nav :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-nav = elementify2 Nothing "nav"
+nav = elementify Nothing "nav"
 
 nav_ :: Array Nut -> Nut
 nav_ = nav []
@@ -1499,7 +1507,7 @@ nav__ t = nav [] [ DC.text_ t ]
 instance TagToDeku "aside" (HTMLElement ())
 
 aside :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-aside = elementify2 Nothing "aside"
+aside = elementify Nothing "aside"
 
 aside_ :: Array Nut -> Nut
 aside_ = aside []
@@ -1510,7 +1518,7 @@ aside__ t = aside [] [ DC.text_ t ]
 instance TagToDeku "h1" (HTMLHeadingElement ())
 
 h1 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
-h1 = elementify2 Nothing "h1"
+h1 = elementify Nothing "h1"
 
 h1_ :: Array Nut -> Nut
 h1_ = h1 []
@@ -1521,7 +1529,7 @@ h1__ t = h1 [] [ DC.text_ t ]
 instance TagToDeku "h2" (HTMLHeadingElement ())
 
 h2 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
-h2 = elementify2 Nothing "h2"
+h2 = elementify Nothing "h2"
 
 h2_ :: Array Nut -> Nut
 h2_ = h2 []
@@ -1532,7 +1540,7 @@ h2__ t = h2 [] [ DC.text_ t ]
 instance TagToDeku "h3" (HTMLHeadingElement ())
 
 h3 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
-h3 = elementify2 Nothing "h3"
+h3 = elementify Nothing "h3"
 
 h3_ :: Array Nut -> Nut
 h3_ = h3 []
@@ -1543,7 +1551,7 @@ h3__ t = h3 [] [ DC.text_ t ]
 instance TagToDeku "h4" (HTMLHeadingElement ())
 
 h4 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
-h4 = elementify2 Nothing "h4"
+h4 = elementify Nothing "h4"
 
 h4_ :: Array Nut -> Nut
 h4_ = h4 []
@@ -1554,7 +1562,7 @@ h4__ t = h4 [] [ DC.text_ t ]
 instance TagToDeku "h5" (HTMLHeadingElement ())
 
 h5 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
-h5 = elementify2 Nothing "h5"
+h5 = elementify Nothing "h5"
 
 h5_ :: Array Nut -> Nut
 h5_ = h5 []
@@ -1565,7 +1573,7 @@ h5__ t = h5 [] [ DC.text_ t ]
 instance TagToDeku "h6" (HTMLHeadingElement ())
 
 h6 :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHeadingElement ()))) -> Array Nut -> Nut
-h6 = elementify2 Nothing "h6"
+h6 = elementify Nothing "h6"
 
 h6_ :: Array Nut -> Nut
 h6_ = h6 []
@@ -1576,7 +1584,7 @@ h6__ t = h6 [] [ DC.text_ t ]
 instance TagToDeku "hgroup" (HTMLElement ())
 
 hgroup :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-hgroup = elementify2 Nothing "hgroup"
+hgroup = elementify Nothing "hgroup"
 
 hgroup_ :: Array Nut -> Nut
 hgroup_ = hgroup []
@@ -1587,7 +1595,7 @@ hgroup__ t = hgroup [] [ DC.text_ t ]
 instance TagToDeku "header" (HTMLElement ())
 
 header :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-header = elementify2 Nothing "header"
+header = elementify Nothing "header"
 
 header_ :: Array Nut -> Nut
 header_ = header []
@@ -1598,7 +1606,7 @@ header__ t = header [] [ DC.text_ t ]
 instance TagToDeku "footer" (HTMLElement ())
 
 footer :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-footer = elementify2 Nothing "footer"
+footer = elementify Nothing "footer"
 
 footer_ :: Array Nut -> Nut
 footer_ = footer []
@@ -1609,7 +1617,7 @@ footer__ t = footer [] [ DC.text_ t ]
 instance TagToDeku "address" (HTMLElement ())
 
 address :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-address = elementify2 Nothing "address"
+address = elementify Nothing "address"
 
 address_ :: Array Nut -> Nut
 address_ = address []
@@ -1620,7 +1628,7 @@ address__ t = address [] [ DC.text_ t ]
 instance TagToDeku "p" (HTMLParagraphElement ())
 
 p :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLParagraphElement ()))) -> Array Nut -> Nut
-p = elementify2 Nothing "p"
+p = elementify Nothing "p"
 
 p_ :: Array Nut -> Nut
 p_ = p []
@@ -1631,7 +1639,7 @@ p__ t = p [] [ DC.text_ t ]
 instance TagToDeku "hr" (HTMLHRElement ())
 
 hr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLHRElement ()))) -> Array Nut -> Nut
-hr = elementify2 Nothing "hr"
+hr = elementify Nothing "hr"
 
 hr_ :: Array Nut -> Nut
 hr_ = hr []
@@ -1642,7 +1650,7 @@ hr__ t = hr [] [ DC.text_ t ]
 instance TagToDeku "pre" (HTMLPreElement ())
 
 pre :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLPreElement ()))) -> Array Nut -> Nut
-pre = elementify2 Nothing "pre"
+pre = elementify Nothing "pre"
 
 pre_ :: Array Nut -> Nut
 pre_ = pre []
@@ -1654,7 +1662,7 @@ instance TagToDeku "blockquote" (HTMLQuoteElement ())
 
 blockquote
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLQuoteElement ()))) -> Array Nut -> Nut
-blockquote = elementify2 Nothing "blockquote"
+blockquote = elementify Nothing "blockquote"
 
 blockquote_ :: Array Nut -> Nut
 blockquote_ = blockquote []
@@ -1665,7 +1673,7 @@ blockquote__ t = blockquote [] [ DC.text_ t ]
 instance TagToDeku "ol" (HTMLOListElement ())
 
 ol :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLOListElement ()))) -> Array Nut -> Nut
-ol = elementify2 Nothing "ol"
+ol = elementify Nothing "ol"
 
 ol_ :: Array Nut -> Nut
 ol_ = ol []
@@ -1676,7 +1684,7 @@ ol__ t = ol [] [ DC.text_ t ]
 instance TagToDeku "ul" (HTMLUListElement ())
 
 ul :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUListElement ()))) -> Array Nut -> Nut
-ul = elementify2 Nothing "ul"
+ul = elementify Nothing "ul"
 
 ul_ :: Array Nut -> Nut
 ul_ = ul []
@@ -1687,7 +1695,7 @@ ul__ t = ul [] [ DC.text_ t ]
 instance TagToDeku "menu" (HTMLMenuElement ())
 
 menu :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLMenuElement ()))) -> Array Nut -> Nut
-menu = elementify2 Nothing "menu"
+menu = elementify Nothing "menu"
 
 menu_ :: Array Nut -> Nut
 menu_ = menu []
@@ -1698,7 +1706,7 @@ menu__ t = menu [] [ DC.text_ t ]
 instance TagToDeku "li" (HTMLLIElement ())
 
 li :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLLIElement ()))) -> Array Nut -> Nut
-li = elementify2 Nothing "li"
+li = elementify Nothing "li"
 
 li_ :: Array Nut -> Nut
 li_ = li []
@@ -1709,7 +1717,7 @@ li__ t = li [] [ DC.text_ t ]
 instance TagToDeku "dl" (HTMLDListElement ())
 
 dl :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDListElement ()))) -> Array Nut -> Nut
-dl = elementify2 Nothing "dl"
+dl = elementify Nothing "dl"
 
 dl_ :: Array Nut -> Nut
 dl_ = dl []
@@ -1720,7 +1728,7 @@ dl__ t = dl [] [ DC.text_ t ]
 instance TagToDeku "dt" (HTMLElement ())
 
 dt :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-dt = elementify2 Nothing "dt"
+dt = elementify Nothing "dt"
 
 dt_ :: Array Nut -> Nut
 dt_ = dt []
@@ -1731,7 +1739,7 @@ dt__ t = dt [] [ DC.text_ t ]
 instance TagToDeku "dd" (HTMLElement ())
 
 dd :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-dd = elementify2 Nothing "dd"
+dd = elementify Nothing "dd"
 
 dd_ :: Array Nut -> Nut
 dd_ = dd []
@@ -1742,7 +1750,7 @@ dd__ t = dd [] [ DC.text_ t ]
 instance TagToDeku "figure" (HTMLElement ())
 
 figure :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-figure = elementify2 Nothing "figure"
+figure = elementify Nothing "figure"
 
 figure_ :: Array Nut -> Nut
 figure_ = figure []
@@ -1753,7 +1761,7 @@ figure__ t = figure [] [ DC.text_ t ]
 instance TagToDeku "figcaption" (HTMLElement ())
 
 figcaption :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-figcaption = elementify2 Nothing "figcaption"
+figcaption = elementify Nothing "figcaption"
 
 figcaption_ :: Array Nut -> Nut
 figcaption_ = figcaption []
@@ -1764,7 +1772,7 @@ figcaption__ t = figcaption [] [ DC.text_ t ]
 instance TagToDeku "main" (HTMLElement ())
 
 main :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-main = elementify2 Nothing "main"
+main = elementify Nothing "main"
 
 main_ :: Array Nut -> Nut
 main_ = main []
@@ -1775,7 +1783,7 @@ main__ t = main [] [ DC.text_ t ]
 instance TagToDeku "search" (HTMLElement ())
 
 search :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-search = elementify2 Nothing "search"
+search = elementify Nothing "search"
 
 search_ :: Array Nut -> Nut
 search_ = search []
@@ -1786,7 +1794,7 @@ search__ t = search [] [ DC.text_ t ]
 instance TagToDeku "div" (HTMLDivElement ())
 
 div :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDivElement ()))) -> Array Nut -> Nut
-div = elementify2 Nothing "div"
+div = elementify Nothing "div"
 
 div_ :: Array Nut -> Nut
 div_ = div []
@@ -1797,7 +1805,7 @@ div__ t = div [] [ DC.text_ t ]
 instance TagToDeku "a" (HTMLAnchorElement ())
 
 a :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLAnchorElement ()))) -> Array Nut -> Nut
-a = elementify2 Nothing "a"
+a = elementify Nothing "a"
 
 a_ :: Array Nut -> Nut
 a_ = a []
@@ -1808,7 +1816,7 @@ a__ t = a [] [ DC.text_ t ]
 instance TagToDeku "em" (HTMLElement ())
 
 em :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-em = elementify2 Nothing "em"
+em = elementify Nothing "em"
 
 em_ :: Array Nut -> Nut
 em_ = em []
@@ -1819,7 +1827,7 @@ em__ t = em [] [ DC.text_ t ]
 instance TagToDeku "strong" (HTMLElement ())
 
 strong :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-strong = elementify2 Nothing "strong"
+strong = elementify Nothing "strong"
 
 strong_ :: Array Nut -> Nut
 strong_ = strong []
@@ -1830,7 +1838,7 @@ strong__ t = strong [] [ DC.text_ t ]
 instance TagToDeku "small" (HTMLElement ())
 
 small :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-small = elementify2 Nothing "small"
+small = elementify Nothing "small"
 
 small_ :: Array Nut -> Nut
 small_ = small []
@@ -1841,7 +1849,7 @@ small__ t = small [] [ DC.text_ t ]
 instance TagToDeku "s" (HTMLElement ())
 
 s :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-s = elementify2 Nothing "s"
+s = elementify Nothing "s"
 
 s_ :: Array Nut -> Nut
 s_ = s []
@@ -1852,7 +1860,7 @@ s__ t = s [] [ DC.text_ t ]
 instance TagToDeku "cite" (HTMLElement ())
 
 cite :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-cite = elementify2 Nothing "cite"
+cite = elementify Nothing "cite"
 
 cite_ :: Array Nut -> Nut
 cite_ = cite []
@@ -1863,7 +1871,7 @@ cite__ t = cite [] [ DC.text_ t ]
 instance TagToDeku "q" (HTMLQuoteElement ())
 
 q :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLQuoteElement ()))) -> Array Nut -> Nut
-q = elementify2 Nothing "q"
+q = elementify Nothing "q"
 
 q_ :: Array Nut -> Nut
 q_ = q []
@@ -1874,7 +1882,7 @@ q__ t = q [] [ DC.text_ t ]
 instance TagToDeku "dfn" (HTMLElement ())
 
 dfn :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-dfn = elementify2 Nothing "dfn"
+dfn = elementify Nothing "dfn"
 
 dfn_ :: Array Nut -> Nut
 dfn_ = dfn []
@@ -1885,7 +1893,7 @@ dfn__ t = dfn [] [ DC.text_ t ]
 instance TagToDeku "abbr" (HTMLElement ())
 
 abbr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-abbr = elementify2 Nothing "abbr"
+abbr = elementify Nothing "abbr"
 
 abbr_ :: Array Nut -> Nut
 abbr_ = abbr []
@@ -1896,7 +1904,7 @@ abbr__ t = abbr [] [ DC.text_ t ]
 instance TagToDeku "ruby" (HTMLElement ())
 
 ruby :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-ruby = elementify2 Nothing "ruby"
+ruby = elementify Nothing "ruby"
 
 ruby_ :: Array Nut -> Nut
 ruby_ = ruby []
@@ -1907,7 +1915,7 @@ ruby__ t = ruby [] [ DC.text_ t ]
 instance TagToDeku "rt" (HTMLElement ())
 
 rt :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-rt = elementify2 Nothing "rt"
+rt = elementify Nothing "rt"
 
 rt_ :: Array Nut -> Nut
 rt_ = rt []
@@ -1918,7 +1926,7 @@ rt__ t = rt [] [ DC.text_ t ]
 instance TagToDeku "rp" (HTMLElement ())
 
 rp :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-rp = elementify2 Nothing "rp"
+rp = elementify Nothing "rp"
 
 rp_ :: Array Nut -> Nut
 rp_ = rp []
@@ -1929,7 +1937,7 @@ rp__ t = rp [] [ DC.text_ t ]
 instance TagToDeku "data" (HTMLDataElement ())
 
 xdata :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDataElement ()))) -> Array Nut -> Nut
-xdata = elementify2 Nothing "data"
+xdata = elementify Nothing "data"
 
 xdata_ :: Array Nut -> Nut
 xdata_ = xdata []
@@ -1940,7 +1948,7 @@ xdata__ t = xdata [] [ DC.text_ t ]
 instance TagToDeku "time" (HTMLTimeElement ())
 
 time :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTimeElement ()))) -> Array Nut -> Nut
-time = elementify2 Nothing "time"
+time = elementify Nothing "time"
 
 time_ :: Array Nut -> Nut
 time_ = time []
@@ -1951,7 +1959,7 @@ time__ t = time [] [ DC.text_ t ]
 instance TagToDeku "code" (HTMLElement ())
 
 code :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-code = elementify2 Nothing "code"
+code = elementify Nothing "code"
 
 code_ :: Array Nut -> Nut
 code_ = code []
@@ -1962,7 +1970,7 @@ code__ t = code [] [ DC.text_ t ]
 instance TagToDeku "var" (HTMLElement ())
 
 var :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-var = elementify2 Nothing "var"
+var = elementify Nothing "var"
 
 var_ :: Array Nut -> Nut
 var_ = var []
@@ -1973,7 +1981,7 @@ var__ t = var [] [ DC.text_ t ]
 instance TagToDeku "samp" (HTMLElement ())
 
 samp :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-samp = elementify2 Nothing "samp"
+samp = elementify Nothing "samp"
 
 samp_ :: Array Nut -> Nut
 samp_ = samp []
@@ -1984,7 +1992,7 @@ samp__ t = samp [] [ DC.text_ t ]
 instance TagToDeku "kbd" (HTMLElement ())
 
 kbd :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-kbd = elementify2 Nothing "kbd"
+kbd = elementify Nothing "kbd"
 
 kbd_ :: Array Nut -> Nut
 kbd_ = kbd []
@@ -1995,7 +2003,7 @@ kbd__ t = kbd [] [ DC.text_ t ]
 instance TagToDeku "sub" (HTMLElement ())
 
 sub :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-sub = elementify2 Nothing "sub"
+sub = elementify Nothing "sub"
 
 sub_ :: Array Nut -> Nut
 sub_ = sub []
@@ -2006,7 +2014,7 @@ sub__ t = sub [] [ DC.text_ t ]
 instance TagToDeku "sup" (HTMLElement ())
 
 sup :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-sup = elementify2 Nothing "sup"
+sup = elementify Nothing "sup"
 
 sup_ :: Array Nut -> Nut
 sup_ = sup []
@@ -2017,7 +2025,7 @@ sup__ t = sup [] [ DC.text_ t ]
 instance TagToDeku "i" (HTMLElement ())
 
 i :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-i = elementify2 Nothing "i"
+i = elementify Nothing "i"
 
 i_ :: Array Nut -> Nut
 i_ = i []
@@ -2028,7 +2036,7 @@ i__ t = i [] [ DC.text_ t ]
 instance TagToDeku "b" (HTMLElement ())
 
 b :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-b = elementify2 Nothing "b"
+b = elementify Nothing "b"
 
 b_ :: Array Nut -> Nut
 b_ = b []
@@ -2039,7 +2047,7 @@ b__ t = b [] [ DC.text_ t ]
 instance TagToDeku "u" (HTMLElement ())
 
 u :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-u = elementify2 Nothing "u"
+u = elementify Nothing "u"
 
 u_ :: Array Nut -> Nut
 u_ = u []
@@ -2050,7 +2058,7 @@ u__ t = u [] [ DC.text_ t ]
 instance TagToDeku "mark" (HTMLElement ())
 
 mark :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-mark = elementify2 Nothing "mark"
+mark = elementify Nothing "mark"
 
 mark_ :: Array Nut -> Nut
 mark_ = mark []
@@ -2061,7 +2069,7 @@ mark__ t = mark [] [ DC.text_ t ]
 instance TagToDeku "bdi" (HTMLElement ())
 
 bdi :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-bdi = elementify2 Nothing "bdi"
+bdi = elementify Nothing "bdi"
 
 bdi_ :: Array Nut -> Nut
 bdi_ = bdi []
@@ -2072,7 +2080,7 @@ bdi__ t = bdi [] [ DC.text_ t ]
 instance TagToDeku "bdo" (HTMLElement ())
 
 bdo :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-bdo = elementify2 Nothing "bdo"
+bdo = elementify Nothing "bdo"
 
 bdo_ :: Array Nut -> Nut
 bdo_ = bdo []
@@ -2083,7 +2091,7 @@ bdo__ t = bdo [] [ DC.text_ t ]
 instance TagToDeku "span" (HTMLSpanElement ())
 
 span :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLSpanElement ()))) -> Array Nut -> Nut
-span = elementify2 Nothing "span"
+span = elementify Nothing "span"
 
 span_ :: Array Nut -> Nut
 span_ = span []
@@ -2094,7 +2102,7 @@ span__ t = span [] [ DC.text_ t ]
 instance TagToDeku "br" (HTMLBRElement ())
 
 br :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLBRElement ()))) -> Array Nut -> Nut
-br = elementify2 Nothing "br"
+br = elementify Nothing "br"
 
 br_ :: Array Nut -> Nut
 br_ = br []
@@ -2105,7 +2113,7 @@ br__ t = br [] [ DC.text_ t ]
 instance TagToDeku "wbr" (HTMLElement ())
 
 wbr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-wbr = elementify2 Nothing "wbr"
+wbr = elementify Nothing "wbr"
 
 wbr_ :: Array Nut -> Nut
 wbr_ = wbr []
@@ -2116,7 +2124,7 @@ wbr__ t = wbr [] [ DC.text_ t ]
 instance TagToDeku "ins" (HTMLModElement ())
 
 ins :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLModElement ()))) -> Array Nut -> Nut
-ins = elementify2 Nothing "ins"
+ins = elementify Nothing "ins"
 
 ins_ :: Array Nut -> Nut
 ins_ = ins []
@@ -2127,7 +2135,7 @@ ins__ t = ins [] [ DC.text_ t ]
 instance TagToDeku "del" (HTMLModElement ())
 
 del :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLModElement ()))) -> Array Nut -> Nut
-del = elementify2 Nothing "del"
+del = elementify Nothing "del"
 
 del_ :: Array Nut -> Nut
 del_ = del []
@@ -2139,7 +2147,7 @@ instance TagToDeku "picture" (HTMLPictureElement ())
 
 picture
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLPictureElement ()))) -> Array Nut -> Nut
-picture = elementify2 Nothing "picture"
+picture = elementify Nothing "picture"
 
 picture_ :: Array Nut -> Nut
 picture_ = picture []
@@ -2151,7 +2159,7 @@ instance TagToDeku "source" (HTMLSourceElement ())
 
 source
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLSourceElement ()))) -> Array Nut -> Nut
-source = elementify2 Nothing "source"
+source = elementify Nothing "source"
 
 source_ :: Array Nut -> Nut
 source_ = source []
@@ -2162,7 +2170,7 @@ source__ t = source [] [ DC.text_ t ]
 instance TagToDeku "img" (HTMLImageElement ())
 
 img :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLImageElement ()))) -> Array Nut -> Nut
-img = elementify2 Nothing "img"
+img = elementify Nothing "img"
 
 img_ :: Array Nut -> Nut
 img_ = img []
@@ -2174,7 +2182,7 @@ instance TagToDeku "iframe" (HTMLIFrameElement ())
 
 iframe
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLIFrameElement ()))) -> Array Nut -> Nut
-iframe = elementify2 Nothing "iframe"
+iframe = elementify Nothing "iframe"
 
 iframe_ :: Array Nut -> Nut
 iframe_ = iframe []
@@ -2185,7 +2193,7 @@ iframe__ t = iframe [] [ DC.text_ t ]
 instance TagToDeku "embed" (HTMLEmbedElement ())
 
 embed :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLEmbedElement ()))) -> Array Nut -> Nut
-embed = elementify2 Nothing "embed"
+embed = elementify Nothing "embed"
 
 embed_ :: Array Nut -> Nut
 embed_ = embed []
@@ -2197,7 +2205,7 @@ instance TagToDeku "object" (HTMLObjectElement ())
 
 object
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLObjectElement ()))) -> Array Nut -> Nut
-object = elementify2 Nothing "object"
+object = elementify Nothing "object"
 
 object_ :: Array Nut -> Nut
 object_ = object []
@@ -2208,7 +2216,7 @@ object__ t = object [] [ DC.text_ t ]
 instance TagToDeku "video" (HTMLVideoElement ())
 
 video :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLVideoElement ()))) -> Array Nut -> Nut
-video = elementify2 Nothing "video"
+video = elementify Nothing "video"
 
 video_ :: Array Nut -> Nut
 video_ = video []
@@ -2219,7 +2227,7 @@ video__ t = video [] [ DC.text_ t ]
 instance TagToDeku "audio" (HTMLAudioElement ())
 
 audio :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLAudioElement ()))) -> Array Nut -> Nut
-audio = elementify2 Nothing "audio"
+audio = elementify Nothing "audio"
 
 audio_ :: Array Nut -> Nut
 audio_ = audio []
@@ -2230,7 +2238,7 @@ audio__ t = audio [] [ DC.text_ t ]
 instance TagToDeku "track" (HTMLTrackElement ())
 
 track :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTrackElement ()))) -> Array Nut -> Nut
-track = elementify2 Nothing "track"
+track = elementify Nothing "track"
 
 track_ :: Array Nut -> Nut
 track_ = track []
@@ -2241,7 +2249,7 @@ track__ t = track [] [ DC.text_ t ]
 instance TagToDeku "map" (HTMLMapElement ())
 
 map :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLMapElement ()))) -> Array Nut -> Nut
-map = elementify2 Nothing "map"
+map = elementify Nothing "map"
 
 map_ :: Array Nut -> Nut
 map_ = map []
@@ -2252,7 +2260,7 @@ map__ t = map [] [ DC.text_ t ]
 instance TagToDeku "area" (HTMLAreaElement ())
 
 area :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLAreaElement ()))) -> Array Nut -> Nut
-area = elementify2 Nothing "area"
+area = elementify Nothing "area"
 
 area_ :: Array Nut -> Nut
 area_ = area []
@@ -2263,7 +2271,7 @@ area__ t = area [] [ DC.text_ t ]
 instance TagToDeku "table" (HTMLTableElement ())
 
 table :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableElement ()))) -> Array Nut -> Nut
-table = elementify2 Nothing "table"
+table = elementify Nothing "table"
 
 table_ :: Array Nut -> Nut
 table_ = table []
@@ -2277,7 +2285,7 @@ caption
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableCaptionElement ())))
   -> Array Nut
   -> Nut
-caption = elementify2 Nothing "caption"
+caption = elementify Nothing "caption"
 
 caption_ :: Array Nut -> Nut
 caption_ = caption []
@@ -2289,7 +2297,7 @@ instance TagToDeku "colgroup" (HTMLTableColElement ())
 
 colgroup
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableColElement ()))) -> Array Nut -> Nut
-colgroup = elementify2 Nothing "colgroup"
+colgroup = elementify Nothing "colgroup"
 
 colgroup_ :: Array Nut -> Nut
 colgroup_ = colgroup []
@@ -2301,7 +2309,7 @@ instance TagToDeku "col" (HTMLTableColElement ())
 
 col
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableColElement ()))) -> Array Nut -> Nut
-col = elementify2 Nothing "col"
+col = elementify Nothing "col"
 
 col_ :: Array Nut -> Nut
 col_ = col []
@@ -2315,7 +2323,7 @@ tbody
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableSectionElement ())))
   -> Array Nut
   -> Nut
-tbody = elementify2 Nothing "tbody"
+tbody = elementify Nothing "tbody"
 
 tbody_ :: Array Nut -> Nut
 tbody_ = tbody []
@@ -2329,7 +2337,7 @@ thead
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableSectionElement ())))
   -> Array Nut
   -> Nut
-thead = elementify2 Nothing "thead"
+thead = elementify Nothing "thead"
 
 thead_ :: Array Nut -> Nut
 thead_ = thead []
@@ -2343,7 +2351,7 @@ tfoot
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableSectionElement ())))
   -> Array Nut
   -> Nut
-tfoot = elementify2 Nothing "tfoot"
+tfoot = elementify Nothing "tfoot"
 
 tfoot_ :: Array Nut -> Nut
 tfoot_ = tfoot []
@@ -2354,7 +2362,7 @@ tfoot__ t = tfoot [] [ DC.text_ t ]
 instance TagToDeku "tr" (HTMLTableRowElement ())
 
 tr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableRowElement ()))) -> Array Nut -> Nut
-tr = elementify2 Nothing "tr"
+tr = elementify Nothing "tr"
 
 tr_ :: Array Nut -> Nut
 tr_ = tr []
@@ -2366,7 +2374,7 @@ instance TagToDeku "td" (HTMLTableCellElement ())
 
 td
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableCellElement ()))) -> Array Nut -> Nut
-td = elementify2 Nothing "td"
+td = elementify Nothing "td"
 
 td_ :: Array Nut -> Nut
 td_ = td []
@@ -2378,7 +2386,7 @@ instance TagToDeku "th" (HTMLTableCellElement ())
 
 th
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTableCellElement ()))) -> Array Nut -> Nut
-th = elementify2 Nothing "th"
+th = elementify Nothing "th"
 
 th_ :: Array Nut -> Nut
 th_ = th []
@@ -2389,7 +2397,7 @@ th__ t = th [] [ DC.text_ t ]
 instance TagToDeku "form" (HTMLFormElement ())
 
 form :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLFormElement ()))) -> Array Nut -> Nut
-form = elementify2 Nothing "form"
+form = elementify Nothing "form"
 
 form_ :: Array Nut -> Nut
 form_ = form []
@@ -2400,7 +2408,7 @@ form__ t = form [] [ DC.text_ t ]
 instance TagToDeku "label" (HTMLLabelElement ())
 
 label :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLLabelElement ()))) -> Array Nut -> Nut
-label = elementify2 Nothing "label"
+label = elementify Nothing "label"
 
 label_ :: Array Nut -> Nut
 label_ = label []
@@ -2411,7 +2419,7 @@ label__ t = label [] [ DC.text_ t ]
 instance TagToDeku "input" (HTMLInputElement ())
 
 input :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLInputElement ()))) -> Array Nut -> Nut
-input = elementify2 Nothing "input"
+input = elementify Nothing "input"
 
 input_ :: Array Nut -> Nut
 input_ = input []
@@ -2423,7 +2431,7 @@ instance TagToDeku "button" (HTMLButtonElement ())
 
 button
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLButtonElement ()))) -> Array Nut -> Nut
-button = elementify2 Nothing "button"
+button = elementify Nothing "button"
 
 button_ :: Array Nut -> Nut
 button_ = button []
@@ -2435,7 +2443,7 @@ instance TagToDeku "select" (HTMLSelectElement ())
 
 select
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLSelectElement ()))) -> Array Nut -> Nut
-select = elementify2 Nothing "select"
+select = elementify Nothing "select"
 
 select_ :: Array Nut -> Nut
 select_ = select []
@@ -2447,7 +2455,7 @@ instance TagToDeku "datalist" (HTMLDataListElement ())
 
 datalist
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDataListElement ()))) -> Array Nut -> Nut
-datalist = elementify2 Nothing "datalist"
+datalist = elementify Nothing "datalist"
 
 datalist_ :: Array Nut -> Nut
 datalist_ = datalist []
@@ -2459,7 +2467,7 @@ instance TagToDeku "optgroup" (HTMLOptGroupElement ())
 
 optgroup
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLOptGroupElement ()))) -> Array Nut -> Nut
-optgroup = elementify2 Nothing "optgroup"
+optgroup = elementify Nothing "optgroup"
 
 optgroup_ :: Array Nut -> Nut
 optgroup_ = optgroup []
@@ -2471,7 +2479,7 @@ instance TagToDeku "option" (HTMLOptionElement ())
 
 option
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLOptionElement ()))) -> Array Nut -> Nut
-option = elementify2 Nothing "option"
+option = elementify Nothing "option"
 
 option_ :: Array Nut -> Nut
 option_ = option []
@@ -2483,7 +2491,7 @@ instance TagToDeku "textarea" (HTMLTextAreaElement ())
 
 textarea
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTextAreaElement ()))) -> Array Nut -> Nut
-textarea = elementify2 Nothing "textarea"
+textarea = elementify Nothing "textarea"
 
 textarea_ :: Array Nut -> Nut
 textarea_ = textarea []
@@ -2495,7 +2503,7 @@ instance TagToDeku "output" (HTMLOutputElement ())
 
 output
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLOutputElement ()))) -> Array Nut -> Nut
-output = elementify2 Nothing "output"
+output = elementify Nothing "output"
 
 output_ :: Array Nut -> Nut
 output_ = output []
@@ -2507,7 +2515,7 @@ instance TagToDeku "progress" (HTMLProgressElement ())
 
 progress
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLProgressElement ()))) -> Array Nut -> Nut
-progress = elementify2 Nothing "progress"
+progress = elementify Nothing "progress"
 
 progress_ :: Array Nut -> Nut
 progress_ = progress []
@@ -2518,7 +2526,7 @@ progress__ t = progress [] [ DC.text_ t ]
 instance TagToDeku "meter" (HTMLMeterElement ())
 
 meter :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLMeterElement ()))) -> Array Nut -> Nut
-meter = elementify2 Nothing "meter"
+meter = elementify Nothing "meter"
 
 meter_ :: Array Nut -> Nut
 meter_ = meter []
@@ -2530,7 +2538,7 @@ instance TagToDeku "fieldset" (HTMLFieldSetElement ())
 
 fieldset
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLFieldSetElement ()))) -> Array Nut -> Nut
-fieldset = elementify2 Nothing "fieldset"
+fieldset = elementify Nothing "fieldset"
 
 fieldset_ :: Array Nut -> Nut
 fieldset_ = fieldset []
@@ -2542,7 +2550,7 @@ instance TagToDeku "legend" (HTMLLegendElement ())
 
 legend
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLLegendElement ()))) -> Array Nut -> Nut
-legend = elementify2 Nothing "legend"
+legend = elementify Nothing "legend"
 
 legend_ :: Array Nut -> Nut
 legend_ = legend []
@@ -2554,7 +2562,7 @@ instance TagToDeku "details" (HTMLDetailsElement ())
 
 details
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDetailsElement ()))) -> Array Nut -> Nut
-details = elementify2 Nothing "details"
+details = elementify Nothing "details"
 
 details_ :: Array Nut -> Nut
 details_ = details []
@@ -2565,7 +2573,7 @@ details__ t = details [] [ DC.text_ t ]
 instance TagToDeku "summary" (HTMLElement ())
 
 summary :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-summary = elementify2 Nothing "summary"
+summary = elementify Nothing "summary"
 
 summary_ :: Array Nut -> Nut
 summary_ = summary []
@@ -2577,7 +2585,7 @@ instance TagToDeku "dialog" (HTMLDialogElement ())
 
 dialog
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDialogElement ()))) -> Array Nut -> Nut
-dialog = elementify2 Nothing "dialog"
+dialog = elementify Nothing "dialog"
 
 dialog_ :: Array Nut -> Nut
 dialog_ = dialog []
@@ -2589,7 +2597,7 @@ instance TagToDeku "script" (HTMLScriptElement ())
 
 script
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLScriptElement ()))) -> Array Nut -> Nut
-script = elementify2 Nothing "script"
+script = elementify Nothing "script"
 
 script_ :: Array Nut -> Nut
 script_ = script []
@@ -2600,7 +2608,7 @@ script__ t = script [] [ DC.text_ t ]
 instance TagToDeku "noscript" (HTMLElement ())
 
 noscript :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-noscript = elementify2 Nothing "noscript"
+noscript = elementify Nothing "noscript"
 
 noscript_ :: Array Nut -> Nut
 noscript_ = noscript []
@@ -2612,7 +2620,7 @@ instance TagToDeku "template" (HTMLTemplateElement ())
 
 template
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLTemplateElement ()))) -> Array Nut -> Nut
-template = elementify2 Nothing "template"
+template = elementify Nothing "template"
 
 template_ :: Array Nut -> Nut
 template_ = template []
@@ -2623,7 +2631,7 @@ template__ t = template [] [ DC.text_ t ]
 instance TagToDeku "slot" (HTMLSlotElement ())
 
 slot :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLSlotElement ()))) -> Array Nut -> Nut
-slot = elementify2 Nothing "slot"
+slot = elementify Nothing "slot"
 
 slot_ :: Array Nut -> Nut
 slot_ = slot []
@@ -2635,7 +2643,7 @@ instance TagToDeku "canvas" (HTMLCanvasElement ())
 
 canvas
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLCanvasElement ()))) -> Array Nut -> Nut
-canvas = elementify2 Nothing "canvas"
+canvas = elementify Nothing "canvas"
 
 canvas_ :: Array Nut -> Nut
 canvas_ = canvas []
@@ -2647,7 +2655,7 @@ instance TagToDeku "applet" (HTMLUnknownElement ())
 
 applet
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
-applet = elementify2 Nothing "applet"
+applet = elementify Nothing "applet"
 
 applet_ :: Array Nut -> Nut
 applet_ = applet []
@@ -2658,7 +2666,7 @@ applet__ t = applet [] [ DC.text_ t ]
 instance TagToDeku "acronym" (HTMLElement ())
 
 acronym :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-acronym = elementify2 Nothing "acronym"
+acronym = elementify Nothing "acronym"
 
 acronym_ :: Array Nut -> Nut
 acronym_ = acronym []
@@ -2670,7 +2678,7 @@ instance TagToDeku "bgsound" (HTMLUnknownElement ())
 
 bgsound
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
-bgsound = elementify2 Nothing "bgsound"
+bgsound = elementify Nothing "bgsound"
 
 bgsound_ :: Array Nut -> Nut
 bgsound_ = bgsound []
@@ -2682,7 +2690,7 @@ instance TagToDeku "dir" (HTMLDirectoryElement ())
 
 dir
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLDirectoryElement ()))) -> Array Nut -> Nut
-dir = elementify2 Nothing "dir"
+dir = elementify Nothing "dir"
 
 dir_ :: Array Nut -> Nut
 dir_ = dir []
@@ -2693,7 +2701,7 @@ dir__ t = dir [] [ DC.text_ t ]
 instance TagToDeku "frame" (HTMLFrameElement ())
 
 frame :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLFrameElement ()))) -> Array Nut -> Nut
-frame = elementify2 Nothing "frame"
+frame = elementify Nothing "frame"
 
 frame_ :: Array Nut -> Nut
 frame_ = frame []
@@ -2705,7 +2713,7 @@ instance TagToDeku "frameset" (HTMLFrameSetElement ())
 
 frameset
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLFrameSetElement ()))) -> Array Nut -> Nut
-frameset = elementify2 Nothing "frameset"
+frameset = elementify Nothing "frameset"
 
 frameset_ :: Array Nut -> Nut
 frameset_ = frameset []
@@ -2716,7 +2724,7 @@ frameset__ t = frameset [] [ DC.text_ t ]
 instance TagToDeku "noframes" (HTMLElement ())
 
 noframes :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-noframes = elementify2 Nothing "noframes"
+noframes = elementify Nothing "noframes"
 
 noframes_ :: Array Nut -> Nut
 noframes_ = noframes []
@@ -2728,7 +2736,7 @@ instance TagToDeku "isindex" (HTMLUnknownElement ())
 
 isindex
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
-isindex = elementify2 Nothing "isindex"
+isindex = elementify Nothing "isindex"
 
 isindex_ :: Array Nut -> Nut
 isindex_ = isindex []
@@ -2740,7 +2748,7 @@ instance TagToDeku "keygen" (HTMLUnknownElement ())
 
 keygen
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
-keygen = elementify2 Nothing "keygen"
+keygen = elementify Nothing "keygen"
 
 keygen_ :: Array Nut -> Nut
 keygen_ = keygen []
@@ -2751,7 +2759,7 @@ keygen__ t = keygen [] [ DC.text_ t ]
 instance TagToDeku "listing" (HTMLPreElement ())
 
 listing :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLPreElement ()))) -> Array Nut -> Nut
-listing = elementify2 Nothing "listing"
+listing = elementify Nothing "listing"
 
 listing_ :: Array Nut -> Nut
 listing_ = listing []
@@ -2762,7 +2770,7 @@ listing__ t = listing [] [ DC.text_ t ]
 instance TagToDeku "menuitem" (HTMLElement ())
 
 menuitem :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-menuitem = elementify2 Nothing "menuitem"
+menuitem = elementify Nothing "menuitem"
 
 menuitem_ :: Array Nut -> Nut
 menuitem_ = menuitem []
@@ -2774,7 +2782,7 @@ instance TagToDeku "nextid" (HTMLUnknownElement ())
 
 nextid
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
-nextid = elementify2 Nothing "nextid"
+nextid = elementify Nothing "nextid"
 
 nextid_ :: Array Nut -> Nut
 nextid_ = nextid []
@@ -2785,7 +2793,7 @@ nextid__ t = nextid [] [ DC.text_ t ]
 instance TagToDeku "noembed" (HTMLElement ())
 
 noembed :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-noembed = elementify2 Nothing "noembed"
+noembed = elementify Nothing "noembed"
 
 noembed_ :: Array Nut -> Nut
 noembed_ = noembed []
@@ -2796,7 +2804,7 @@ noembed__ t = noembed [] [ DC.text_ t ]
 instance TagToDeku "param" (HTMLParamElement ())
 
 param :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLParamElement ()))) -> Array Nut -> Nut
-param = elementify2 Nothing "param"
+param = elementify Nothing "param"
 
 param_ :: Array Nut -> Nut
 param_ = param []
@@ -2807,7 +2815,7 @@ param__ t = param [] [ DC.text_ t ]
 instance TagToDeku "plaintext" (HTMLElement ())
 
 plaintext :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-plaintext = elementify2 Nothing "plaintext"
+plaintext = elementify Nothing "plaintext"
 
 plaintext_ :: Array Nut -> Nut
 plaintext_ = plaintext []
@@ -2818,7 +2826,7 @@ plaintext__ t = plaintext [] [ DC.text_ t ]
 instance TagToDeku "rb" (HTMLElement ())
 
 rb :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-rb = elementify2 Nothing "rb"
+rb = elementify Nothing "rb"
 
 rb_ :: Array Nut -> Nut
 rb_ = rb []
@@ -2829,7 +2837,7 @@ rb__ t = rb [] [ DC.text_ t ]
 instance TagToDeku "rtc" (HTMLElement ())
 
 rtc :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-rtc = elementify2 Nothing "rtc"
+rtc = elementify Nothing "rtc"
 
 rtc_ :: Array Nut -> Nut
 rtc_ = rtc []
@@ -2840,7 +2848,7 @@ rtc__ t = rtc [] [ DC.text_ t ]
 instance TagToDeku "strike" (HTMLElement ())
 
 strike :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-strike = elementify2 Nothing "strike"
+strike = elementify Nothing "strike"
 
 strike_ :: Array Nut -> Nut
 strike_ = strike []
@@ -2851,7 +2859,7 @@ strike__ t = strike [] [ DC.text_ t ]
 instance TagToDeku "xmp" (HTMLPreElement ())
 
 xmp :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLPreElement ()))) -> Array Nut -> Nut
-xmp = elementify2 Nothing "xmp"
+xmp = elementify Nothing "xmp"
 
 xmp_ :: Array Nut -> Nut
 xmp_ = xmp []
@@ -2862,7 +2870,7 @@ xmp__ t = xmp [] [ DC.text_ t ]
 instance TagToDeku "basefont" (HTMLElement ())
 
 basefont :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-basefont = elementify2 Nothing "basefont"
+basefont = elementify Nothing "basefont"
 
 basefont_ :: Array Nut -> Nut
 basefont_ = basefont []
@@ -2873,7 +2881,7 @@ basefont__ t = basefont [] [ DC.text_ t ]
 instance TagToDeku "big" (HTMLElement ())
 
 big :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-big = elementify2 Nothing "big"
+big = elementify Nothing "big"
 
 big_ :: Array Nut -> Nut
 big_ = big []
@@ -2885,7 +2893,7 @@ instance TagToDeku "blink" (HTMLUnknownElement ())
 
 blink
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
-blink = elementify2 Nothing "blink"
+blink = elementify Nothing "blink"
 
 blink_ :: Array Nut -> Nut
 blink_ = blink []
@@ -2896,7 +2904,7 @@ blink__ t = blink [] [ DC.text_ t ]
 instance TagToDeku "center" (HTMLElement ())
 
 center :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-center = elementify2 Nothing "center"
+center = elementify Nothing "center"
 
 center_ :: Array Nut -> Nut
 center_ = center []
@@ -2907,7 +2915,7 @@ center__ t = center [] [ DC.text_ t ]
 instance TagToDeku "font" (HTMLFontElement ())
 
 font :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLFontElement ()))) -> Array Nut -> Nut
-font = elementify2 Nothing "font"
+font = elementify Nothing "font"
 
 font_ :: Array Nut -> Nut
 font_ = font []
@@ -2919,7 +2927,7 @@ instance TagToDeku "marquee" (HTMLMarqueeElement ())
 
 marquee
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLMarqueeElement ()))) -> Array Nut -> Nut
-marquee = elementify2 Nothing "marquee"
+marquee = elementify Nothing "marquee"
 
 marquee_ :: Array Nut -> Nut
 marquee_ = marquee []
@@ -2931,7 +2939,7 @@ instance TagToDeku "multicol" (HTMLUnknownElement ())
 
 multicol
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
-multicol = elementify2 Nothing "multicol"
+multicol = elementify Nothing "multicol"
 
 multicol_ :: Array Nut -> Nut
 multicol_ = multicol []
@@ -2942,7 +2950,7 @@ multicol__ t = multicol [] [ DC.text_ t ]
 instance TagToDeku "nobr" (HTMLElement ())
 
 nobr :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-nobr = elementify2 Nothing "nobr"
+nobr = elementify Nothing "nobr"
 
 nobr_ :: Array Nut -> Nut
 nobr_ = nobr []
@@ -2954,7 +2962,7 @@ instance TagToDeku "spacer" (HTMLUnknownElement ())
 
 spacer
   :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLUnknownElement ()))) -> Array Nut -> Nut
-spacer = elementify2 Nothing "spacer"
+spacer = elementify Nothing "spacer"
 
 spacer_ :: Array Nut -> Nut
 spacer_ = spacer []
@@ -2965,7 +2973,7 @@ spacer__ t = spacer [] [ DC.text_ t ]
 instance TagToDeku "tt" (HTMLElement ())
 
 tt :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLElement ()))) -> Array Nut -> Nut
-tt = elementify2 Nothing "tt"
+tt = elementify Nothing "tt"
 
 tt_ :: Array Nut -> Nut
 tt_ = tt []
