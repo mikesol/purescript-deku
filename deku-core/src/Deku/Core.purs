@@ -61,7 +61,7 @@ module Deku.Core
   , actOnLifecycleForText
   , attributeAtYourOwnRisk
   , beaconAttribution
-  , pursxToElement
+  , callbackWithCaution
   , cb
   , cb'
   , class PursxToElement
@@ -70,21 +70,28 @@ module Deku.Core
   , eltAttribution
   , eventOrBust
   , fixed
+  , fromDekuBeacon
+  , fromDekuElement
+  , fromDekuText
   , getLifecycle
   , handleAtts
   , notLucky
   , pollOrBust
   , portal
   , prop'
-  , unset'
   , pureOrBust
+  , pursxToElement
   , runListener
   , text
   , textAttribution
   , text_
   , thunker
+  , toDekuBeacon
+  , toDekuElement
+  , toDekuText
   , unsafeAttribute
   , unsafeUnAttribute
+  , unset'
   , useDeflect
   , useDyn
   , useDynAtBeginning
@@ -97,23 +104,17 @@ module Deku.Core
   , useMailboxed
   , useMailboxedS
   , useRant
-  , useSplit
   , useRant'
   , useRef
   , useRefST
+  , useSplit
   , useState
   , useState'
   , useStateTagged'
   , withUnsub
   , xdata
-  ----
-  , toDekuElement
-  , fromDekuElement
-  , toDekuBeacon
-  , fromDekuBeacon
-  , toDekuText
-  , fromDekuText
-  ) where
+  )
+  where
 
 import Prelude
 
@@ -237,6 +238,10 @@ unsafeAttribute = Attribute
 attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
 attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setProp }) ->
   runEffectFn3 setProp (toDekuElement e) (Key k) (Value v)
+
+callbackWithCaution :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
+callbackWithCaution k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setCb }) ->
+  runEffectFn3 setCb (toDekuElement e) (Key k) (Cb v)
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
