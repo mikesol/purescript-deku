@@ -27,7 +27,6 @@ import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
 import Deku.Core (Cb(..), DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Key(..), Nut(..), PSR(..), PursXable(..), Tag(..), Value(..), Verb(..), eltAttribution, fromDekuBeacon, fromDekuElement, fromDekuText, handleAtts, toDekuBeacon, toDekuElement, toDekuText)
 import Deku.Core as Core
-import Deku.JSMap as JSMap
 import Deku.JSWeakRef (WeakRef)
 import Deku.UnsafeDOM (addEventListener, appendChild, cloneTemplate, createElement, createElementNS, eventListener, insertBefore, outerHTML, removeEventListener, setTextContent, toTemplate, unsafeParentNode)
 import Effect (Effect, foreachE)
@@ -38,7 +37,7 @@ import Foreign.Object as Object
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
 import Unsafe.Reference (unsafeRefEq)
-import Untagged.Union (type (|+|), toEither1)
+import Untagged.Union (type (|+|))
 import Web.DOM (Element)
 import Web.DOM as Node
 import Web.DOM.ChildNode (remove)
@@ -50,7 +49,7 @@ import Web.DOM.Node (childNodes, firstChild, lastChild, nextSibling, nodeTypeInd
 import Web.DOM.NodeList as NodeList
 import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.DOM.Text as Text
-import Web.Event.Event (EventType(..), target)
+import Web.Event.Event (EventType(..))
 import Web.Event.Event as Web
 import Web.Event.EventTarget (EventListener)
 import Web.HTML (window)
@@ -231,14 +230,14 @@ attributeTextParentEffect = mkEffectFn2
     runEffectFn2 appendChild (Text.toNode (fromDekuText txt))
       (Element.toNode (fromDekuElement parent))
 
-makeOpenBeaconEffect :: Core.MakeBeacon
+makeOpenBeaconEffect :: Core.MakeOpenBeacon
 makeOpenBeaconEffect = do
   doc <- window >>= document
   cm <- createComment d3kU (toDocument doc)
   pure (toDekuBeacon cm)
 
-makeCloseBeaconEffect :: Core.MakeBeacon
-makeCloseBeaconEffect = do
+makeCloseBeaconEffect :: Core.MakeCloseBeacon
+makeCloseBeaconEffect = mkEffectFn1 \_ -> do
   doc <- window >>= document
   cm <- createComment uk3D (toDocument doc)
   pure (toDekuBeacon cm)
@@ -431,21 +430,6 @@ setPropEffect = mkEffectFn3 \elt' (Key k) (Value v) -> do
           fe
       | otherwise = setAttribute k v elt
   o
-
-setDelegateCbEffect :: Core.SetDelegateCb
-setDelegateCbEffect = mkEffectFn3 \elt' (Key k) mp ->
-  do -- EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb)) Unit
-    let eventType = EventType k
-    let eventTarget = toEventTarget (fromDekuElement elt')
-    nl <- runEffectFn1 eventListener $ mkEffectFn1 \ev -> do
-      for_ (target ev >>= Element.fromEventTarget) \t -> do
-        oo <- runEffectFn2 JSMap.getImpl t mp
-        case toEither1 oo of
-          Left _ -> pure unit
-          Right obj -> case Object.lookup k obj of
-            Just (Cb cb) -> void $ cb ev
-            Nothing -> pure unit
-    runEffectFn4 addEventListener eventType nl false eventTarget
 
 foreign import getPreviousCb
   :: EffectFn2 String DekuElement (Nullable EventListener)

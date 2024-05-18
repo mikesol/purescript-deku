@@ -1,20 +1,23 @@
-module Deku.FullDOMInterpret where
+module Deku.HydratingDOMInterpret where
+
+import Prelude
 
 import Deku.Core as Core
 import Deku.Interpret as I
+import Effect.Uncurried (mkEffectFn2, mkEffectFn3, mkEffectFn5)
 
 fullDOMInterpret :: Core.DOMInterpret
 fullDOMInterpret =
   let
     next = Core.DOMInterpret
-      { makeElement: I.makeElementEffect
-      , setProp: I.setPropEffect
+      { makeElement: I.makeElementEffect --
+      , setProp: mkEffectFn3 \_ _ _ -> pure unit
       , setCb: I.setCbEffect
-      , unsetAttribute: I.unsetAttributeEffect
-      , attributeElementParent: I.attributeElementParentEffect
-      , attributeDynParentForElement: I.attributeDynParentForElementEffect
-      , sendToPosForElement: I.sendToPosForElementEffect
-      , removeForElement: I.removeForElementEffect
+      , unsetAttribute: mkEffectFn2 \_ _ -> pure unit
+      , attributeElementParent: mkEffectFn2 \_ _ -> pure unit
+      , attributeDynParentForElement: mkEffectFn5 \_ _ _ _ _ -> pure unit
+      , sendToPosForElement: mkEffectFn5 \_ _ _ _ _ -> pure unit
+      , removeForElement: mkEffectFn2 \_ _ -> pure unit
       --
       , makeOpenBeacon: I.makeOpenBeaconEffect
       , makeCloseBeacon: I.makeCloseBeaconEffect

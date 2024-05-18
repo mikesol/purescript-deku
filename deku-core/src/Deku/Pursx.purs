@@ -398,7 +398,7 @@ template p = Nut $ mkEffectFn2
     when (not (null psr.unsubs)) do
       void $ liftST $ STArray.pushAll psr.unsubs unsubs
     -- also need a close beacon
-    dbEnd <- di.makeCloseBeacon
+    dbEnd <- runEffectFn1 di.makeCloseBeacon dbStart
     -- do the same close beacon management as our dyn friends
     case psr.beacon of
       Nothing -> do

@@ -34,7 +34,8 @@ module Deku.Core
   , Hook'
   , Html(..)
   , Key(..)
-  , MakeBeacon
+  , MakeOpenBeacon
+  , MakeCloseBeacon
   , MakeElement
   , MakePursx
   , MakeText
@@ -49,7 +50,6 @@ module Deku.Core
   , SendToPosForElement
   , SendToPosForText
   , SetCb
-  , SetDelegateCb
   , SetProp
   , SetText
   , Tag(..)
@@ -137,7 +137,6 @@ import Data.Symbol (class IsSymbol)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
-import Deku.JSMap as JSMap
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
 import Effect (Effect, foreachE)
 import Effect.Ref (Ref, new, write)
@@ -155,7 +154,6 @@ import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM (Comment, Element, Text)
-import Web.DOM as Element
 import Web.Event.Internal.Types (Event)
 
 ------
@@ -381,10 +379,6 @@ type SetProp = EffectFn3 DekuElement Key Value Unit
 type SetCb =
   EffectFn3 DekuElement Key Cb Unit
 
-type SetDelegateCb =
-  EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb))
-    Unit
-
 newtype Html = Html String
 newtype Verb = Verb String
 -- | Type used by Deku backends to make pursx. For internal use only unless you're writing a custom backend.
@@ -395,7 +389,8 @@ type MakePursx =
     DekuElement
 
 -- | Type used by Deku backends to make a beacon signaling the beginning or end of a dynamic construct. For internal use only unless you're writing a custom backend.
-type MakeBeacon = Effect DekuBeacon
+type MakeOpenBeacon = Effect DekuBeacon
+type MakeCloseBeacon = EffectFn1 DekuBeacon DekuBeacon
 
 type CleanUpBeacon = EffectFn1 (WeakRef DekuBeacon) Unit
 type CleanUpElement = EffectFn1 (WeakRef DekuElement) Unit
@@ -410,15 +405,14 @@ newtype DOMInterpret = DOMInterpret
   { makeElement :: MakeElement
   , setProp :: SetProp
   , setCb :: SetCb
-  , setDelegateCb :: SetDelegateCb
   , unsetAttribute :: UnsetAttribute
   , attributeElementParent :: AttributeElementParent
   , attributeDynParentForElement :: AttributeDynParentForElement
   , sendToPosForElement :: SendToPosForElement
   , removeForElement :: RemoveForElement
   --
-  , makeOpenBeacon :: MakeBeacon
-  , makeCloseBeacon :: MakeBeacon
+  , makeOpenBeacon :: MakeOpenBeacon
+  , makeCloseBeacon :: MakeCloseBeacon
   , attributeBeaconParent :: AttributeBeaconParent
   , attributeDynParentForBeacons :: AttributeDynParentForBeacons
   , attributeBeaconFullRangeParent :: AttributeBeaconFullRangeParent
@@ -511,7 +505,7 @@ fixed nuts = Nut $ mkEffectFn2
       unsubs <- liftST $ STArray.new
       when (not (null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
-      dbEnd <- makeCloseBeacon
+      dbEnd <- runEffectFn1 makeCloseBeacon dbStart
       case psr.beacon of
         Nothing -> do
           runEffectFn2 attributeBeaconParent dbStart (DekuParent psr.parent)
@@ -756,7 +750,7 @@ useDynWith p d f = Nut $ mkEffectFn2
       unsubs <- liftST $ STArray.new
       when (not (null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
-      dbEnd <- makeCloseBeacon
+      dbEnd <- runEffectFn1 makeCloseBeacon dbStart
       case psr.beacon of
         Nothing -> do
           runEffectFn2 attributeBeaconParent dbStart (DekuParent psr.parent)
