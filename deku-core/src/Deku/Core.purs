@@ -435,6 +435,7 @@ newtype DOMInterpret = DOMInterpret
   --
   , makePursx :: MakePursx
   --
+  , next :: Unit -> DOMInterpret
   }
 
 derive instance Newtype DOMInterpret _
@@ -745,6 +746,7 @@ useDynWith p d f = Nut $ mkEffectFn2
          , attributeDynParentForBeacons
          , makeOpenBeacon
          , makeCloseBeacon
+         , next
          }
      ) ->
     do
@@ -768,7 +770,7 @@ useDynWith p d f = Nut $ mkEffectFn2
       let those' = eventOrBust p
       let that' = pollOrBust p
       let
-        oh'hi sstaaarrrrrt eeeeeennnnd = mkEffectFn1 \(Tuple mpos value) -> do
+        oh'hi sstaaarrrrrt eeeeeennnnd di' = mkEffectFn1 \(Tuple mpos value) -> do
           let sendTo = d.sendTo value
           let remove = d.remove value
           sendTo' <- liftST $ Poll.create
@@ -797,17 +799,18 @@ useDynWith p d f = Nut $ mkEffectFn2
                     }
                 }
             )
-            di
-      for_ this' \t -> runEffectFn2 fastForeachE t (oh'hi dbStart dbEnd)
+            di'
+      for_ this' \t -> runEffectFn2 fastForeachE t (oh'hi dbStart dbEnd di)
       let
         handleEvent t = do
+          let ndi = next unit
           wrStart <- runEffectFn1 weakRef dbStart
           wrEnd <- runEffectFn1 weakRef dbEnd
           uu <- subscribe t \yy -> do
             drStart <- runEffectFn1 deref wrStart
             drEnd <- runEffectFn1 deref wrEnd
             case toMaybe drStart, toMaybe drEnd of
-              Just dbStartx, Just dbEndy -> runEffectFn1 (oh'hi dbStartx dbEndy)
+              Just dbStartx, Just dbEndy -> runEffectFn1 (oh'hi dbStartx dbEndy ndi)
                 yy
               _, _ -> do
                 -- only need to run on head as head is reference
@@ -988,15 +991,16 @@ handleAtts
   -> STArray.STArray Global (Effect Unit)
   -> Array (Poll Attribute')
   -> Effect Unit
-handleAtts di elt unsubs atts =
+handleAtts di@(DOMInterpret { next }) elt unsubs atts =
   do
     let
       handleAttrEvent y = do
+        let ndi = next unit
         wr <- runEffectFn1 weakRef elt
         uu <- subscribe y \x -> do
           drf <- runEffectFn1 deref wr
           case toMaybe drf of
-            Just yy -> runEffectFn2 x (fromDekuElement yy) di
+            Just yy -> runEffectFn2 x (fromDekuElement yy) ndi
             Nothing -> thunker unsubs
         void $ liftST $ STArray.push uu unsubs
       handleAttrPoll y = do
@@ -1086,7 +1090,7 @@ text p = Nut $ mkEffectFn2
    di@
      ( DOMInterpret
          { makeText
-         , setText
+         , next
          }
      ) ->
     do
@@ -1101,11 +1105,12 @@ text p = Nut $ mkEffectFn2
       runEffectFn3 textAttribution ps di txt
       let
         handleEvent y = do
+          let DOMInterpret ndi = next unit
           wr <- runEffectFn1 weakRef txt
           uu <- subscribe y \yy -> do
             drf <- runEffectFn1 deref wr
             case toMaybe drf of
-              Just yyy -> runEffectFn2 setText yyy yy
+              Just yyy -> runEffectFn2 ndi.setText yyy yy
               Nothing -> thunker unsubs
           void $ liftST $ STArray.push uu unsubs
       for_ those' handleEvent
