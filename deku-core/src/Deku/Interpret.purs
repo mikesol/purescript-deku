@@ -327,7 +327,7 @@ attributeDynParentForBeaconFullRangeEffect = mkEffectFn4
     nsOld <- nextSibling (Comment.toNode (fromDekuBeacon stBeacon))
     runEffectFn4
       attributeDynParentForArrayOfNodesEffect
-      [Comment.toNode (fromDekuBeacon stBeacon)]
+      [ Comment.toNode (fromDekuBeacon stBeacon) ]
       leftB
       rightB
       mpos
@@ -426,8 +426,8 @@ getDisableable elt = go
           x = Just o
   go (_ : y) = go y
 
-setPropEffect :: Core.SetProp
-setPropEffect = mkEffectFn3 \elt' (Key k) (Value v) -> do
+setPropBase :: (String -> String -> Element -> Effect Unit) -> Core.SetProp
+setPropBase f = mkEffectFn3 \elt' (Key k) (Value v) -> do
   let elt = fromDekuElement elt'
   let
     o
@@ -444,10 +444,13 @@ setPropEffect = mkEffectFn3 \elt' (Key k) (Value v) -> do
       | k == "disabled"
       , Just fe <-
           getDisableable elt disableables = runExists
-          (\(FeO { f, e }) -> f (v == "true") e)
+          (\(FeO { f: fx, e }) -> fx (v == "true") e)
           fe
-      | otherwise = setAttribute k v elt
+      | otherwise = f k v elt
   o
+
+setPropEffect :: Core.SetProp
+setPropEffect = setPropBase setAttribute
 
 foreign import getPreviousCb
   :: EffectFn2 String DekuElement (Nullable EventListener)
@@ -652,16 +655,16 @@ makePursxEffect = mkEffectFn5
                       (Element.toNode asElt)
                       (Element.toNode x)
                     DekuTextOutcome to -> do
-                        let lNode = Comment.toNode (fromDekuTextMarker to.l)
-                        let tNode = Text.toNode (fromDekuText to.txt)
-                        let rNode = Comment.toNode (fromDekuTextMarker to.r)
-                        let pNode = Element.toNode x
-                        replaceChild
-                          rNode
-                          (Element.toNode asElt)
-                          pNode
-                        runEffectFn3 insertBefore tNode rNode pNode
-                        runEffectFn3 insertBefore lNode tNode pNode
+                      let lNode = Comment.toNode (fromDekuTextMarker to.l)
+                      let tNode = Text.toNode (fromDekuText to.txt)
+                      let rNode = Comment.toNode (fromDekuTextMarker to.r)
+                      let pNode = Element.toNode x
+                      replaceChild
+                        rNode
+                        (Element.toNode asElt)
+                        pNode
+                      runEffectFn3 insertBefore tNode rNode pNode
+                      runEffectFn3 insertBefore lNode tNode pNode
                     DekuBeaconOutcome bo -> do
                       runEffectFn3
                         attributeBeaconFullRangeParentProto

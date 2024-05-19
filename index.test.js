@@ -13,6 +13,19 @@ const doTest = (name, closure, ionly) => {
       await myScript(false);
     });
   });
+  (ionly ? it.only : it)(name+' SSR', async () => {
+    await closure(async (myTest, myScript) => {
+      if (!myTest) {
+        throw new Error(`Cannot find test named ${name}`);
+      }
+      document.getElementsByTagName("html")[0].innerHTML =
+        '<head></head><body id="mybody"></body>';
+      tests.ssrTest(myTest)();
+      document.body.innerHTML = document.body.innerHTML; // forces string
+      tests.hydrateTest(myTest)();
+      await myScript(true);
+    });
+  });
 };
 
 const getIndex = (child) => {
@@ -1479,7 +1492,7 @@ describe("deku", () => {
         expect($("#hello").text()).toBe("hello");
       })
     );
-    doTest("useRant works", (f) =>
+    doTest("use hot rant works", (f) =>
       f(tests.useHotRantWorks, () => {
         const $ = require("jquery");
         expect($("#da").text()).toBe("1");

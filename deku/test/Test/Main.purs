@@ -28,7 +28,7 @@ import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useD
 import Deku.Hooks as DH
 import Deku.Pursx (template, pursx)
 import Deku.Some as Some
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (hydrateInBody, runInBody, ssrInBody)
 import Effect (Effect, foreachE)
 import Effect.Random (random, randomInt)
 import FRP.Event (fold)
@@ -42,6 +42,12 @@ foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
 runTest :: Nut -> Effect Unit
 runTest = runInBody
+
+ssrTest :: Nut -> Effect Unit
+ssrTest = ssrInBody
+
+hydrateTest :: Nut -> Effect Unit
+hydrateTest = hydrateInBody
 
 sanityCheck :: Nut
 sanityCheck = D.span [ DA.id_ "hello" ] [ text_ "Hello" ]

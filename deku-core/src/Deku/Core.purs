@@ -178,6 +178,7 @@ toDekuTextMarker = unsafeCoerce
 
 fromDekuTextMarker :: DekuTextMarker -> Comment
 fromDekuTextMarker = unsafeCoerce
+
 toDekuText :: Text -> DekuText
 toDekuText = unsafeCoerce
 
@@ -318,13 +319,16 @@ type SendToPosForElement = EffectFn5 (Ref Boolean) Int DekuElement DekuBeacon
   DekuBeacon
   Unit
 
-type SendToPosForText = EffectFn7 (Ref Boolean) Int DekuTextMarker DekuText DekuTextMarker DekuBeacon
+type SendToPosForText = EffectFn7 (Ref Boolean) Int DekuTextMarker DekuText
+  DekuTextMarker
+  DekuBeacon
   DekuBeacon
   Unit
 
 type RemoveForDyn = EffectFn3 Boolean DekuBeacon DekuBeacon Unit
 type RemoveForElement = EffectFn2 Boolean DekuElement Unit
-type RemoveForText = EffectFn4 Boolean DekuTextMarker DekuText DekuTextMarker Unit
+type RemoveForText = EffectFn4 Boolean DekuTextMarker DekuText DekuTextMarker
+  Unit
 
 -- | Type used by Deku backends to give a parent to an element. For internal use only unless you're writing a custom backend.
 type AttributeElementParent =
@@ -369,12 +373,14 @@ type AttributeDynParentForBeacons = EffectFn5 DekuBeacon DekuBeacon DekuBeacon
 
 -- parent is not needed because we may be in a portal
 -- we always grab the parent from the beacon
-type AttributeDynParentForText = EffectFn5 (Ref Boolean) DekuTextOutcome' DekuBeacon
+type AttributeDynParentForText = EffectFn5 (Ref Boolean) DekuTextOutcome'
+  DekuBeacon
   DekuBeacon
   (Maybe Int)
   Unit
 
-type DekuTextOutcome' = { l :: DekuTextMarker, r :: DekuTextMarker, txt :: DekuText }
+type DekuTextOutcome' =
+  { l :: DekuTextMarker, r :: DekuTextMarker, txt :: DekuText }
 
 -- | Type used by Deku backends to construct a text element. For internal use only unless you're writing a custom backend.
 type MakeText = EffectFn1 (Maybe String) DekuTextOutcome'
@@ -606,6 +612,35 @@ useRant e f = Nut $ mkEffectFn2 \psr di -> do
   { poll, unsubscribe } <- liftST $ Poll.rant e
   runEffectFn2 (coerce $ f poll) (withUnsub (liftST unsubscribe) psr) di
 
+-- useSplit :: forall a. Poll a -> Hook { first :: Poll a, second :: Poll a }
+-- useSplit e f = Nut $ mkEffectFn2 \psr di -> do
+--   { poll, unsubscribe } <- liftST $ Poll.rant e
+--   p0 <- liftST $ Poll.create
+--   p1 <- liftST $ Poll.create
+--   let
+--     this' = pureOrBust poll
+--     those' = eventOrBust poll
+--     that' = pollOrBust poll
+--     handleEvent t = do
+--       o <- subscribe t \i -> do
+--         p0.push i
+--         p1.push i
+--       pure o
+--     handlePoll t = do
+--       pump <- liftST $ Event.create
+--       o <- handleEvent (UPoll.sample t pump.event)
+--       pump.push identity
+--       pure o
+--     pures = mergePure $ fromMaybe [] this'
+--   s1 <- traverse handleEvent those'
+--   s2 <- traverse handlePoll that'
+--   runEffectFn2
+--     ( coerce $ f
+--         { first: merge [ pures, p0.poll ], second: merge [ pures, p1.poll ] }
+--     )
+--     (withUnsub (sequence_ s1 *> sequence_ s2 *> liftST unsubscribe) psr)
+--     di
+
 useSplit :: forall a. Poll a -> Hook { first :: Poll a, second :: Poll a }
 useSplit e f = Nut $ mkEffectFn2 \psr di -> do
   { poll, unsubscribe } <- liftST $ Poll.rant e
@@ -777,9 +812,11 @@ useDynWith p d f = Nut $ mkEffectFn2
       let this' = pureOrBust p
       let those' = eventOrBust p
       let that' = pollOrBust p
+      diRef <- liftST $ STRef.new di
       let
-        oh'hi sstaaarrrrrt eeeeeennnnd di' = mkEffectFn1 \(Tuple mpos value) ->
+        oh'hi sstaaarrrrrt eeeeeennnnd = mkEffectFn1 \(Tuple mpos value) ->
           do
+            di' <- liftST $ STRef.read diRef
             let sendTo = d.sendTo value
             let remove = d.remove value
             sendTo' <- liftST $ Poll.create
@@ -809,10 +846,9 @@ useDynWith p d f = Nut $ mkEffectFn2
                   }
               )
               di'
-      for_ this' \t -> runEffectFn2 fastForeachE t (oh'hi dbStart dbEnd di)
+      for_ this' \t -> runEffectFn2 fastForeachE t (oh'hi dbStart dbEnd)
       let
         handleEvent t = do
-          let ndi = next unit
           wrStart <- runEffectFn1 weakRef dbStart
           wrEnd <- runEffectFn1 weakRef dbEnd
           uu <- subscribe t \yy -> do
@@ -820,7 +856,7 @@ useDynWith p d f = Nut $ mkEffectFn2
             drEnd <- runEffectFn1 deref wrEnd
             case toMaybe drStart, toMaybe drEnd of
               Just dbStartx, Just dbEndy -> runEffectFn1
-                (oh'hi dbStartx dbEndy ndi)
+                (oh'hi dbStartx dbEndy)
                 yy
               _, _ -> do
                 -- only need to run on head as head is reference
@@ -831,6 +867,7 @@ useDynWith p d f = Nut $ mkEffectFn2
         pump <- liftST $ Event.create
         handleEvent (UPoll.sample t pump.event)
         pump.push identity
+      void $ liftST $ STRef.write (next unit) diRef
       for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn8
         actOnLifecycleForDyn
         psr.fromPortal
@@ -883,7 +920,8 @@ actOnLifecycleForText = mkEffectFn8
           of
           Just lwr, Just txt, Just rwr, Just startAnchor, Just endAnchor ->
             case x of
-              DekuSendToPos i -> runEffectFn7 sendToPosForText lucky i lwr txt rwr
+              DekuSendToPos i -> runEffectFn7 sendToPosForText lucky i lwr txt
+                rwr
                 startAnchor
                 endAnchor
               DekuRemove -> runEffectFn4 removeForText fromPortal lwr txt rwr
@@ -1009,9 +1047,10 @@ handleAtts
   -> Effect Unit
 handleAtts di@(DOMInterpret { next }) elt unsubs atts =
   do
+    diRef <- liftST $ STRef.new di
     let
       handleAttrEvent y = do
-        let ndi = next unit
+        ndi <- liftST $ STRef.read diRef
         wr <- runEffectFn1 weakRef elt
         uu <- subscribe y \x -> do
           drf <- runEffectFn1 deref wr
@@ -1039,6 +1078,7 @@ handleAtts di@(DOMInterpret { next }) elt unsubs atts =
           handleAttrPoll y
 
     foreachE atts \ii -> go ii
+    void $ liftST $ STRef.write (next unit) diRef
 
 elementify
   :: forall element
@@ -1103,13 +1143,9 @@ text_ = pure >>> text
 text :: Poll String -> Nut
 text p = Nut $ mkEffectFn2
   \ps@(PSR psr)
-   di@
-     ( DOMInterpret
-         { makeText
-         , next
-         }
-     ) ->
+   di@(DOMInterpret { makeText, next }) ->
     do
+      diRef <- liftST $ STRef.new di
       let this' = pureOrBust p
       let those' = eventOrBust p
       let that' = pollOrBust p
@@ -1121,7 +1157,7 @@ text p = Nut $ mkEffectFn2
       runEffectFn3 textAttribution ps di txt
       let
         handleEvent y = do
-          let DOMInterpret ndi = next unit
+          DOMInterpret ndi <- liftST $ STRef.read diRef
           wr <- runEffectFn1 weakRef txt.txt
           uu <- subscribe y \yy -> do
             drf <- runEffectFn1 deref wr
@@ -1134,6 +1170,7 @@ text p = Nut $ mkEffectFn2
         pump <- liftST $ Event.create
         handleEvent (UPoll.sample y pump.event)
         pump.push identity
+      void $ liftST $ STRef.write (next unit) diRef
       for_ (getLifecycle psr.beacon) \{ l, s, e, lucky } -> runEffectFn8
         actOnLifecycleForText
         psr.fromPortal
