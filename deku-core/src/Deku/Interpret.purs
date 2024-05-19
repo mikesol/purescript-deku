@@ -25,13 +25,14 @@ import Data.Nullable (Nullable, toMaybe)
 import Data.String as String
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
+import Debug (spy)
 import Deku.Core (Cb(..), DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Key(..), Nut(..), PSR(..), PursXable(..), Tag(..), Value(..), Verb(..), eltAttribution, fromDekuBeacon, fromDekuElement, fromDekuText, fromDekuTextMarker, handleAtts, toDekuBeacon, toDekuElement, toDekuText, toDekuTextMarker)
 import Deku.Core as Core
 import Deku.JSWeakRef (WeakRef)
 import Deku.Markers as M
 import Deku.UnsafeDOM (addEventListener, appendChild, cloneTemplate, createElement, createElementNS, eventListener, insertBefore, outerHTML, removeEventListener, setTextContent, toTemplate, unsafeParentNode)
 import Effect (Effect, foreachE)
-import Effect.Console (error)
+import Effect.Console (error, log)
 import Effect.Ref (read)
 import Effect.Uncurried (EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, mkEffectFn7, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import Foreign.Object as Object
@@ -494,11 +495,13 @@ setTextEffect = mkEffectFn2 \txt' str -> do
 -- we remove first
 sendToPosForDynEffect :: Core.SendToPosForDyn
 sendToPosForDynEffect = mkEffectFn5 \i b e st ed -> do
+  let _ = spy "sendToPosForDynEffect clicked" true
   runEffectFn3 removeForDynEffect true b e
   runEffectFn4 attributeDynParentForBeaconFullRangeEffect b st ed (Just i)
 
 sendToPosForElementEffect :: Core.SendToPosForElement
 sendToPosForElementEffect = mkEffectFn5 \lucky i b st ed -> do
+  let _ = spy "sendToPosForElementEffect clicked" true
   runEffectFn2 removeForElementEffect true b
   runEffectFn5 attributeDynParentForElementEffect lucky (DekuChild b) st ed
     (Just i)
@@ -574,6 +577,7 @@ makePursxEffect :: Core.MakePursx
 makePursxEffect = mkEffectFn5
   \(Html html) (Verb verb) replacements ps di -> do
     let
+      _ = spy "makePursxEffect called" true
       { foldedHtml, nuts, atts } = foldrWithIndex
         ( \i v r -> case v of
             PXNut n -> r

@@ -516,6 +516,7 @@ fixed nuts = Nut $ mkEffectFn2
          , attributeDynParentForBeacons
          , makeOpenBeacon
          , makeCloseBeacon
+         , next
          }
      ) ->
     do
@@ -556,7 +557,7 @@ fixed nuts = Nut $ mkEffectFn2
           psr.fromPortal
           unsubs
           l
-          di
+          (next unit)
           dbStart
           dbEnd
           s
@@ -1050,9 +1051,9 @@ handleAtts di@(DOMInterpret { next }) elt unsubs atts =
     diRef <- liftST $ STRef.new di
     let
       handleAttrEvent y = do
-        ndi <- liftST $ STRef.read diRef
         wr <- runEffectFn1 weakRef elt
         uu <- subscribe y \x -> do
+          ndi <- liftST $ STRef.read diRef
           drf <- runEffectFn1 deref wr
           case toMaybe drf of
             Just yy -> runEffectFn2 x (fromDekuElement yy) ndi
@@ -1091,7 +1092,7 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
   \ps@(PSR psr)
    di@
      ( DOMInterpret
-         { makeElement
+         { makeElement, next
          }
      ) ->
     do
@@ -1119,7 +1120,7 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
         lucky
         unsubs
         l
-        di
+        (next unit)
         elt
         s
         e
@@ -1157,9 +1158,9 @@ text p = Nut $ mkEffectFn2
       runEffectFn3 textAttribution ps di txt
       let
         handleEvent y = do
-          DOMInterpret ndi <- liftST $ STRef.read diRef
           wr <- runEffectFn1 weakRef txt.txt
           uu <- subscribe y \yy -> do
+            DOMInterpret ndi <- liftST $ STRef.read diRef
             drf <- runEffectFn1 deref wr
             case toMaybe drf of
               Just yyy -> runEffectFn2 ndi.setText yyy yy
@@ -1177,7 +1178,7 @@ text p = Nut $ mkEffectFn2
         lucky
         unsubs
         l
-        di
+        (next unit)
         txt
         s
         e

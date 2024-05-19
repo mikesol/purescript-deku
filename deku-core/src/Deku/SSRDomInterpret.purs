@@ -2,6 +2,7 @@ module Deku.SSRDomInterpret where
 
 import Prelude
 
+import Debug (spy)
 import Deku.Core (DekuElement, toDekuElement)
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
@@ -17,6 +18,7 @@ import Web.HTML.Window (document)
 
 makePursxPlaceholder :: Effect DekuElement
 makePursxPlaceholder = do
+  let _ = spy "makePursxPlaceholder" true
   doc <- window >>= document
   cm <- createComment M.pursx (toDocument doc)
   pure (toDekuElement $ (unsafeCoerce :: Comment -> Element) cm)
@@ -29,4 +31,5 @@ ssrDOMInterpret = Core.DOMInterpret t
   t = n
     { setCb = mkEffectFn3 \_ _ _ -> pure unit
     , makePursx = mkEffectFn5 \_ _ _ _ _ -> makePursxPlaceholder
+    , next = \_ -> ssrDOMInterpret
     }

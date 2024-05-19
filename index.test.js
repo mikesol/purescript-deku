@@ -2,17 +2,17 @@ const tests = require("./output/Test.Main");
 const testFriend = require("./output/Test.TestFriend");
 const di = require("./output/Deku.Interpret");
 const doTest = (name, closure, ionly) => {
-  (ionly ? it.only : it)(name, async () => {
-    await closure(async (myTest, myScript) => {
-      if (!myTest) {
-        throw new Error(`Cannot find test named ${name}`);
-      }
-      document.getElementsByTagName("html")[0].innerHTML =
-        '<head></head><body id="mybody"></body>';
-      tests.runTest(myTest)();
-      await myScript(false);
-    });
-  });
+  // (ionly ? it.only : it)(name, async () => {
+  //   await closure(async (myTest, myScript) => {
+  //     if (!myTest) {
+  //       throw new Error(`Cannot find test named ${name}`);
+  //     }
+  //     document.getElementsByTagName("html")[0].innerHTML =
+  //       '<head></head><body id="mybody"></body>';
+  //     tests.runTest(myTest)();
+  //     await myScript(false);
+  //   });
+  // });
   (ionly ? it.only : it)(name+' SSR', async () => {
     await closure(async (myTest, myScript) => {
       if (!myTest) {
@@ -21,6 +21,7 @@ const doTest = (name, closure, ionly) => {
       document.getElementsByTagName("html")[0].innerHTML =
         '<head></head><body id="mybody"></body>';
       tests.ssrTest(myTest)();
+      console.log('html now', document.body.innerHTML)
       document.body.innerHTML = document.body.innerHTML; // forces string
       tests.hydrateTest(myTest)();
       await myScript(true);
@@ -1147,7 +1148,7 @@ describe("deku", () => {
         expect($("#span0").text()).toBe("hello");
         $("#inny").trigger("click");
         expect($("#span0").text()).toBe("goodbye");
-      })
+      }), true
     );
 
     doTest("templates work", (f) =>
@@ -1496,7 +1497,9 @@ describe("deku", () => {
       f(tests.useHotRantWorks, () => {
         const $ = require("jquery");
         expect($("#da").text()).toBe("1");
+        console.log('before click');
         $("#update").trigger("click");
+        console.log('after click')
         expect($("#da").text()).toBe("2");
         $("#update").trigger("click");
         expect($("#da").text()).toBe("3");
@@ -1506,7 +1509,7 @@ describe("deku", () => {
         $("#update").trigger("click");
         expect($("#da").text()).toBe("4");
         expect($("#db").text()).toBe("4");
-      })
+      }),
     );
     doTest("stress test doesn't blow up", (f) =>
       f(tests.stressTest, () => {

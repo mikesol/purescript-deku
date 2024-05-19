@@ -13,6 +13,7 @@ import Deku.Interpret as I
 import Deku.Markers as M
 import Deku.UnsafeDOM (insertBefore)
 import Effect (Effect)
+import Effect.Console (log)
 import Effect.Exception (error, throwException)
 import Effect.Ref as Ref
 import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, mkEffectFn7, runEffectFn2, runEffectFn3, runEffectFn5)
@@ -108,6 +109,7 @@ makeTextHydrate nodeRef = mkEffectFn1 \_ -> do
       t <- Node.textContent cnd
       if t == M.tx then do
         ntx <- nextSibling cnd
+        let _ = spy "found next txt sibling" ntx
         case ntx >>= Txt.fromNode of
           Just txt -> do
             nc <- nextSibling (Txt.toNode txt)
@@ -153,6 +155,7 @@ makeTextHydrate nodeRef = mkEffectFn1 \_ -> do
 makePursxHydrate :: Ref.Ref (Maybe Node) -> Core.MakePursx
 makePursxHydrate nodeRef = mkEffectFn5 \a b c d e -> do
   nx <- Ref.read nodeRef
+  let _ = spy "NX pursx" nx
   Tuple nx' nn <- case nx >>= Cmt.fromNode of
     Just y -> do
       let cnd = Cmt.toNode y
