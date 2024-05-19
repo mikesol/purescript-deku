@@ -328,11 +328,17 @@ attributeDynParentForBeaconFullRangeEffect = mkEffectFn4
       _, _ -> error
         "Programming error: attributeDynParentForBeaconFullRangeEffect cannot find parent"
 
+tx = "+x" :: String
+xt = "x+" :: String
+
 makeTextEffect :: Core.MakeText
 makeTextEffect = mkEffectFn1 \mstr -> do
-  doc <- window >>= document
-  txt <- createTextNode (fromMaybe "" mstr) (toDocument doc)
-  pure $ toDekuText txt
+  doc' <- window >>= document
+  let doc = toDocument doc'
+  l <- createComment tx doc
+  txt <- createTextNode (fromMaybe "" mstr) doc
+  r <- createComment xt doc
+  pure $ { l, txt: toDekuText txt, r }
 
 newtype FeI e = FeI
   { f :: Boolean -> e -> Effect Unit, e :: Element -> Maybe e }
@@ -418,8 +424,8 @@ setPropEffect = mkEffectFn3 \elt' (Key k) (Value v) -> do
           v
           ie
       | k == "value"
-      , Just tx <- HTMLTextAreaElement.fromElement elt =
-          HTMLTextAreaElement.setValue v tx
+      , Just ttx <- HTMLTextAreaElement.fromElement elt =
+          HTMLTextAreaElement.setValue v ttx
       | k == "checked"
       , Just ie <- HTMLInputElement.fromElement elt =
           HTMLInputElement.setChecked (v == "true") ie

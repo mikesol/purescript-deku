@@ -113,8 +113,7 @@ module Deku.Core
   , useStateTagged'
   , withUnsub
   , xdata
-  )
-  where
+  ) where
 
 import Prelude
 
@@ -234,12 +233,15 @@ unsafeAttribute
 unsafeAttribute = Attribute
 
 attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
-attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setProp }) ->
-  runEffectFn3 setProp (toDekuElement e) (Key k) (Value v)
+attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2
+  \e (DOMInterpret { setProp }) ->
+    runEffectFn3 setProp (toDekuElement e) (Key k) (Value v)
 
-callbackWithCaution :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
-callbackWithCaution k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setCb }) ->
-  runEffectFn3 setCb (toDekuElement e) (Key k) (Cb v)
+callbackWithCaution
+  :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
+callbackWithCaution k v = unsafeAttribute $ mkEffectFn2
+  \e (DOMInterpret { setCb }) ->
+    runEffectFn3 setCb (toDekuElement e) (Key k) (Cb v)
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
@@ -363,7 +365,8 @@ type AttributeDynParentForText = EffectFn5 (Ref Boolean) DekuText DekuBeacon
   Unit
 
 -- | Type used by Deku backends to construct a text element. For internal use only unless you're writing a custom backend.
-type MakeText = EffectFn1 (Maybe String) DekuText
+type MakeText = EffectFn1 (Maybe String)
+  { l :: Comment, r :: Comment, txt :: DekuText }
 
 -- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom backend.
 type SetText = EffectFn2 DekuText String Unit
@@ -764,36 +767,37 @@ useDynWith p d f = Nut $ mkEffectFn2
       let those' = eventOrBust p
       let that' = pollOrBust p
       let
-        oh'hi sstaaarrrrrt eeeeeennnnd di' = mkEffectFn1 \(Tuple mpos value) -> do
-          let sendTo = d.sendTo value
-          let remove = d.remove value
-          sendTo' <- liftST $ Poll.create
-          remove' <- liftST $ Poll.create
-          let
-            (Nut nut) = f
-              { value
-              , remove: remove'.push DekuRemove
-              , sendTo: DekuSendToPos >>> sendTo'.push
-              }
-          void $ runEffectFn2 nut
-            ( PSR $ psr
-                { unsubs = []
-                , fromPortal = false
-                , beacon = Just
-                    { start: sstaaarrrrrt
-                    , end: eeeeeennnnd
-                    , pos: mpos
-                    , lucky
-                    , lifecycle: Just $ Poll.merge
-                        [ DekuSendToPos <$> sendTo
-                        , sendTo'.poll
-                        , remove $> DekuRemove
-                        , remove'.poll
-                        ]
-                    }
+        oh'hi sstaaarrrrrt eeeeeennnnd di' = mkEffectFn1 \(Tuple mpos value) ->
+          do
+            let sendTo = d.sendTo value
+            let remove = d.remove value
+            sendTo' <- liftST $ Poll.create
+            remove' <- liftST $ Poll.create
+            let
+              (Nut nut) = f
+                { value
+                , remove: remove'.push DekuRemove
+                , sendTo: DekuSendToPos >>> sendTo'.push
                 }
-            )
-            di'
+            void $ runEffectFn2 nut
+              ( PSR $ psr
+                  { unsubs = []
+                  , fromPortal = false
+                  , beacon = Just
+                      { start: sstaaarrrrrt
+                      , end: eeeeeennnnd
+                      , pos: mpos
+                      , lucky
+                      , lifecycle: Just $ Poll.merge
+                          [ DekuSendToPos <$> sendTo
+                          , sendTo'.poll
+                          , remove $> DekuRemove
+                          , remove'.poll
+                          ]
+                      }
+                  }
+              )
+              di'
       for_ this' \t -> runEffectFn2 fastForeachE t (oh'hi dbStart dbEnd di)
       let
         handleEvent t = do
@@ -804,7 +808,8 @@ useDynWith p d f = Nut $ mkEffectFn2
             drStart <- runEffectFn1 deref wrStart
             drEnd <- runEffectFn1 deref wrEnd
             case toMaybe drStart, toMaybe drEnd of
-              Just dbStartx, Just dbEndy -> runEffectFn1 (oh'hi dbStartx dbEndy ndi)
+              Just dbStartx, Just dbEndy -> runEffectFn1
+                (oh'hi dbStartx dbEndy ndi)
                 yy
               _, _ -> do
                 -- only need to run on head as head is reference
@@ -1091,7 +1096,7 @@ text p = Nut $ mkEffectFn2
       let this' = pureOrBust p
       let those' = eventOrBust p
       let that' = pollOrBust p
-      txt <- runEffectFn1 makeText (this' >>= Array.last)
+      { txt } <- runEffectFn1 makeText (this' >>= Array.last)
 
       unsubs <- liftST $ STArray.new
       when (not (null psr.unsubs)) do

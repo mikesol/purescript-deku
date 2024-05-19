@@ -450,13 +450,13 @@ template p = Nut $ mkEffectFn2
               if nodeTypeIndex realDeal0 == 3 then pure
                 ((unsafeCoerce :: Node.Node -> Text.Text) realDeal0)
               else do
-                nt <- runEffectFn1 di.makeText Nothing
+                { txt } <- runEffectFn1 di.makeText Nothing
                 par <- runEffectFn1 unsafeParentNode realDeal0
                 replaceChild
-                  (Text.toNode $ fromDekuText nt)
+                  (Text.toNode $ fromDekuText txt)
                   realDeal0
                   par
-                pure (fromDekuText nt)
+                pure (fromDekuText txt)
             realDeal <- runEffectFn1 weakRef realDekal
             let
               effn = mkEffectFn1 \(Identity str) -> do

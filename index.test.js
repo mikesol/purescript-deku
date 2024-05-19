@@ -921,10 +921,10 @@ describe("deku", () => {
     });
     describe("makeText and setText", () => {
       it("makes text", () => {
-        const t = di.makeTextEffect(testFriend.just("hello"));
-        expect(t.textContent).toBe("hello");
-        di.setTextEffect(t, "goodbye");
-        expect(t.textContent).toBe("goodbye");
+        const { txt } = di.makeTextEffect(testFriend.just("hello"));
+        expect(txt.textContent).toBe("hello");
+        di.setTextEffect(txt, "goodbye");
+        expect(txt.textContent).toBe("goodbye");
       });
     });
     describe("setProp", () => {
