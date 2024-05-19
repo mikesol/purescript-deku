@@ -7,9 +7,10 @@ import Data.Array.ST as STArray
 import Data.Maybe (Maybe(..))
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Attribute (Attribute, Attribute', unsafeUnAttribute)
-import Deku.Core (fromDekuBeacon, fromDekuElement, fromDekuText, toDekuElement, DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), handleAtts)
+import Deku.Core (DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), fromDekuBeacon, fromDekuElement, fromDekuText, fromDekuTextMarker, handleAtts, toDekuElement)
 import Deku.Interpret (attributeBeaconFullRangeParentProto)
 import Deku.Path as Path
+import Deku.UnsafeDOM (insertBefore)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Poll (Poll)
 import Prim.Row as R
@@ -19,10 +20,9 @@ import Type.Proxy (Proxy(..))
 import Web.DOM (Element, Text)
 import Web.DOM.ChildNode (remove)
 import Web.DOM.Comment as Comment
-import Web.DOM.Node as Node
 import Web.DOM.Element as Element
 import Web.DOM.Node (replaceChild)
-import Deku.UnsafeDOM (insertBefore)
+import Web.DOM.Node as Node
 import Web.DOM.Text as Text
 
 data MElement
@@ -91,10 +91,17 @@ processNutPursx splitter = mkEffectFn4 \k (Nut nut) di@(DOMInterpret { makeEleme
         (Element.toNode (fromDekuElement eo))
         (Text.toNode t)
         (Element.toNode par)
-      DekuTextOutcome to -> replaceChild
-        (Text.toNode (fromDekuText to))
-        (Text.toNode t)
-        (Element.toNode par)
+      DekuTextOutcome to -> do
+          let lNode = Comment.toNode (fromDekuTextMarker to.l)
+          let tNode = Text.toNode (fromDekuText to.txt)
+          let rNode = Comment.toNode (fromDekuTextMarker to.r)
+          let pNode = Element.toNode par
+          replaceChild
+            rNode
+            (Text.toNode t)
+            pNode
+          runEffectFn3 insertBefore tNode rNode pNode
+          runEffectFn3 insertBefore lNode tNode pNode
       DekuBeaconOutcome bo -> do
         runEffectFn3
           attributeBeaconFullRangeParentProto

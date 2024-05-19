@@ -452,6 +452,9 @@ template p = Nut $ mkEffectFn2
               else do
                 { txt } <- runEffectFn1 di.makeText Nothing
                 par <- runEffectFn1 unsafeParentNode realDeal0
+                -- for now, we do not insert the comments around the text
+                -- this is because templates cannot be rendered on the server
+                -- if this changes, replace this
                 replaceChild
                   (Text.toNode $ fromDekuText txt)
                   realDeal0

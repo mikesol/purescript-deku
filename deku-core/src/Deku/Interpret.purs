@@ -9,7 +9,7 @@ import Prelude
 
 import Control.Monad.Rec.Class (Step(..), tailRecM)
 import Control.Monad.ST.Class (liftST)
-import Data.Array ((!!))
+import Data.Array (foldM, (!!))
 import Data.Array as Array
 import Data.Array.NonEmpty (toArray)
 import Data.Array.ST as STArray
@@ -25,14 +25,15 @@ import Data.Nullable (Nullable, toMaybe)
 import Data.String as String
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
-import Deku.Core (Cb(..), DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Key(..), Nut(..), PSR(..), PursXable(..), Tag(..), Value(..), Verb(..), eltAttribution, fromDekuBeacon, fromDekuElement, fromDekuText, handleAtts, toDekuBeacon, toDekuElement, toDekuText)
+import Deku.Core (Cb(..), DekuBeacon, DekuChild(..), DekuElement, DekuOutcome(..), DekuParent(..), DekuText, Html(..), Key(..), Nut(..), PSR(..), PursXable(..), Tag(..), Value(..), Verb(..), eltAttribution, fromDekuBeacon, fromDekuElement, fromDekuText, fromDekuTextMarker, handleAtts, toDekuBeacon, toDekuElement, toDekuText, toDekuTextMarker)
 import Deku.Core as Core
 import Deku.JSWeakRef (WeakRef)
+import Deku.Markers as M
 import Deku.UnsafeDOM (addEventListener, appendChild, cloneTemplate, createElement, createElementNS, eventListener, insertBefore, outerHTML, removeEventListener, setTextContent, toTemplate, unsafeParentNode)
 import Effect (Effect, foreachE)
 import Effect.Console (error)
 import Effect.Ref (read)
-import Effect.Uncurried (EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, mkEffectFn7, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import Foreign.Object as Object
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
@@ -75,9 +76,6 @@ makeElementEffect = mkEffectFn2 \ns tag -> do
     Just ns' -> runEffectFn2 createElementNS (coerce ns') (coerce tag)
   pure $ toDekuElement elt
 
-d3kU = "d3kU" :: String
-uk3D = "ul3D" :: String
-
 -- gets the next positional node
 ffwd
   :: { n :: Int, node :: Node.Node, cpos :: Int }
@@ -98,30 +96,31 @@ ffwd { n, node, cpos } = do
       case ctext of
         i
           -- the current node starts a dyn
-          | i == d3kU -> pure $ Loop { n: n + 1, node: nx, cpos }
+          | i == M.d3kU -> pure $ Loop { n: n + 1, node: nx, cpos }
           -- the current node ends this dyn
           -- so the next node is out of the dyn
-          | i == uk3D && n == 1 -> pure $ Done { cpos, sb: Just nx }
+          | i == M.uk3D && n == 1 -> pure $ Done { cpos, sb: Just nx }
           -- the current node closes a dyn
-          | i == uk3D -> pure $ Loop { n: n - 1, node: nx, cpos }
+          | i == M.uk3D -> pure $ Loop { n: n - 1, node: nx, cpos }
           -- random comment, carry on
           | otherwise -> pure $ Loop { n, node: nx, cpos }
     -- exotic node, carry on
     Just nx, _, _ -> pure $ Loop { n, node: nx, cpos }
 
-doInsertAtEnd' :: Node.Node -> DekuBeacon -> Effect Unit
+doInsertAtEnd' :: Array Node.Node -> DekuBeacon -> Effect Unit
 doInsertAtEnd' nd end = do
-  x <- runEffectFn1 unsafeParentNode (Comment.toNode (fromDekuBeacon end))
-  runEffectFn3 insertBefore nd
-    (Comment.toNode (fromDekuBeacon end))
-    x
+  let cmnt = Comment.toNode (fromDekuBeacon end)
+  x <- runEffectFn1 unsafeParentNode cmnt
+  let
+    f b a = runEffectFn3 insertBefore a b x $> a
+  void $ foldM f cmnt nd
 
-attributeDynParentForNodeEffect
-  :: EffectFn4 Node.Node DekuBeacon
+attributeDynParentForArrayOfNodesEffect
+  :: EffectFn4 (Array Node.Node) DekuBeacon
        DekuBeacon
        (Maybe Int)
        Unit
-attributeDynParentForNodeEffect = mkEffectFn4
+attributeDynParentForArrayOfNodesEffect = mkEffectFn4
   \nd start end mpos -> do
     let
       doInsertAtEnd = doInsertAtEnd' nd end
@@ -131,7 +130,9 @@ attributeDynParentForNodeEffect = mkEffectFn4
           go (Left { curSib, cpos }) = do
             if cpos >= pos then do
               x <- runEffectFn1 unsafeParentNode curSib
-              runEffectFn3 insertBefore nd curSib x
+              let
+                f b a = runEffectFn3 insertBefore a b x $> a
+              void $ foldM f curSib nd
               pure $ Done unit
             else
               ifM
@@ -143,7 +144,7 @@ attributeDynParentForNodeEffect = mkEffectFn4
                 ( if nodeTypeIndex curSib /= 8 then pure false
                   else do
                     ctext <- textContent curSib
-                    pure $ ctext == uk3D
+                    pure $ ctext == M.uk3D
                 )
                 (doInsertAtEnd $> Done unit)
                 (Loop <<< Right <$> ffwd { n: 0, node: curSib, cpos })
@@ -157,15 +158,15 @@ attributeDynParentForNodeEffect = mkEffectFn4
         case firstOrEnd of
           Just st -> tailRecM go $ Left { cpos: 0, curSib: st }
           Nothing -> error
-            "Programming error: no boundary found in attributeDynParentForNodeEffect"
+            "Programming error: no boundary found in attributeDynParentForArrayOfNodesEffect"
       Nothing -> doInsertAtEnd
 
-attributeDynParentForNodeEffectLucky
-  :: EffectFn4 Node.Node DekuBeacon
+attributeDynParentForArrayOfNodesEffectLucky
+  :: EffectFn4 (Array Node.Node) DekuBeacon
        DekuBeacon
        (Maybe Int)
        Unit
-attributeDynParentForNodeEffectLucky = mkEffectFn4
+attributeDynParentForArrayOfNodesEffectLucky = mkEffectFn4
   \nd start end mpos -> do
     let
       doInsertAtEnd = doInsertAtEnd' nd end
@@ -182,22 +183,24 @@ attributeDynParentForNodeEffectLucky = mkEffectFn4
           if pos >= (endIx - startIx) then do
             doInsertAtEnd
           else do
-            for_ (asArr !! (startIx + 1 + max pos 0)) \nn ->
-              runEffectFn3 insertBefore nd nn par
+            for_ (asArr !! (startIx + 1 + max pos 0)) \nn -> do
+              let
+                f b a = runEffectFn3 insertBefore a b par $> a
+              void $ foldM f nn nd
       _ -> doInsertAtEnd
 
 attributeDynParentForElementEffect :: Core.AttributeDynParentForElement
 attributeDynParentForElementEffect = mkEffectFn5
   \lucky (DekuChild child) start end mpos -> do
     l <- read lucky
-    if l then runEffectFn4 attributeDynParentForNodeEffectLucky
-      (Element.toNode (fromDekuElement child))
+    if l then runEffectFn4 attributeDynParentForArrayOfNodesEffectLucky
+      [ Element.toNode (fromDekuElement child) ]
       start
       end
       mpos
     else runEffectFn4
-      attributeDynParentForNodeEffect
-      (Element.toNode (fromDekuElement child))
+      attributeDynParentForArrayOfNodesEffect
+      [ Element.toNode (fromDekuElement child) ]
       start
       end
       mpos
@@ -206,14 +209,21 @@ attributeDynParentForTextEffect :: Core.AttributeDynParentForText
 attributeDynParentForTextEffect = mkEffectFn5
   \lucky txt start end mpos -> do
     l <- read lucky
-    if l then runEffectFn4 attributeDynParentForNodeEffectLucky
-      (Text.toNode (fromDekuText txt))
+    -- backwards because insertion goes backwards
+    let
+      nodes =
+        [ Comment.toNode (fromDekuTextMarker txt.r)
+        , Text.toNode (fromDekuText txt.txt)
+        , Comment.toNode (fromDekuTextMarker txt.l)
+        ]
+    if l then runEffectFn4 attributeDynParentForArrayOfNodesEffectLucky
+      nodes
       start
       end
       mpos
     else runEffectFn4
-      attributeDynParentForNodeEffect
-      (Text.toNode (fromDekuText txt))
+      attributeDynParentForArrayOfNodesEffect
+      nodes
       start
       end
       mpos
@@ -226,20 +236,25 @@ attributeElementParentEffect = mkEffectFn2
 
 attributeTextParentEffect :: Core.AttributeTextParent
 attributeTextParentEffect = mkEffectFn2
-  \txt (DekuParent parent) -> do
+  \{ l, txt, r } (DekuParent parent) -> do
+    let parNode = Element.toNode (fromDekuElement parent)
+    runEffectFn2 appendChild (Comment.toNode (fromDekuTextMarker l))
+      parNode
     runEffectFn2 appendChild (Text.toNode (fromDekuText txt))
-      (Element.toNode (fromDekuElement parent))
+      parNode
+    runEffectFn2 appendChild (Comment.toNode (fromDekuTextMarker r))
+      parNode
 
 makeOpenBeaconEffect :: Core.MakeOpenBeacon
 makeOpenBeaconEffect = do
   doc <- window >>= document
-  cm <- createComment d3kU (toDocument doc)
+  cm <- createComment M.d3kU (toDocument doc)
   pure (toDekuBeacon cm)
 
 makeCloseBeaconEffect :: Core.MakeCloseBeacon
 makeCloseBeaconEffect = mkEffectFn1 \_ -> do
   doc <- window >>= document
-  cm <- createComment uk3D (toDocument doc)
+  cm <- createComment M.uk3D (toDocument doc)
   pure (toDekuBeacon cm)
 
 attributeBeaconParentEffect :: Core.AttributeBeaconParent
@@ -252,7 +267,7 @@ attributeDynParentForBeaconsEffect = mkEffectFn5
   \i o start end mpos -> do
     let oo = Comment.toNode (fromDekuBeacon o)
     let ii = Comment.toNode (fromDekuBeacon i)
-    runEffectFn4 attributeDynParentForNodeEffect oo start end mpos
+    runEffectFn4 attributeDynParentForArrayOfNodesEffect [ oo ] start end mpos
     x <- runEffectFn1 unsafeParentNode oo
     runEffectFn3 insertBefore ii oo x
 
@@ -275,12 +290,12 @@ attributeBeaconFullRangeParentProto = mkEffectFn3
                 ctext <- textContent nx
                 case ctext of
                   i
-                    | i == d3kU -> pure $ Loop
+                    | i == M.d3kU -> pure $ Loop
                         { n: n + 1, node: nx }
-                    | i == uk3D && n == 0 -> do
+                    | i == M.uk3D && n == 0 -> do
                         mover nx
                         pure $ Done unit
-                    | i == uk3D -> pure $ Loop
+                    | i == M.uk3D -> pure $ Loop
                         { n: n - 1, node: nx }
                     | otherwise -> pure $ Loop { n, node: nx }
               _ -> pure $ Loop { n, node: nx }
@@ -292,7 +307,7 @@ attributeBeaconFullRangeParentProto = mkEffectFn3
               ctext <- textContent initial
               case ctext of
                 i
-                  | i == d3kU -> pure 1
+                  | i == M.d3kU -> pure 1
                   | otherwise -> pure 0
             _ -> pure 0
       tailRecM go { n, node: initial }
@@ -311,8 +326,8 @@ attributeDynParentForBeaconFullRangeEffect = mkEffectFn4
   \stBeacon leftB rightB mpos -> do
     nsOld <- nextSibling (Comment.toNode (fromDekuBeacon stBeacon))
     runEffectFn4
-      attributeDynParentForNodeEffect
-      (Comment.toNode (fromDekuBeacon stBeacon))
+      attributeDynParentForArrayOfNodesEffect
+      [Comment.toNode (fromDekuBeacon stBeacon)]
       leftB
       rightB
       mpos
@@ -328,17 +343,14 @@ attributeDynParentForBeaconFullRangeEffect = mkEffectFn4
       _, _ -> error
         "Programming error: attributeDynParentForBeaconFullRangeEffect cannot find parent"
 
-tx = "+x" :: String
-xt = "x+" :: String
-
 makeTextEffect :: Core.MakeText
 makeTextEffect = mkEffectFn1 \mstr -> do
   doc' <- window >>= document
   let doc = toDocument doc'
-  l <- createComment tx doc
+  l <- createComment M.tx doc
   txt <- createTextNode (fromMaybe "" mstr) doc
-  r <- createComment xt doc
-  pure $ { l, txt: toDekuText txt, r }
+  r <- createComment M.xt doc
+  pure $ { l: toDekuTextMarker l, txt: toDekuText txt, r: toDekuTextMarker r }
 
 newtype FeI e = FeI
   { f :: Boolean -> e -> Effect Unit, e :: Element -> Maybe e }
@@ -489,9 +501,11 @@ sendToPosForElementEffect = mkEffectFn5 \lucky i b st ed -> do
     (Just i)
 
 sendToPosForTextEffect :: Core.SendToPosForText
-sendToPosForTextEffect = mkEffectFn5 \lucky i b st ed -> do
-  runEffectFn2 removeForTextEffect true b
-  runEffectFn5 attributeDynParentForTextEffect lucky b st ed (Just i)
+sendToPosForTextEffect = mkEffectFn7 \lucky i ml b mr st ed -> do
+  runEffectFn4 removeForTextEffect true ml b mr
+  runEffectFn5 attributeDynParentForTextEffect lucky { l: ml, txt: b, r: mr } st
+    ed
+    (Just i)
 
 -- for now ignore isPortal elements
 removeForDynEffect :: Core.RemoveForDyn
@@ -530,8 +544,10 @@ removeForElementEffect = mkEffectFn2 \_ e -> do
   remove (toChildNode (fromDekuElement e))
 
 removeForTextEffect :: Core.RemoveForText
-removeForTextEffect = mkEffectFn2 \_ t -> do
+removeForTextEffect = mkEffectFn4 \_ l t r -> do
   remove (Text.toChildNode (fromDekuText t))
+  remove (Comment.toChildNode (fromDekuTextMarker l))
+  remove (Comment.toChildNode (fromDekuTextMarker r))
 
 matchTildes :: String -> Array String
 matchTildes nodeContent =
@@ -635,10 +651,17 @@ makePursxEffect = mkEffectFn5
                       (Element.toNode (fromDekuElement eo))
                       (Element.toNode asElt)
                       (Element.toNode x)
-                    DekuTextOutcome to -> replaceChild
-                      (Text.toNode (fromDekuText to))
-                      (Element.toNode asElt)
-                      (Element.toNode x)
+                    DekuTextOutcome to -> do
+                        let lNode = Comment.toNode (fromDekuTextMarker to.l)
+                        let tNode = Text.toNode (fromDekuText to.txt)
+                        let rNode = Comment.toNode (fromDekuTextMarker to.r)
+                        let pNode = Element.toNode x
+                        replaceChild
+                          rNode
+                          (Element.toNode asElt)
+                          pNode
+                        runEffectFn3 insertBefore tNode rNode pNode
+                        runEffectFn3 insertBefore lNode tNode pNode
                     DekuBeaconOutcome bo -> do
                       runEffectFn3
                         attributeBeaconFullRangeParentProto

@@ -22,6 +22,7 @@ module Deku.Core
   , CleanUpElement
   , CleanUpText
   , DOMInterpret(..)
+  , DekuTextMarker(..)
   , DekuBeacon(..)
   , DekuChild(..)
   , DekuDynamic(..)
@@ -56,6 +57,7 @@ module Deku.Core
   , UnsetAttribute
   , Value(..)
   , Verb(..)
+  , DekuTextOutcome'
   , actOnLifecycleForDyn
   , actOnLifecycleForElement
   , actOnLifecycleForText
@@ -70,6 +72,8 @@ module Deku.Core
   , eltAttribution
   , eventOrBust
   , fixed
+  , toDekuTextMarker
+  , fromDekuTextMarker
   , fromDekuBeacon
   , fromDekuElement
   , fromDekuText
@@ -139,7 +143,7 @@ import Deku.Do as Deku
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
 import Effect (Effect, foreachE)
 import Effect.Ref (Ref, new, write)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn8, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn7, EffectFn8, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn7, runEffectFn8)
 import FRP.Event (fastForeachE, fastForeachThunkE, subscribe, subscribeO)
 import FRP.Event as Event
 import FRP.Poll (Poll(..))
@@ -169,6 +173,11 @@ toDekuBeacon = unsafeCoerce
 fromDekuBeacon :: DekuBeacon -> Comment
 fromDekuBeacon = unsafeCoerce
 
+toDekuTextMarker :: Comment -> DekuTextMarker
+toDekuTextMarker = unsafeCoerce
+
+fromDekuTextMarker :: DekuTextMarker -> Comment
+fromDekuTextMarker = unsafeCoerce
 toDekuText :: Text -> DekuText
 toDekuText = unsafeCoerce
 
@@ -274,7 +283,7 @@ derive instance Newtype PSR _
 
 data DekuOutcome
   = DekuElementOutcome DekuElement
-  | DekuTextOutcome DekuText
+  | DekuTextOutcome DekuTextOutcome'
   | DekuBeaconOutcome DekuBeacon
   | NoOutcome
 
@@ -290,6 +299,7 @@ data DekuDynamic = DekuSendToPos Int | DekuRemove
 
 data DekuElement
 data DekuText
+data DekuTextMarker
 data DekuBeacon
 
 newtype Tag = Tag String
@@ -308,13 +318,13 @@ type SendToPosForElement = EffectFn5 (Ref Boolean) Int DekuElement DekuBeacon
   DekuBeacon
   Unit
 
-type SendToPosForText = EffectFn5 (Ref Boolean) Int DekuText DekuBeacon
+type SendToPosForText = EffectFn7 (Ref Boolean) Int DekuTextMarker DekuText DekuTextMarker DekuBeacon
   DekuBeacon
   Unit
 
 type RemoveForDyn = EffectFn3 Boolean DekuBeacon DekuBeacon Unit
 type RemoveForElement = EffectFn2 Boolean DekuElement Unit
-type RemoveForText = EffectFn2 Boolean DekuText Unit
+type RemoveForText = EffectFn4 Boolean DekuTextMarker DekuText DekuTextMarker Unit
 
 -- | Type used by Deku backends to give a parent to an element. For internal use only unless you're writing a custom backend.
 type AttributeElementParent =
@@ -327,7 +337,7 @@ type AttributeBeaconFullRangeParent =
   EffectFn2 DekuBeacon DekuParent Unit
 
 type AttributeTextParent =
-  EffectFn2 DekuText DekuParent Unit
+  EffectFn2 DekuTextOutcome' DekuParent Unit
 
 type AssociateUnsubsToBeacon = EffectFn2 DekuBeacon (Array (Effect Unit))
   Unit
@@ -359,14 +369,15 @@ type AttributeDynParentForBeacons = EffectFn5 DekuBeacon DekuBeacon DekuBeacon
 
 -- parent is not needed because we may be in a portal
 -- we always grab the parent from the beacon
-type AttributeDynParentForText = EffectFn5 (Ref Boolean) DekuText DekuBeacon
+type AttributeDynParentForText = EffectFn5 (Ref Boolean) DekuTextOutcome' DekuBeacon
   DekuBeacon
   (Maybe Int)
   Unit
 
+type DekuTextOutcome' = { l :: DekuTextMarker, r :: DekuTextMarker, txt :: DekuText }
+
 -- | Type used by Deku backends to construct a text element. For internal use only unless you're writing a custom backend.
-type MakeText = EffectFn1 (Maybe String)
-  { l :: Comment, r :: Comment, txt :: DekuText }
+type MakeText = EffectFn1 (Maybe String) DekuTextOutcome'
 
 -- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom backend.
 type SetText = EffectFn2 DekuText String Unit
@@ -836,7 +847,7 @@ actOnLifecycleForText
   :: EffectFn8 Boolean (Ref Boolean) (STArray.STArray Global (Effect Unit))
        (Poll DekuDynamic)
        DOMInterpret
-       DekuText
+       DekuTextOutcome'
        DekuBeacon
        DekuBeacon
        Unit
@@ -851,26 +862,32 @@ actOnLifecycleForText = mkEffectFn8
    txt'
    startAnchor'
    endAnchor' -> do
-    txtWr <- runEffectFn1 weakRef txt'
+    txtLWr <- runEffectFn1 weakRef txt'.l
+    txtWr <- runEffectFn1 weakRef txt'.txt
+    txtRWr <- runEffectFn1 weakRef txt'.r
     startAnchorWr <- runEffectFn1 weakRef startAnchor'
     endAnchorWr <- runEffectFn1 weakRef endAnchor'
     let
       oh'hi = mkEffectFn1 \x -> do
+        txtXLWr <- runEffectFn1 deref txtLWr
         txtX <- runEffectFn1 deref txtWr
+        txtXRWr <- runEffectFn1 deref txtRWr
         startAnchorX <- runEffectFn1 deref startAnchorWr
         endAnchorX <- runEffectFn1 deref endAnchorWr
         case
+          toMaybe txtXLWr,
           toMaybe txtX,
+          toMaybe txtXRWr,
           toMaybe startAnchorX,
           toMaybe endAnchorX
           of
-          Just txt, Just startAnchor, Just endAnchor ->
+          Just lwr, Just txt, Just rwr, Just startAnchor, Just endAnchor ->
             case x of
-              DekuSendToPos i -> runEffectFn5 sendToPosForText lucky i txt
+              DekuSendToPos i -> runEffectFn7 sendToPosForText lucky i lwr txt rwr
                 startAnchor
                 endAnchor
-              DekuRemove -> runEffectFn2 removeForText fromPortal txt
-          _, _, _ -> do
+              DekuRemove -> runEffectFn4 removeForText fromPortal lwr txt rwr
+          _, _, _, _, _ -> do
             thunker associations
     runListener oh'hi associations p
 
@@ -1069,7 +1086,7 @@ elementify ns tag atts nuts = Nut $ mkEffectFn2
       pure $ DekuElementOutcome elt
 
 -- text
-textAttribution :: EffectFn3 PSR DOMInterpret DekuText Unit
+textAttribution :: EffectFn3 PSR DOMInterpret DekuTextOutcome' Unit
 textAttribution = mkEffectFn3 \(PSR psr) (DOMInterpret di) txt ->
   case psr.beacon of
     Nothing -> do
@@ -1096,7 +1113,7 @@ text p = Nut $ mkEffectFn2
       let this' = pureOrBust p
       let those' = eventOrBust p
       let that' = pollOrBust p
-      { txt } <- runEffectFn1 makeText (this' >>= Array.last)
+      txt <- runEffectFn1 makeText (this' >>= Array.last)
 
       unsubs <- liftST $ STArray.new
       when (not (null psr.unsubs)) do
@@ -1105,7 +1122,7 @@ text p = Nut $ mkEffectFn2
       let
         handleEvent y = do
           let DOMInterpret ndi = next unit
-          wr <- runEffectFn1 weakRef txt
+          wr <- runEffectFn1 weakRef txt.txt
           uu <- subscribe y \yy -> do
             drf <- runEffectFn1 deref wr
             case toMaybe drf of

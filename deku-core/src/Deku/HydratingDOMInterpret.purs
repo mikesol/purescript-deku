@@ -13,7 +13,7 @@ import Deku.Interpret as I
 import Effect (Effect)
 import Effect.Exception (error, throwException)
 import Effect.Ref as Ref
-import Effect.Uncurried (mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5)
+import Effect.Uncurried (mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, mkEffectFn7)
 import Web.DOM (Element, Node)
 import Web.DOM.Element (fromNode, toNode, toNonDocumentTypeChildNode, toParentNode)
 import Web.DOM.Node (parentElement)
@@ -71,8 +71,8 @@ hydratingDOMInterpret nodeRef = Core.DOMInterpret
   , setText: mkEffectFn2 \_ _ -> pure unit
   , attributeTextParent: mkEffectFn2 \_ _ -> pure unit
   , attributeDynParentForText: mkEffectFn5 \_ _ _ _ _ -> pure unit
-  , sendToPosForText: mkEffectFn5 \_ _ _ _ _ -> pure unit
-  , removeForText: mkEffectFn2 \_ _ -> pure unit
+  , sendToPosForText: mkEffectFn7 \_ _ _ _ _ _ _ -> pure unit
+  , removeForText: mkEffectFn4 \_ _ _ _ -> pure unit
   --
   , makePursx: I.makePursxEffect --
   --

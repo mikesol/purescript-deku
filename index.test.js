@@ -1023,10 +1023,10 @@ describe("deku", () => {
       (f) =>
         f(tests.dynAppearsCorrectlyAtBeginning, () => {
           const $ = require("jquery");
-          // text, span, start beacon, end beacon, button
-          const base = 5;
+          // cmt, text, cmt, span, start beacon, end beacon, button
+          const base = 7;
           expect($("#div0").contents().length).toBe(base);
-          expect($($("#div0").contents()[0]).text()).toBe("foo");
+          expect($($("#div0").contents()[1]).text()).toBe("foo");
           expect($($("#div0").contents()[base - 4]).text()).toBe("bar");
           expect($($("#div0").contents()[base - 1]).text()).toBe("incr");
           $($("#div0").contents()[base - 1]).trigger("click");
@@ -1050,12 +1050,12 @@ describe("deku", () => {
     doTest(
       "has dyn appearing in the correct composable order when used at end",
       (f) =>
-        f(tests.dynAppearsCorrectlyAtEnd, (usingSSR) => {
+        f(tests.dynAppearsCorrectlyAtEnd, () => {
           const $ = require("jquery");
-          // text, span, start beacon, end beacon, button
-          const base = usingSSR ? 6 : 5;
+          // cmt, text, cmt, span, start beacon, end beacon, button
+          const base = 7;
           expect($("#div0").contents().length).toBe(base);
-          expect($($("#div0").contents()[0]).text()).toBe("foo");
+          expect($($("#div0").contents()[1]).text()).toBe("foo");
           expect($($("#div0").contents()[base - 4]).text()).toBe("bar");
           expect($($("#div0").contents()[base - 1]).text()).toBe("incr");
           $($("#div0").contents()[base - 1]).trigger("click");
