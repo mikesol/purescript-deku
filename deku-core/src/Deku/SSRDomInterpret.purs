@@ -8,7 +8,7 @@ import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Markers as M
 import Effect (Effect)
-import Effect.Uncurried (mkEffectFn3, mkEffectFn5)
+import Effect.Uncurried (mkEffectFn3, mkEffectFn7)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM (Comment, Element)
 import Web.DOM.Document (createComment)
@@ -28,8 +28,10 @@ ssrDOMInterpret :: Core.DOMInterpret
 ssrDOMInterpret = Core.DOMInterpret t
   where
   Core.DOMInterpret n = fullDOMInterpret
+  mpx :: Core.MakePursx'
+  mpx = mkEffectFn7 \_ _ _ _ _ _ _ -> makePursxPlaceholder
   t = n
     { setCb = mkEffectFn3 \_ _ _ -> pure unit
-    , makePursx = mkEffectFn5 \_ _ _ _ _ -> makePursxPlaceholder
+    , makePursx = Core.MakePursx mpx
     , next = \_ -> ssrDOMInterpret
     }

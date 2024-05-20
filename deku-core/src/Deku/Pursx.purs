@@ -16,7 +16,6 @@ import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as STRef
 import Control.Plus (empty)
 import Data.Array (null)
-import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Foldable (foldr, for_)
 import Data.Identity (Identity(..))
@@ -27,23 +26,24 @@ import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.TraversableWithIndex (traverseWithIndex)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, fromDekuText, getLifecycle, notLucky, runListener, text, thunker, toDekuElement, toDekuText)
+import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, fromDekuText, getLifecycle, notLucky, runListener, text, toDekuElement, toDekuText)
+import Deku.Core as Core
 import Deku.Interpret (attributeDynParentForElementEffect)
-import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.JSWeakRef (deref, weakRef)
 import Deku.Path (symbolsToArray)
 import Deku.Path as Path
-import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, mEltify, processAttPursx, processNutPursx, returnReplacement, returnReplacementIndex, returnReplacementNoIndex)
+import Deku.PathWalker (InstructionDelegate(..), processAttPursx, processNutPursx)
 import Deku.PathWalker as PW
+import Deku.PathWalkerPrimitives as PWP
 import Deku.PursxParser as PxP
 import Deku.PxTypes (PxAtt, PxNut)
 import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some)
 import Deku.Some as Some
-import Deku.UnsafeDOM (cloneElement, cloneTemplate, toTemplate, unsafeFirstChildAsElement, unsafeParentNode)
+import Deku.UnsafeDOM (cloneElement, toTemplate, unsafeFirstChildAsElement, unsafeParentNode)
 import Effect (foreachE)
 import Effect.Exception (error, throwException)
 import Effect.Ref (new)
-import Effect.Uncurried (EffectFn1, EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
+import Effect.Uncurried (EffectFn1, EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn7, runEffectFn8)
 import FRP.Poll (Poll)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
@@ -168,102 +168,60 @@ pursx'
   => { | r }
   -> Nut
 pursx' r = Nut $ mkEffectFn2
-  \ps@(PSR psr)
-   di ->
-    do
-      let
-        -- various proxies
-        rlProxy = Proxy :: _ rl
-        verbProxy = Proxy :: _ verb
-        verbSymbol = reflectSymbol verbProxy
-        htmlProxy = Proxy :: _ html
-        scrunch = Proxy :: _ scrunched
-        syms = symbolsToArray rlProxy
-        -- remove all ~s~ from the html attributes
-        html = foldr
-          ( \(Tuple isAtt pat) h ->
-              String.replaceAll
-                (String.Pattern (verbSymbol <> pat <> verbSymbol))
-                ( String.Replacement $
-                    if isAtt then ""
-                    else "<!--" <> verbSymbol <> pat <> verbSymbol <> "-->"
-                )
-                h
+  \ps
+   di@(DOMInterpret { makePursx: Core.MakePursx makePursx }) -> do
+    let verbSymbol = reflectSymbol (Proxy :: _ verb)
+    o <- runEffectFn7 makePursx ps di r verbSymbol
+      (reflectSymbol (Proxy :: _ html))
+      ( mkEffectFn3 \xxx yyy zzz -> runEffectFn5
+          ( PW.walk
+              :: EffectFn5 InstructionDelegate (Proxy scrunched) { | r }
+                   DOMInterpret
+                   PWP.MElement
+                   Unit
           )
-          (reflectSymbol htmlProxy)
-          syms
-      -- turn the pursx i into a template
-      eltX <- runEffectFn1 toTemplate html
-      -- clone the template
-      elt <- runEffectFn1 cloneTemplate eltX
-      let unsafeMElement = mEltify (Element.toNode elt)
-      runEffectFn3 eltAttribution ps di (toDekuElement elt)
-      -- walk through the template, getting all of the elements and
-      -- setting up listeners
-      -- for example, processAttPursx handles all of the attributes in
-      -- pursx
-      runEffectFn5
-        ( PW.walk
-            :: EffectFn5 InstructionDelegate (Proxy scrunched) { | r }
-                 DOMInterpret
-                 MElement
-                 Unit
-        )
-        ( InstructionDelegate
-            { processAttribute: mkEffectFn4 \a b c d -> runEffectFn4
-                processAttPursx
-                a
-                b
-                c
-                d
-            , processPollString: mkEffectFn4 \a b c d -> runEffectFn4
-                ( processNutPursx
-                    ( mkEffectFn2 \q z -> runEffectFn3 returnReplacementNoIndex
-                        verbSymbol
-                        q
-                        z
-                    )
-                )
-                a
-                (text b)
-                c
-                d
-            , processNut: mkEffectFn4 \a b c d -> runEffectFn4
-                ( processNutPursx
-                    ( mkEffectFn2 \q z -> runEffectFn3 returnReplacementNoIndex
-                        verbSymbol
-                        q
-                        z
-                    )
-                )
-                a
-                b
-                c
-                d
-            }
-        )
-        scrunch
-        r
-        di
-        unsafeMElement
-      -- standard unsub management, just like in elementify
-      unsubs <- liftST $ STArray.new
-      when (not (Array.null psr.unsubs)) do
-        void $ liftST $ STArray.pushAll psr.unsubs unsubs
-      -- if the element will be finalized, do all cancellations as well
-      runEffectFn2 oneOffFinalizationRegistry elt (thunker unsubs)
-      -- standard lifecycle management
-      for_ (getLifecycle psr.beacon) \{ l, s, e, lucky } -> runEffectFn8
-        actOnLifecycleForElement
-        psr.fromPortal
-        lucky
-        unsubs
-        l
-        di
-        (toDekuElement elt)
-        s
-        e
-      pure $ DekuElementOutcome (toDekuElement elt)
+          ( InstructionDelegate
+              { processAttribute: mkEffectFn4 \a b c d -> runEffectFn4
+                  processAttPursx
+                  a
+                  b
+                  c
+                  d
+              , processPollString: mkEffectFn4 \a b c d -> runEffectFn4
+                  ( processNutPursx
+                      ( mkEffectFn2 \q z -> runEffectFn3
+                          PWP.returnReplacementNoIndex
+                          verbSymbol
+                          q
+                          z
+                      )
+                  )
+                  a
+                  (text b)
+                  c
+                  d
+              , processNut: mkEffectFn4 \a b c d -> runEffectFn4
+                  ( processNutPursx
+                      ( mkEffectFn2 \q z -> runEffectFn3
+                          PWP.returnReplacementNoIndex
+                          verbSymbol
+                          q
+                          z
+                      )
+                  )
+                  a
+                  b
+                  c
+                  d
+              }
+          )
+          (Proxy :: _ scrunched)
+          xxx
+          yyy
+          zzz
+      )
+      (symbolsToArray (Proxy :: _ rl))
+    pure $ DekuElementOutcome o
 
 template
   :: forall (@html :: Symbol) p pl r0 rl0 elementCache r rl rr plr path
@@ -328,7 +286,7 @@ template p = Nut $ mkEffectFn2
     -- we don't want to recurse over text nodes constantly checking their content
     -- so we create a cache that helps us with that (we'll see)
     -- it used later
-    isStringCache :: STObject.STObject Global MElement <- liftST
+    isStringCache :: STObject.STObject Global PWP.MElement <- liftST
       STObject.new
     eltX <- runEffectFn1 toTemplate html
     ctnt <- HtmlTemplateElement.content eltX
@@ -348,7 +306,7 @@ template p = Nut $ mkEffectFn2
           :: EffectFn5 InstructionDelegate (Proxy scrunched)
                { | rEmpty }
                DOMInterpret
-               MElement
+               PWP.MElement
                Unit
     do
       -- this bloc splits all of the dynamic text nodes into
@@ -361,7 +319,7 @@ template p = Nut $ mkEffectFn2
             , processPollString: mkEffectFn4 \a _ _ dd -> do
                 void $ liftST $ STObject.poke a dd isStringCache
                 void $ runEffectFn3
-                  returnReplacementNoIndex
+                  PWP.returnReplacementNoIndex
                   verbSymbol
                   a
                   dd
@@ -374,14 +332,15 @@ template p = Nut $ mkEffectFn2
         scrunch
         emptiness
         (DOMInterpret di)
-        (unsafeCoerce (mEltify $ Element.toNode eltusMaximus))
+        (unsafeCoerce (PWP.mEltify $ Element.toNode eltusMaximus))
     let
       frozenIsStringcache =
         ( unsafeCoerce
-            :: STObject.STObject Global MElement -> Object.Object MElement
+            :: STObject.STObject Global PWP.MElement
+            -> Object.Object PWP.MElement
         ) isStringCache
     indices <- traverseWithIndex
-      (\k v -> runEffectFn3 returnReplacementIndex verbSymbol k v)
+      (\k v -> runEffectFn3 PWP.returnReplacementIndex verbSymbol k v)
       frozenIsStringcache
     -- as usual, we start off lucky
     -- even though this can enver be unlucky as templates can only
@@ -420,7 +379,7 @@ template p = Nut $ mkEffectFn2
     let
       walkerInstructionDelegate = InstructionDelegate
         { processAttribute: mkEffectFn4 \s _ _ eeeeeeeee -> do
-            let eeekkee = mEltElt eeeeeeeee
+            let eeekkee = PWP.mEltElt eeeeeeeee
             eeeee <- runEffectFn1 weakRef eeekkee
             let
               effn
@@ -444,7 +403,7 @@ template p = Nut $ mkEffectFn2
               oooooooooo
         , processPollString: mkEffectFn4 \s _ _ e' -> do
             let iiiii = unsafeIndex indices s
-            realDeal0 <- runEffectFn2 returnReplacement iiiii
+            realDeal0 <- runEffectFn2 PWP.returnReplacement iiiii
               e'
             realDekal <-
               if nodeTypeIndex realDeal0 == 3 then pure
@@ -494,7 +453,7 @@ template p = Nut $ mkEffectFn2
         -- clone the template
         elt <- runEffectFn1 cloneElement eltBase
         -- wire it up for the walking algo
-        let unsafeMElement = mEltify (Element.toNode elt)
+        let unsafeMElement = PWP.mEltify (Element.toNode elt)
         -- insert our fledgling element into the dyn
         runEffectFn5 attributeDynParentForElementEffect lucky
           (DekuChild (toDekuElement elt))

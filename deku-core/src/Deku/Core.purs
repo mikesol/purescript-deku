@@ -38,7 +38,8 @@ module Deku.Core
   , MakeOpenBeacon
   , MakeCloseBeacon
   , MakeElement
-  , MakePursx
+  , MakePursx(..)
+  , MakePursx'
   , MakeText
   , Namespace(..)
   , Nut(..)
@@ -141,6 +142,7 @@ import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
 import Deku.JSWeakRef (WeakRef, deref, weakRef)
+import Deku.PathWalkerPrimitives as PWP
 import Effect (Effect, foreachE)
 import Effect.Ref (Ref, new, write)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, EffectFn7, EffectFn8, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn8, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn7, runEffectFn8)
@@ -402,11 +404,9 @@ type SetCb =
 newtype Html = Html String
 newtype Verb = Verb String
 -- | Type used by Deku backends to make pursx. For internal use only unless you're writing a custom backend.
-type MakePursx =
-  EffectFn5 Html Verb (Object.Object PursXable)
-    PSR
-    DOMInterpret
-    DekuElement
+type MakePursx' = forall r.
+  EffectFn7 PSR DOMInterpret r String String (EffectFn3 r DOMInterpret PWP.MElement Unit) (Array (Tuple Boolean String)) DekuElement
+newtype MakePursx = MakePursx MakePursx'
 
 -- | Type used by Deku backends to make a beacon signaling the beginning or end of a dynamic construct. For internal use only unless you're writing a custom backend.
 type MakeOpenBeacon = Effect DekuBeacon

@@ -10,30 +10,22 @@ import Deku.Attribute (Attribute, Attribute', unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), DekuOutcome(..), Nut(..), PSR(..), Tag(..), fromDekuBeacon, fromDekuElement, fromDekuText, fromDekuTextMarker, handleAtts, toDekuElement)
 import Deku.Interpret (attributeBeaconFullRangeParentProto)
 import Deku.Path as Path
+import Deku.PathWalkerPrimitives as PWP
 import Deku.UnsafeDOM (insertBefore)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn4, EffectFn5, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
 import FRP.Poll (Poll)
 import Prim.Row as R
 import Prim.RowList as RL
 import Record (get)
 import Type.Proxy (Proxy(..))
-import Web.DOM (Element, Text)
+import Web.DOM (Text)
 import Web.DOM.ChildNode (remove)
 import Web.DOM.Comment as Comment
 import Web.DOM.Element as Element
 import Web.DOM.Node (replaceChild)
-import Web.DOM.Node as Node
 import Web.DOM.Text as Text
 
-data MElement
-
-foreign import mEltElt :: MElement -> Element
-foreign import mEltify :: Node.Node -> MElement
-foreign import mEltParent :: MElement -> Element
-foreign import returnReplacementNoIndex :: EffectFn3 String String MElement Text
-foreign import returnReplacement :: EffectFn2 Int  MElement Node.Node
-foreign import returnReplacementIndex :: EffectFn3 String String MElement Int
-type InstructionSignature i = EffectFn4 String i DOMInterpret MElement Unit
+type InstructionSignature i = EffectFn4 String i DOMInterpret PWP.MElement Unit
 newtype InstructionDelegate = InstructionDelegate {
   processPollString :: InstructionSignature (Poll String),
   processAttribute :: InstructionSignature (Poll Attribute'),
@@ -42,15 +34,15 @@ newtype InstructionDelegate = InstructionDelegate {
 
 class PathWalker :: Path.Path -> Row Type -> Constraint
 class PathWalker p r | p -> r where
-  walk :: EffectFn5 InstructionDelegate (Proxy p) { | r } DOMInterpret MElement Unit
+  walk :: EffectFn5 InstructionDelegate (Proxy p) { | r } DOMInterpret PWP.MElement Unit
 
 class ProcessInstruction :: Symbol -> Type -> Constraint
 class ProcessInstruction s i where
-  processInstruction :: EffectFn5 InstructionDelegate (Proxy s) i DOMInterpret MElement Unit
+  processInstruction :: EffectFn5 InstructionDelegate (Proxy s) i DOMInterpret PWP.MElement Unit
 
 class ProcessInstructions :: Row Type -> RL.RowList Symbol -> Constraint
 class ProcessInstructions r rl | rl -> r where
-  processInstructions :: EffectFn5 InstructionDelegate (Proxy rl) { | r } DOMInterpret MElement Unit
+  processInstructions :: EffectFn5 InstructionDelegate (Proxy rl) { | r } DOMInterpret PWP.MElement Unit
 
 instance processInstructionsNil :: ProcessInstructions r RL.Nil where
   processInstructions = mkEffectFn5 \_ _ _ _ _ -> pure unit
@@ -68,7 +60,7 @@ instance processInstructionsCons :: (IsSymbol k, R.Cons k v r' r, ProcessInstruc
 processAttPursx :: InstructionSignature (Poll Attribute')
 processAttPursx = mkEffectFn4 \_ att di e -> do
     star <- liftST $ STArray.new
-    handleAtts di (toDekuElement (mEltElt e)) star
+    handleAtts di (toDekuElement (PWP.mEltElt e)) star
       [  att ]
 
 instance processInstructionPollAtt :: IsSymbol k => ProcessInstruction k (Poll (Attribute e)) where
@@ -79,11 +71,11 @@ instance processInstructionPollString :: IsSymbol k => ProcessInstruction k (Pol
   processInstruction = mkEffectFn5 \(InstructionDelegate { processPollString }) k pstring di e -> do
     runEffectFn4 processPollString (reflectSymbol k) pstring di e
 
-processNutPursx :: EffectFn2 String MElement Text ->  InstructionSignature Nut
+processNutPursx :: EffectFn2 String PWP.MElement Text ->  InstructionSignature Nut
 processNutPursx splitter = mkEffectFn4 \k (Nut nut) di@(DOMInterpret { makeElement }) e -> do
     
     fauxPar <- runEffectFn2 makeElement Nothing (Tag "template")
-    let par = mEltParent e
+    let par = PWP.mEltParent e
     o <- runEffectFn2 nut (PSR { unsubs: [], parent: fauxPar, beacon: Nothing, fromPortal: false }) di
     t <- runEffectFn2 splitter k e
     case o of
@@ -118,392 +110,392 @@ instance processInstructionNut :: IsSymbol k => ProcessInstruction k Nut where
   processInstruction = mkEffectFn5 \(InstructionDelegate { processNut }) k nut di e -> do
     runEffectFn4 processNut (reflectSymbol k) nut di e
 
-foreign import downGroup :: EffectFn1 MElement MElement
-foreign import rightGroup :: EffectFn1 MElement MElement
+foreign import downGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import rightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
 ---- level 0
-foreign import xDownGroup :: EffectFn1 MElement MElement
-foreign import xRightGroup :: EffectFn1 MElement MElement
+foreign import xDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yDownGroup :: EffectFn1 MElement MElement
-foreign import yRightGroup :: EffectFn1 MElement MElement
+foreign import yDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
 ---- level 1
-foreign import xxDownGroup :: EffectFn1 MElement MElement
-foreign import xxRightGroup :: EffectFn1 MElement MElement
+foreign import xxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyDownGroup :: EffectFn1 MElement MElement
-foreign import xyRightGroup :: EffectFn1 MElement MElement
+foreign import xyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxDownGroup :: EffectFn1 MElement MElement
-foreign import yxRightGroup :: EffectFn1 MElement MElement
+foreign import yxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyDownGroup :: EffectFn1 MElement MElement
-foreign import yyRightGroup :: EffectFn1 MElement MElement
+foreign import yyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
 ---- level 2
-foreign import xxxDownGroup :: EffectFn1 MElement MElement
-foreign import xxxRightGroup :: EffectFn1 MElement MElement
+foreign import xxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyDownGroup :: EffectFn1 MElement MElement
-foreign import xxyRightGroup :: EffectFn1 MElement MElement
+foreign import xxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxDownGroup :: EffectFn1 MElement MElement
-foreign import xyxRightGroup :: EffectFn1 MElement MElement
+foreign import xyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyDownGroup :: EffectFn1 MElement MElement
-foreign import xyyRightGroup :: EffectFn1 MElement MElement
+foreign import xyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxDownGroup :: EffectFn1 MElement MElement
-foreign import yxxRightGroup :: EffectFn1 MElement MElement
+foreign import yxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyDownGroup :: EffectFn1 MElement MElement
-foreign import yxyRightGroup :: EffectFn1 MElement MElement
+foreign import yxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxDownGroup :: EffectFn1 MElement MElement
-foreign import yyxRightGroup :: EffectFn1 MElement MElement
+foreign import yyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyDownGroup :: EffectFn1 MElement MElement
-foreign import yyyRightGroup :: EffectFn1 MElement MElement
+foreign import yyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
 ---- level 3
-foreign import xxxxDownGroup :: EffectFn1 MElement MElement
-foreign import xxxxRightGroup :: EffectFn1 MElement MElement
+foreign import xxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxyDownGroup :: EffectFn1 MElement MElement
-foreign import xxxyRightGroup :: EffectFn1 MElement MElement
+foreign import xxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyxDownGroup :: EffectFn1 MElement MElement
-foreign import xxyxRightGroup :: EffectFn1 MElement MElement
+foreign import xxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyyDownGroup :: EffectFn1 MElement MElement
-foreign import xxyyRightGroup :: EffectFn1 MElement MElement
+foreign import xxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxxDownGroup :: EffectFn1 MElement MElement
-foreign import xyxxRightGroup :: EffectFn1 MElement MElement
+foreign import xyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxyDownGroup :: EffectFn1 MElement MElement
-foreign import xyxyRightGroup :: EffectFn1 MElement MElement
+foreign import xyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyxDownGroup :: EffectFn1 MElement MElement
-foreign import xyyxRightGroup :: EffectFn1 MElement MElement
+foreign import xyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyyDownGroup :: EffectFn1 MElement MElement
-foreign import xyyyRightGroup :: EffectFn1 MElement MElement
+foreign import xyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxxDownGroup :: EffectFn1 MElement MElement
-foreign import yxxxRightGroup :: EffectFn1 MElement MElement
+foreign import yxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxyDownGroup :: EffectFn1 MElement MElement
-foreign import yxxyRightGroup :: EffectFn1 MElement MElement
+foreign import yxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyxDownGroup :: EffectFn1 MElement MElement
-foreign import yxyxRightGroup :: EffectFn1 MElement MElement
+foreign import yxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyyDownGroup :: EffectFn1 MElement MElement
-foreign import yxyyRightGroup :: EffectFn1 MElement MElement
+foreign import yxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxxDownGroup :: EffectFn1 MElement MElement
-foreign import yyxxRightGroup :: EffectFn1 MElement MElement
+foreign import yyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxyDownGroup :: EffectFn1 MElement MElement
-foreign import yyxyRightGroup :: EffectFn1 MElement MElement
+foreign import yyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyxDownGroup :: EffectFn1 MElement MElement
-foreign import yyyxRightGroup :: EffectFn1 MElement MElement
+foreign import yyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyyDownGroup :: EffectFn1 MElement MElement
-foreign import yyyyRightGroup :: EffectFn1 MElement MElement
+foreign import yyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
 ---- level 4
-foreign import xxxxxDownGroup :: EffectFn1 MElement MElement
-foreign import xxxxxRightGroup :: EffectFn1 MElement MElement
+foreign import xxxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxxyDownGroup :: EffectFn1 MElement MElement
-foreign import xxxxyRightGroup :: EffectFn1 MElement MElement
+foreign import xxxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxyxDownGroup :: EffectFn1 MElement MElement
-foreign import xxxyxRightGroup :: EffectFn1 MElement MElement
+foreign import xxxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxyyDownGroup :: EffectFn1 MElement MElement
-foreign import xxxyyRightGroup :: EffectFn1 MElement MElement
+foreign import xxxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyxxDownGroup :: EffectFn1 MElement MElement
-foreign import xxyxxRightGroup :: EffectFn1 MElement MElement
+foreign import xxyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyxyDownGroup :: EffectFn1 MElement MElement
-foreign import xxyxyRightGroup :: EffectFn1 MElement MElement
+foreign import xxyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyyxDownGroup :: EffectFn1 MElement MElement
-foreign import xxyyxRightGroup :: EffectFn1 MElement MElement
+foreign import xxyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyyyDownGroup :: EffectFn1 MElement MElement
-foreign import xxyyyRightGroup :: EffectFn1 MElement MElement
+foreign import xxyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxxxDownGroup :: EffectFn1 MElement MElement
-foreign import xyxxxRightGroup :: EffectFn1 MElement MElement
+foreign import xyxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxxyDownGroup :: EffectFn1 MElement MElement
-foreign import xyxxyRightGroup :: EffectFn1 MElement MElement
+foreign import xyxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxyxDownGroup :: EffectFn1 MElement MElement
-foreign import xyxyxRightGroup :: EffectFn1 MElement MElement
+foreign import xyxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxyyDownGroup :: EffectFn1 MElement MElement
-foreign import xyxyyRightGroup :: EffectFn1 MElement MElement
+foreign import xyxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyxxDownGroup :: EffectFn1 MElement MElement
-foreign import xyyxxRightGroup :: EffectFn1 MElement MElement
+foreign import xyyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyxyDownGroup :: EffectFn1 MElement MElement
-foreign import xyyxyRightGroup :: EffectFn1 MElement MElement
+foreign import xyyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyyxDownGroup :: EffectFn1 MElement MElement
-foreign import xyyyxRightGroup :: EffectFn1 MElement MElement
+foreign import xyyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyyyDownGroup :: EffectFn1 MElement MElement
-foreign import xyyyyRightGroup :: EffectFn1 MElement MElement
+foreign import xyyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxxxDownGroup :: EffectFn1 MElement MElement
-foreign import yxxxxRightGroup :: EffectFn1 MElement MElement
+foreign import yxxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxxyDownGroup :: EffectFn1 MElement MElement
-foreign import yxxxyRightGroup :: EffectFn1 MElement MElement
+foreign import yxxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxyxDownGroup :: EffectFn1 MElement MElement
-foreign import yxxyxRightGroup :: EffectFn1 MElement MElement
+foreign import yxxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxyyDownGroup :: EffectFn1 MElement MElement
-foreign import yxxyyRightGroup :: EffectFn1 MElement MElement
+foreign import yxxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyxxDownGroup :: EffectFn1 MElement MElement
-foreign import yxyxxRightGroup :: EffectFn1 MElement MElement
+foreign import yxyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyxyDownGroup :: EffectFn1 MElement MElement
-foreign import yxyxyRightGroup :: EffectFn1 MElement MElement
+foreign import yxyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyyxDownGroup :: EffectFn1 MElement MElement
-foreign import yxyyxRightGroup :: EffectFn1 MElement MElement
+foreign import yxyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyyyDownGroup :: EffectFn1 MElement MElement
-foreign import yxyyyRightGroup :: EffectFn1 MElement MElement
+foreign import yxyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxxxDownGroup :: EffectFn1 MElement MElement
-foreign import yyxxxRightGroup :: EffectFn1 MElement MElement
+foreign import yyxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxxyDownGroup :: EffectFn1 MElement MElement
-foreign import yyxxyRightGroup :: EffectFn1 MElement MElement
+foreign import yyxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxyxDownGroup :: EffectFn1 MElement MElement
-foreign import yyxyxRightGroup :: EffectFn1 MElement MElement
+foreign import yyxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxyyDownGroup :: EffectFn1 MElement MElement
-foreign import yyxyyRightGroup :: EffectFn1 MElement MElement
+foreign import yyxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyxxDownGroup :: EffectFn1 MElement MElement
-foreign import yyyxxRightGroup :: EffectFn1 MElement MElement
+foreign import yyyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyxyDownGroup :: EffectFn1 MElement MElement
-foreign import yyyxyRightGroup :: EffectFn1 MElement MElement
+foreign import yyyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyyxDownGroup :: EffectFn1 MElement MElement
-foreign import yyyyxRightGroup :: EffectFn1 MElement MElement
+foreign import yyyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyyyDownGroup :: EffectFn1 MElement MElement
-foreign import yyyyyRightGroup :: EffectFn1 MElement MElement
+foreign import yyyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
 ---- level 5
-foreign import xxxxxxDownGroup :: EffectFn1 MElement MElement
-foreign import xxxxxxRightGroup :: EffectFn1 MElement MElement
+foreign import xxxxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxxxyDownGroup :: EffectFn1 MElement MElement
-foreign import xxxxxyRightGroup :: EffectFn1 MElement MElement
+foreign import xxxxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxxyxDownGroup :: EffectFn1 MElement MElement
-foreign import xxxxyxRightGroup :: EffectFn1 MElement MElement
+foreign import xxxxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxxyyDownGroup :: EffectFn1 MElement MElement
-foreign import xxxxyyRightGroup :: EffectFn1 MElement MElement
+foreign import xxxxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxyxxDownGroup :: EffectFn1 MElement MElement
-foreign import xxxyxxRightGroup :: EffectFn1 MElement MElement
+foreign import xxxyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxyxyDownGroup :: EffectFn1 MElement MElement
-foreign import xxxyxyRightGroup :: EffectFn1 MElement MElement
+foreign import xxxyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxyyxDownGroup :: EffectFn1 MElement MElement
-foreign import xxxyyxRightGroup :: EffectFn1 MElement MElement
+foreign import xxxyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxxyyyDownGroup :: EffectFn1 MElement MElement
-foreign import xxxyyyRightGroup :: EffectFn1 MElement MElement
+foreign import xxxyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxxyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyxxxDownGroup :: EffectFn1 MElement MElement
-foreign import xxyxxxRightGroup :: EffectFn1 MElement MElement
+foreign import xxyxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyxxyDownGroup :: EffectFn1 MElement MElement
-foreign import xxyxxyRightGroup :: EffectFn1 MElement MElement
+foreign import xxyxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyxyxDownGroup :: EffectFn1 MElement MElement
-foreign import xxyxyxRightGroup :: EffectFn1 MElement MElement
+foreign import xxyxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyxyyDownGroup :: EffectFn1 MElement MElement
-foreign import xxyxyyRightGroup :: EffectFn1 MElement MElement
+foreign import xxyxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyyxxDownGroup :: EffectFn1 MElement MElement
-foreign import xxyyxxRightGroup :: EffectFn1 MElement MElement
+foreign import xxyyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyyxyDownGroup :: EffectFn1 MElement MElement
-foreign import xxyyxyRightGroup :: EffectFn1 MElement MElement
+foreign import xxyyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyyyxDownGroup :: EffectFn1 MElement MElement
-foreign import xxyyyxRightGroup :: EffectFn1 MElement MElement
+foreign import xxyyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xxyyyyDownGroup :: EffectFn1 MElement MElement
-foreign import xxyyyyRightGroup :: EffectFn1 MElement MElement
+foreign import xxyyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xxyyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxxxxDownGroup :: EffectFn1 MElement MElement
-foreign import xyxxxxRightGroup :: EffectFn1 MElement MElement
+foreign import xyxxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxxxyDownGroup :: EffectFn1 MElement MElement
-foreign import xyxxxyRightGroup :: EffectFn1 MElement MElement
+foreign import xyxxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxxyxDownGroup :: EffectFn1 MElement MElement
-foreign import xyxxyxRightGroup :: EffectFn1 MElement MElement
+foreign import xyxxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxxyyDownGroup :: EffectFn1 MElement MElement
-foreign import xyxxyyRightGroup :: EffectFn1 MElement MElement
+foreign import xyxxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxyxxDownGroup :: EffectFn1 MElement MElement
-foreign import xyxyxxRightGroup :: EffectFn1 MElement MElement
+foreign import xyxyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxyxyDownGroup :: EffectFn1 MElement MElement
-foreign import xyxyxyRightGroup :: EffectFn1 MElement MElement
+foreign import xyxyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxyyxDownGroup :: EffectFn1 MElement MElement
-foreign import xyxyyxRightGroup :: EffectFn1 MElement MElement
+foreign import xyxyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyxyyyDownGroup :: EffectFn1 MElement MElement
-foreign import xyxyyyRightGroup :: EffectFn1 MElement MElement
+foreign import xyxyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyxyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyxxxDownGroup :: EffectFn1 MElement MElement
-foreign import xyyxxxRightGroup :: EffectFn1 MElement MElement
+foreign import xyyxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyxxyDownGroup :: EffectFn1 MElement MElement
-foreign import xyyxxyRightGroup :: EffectFn1 MElement MElement
+foreign import xyyxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyxyxDownGroup :: EffectFn1 MElement MElement
-foreign import xyyxyxRightGroup :: EffectFn1 MElement MElement
+foreign import xyyxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyxyyDownGroup :: EffectFn1 MElement MElement
-foreign import xyyxyyRightGroup :: EffectFn1 MElement MElement
+foreign import xyyxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyyxxDownGroup :: EffectFn1 MElement MElement
-foreign import xyyyxxRightGroup :: EffectFn1 MElement MElement
+foreign import xyyyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyyxyDownGroup :: EffectFn1 MElement MElement
-foreign import xyyyxyRightGroup :: EffectFn1 MElement MElement
+foreign import xyyyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyyyxDownGroup :: EffectFn1 MElement MElement
-foreign import xyyyyxRightGroup :: EffectFn1 MElement MElement
+foreign import xyyyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import xyyyyyDownGroup :: EffectFn1 MElement MElement
-foreign import xyyyyyRightGroup :: EffectFn1 MElement MElement
+foreign import xyyyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import xyyyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxxxxDownGroup :: EffectFn1 MElement MElement
-foreign import yxxxxxRightGroup :: EffectFn1 MElement MElement
+foreign import yxxxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxxxyDownGroup :: EffectFn1 MElement MElement
-foreign import yxxxxyRightGroup :: EffectFn1 MElement MElement
+foreign import yxxxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxxyxDownGroup :: EffectFn1 MElement MElement
-foreign import yxxxyxRightGroup :: EffectFn1 MElement MElement
+foreign import yxxxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxxyyDownGroup :: EffectFn1 MElement MElement
-foreign import yxxxyyRightGroup :: EffectFn1 MElement MElement
+foreign import yxxxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxyxxDownGroup :: EffectFn1 MElement MElement
-foreign import yxxyxxRightGroup :: EffectFn1 MElement MElement
+foreign import yxxyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxyxyDownGroup :: EffectFn1 MElement MElement
-foreign import yxxyxyRightGroup :: EffectFn1 MElement MElement
+foreign import yxxyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxyyxDownGroup :: EffectFn1 MElement MElement
-foreign import yxxyyxRightGroup :: EffectFn1 MElement MElement
+foreign import yxxyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxxyyyDownGroup :: EffectFn1 MElement MElement
-foreign import yxxyyyRightGroup :: EffectFn1 MElement MElement
+foreign import yxxyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxxyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyxxxDownGroup :: EffectFn1 MElement MElement
-foreign import yxyxxxRightGroup :: EffectFn1 MElement MElement
+foreign import yxyxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyxxyDownGroup :: EffectFn1 MElement MElement
-foreign import yxyxxyRightGroup :: EffectFn1 MElement MElement
+foreign import yxyxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyxyxDownGroup :: EffectFn1 MElement MElement
-foreign import yxyxyxRightGroup :: EffectFn1 MElement MElement
+foreign import yxyxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyxyyDownGroup :: EffectFn1 MElement MElement
-foreign import yxyxyyRightGroup :: EffectFn1 MElement MElement
+foreign import yxyxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyyxxDownGroup :: EffectFn1 MElement MElement
-foreign import yxyyxxRightGroup :: EffectFn1 MElement MElement
+foreign import yxyyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyyxyDownGroup :: EffectFn1 MElement MElement
-foreign import yxyyxyRightGroup :: EffectFn1 MElement MElement
+foreign import yxyyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyyyxDownGroup :: EffectFn1 MElement MElement
-foreign import yxyyyxRightGroup :: EffectFn1 MElement MElement
+foreign import yxyyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yxyyyyDownGroup :: EffectFn1 MElement MElement
-foreign import yxyyyyRightGroup :: EffectFn1 MElement MElement
+foreign import yxyyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yxyyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxxxxDownGroup :: EffectFn1 MElement MElement
-foreign import yyxxxxRightGroup :: EffectFn1 MElement MElement
+foreign import yyxxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxxxyDownGroup :: EffectFn1 MElement MElement
-foreign import yyxxxyRightGroup :: EffectFn1 MElement MElement
+foreign import yyxxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxxyxDownGroup :: EffectFn1 MElement MElement
-foreign import yyxxyxRightGroup :: EffectFn1 MElement MElement
+foreign import yyxxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxxyyDownGroup :: EffectFn1 MElement MElement
-foreign import yyxxyyRightGroup :: EffectFn1 MElement MElement
+foreign import yyxxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxyxxDownGroup :: EffectFn1 MElement MElement
-foreign import yyxyxxRightGroup :: EffectFn1 MElement MElement
+foreign import yyxyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxyxyDownGroup :: EffectFn1 MElement MElement
-foreign import yyxyxyRightGroup :: EffectFn1 MElement MElement
+foreign import yyxyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxyyxDownGroup :: EffectFn1 MElement MElement
-foreign import yyxyyxRightGroup :: EffectFn1 MElement MElement
+foreign import yyxyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyxyyyDownGroup :: EffectFn1 MElement MElement
-foreign import yyxyyyRightGroup :: EffectFn1 MElement MElement
+foreign import yyxyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyxyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyxxxDownGroup :: EffectFn1 MElement MElement
-foreign import yyyxxxRightGroup :: EffectFn1 MElement MElement
+foreign import yyyxxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyxxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyxxyDownGroup :: EffectFn1 MElement MElement
-foreign import yyyxxyRightGroup :: EffectFn1 MElement MElement
+foreign import yyyxxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyxxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyxyxDownGroup :: EffectFn1 MElement MElement
-foreign import yyyxyxRightGroup :: EffectFn1 MElement MElement
+foreign import yyyxyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyxyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyxyyDownGroup :: EffectFn1 MElement MElement
-foreign import yyyxyyRightGroup :: EffectFn1 MElement MElement
+foreign import yyyxyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyxyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyyxxDownGroup :: EffectFn1 MElement MElement
-foreign import yyyyxxRightGroup :: EffectFn1 MElement MElement
+foreign import yyyyxxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyyxxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyyxyDownGroup :: EffectFn1 MElement MElement
-foreign import yyyyxyRightGroup :: EffectFn1 MElement MElement
+foreign import yyyyxyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyyxyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyyyxDownGroup :: EffectFn1 MElement MElement
-foreign import yyyyyxRightGroup :: EffectFn1 MElement MElement
+foreign import yyyyyxDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyyyxRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
-foreign import yyyyyyDownGroup :: EffectFn1 MElement MElement
-foreign import yyyyyyRightGroup :: EffectFn1 MElement MElement
+foreign import yyyyyyDownGroup :: EffectFn1 PWP.MElement PWP.MElement
+foreign import yyyyyyRightGroup :: EffectFn1 PWP.MElement PWP.MElement
 
 ----------- new section
 ---

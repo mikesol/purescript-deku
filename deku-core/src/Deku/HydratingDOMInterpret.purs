@@ -16,7 +16,7 @@ import Effect (Effect)
 import Effect.Console (log)
 import Effect.Exception (error, throwException)
 import Effect.Ref as Ref
-import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, mkEffectFn7, runEffectFn2, runEffectFn3, runEffectFn5)
+import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, mkEffectFn7, runEffectFn2, runEffectFn3, runEffectFn5, runEffectFn7)
 import Web.DOM (Node)
 import Web.DOM.Comment as Cmt
 import Web.DOM.Document (createTextNode)
@@ -153,32 +153,36 @@ makeTextHydrate nodeRef = mkEffectFn1 \_ -> do
   pure nx'
 
 makePursxHydrate :: Ref.Ref (Maybe Node) -> Core.MakePursx
-makePursxHydrate nodeRef = mkEffectFn5 \a b c d e -> do
-  nx <- Ref.read nodeRef
-  let _ = spy "NX pursx" nx
-  Tuple nx' nn <- case nx >>= Cmt.fromNode of
-    Just y -> do
-      let cnd = Cmt.toNode y
-      t <- Node.textContent cnd
-      if t == M.pursx then do
-        px <- runEffectFn5 I.makePursxEffect a b c d e
-        p <- parentNode cnd
-        let ev = Elt.toNode $ fromDekuElement px
-        case p of
-          Just p' -> do
-            replaceChild
-              ev
-              cnd
-              p'
-            nxx <- getNextNode ev
-            pure $ Tuple px nxx
-          Nothing -> throwException $ error
-            "could not find parent for pursx marker"
-      else throwException $ error
-        ("makePursxHydrate wrong text: " <> t)
-    _ -> throwException $ error "makePursxHydrate not comment"
-  Ref.write nn nodeRef
-  pure nx'
+makePursxHydrate nodeRef = Core.MakePursx oo
+  where
+  oo :: Core.MakePursx'
+  oo = mkEffectFn7 \a b c d e f g -> do
+    nx <- Ref.read nodeRef
+    let _ = spy "NX pursx" nx
+    Tuple nx' nn <- case nx >>= Cmt.fromNode of
+      Just y -> do
+        let cnd = Cmt.toNode y
+        t <- Node.textContent cnd
+        if t == M.pursx then do
+          let Core.MakePursx mpx = I.makePursxEffect
+          px <- runEffectFn7 mpx a b c d e f g
+          p <- parentNode cnd
+          let ev = Elt.toNode $ fromDekuElement px
+          case p of
+            Just p' -> do
+              replaceChild
+                ev
+                cnd
+                p'
+              nxx <- getNextNode ev
+              pure $ Tuple px nxx
+            Nothing -> throwException $ error
+              "could not find parent for pursx marker"
+        else throwException $ error
+          ("makePursxHydrate wrong text: " <> t)
+      _ -> throwException $ error "makePursxHydrate not comment"
+    Ref.write nn nodeRef
+    pure nx'
 
 hydratingDOMInterpret :: Ref.Ref (Maybe Node) -> Core.DOMInterpret
 hydratingDOMInterpret nodeRef = Core.DOMInterpret
