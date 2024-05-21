@@ -25,6 +25,7 @@ import Deku.Core as Core
 import Deku.JSMap as JSMap
 import Deku.JSWeakRef (WeakRef)
 import Deku.UnsafeDOM (addEventListener, appendChild, createElement, createElementNS, eventListener, insertBefore, removeEventListener, setTextContent, unsafeParentNode)
+import Deku.UnsafeDOM as Unsafe
 import Effect (Effect)
 import Effect.Console (error)
 import Effect.Ref (read)
@@ -555,3 +556,6 @@ queryAttrWithParent = mkEffectFn2 \att me -> do
   hasAttr <- getAttribute att me
   arr <- NodeList.toArray nl
   pure (maybe arr (Array.snoc arr) (hasAttr $> Element.toNode me))
+
+toTemplateEffect :: Core.ToTemplate
+toTemplateEffect = Unsafe.toTemplate

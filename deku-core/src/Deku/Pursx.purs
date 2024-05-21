@@ -39,7 +39,7 @@ import Deku.PursxParser as PxP
 import Deku.PxTypes (PxAtt, PxNut)
 import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some)
 import Deku.Some as Some
-import Deku.UnsafeDOM (cloneElement, cloneTemplate, toTemplate, unsafeFirstChildAsElement, unsafeParentNode)
+import Deku.UnsafeDOM (cloneElement, cloneTemplate, unsafeFirstChildAsElement, unsafeParentNode)
 import Effect (foreachE)
 import Effect.Exception (error, throwException)
 import Effect.Ref (new)
@@ -169,7 +169,7 @@ pursx'
   -> Nut
 pursx' r = Nut $ mkEffectFn2
   \ps@(PSR psr)
-   di ->
+   di@(DOMInterpret di') ->
     do
       let
         -- various proxies
@@ -193,7 +193,7 @@ pursx' r = Nut $ mkEffectFn2
           (reflectSymbol htmlProxy)
           syms
       -- turn the pursx i into a template
-      eltX <- runEffectFn1 toTemplate html
+      eltX <- runEffectFn1 di'.toTemplate html
       -- clone the template
       elt <- runEffectFn1 cloneTemplate eltX
       let unsafeMElement = mEltify (Element.toNode elt)
@@ -330,7 +330,7 @@ template p = Nut $ mkEffectFn2
     -- it used later
     isStringCache :: STObject.STObject Global MElement <- liftST
       STObject.new
-    eltX <- runEffectFn1 toTemplate html
+    eltX <- runEffectFn1 di.toTemplate html
     ctnt <- HtmlTemplateElement.content eltX
     eltBase <- runEffectFn1 unsafeFirstChildAsElement
       ( (unsafeCoerce :: Node.Node -> Element.Element) $ DocumentFragment.toNode

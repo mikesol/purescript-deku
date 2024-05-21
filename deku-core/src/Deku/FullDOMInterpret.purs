@@ -32,4 +32,5 @@ fullDOMInterpret = Core.DOMInterpret
   , sendToPosForText: I.sendToPosForTextEffect
   , removeForText: I.removeForTextEffect
   --
+  , toTemplate: I.toTemplateEffect
   }

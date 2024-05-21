@@ -52,6 +52,7 @@ module Deku.Core
   , SetProp
   , SetText
   , Tag(..)
+  , ToTemplate
   , UnsetAttribute
   , Value(..)
   , Verb(..)
@@ -156,6 +157,7 @@ import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM (Comment, Element, Text)
 import Web.DOM as Element
 import Web.Event.Internal.Types (Event)
+import Web.HTML (HTMLTemplateElement)
 
 ------
 ------
@@ -387,9 +389,8 @@ type SetDelegateCb =
 newtype Html = Html String
 newtype Verb = Verb String
 
--- | Type used by Deku backends to make a beacon signaling the beginning or end of a dynamic construct. For internal use only unless you're writing a custom backend.
+type ToTemplate = EffectFn1 String HTMLTemplateElement
 type MakeBeacon = Effect DekuBeacon
-
 type CleanUpBeacon = EffectFn1 (WeakRef DekuBeacon) Unit
 type CleanUpElement = EffectFn1 (WeakRef DekuElement) Unit
 type CleanUpText = EffectFn1 (WeakRef DekuText) Unit
@@ -426,6 +427,7 @@ newtype DOMInterpret = DOMInterpret
   , sendToPosForText :: SendToPosForText
   , removeForText :: RemoveForText
   --
+  , toTemplate :: ToTemplate
   }
 
 derive instance Newtype DOMInterpret _
