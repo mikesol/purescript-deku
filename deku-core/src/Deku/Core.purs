@@ -36,7 +36,6 @@ module Deku.Core
   , Key(..)
   , MakeBeacon
   , MakeElement
-  , MakePursx
   , MakeText
   , Namespace(..)
   , Nut(..)
@@ -387,12 +386,6 @@ type SetDelegateCb =
 
 newtype Html = Html String
 newtype Verb = Verb String
--- | Type used by Deku backends to make pursx. For internal use only unless you're writing a custom backend.
-type MakePursx =
-  EffectFn5 Html Verb (Object.Object PursXable)
-    PSR
-    DOMInterpret
-    DekuElement
 
 -- | Type used by Deku backends to make a beacon signaling the beginning or end of a dynamic construct. For internal use only unless you're writing a custom backend.
 type MakeBeacon = Effect DekuBeacon
@@ -432,8 +425,6 @@ newtype DOMInterpret = DOMInterpret
   , attributeDynParentForText :: AttributeDynParentForText
   , sendToPosForText :: SendToPosForText
   , removeForText :: RemoveForText
-  --
-  , makePursx :: MakePursx
   --
   }
 

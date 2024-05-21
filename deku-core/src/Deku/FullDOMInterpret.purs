@@ -32,6 +32,4 @@ fullDOMInterpret = Core.DOMInterpret
   , sendToPosForText: I.sendToPosForTextEffect
   , removeForText: I.removeForTextEffect
   --
-  , makePursx: I.makePursxEffect
-  --
   }
