@@ -37,13 +37,13 @@ import Deku.PathWalker as PW
 import Deku.PathWalkerPrimitives as PWP
 import Deku.PursxParser as PxP
 import Deku.PxTypes (PxAtt, PxNut)
-import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some)
+import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some, unsafeForeachE)
 import Deku.Some as Some
 import Deku.UnsafeDOM (cloneElement, toTemplate, unsafeFirstChildAsElement, unsafeParentNode)
-import Effect (foreachE)
+import Effect (Effect, foreachE)
 import Effect.Exception (error, throwException)
 import Effect.Ref (new)
-import Effect.Uncurried (EffectFn1, EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn7, runEffectFn8)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn7, runEffectFn8)
 import FRP.Poll (Poll)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
@@ -222,6 +222,272 @@ pursx' r = Nut $ mkEffectFn2
       )
       (symbolsToArray (Proxy :: _ rl))
     pure $ DekuElementOutcome o
+
+makeTemplate
+  :: forall a
+   . Poll (Poll a)
+  -> PSR
+  -> DOMInterpret
+  -> String
+  -> String
+  -> EffectFn2 DOMInterpret PWP.MElement Unit
+  -> EffectFn2 DOMInterpret PWP.MElement Unit
+  -> Array (Tuple Boolean String)
+  -> Effect DekuOutcome
+makeTemplate
+  p
+  (PSR psr)
+  di'@(DOMInterpret di)
+  htmlSymbol
+  verbSymbol
+  walkMe
+  walkMeInternal
+  syms = do
+  let
+    -- remove all ~foo~ attributes from the html
+    html = foldr
+      ( \(Tuple isAtt pat) h ->
+          String.replaceAll
+            (String.Pattern (verbSymbol <> pat <> verbSymbol))
+            ( String.Replacement $
+                if isAtt then ""
+                else "<!--" <> verbSymbol <> pat <> verbSymbol <> "-->"
+            )
+            h
+      )
+      htmlSymbol
+      syms
+  -- we don't want to recurse over text nodes constantly checking their content
+  -- so we create a cache that helps us with that (we'll see)
+  -- it used later
+  isStringCache :: STObject.STObject Global PWP.MElement <- liftST
+    STObject.new
+  eltX <- runEffectFn1 toTemplate html
+  ctnt <- HtmlTemplateElement.content eltX
+  eltBase <- runEffectFn1 unsafeFirstChildAsElement
+    ( (unsafeCoerce :: Node.Node -> Element.Element) $ DocumentFragment.toNode
+        ctnt
+    )
+  -- we know we'll need this walk many times, so
+  -- we take it out of the loop
+  eltusMaximus <- runEffectFn1 cloneElement eltBase
+  do
+    -- this bloc splits all of the dynamic text nodes into
+    -- separate text nodes, which makes recursing over them faster as
+    -- we only need to do previousNode instead of splitText
+    -- runEffectFn5
+    --   walker
+    --   ( InstructionDelegate
+    --       { processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit
+    --       , processPollString: mkEffectFn4 \a _ _ dd -> do
+    --           void $ liftST $ STObject.poke a dd isStringCache
+    --           void $ runEffectFn3
+    --             PWP.returnReplacementNoIndex
+    --             verbSymbol
+    --             a
+    --             dd
+    --       , processNut: mkEffectFn4 \_ _ _ _ -> throwException
+    --           ( error
+    --               "Programming error: template should not be called with a string"
+    --           )
+    --       }
+    --   )
+    --   scrunch
+    runEffectFn2 walkMe
+      (DOMInterpret di)
+      (unsafeCoerce (PWP.mEltify $ Element.toNode eltusMaximus))
+  let
+    frozenIsStringcache =
+      ( unsafeCoerce
+          :: STObject.STObject Global PWP.MElement
+          -> Object.Object PWP.MElement
+      ) isStringCache
+  indices <- traverseWithIndex
+    (\k v -> runEffectFn3 PWP.returnReplacementIndex verbSymbol k v)
+    frozenIsStringcache
+  -- as usual, we start off lucky
+  -- even though this can enver be unlucky as templates can only
+  -- ever be populated with elements (not dyn), we still need it
+  -- just cuz of the type contracts
+  lucky <- new true
+  -- alas, our parent is not lucky, for a template is a dyn after all
+  for_ psr.beacon (_.lucky >>> notLucky)
+  -- it's a dyn, so we need an opening beacon
+  dbStart <- di.makeOpenBeacon
+  -- the standard unsubs
+  unsubs <- liftST $ STArray.new
+  -- normal unsub management
+  when (not (null psr.unsubs)) do
+    void $ liftST $ STArray.pushAll psr.unsubs unsubs
+  -- also need a close beacon
+  dbEnd <- runEffectFn1 di.makeCloseBeacon dbStart
+  -- do the same close beacon management as our dyn friends
+  case psr.beacon of
+    Nothing -> do
+      runEffectFn2 di.attributeBeaconParent dbStart (DekuParent psr.parent)
+      runEffectFn2 di.attributeBeaconParent dbEnd (DekuParent psr.parent)
+    Just y -> do
+      runEffectFn5 di.attributeDynParentForBeacons dbStart dbEnd
+        y.start
+        y.end
+        Nothing
+  -- this is our element cache
+  -- we don't even try to have a semblance of type
+  -- safety here
+  -- but we do have unit tests!
+  -- we'll be casting this to { | elementCache } later
+  oooooooooo :: STRef.STRef Global (Object.Object Void) <- liftST $ STRef.new
+    Object.empty
+  -- this is the delegate we use in the walker
+  -- let
+  --   walkerInstructionDelegate = InstructionDelegate
+  --     { processAttribute: mkEffectFn4 \s _ _ eeeeeeeee -> do
+  --         let eeekkee = PWP.mEltElt eeeeeeeee
+  --         eeeee <- runEffectFn1 weakRef eeekkee
+  --         let
+  --           effn
+  --             :: forall t
+  --              . EffectFn1 (Array (Identity (Attribute t))) Unit
+  --           effn = mkEffectFn1 \atts -> foreachE atts
+  --             \(Identity att) -> do
+  --               zz <- runEffectFn1 deref eeeee
+  --               for_ (toMaybe zz) \mmmm ->
+  --                 runEffectFn2 (unsafeUnAttribute att) mmmm
+  --                   (DOMInterpret di)
+  --         void $ liftST $ STRef.modify
+  --           ( Object.insert s $
+  --               ( unsafeCoerce
+  --                   :: forall t
+  --                    . EffectFn1 (Array (Identity (Attribute t)))
+  --                        Unit
+  --                   -> Void
+  --               ) effn
+  --           )
+  --           oooooooooo
+  --     , processPollString: mkEffectFn4 \s _ _ e' -> do
+  --         let iiiii = unsafeIndex indices s
+  --         realDeal0 <- runEffectFn2 PWP.returnReplacement iiiii
+  --           e'
+  --         realDekal <-
+  --           if nodeTypeIndex realDeal0 == 3 then pure
+  --             ((unsafeCoerce :: Node.Node -> Text.Text) realDeal0)
+  --           else do
+  --             { txt } <- runEffectFn1 di.makeText Nothing
+  --             par <- runEffectFn1 unsafeParentNode realDeal0
+  --             -- for now, we do not insert the comments around the text
+  --             -- this is because templates cannot be rendered on the server
+  --             -- if this changes, replace this
+  --             replaceChild
+  --               (Text.toNode $ fromDekuText txt)
+  --               realDeal0
+  --               par
+  --             pure (fromDekuText txt)
+  --         realDeal <- runEffectFn1 weakRef realDekal
+  --         let
+  --           effn = mkEffectFn1 \(Identity str) -> do
+  --             zz <- runEffectFn1 deref realDeal
+  --             for_ (toMaybe zz) \mmmm ->
+  --               runEffectFn2
+  --                 di.setText
+  --                 (toDekuText mmmm)
+  --                 str
+  --         void $ liftST $ STRef.modify
+  --           ( Object.insert s $
+  --               ( unsafeCoerce
+  --                   :: EffectFn1 (Identity String) Unit -> Void
+  --               ) effn
+  --           )
+  --           oooooooooo
+  --     , processNut: mkEffectFn4 \_ _ _ _ -> throwException
+  --         ( error
+  --             "Programming error: template should not be called with a nut"
+  --         )
+  --     }
+  -- this is the function that does everything
+  -- everrrryyyyyythingggggg
+  -- the deal is that, when a dyn comes down the pipe
+  -- either it is in the cache or not
+  -- if its not, we WALK and fill the cache
+  -- after it's in the cache, we can look at the `Some`
+  -- and use it to do our attribute and text wizardry
+  let
+    oh'hi = mkEffectFn1 \pp -> do
+      unsubs2 <- liftST $ STArray.new
+      -- clone the template
+      elt <- runEffectFn1 cloneElement eltBase
+      -- wire it up for the walking algo
+      let unsafeMElement = PWP.mEltify (Element.toNode elt)
+      -- insert our fledgling element into the dyn
+      runEffectFn5 attributeDynParentForElementEffect lucky
+        (DekuChild (toDekuElement elt))
+        dbStart
+        dbEnd
+        Nothing
+      -- this is our element cache
+      -- we don't even try to have a semblance of type
+      -- safety here
+      -- but we do have unit tests!
+      -- we'll be casting this to { | elementCache } later
+      void $ liftST $ STRef.write Object.empty oooooooooo
+      -- we walk down to cache a bunch of functions in
+      -- `oooooooooo` that will do our element manipulation
+      -- these are either EffectFn1 attribute or
+      -- EffectFn1 text
+      runEffectFn2 walkMeInternal (DOMInterpret di) unsafeMElement
+      -- runEffectFn5
+      --   walker
+      --   walkerInstructionDelegate
+      --   scrunch
+      --   emptiness
+      --   (DOMInterpret di)
+      --   unsafeMElement
+      -- next up, our `oooooooooo` needs to listen for SEND
+      -- and REMOVE events
+      shmelt <- runEffectFn1 weakRef elt
+      void $ liftST $ flip STRef.modify oooooooooo
+        $ Object.union
+            ( unsafeCoerce
+                { sendTo: mkEffectFn1 \i -> do
+                    gelt' <- runEffectFn1 deref shmelt
+                    for_ (toMaybe gelt') \gelt ->
+                      runEffectFn5 di.sendToPosForElement lucky i
+                        (toDekuElement gelt)
+                        dbStart
+                        dbEnd
+                , remove: mkEffectFn1 \_ ->
+                    do
+                      gelt' <- runEffectFn1 deref shmelt
+                      for_ (toMaybe gelt') \gelt ->
+                        runEffectFn2 di.removeForElement
+                          false
+                          (toDekuElement gelt)
+                      u <- liftST $ STArray.unsafeFreeze unsubs2
+                      foreachE u \i -> i
+                }
+            )
+      -- finally, we set the element cache so that next time all of
+      -- this is "easier"
+      uuuuu <- liftST $ STRef.read oooooooooo
+
+      runListener
+        (mkEffectFn1 \value -> runEffectFn2 unsafeForeachE value uuuuu)
+        unsubs2
+        pp
+  -- now that we have our element cache, we do something with it
+  runListener oh'hi unsubs p
+  -- listen to the lifecycle
+  for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn8
+    actOnLifecycleForDyn
+    psr.fromPortal
+    unsubs
+    l
+    di'
+    dbStart
+    dbEnd
+    s
+    e
+  -- finally, return the beacon
+  pure $ DekuBeaconOutcome dbStart
 
 template
   :: forall (@html :: Symbol) p pl r0 rl0 elementCache r rl rr plr path

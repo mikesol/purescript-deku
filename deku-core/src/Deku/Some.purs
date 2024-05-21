@@ -11,6 +11,7 @@ module Deku.Some
   , class AsTypeConstructor
   , class AsTypeConstructorRL
   , foreachE
+  , unsafeForeachE
   , labels
   , EffectOp(..)
   ) where
@@ -108,3 +109,6 @@ foreachE
    . AsTypeConstructor EffectOp r2 r3
   => EffectFn2 (Some r2) { | r3 }  Unit
 foreachE = unsafeCoerce foreachEImpl
+
+unsafeForeachE :: forall a b. EffectFn2 a b Unit
+unsafeForeachE = foreachEImpl
