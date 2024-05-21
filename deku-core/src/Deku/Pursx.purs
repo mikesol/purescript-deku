@@ -39,7 +39,7 @@ import Deku.PursxParser as PxP
 import Deku.PxTypes (PxAtt, PxNut)
 import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some)
 import Deku.Some as Some
-import Deku.UnsafeDOM (cloneElement, cloneTemplate, unsafeFirstChildAsElement, unsafeParentNode)
+import Deku.UnsafeDOM (unsafeFirstChildAsElement, unsafeParentNode)
 import Effect (foreachE)
 import Effect.Exception (error, throwException)
 import Effect.Ref (new)
@@ -59,7 +59,6 @@ import Web.DOM.Element as Element
 import Web.DOM.Node (nodeTypeIndex, replaceChild)
 import Web.DOM.Node as Node
 import Web.DOM.Text as Text
-import Web.HTML.HTMLTemplateElement as HtmlTemplateElement
 
 class EmptyMe (r :: Row Type) (rl :: RL.RowList Type) | rl -> r where
   emptyMe :: Proxy rl -> { | r }
@@ -195,7 +194,7 @@ pursx' r = Nut $ mkEffectFn2
       -- turn the pursx i into a template
       eltX <- runEffectFn1 di'.toTemplate html
       -- clone the template
-      elt <- runEffectFn1 cloneTemplate eltX
+      elt <- runEffectFn1 di'.cloneTemplate eltX
       let unsafeMElement = mEltify (Element.toNode elt)
       runEffectFn3 eltAttribution ps di (toDekuElement elt)
       -- walk through the template, getting all of the elements and
@@ -331,7 +330,7 @@ template p = Nut $ mkEffectFn2
     isStringCache :: STObject.STObject Global MElement <- liftST
       STObject.new
     eltX <- runEffectFn1 di.toTemplate html
-    ctnt <- HtmlTemplateElement.content eltX
+    ctnt <- runEffectFn1 di.templateContent eltX
     eltBase <- runEffectFn1 unsafeFirstChildAsElement
       ( (unsafeCoerce :: Node.Node -> Element.Element) $ DocumentFragment.toNode
           ctnt
@@ -341,7 +340,7 @@ template p = Nut $ mkEffectFn2
     let emptiness = emptyMe (Proxy :: _ rl)
     -- we know we'll need this walk many times, so
     -- we take it out of the loop
-    eltusMaximus <- runEffectFn1 cloneElement eltBase
+    eltusMaximus <- runEffectFn1 di.cloneElement eltBase
     let
       walker =
         PW.walk
@@ -489,7 +488,7 @@ template p = Nut $ mkEffectFn2
       oh'hi = mkEffectFn1 \pp -> do
         unsubs2 <- liftST $ STArray.new
         -- clone the template
-        elt <- runEffectFn1 cloneElement eltBase
+        elt <- runEffectFn1 di.cloneElement eltBase
         -- wire it up for the walking algo
         let unsafeMElement = mEltify (Element.toNode elt)
         -- insert our fledgling element into the dyn

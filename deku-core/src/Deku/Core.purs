@@ -21,6 +21,8 @@ module Deku.Core
   , CleanUpBeacon
   , CleanUpElement
   , CleanUpText
+  , CloneElement
+  , CloneTemplate
   , DOMInterpret(..)
   , DekuBeacon(..)
   , DekuChild(..)
@@ -52,6 +54,7 @@ module Deku.Core
   , SetProp
   , SetText
   , Tag(..)
+  , TemplateContent
   , ToTemplate
   , UnsetAttribute
   , Value(..)
@@ -154,7 +157,7 @@ import Record (get)
 import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
-import Web.DOM (Comment, Element, Text)
+import Web.DOM (Comment, DocumentFragment, Element, Text)
 import Web.DOM as Element
 import Web.Event.Internal.Types (Event)
 import Web.HTML (HTMLTemplateElement)
@@ -389,6 +392,9 @@ type SetDelegateCb =
 newtype Html = Html String
 newtype Verb = Verb String
 
+type CloneElement = EffectFn1 Element Element
+type CloneTemplate = EffectFn1 HTMLTemplateElement Element
+type TemplateContent = EffectFn1 HTMLTemplateElement DocumentFragment
 type ToTemplate = EffectFn1 String HTMLTemplateElement
 type MakeBeacon = Effect DekuBeacon
 type CleanUpBeacon = EffectFn1 (WeakRef DekuBeacon) Unit
@@ -428,6 +434,9 @@ newtype DOMInterpret = DOMInterpret
   , removeForText :: RemoveForText
   --
   , toTemplate :: ToTemplate
+  , cloneElement :: CloneElement
+  , cloneTemplate :: CloneTemplate
+  , templateContent :: TemplateContent
   }
 
 derive instance Newtype DOMInterpret _

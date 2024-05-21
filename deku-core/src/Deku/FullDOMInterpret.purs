@@ -33,4 +33,7 @@ fullDOMInterpret = Core.DOMInterpret
   , removeForText: I.removeForTextEffect
   --
   , toTemplate: I.toTemplateEffect
+  , cloneElement: I.cloneElementEffect
+  , cloneTemplate: I.cloneTemplateEffect
+  , templateContent: I.templateContentEffect
   }

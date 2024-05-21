@@ -59,6 +59,7 @@ import Web.HTML.HTMLLinkElement as HTMLLinkElement
 import Web.HTML.HTMLOptGroupElement as HTMLOptGroupElement
 import Web.HTML.HTMLOptionElement as HTMLOptionElement
 import Web.HTML.HTMLSelectElement as HTMLSelectElement
+import Web.HTML.HTMLTemplateElement as HTMLTemplateElement
 import Web.HTML.HTMLTextAreaElement as HTMLTextAreaElement
 import Web.HTML.Window (document)
 
@@ -559,3 +560,12 @@ queryAttrWithParent = mkEffectFn2 \att me -> do
 
 toTemplateEffect :: Core.ToTemplate
 toTemplateEffect = Unsafe.toTemplate
+
+cloneElementEffect :: Core.CloneElement
+cloneElementEffect = Unsafe.cloneElement
+
+cloneTemplateEffect :: Core.CloneTemplate
+cloneTemplateEffect = Unsafe.cloneTemplate
+
+templateContentEffect :: Core.TemplateContent
+templateContentEffect = mkEffectFn1 HTMLTemplateElement.content
