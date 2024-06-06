@@ -20,21 +20,17 @@ import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
-import Deku.Core (Cb(..), DekuBeacon, DekuChild(..), DekuElement, DekuParent(..), DekuText, Key(..), Tag(..), Value(..), fromDekuBeacon, fromDekuElement, fromDekuText, toDekuBeacon, toDekuElement, toDekuText)
+import Deku.Core (Cb(..), DekuBeacon, DekuChild(..), DekuElement, DekuParent(..), Key(..), Tag(..), Value(..), fromDekuBeacon, fromDekuElement, fromDekuText, toDekuBeacon, toDekuElement, toDekuText)
 import Deku.Core as Core
-import Deku.JSMap as JSMap
-import Deku.JSWeakRef (WeakRef)
 import Deku.UnsafeDOM (addEventListener, appendChild, createElement, createElementNS, eventListener, insertBefore, removeEventListener, setTextContent, unsafeParentNode)
 import Deku.UnsafeDOM as Unsafe
 import Effect (Effect)
 import Effect.Console (error)
 import Effect.Ref (read)
 import Effect.Uncurried (EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, mkEffectFn5, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5)
-import Foreign.Object as Object
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
 import Unsafe.Reference (unsafeRefEq)
-import Untagged.Union (type (|+|), toEither1)
 import Web.DOM (Element)
 import Web.DOM as Node
 import Web.DOM.ChildNode (remove)
@@ -46,7 +42,7 @@ import Web.DOM.Node (childNodes, firstChild, lastChild, nextSibling, nodeTypeInd
 import Web.DOM.NodeList as NodeList
 import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.DOM.Text as Text
-import Web.Event.Event (EventType(..), target)
+import Web.Event.Event (EventType(..))
 import Web.Event.Event as Web
 import Web.Event.EventTarget (EventListener)
 import Web.HTML (window)
@@ -62,9 +58,6 @@ import Web.HTML.HTMLSelectElement as HTMLSelectElement
 import Web.HTML.HTMLTemplateElement as HTMLTemplateElement
 import Web.HTML.HTMLTextAreaElement as HTMLTextAreaElement
 import Web.HTML.Window (document)
-
-type MapEntry = (WeakRef DekuElement) |+| (WeakRef DekuBeacon) |+|
-  (WeakRef DekuText)
 
 makeElementEffect :: Core.MakeElement
 makeElementEffect = mkEffectFn2 \ns tag -> do
@@ -428,21 +421,6 @@ setPropEffect = mkEffectFn3 \elt' (Key k) (Value v) -> do
           fe
       | otherwise = setAttribute k v elt
   o
-
-setDelegateCbEffect :: Core.SetDelegateCb
-setDelegateCbEffect = mkEffectFn3 \elt' (Key k) mp ->
-  do -- EffectFn3 DekuElement Key (JSMap.JSMap Element.Element (Object.Object Cb)) Unit
-    let eventType = EventType k
-    let eventTarget = toEventTarget (fromDekuElement elt')
-    nl <- runEffectFn1 eventListener $ mkEffectFn1 \ev -> do
-      for_ (target ev >>= Element.fromEventTarget) \t -> do
-        oo <- runEffectFn2 JSMap.getImpl t mp
-        case toEither1 oo of
-          Left _ -> pure unit
-          Right obj -> case Object.lookup k obj of
-            Just (Cb cb) -> void $ cb ev
-            Nothing -> pure unit
-    runEffectFn4 addEventListener eventType nl false eventTarget
 
 foreign import getPreviousCb
   :: EffectFn2 String DekuElement (Nullable EventListener)

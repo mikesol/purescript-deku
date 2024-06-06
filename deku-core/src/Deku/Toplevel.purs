@@ -31,7 +31,7 @@ runInElement elt (Nut nut) = void $ runEffectFn2 nut
   )
   fullDOMInterpret
 
--- -- | Runs a deku application in the body of a document, returning a canceler that can
+-- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
 runInBody
   :: Nut

@@ -16,7 +16,7 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple (Tuple(..), fst)
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut, fixed, portal, useMailboxedS, useRefST)
+import Deku.Core (Hook, Nut(..), fixed, portal, useMailboxedS, useRefST, withUnsub)
 import Deku.DOM (Attribute)
 import Deku.DOM as D
 import Deku.DOM as DOM
@@ -31,7 +31,8 @@ import Deku.Some as Some
 import Deku.Toplevel (runInBody)
 import Effect (Effect, foreachE)
 import Effect.Random (random, randomInt)
-import FRP.Event (fold)
+import Effect.Uncurried (mkEffectFn2, runEffectFn2)
+import FRP.Event (count, fold)
 import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
 import Record (union)
 import Web.HTML (window)
@@ -658,6 +659,24 @@ useHotRantWorks = Deku.do
         [ text_ "Show another version" ]
     , framed "da"
     , guard presence $ framed "db"
+    ]
+
+
+useDispose :: Effect Unit -> Effect Unit -> Hook Unit
+useDispose init eff cont = Nut $ mkEffectFn2 \psr di -> do
+  init
+  let Nut nut = cont unit
+  runEffectFn2 nut ( withUnsub eff psr ) di
+
+disposeGetsRun :: Nut
+disposeGetsRun = Deku.do
+  pushTick /\ ticks <- useState'
+  fixed
+    [ D.span [ DA.id_ "count" ] [ text $ show <$> count ticks ]
+    , Deku.do
+      { remove } <- useDynAtBeginning ( pure unit )
+      useDispose ( pushTick unit ) ( pushTick unit )
+      D.span [ DA.id_ "notthere", DL.click_ \_ -> remove ] []
     ]
 
 ocarinaExample :: Nut

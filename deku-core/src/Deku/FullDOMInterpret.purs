@@ -8,7 +8,6 @@ fullDOMInterpret = Core.DOMInterpret
   { makeElement: I.makeElementEffect
   , setProp: I.setPropEffect
   , setCb: I.setCbEffect
-  , setDelegateCb: I.setDelegateCbEffect
   , unsetAttribute: I.unsetAttributeEffect
   , attributeElementParent: I.attributeElementParentEffect
   , attributeDynParentForElement: I.attributeDynParentForElementEffect
