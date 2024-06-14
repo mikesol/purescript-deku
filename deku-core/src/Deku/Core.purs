@@ -113,8 +113,7 @@ module Deku.Core
   , useStateTagged'
   , withUnsub
   , xdata
-  )
-  where
+  ) where
 
 import Prelude
 
@@ -231,12 +230,15 @@ unsafeAttribute
 unsafeAttribute = Attribute
 
 attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
-attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setProp }) ->
-  runEffectFn3 setProp (toDekuElement e) (Key k) (Value v)
+attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2
+  \e (DOMInterpret { setProp }) ->
+    runEffectFn3 setProp (toDekuElement e) (Key k) (Value v)
 
-callbackWithCaution :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
-callbackWithCaution k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setCb }) ->
-  runEffectFn3 setCb (toDekuElement e) (Key k) (Cb v)
+callbackWithCaution
+  :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
+callbackWithCaution k v = unsafeAttribute $ mkEffectFn2
+  \e (DOMInterpret { setCb }) ->
+    runEffectFn3 setCb (toDekuElement e) (Key k) (Cb v)
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
