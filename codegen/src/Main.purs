@@ -23,7 +23,6 @@ import Effect.Aff (Aff, Error, launchAff_, message)
 import Effect.Class.Console as Console
 import FS as FS
 import Node.Path as Path
-import Parser as Parser
 import Prim.Row (class Cons)
 import Type.Proxy (Proxy(..))
 
@@ -113,8 +112,6 @@ generate = do
 
     Indexed.generate html svg mathml
     
-    Parser.generate
-
 
 -- SVG spec is barely useful
 fixSVG :: Parse.Specification -> Parse.Specification 

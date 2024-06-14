@@ -1137,32 +1137,7 @@ describe("deku", () => {
       })
     );
 
-    doTest("templates work", (f) =>
-      f(tests.templatesWork, () => {
-        const $ = require("jquery");
-        expect($("#div0").text()).toBe(
-          "hello Helsinkixhello Stockholmxhello Copenhagenx"
-        );
-        $("#Stockholm").trigger("click");
-        expect($("#div0").text()).toBe(
-          "hello Stockholmxhello Helsinkixhello Copenhagenx"
-        );
-      })
-    );
-    doTest("templates work 2", (f) =>
-      f(tests.templatesWork2, () => {
-        const $ = require("jquery");
-        expect($("#testing").text()).toBe(
-          "hello world"
-        );
-      })
-    );
-    doTest("ocarina pursx doesn't crash", (f) =>
-      f(tests.ocarinaExample, () => {
-        const $ = require("jquery");
-      })
-    );
-    
+
     doTest("sends to position correctly when elt is fixed", (f) =>
       f(tests.sendsToPositionFixed, () => {
         const $ = require("jquery");
@@ -1493,12 +1468,6 @@ describe("deku", () => {
         $("#update").trigger("click");
         expect($("#da").text()).toBe("4");
         expect($("#db").text()).toBe("4");
-      })
-    );
-    doTest("stress test doesn't blow up", (f) =>
-      f(tests.stressTest, () => {
-        const $ = require("jquery");
-        $("#runlots").trigger("click");
       })
     );
   });
