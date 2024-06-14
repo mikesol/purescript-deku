@@ -29,6 +29,8 @@ imports events =
                     , "checkedOn_"
                     , "valueOn"
                     , "valueOn_"
+                    , "selectOn"
+                    , "selectOn_"
                     ]
                 ) "Combinators"
             ]
