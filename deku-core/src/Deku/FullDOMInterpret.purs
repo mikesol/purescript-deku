@@ -6,32 +6,20 @@ import Deku.Interpret as I
 fullDOMInterpret :: Core.DOMInterpret
 fullDOMInterpret = Core.DOMInterpret
   { makeElement: I.makeElementEffect
+  , attachElement : I.attachElementEffect
   , setProp: I.setPropEffect
   , setCb: I.setCbEffect
   , unsetAttribute: I.unsetAttributeEffect
-  , attributeElementParent: I.attributeElementParentEffect
-  , attributeDynParentForElement: I.attributeDynParentForElementEffect
-  , sendToPosForElement: I.sendToPosForElementEffect
-  , removeForElement: I.removeForElementEffect
-  --
-  , makeOpenBeacon: I.makeOpenBeaconEffect
-  , makeCloseBeacon: I.makeCloseBeaconEffect
-  , attributeBeaconParent: I.attributeBeaconParentEffect
-  , attributeDynParentForBeacons: I.attributeDynParentForBeaconsEffect
-  , attributeBeaconFullRangeParent: I.attributeBeaconFullRangeParentEffect
-  , attributeDynParentForBeaconFullRange:
-      I.attributeDynParentForBeaconFullRangeEffect
-  , sendToPosForDyn: I.sendToPosForDynEffect
-  , removeForDyn: I.removeForDynEffect
+  , removeElement: I.removeElementEffect
   --
   , makeText: I.makeTextEffect
+  , attachText : I.attachTextEffect
   , setText: I.setTextEffect
-  , attributeTextParent: I.attributeTextParentEffect
-  , attributeDynParentForText: I.attributeDynParentForTextEffect
-  , sendToPosForText: I.sendToPosForTextEffect
-  , removeForText: I.removeForTextEffect
+  , removeText: I.removeTextEffect
   --
-  , toTemplate: I.toTemplateEffect
+  , beamRegion : I.beamRegionEffect
+  -- 
+  , makeTemplate: I.toTemplateEffect
   , cloneElement: I.cloneElementEffect
   , cloneTemplate: I.cloneTemplateEffect
   , templateContent: I.templateContentEffect
