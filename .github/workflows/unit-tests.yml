@@ -1,8 +1,5 @@
-name: Unit test only
-on:
-  push:
-    branches-ignore:
-      - main
+name: Unit test
+on: push
 jobs:
   container-job:
     runs-on: ubuntu-latest
