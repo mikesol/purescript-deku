@@ -209,12 +209,11 @@ tabbedNavigationWithPursx = Deku.do
             [ text_ "contact" ]
         ]
     , item <#~> case _ of
-        0 -> purs X.do
-          "<h1 id=\"home\">home</h1>"
+        0 -> purs "<h1 id=\"home\">home</h1>"
         1 -> purs X.do
-                "<h1 id=\"about\">about"
-                (text_ " deku")
-                "</h1>"
+          "<h1 id=\"about\">about"
+          (text_ " deku")
+          "</h1>"
         _ -> purs X.do
           "<h1 id=\"contact\">contact "
           (D.span_ [ text_ "mike" ])
@@ -223,9 +222,7 @@ tabbedNavigationWithPursx = Deku.do
           " "
           (text_ "dot com")
           " "
-          ( purs X.do
-              "<h1 id=\"thanks\">thanks</h1>"
-          )
+          (purs "<h1 id=\"thanks\">thanks</h1>")
           "</h1>"
     ]
 
