@@ -1231,8 +1231,8 @@ type HTMLDetailsElement (r :: Row Type) =
 type HTMLDialogElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLDialogElement"
   , open :: String
-  , close :: Web.Event.Internal.Types.Event
   , cancel :: Web.Event.Internal.Types.Event
+  , close :: Web.Event.Internal.Types.Event
   | HTMLElement r
   )
 
