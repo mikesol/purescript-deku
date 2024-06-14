@@ -20,7 +20,8 @@ import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
-import Deku.Pursx (purs, x)
+import Deku.Pursx (purs)
+import Deku.Pursx as X
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Random (random)
@@ -208,18 +209,24 @@ tabbedNavigationWithPursx = Deku.do
             [ text_ "contact" ]
         ]
     , item <#~> case _ of
-        0 -> purs $ x "<h1 id=\"home\">home</h1>" unit
-        1 -> purs $ x "<h1 id=\"about\">about" (text_ " deku") "</h1>" unit
-        _ -> purs $ x "<h1 id=\"contact\">contact " (D.span_ [ text_ "mike" ])
+        0 -> purs X.do
+          "<h1 id=\"home\">home</h1>"
+        1 -> purs X.do
+                "<h1 id=\"about\">about"
+                (text_ " deku")
+                "</h1>"
+        _ -> purs X.do
+          "<h1 id=\"contact\">contact "
+          (D.span_ [ text_ "mike" ])
           " at "
           (text_ "site")
           " "
           (text_ "dot com")
           " "
-          (purs $ x "<h1 id=\"thanks\">thanks</h1>" unit)
+          ( purs X.do
+              "<h1 id=\"thanks\">thanks</h1>"
+          )
           "</h1>"
-          unit
-
     ]
 
 portalsCompose :: Nut
@@ -245,17 +252,19 @@ portalsCompose = Deku.do
 pursXComposes :: Nut
 pursXComposes = Deku.do
   D.div [ DA.id_ "div0" ]
-    [ purs $ x "<h1 id=\"px\">début "
+    [ purs X.do
+        "<h1 id=\"px\">début "
         (fixed [ text_ "milieu", text_ " ", text_ "après-milieu" ])
         " fin</h1>"
-        unit
     ]
 
 pursXWiresUp :: Nut
 pursXWiresUp = Deku.do
   setMessage /\ message <- useState'
   D.div [ DA.id_ "div0" ]
-    [ purs $ x "<div " ((DA.klass_ "arrrrr" <|> DA.id_ "topdiv") :: Poll _)
+    [ purs X.do
+        "<div "
+        ((DA.klass_ "arrrrr" <|> DA.id_ "topdiv") :: Poll _)
         "><h1 id=\"px\" "
         ((DL.click_ \_ -> setMessage "hello") :: Poll _)
         ">hi</h1>début "
@@ -270,7 +279,6 @@ pursXWiresUp = Deku.do
             ]
         )
         " fin</div>"
-        unit
 
     , D.span [ DA.id_ "span0" ] [ text message ]
     ]
