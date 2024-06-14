@@ -6,7 +6,7 @@ module Deku.DOM.SVG.Listeners (module Combinators, repeat, repeat_, end, end_, b
 import Control.Applicative (pure, class Applicative) as Applicative
 import Control.Category ((<<<))
 import Data.Functor (map, class Functor) as Functor
-import Deku.DOM.Combinators (unset, injectElement, injectElementT, runOn, runOn_, numberOn, numberOn_, checkedOn, checkedOn_, valueOn, valueOn_) as Combinators
+import Deku.DOM.Combinators (unset, injectElement, injectElementT, runOn, runOn_, numberOn, numberOn_, checkedOn, checkedOn_, valueOn, valueOn_, selectOn, selectOn_) as Combinators
 import Deku.Attribute as Deku.Attribute
 import Web.Event.Internal.Types as Web.Event.Internal.Types
 import Effect as Effect
