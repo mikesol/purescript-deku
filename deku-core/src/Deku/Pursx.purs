@@ -27,7 +27,7 @@ import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.TraversableWithIndex (traverseWithIndex)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, fromDekuText, getLifecycle, notLucky, runListener, text, thunker, toDekuElement, toDekuText)
+import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, fromDekuText, getLifecycle, notLucky, pump, text, toDekuElement, toDekuText)
 import Deku.Interpret (attributeDynParentForElementEffect)
 import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
 import Deku.JSWeakRef (deref, weakRef)
@@ -40,10 +40,11 @@ import Deku.PxTypes (PxAtt, PxNut)
 import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some)
 import Deku.Some as Some
 import Deku.UnsafeDOM (unsafeFirstChildAsElement, unsafeParentNode)
-import Effect (foreachE)
+import Effect (Effect, foreachE)
 import Effect.Exception (error, throwException)
 import Effect.Ref (new)
 import Effect.Uncurried (EffectFn1, EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
+import FRP.Event (fastForeachThunkE)
 import FRP.Poll (Poll)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
@@ -246,11 +247,14 @@ pursx' r = Nut $ mkEffectFn2
         di
         unsafeMElement
       -- standard unsub management, just like in elementify
+
       unsubs <- liftST $ STArray.new
       when (not (Array.null psr.unsubs)) do
         void $ liftST $ STArray.pushAll psr.unsubs unsubs
+
       -- if the element will be finalized, do all cancellations as well
       runEffectFn2 oneOffFinalizationRegistry elt (thunker unsubs)
+
       -- standard lifecycle management
       for_ (getLifecycle psr.beacon) \{ l, s, e, lucky } -> runEffectFn8
         actOnLifecycleForElement
@@ -275,8 +279,6 @@ template
   -- r0 as a rowlist
   => RL.RowToList r0 rl0
   -- r contains the valid types for this template
-  -- PxAtt -> Poll (Attribute e)
-  -- PxNut -> Poll String
   => TemplateSubstitutions rl0 r
   -- turn r to a row list
   => RL.RowToList r rl
@@ -349,31 +351,31 @@ template p = Nut $ mkEffectFn2
                DOMInterpret
                MElement
                Unit
-    do
-      -- this bloc splits all of the dynamic text nodes into
-      -- separate text nodes, which makes recursing over them faster as
-      -- we only need to do previousNode instead of splitText
-      runEffectFn5
-        walker
-        ( InstructionDelegate
-            { processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit
-            , processPollString: mkEffectFn4 \a _ _ dd -> do
-                void $ liftST $ STObject.poke a dd isStringCache
-                void $ runEffectFn3
-                  returnReplacementNoIndex
-                  verbSymbol
-                  a
-                  dd
-            , processNut: mkEffectFn4 \_ _ _ _ -> throwException
-                ( error
-                    "Programming error: template should not be called with a string"
-                )
-            }
-        )
-        scrunch
-        emptiness
-        (DOMInterpret di)
-        (unsafeCoerce (mEltify $ Element.toNode eltusMaximus))
+  
+    -- this bloc splits all of the dynamic text nodes into
+    -- separate text nodes, which makes recursing over them faster as
+    -- we only need to do previousNode instead of splitText
+    runEffectFn5
+      walker
+      ( InstructionDelegate
+          { processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit
+          , processPollString: mkEffectFn4 \a _ _ dd -> do
+              void $ liftST $ STObject.poke a dd isStringCache
+              void $ runEffectFn3
+                returnReplacementNoIndex
+                verbSymbol
+                a
+                dd
+          , processNut: mkEffectFn4 \_ _ _ _ -> throwException
+              ( error
+                  "Programming error: template should not be called with a string"
+              )
+          }
+      )
+      scrunch
+      emptiness
+      (DOMInterpret di)
+      (unsafeCoerce (mEltify $ Element.toNode eltusMaximus))
     let
       frozenIsStringcache =
         ( unsafeCoerce
@@ -383,7 +385,7 @@ template p = Nut $ mkEffectFn2
       (\k v -> runEffectFn3 returnReplacementIndex verbSymbol k v)
       frozenIsStringcache
     -- as usual, we start off lucky
-    -- even though this can enver be unlucky as templates can only
+    -- even though this can never be unlucky as templates can only
     -- ever be populated with elements (not dyn), we still need it
     -- just cuz of the type contracts
     lucky <- new true
@@ -391,11 +393,12 @@ template p = Nut $ mkEffectFn2
     for_ psr.beacon (_.lucky >>> notLucky)
     -- it's a dyn, so we need an opening beacon
     dbStart <- di.makeOpenBeacon
-    -- the standard unsubs
-    unsubs <- liftST $ STArray.new
+
     -- normal unsub management
+    unsubs <- liftST $ STArray.new
     when (not (null psr.unsubs)) do
       void $ liftST $ STArray.pushAll psr.unsubs unsubs
+
     -- also need a close beacon
     dbEnd <- di.makeCloseBeacon
     -- do the same close beacon management as our dyn friends
@@ -477,6 +480,7 @@ template p = Nut $ mkEffectFn2
                 "Programming error: template should not be called with a nut"
             )
         }
+
     -- this is the function that does everything
     -- everrrryyyyyythingggggg
     -- the deal is that, when a dyn comes down the pipe
@@ -546,12 +550,13 @@ template p = Nut $ mkEffectFn2
               -> STRef.STRef Global { | elementCache }
           ) oooooooooo
 
-        runListener
-          (mkEffectFn1 \value -> runEffectFn2 Some.foreachE value uuuuu)
+        pump
           unsubs2
           pp
+          $ mkEffectFn1 \value -> runEffectFn2 Some.foreachE value uuuuu
+          
     -- now that we have our element cache, we do something with it
-    runListener oh'hi unsubs p
+    pump unsubs p oh'hi
     -- listen to the lifecycle
     for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn8
       actOnLifecycleForDyn
@@ -565,3 +570,8 @@ template p = Nut $ mkEffectFn2
       e
     -- finally, return the beacon
     pure $ DekuBeaconOutcome dbStart
+
+thunker :: STArray.STArray Global (Effect Unit) -> Effect Unit
+thunker unsubs = do
+  unsubsX <- liftST $ STArray.unsafeFreeze unsubs
+  runEffectFn1 fastForeachThunkE unsubsX

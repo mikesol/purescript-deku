@@ -1495,6 +1495,20 @@ describe("deku", () => {
         expect($("#db").text()).toBe("4");
       })
     );
+
+    doTest( "deterministic unsub", ( f ) =>
+      f( tests.disposeGetsRun, () => {
+        const $ = require( "jquery" );
+        expect( $( "#notthere" ).length ).toBe( 1 );
+        expect( $( "#count" ).text() ).toBe( "1" );
+
+        $( "#notthere" ).trigger( "click" );
+
+        expect( $( "#notthere" ).length ).toBe( 0 ); // element is gone so its unsubs should have been called
+        expect( $( "#count" ).text() ).toBe( "2" ); // one tick for the init and one tick for the unsub
+      })
+    );
+
     doTest("stress test doesn't blow up", (f) =>
       f(tests.stressTest, () => {
         const $ = require("jquery");
