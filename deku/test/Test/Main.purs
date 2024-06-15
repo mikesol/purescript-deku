@@ -20,8 +20,7 @@ import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
-import Deku.Pursx (purs)
-import Deku.Pursx as X
+import Deku.Pursx (lenientPursx, pursx)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Random (random)
@@ -209,21 +208,15 @@ tabbedNavigationWithPursx = Deku.do
             [ text_ "contact" ]
         ]
     , item <#~> case _ of
-        0 -> purs "<h1 id=\"home\">home</h1>"
-        1 -> purs X.do
-          "<h1 id=\"about\">about"
-          (text_ " deku")
-          "</h1>"
-        _ -> purs X.do
-          "<h1 id=\"contact\">contact "
-          (D.span_ [ text_ "mike" ])
-          " at "
-          (text_ "site")
-          " "
-          (text_ "dot com")
-          " "
-          (purs "<h1 id=\"thanks\">thanks</h1>")
-          "</h1>"
+        0 -> lenientPursx "<h1 id=\"home\">home</h1>" {}
+        1 -> lenientPursx "<h1 id=\"about\">about ~me~</h1>"
+          { me: text_ "deku" }
+        _ -> lenientPursx "<h1 id=\"contact\">contact ~a~ at ~b~ ~c~ ~d~</h1>"
+          { a: D.span_ [ text_ "mike" ]
+          , b: text_ "site"
+          , c: text_ "dot com"
+          , d: lenientPursx "<h1 id=\"thanks\">thanks</h1>" {}
+          }
     ]
 
 portalsCompose :: Nut
@@ -246,26 +239,12 @@ portalsCompose = Deku.do
         [ text_ "incr" ]
     ]
 
-pursXComposes :: Nut
-pursXComposes = Deku.do
-  D.div [ DA.id_ "div0" ]
-    [ purs X.do
-        "<h1 id=\"px\">début "
-        (fixed [ text_ "milieu", text_ " ", text_ "après-milieu" ])
-        " fin</h1>"
-    ]
-
 pursXWiresUp :: Nut
 pursXWiresUp = Deku.do
   setMessage /\ message <- useState'
   D.div [ DA.id_ "div0" ]
-    [ purs X.do
-        "<div "
-        ((DA.klass_ "arrrrr" <|> DA.id_ "topdiv") :: Poll _)
-        "><h1 id=\"px\" "
-        ((DL.click_ \_ -> setMessage "hello") :: Poll _)
-        ">hi</h1>début "
-        ( fixed
+    [ pursx @"<div ~mykls~><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>"
+        { me: fixed
             [ text_ "milieu"
             , text_ " "
             , D.span
@@ -274,9 +253,29 @@ pursXWiresUp = Deku.do
                 ]
                 [ text_ "après-milieu" ]
             ]
-        )
-        " fin</div>"
+        , evt:  DL.click_ \_ -> setMessage "hello" 
+        , mykls:  DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
+        }
+    , D.span [ DA.id_ "span0" ] [ text message ]
+    ]
 
+pursXWiresUp2 :: Nut
+pursXWiresUp2 = Deku.do
+  setMessage /\ message <- useState'
+  D.div [ DA.id_ "div0" ]
+    [ lenientPursx "<div ~mykls~><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>"
+        { me: fixed
+            [ text_ "milieu"
+            , text_ " "
+            , D.span
+                [ DL.click_ \_ -> setMessage "goodbye"
+                , DA.id_ "inny"
+                ]
+                [ text_ "après-milieu" ]
+            ]
+        , evt:  DL.click_ \_ -> setMessage "hello" 
+        , mykls: DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
+        }
     , D.span [ DA.id_ "span0" ] [ text message ]
     ]
 
