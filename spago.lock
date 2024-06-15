@@ -297,6 +297,7 @@ workspace:
         - aff
         - arrays
         - assert
+        - avar
         - bifunctors
         - catenable-lists
         - console
@@ -380,6 +381,7 @@ workspace:
         - aff
         - arrays
         - assert
+        - avar
         - bifunctors
         - catenable-lists
         - colors
@@ -471,6 +473,7 @@ workspace:
         - aff
         - arrays
         - assert
+        - avar
         - bifunctors
         - catenable-lists
         - console
@@ -1028,6 +1031,7 @@ workspace:
       version: v2.5.0
       dependencies:
         - effect
+        - avar
         - js-timers
         - web-html
         - unsafe-reference
@@ -1721,6 +1725,7 @@ packages:
     url: https://github.com/mikesol/purescript-hyrule.git
     rev: a2a32e02a0d8518d906ec5fb3192261f63667338
     dependencies:
+      - avar
       - effect
       - js-timers
       - unsafe-reference

@@ -1,29 +1,42 @@
 module Deku.Pursx.Internal
   ( Attributable
   , AttributableE
-  , PursxInfo(..)
-  , class BindPursx
-  , bindPursx
-  , PursxInfoMap
   , PursxAllowable
+  , PursxInfo(..)
+  , PursxInfoMap
+  , class PursxableToMap
+  , class PursxableToMapRL
+  , pursxableToMapRL
+  , xa
+  , pursxableToMap
+  , bindPursx
+  , class BindPursx
   , purs
+  , pursx'
+  , pursx
   ) where
 
 import Prelude
 
 import Control.Monad.ST (ST, run)
 import Control.Monad.ST.Ref as STRef
-import Data.Either (Either(..))
+import Data.Either (Either(..), isLeft, isRight)
 import Data.Exists (Exists, mkExists, runExists)
+import Data.FoldableWithIndex (foldlWithIndex)
 import Data.List (List(..), (:))
 import Data.Map (Map)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple (Tuple(..), uncurry)
 import Deku.Core (Attribute, Nut, attributeAtYourOwnRisk, elementify, text_)
 import FRP.Poll (Poll)
 import Foreign.Object (Object, toUnfoldable)
 import Foreign.Object as Object
+import Prim.Row as Row
+import Prim.RowList as RL
+import Record as Record
+import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 
 data Htmlparser2
@@ -48,6 +61,9 @@ unAttribuable :: forall x. Attributable x -> Poll (Attribute x)
 unAttribuable (Attributable y) = y
 
 type AttributableE = Exists Attributable
+
+xa :: forall r. Poll (Attribute r) -> AttributableE
+xa a = mkExists (Attributable a)
 
 type PursxAllowable = Either AttributableE Nut
 
@@ -149,10 +165,10 @@ instance BindPursx String (Tuple Int PursxInfo) where
     where
     Tuple i (PursxInfo html atts'elts) = f unit
 
-instance BindPursx (Poll (Attribute r)) (Tuple Int PursxInfo) where
+instance BindPursx AttributableE (Tuple Int PursxInfo) where
   bindPursx att f = Tuple (i + 1) $ PursxInfo
     (" data-pursx-att=\"" <> show i <> "\" " <> html)
-    (Map.insert (show i) (Left (mkExists (Attributable att))) atts'elts)
+    (Map.insert (show i) (Left att) atts'elts)
     where
     Tuple i (PursxInfo html atts'elts) = f unit
 
@@ -170,10 +186,10 @@ instance BindPursx String String where
     html = f unit
     atts'elts = Map.empty
 
-instance BindPursx (Poll (Attribute r)) String where
+instance BindPursx AttributableE String where
   bindPursx att f = Tuple (i + 1) $ PursxInfo
     (" data-pursx-att=\"" <> show i <> "\" " <> html)
-    (Map.insert (show i) (Left (mkExists (Attributable att))) atts'elts)
+    (Map.insert (show i) (Left att) atts'elts)
     where
     i = 0
     html = f unit
@@ -191,12 +207,55 @@ instance BindPursx Nut String where
 -- delimiter -- str -- split
 foreign import splitOnDelimiter :: String -> String -> Array String
 
-data Pursxable = Pursxable
+class PursxableToMap r where
+  pursxableToMap :: { | r } -> Map String PursxAllowable
 
-instance 
-  Mapping Pursxable (Poll (Attribute r)) PursxAllowable where
-  mapping Pursxable att = (
+instance (RL.RowToList r rl, PursxableToMapRL rl r) => PursxableToMap r where
+  pursxableToMap = pursxableToMapRL (Proxy :: _ rl)
 
-instance 
-  Mapping Pursxable Nut PursxAllowable where
-  mapping Pursxable elt = Right elt
+class PursxableToMapRL (rl :: RL.RowList Type) r where
+  pursxableToMapRL :: Proxy rl -> { | r } -> Map String PursxAllowable
+
+instance PursxableToMapRL RL.Nil r where
+  pursxableToMapRL _ _ = Map.empty
+
+instance
+  ( Row.Cons k AttributableE r' r
+  , IsSymbol k
+  , PursxableToMapRL rest r
+  ) =>
+  PursxableToMapRL (RL.Cons k AttributableE rest) r where
+  pursxableToMapRL _ r = Map.insert (reflectSymbol (Proxy :: _ k))
+    (Left (Record.get (Proxy :: _ k) r))
+    (pursxableToMapRL (Proxy :: _ rest) r)
+
+instance
+  ( Row.Cons k Nut r' r
+  , IsSymbol k
+  , PursxableToMapRL rest r
+  ) =>
+  PursxableToMapRL (RL.Cons k Nut rest) r where
+  pursxableToMapRL _ r = Map.insert (reflectSymbol (Proxy :: _ k))
+    (Right (Record.get (Proxy :: _ k) r))
+    (pursxableToMapRL (Proxy :: _ rest) r)
+
+pursx' :: forall r. PursxableToMap r => String -> String -> { | r } -> Nut
+pursx' verb html r = purs $ Tuple 0 (PursxInfo htmlified mapified)
+  where
+  split = splitOnDelimiter verb html
+  ibab i b a =
+    if i `mod` 2 == 0 then b <> a
+    else if (isLeft <$> Map.lookup a mapified) == Just true then b
+      <> " data-pursx-att=\""
+      <> a
+      <> "\" "
+    else if (isRight <$> Map.lookup a mapified) == Just true then b
+      <> "<pursx data-pursx-elt=\""
+      <> a
+      <> "\"></pursx>"
+    else b
+  htmlified = foldlWithIndex ibab "" split
+  mapified = pursxableToMap r
+
+pursx :: forall r. PursxableToMap r => String -> { | r } -> Nut
+pursx = pursx' "~"

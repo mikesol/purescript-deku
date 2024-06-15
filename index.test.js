@@ -967,28 +967,17 @@ describe("deku", () => {
         const $ = require("jquery");
         const elt = di.makeElementEffect(testFriend.nothing, "button");
         let i = 0;
-        di.setCbEffect(
-          elt,
-          "click",
-          () => () => {
-            i++;
-          },
-        );
+        di.setCbEffect(elt, "click", () => () => {
+          i++;
+        });
         $(elt).trigger("click");
         expect(i).toBe(1);
-        di.setCbEffect(
-          elt,
-          "click",
-          () => () => {
-            i += 42;
-          },
-        );
+        di.setCbEffect(elt, "click", () => () => {
+          i += 42;
+        });
         $(elt).trigger("click");
         expect(i).toBe(43);
-        di.unsetAttributeEffect(
-          elt,
-          "click",
-        );
+        di.unsetAttributeEffect(elt, "click");
         $(elt).trigger("click");
         expect(i).toBe(43);
       });
@@ -1136,7 +1125,17 @@ describe("deku", () => {
         expect($("#span0").text()).toBe("goodbye");
       })
     );
-
+    doTest("pursx adds listeners 2", (f) =>
+      f(tests.pursXWiresUp2, () => {
+        const $ = require("jquery");
+        expect($("#span0").text()).toBe("");
+        expect($("#topdiv").attr("class")).toBe("arrrrr");
+        $("#px").trigger("click");
+        expect($("#span0").text()).toBe("hello");
+        $("#inny").trigger("click");
+        expect($("#span0").text()).toBe("goodbye");
+      })
+    );
 
     doTest("sends to position correctly when elt is fixed", (f) =>
       f(tests.sendsToPositionFixed, () => {
@@ -1190,6 +1189,20 @@ describe("deku", () => {
 
     doTest("tabbed navigation with pursx has correct layout", (f) =>
       f(tests.tabbedNavigationWithPursx, () => {
+        const $ = require("jquery");
+        expect($("#home").text()).toBe("home");
+        $("#about-btn").trigger("click");
+        expect($("#home").length === 0);
+        expect($("#about").text()).toBe("about deku");
+        $("#contact-btn").trigger("click");
+        expect($("#about").length === 0);
+        expect($("#contact").text()).toBe(
+          "contact mike at site dot com thanks"
+        );
+      })
+    );
+    doTest("tabbed navigation with pursx has correct layout 2", (f) =>
+      f(tests.tabbedNavigationWithPursx2, () => {
         const $ = require("jquery");
         expect($("#home").text()).toBe("home");
         $("#about-btn").trigger("click");

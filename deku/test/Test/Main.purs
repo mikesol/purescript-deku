@@ -20,7 +20,7 @@ import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
-import Deku.Pursx (purs)
+import Deku.Pursx (purs, pursx, xa)
 import Deku.Pursx as X
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
@@ -209,6 +209,30 @@ tabbedNavigationWithPursx = Deku.do
             [ text_ "contact" ]
         ]
     , item <#~> case _ of
+        0 -> pursx "<h1 id=\"home\">home</h1>" {}
+        1 -> pursx "<h1 id=\"about\">about ~me~</h1>"
+          { me: text_ "deku" }
+        _ -> pursx "<h1 id=\"contact\">contact ~a~ at ~b~ ~c~ ~d~</h1>"
+          { a: D.span_ [ text_ "mike" ]
+          , b: text_ "site"
+          , c: text_ "dot com"
+          , d: pursx "<h1 id=\"thanks\">thanks</h1>" {}
+          }
+    ]
+
+tabbedNavigationWithPursx2 :: Nut
+tabbedNavigationWithPursx2 = Deku.do
+  setItem /\ item <- useState 0
+  D.div [ DA.id_ "div0" ]
+    [ D.div_
+        [ D.button [ DA.id_ "home-btn", DL.click_ \_ -> setItem 0 ]
+            [ text_ "home" ]
+        , D.button [ DA.id_ "about-btn", DL.click_ \_ -> setItem 1 ]
+            [ text_ "about" ]
+        , D.button [ DA.id_ "contact-btn", DL.click_ \_ -> setItem 2 ]
+            [ text_ "contact" ]
+        ]
+    , item <#~> case _ of
         0 -> purs "<h1 id=\"home\">home</h1>"
         1 -> purs X.do
           "<h1 id=\"about\">about"
@@ -259,11 +283,31 @@ pursXWiresUp :: Nut
 pursXWiresUp = Deku.do
   setMessage /\ message <- useState'
   D.div [ DA.id_ "div0" ]
+    [ pursx "<div ~mykls~><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>"
+        { me: fixed
+            [ text_ "milieu"
+            , text_ " "
+            , D.span
+                [ DL.click_ \_ -> setMessage "goodbye"
+                , DA.id_ "inny"
+                ]
+                [ text_ "après-milieu" ]
+            ]
+        , evt: xa $ DL.click_ \_ -> setMessage "hello" 
+        , mykls: xa $ DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
+        }
+    , D.span [ DA.id_ "span0" ] [ text message ]
+    ]
+
+pursXWiresUp2 :: Nut
+pursXWiresUp2 = Deku.do
+  setMessage /\ message <- useState'
+  D.div [ DA.id_ "div0" ]
     [ purs X.do
         "<div "
-        ((DA.klass_ "arrrrr" <|> DA.id_ "topdiv") :: Poll _)
+        xa $ DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
         "><h1 id=\"px\" "
-        ((DL.click_ \_ -> setMessage "hello") :: Poll _)
+        xa $ DL.click_ \_ -> setMessage "hello"
         ">hi</h1>début "
         ( fixed
             [ text_ "milieu"
