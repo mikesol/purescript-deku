@@ -1136,18 +1136,6 @@ describe("deku", () => {
         expect($("#span0").text()).toBe("goodbye");
       })
     );
-    doTest("pursx adds listeners 3", (f) =>
-      f(tests.pursXWiresUp3, () => {
-        const $ = require("jquery");
-        expect($("#span0").text()).toBe("");
-        expect($("#topdiv").attr("class")).toBe("arrrrr");
-        $("#px").trigger("click");
-        expect($("#span0").text()).toBe("hello");
-        $("#inny").trigger("click");
-        expect($("#span0").text()).toBe("goodbye");
-      })
-    );
-
     doTest("sends to position correctly when elt is fixed", (f) =>
       f(tests.sendsToPositionFixed, () => {
         const $ = require("jquery");
@@ -1212,20 +1200,6 @@ describe("deku", () => {
         );
       })
     );
-    doTest("tabbed navigation with pursx has correct layout 2", (f) =>
-      f(tests.tabbedNavigationWithPursx2, () => {
-        const $ = require("jquery");
-        expect($("#home").text()).toBe("home");
-        $("#about-btn").trigger("click");
-        expect($("#home").length === 0);
-        expect($("#about").text()).toBe("about deku");
-        $("#contact-btn").trigger("click");
-        expect($("#about").length === 0);
-        expect($("#contact").text()).toBe(
-          "contact mike at site dot com thanks"
-        );
-      })
-    );
 
     doTest("switchers compose", (f) =>
       f(tests.switchersCompose, () => {
@@ -1252,13 +1226,6 @@ describe("deku", () => {
         $("#incr").trigger("click");
         // shifts the portal
         expect($("#maindiv").text()).toBe("d0d1d2abcincr");
-      })
-    );
-
-    doTest("pursx composes", (f) =>
-      f(tests.pursXComposes, () => {
-        const $ = require("jquery");
-        expect($("#div0").text()).toBe("début milieu après-milieu fin");
       })
     );
 
