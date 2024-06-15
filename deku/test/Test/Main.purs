@@ -298,7 +298,7 @@ templatesWork = Deku.do
 templatesWork2 :: Nut
 templatesWork2 = Deku.do
   D.div [ DA.id_ "div0" ]
-    [ template @"<div id=\"testing\">~test~ ~ing~</div>"
+    [ template @"<div id='testing'>~test~ ~ing~</div>"
         $ pure
         $ pure
         $ Some.inj

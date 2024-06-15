@@ -48,9 +48,13 @@ letters :: Array (Type Void)
 letters =
   lowerCase <> upperCase
 
-punctuation :: Array (Type Void)
-punctuation =
+punctuationWithSingleQuote :: Array (Type Void)
+punctuationWithSingleQuote =
   typeArrayFromString ":,;\'!?@#$%^&*()_-=`~<>/."
+
+punctuationWithDoubleQuote :: Array (Type Void)
+punctuationWithDoubleQuote =
+  typeArrayFromString ":,;\"!?@#$%^&*()_-=`~<>/."
 
 digits :: Array (Type Void)
 digits =
@@ -181,9 +185,13 @@ pxTagPreAttrValueClass :: Type Void
 pxTagPreAttrValueClass =
   unsafePartial $ typeCtor "PXTagPreAttrValue"
 
-pxTagAttrValueClass :: Type Void
-pxTagAttrValueClass =
-  unsafePartial $ typeCtor "PXTagAttrValue"
+pxTagAttrValueWithWithDoubleQuoteClass :: Type Void
+pxTagAttrValueWithWithDoubleQuoteClass =
+  unsafePartial $ typeCtor "PXTagAttrValueWithWithDoubleQuote"
+
+pxTagAttrValueWithWithSingleQuoteClass :: Type Void
+pxTagAttrValueWithWithSingleQuoteClass =
+  unsafePartial $ typeCtor "PXTagAttrValueWithWithSingleQuote"
 
 doVerbForAttrClass :: Type Void
 doVerbForAttrClass =
