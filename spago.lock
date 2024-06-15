@@ -192,6 +192,7 @@ workspace:
         - halogen-hooks
         - halogen-subscriptions
         - halogen-vdom
+        - heterogeneous
         - hyrule
         - identity
         - integers
@@ -243,6 +244,7 @@ workspace:
         - unsafe-coerce
         - unsafe-reference
         - untagged-union
+        - variant
         - web-clipboard
         - web-dom
         - web-dom-parser
@@ -267,6 +269,7 @@ workspace:
         - foldable-traversable
         - foreign-object
         - free
+        - heterogeneous
         - hyrule
         - maybe
         - newtype
@@ -316,6 +319,7 @@ workspace:
         - functions
         - functors
         - gen
+        - heterogeneous
         - hyrule
         - identity
         - integers
@@ -357,6 +361,7 @@ workspace:
         - unsafe-coerce
         - unsafe-reference
         - untagged-union
+        - variant
         - web-dom
         - web-dom-parser
         - web-events
@@ -400,6 +405,7 @@ workspace:
         - functions
         - functors
         - gen
+        - heterogeneous
         - hyrule
         - identity
         - integers
@@ -443,6 +449,7 @@ workspace:
         - unsafe-coerce
         - unsafe-reference
         - untagged-union
+        - variant
         - web-dom
         - web-dom-parser
         - web-events
@@ -487,6 +494,7 @@ workspace:
         - functions
         - functors
         - gen
+        - heterogeneous
         - hyrule
         - identity
         - integers
@@ -528,6 +536,7 @@ workspace:
         - unsafe-coerce
         - unsafe-reference
         - untagged-union
+        - variant
         - web-dom
         - web-dom-parser
         - web-events
@@ -1688,6 +1697,17 @@ packages:
       - tuples
       - unsafe-coerce
       - web-html
+  heterogeneous:
+    type: registry
+    version: 0.6.0
+    integrity: sha256-cfNYSK6yYmjTrkzk95Otpv6TUUkeBreexwqG/tBvUyg=
+    dependencies:
+      - either
+      - functors
+      - prelude
+      - record
+      - tuples
+      - variant
   http-methods:
     type: registry
     version: 6.0.0

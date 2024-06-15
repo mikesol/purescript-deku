@@ -5,6 +5,7 @@ module Deku.Pursx.Internal
   , class BindPursx
   , bindPursx
   , PursxInfoMap
+  , PursxAllowable
   , purs
   ) where
 
@@ -48,7 +49,9 @@ unAttribuable (Attributable y) = y
 
 type AttributableE = Exists Attributable
 
-type PursxInfoMap = Map String (Either AttributableE Nut)
+type PursxAllowable = Either AttributableE Nut
+
+type PursxInfoMap = Map String PursxAllowable
 data PursxInfo = PursxInfo String PursxInfoMap
 
 instance Semigroup PursxInfo where
@@ -184,3 +187,16 @@ instance BindPursx Nut String where
     i = 0
     html = f unit
     atts'elts = Map.empty
+
+-- delimiter -- str -- split
+foreign import splitOnDelimiter :: String -> String -> Array String
+
+data Pursxable = Pursxable
+
+instance 
+  Mapping Pursxable (Poll (Attribute r)) PursxAllowable where
+  mapping Pursxable att = (
+
+instance 
+  Mapping Pursxable Nut PursxAllowable where
+  mapping Pursxable elt = Right elt

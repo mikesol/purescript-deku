@@ -17,3 +17,10 @@ export const createParser = (onOpenTag) => (onText) => (onCloseTag) => () => {
 export const write = (parser) => (data) => () => parser.write(data);
 
 export const end = (parser) => () => parser.end();
+
+export const splitOnDelimiter = (delimiter) => (str) =>
+  str
+    .split(new RegExp(`(${delimiter}[^${delimiter}]+${delimiter})`))
+    .map((part) =>
+      part.replace(new RegExp(`^${delimiter}|${delimiter}$`, "g"), "")
+    );
