@@ -16,10 +16,11 @@ import Data.Either (Either(..))
 import Data.Exists (Exists, mkExists, runExists)
 import Data.Foldable (for_)
 import Data.List (List(..), (:))
-import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Data.String.Regex (match, regex)
 import Data.String.Regex.Flags (global)
+import Deku.Beacon (d3kUTag, uk3DTag, d3kU, uk3D)
 import Deku.Core (Cb(..), DekuBeacon, DekuChild(..), DekuElement, DekuParent(..), DekuText, Key(..), Tag(..), Value(..), fromDekuBeacon, fromDekuElement, fromDekuText, toDekuBeacon, toDekuElement, toDekuText)
 import Deku.Core as Core
 import Deku.JSMap as JSMap
@@ -73,9 +74,6 @@ makeElementEffect = mkEffectFn2 \ns tag -> do
     Just ns' -> runEffectFn2 createElementNS (coerce ns') (coerce tag)
   pure $ toDekuElement elt
 
-d3kU = "d3kU" :: String
-uk3D = "ul3D" :: String
-
 -- gets the next positional node
 ffwd
   :: { n :: Int, node :: Node.Node, cpos :: Int }
@@ -96,12 +94,12 @@ ffwd { n, node, cpos } = do
       case ctext of
         i
           -- the current node starts a dyn
-          | i == d3kU -> pure $ Loop { n: n + 1, node: nx, cpos }
+          | isJust (d3kUTag i) -> pure $ Loop { n: n + 1, node: nx, cpos }
           -- the current node ends this dyn
           -- so the next node is out of the dyn
-          | i == uk3D && n == 1 -> pure $ Done { cpos, sb: Just nx }
+          | isJust (uk3DTag i) && n == 1 -> pure $ Done { cpos, sb: Just nx }
           -- the current node closes a dyn
-          | i == uk3D -> pure $ Loop { n: n - 1, node: nx, cpos }
+          | isJust $ uk3DTag i -> pure $ Loop { n: n - 1, node: nx, cpos }
           -- random comment, carry on
           | otherwise -> pure $ Loop { n, node: nx, cpos }
     -- exotic node, carry on
@@ -141,7 +139,7 @@ attributeDynParentForNodeEffect = mkEffectFn4
                 ( if nodeTypeIndex curSib /= 8 then pure false
                   else do
                     ctext <- textContent curSib
-                    pure $ ctext == uk3D
+                    pure $ isJust $ uk3DTag ctext
                 )
                 (doInsertAtEnd $> Done unit)
                 (Loop <<< Right <$> ffwd { n: 0, node: curSib, cpos })
@@ -231,13 +229,13 @@ attributeTextParentEffect = mkEffectFn2
 makeOpenBeaconEffect :: Core.MakeBeacon
 makeOpenBeaconEffect = do
   doc <- window >>= document
-  cm <- createComment d3kU (toDocument doc)
+  cm <- createComment (d3kU "") (toDocument doc)
   pure (toDekuBeacon cm)
 
 makeCloseBeaconEffect :: Core.MakeBeacon
 makeCloseBeaconEffect = do
   doc <- window >>= document
-  cm <- createComment uk3D (toDocument doc)
+  cm <- createComment (uk3D "") (toDocument doc)
   pure (toDekuBeacon cm)
 
 attributeBeaconParentEffect :: Core.AttributeBeaconParent
@@ -273,12 +271,12 @@ attributeBeaconFullRangeParentProto = mkEffectFn3
                 ctext <- textContent nx
                 case ctext of
                   i
-                    | i == d3kU -> pure $ Loop
+                    | isJust (d3kUTag i) -> pure $ Loop
                         { n: n + 1, node: nx }
-                    | i == uk3D && n == 0 -> do
+                    | isJust (uk3DTag i) && n == 0 -> do
                         mover nx
                         pure $ Done unit
-                    | i == uk3D -> pure $ Loop
+                    | isJust (uk3DTag i) -> pure $ Loop
                         { n: n - 1, node: nx }
                     | otherwise -> pure $ Loop { n, node: nx }
               _ -> pure $ Loop { n, node: nx }
@@ -290,7 +288,7 @@ attributeBeaconFullRangeParentProto = mkEffectFn3
               ctext <- textContent initial
               case ctext of
                 i
-                  | i == d3kU -> pure 1
+                  | isJust (d3kUTag i) -> pure 1
                   | otherwise -> pure 0
             _ -> pure 0
       tailRecM go { n, node: initial }
