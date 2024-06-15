@@ -4,6 +4,7 @@ module Deku.Pursx.Internal
   , PursxAllowable
   , PursxInfo(..)
   , PursxInfoMap
+  , class PursxSubstitutions
   , class PursxableToMap
   , class PursxableToMapRL
   , pursxableToMapRL
@@ -12,6 +13,8 @@ module Deku.Pursx.Internal
   , bindPursx
   , class BindPursx
   , purs
+  , lenientPursx'
+  , lenientPursx
   , pursx'
   , pursx
   ) where
@@ -30,6 +33,8 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple (Tuple(..), uncurry)
 import Deku.Core (Attribute, Nut, attributeAtYourOwnRisk, elementify, text_)
+import Deku.PursxParser as PxP
+import Deku.PxTypes (PxAtt, PxNut)
 import FRP.Poll (Poll)
 import Foreign.Object (Object, toUnfoldable)
 import Foreign.Object as Object
@@ -239,8 +244,8 @@ instance
     (Right (Record.get (Proxy :: _ k) r))
     (pursxableToMapRL (Proxy :: _ rest) r)
 
-pursx' :: forall r. PursxableToMap r => String -> String -> { | r } -> Nut
-pursx' verb html r = purs $ Tuple 0 (PursxInfo htmlified mapified)
+lenientPursx' :: forall r. PursxableToMap r => String -> String -> { | r } -> Nut
+lenientPursx' verb html r = purs $ Tuple 0 (PursxInfo htmlified mapified)
   where
   split = splitOnDelimiter verb html
   ibab i b a =
@@ -257,5 +262,50 @@ pursx' verb html r = purs $ Tuple 0 (PursxInfo htmlified mapified)
   htmlified = foldlWithIndex ibab "" split
   mapified = pursxableToMap r
 
-pursx :: forall r. PursxableToMap r => String -> { | r } -> Nut
-pursx = pursx' "~"
+lenientPursx :: forall r. PursxableToMap r => String -> { | r } -> Nut
+lenientPursx = lenientPursx' "~"
+
+-- strict
+class PursxSubstitutions
+  :: RL.RowList Type -> Row Type -> Constraint
+class PursxSubstitutions nostr str | nostr -> str
+
+instance PursxSubstitutions RL.Nil ()
+
+instance
+  ( Row.Cons k Nut d r
+  , PursxSubstitutions c d
+  ) =>
+  PursxSubstitutions (RL.Cons k PxNut c) r
+
+instance
+  ( Row.Cons k AttributableE d r
+  , PursxSubstitutions c d
+  ) =>
+  PursxSubstitutions (RL.Cons k PxAtt c)
+    r
+
+pursx'
+  :: forall @verb (@html :: Symbol) r0 rl0 p  r rl
+   . IsSymbol html
+  => IsSymbol verb
+  => PxP.PXStart verb " " html r0 p
+  => RL.RowToList r0 rl0
+  => RL.RowToList r rl
+  => PursxSubstitutions rl0 r
+  => PursxableToMap r
+  => { | r }
+  -> Nut
+pursx' = lenientPursx' (reflectSymbol (Proxy :: _ verb)) (reflectSymbol (Proxy :: _ html))
+
+pursx
+  :: forall  (@html :: Symbol) r0 rl0 p  r rl
+   . IsSymbol html
+  => PxP.PXStart "~" " " html r0 p
+  => RL.RowToList r0 rl0
+  => RL.RowToList r rl
+  => PursxSubstitutions rl0 r
+  => PursxableToMap r
+  => { | r }
+  -> Nut
+pursx = lenientPursx' "~" (reflectSymbol (Proxy :: _ html))
