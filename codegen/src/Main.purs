@@ -29,185 +29,238 @@ import Type.Proxy (Proxy(..))
 
 main :: Effect Unit
 main = launchAff_ do
-    r <- runExceptT generate
-    for_ ( blush r ) \e -> do
-        Console.log $ message e
-
+  r <- runExceptT generate
+  for_ (blush r) \e -> do
+    Console.log $ message e
 
 cachePath = "codegen/cache" :: String
 
-fetch :: forall @label @spec r1 r2
-     . IsSymbol label
-    => Cons label spec r1 r2
-    => DecodeJson spec
-    => String -> ExceptT Error Aff ( Variant r2 )
-fetch url = inj ( Proxy @label ) <$> do
-    let urlFilename = Path.basename url
-        cacheName = reflectSymbol ( Proxy @label )
-        localFilename = Path.concat [ cachePath, cacheName, urlFilename ]
-    FS.cachedFetch @spec localFilename url
+fetch
+  :: forall @label @spec r1 r2
+   . IsSymbol label
+  => Cons label spec r1 r2
+  => DecodeJson spec
+  => String
+  -> ExceptT Error Aff (Variant r2)
+fetch url = inj (Proxy @label) <$> do
+  let
+    urlFilename = Path.basename url
+    cacheName = reflectSymbol (Proxy @label)
+    localFilename = Path.concat [ cachePath, cacheName, urlFilename ]
+  FS.cachedFetch @spec localFilename url
 
 generate :: ExceptT Error Aff Unit
 generate = do
 
-    FS.createDir $ cachePath <> "/dfn"
-    FS.createDir $ cachePath <> "/events"
-    FS.createDir $ cachePath <> "/idlparsed"
-    FS.createDir $ cachePath <> "/elements"
+  FS.createDir $ cachePath <> "/dfn"
+  FS.createDir $ cachePath <> "/events"
+  FS.createDir $ cachePath <> "/idlparsed"
+  FS.createDir $ cachePath <> "/elements"
 
-    html <- Parse.parse HTML <$> sequence
-        [ fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html-media-capture.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/pointerlock-2.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/selection-api.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-1.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-2.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/wai-aria-1.3.json"
+  html <- Parse.parse HTML <$> sequence
+    [ fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html-media-capture.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/pointerlock-2.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/selection-api.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-1.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-2.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/wai-aria-1.3.json"
 
-        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/html.json"
-        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/touch-events.json"
-        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/uievents.json"
-        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/pointerevents3.json"
-        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/css-animations-1.json"
-        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/css-transitions-1.json"
-        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediacapture-handle-actions.json"
-        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediacapture-streams.json"
-        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediastream-recording.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/html.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/touch-events.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/uievents.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/pointerevents3.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/css-animations-1.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/css-transitions-1.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediacapture-handle-actions.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediacapture-streams.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediastream-recording.json"
 
-        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/dom.json"
-        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/html.json"
-        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/wai-aria-1.3.json"
+    , fetch @"idlparsed"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/dom.json"
+    , fetch @"idlparsed"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/html.json"
+    , fetch @"idlparsed"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/wai-aria-1.3.json"
 
-        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/html.json"
-        ]
-    
-    svg <- fixSVG <<< Parse.parse SVG <$> sequence
-        [ fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/SVG2.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-integration.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-strokes.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/fill-stroke-3.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/filter-effects-1.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-animations.json"
+    , fetch @"elements"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/html.json"
+    ]
 
-        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/svg-animations.json"
+  svg <- fixSVG <<< Parse.parse SVG <$> sequence
+    [ fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/SVG2.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-integration.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-strokes.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/fill-stroke-3.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/filter-effects-1.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-animations.json"
 
-        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/SVG2.json"
-        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/svg-animations.json"
-        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/filter-effects-1.json"
-        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/css-masking-1.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/svg-animations.json"
 
-        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/SVG2.json"
-        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/svg-animations.json"
-        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/filter-effects-1.json"
-        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/css-masking-1.json"
-        ]
+    , fetch @"idlparsed"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/SVG2.json"
+    , fetch @"idlparsed"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/svg-animations.json"
+    , fetch @"idlparsed"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/filter-effects-1.json"
+    , fetch @"idlparsed"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/css-masking-1.json"
 
-    mathml <- Parse.parse MathML <$> sequence
-        [ fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-core.json"
-        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml4.json"
+    , fetch @"elements"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/SVG2.json"
+    , fetch @"elements"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/svg-animations.json"
+    , fetch @"elements"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/filter-effects-1.json"
+    , fetch @"elements"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/css-masking-1.json"
+    ]
 
-        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/mathml-core.json"
+  mathml <- Parse.parse MathML <$> sequence
+    [ fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-core.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml4.json"
 
-        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/mathml-core.json"
-        ]
+    , fetch @"idlparsed"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/mathml-core.json"
 
-    Indexed.generate html svg mathml
-    
-    Parser.generate
+    , fetch @"elements"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/mathml-core.json"
+    ]
 
+  Indexed.generate html svg mathml
+
+  Parser.generate
 
 -- SVG spec is barely useful
-fixSVG :: Parse.Specification -> Parse.Specification 
+fixSVG :: Parse.Specification -> Parse.Specification
 fixSVG svgBase =
-    svgBase
-        { interfaces =
-            map ( missingPresentationProperties ) svgBase.interfaces
-                <> [ svgText, svgPresentation ]
-        , attributes = do
-            let existing = Set.fromFoldable $ _.name <$> svgBase.attributes
-                patched = flip Array.mapMaybe ( svgTextMembers <> svgPresentationMembers ) \member -> 
-                    if Set.member member existing then Nothing else mkAttribute mempty member
-            svgBase.attributes <> patched
-        }
+  svgBase
+    { interfaces =
+        map (missingPresentationProperties) svgBase.interfaces
+          <> [ svgText, svgPresentation ]
+    , attributes = do
+        let
+          existing = Set.fromFoldable $ _.name <$> svgBase.attributes
+          patched = flip Array.mapMaybe
+            (svgTextMembers <> svgPresentationMembers)
+            \member ->
+              if Set.member member existing then Nothing
+              else mkAttribute mempty member
+        svgBase.attributes <> patched
+    }
 
 missingPresentationProperties :: Interface -> Interface
 missingPresentationProperties = case _ of
-    txt@{ name } | name `Array.elem` [ "SVGTextElement", "SVGTextPathElement", "SVGTspanElement" ] ->
+  txt@{ name }
+    | name `Array.elem`
+        [ "SVGTextElement", "SVGTextPathElement", "SVGTspanElement" ] ->
         txt { bases = txt.bases <> [ svgText.ctor, svgPresentation.ctor ] }
 
-    fe@{ name } | Just _ <- String.stripPrefix ( String.Pattern "SVGFe" ) name ->
-        fe { bases = fe.bases <> [ svgPresentation.ctor, Ctor "SVGFilterPrimitiveElement" ] }
+  fe@{ name } | Just _ <- String.stripPrefix (String.Pattern "SVGFe") name ->
+    fe
+      { bases = fe.bases <>
+          [ svgPresentation.ctor, Ctor "SVGFilterPrimitiveElement" ]
+      }
 
-    animate@{ name : "SVGAnimateElement" } ->
-        animate { members = animate.members <> [ Ctor "by" /\ TypeString ] }
+  animate@{ name: "SVGAnimateElement" } ->
+    animate { members = animate.members <> [ Ctor "by" /\ TypeString ] }
 
-    animate@{ name } | Just _ <- String.stripPrefix ( String.Pattern "SVGAnimate" ) name ->
-        animate { bases = animate.bases <> [ svgPresentation.ctor, Ctor "SVGAnimateElement" ] }
+  animate@{ name }
+    | Just _ <- String.stripPrefix (String.Pattern "SVGAnimate") name ->
+        animate
+          { bases = animate.bases <>
+              [ svgPresentation.ctor, Ctor "SVGAnimateElement" ]
+          }
 
-    svg@{ name : "SVGSVGElement" } ->
-        svg
-            { members = svg.members <>
-                [ Ctor "height" /\ TypeString
-                , Ctor "width" /\ TypeString
-                ]
-            , bases = svg.bases <> [ svgPresentation.ctor ]
-            }
+  svg@{ name: "SVGSVGElement" } ->
+    svg
+      { members = svg.members <>
+          [ Ctor "height" /\ TypeString
+          , Ctor "width" /\ TypeString
+          ]
+      , bases = svg.bases <> [ svgPresentation.ctor ]
+      }
 
-    clippath@{ name : "SVGClipPathElement" } ->
-        clippath
-            { members = clippath.members <>
-                [ Ctor "clipPathUnits" /\ TypeString ] 
-            }
+  clippath@{ name: "SVGClipPathElement" } ->
+    clippath
+      { members = clippath.members <>
+          [ Ctor "clipPathUnits" /\ TypeString ]
+      }
 
-    id ->
-        id { bases = id.bases <> [ svgPresentation.ctor ] }
+  id ->
+    id { bases = id.bases <> [ svgPresentation.ctor ] }
 
 svgText :: Interface
 svgText =
-    { ctor : Ctor "SvgText"
-    , name : "SvgText"
-    , bases : []
-    , members : map ( ( _ /\ TypeString ) <<< Ctor <<< unSnake ) svgTextMembers
-    }
+  { ctor: Ctor "SvgText"
+  , name: "SvgText"
+  , bases: []
+  , members: map ((_ /\ TypeString) <<< Ctor <<< unSnake) svgTextMembers
+  }
 
 svgTextMembers :: Array String
 svgTextMembers =
-    [ "alignment-baseline"
-    , "baseline-shift"
-    , "dominant-baseline"
-    , "font-family"
-    , "font-size"
-    , "font-size-adjust"
-    , "font-stretch"
-    , "font-style"
-    , "font-variant"
-    , "font-weight"
-    , "letter-spacing"
-    , "text-decoration"
-    , "word-spacing"
-    , "writing-mode"
-    , "unicode-bidi" 
-    ]
+  [ "alignment-baseline"
+  , "baseline-shift"
+  , "dominant-baseline"
+  , "font-family"
+  , "font-size"
+  , "font-size-adjust"
+  , "font-stretch"
+  , "font-style"
+  , "font-variant"
+  , "font-weight"
+  , "letter-spacing"
+  , "text-decoration"
+  , "word-spacing"
+  , "writing-mode"
+  , "unicode-bidi"
+  ]
 
 svgPresentation :: Interface
 svgPresentation =
-    { ctor : Ctor "SvgPresentation"
-    , name : "SvgPresentation"
-    , bases : []
-    , members : map ( ( _ /\ TypeString ) <<< Ctor <<< unSnake ) svgPresentationMembers
-    }
+  { ctor: Ctor "SvgPresentation"
+  , name: "SvgPresentation"
+  , bases: []
+  , members: map ((_ /\ TypeString) <<< Ctor <<< unSnake) svgPresentationMembers
+  }
 
 svgPresentationMembers :: Array String
 svgPresentationMembers =
-    [ "pathLength"
-    , "mask"
-    , "opacity"
-    , "overflow"
-    , "clip-path"
-    , "clip-rule"
-    , "cursor"
-    , "display"
-    , "transform"
-    , "transform-origin"
-    , "visibility"
-    ]
+  [ "pathLength"
+  , "mask"
+  , "opacity"
+  , "overflow"
+  , "clip-path"
+  , "clip-rule"
+  , "cursor"
+  , "display"
+  , "transform"
+  , "transform-origin"
+  , "visibility"
+  ]

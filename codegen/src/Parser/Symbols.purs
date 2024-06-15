@@ -72,7 +72,6 @@ pursx :: Type Void
 pursx =
   unsafePartial $ typeVar "pursx"
 
-
 pathx :: Type Void
 pathx =
   unsafePartial $ typeVar "pathx"
