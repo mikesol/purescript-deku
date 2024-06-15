@@ -13,186 +13,189 @@ import Data.Maybe (Maybe)
 import Foreign.Object as Foreign
 
 type TagSpec =
-    { spec :: 
-        { title :: String 
-        , url :: String
-        }
-    , elements :: Array Tag
-    }
+  { spec ::
+      { title :: String
+      , url :: String
+      }
+  , elements :: Array Tag
+  }
 
 type Tag =
-    { name :: String
-    , interface :: Maybe String
-    , obsolete :: Maybe Boolean
-    }
+  { name :: String
+  , interface :: Maybe String
+  , obsolete :: Maybe Boolean
+  }
 
 type EventSpec =
-    { spec :: { title :: String, url :: String }
-    , events :: Array EventDef
-    }
+  { spec :: { title :: String, url :: String }
+  , events :: Array EventDef
+  }
 
 type EventDef =
-    { href :: Maybe String
-    , src :: { format :: String, href :: Maybe String }
-    , type :: String
-    , targets :: Array String
-    , interface :: String
-    , bubbles :: Maybe Boolean
-    }
+  { href :: Maybe String
+  , src :: { format :: String, href :: Maybe String }
+  , type :: String
+  , targets :: Array String
+  , interface :: String
+  , bubbles :: Maybe Boolean
+  }
 
 type InterfaceSpec =
-    {  spec :: 
-        { title :: String 
-        , url :: String
-        }
-    , idlparsed :: IDL
-    }
+  { spec ::
+      { title :: String
+      , url :: String
+      }
+  , idlparsed :: IDL
+  }
 
 type IDL =
-    { idlNames :: Foreign.Object Interface
-    , idlExtendedNames :: Foreign.Object ( Array Mixin )
-    }
+  { idlNames :: Foreign.Object Interface
+  , idlExtendedNames :: Foreign.Object (Array Mixin)
+  }
 
 type Interface =
-    { type :: String
-    , name :: String
-    , inheritance :: Maybe String
-    , members :: Maybe ( Array Member )
-    , fragment :: String
-    }
+  { type :: String
+  , name :: String
+  , inheritance :: Maybe String
+  , members :: Maybe (Array Member)
+  , fragment :: String
+  }
 
-data Member 
-    = Constructor
-    | Operation { name :: String }
-    | Attribute Attribute
-    | Const
-    | Field { name :: String }
-    | Iterable
+data Member
+  = Constructor
+  | Operation { name :: String }
+  | Attribute Attribute
+  | Const
+  | Field { name :: String }
+  | Iterable
 
 derive instance Eq Member
 derive instance Ord Member
 derive instance Generic Member _
 instance DecodeJson Member where
-    decodeJson json = do
-        member <- decodeJObject json
-        type_ <- decodeJson =<< note MissingValue ( Foreign.lookup "type" member )
-        case type_ of
-            "constructor" ->
-                pure Constructor
+  decodeJson json = do
+    member <- decodeJObject json
+    type_ <- decodeJson =<< note MissingValue (Foreign.lookup "type" member)
+    case type_ of
+      "constructor" ->
+        pure Constructor
 
-            "operation" ->
-                Operation <$> decodeJson json
+      "operation" ->
+        Operation <$> decodeJson json
 
-            "attribute" ->
-                Attribute <$> decodeJson json
+      "attribute" ->
+        Attribute <$> decodeJson json
 
-            "const" ->
-                pure Const
-            
-            "field" ->
-                Field <$> decodeJson json
+      "const" ->
+        pure Const
 
-            "iterable" ->
-                pure Iterable
+      "field" ->
+        Field <$> decodeJson json
 
-            "maplike" ->
-                pure Iterable
+      "iterable" ->
+        pure Iterable
 
-            "setlike" ->
-                pure Iterable
+      "maplike" ->
+        pure Iterable
 
-            _ ->
-                Left $ UnexpectedValue json
+      "setlike" ->
+        pure Iterable
+
+      _ ->
+        Left $ UnexpectedValue json
 
 instance EncodeJson Member where
-    encodeJson = genericEncodeJson
+  encodeJson = genericEncodeJson
 
-data Mixin 
-    = Includes 
-        { fragment :: String
-        , includes :: String
-        }
-    | Interface
-        { inheritance :: Maybe String
-        , members :: Maybe ( Array Member )
-        , partial :: Boolean
-        }
+data Mixin
+  = Includes
+      { fragment :: String
+      , includes :: String
+      }
+  | Interface
+      { inheritance :: Maybe String
+      , members :: Maybe (Array Member)
+      , partial :: Boolean
+      }
 
 derive instance Eq Mixin
 derive instance Ord Mixin
 derive instance Generic Mixin _
 instance DecodeJson Mixin where
-    decodeJson json = do
-        member <- decodeJObject json
-        type_ <- decodeJson =<< note MissingValue ( Foreign.lookup "type" member )
-        case type_ of
-            "includes" ->
-                Includes <$> decodeJson json
+  decodeJson json = do
+    member <- decodeJObject json
+    type_ <- decodeJson =<< note MissingValue (Foreign.lookup "type" member)
+    case type_ of
+      "includes" ->
+        Includes <$> decodeJson json
 
-            "interface" ->
-                Interface <$> decodeJson json
-                
-            "interface mixin" ->
-                Interface <$> decodeJson json
+      "interface" ->
+        Interface <$> decodeJson json
 
-            _ ->
-                Left $ UnexpectedValue json
+      "interface mixin" ->
+        Interface <$> decodeJson json
+
+      _ ->
+        Left $ UnexpectedValue json
+
 instance EncodeJson Mixin where
-    encodeJson = genericEncodeJson
+  encodeJson = genericEncodeJson
 
-type Attribute = 
-    { name :: String
-    , idlType :: IDLType
-    , readonly :: Maybe Boolean
-    }
+type Attribute =
+  { name :: String
+  , idlType :: IDLType
+  , readonly :: Maybe Boolean
+  }
 
 data IDLType
-    = Union ( Array IDLType )
-    | Descriptor IDLDescriptor
-    | Primitive String
+  = Union (Array IDLType)
+  | Descriptor IDLDescriptor
+  | Primitive String
+
 derive instance Eq IDLType
 derive instance Ord IDLType
 derive instance Generic IDLType _
 instance DecodeJson IDLType where
-    decodeJson json = 
-        if isObject json then
-            Descriptor <$> decodeJson json
+  decodeJson json =
+    if isObject json then
+      Descriptor <$> decodeJson json
 
-        else if isArray json then
-            Union <$> decodeJson json
+    else if isArray json then
+      Union <$> decodeJson json
 
-        else
-            Primitive <$> decodeJson json
+    else
+      Primitive <$> decodeJson json
+
 instance EncodeJson IDLType where
-    encodeJson a = genericEncodeJson a
+  encodeJson a = genericEncodeJson a
 
 type IDLDescriptor =
-    { nullable :: Boolean
-    , idlType :: IDLType
-    }
+  { nullable :: Boolean
+  , idlType :: IDLType
+  }
 
 type KeywordSpec =
-    { spec ::
-        { title :: String
-        , url :: String
-        }
-    , dfns :: Array Definition
-    }
+  { spec ::
+      { title :: String
+      , url :: String
+      }
+  , dfns :: Array Definition
+  }
 
 type Definition =
-    { id :: String
-    , href :: String
-    , linkingText :: Array String
-    , localLinkingText :: Array String
-    , informative :: Boolean
-    , access :: String
-    , for :: Array String
-    , type :: String
-    , definedIn :: String
-    , heading ::
-        { id :: Maybe String
-        , href :: String
-        , title :: String
-        , number :: Maybe String
-        }
-    }
+  { id :: String
+  , href :: String
+  , linkingText :: Array String
+  , localLinkingText :: Array String
+  , informative :: Boolean
+  , access :: String
+  , for :: Array String
+  , type :: String
+  , definedIn :: String
+  , heading ::
+      { id :: Maybe String
+      , href :: String
+      , title :: String
+      , number :: Maybe String
+      }
+  }

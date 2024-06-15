@@ -18,216 +18,230 @@ import Foreign.Object as Foreign
 import Safe.Coerce (coerce)
 
 type Source = Variant
-    ( dfn :: Spec.KeywordSpec
-    , events :: Spec.EventSpec
-    , idlparsed :: Spec.InterfaceSpec
-    , elements :: Spec.TagSpec
-    )
+  ( dfn :: Spec.KeywordSpec
+  , events :: Spec.EventSpec
+  , idlparsed :: Spec.InterfaceSpec
+  , elements :: Spec.TagSpec
+  )
 
 type Specification =
-    { attributes :: Array Attribute
-    , events :: Array Event
-    , interfaces :: Array Interface
-    , elements :: Array Element
-    }
+  { attributes :: Array Attribute
+  , events :: Array Event
+  , interfaces :: Array Interface
+  , elements :: Array Element
+  }
 
 -- | Sorts an array of definitions into a specification.
-parse :: TagNS -> Array Source ->  Specification
+parse :: TagNS -> Array Source -> Specification
 parse ns sources = do
-    let
-        -- merge all chunks of Source into one record of arrays/objects to work with
-        source ::
-            { dfn :: Array Spec.Definition
-            , event :: Array Spec.EventDef
-            , inheritance :: Foreign.Object ( Array String )
-            , members :: Foreign.Object ( Array Spec.Member )
-            , extension :: Foreign.Object ( Array Spec.Mixin )
-            , element :: Array Spec.Tag
+  let
+    -- merge all chunks of Source into one record of arrays/objects to work with
+    source
+      :: { dfn :: Array Spec.Definition
+         , event :: Array Spec.EventDef
+         , inheritance :: Foreign.Object (Array String)
+         , members :: Foreign.Object (Array Spec.Member)
+         , extension :: Foreign.Object (Array Spec.Mixin)
+         , element :: Array Spec.Tag
+         }
+    source =
+      Array.foldMap
+        ( match
+            { dfn: \{ dfns } -> empty { dfn = dfns }
+            , events: \{ events: evs } -> empty { event = evs }
+            , idlparsed: \{ idlparsed: { idlNames, idlExtendedNames } } ->
+                empty
+                  { inheritance = map (Array.fromFoldable <<< _.inheritance)
+                      idlNames
+                  , members = map (maybe mempty identity <<< _.members) idlNames
+                  , extension = idlExtendedNames
+                  }
+
+            , elements: \{ elements: els } -> empty { element = els }
             }
-        source =
-            Array.foldMap 
-                ( match
-                    { dfn : \{ dfns } -> empty { dfn = dfns }
-                    , events : \{ events : evs } -> empty { event = evs }
-                    , idlparsed : \{ idlparsed : { idlNames, idlExtendedNames } } ->
-                        empty
-                            { inheritance = map ( Array.fromFoldable <<< _.inheritance ) idlNames
-                            , members = map ( maybe mempty identity <<< _.members ) idlNames 
-                            , extension = idlExtendedNames
-                            }
-                            
-                    , elements : \{ elements : els } -> empty { element = els }
-                    }
-                )
-                sources
-            
-            where
+        )
+        sources
 
-            empty =
-                { dfn : []
-                , event : []
-                , inheritance : Foreign.empty
-                , members : Foreign.empty
-                , extension : Foreign.empty
-                , element : []
-                }
+      where
 
-        -- mapping of attribute to valid keywords
-        keywords :: Foreign.Object ( Array String ) 
-        keywords = do
-            map Array.nub $ Foreign.fromFoldableWith append do
-                dfn <- Array.filter ( not <<< eq "argument" <<< _.type ) source.dfn
-                text <- dfn.linkingText
-                for <- Array.nub $ Array.mapMaybe forAttribute dfn.for
-                pure $ for /\ pure text
+      empty =
+        { dfn: []
+        , event: []
+        , inheritance: Foreign.empty
+        , members: Foreign.empty
+        , extension: Foreign.empty
+        , element: []
+        }
 
-            where
+    -- mapping of attribute to valid keywords
+    keywords :: Foreign.Object (Array String)
+    keywords = do
+      map Array.nub $ Foreign.fromFoldableWith append do
+        dfn <- Array.filter (not <<< eq "argument" <<< _.type) source.dfn
+        text <- dfn.linkingText
+        for <- Array.nub $ Array.mapMaybe forAttribute dfn.for
+        pure $ for /\ pure text
 
-            forAttribute :: String -> Maybe String
-            forAttribute f =
-                case String.split ( String.Pattern "/" ) f of
-                    [ _, attr ] | attr /= "" ->
-                        Just attr
-                    
-                    _ ->
-                        Nothing
+      where
 
-        elements :: Foreign.Object Element
-        elements =
-            Foreign.fromFoldable
-                $ bind source.element case _ of
-                    { name, interface : Just interface } ->
-                        Tuple name <$> ( Array.fromFoldable $ mkElement ns interface name )
-                    
-                    _ ->
-                        []
+      forAttribute :: String -> Maybe String
+      forAttribute f =
+        case String.split (String.Pattern "/") f of
+          [ _, attr ] | attr /= "" ->
+            Just attr
 
-        -- we have the interface definitions in `interfaceSource` but those only contain properties. For SSR we need the 
-        -- actual attributes and those only show up in the definitions as `element-attr`. 
-        attributeMembers :: Foreign.Object ( Array Attribute )
-        attributeMembers =
-            Foreign.fromFoldableWith append
-                $ bind source.dfn case _ of
-                    -- basic attributes
-                    { type : "element-attr", for, linkingText } -> do
-                        attr <- flip Array.mapMaybe linkingText \attr ->
-                            case String.stripPrefix ( String.Pattern "on" ) attr of
-                                -- ignore "on" attributes for events, these are described better by the `EventSpec`
-                                Just _ ->
-                                    Nothing
+          _ ->
+            Nothing
 
-                                Nothing ->
-                                    Just attr
+    elements :: Foreign.Object Element
+    elements =
+      Foreign.fromFoldable
+        $ bind source.element case _ of
+            { name, interface: Just interface } ->
+              Tuple name <$> (Array.fromFoldable $ mkElement ns interface name)
 
-                        let kws =  keywordsFor attr
-                        
-                        attribute <- Array.fromFoldable $ mkAttribute kws attr
-                        interface <- coerce $ map tagToInterface for
-                        pure $ interface /\ pure attribute
+            _ ->
+              []
 
-                    -- could not find a definition for aria attributes so we translate the properties instead
-                    { type : "attribute", for : [ "ARIAMixin" ], linkingText } ->
-                        pure $ "ARIAMixin" /\ flip Array.mapMaybe linkingText \prop -> do
-                            let attr = unAria prop
-                                kws = keywordsFor attr 
-                            mkAttribute kws attr
-                    
-                    -- css styling properties for svg
-                    { type : "property", for :[], linkingText } | ns == SVG ->
-                        pure $ "SVGElement" /\ flip Array.mapMaybe linkingText \prop -> do
-                            let kws = keywordsFor prop
-                            mkAttribute kws prop
+    -- we have the interface definitions in `interfaceSource` but those only contain properties. For SSR we need the 
+    -- actual attributes and those only show up in the definitions as `element-attr`. 
+    attributeMembers :: Foreign.Object (Array Attribute)
+    attributeMembers =
+      Foreign.fromFoldableWith append
+        $ bind source.dfn case _ of
+            -- basic attributes
+            { type: "element-attr", for, linkingText } -> do
+              attr <- flip Array.mapMaybe linkingText \attr ->
+                case String.stripPrefix (String.Pattern "on") attr of
+                  -- ignore "on" attributes for events, these are described better by the `EventSpec`
+                  Just _ ->
+                    Nothing
 
-                    { type : "property", for, linkingText } | ns == SVG -> do
-                        prop <- linkingText
-                        let kws = keywordsFor prop
-                        attribute <- Array.fromFoldable $ mkAttribute kws prop
-                        interface <- coerce $ tagToInterface <$> for
-                        pure $ interface /\ pure attribute
-                        
-                    _ ->
-                        []
-            where
+                  Nothing ->
+                    Just attr
 
-            -- dfn contains some pseudo interfaces which we have to map
-            tagToInterface :: String -> Ctor
-            tagToInterface "global" = Ctor "Element"
-            tagToInterface "html-global" = Ctor "HTMLElement"
-            tagToInterface "htmlsvg-global" = Ctor "HTMLOrSVGElement"
-            tagToInterface tag = case Foreign.lookup tag elements of
-                Just { interface } ->
-                    interface
+              let kws = keywordsFor attr
 
-                Nothing ->
-                    -- will throw either at generation or compilation
-                    Ctor $ "!NoInterfaceFor" <> tag
+              attribute <- Array.fromFoldable $ mkAttribute kws attr
+              interface <- coerce $ map tagToInterface for
+              pure $ interface /\ pure attribute
 
-            keywordsFor :: String -> Array String
-            keywordsFor attr = 
-                fromMaybe mempty $ Foreign.lookup attr keywords
+            -- could not find a definition for aria attributes so we translate the properties instead
+            { type: "attribute", for: [ "ARIAMixin" ], linkingText } ->
+              pure $ "ARIAMixin" /\ flip Array.mapMaybe linkingText \prop -> do
+                let
+                  attr = unAria prop
+                  kws = keywordsFor attr
+                mkAttribute kws attr
 
-            -- | Converts the property names of the ARIAMixin interface to the corresponding attribute name
-            unAria :: String -> String
-            unAria prop = case String.stripPrefix ( String.Pattern "aria" ) prop of
-                Nothing -> 
-                    prop -- "role" is not prefixed with aria
+            -- css styling properties for svg
+            { type: "property", for: [], linkingText } | ns == SVG ->
+              pure $ "SVGElement" /\ flip Array.mapMaybe linkingText \prop -> do
+                let kws = keywordsFor prop
+                mkAttribute kws prop
 
-                Just rawAttr -> case rawAttr of
-                    _ | Just elementStripped <- String.stripSuffix ( String.Pattern "Element" ) rawAttr ->
-                        "aria-" <> String.toLower elementStripped
+            { type: "property", for, linkingText } | ns == SVG -> do
+              prop <- linkingText
+              let kws = keywordsFor prop
+              attribute <- Array.fromFoldable $ mkAttribute kws prop
+              interface <- coerce $ tagToInterface <$> for
+              pure $ interface /\ pure attribute
 
-                    _ | Just elementsStripped <- String.stripSuffix ( String.Pattern "Elements" ) rawAttr ->
-                        "aria-" <> String.toLower elementsStripped
+            _ ->
+              []
+      where
 
-                    _ ->
-                        "aria-" <> String.toLower rawAttr
+      -- dfn contains some pseudo interfaces which we have to map
+      tagToInterface :: String -> Ctor
+      tagToInterface "global" = Ctor "Element"
+      tagToInterface "html-global" = Ctor "HTMLElement"
+      tagToInterface "htmlsvg-global" = Ctor "HTMLOrSVGElement"
+      tagToInterface tag = case Foreign.lookup tag elements of
+        Just { interface } ->
+          interface
 
-        -- the interface specifications do contain the events but not the interface of the emitted event itself. Those 
-        -- can be found by running through the event specifications
-        eventMembers :: Foreign.Object ( Array Event )
-        eventMembers = 
-            Foreign.fromFoldableWith append 
-                $ bind source.event \{ type : name, targets, interface : eventType } -> do
-                    interface <- targets
-                    maybe mempty ( pure <<< Tuple interface <<< pure ) $ mkHandler eventType name
-        
-        interfaceMembers :: Foreign.Object ( Array ( Ctor /\ TypeStub ) )
-        interfaceMembers =
-            map ( Array.nub )
-                $ Foreign.unionWith append ( extractMember attributeMembers ) ( extractMember eventMembers )
+        Nothing ->
+          -- will throw either at generation or compilation
+          Ctor $ "!NoInterfaceFor" <> tag
 
-        -- the only thing we actually need the interface specifications for is the relation between interfaces. We need 
-        -- to know which interface inherits, extends or mixes into another.
-        interfaces :: Array Interface
-        interfaces = do
-            flip Array.mapMaybe ( Foreign.toUnfoldable source.members ) \( name /\ _ ) -> do
-                let bases = Array.filter fixSpec ( IDL.resolveInterface source.inheritance source.extension name )
-                    members = fromMaybe mempty $ Foreign.lookup name interfaceMembers 
-                mkInterface bases members name
+      keywordsFor :: String -> Array String
+      keywordsFor attr =
+        fromMaybe mempty $ Foreign.lookup attr keywords
 
-            where
+      -- | Converts the property names of the ARIAMixin interface to the corresponding attribute name
+      unAria :: String -> String
+      unAria prop = case String.stripPrefix (String.Pattern "aria") prop of
+        Nothing ->
+          prop -- "role" is not prefixed with aria
 
-            fixSpec = case _ of
-                "LinkStyle" -> false
-                _ -> true
+        Just rawAttr -> case rawAttr of
+          _
+            | Just elementStripped <-
+                String.stripSuffix (String.Pattern "Element") rawAttr ->
+                "aria-" <> String.toLower elementStripped
 
-        -- this would in theory leave out attributes with the same name but different types. In practice all attributes
-        -- are stringly typed.
-        attributes :: Array Attribute
-        attributes =
-            Array.nubBy ( compare `on` _.name ) $ Array.concat $ Foreign.values attributeMembers
+          _
+            | Just elementsStripped <-
+                String.stripSuffix (String.Pattern "Elements") rawAttr ->
+                "aria-" <> String.toLower elementsStripped
 
-        events :: Array Event
-        events =
-            Array.nubBy ( compare `on` _.name ) $ Array.concat $ Foreign.values eventMembers
+          _ ->
+            "aria-" <> String.toLower rawAttr
 
-    { attributes, events, elements : Foreign.values elements, interfaces }
+    -- the interface specifications do contain the events but not the interface of the emitted event itself. Those 
+    -- can be found by running through the event specifications
+    eventMembers :: Foreign.Object (Array Event)
+    eventMembers =
+      Foreign.fromFoldableWith append
+        $ bind source.event \{ type: name, targets, interface: eventType } -> do
+            interface <- targets
+            maybe mempty (pure <<< Tuple interface <<< pure) $ mkHandler
+              eventType
+              name
 
+    interfaceMembers :: Foreign.Object (Array (Ctor /\ TypeStub))
+    interfaceMembers =
+      map (Array.nub)
+        $ Foreign.unionWith append (extractMember attributeMembers)
+            (extractMember eventMembers)
 
-extractMember :: forall f1 f2 r
-        . Functor f1
-    => Functor f2
-    => f1 ( f2 { index :: Ctor, type :: TypeStub | r } )
-    -> f1 ( f2 ( Ctor /\ TypeStub ) )
+    -- the only thing we actually need the interface specifications for is the relation between interfaces. We need 
+    -- to know which interface inherits, extends or mixes into another.
+    interfaces :: Array Interface
+    interfaces = do
+      flip Array.mapMaybe (Foreign.toUnfoldable source.members) \(name /\ _) ->
+        do
+          let
+            bases = Array.filter fixSpec
+              (IDL.resolveInterface source.inheritance source.extension name)
+            members = fromMaybe mempty $ Foreign.lookup name interfaceMembers
+          mkInterface bases members name
+
+      where
+
+      fixSpec = case _ of
+        "LinkStyle" -> false
+        _ -> true
+
+    -- this would in theory leave out attributes with the same name but different types. In practice all attributes
+    -- are stringly typed.
+    attributes :: Array Attribute
+    attributes =
+      Array.nubBy (compare `on` _.name) $ Array.concat $ Foreign.values
+        attributeMembers
+
+    events :: Array Event
+    events =
+      Array.nubBy (compare `on` _.name) $ Array.concat $ Foreign.values
+        eventMembers
+
+  { attributes, events, elements: Foreign.values elements, interfaces }
+
+extractMember
+  :: forall f1 f2 r
+   . Functor f1
+  => Functor f2
+  => f1 (f2 { index :: Ctor, type :: TypeStub | r })
+  -> f1 (f2 (Ctor /\ TypeStub))
 extractMember =
-    map $ map \{ index, type : t } -> index /\ t
+  map $ map \{ index, type: t } -> index /\ t
