@@ -192,6 +192,7 @@ workspace:
         - halogen-hooks
         - halogen-subscriptions
         - halogen-vdom
+        - heterogeneous
         - hyrule
         - identity
         - integers
@@ -243,6 +244,7 @@ workspace:
         - unsafe-coerce
         - unsafe-reference
         - untagged-union
+        - variant
         - web-clipboard
         - web-dom
         - web-dom-parser
@@ -267,6 +269,7 @@ workspace:
         - foldable-traversable
         - foreign-object
         - free
+        - heterogeneous
         - hyrule
         - maybe
         - newtype
@@ -294,6 +297,7 @@ workspace:
         - aff
         - arrays
         - assert
+        - avar
         - bifunctors
         - catenable-lists
         - console
@@ -316,6 +320,7 @@ workspace:
         - functions
         - functors
         - gen
+        - heterogeneous
         - hyrule
         - identity
         - integers
@@ -357,6 +362,7 @@ workspace:
         - unsafe-coerce
         - unsafe-reference
         - untagged-union
+        - variant
         - web-dom
         - web-dom-parser
         - web-events
@@ -375,6 +381,7 @@ workspace:
         - aff
         - arrays
         - assert
+        - avar
         - bifunctors
         - catenable-lists
         - colors
@@ -400,6 +407,7 @@ workspace:
         - functions
         - functors
         - gen
+        - heterogeneous
         - hyrule
         - identity
         - integers
@@ -443,6 +451,7 @@ workspace:
         - unsafe-coerce
         - unsafe-reference
         - untagged-union
+        - variant
         - web-dom
         - web-dom-parser
         - web-events
@@ -464,6 +473,7 @@ workspace:
         - aff
         - arrays
         - assert
+        - avar
         - bifunctors
         - catenable-lists
         - console
@@ -487,6 +497,7 @@ workspace:
         - functions
         - functors
         - gen
+        - heterogeneous
         - hyrule
         - identity
         - integers
@@ -528,6 +539,7 @@ workspace:
         - unsafe-coerce
         - unsafe-reference
         - untagged-union
+        - variant
         - web-dom
         - web-dom-parser
         - web-events
@@ -1019,6 +1031,7 @@ workspace:
       version: v2.5.0
       dependencies:
         - effect
+        - avar
         - js-timers
         - web-html
         - unsafe-reference
@@ -1688,6 +1701,17 @@ packages:
       - tuples
       - unsafe-coerce
       - web-html
+  heterogeneous:
+    type: registry
+    version: 0.6.0
+    integrity: sha256-cfNYSK6yYmjTrkzk95Otpv6TUUkeBreexwqG/tBvUyg=
+    dependencies:
+      - either
+      - functors
+      - prelude
+      - record
+      - tuples
+      - variant
   http-methods:
     type: registry
     version: 6.0.0
@@ -1701,6 +1725,7 @@ packages:
     url: https://github.com/mikesol/purescript-hyrule.git
     rev: a2a32e02a0d8518d906ec5fb3192261f63667338
     dependencies:
+      - avar
       - effect
       - js-timers
       - unsafe-reference

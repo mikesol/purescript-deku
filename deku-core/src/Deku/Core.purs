@@ -42,7 +42,6 @@ module Deku.Core
   , Namespace(..)
   , Nut(..)
   , PSR(..)
-  , PursXable(..)
   , RemoveForDyn
   , RemoveForElement
   , RemoveForText
@@ -67,7 +66,6 @@ module Deku.Core
   , callbackWithCaution
   , cb
   , cb'
-  , class PursxToElement
   , dynOptions
   , elementify
   , eltAttribution
@@ -83,7 +81,6 @@ module Deku.Core
   , portal
   , prop'
   , pureOrBust
-  , pursxToElement
   , runListener
   , text
   , textAttribution
@@ -116,8 +113,7 @@ module Deku.Core
   , useStateTagged'
   , withUnsub
   , xdata
-  )
-  where
+  ) where
 
 import Prelude
 
@@ -135,8 +131,6 @@ import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
 import Data.Nullable (toMaybe)
-import Data.Reflectable (class Reflectable, reflectType)
-import Data.Symbol (class IsSymbol)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
@@ -151,11 +145,7 @@ import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
 import FRP.Poll.Unoptimized as UPoll
 import Foreign.Object as Object
-import Prim.Row as Row
-import Prim.RowList as RL
-import Record (get)
 import Safe.Coerce (coerce)
-import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM (Comment, DocumentFragment, Element, Text)
 import Web.DOM as Element
@@ -226,7 +216,7 @@ type Attribute' = EffectFn2 Element DOMInterpret Unit
 -- | Low level representation of key-value pairs for attributes and listeners.
 -- | In general, this type is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
-newtype Attribute :: forall k. k -> Type
+newtype Attribute :: Row Type -> Type
 newtype Attribute i = Attribute Attribute'
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
@@ -240,12 +230,15 @@ unsafeAttribute
 unsafeAttribute = Attribute
 
 attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
-attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setProp }) ->
-  runEffectFn3 setProp (toDekuElement e) (Key k) (Value v)
+attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2
+  \e (DOMInterpret { setProp }) ->
+    runEffectFn3 setProp (toDekuElement e) (Key k) (Value v)
 
-callbackWithCaution :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
-callbackWithCaution k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setCb }) ->
-  runEffectFn3 setCb (toDekuElement e) (Key k) (Cb v)
+callbackWithCaution
+  :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
+callbackWithCaution k v = unsafeAttribute $ mkEffectFn2
+  \e (DOMInterpret { setCb }) ->
+    runEffectFn3 setCb (toDekuElement e) (Key k) (Cb v)
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
@@ -1177,71 +1170,3 @@ portal (Nut toBeam) f = Nut $ mkEffectFn2
           runEffectFn3 beaconAttribution ps di stBeacon
         NoOutcome -> pure unit
       pure beamMe
-
--- pursx
-
-data PursXable = PXAttr (Poll Attribute') | PXStr String | PXNut Nut
-
-class
-  PursxToElement (rl :: RL.RowList Type) (r :: Row Type)
-  | rl -> r where
-  pursxToElement
-    :: Proxy rl
-    -> { | r }
-    -> Object.Object PursXable
-
-instance pursxToElementConsNut ::
-  ( Row.Cons key Nut r' r
-  , PursxToElement rest r
-  , Reflectable key String
-  , IsSymbol key
-  ) =>
-  PursxToElement
-    (RL.Cons key (Nut) rest)
-    r where
-  pursxToElement _ r = do
-    let
-      o = pursxToElement (Proxy :: Proxy rest) r
-    Object.insert (reflectType pxk) (PXNut (get pxk r)) o
-    where
-    pxk = Proxy :: _ key
-
-else instance pursxToElementConsAttr ::
-  ( Row.Cons key (Poll (Attribute deku)) r' r
-  , PursxToElement rest r
-  , Reflectable key String
-  , IsSymbol key
-  ) =>
-  PursxToElement
-    (RL.Cons key (Poll (Attribute deku)) rest)
-    r where
-  pursxToElement _ r = do
-    let
-      o = pursxToElement (Proxy :: Proxy rest) r
-    Object.insert (reflectType pxk)
-      (PXAttr (unsafeUnAttribute <$> (get pxk r)))
-      o
-    where
-    pxk = Proxy :: _ key
-
-else instance pursxToElementConsStr ::
-  ( Row.Cons key String r' r
-  , PursxToElement rest r
-  , Reflectable key String
-  , IsSymbol key
-  ) =>
-  PursxToElement
-    (RL.Cons key String rest)
-    r where
-  pursxToElement _ r = do
-    let
-      o = pursxToElement (Proxy :: Proxy rest) r
-    Object.insert (reflectType pxk)
-      (PXStr (get pxk r))
-      o
-    where
-    pxk = Proxy :: _ key
-
-instance pursxToElementNil ::
-  PursxToElement RL.Nil r where
-  pursxToElement _ _ = Object.empty

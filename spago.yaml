@@ -11,6 +11,7 @@ workspace:
       version: "v2.5.0"
       dependencies:
         - effect
+        - avar
         - js-timers
         - web-html
         - unsafe-reference

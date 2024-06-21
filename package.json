@@ -34,5 +34,8 @@
 		"spago": "^0.93.29",
 		"test": "^0.6.0",
 		"tracealyzer": "^0.10.3"
+	},
+	"dependencies": {
+		"htmlparser2": "^9.1.0"
 	}
 }
