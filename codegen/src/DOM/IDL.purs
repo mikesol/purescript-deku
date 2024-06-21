@@ -11,102 +11,102 @@ import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Tuple.Nested (type (/\), (/\))
 import Foreign.Object as Foreign
 
-validTag :: Tag -> Maybe ( String /\ String )
-validTag { obsolete : Just true } = Nothing
-validTag { interface : Nothing } = Nothing
-validTag { interface : Just interface, name } = Just $ name /\ interface
+validTag :: Tag -> Maybe (String /\ String)
+validTag { obsolete: Just true } = Nothing
+validTag { interface: Nothing } = Nothing
+validTag { interface: Just interface, name } = Just $ name /\ interface
 
-attributeMember :: Member -> Array ( String /\ IDLType )
+attributeMember :: Member -> Array (String /\ IDLType)
 attributeMember = case _ of
-    -- only emit writeable(not readonly attributes)
-    Attribute { idlType, name : attrName, readonly } | maybe true not readonly ->
-        [ attrName /\ idlType ]
-    
-    _ ->
-        []
-            
+  -- only emit writeable(not readonly attributes)
+  Attribute { idlType, name: attrName, readonly } | maybe true not readonly ->
+    [ attrName /\ idlType ]
+
+  _ ->
+    []
+
 -- | Looks up an interface and returns all inherited and mixed in interfaces.
-resolveInterface :: Foreign.Object ( Array String )
-    -> Foreign.Object ( Array Mixin )
-    -> String
-    -> Array String
+resolveInterface
+  :: Foreign.Object (Array String)
+  -> Foreign.Object (Array Mixin)
+  -> String
+  -> Array String
 resolveInterface inheritance extended name = do
-    let
-        extensions :: Array Mixin
-        extensions =
-            fromMaybe []
-                $ Foreign.lookup name extended
+  let
+    extensions :: Array Mixin
+    extensions =
+      fromMaybe []
+        $ Foreign.lookup name extended
 
-        bases :: Array String
-        bases =
-            maybe mempty identity ( Foreign.lookup name inheritance )
+    bases :: Array String
+    bases =
+      maybe mempty identity (Foreign.lookup name inheritance)
 
-    bases <> Array.mapMaybe included extensions
+  bases <> Array.mapMaybe included extensions
 
-    where
+  where
 
-    included = case _ of
-        Includes { includes } ->
-            Just includes
-        
-        _ ->
-            Nothing
+  included = case _ of
+    Includes { includes } ->
+      Just includes
 
+    _ ->
+      Nothing
 
 mapType :: IDLType -> Array TypeStub
 mapType = case _ of
-    Descriptor t -> mapType t.idlType
+  Descriptor t -> mapType t.idlType
 
-    Primitive "boolean" ->
-        pure TypeBoolean
-    
-    Primitive "long" ->
-        pure TypeInt
+  Primitive "boolean" ->
+    pure TypeBoolean
 
-    Primitive "unsigned long" ->
-        pure TypeInt
+  Primitive "long" ->
+    pure TypeInt
 
-    Primitive "long long" ->
-        pure TypeInt
-    
-    Primitive "unsigned long long" -> 
-        pure TypeInt
+  Primitive "unsigned long" ->
+    pure TypeInt
 
-    Primitive "unsigned short" ->
-        pure TypeInt
+  Primitive "long long" ->
+    pure TypeInt
 
-    Primitive "double" -> 
-        pure TypeNumber
+  Primitive "unsigned long long" ->
+    pure TypeInt
 
-    Primitive "unrestricted double" ->
-        pure TypeNumber
-        
-    Primitive "Number" ->
-        pure TypeNumber
+  Primitive "unsigned short" ->
+    pure TypeInt
 
-    Primitive "SVGAnimatedNumber" ->
-        pure TypeNumber
+  Primitive "double" ->
+    pure TypeNumber
 
-    Primitive "EventHandler" ->
-        pure $ TypeEvent "Event" "Web.Event.Internal.Types"
+  Primitive "unrestricted double" ->
+    pure TypeNumber
 
-    Primitive "any" ->
-        pure TypeString
+  Primitive "Number" ->
+    pure TypeNumber
 
-    Primitive "DOMString" ->
-        pure TypeString
+  Primitive "SVGAnimatedNumber" ->
+    pure TypeNumber
 
-    Primitive "DOMTokenList" ->
-        pure TypeString
+  Primitive "EventHandler" ->
+    pure $ TypeEvent "Event" "Web.Event.Internal.Types"
 
-    Primitive "USVString" ->
-        pure TypeString
+  Primitive "any" ->
+    pure TypeString
 
-    Primitive "SVGAnimatedEnumeration" ->
-        pure TypeString
+  Primitive "DOMString" ->
+    pure TypeString
 
-    Union s ->
-        bind s mapType
+  Primitive "DOMTokenList" ->
+    pure TypeString
 
-    Primitive _ ->
-        []
+  Primitive "USVString" ->
+    pure TypeString
+
+  Primitive "SVGAnimatedEnumeration" ->
+    pure TypeString
+
+  Union s ->
+    bind s mapType
+
+  Primitive _ ->
+    []

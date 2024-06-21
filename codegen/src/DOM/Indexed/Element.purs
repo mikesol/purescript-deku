@@ -29,7 +29,7 @@ imports baseMod interfaces =
             "Deku.Attribute"
 
         , declImport "Deku.Control" [ importValue "elementify" ]
-        , declImportAs "Deku.Control" [  ] "DC"
+        , declImportAs "Deku.Control" [] "DC"
         , declImport "Deku.Core" [ importType "Nut" ]
         , declImport "Type.Proxy" [ importType "Proxy" ]
         ]
