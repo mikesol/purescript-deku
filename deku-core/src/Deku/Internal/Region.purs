@@ -1,120 +1,128 @@
-module Deku.Internal.Region where
+module Deku.Internal.Region
+    where
 
 import Prelude
 
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (STFn1, STFn2, mkSTFn1, mkSTFn2, runSTFn1, runSTFn2)
-import Data.Newtype (class Newtype)
+import Control.Monad.ST.Uncurried (STFn1, STFn3, mkSTFn1, mkSTFn3, runSTFn1, runSTFn3)
+import Data.Array.ST as STArray
+import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Newtype (class Newtype, un)
 import Deku.Internal.Entities (DekuElement, DekuParent, DekuText)
+import FRP.Poll (Poll)
+import Prim.TypeError (class Warn, Text)
+import Unsafe.Coerce (unsafeCoerce)
 
-data BoundAnchor
+data Anchor
   = ParentStart DekuParent
   | Element DekuElement
   | Text DekuText
 
--- | Defines a half open interval (begin,end] of elements. `begin` is not included and `end` is included.
-newtype DekuRegion =
-  DekuRegion { begin :: Bound, end :: Bound }
-derive instance Newtype DekuRegion _
+type Bound =
+    ST.ST Global Anchor
 
-regionBegin :: STFn1 DekuRegion Global BoundAnchor
-regionBegin = mkSTFn1 \( DekuRegion { begin } ) -> do
-    runSTFn1 readBound begin
+type Bump =
+    STFn1 Anchor Global Unit
 
-regionEnd :: STFn1 DekuRegion Global BoundAnchor
-regionEnd = mkSTFn1 \( DekuRegion { end } ) -> do
-    runSTFn1 readBound end
+type Clear =
+    ST.ST Global Unit
 
--- | Creates a new empty region at the end of the given region. The begin of the new region is controlled by the end of
--- | the previous region on the same parent. The end of the new region controls the end of the parent region.
--- |
--- | ```
--- | 
--- |    ┌─┐    |    ┌─┐                ┌─┐
--- |    │e│    |    │e│                │e│
--- |    └▲┘    |    └▲┘                └▲┘
--- |     │     |     │                  │ 
--- |    ┌┴┐    |    ┌┴┐                ┌┴┐
--- |    │1│   -->   │1◄────────┐    ┌──►2│
--- |    └▲┘    |    └─┘        │    │  └▲┘
--- |     │     |               │    │   │ 
--- |     │     |     ┌─────────┼────┘   │ 
--- |     │     |     │         │        │ 
--- | parentend | parentend   begin     end
--- |
--- | ```
-managedRegion :: STFn1 DekuRegion Global DekuRegion
-managedRegion = mkSTFn1 \( DekuRegion { end } ) -> do
-    newBegin <- runSTFn1 shareBound end -- shallow copy to share anchor with previous region
-    newEnd <- runSTFn1 copyBound end -- deep copy to control our own end
+-- | Region that supports adding, moving and removing new child regions.
+newtype Region = Region
+    { begin :: Bound
+    , end :: Bound
 
-    runSTFn2 matchBound newEnd end -- share our end with parent region
-    pure ( DekuRegion { begin : newBegin, end : newEnd } )
+    , position :: Poll Int
+    , sendTo :: STFn1 Int Global Unit
+    , remove :: ST.ST Global Unit
 
--- | Creates a new region at the head of a given region.
--- |
--- | ```
--- | 
--- |  ┌─┐          ┌─┐     |     ┌─┐              ┌─┐          ┌─┐
--- |  │b|          │e│     |     │b│              │b│          │e│
--- |  └▲┘          └▲┘     |     └▲┘              └▲┘          └▲┘
--- |   │            │      |      │                │            │ 
--- |  ┌┴┐          ┌┴┐     |     ┌┴┐              ┌┴┐          ┌┴┐
--- |  │1◄──────┐   │2│    -->    │1◄───────┐      │3◄──────┐   │2│
--- |  └▲┘      │   └▲┘     |     └▲┘       │      └▲┘      │   └▲┘
--- |   │       │    │      |      │        │       │       │    │ 
--- |   │       │    │      |      │        │       │       │    │ 
--- | prevEnd begin end     |    prevEnd newBegin newEnd   begin end
--- |
--- | ```
-shiftRegion :: STFn1 DekuRegion Global DekuRegion
-shiftRegion = mkSTFn1 \( DekuRegion { begin } ) -> do
-    newBegin <- runSTFn1 shareBound begin
-    newEnd <- runSTFn1 copyBound begin
-    runSTFn2 matchBound newEnd begin
-    pure $ DekuRegion { begin : newBegin, end : newEnd }
+    , static :: StaticRegion
+    }
+derive instance Newtype Region _
+
+-- | Region that supports adding new regions and elements.
+newtype StaticRegion = StaticRegion
+    { end :: Bound
+    , span :: ST.ST Global RegionSpan
+    , element :: Bump
+    }
+derive instance Newtype StaticRegion _
+
+type ManagedRegion =
+    { ix :: ST.STRef Global Int
+    , begin :: Bound
+    , end :: ST.STRef Global { owned :: Boolean, ref :: Bound }
+    }
+
+-- | Managed span of `Region`s.
+newtype RegionSpan =
+    RegionSpan ( STFn1 ( Maybe Int ) Global Region )
+derive instance Newtype RegionSpan _
+
+newSpan :: STFn3 Bound Bump Clear Global RegionSpan
+newSpan = mkSTFn3 \parent bump clear -> do
+    children <- STArray.new
+    
+    pure $ RegionSpan $ mkSTFn1 \pos -> do
+        length <- STArray.length children
+        ix <- ST.new $ fromMaybe length pos
+        void $ STArray.push { ix, begin : todo, end : todo } children
+
+        pure $ Region
+            { begin : todo
+            , end : todo
+            
+            , position : todo
+            , sendTo : todo
+            , remove : todo
+
+            , static : StaticRegion
+                { end : todo
+                , element : todo
+                , span : todo
+                }
+            }
+
+newStaticRegion :: STFn1 Bound Global StaticRegion
+newStaticRegion = mkSTFn1 \parent -> do
+    state <- ST.new Nothing
+    end <- ST.new =<< ST.new =<< parent
+    pure $ StaticRegion
+        { end : ST.read =<< ST.read end
+        , span : do
+            RegionSpan span <- ST.read state >>= case _ of
+                Nothing -> do
+                    -- begin can't change ever, it's static
+                    begin <- ST.read =<< ST.read end
+                    spanEnd <- ST.new begin
+                    void $ ST.write spanEnd end 
+                    span <- runSTFn3 newSpan
+                        ( pure begin )
+                        ( mkSTFn1 \a -> void $ ST.write a spanEnd )
+                        ( void $ ST.write begin spanEnd )
+
+                    pure span
+
+                Just span ->
+                    pure span
+
+            Region region <- runSTFn1 span Nothing
+            ( un StaticRegion region.static ).span
+
+        , element : mkSTFn1 \anchor -> do
+            ST.read state >>= case _ of
+                Nothing ->
+                    void $ ST.write anchor <$> ST.read end
+                
+                Just _ -> do
+                    -- detach end of span from writing to the end
+                    void $ ST.write <$> ST.new anchor <@> end
+                    -- clear span state
+                    void $ ST.write Nothing state
+        }
 
 
-
--- | Sets the end of a region to a new anchor.
-pushRegionEnd :: STFn2 BoundAnchor DekuRegion Global Unit
-pushRegionEnd = mkSTFn2 \anchor ( DekuRegion { end } ) -> do
-    runSTFn2 writeBound anchor end
-
--- | Entangles a sub region with its parent region setting the end of the parent region to the end of the sub region.
--- | This way when the sub region extends the parent region reflects this.
-matchEnd :: STFn2 DekuRegion DekuRegion Global Unit
-matchEnd = mkSTFn2 \( DekuRegion { end : sub } ) ( DekuRegion { end : parent } ) -> do
-    runSTFn2 matchBound sub parent
-
--- | A boundary that can be shared between regions.
-newtype Bound =
-  -- double indirection so we can change were a region is reading from
-  Bound ( ST.STRef Global ( ST.STRef Global BoundAnchor ) ) 
-
-newBound :: STFn1 BoundAnchor Global Bound
-newBound = mkSTFn1 $ map Bound <<< ST.new <=< ST.new
-
-readBound :: STFn1 Bound Global BoundAnchor
-readBound = mkSTFn1 \( Bound b ) -> do
-    ST.read =<< ST.read b
-
-writeBound :: STFn2 BoundAnchor Bound Global Unit
-writeBound = mkSTFn2 \anchor ( Bound ref ) -> do
-    void $ ST.write anchor <$> ST.read ref
-
--- | Creates a new copy of a bound with no sharing.
-copyBound :: STFn1 Bound Global Bound
-copyBound = mkSTFn1 \( Bound src ) ->
-    map Bound $ ST.new =<< ST.new =<< ST.read =<< ST.read src
-
--- | Creates a shallow copy of a Bound where both the original and the copy still share the bound.
-shareBound :: STFn1 Bound Global Bound
-shareBound = mkSTFn1 \( Bound ref ) -> do
-    map Bound $ ST.new =<< ST.read ref
-
--- | Entangles two `Bound`s so they share the same value. The target `Bound` loses its value.
-matchBound :: STFn2 Bound Bound Global Unit
-matchBound = mkSTFn2 \( Bound src ) ( Bound target ) -> do
-    void $ ST.write <$> ST.read src <@> target
+todo :: forall a . Warn ( Text "todo" ) => a
+todo = 
+    unsafeCoerce unit

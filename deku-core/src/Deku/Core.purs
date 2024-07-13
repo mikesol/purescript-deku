@@ -87,7 +87,7 @@ import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (STFn2, STFn3, STFn4, mkSTFn2, mkSTFn3, mkSTFn4, runSTFn1, runSTFn2, runSTFn3, runSTFn4)
+import Control.Monad.ST.Uncurried (runSTFn1)
 import Control.Plus (empty)
 import Data.Array as Array
 import Data.Array.ST as STArray
@@ -100,7 +100,7 @@ import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
-import Deku.Internal.Region (BoundAnchor(..), DekuRegion(..), managedRegion, matchBound, newBound, pushRegionEnd, readBound, regionEnd, shiftRegion)
+import Deku.Internal.Region (Anchor(..), Region(..), RegionSpan(..), StaticRegion(..), newStaticRegion)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3)
 import FRP.Event as Event
@@ -108,7 +108,6 @@ import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
 import FRP.Poll.Unoptimized as UPoll
 import Foreign.Object as Object
-import Partial.Unsafe (unsafePartial)
 import Prim.Row as Row
 import Prim.RowList as RL
 import Record (get)
@@ -194,10 +193,10 @@ type RemoveText = EffectFn1 DekuText Unit
 
 -- | Type used by Deku backends to give a parent to an element. For internal use only unless you're writing a custom backend.
 type AttachElement =
-  EffectFn2 DekuChild BoundAnchor Unit
+  EffectFn2 DekuChild Anchor Unit
 
 type AttachText =
-  EffectFn2 DekuText BoundAnchor Unit
+  EffectFn2 DekuText Anchor Unit
 
 type AssociateUnsubsToText = EffectFn2 DekuText (Array (Effect Unit)) Unit
 
@@ -223,7 +222,7 @@ type SetCb =
 
 -- | Moves all `Element` and `Text` nodes between `fromBegin` and `fromEnd` after the node pointed to by `after`
 type BeamRegion =
-  EffectFn3 BoundAnchor BoundAnchor BoundAnchor Unit
+  EffectFn3 Anchor Anchor Anchor Unit
 
 type MakeTemplate = EffectFn1 String HTMLTemplateElement
 type CloneElement = EffectFn1 Element Element
@@ -268,7 +267,7 @@ disposeUnsubs = mkEffectFn1 \unsubs -> do
   runEffectFn1 Event.fastForeachThunkE =<< liftST ( STArray.unsafeFreeze unsubs )
 
 -- | Handles an optimized `Poll` by running the effect on each emitted value. Any resulting subscription gets written to 
--- | given cleanup array.
+-- | the given cleanup array.
 pump :: forall a
    . STArray.STArray Global (Effect Unit)
   -> Poll a
@@ -300,9 +299,10 @@ pump associations p eff =
       go ( OnlyPoll y )
 
 newtype PSR = PSR
-  { parent :: DekuRegion
+  { lifecycle :: Poll.Poll Unit
+  -- used by `Nut`s to register or clear the last element of their region.
+  , region :: StaticRegion
   , unsubs :: Array (Effect Unit)
-  , lifecycle :: Poll.Poll Unit
   }
 derive instance Newtype PSR _
 
@@ -438,8 +438,15 @@ useState a f = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 nut psr di
 
 -- dyn
-type DynOptions v =
-  { sendTo :: v -> Poll Int, remove :: v -> Poll Unit }
+type DynOptions value =
+  { sendTo :: value -> Poll Int, remove :: value -> Poll Unit }
+
+type DynControl value =
+  { value :: value
+  , position :: Poll Int
+  , remove :: Effect Unit
+  , sendTo :: Int -> Effect Unit
+  }
 
 dynOptions :: forall v. DynOptions v
 dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
@@ -447,73 +454,49 @@ dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
 useDyn
   :: forall value
    . Poll (Tuple (Maybe Int) value)
-  -> Hook
-       { value :: value
-       , remove :: Effect Unit
-       , sendTo :: Int -> Effect Unit
-       }
+  -> Hook ( DynControl value )
 useDyn p = useDynWith p dynOptions
 
 useDynAtBeginning
   :: forall value
    . Poll value
-  -> Hook
-       { value :: value
-       , remove :: Effect Unit
-       , sendTo :: Int -> Effect Unit
-       }
+  -> Hook ( DynControl value )
 useDynAtBeginning b = useDynAtBeginningWith b dynOptions
 
 useDynAtBeginningWith
   :: forall value
    . Poll value
   -> DynOptions value
-  -> Hook
-       { value :: value
-       , remove :: Effect Unit
-       , sendTo :: Int -> Effect Unit
-       }
+  -> Hook ( DynControl value )
 useDynAtBeginningWith e = useDynWith (map (Just 0 /\ _) e)
 
 useDynAtEnd
   :: forall value
    . Poll value
-  -> Hook
-       { value :: value
-       , remove :: Effect Unit
-       , sendTo :: Int -> Effect Unit
-       }
+  -> Hook ( DynControl value )
 useDynAtEnd b = useDynAtEndWith b dynOptions
 
 useDynAtEndWith
   :: forall value
    . Poll value
   -> DynOptions value
-  -> Hook
-       { value :: value
-       , remove :: Effect Unit
-       , sendTo :: Int -> Effect Unit
-       }
+  -> Hook ( DynControl value )
 useDynAtEndWith e = useDynWith (map (Nothing /\ _) e)
 
 useDynWith
   :: forall value
    . Poll ( Tuple ( Maybe Int ) value )
   -> DynOptions value
-  -> Hook
-       { value :: value
-       , remove :: Effect Unit
-       , sendTo :: Int -> Effect Unit
-       }
+  -> Hook ( DynControl value )
 useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
-  managed <- liftST $ runSTFn1 managedRegion ( un PSR psr ).parent
-  regions <- liftST STArray.new
+  RegionSpan span <- liftST ( un StaticRegion ( un PSR psr ).region ).span
   lifecycle <- liftST Poll.create
   unsubs <- runEffectFn1 collectUnsubs psr
   
   let
     handleElements :: EffectFn1 ( Tuple ( Maybe Int ) value ) Unit
     handleElements = mkEffectFn1 \( Tuple initialPos value ) -> do
+      Region eltRegion <- liftST $ runSTFn1 span initialPos
       eltSendTo <- liftST Poll.create
       let
         sendTo :: Poll Int
@@ -526,28 +509,11 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
         remove =
           Poll.merge [ options.remove value, eltRemove.poll, lifecycle.poll ]
 
-
-      elt <- liftST do
-        case initialPos of
-          Just pos -> do
-            query <- STArray.peek pos regions
-            case query of
-              Just { region : before } -> do
-                region <- runSTFn1 shiftRegion before
-                ix <- ST.new pos
-                runSTFn2 fixDynRegion pos regions
-                pure { ix, region }
-
-              Nothing ->
-                runSTFn2 pushDynRegion managed regions
-
-          Nothing -> do
-            runSTFn2 pushDynRegion managed regions
-
       eltUnsubs <- liftST STArray.new
       let
         Nut nut = cont
           { value
+          , position : eltRegion.position
           , remove : eltRemove.push unit
           , sendTo : eltSendTo.push
           }
@@ -555,7 +521,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
         eltPSR :: PSR
         eltPSR =
           PSR
-            { parent : elt.region
+            { region : eltRegion.static
             , unsubs : []
             , lifecycle : remove
             }
@@ -563,18 +529,16 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
         handleManagedLifecycle :: EffectFn1 Unit Unit
         handleManagedLifecycle =
           mkEffectFn1 \_ -> do
-            liftST $ runSTFn3 deleteDynRegion elt managed regions 
+            liftST eltRegion.remove
             runEffectFn1 disposeUnsubs eltUnsubs
 
         handleSendTo :: EffectFn1 Int Unit
         handleSendTo = mkEffectFn1 \newPos -> do
-          fromBegin <- liftST $ runSTFn1 readBound ( un DekuRegion elt.region ).begin
-          fromEnd <- liftST $ runSTFn1 readBound ( un DekuRegion elt.region ).end
+          fromBegin <- liftST eltRegion.begin
+          fromEnd <- liftST eltRegion.end
+          liftST $ runSTFn1 eltRegion.sendTo newPos 
 
-          liftST $ runSTFn3 deleteDynRegion elt managed regions
-          liftST $ runSTFn4 insertDynRegion newPos elt managed regions
-
-          target <- liftST $ runSTFn1 readBound ( un DekuRegion elt.region ).begin
+          target <- liftST eltRegion.begin
           runEffectFn3 ( un DOMInterpret di ).beamRegion fromBegin fromEnd target
 
       pump eltUnsubs sendTo handleSendTo
@@ -591,60 +555,6 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
     
   pump unsubs elements handleElements
   pump unsubs ( un PSR psr ).lifecycle handleDynLifecycle
-
-type DynRegion =
-  { ix :: ST.STRef Global Int
-  , region :: DekuRegion
-  }
-
--- | Adds a new DynRegion at end of the managed DynRegion array.
-pushDynRegion :: STFn2 DekuRegion ( STArray.STArray Global DynRegion ) Global DynRegion
-pushDynRegion = mkSTFn2 \managed regions -> do
-  region <- runSTFn1 managedRegion managed
-  ix <- ST.new =<< STArray.length regions
-  let el = { ix, region }
-  void $ STArray.push el regions
-  pure el
-
-deleteDynRegion :: STFn3 DynRegion DekuRegion ( STArray.STArray Global DynRegion ) Global Unit
-deleteDynRegion = mkSTFn3 \{ ix, region : DekuRegion delete } ( DekuRegion managed ) regions -> do
-  currentPos <- ST.read ix
-  query <- STArray.peek ( currentPos + 1 ) regions
-  case query of
-    Just { region : DekuRegion following } ->
-      runSTFn2 matchBound delete.begin following.begin 
-
-    Nothing ->
-      -- element to delete was at end so we fix the end of the managed region instead
-      runSTFn2 matchBound delete.begin managed.end
-      
-  void $ STArray.splice currentPos 1 [] regions
-  
-insertDynRegion :: STFn4 Int DynRegion DekuRegion ( STArray.STArray Global DynRegion ) Global Unit
-insertDynRegion = mkSTFn4 \pos el@{ region : DekuRegion insert } ( DekuRegion managed ) regions -> do
-  qtarget <- STArray.peek pos regions
-  case qtarget of
-    Just { region : DekuRegion target } -> do
-      runSTFn2 matchBound target.begin insert.begin
-      runSTFn2 matchBound insert.end target.begin
-  
-    Nothing -> do
-      -- at end or out of range
-      runSTFn2 matchBound managed.end insert.begin
-      runSTFn2 matchBound insert.end managed.end
-
-  void $ STArray.splice pos 0 [ el ] regions
-
-  runSTFn2 fixDynRegion pos regions
-
--- | Updates all indices in the region array to point to their correct position again.
-fixDynRegion :: STFn2 Int ( STArray.STArray Global DynRegion ) Global Unit
-fixDynRegion = mkSTFn2 \ix regions -> do
-  length <- STArray.length regions
-  -- | Cast array for easier access
-  arr <- STArray.unsafeFreeze regions
-  ST.for ix length \i -> do
-    void $ ST.write i ( unsafePartial ( Array.unsafeIndex arr i ) ).ix
 
 fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2 \psr di -> do
@@ -673,9 +583,9 @@ elementify
   -> Nut
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   elt <- runEffectFn2 ( un DOMInterpret di ).makeElement ( Namespace <$> ns ) ( Tag tag )
-  regionEnd <- liftST $ runSTFn1 regionEnd ( un PSR psr ).parent
+  regionEnd <- liftST ( un StaticRegion ( un PSR psr ).region ).end
   runEffectFn2 ( un DOMInterpret di ).attachElement ( DekuChild elt ) regionEnd
-  liftST $ runSTFn2 pushRegionEnd ( Element ( elt ) ) ( un PSR psr ).parent
+  liftST $ runSTFn1 ( un StaticRegion ( un PSR psr ).region ).element ( Element ( elt ) )
 
   unsubs <- runEffectFn1 collectUnsubs psr
 
@@ -686,10 +596,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         runEffectFn2 x (fromDekuElement elt) di
   runEffectFn2 Event.fastForeachE arrAtts handleAtts
 
-  eltRegion <- liftST do
-    begin <- runSTFn1 newBound ( ParentStart ( DekuParent elt ) )
-    end <- runSTFn1 newBound ( ParentStart ( DekuParent elt ) )
-    pure $ DekuRegion { begin, end }
+  eltRegion <- liftST $ runSTFn1 newStaticRegion ( pure ( ParentStart ( DekuParent elt ) ) )
   let
     handleNuts :: EffectFn1 Nut Unit
     handleNuts = mkEffectFn1 \( Nut nut ) ->
@@ -697,7 +604,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         ( PSR
           { unsubs : []
           , lifecycle : ( un PSR psr ).lifecycle
-          , parent : eltRegion
+          , region : eltRegion
           }
         )
         di
@@ -754,8 +661,9 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
       bang.push identity
       pure txt
   
-  regionEnd <- liftST $ runSTFn1 regionEnd ( un PSR psr ).parent
+  regionEnd <- liftST ( un StaticRegion ( un PSR psr ).region ).end
   runEffectFn2 ( un DOMInterpret di ).attachText txt regionEnd
+  liftST $ runSTFn1 ( un StaticRegion ( un PSR psr ).region ).element ( Text txt )
 
   let
     handleLifecycle :: EffectFn1 Unit Unit
