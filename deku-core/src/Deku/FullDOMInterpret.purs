@@ -18,9 +18,5 @@ fullDOMInterpret = Core.DOMInterpret
   , removeText: I.removeTextEffect
   --
   , beamRegion : I.beamRegionEffect
-  -- 
-  , makeTemplate: I.toTemplateEffect
-  , cloneElement: I.cloneElementEffect
-  , cloneTemplate: I.cloneTemplateEffect
-  , templateContent: I.templateContentEffect
+  , bufferPortal : I.bufferPortal
   }

@@ -22,11 +22,8 @@ module Deku.Core
   , SetText
   , AttachText
   , RemoveText
+  , BufferPortal
   , BeamRegion
-  , MakeTemplate
-  , CloneElement
-  , CloneTemplate
-  , TemplateContent
 
   , DOMInterpret(..)
   , DekuDynamic(..)
@@ -38,10 +35,6 @@ module Deku.Core
   , callbackWithCaution
   , cb
   , cb'
-
-  , PursXable(..)
-  , class PursxToElement
-  , pursxToElement
 
   , elementify
   , fixed
@@ -93,25 +86,20 @@ import Data.Array.ST as STArray
 import Data.Compactable (compact)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, over, un)
-import Data.Reflectable (class Reflectable, reflectType)
-import Data.Symbol (class IsSymbol)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
-import Deku.Internal.Region (Anchor(..), Region(..), RegionSpan(..), StaticRegion(..), newStaticRegion)
+import Deku.Internal.Region (Anchor(..), Region(..), RegionSpan(..), StaticRegion(..), fromParent)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3)
 import FRP.Event as Event
 import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
 import FRP.Poll.Unoptimized as UPoll
-import Foreign.Object as Object
 import Safe.Coerce (coerce)
-import Type.Proxy (Proxy(..))
-import Web.DOM (DocumentFragment, Element)
+import Web.DOM (Element)
 import Web.Event.Internal.Types (Event)
-import Web.HTML (HTMLTemplateElement)
 
 -- | A callback function that can be used as a value for a listener.
 newtype Key = Key String
@@ -144,7 +132,9 @@ unset' :: String -> Attribute'
 unset' k = mkEffectFn2 \e (DOMInterpret { unsetAttribute }) ->
   runEffectFn2 unsetAttribute (Key k) (toDekuElement e)
 
-type Attribute' = EffectFn2 Element DOMInterpret Unit
+-- TODO: get rid of `Element` type
+type Attribute' =
+  EffectFn2 Element DOMInterpret Unit
 
 -- | Low level representation of key-value pairs for attributes and listeners.
 -- | In general, this type is for internal use only. In practice, you'll use
@@ -187,22 +177,20 @@ type MakeElement =
 type RemoveElement = EffectFn1 DekuElement Unit
 type RemoveText = EffectFn1 DekuText Unit
 
--- | Type used by Deku backends to give a parent to an element. For internal use only unless you're writing a custom backend.
+-- | Type used by Deku backends to give a parent to an element. For internal use only unless you're writing a custom
+-- | backend.
 type AttachElement =
   EffectFn2 DekuChild Anchor Unit
 
 type AttachText =
   EffectFn2 DekuText Anchor Unit
 
-type AssociateUnsubsToText = EffectFn2 DekuText (Array (Effect Unit)) Unit
-
-type AssociateUnsubsToElement = EffectFn2 DekuElement (Array (Effect Unit))
-  Unit
-
--- | Type used by Deku backends to construct a text element. For internal use only unless you're writing a custom backend.
+-- | Type used by Deku backends to construct a text element. For internal use only unless you're writing a custom
+-- | backend.
 type MakeText = EffectFn1 (Maybe String) DekuText
 
--- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom backend.
+-- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom
+-- | backend.
 type SetText = EffectFn2 String DekuText Unit
 
 -- | Type used by Deku backends to unset an attribute. For internal use only unless you're writing a custom backend.
@@ -216,15 +204,14 @@ type SetProp = EffectFn3 Key Value DekuElement Unit
 type SetCb =
   EffectFn3 Key Cb DekuElement Unit
 
--- | Moves all `Element` and `Text` nodes between `fromBegin` and `fromEnd` after the node pointed to by `after`
+-- | Moves all `Element` and `Text` nodes between first and second argument after the node pointed to by the third
+-- | argument.
 type BeamRegion =
   EffectFn3 Anchor Anchor Anchor Unit
 
-type MakeTemplate = EffectFn1 String HTMLTemplateElement
-type CloneElement = EffectFn1 Element Element
-type CloneTemplate = EffectFn1 HTMLTemplateElement Element
-type TemplateContent = EffectFn1 HTMLTemplateElement DocumentFragment
-
+-- | Generates a place for portals to render into that will not be displayed immediatly.
+type BufferPortal =
+  Effect DekuParent
 
 -- | This is the interpreter that any Deku backend creator needs to impelement.
 -- | Three interpreters are included with Deku: SPA.
@@ -242,12 +229,8 @@ newtype DOMInterpret = DOMInterpret
   , attachText :: AttachText
   , removeText :: RemoveText
   -- 
+  , bufferPortal :: BufferPortal
   , beamRegion :: BeamRegion
-  --
-  , makeTemplate :: MakeTemplate
-  , cloneElement :: CloneElement
-  , cloneTemplate :: CloneTemplate
-  , templateContent :: TemplateContent
   }
 derive instance Newtype DOMInterpret _
 
@@ -307,16 +290,16 @@ newtype Nut =
 
 instance Semigroup Nut where
   append ( Nut a ) ( Nut b ) =
+    -- unrolled version of `fixed`
     Nut $ mkEffectFn2 \psr di -> do
-      -- unrolled version of `fixed`
-      -- first `Nut` should not handle all unsubs, they may still be needed for later elements
+      -- first `Nut` should not handle any unsubs, they may still be needed for later elements
       runEffectFn2 a ( over PSR _ { unsubs = [] } psr ) di 
       runEffectFn2 b psr di
       
 instance Monoid Nut where
   mempty =
+    -- while we contribute no UI elements we still have to handle any unsubs created by our hooks
     Nut $ mkEffectFn2 \psr _ -> do
-      -- while we contribute no UI elements we still have to handle any unsubs created by our hooks
       unsubs <- runEffectFn1 collectUnsubs psr
       
       let 
@@ -592,7 +575,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         runEffectFn2 x (fromDekuElement elt) di
   runEffectFn2 Event.fastForeachE arrAtts handleAtts
 
-  eltRegion <- liftST $ runSTFn1 newStaticRegion ( pure ( ParentStart ( DekuParent elt ) ) )
+  eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
   let
     handleNuts :: EffectFn1 Nut Unit
     handleNuts = mkEffectFn1 \( Nut nut ) ->
@@ -702,71 +685,3 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
 --           runEffectFn3 beaconAttribution ps di stBeacon
 --         NoOutcome -> pure unit
 --       pure beamMe
-
--- pursx
-
-data PursXable = PXAttr (Poll Attribute') | PXStr String | PXNut Nut
-
-class
-  PursxToElement (rl :: RL.RowList Type) (r :: Row Type)
-  | rl -> r where
-  pursxToElement
-    :: Proxy rl
-    -> { | r }
-    -> Object.Object PursXable
-
-instance pursxToElementConsNut ::
-  ( Row.Cons key Nut r' r
-  , PursxToElement rest r
-  , Reflectable key String
-  , IsSymbol key
-  ) =>
-  PursxToElement
-    (RL.Cons key (Nut) rest)
-    r where
-  pursxToElement _ r = do
-    let
-      o = pursxToElement (Proxy :: Proxy rest) r
-    Object.insert (reflectType pxk) (PXNut (get pxk r)) o
-    where
-    pxk = Proxy :: _ key
-
-else instance pursxToElementConsAttr ::
-  ( Row.Cons key (Poll (Attribute deku)) r' r
-  , PursxToElement rest r
-  , Reflectable key String
-  , IsSymbol key
-  ) =>
-  PursxToElement
-    (RL.Cons key (Poll (Attribute deku)) rest)
-    r where
-  pursxToElement _ r = do
-    let
-      o = pursxToElement (Proxy :: Proxy rest) r
-    Object.insert (reflectType pxk)
-      (PXAttr (unsafeUnAttribute <$> (get pxk r)))
-      o
-    where
-    pxk = Proxy :: _ key
-
-else instance pursxToElementConsStr ::
-  ( Row.Cons key String r' r
-  , PursxToElement rest r
-  , Reflectable key String
-  , IsSymbol key
-  ) =>
-  PursxToElement
-    (RL.Cons key String rest)
-    r where
-  pursxToElement _ r = do
-    let
-      o = pursxToElement (Proxy :: Proxy rest) r
-    Object.insert (reflectType pxk)
-      (PXStr (get pxk r))
-      o
-    where
-    pxk = Proxy :: _ key
-
-instance pursxToElementNil ::
-  PursxToElement RL.Nil r where
-  pursxToElement _ _ = Object.empty

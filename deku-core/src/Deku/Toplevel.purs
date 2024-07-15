@@ -3,12 +3,17 @@ module Deku.Toplevel where
 
 import Prelude
 
-import Data.Maybe (Maybe(..), maybe)
-import Deku.Core (Nut(..), PSR(..), toDekuElement)
+import Control.Monad.ST.Class (liftST)
+import Control.Monad.ST.Uncurried (runSTFn1)
+import Data.Maybe (maybe)
+import Deku.Core (Nut(..), PSR(..))
 import Deku.FullDOMInterpret (fullDOMInterpret)
+import Deku.Internal.Entities (DekuParent(..), toDekuElement)
+import Deku.Internal.Region as Region
 import Effect (Effect)
 import Effect.Exception (error, throwException)
 import Effect.Uncurried (runEffectFn2)
+import FRP.Poll (create)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body)
@@ -20,22 +25,18 @@ import Web.HTML.Window (document)
 runInElement
   :: Web.DOM.Element
   -> Nut
-  -> Effect Unit
-runInElement elt (Nut nut) = void $ runEffectFn2 nut
-  ( PSR
-      { parent: toDekuElement elt
-      , fromPortal: false
-      , unsubs: []
-      , beacon: Nothing
-      }
-  )
-  fullDOMInterpret
+  -> Effect ( Effect Unit )
+runInElement elt (Nut nut) = do
+  { poll : lifecycle, push : dispose } <- liftST create
+  region <- liftST $ runSTFn1 Region.fromParent ( DekuParent $ toDekuElement elt )
+  void $ runEffectFn2 nut ( PSR { region, unsubs: [], lifecycle } ) fullDOMInterpret
+  pure $ dispose unit
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
 runInBody
   :: Nut
-  -> Effect Unit
+  -> Effect ( Effect Unit )
 runInBody elt = do
   b' <- window >>= document >>= body
   maybe (throwException (error "Could not find element"))

@@ -2,22 +2,28 @@ module Deku.Interpret where
 
 import Prelude
 
+import Control.Monad.ST.Class (liftST)
+import Data.Array.ST as STArray
 import Data.Exists (Exists, mkExists, runExists)
-import Data.Foldable (for_)
+import Data.Foldable (for_, traverse_)
 import Data.List (List(..), (:))
-import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Maybe (Maybe(..), fromJust, fromMaybe, isJust)
 import Data.Nullable (toMaybe)
 import Deku.Core as Core
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), fromDekuElement, fromDekuText, toDekuElement, toDekuText)
-import Deku.Internal.Region (BoundAnchor(..))
-import Deku.UnsafeDOM (addEventListener, after, cloneElement, cloneTemplate, createElement, createElementNS, createText, eventListener, popCb, prepend, pushCb, removeEventListener, setTextContent, toTemplate)
-import Effect (Effect)
-import Effect.Uncurried (EffectFn2, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
+import Deku.Internal.Region (Anchor(..))
+import Deku.UnsafeDOM (addEventListener, after, createDocumentFragment, createElement, createElementNS, createText, eventListener, popCb, prepend, pushCb, removeEventListener, setTextContent)
+import Effect (Effect, whileE)
+import Effect.Ref as Ref
+import Effect.Uncurried (EffectFn1, EffectFn2, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
+import Partial.Unsafe (unsafePartial)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
+import Unsafe.Reference (unsafeRefEq)
 import Web.DOM (ChildNode, Element, Node)
 import Web.DOM.ChildNode (remove)
 import Web.DOM.Element (removeAttribute, setAttribute)
+import Web.DOM.Node (firstChild, nextSibling)
 import Web.DOM.Text as Text
 import Web.Event.Event (EventType(..))
 import Web.Event.Event as Web
@@ -30,9 +36,7 @@ import Web.HTML.HTMLLinkElement as HTMLLinkElement
 import Web.HTML.HTMLOptGroupElement as HTMLOptGroupElement
 import Web.HTML.HTMLOptionElement as HTMLOptionElement
 import Web.HTML.HTMLSelectElement as HTMLSelectElement
-import Web.HTML.HTMLTemplateElement as HTMLTemplateElement
 import Web.HTML.HTMLTextAreaElement as HTMLTextAreaElement
-
 
 makeElementEffect :: Core.MakeElement
 makeElementEffect = mkEffectFn2 \ns tag -> do
@@ -43,10 +47,10 @@ makeElementEffect = mkEffectFn2 \ns tag -> do
 
 attachElementEffect :: Core.AttachElement
 attachElementEffect =
-  mkEffectFn2 \( DekuChild el ) -> runEffectFn2 attachNodeEffect ( fromDekuElement @Node el )
+  mkEffectFn2 \( DekuChild el ) -> runEffectFn2 attachNodeEffect [ fromDekuElement @Node el ]
 
 setPropEffect :: Core.SetProp
-setPropEffect = mkEffectFn3 \elt' (Core.Key k) (Core.Value v) -> do
+setPropEffect = mkEffectFn3 \(Core.Key k) (Core.Value v) elt' -> do
   let elt = fromDekuElement elt'
   let
     o
@@ -69,7 +73,7 @@ setPropEffect = mkEffectFn3 \elt' (Core.Key k) (Core.Value v) -> do
   o
 
 setCbEffect :: Core.SetCb
-setCbEffect = mkEffectFn3 \elt' (Core.Key k) (Core.Cb v) -> do
+setCbEffect = mkEffectFn3 \(Core.Key k) (Core.Cb v) elt' -> do
   if k == "@self@" then do
     void $ v  ((unsafeCoerce :: DekuElement -> Web.Event) elt')
   else do
@@ -86,7 +90,7 @@ setCbEffect = mkEffectFn3 \elt' (Core.Key k) (Core.Cb v) -> do
     runEffectFn3 pushCb k nl asElt
 
 unsetAttributeEffect :: Core.UnsetAttribute
-unsetAttributeEffect = mkEffectFn2 \elt' (Core.Key k) -> do
+unsetAttributeEffect = mkEffectFn2 \(Core.Key k) elt' -> do
   let asElt = fromDekuElement @Element elt'
   l <- runEffectFn2 popCb k asElt
   let asEventTarget = fromDekuElement @EventTarget elt'
@@ -96,7 +100,7 @@ unsetAttributeEffect = mkEffectFn2 \elt' (Core.Key k) -> do
   removeAttribute k asElt
 
 removeElementEffect :: Core.RemoveElement
-removeElementEffect = mkEffectFn1 \ e -> do
+removeElementEffect = mkEffectFn1 \e -> do
   remove ( fromDekuElement @ChildNode e)
 
 newtype FeI e = FeI
@@ -182,40 +186,60 @@ makeTextEffect = mkEffectFn1 \mstr -> do
 
 attachTextEffect :: Core.AttachText
 attachTextEffect =
-  mkEffectFn2 \txt -> runEffectFn2 attachNodeEffect ( fromDekuText @Node txt )
+  mkEffectFn2 \txt -> runEffectFn2 attachNodeEffect [ fromDekuText @Node txt ]
 
 setTextEffect :: Core.SetText
-setTextEffect = mkEffectFn2 \txt' str -> do
+setTextEffect = mkEffectFn2 \str txt' -> do
   let txt = fromDekuText @Node txt'
   runEffectFn2 setTextContent str txt
 
 removeTextEffect :: Core.RemoveText
-removeTextEffect = mkEffectFn2 \_ t -> do
+removeTextEffect = mkEffectFn1 \t -> do
   remove (Text.toChildNode (fromDekuText t))
 
-beamRegionEffect :: Core.BeamRegion
-beamRegionEffect = mkEffectFn3 \fromBegin fromEnd target -> do
-  pure unit
+bufferPortal :: Core.BufferPortal
+bufferPortal = 
+  DekuParent <<< toDekuElement <$> createDocumentFragment
 
-attachNodeEffect :: EffectFn2 Node BoundAnchor Unit
-attachNodeEffect = mkEffectFn2 \node -> case _ of
+beamRegionEffect :: Core.BeamRegion
+beamRegionEffect = mkEffectFn3 case _, _, _ of
+  _, ParentStart _, _ ->
+    pure unit
+
+  ParentStart ( DekuParent parent ), end, target -> do
+    firstChild ( fromDekuElement @Node parent ) >>= traverse_ \first -> do
+      let
+        endNode :: Node
+        endNode = unsafePartial case end of
+          Element el -> fromDekuElement @Node el
+          Text txt -> fromDekuText @Node txt
+
+      acc <- liftST $ STArray.new
+
+      next <- Ref.new $ Just first
+      whileE ( isJust <$> Ref.read next ) do
+        current <- unsafePartial $ fromJust <$> Ref.read next
+        void $ liftST $ STArray.push current acc
+        
+        if unsafeRefEq current endNode then
+          void $ Ref.write Nothing next
+        else
+          void $ Ref.write <$> nextSibling current <@> next
+
+      nodes <- liftST $ STArray.unsafeFreeze acc
+      runEffectFn2 attachNodeEffect nodes target
+
+  fromBegin, fromEnd, target -> do
+
+    runEffectFn2 attachNodeEffect [] target
+
+attachNodeEffect :: EffectFn2 ( Array Node ) Anchor Unit
+attachNodeEffect = mkEffectFn2 \nodes -> case _ of
   ParentStart ( DekuParent parent ) -> do
-    runEffectFn2 prepend node ( fromDekuElement @Node parent )
+    runEffectFn2 prepend nodes ( fromDekuElement @Node parent )
 
   Element el -> do
-    runEffectFn2 after node ( fromDekuElement @Node el )
+    runEffectFn2 after nodes ( fromDekuElement @Node el )
 
   Text txt -> do
-    runEffectFn2 after node ( fromDekuText @Node txt )
-
-toTemplateEffect :: Core.MakeTemplate
-toTemplateEffect = toTemplate
-
-cloneElementEffect :: Core.CloneElement
-cloneElementEffect = cloneElement
-
-cloneTemplateEffect :: Core.CloneTemplate
-cloneTemplateEffect = cloneTemplate
-
-templateContentEffect :: Core.TemplateContent
-templateContentEffect = mkEffectFn1 HTMLTemplateElement.content
+    runEffectFn2 after nodes ( fromDekuText @Node txt )
