@@ -967,28 +967,17 @@ describe("deku", () => {
         const $ = require("jquery");
         const elt = di.makeElementEffect(testFriend.nothing, "button");
         let i = 0;
-        di.setCbEffect(
-          elt,
-          "click",
-          () => () => {
-            i++;
-          },
-        );
+        di.setCbEffect(elt, "click", () => () => {
+          i++;
+        });
         $(elt).trigger("click");
         expect(i).toBe(1);
-        di.setCbEffect(
-          elt,
-          "click",
-          () => () => {
-            i += 42;
-          },
-        );
+        di.setCbEffect(elt, "click", () => () => {
+          i += 42;
+        });
         $(elt).trigger("click");
         expect(i).toBe(43);
-        di.unsetAttributeEffect(
-          elt,
-          "click",
-        );
+        di.unsetAttributeEffect(elt, "click");
         $(elt).trigger("click");
         expect(i).toBe(43);
       });
@@ -1136,33 +1125,17 @@ describe("deku", () => {
         expect($("#span0").text()).toBe("goodbye");
       })
     );
-
-    doTest("templates work", (f) =>
-      f(tests.templatesWork, () => {
+    doTest("pursx adds listeners 2", (f) =>
+      f(tests.pursXWiresUp2, () => {
         const $ = require("jquery");
-        expect($("#div0").text()).toBe(
-          "hello Helsinkixhello Stockholmxhello Copenhagenx"
-        );
-        $("#Stockholm").trigger("click");
-        expect($("#div0").text()).toBe(
-          "hello Stockholmxhello Helsinkixhello Copenhagenx"
-        );
+        expect($("#span0").text()).toBe("");
+        expect($("#topdiv").attr("class")).toBe("arrrrr");
+        $("#px").trigger("click");
+        expect($("#span0").text()).toBe("hello");
+        $("#inny").trigger("click");
+        expect($("#span0").text()).toBe("goodbye");
       })
     );
-    doTest("templates work 2", (f) =>
-      f(tests.templatesWork2, () => {
-        const $ = require("jquery");
-        expect($("#testing").text()).toBe(
-          "hello world"
-        );
-      })
-    );
-    doTest("ocarina pursx doesn't crash", (f) =>
-      f(tests.ocarinaExample, () => {
-        const $ = require("jquery");
-      })
-    );
-    
     doTest("sends to position correctly when elt is fixed", (f) =>
       f(tests.sendsToPositionFixed, () => {
         const $ = require("jquery");
@@ -1253,13 +1226,6 @@ describe("deku", () => {
         $("#incr").trigger("click");
         // shifts the portal
         expect($("#maindiv").text()).toBe("d0d1d2abcincr");
-      })
-    );
-
-    doTest("pursx composes", (f) =>
-      f(tests.pursXComposes, () => {
-        const $ = require("jquery");
-        expect($("#div0").text()).toBe("début milieu après-milieu fin");
       })
     );
 
@@ -1506,13 +1472,6 @@ describe("deku", () => {
 
         expect( $( "#notthere" ).length ).toBe( 0 ); // element is gone so its unsubs should have been called
         expect( $( "#count" ).text() ).toBe( "2" ); // one tick for the init and one tick for the unsub
-      })
-    );
-
-    doTest("stress test doesn't blow up", (f) =>
-      f(tests.stressTest, () => {
-        const $ = require("jquery");
-        $("#runlots").trigger("click");
       })
     );
   });

@@ -1549,13 +1549,21 @@ instance
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
   ) =>
   PXTagPreAttrValue verb hasAttributed tag "\"" tail onezero pursi pathi purso patho trailing
 
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagPreAttrValue verb hasAttributed tag "'" tail onezero pursi pathi purso patho trailing
+
 --
 class
-  PXTagAttrValue
+  PXTagAttrValueWithWithDoubleQuote
     (verb :: Symbol)
     (hasAttributed :: Boolean)
     (tag :: Symbol)
@@ -1571,549 +1579,3110 @@ class
 
 instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "a" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "b" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "c" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "d" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "e" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "f" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "g" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "h" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "i" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "j" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "k" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "l" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "m" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "n" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "o" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "p" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "q" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "r" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "s" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "t" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "u" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "v" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "w" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "x" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "y" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "z" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "A" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "B" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "C" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "D" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "E" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "F" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "G" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "H" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "I" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "J" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "K" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "L" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "M" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "N" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "O" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "P" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "Q" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "R" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "S" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "T" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "U" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "V" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "W" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "X" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "Y" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "Z" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "0" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "1" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "2" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "3" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "4" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "5" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "6" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "7" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "8" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "9" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag ":" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "," tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag ";" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "'" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "!" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "?" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "@" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "#" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "$" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "%" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "^" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "&" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "*" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "(" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag ")" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "_" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "-" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "=" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "`" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "~" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "<" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag ">" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "/" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "." tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "\\" tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag " " tail onezero pursi pathi purso patho trailing
-
-instance
-  ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
-  ) =>
-  PXTagAttrValue verb hasAttributed tag "\t" tail onezero pursi pathi purso patho trailing
-
-instance
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "a"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "b"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "c"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "d"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "e"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "f"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
   ( Sym.Cons x y tail
-  , PXTagAttrValue verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
   ) =>
-  PXTagAttrValue verb hasAttributed tag "\n" tail onezero pursi pathi purso patho trailing
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "g"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "h"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "i"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "j"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "k"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "l"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "m"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "n"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "o"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "p"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "q"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "r"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "s"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "t"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "u"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "v"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "w"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "x"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "y"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "z"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "A"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "B"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "C"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "D"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "E"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "F"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "G"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "H"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "I"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "J"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "K"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "L"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "M"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "N"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "O"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "P"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "Q"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "R"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "S"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "T"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "U"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "V"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "W"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "X"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "Y"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "Z"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "0"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "1"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "2"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "3"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "4"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "5"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "6"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "7"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "8"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "9"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    ":"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    ","
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    ";"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "'"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "!"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "?"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "@"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "#"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "$"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "%"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "^"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "&"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "*"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "("
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    ")"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "_"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "-"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "="
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "`"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "~"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "<"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    ">"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "/"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "."
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "\\"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    " "
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "\t"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithDoubleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "\n"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+class
+  PXTagAttrValueWithWithSingleQuote
+    (verb :: Symbol)
+    (hasAttributed :: Boolean)
+    (tag :: Symbol)
+    (head :: Symbol)
+    (tail :: Symbol)
+    (onezero :: RL.RowList Symbol)
+    (pursi :: Row Type)
+    (pathi :: Row (RL.RowList Symbol))
+    (purso :: Row Type)
+    (patho :: Row (RL.RowList Symbol))
+    (trailing :: Symbol)
+  | verb hasAttributed tag head tail onezero pursi pathi -> purso patho trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "a"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "b"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "c"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "d"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "e"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "f"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "g"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "h"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "i"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "j"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "k"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "l"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "m"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "n"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "o"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "p"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "q"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "r"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "s"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "t"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "u"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "v"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "w"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "x"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "y"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "z"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "A"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "B"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "C"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "D"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "E"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "F"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "G"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "H"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "I"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "J"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "K"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "L"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "M"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "N"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "O"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "P"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "Q"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "R"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "S"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "T"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "U"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "V"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "W"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "X"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "Y"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "Z"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "0"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "1"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "2"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "3"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "4"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "5"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "6"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "7"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "8"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "9"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    ":"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    ","
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    ";"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "\""
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "!"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "?"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "@"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "#"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "$"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "%"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "^"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "&"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "*"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "("
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    ")"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "_"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "-"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "="
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "`"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "~"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "<"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    ">"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "/"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "."
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "\\"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    " "
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "\t"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagAttrValueWithWithSingleQuote verb hasAttributed tag x y onezero pursi pathi purso patho
+      trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "\n"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
 
 instance
   ( Sym.Cons x y tail
   , PXTagPreAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
   ) =>
-  PXTagAttrValue verb hasAttributed tag "\"" tail onezero pursi pathi purso patho trailing
+  PXTagAttrValueWithWithDoubleQuote verb
+    hasAttributed
+    tag
+    "\""
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
+
+instance
+  ( Sym.Cons x y tail
+  , PXTagPreAttrName verb hasAttributed tag x y onezero pursi pathi purso patho trailing
+  ) =>
+  PXTagAttrValueWithWithSingleQuote verb
+    hasAttributed
+    tag
+    "'"
+    tail
+    onezero
+    pursi
+    pathi
+    purso
+    patho
+    trailing
 
 class
   PXBody

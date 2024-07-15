@@ -1,92 +1,219 @@
 module Deku.Pursx
-  ( pursx
-  , pursx'
-  , template
+  ( Attributable
+  , AttributableE
+  , PursxAllowable
+  , PursxInfo(..)
+  , PursxInfoMap
   , class PursxSubstitutions
-  , class ToElementCache
-  , class TemplateSubstitutions
-  , class EmptyMe
-  , emptyMe
+  , class PursxableToMap
+  , class PursxableToMapRL
+  , pursxableToMap
+  , pursxableToMapRL
+  , lenientPursx'
+  , lenientPursx
+  , pursx'
+  , pursx
   ) where
 
 import Prelude
 
-import Control.Monad.ST.Class (liftST)
-import Control.Monad.ST.Global (Global)
-import Control.Monad.ST.Internal as STRef
-import Control.Plus (empty)
-import Data.Array (null)
-import Data.Array as Array
-import Data.Array.ST as STArray
-import Data.Foldable (foldr, for_)
-import Data.Identity (Identity(..))
-import Data.Maybe (Maybe(..))
-import Data.Nullable (toMaybe)
-import Data.String as String
+import Control.Monad.ST (ST, run)
+import Control.Monad.ST.Ref as STRef
+import Data.Either (Either(..), isLeft, isRight)
+import Data.Exists (Exists, mkExists, runExists)
+import Data.FoldableWithIndex (foldlWithIndex)
+import Data.List (List(..), (:))
+import Data.Map (Map)
+import Data.Map as Map
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Symbol (class IsSymbol, reflectSymbol)
-import Data.TraversableWithIndex (traverseWithIndex)
-import Data.Tuple (Tuple(..))
-import Deku.Attribute (Attribute, unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), DekuChild(..), DekuOutcome(..), DekuParent(..), Nut(..), PSR(..), actOnLifecycleForDyn, actOnLifecycleForElement, eltAttribution, fromDekuText, getLifecycle, notLucky, pump, text, toDekuElement, toDekuText)
-import Deku.Interpret (attributeDynParentForElementEffect)
-import Deku.JSFinalizationRegistry (oneOffFinalizationRegistry)
-import Deku.JSWeakRef (deref, weakRef)
-import Deku.Path (symbolsToArray)
-import Deku.Path as Path
-import Deku.PathWalker (InstructionDelegate(..), MElement, mEltElt, mEltify, processAttPursx, processNutPursx, returnReplacement, returnReplacementIndex, returnReplacementNoIndex)
-import Deku.PathWalker as PW
+import Data.Tuple (uncurry)
+import Deku.Core (Attribute, Nut, attributeAtYourOwnRisk, elementify, text_)
 import Deku.PursxParser as PxP
 import Deku.PxTypes (PxAtt, PxNut)
-import Deku.Some (class AsTypeConstructor, class Labels, EffectOp, Some)
-import Deku.Some as Some
-import Deku.UnsafeDOM (unsafeFirstChildAsElement, unsafeParentNode)
-import Effect (Effect, foreachE)
-import Effect.Exception (error, throwException)
-import Effect.Ref (new)
-import Effect.Uncurried (EffectFn1, EffectFn5, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4, runEffectFn5, runEffectFn8)
-import FRP.Event (fastForeachThunkE)
 import FRP.Poll (Poll)
+import Foreign.Object (Object, toUnfoldable)
 import Foreign.Object as Object
-import Foreign.Object.ST as STObject
-import Foreign.Object.Unsafe (unsafeIndex)
-import Prim.Row as R
 import Prim.Row as Row
 import Prim.RowList as RL
 import Record as Record
+import Type.Equality (class TypeEquals, to)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
-import Web.DOM.DocumentFragment as DocumentFragment
-import Web.DOM.Element as Element
-import Web.DOM.Node (nodeTypeIndex, replaceChild)
-import Web.DOM.Node as Node
-import Web.DOM.Text as Text
 
-class EmptyMe (r :: Row Type) (rl :: RL.RowList Type) | rl -> r where
-  emptyMe :: Proxy rl -> { | r }
+data Htmlparser2
 
-instance EmptyMe () RL.Nil where
-  emptyMe _ = {}
+foreign import createParser
+  :: forall r
+   . (String -> Object String -> ST r Unit)
+  -> (String -> ST r Unit)
+  -> (String -> ST r Unit)
+  -> ST r Htmlparser2
+
+foreign import write :: forall r. Htmlparser2 -> String -> ST r Unit
+
+foreign import end :: forall r. Htmlparser2 -> ST r Unit
+
+newtype Attributable r = Attributable (Poll (Attribute r))
+
+unsafeCastAttributable :: forall a b. Attributable a -> Attributable b
+unsafeCastAttributable = unsafeCoerce
+
+unAttribuable :: forall x. Attributable x -> Poll (Attribute x)
+unAttribuable (Attributable y) = y
+
+type AttributableE = Exists Attributable
+
+type PursxAllowable = Either AttributableE Nut
+
+type PursxInfoMap = Map String PursxAllowable
+data PursxInfo = PursxInfo String PursxInfoMap
+
+instance Semigroup PursxInfo where
+  append (PursxInfo a1 b1) (PursxInfo a2 b2) = PursxInfo (a1 <> a2)
+    (Map.union b1 b2)
+
+instance Monoid PursxInfo where
+  mempty = PursxInfo mempty Map.empty
+
+xa :: forall r. Poll (Attribute r) -> AttributableE
+xa a = mkExists (Attributable a)
+
+useExistingAtt
+  :: forall e. PursxInfoMap -> String -> String -> Poll (Attribute e)
+useExistingAtt mp k v = fromMaybe (pure $ attributeAtYourOwnRisk k v) z
+  where
+  z
+    | k == "data-pursx-att" = case Map.lookup v mp of
+        Just (Left o) -> Just $ unAttribuable $ runExists unsafeCastAttributable
+          o
+        _ -> Nothing
+    | otherwise = Nothing
+
+onOpenTag
+  :: forall r
+   . PursxInfoMap
+  -> STRef.STRef r (List (Array Nut -> Nut))
+  -> String
+  -> Object String
+  -> ST r Unit
+onOpenTag info stack name attributes = do
+  stackValue <- STRef.read stack
+  let
+    backup = elementify Nothing name
+      ( map (uncurry (useExistingAtt info)) $ toUnfoldable
+          attributes
+      )
+    nut
+      | name == "pursx" = case (Object.lookup "data-pursx-elt" attributes) of
+          Just v -> case Map.lookup v info of
+            Just (Right n) -> pure n
+            _ -> backup
+          _ -> backup
+      | otherwise = backup
+  void $ STRef.write
+    (nut : stackValue)
+    stack
+
+onText
+  :: forall r
+   . PursxInfoMap
+  -> STRef.STRef r (List (Array Nut -> Nut))
+  -> String
+  -> ST r Unit
+onText _ stack text = do
+  stackValue <- STRef.read stack
+  void $ case stackValue of
+    Nil -> STRef.write (pure (pure nut)) stack
+    f : rest -> do
+      STRef.write ((\i -> f ([ nut ] <> i)) : rest) stack
+  where
+  nut = text_ text
+
+onCloseTag
+  :: forall r
+   . PursxInfoMap
+  -> STRef.STRef r (List (Array Nut -> Nut))
+  -> String
+  -> ST r Unit
+onCloseTag _ stack _ = do
+  stackValue <- STRef.read stack
+  void $ case stackValue of
+    -- uh oh
+    Nil -> pure unit
+    -- fine, we're done
+    _ : Nil -> pure unit
+    f : g : rest -> do
+      void $ STRef.write ((\i -> g ([ f [] ] <> i)) : rest) stack
+
+purs :: PursxInfo -> Nut
+purs (PursxInfo html i) = run do
+  r <- STRef.new Nil
+  parser <- createParser (onOpenTag i r) (onText i r) (onCloseTag i r)
+  write parser html
+  end parser
+  o <- STRef.read r
+  pure $ case o of
+    Nil -> mempty
+    f : _ -> f []
+
+-- delimiter -- str -- split
+foreign import splitOnDelimiter :: String -> String -> Array String
+
+class PursxableToMap r where
+  pursxableToMap :: { | r } -> Map String PursxAllowable
+
+instance (RL.RowToList r rl, PursxableToMapRL rl r) => PursxableToMap r where
+  pursxableToMap = pursxableToMapRL (Proxy :: _ rl)
+
+class PursxableToMapRL (rl :: RL.RowList Type) r where
+  pursxableToMapRL :: Proxy rl -> { | r } -> Map String PursxAllowable
+
+instance PursxableToMapRL RL.Nil r where
+  pursxableToMapRL _ _ = Map.empty
 
 instance
-  ( IsSymbol k
-  , R.Lacks k r'
-  -- we go from an array to a single attribute
-  -- because of the way `walk` works
-  , R.Cons k (Poll (Attribute e)) r' r
-  , EmptyMe r' rl
+  ( Row.Cons k Nut r' r
+  , IsSymbol k
+  , PursxableToMapRL rest r
   ) =>
-  EmptyMe r (RL.Cons k (Array (Identity (Attribute e))) rl) where
-  emptyMe _ = Record.insert (Proxy :: _ k) empty (emptyMe (Proxy :: _ rl))
-
-instance
-  ( IsSymbol k
-  , R.Lacks k r'
-  , R.Cons k (Poll String) r' r
-  , EmptyMe r' rl
+  PursxableToMapRL (RL.Cons k Nut rest) r where
+  pursxableToMapRL _ r = Map.insert (reflectSymbol (Proxy :: _ k))
+    (Right (Record.get (Proxy :: _ k) r))
+    (pursxableToMapRL (Proxy :: _ rest) r)
+else instance
+  ( TypeEquals z (Poll (Attribute q))
+  , Row.Cons k z r' r
+  , IsSymbol k
+  , PursxableToMapRL rest r
   ) =>
-  EmptyMe r (RL.Cons k (Identity String) rl) where
-  emptyMe _ = Record.insert (Proxy :: _ k) empty (emptyMe (Proxy :: _ rl))
+  PursxableToMapRL (RL.Cons k z rest) r where
+  pursxableToMapRL _ r = Map.insert (reflectSymbol (Proxy :: _ k))
+    (Left (xa (to ((Record.get (Proxy :: _ k) r) :: z))))
+    (pursxableToMapRL (Proxy :: _ rest) r)
+lenientPursx'
+  :: forall r. PursxableToMap r => String -> String -> { | r } -> Nut
+lenientPursx' verb html r = purs $ PursxInfo htmlified mapified
+  where
+  split = splitOnDelimiter verb html
+  ibab i b a =
+    if i `mod` 2 == 0 then b <> a
+    else if (isLeft <$> Map.lookup a mapified) == Just true then b
+      <> " data-pursx-att=\""
+      <> a
+      <> "\" "
+    else if (isRight <$> Map.lookup a mapified) == Just true then b
+      <> "<pursx data-pursx-elt=\""
+      <> a
+      <> "\"></pursx>"
+    else b
+  htmlified = foldlWithIndex ibab "" split
+  mapified = pursxableToMap r
 
+lenientPursx :: forall r. PursxableToMap r => String -> { | r } -> Nut
+lenientPursx = lenientPursx' "~"
+
+-- strict
 class PursxSubstitutions
   :: RL.RowList Type -> Row Type -> Constraint
 class PursxSubstitutions nostr str | nostr -> str
@@ -100,478 +227,34 @@ instance
   PursxSubstitutions (RL.Cons k PxNut c) r
 
 instance
-  ( Row.Cons k (Poll (Attribute deku)) d r
+  ( Row.Cons k (Poll (Attribute q)) d r
   , PursxSubstitutions c d
   ) =>
   PursxSubstitutions (RL.Cons k PxAtt c)
     r
 
-class TemplateSubstitutions
-  :: RL.RowList Type -> Row Type -> Constraint
-class TemplateSubstitutions nostr str | nostr -> str
-
-instance TemplateSubstitutions RL.Nil ()
-
-instance
-  ( Row.Cons k (Identity String) d r
-  , TemplateSubstitutions c d
-  ) =>
-  TemplateSubstitutions (RL.Cons k PxNut c) r
-
-else instance
-  ( Row.Cons k (Array (Identity (Attribute deku))) d r
-  , TemplateSubstitutions c d
-  ) =>
-  TemplateSubstitutions (RL.Cons k PxAtt c)
-    r
-
-class ToElementCache (rl :: RL.RowList Type) (r :: Row Type) | rl -> r
-
-instance ToElementCache RL.Nil ()
-instance
-  ( Row.Cons k (EffectOp a) r' r
-  , ToElementCache c r'
-  ) =>
-  ToElementCache (RL.Cons k a c) r
-
-pursx
-  :: forall (@html :: Symbol) p pl r0 rl0 r rl plr path scrunched
-   . IsSymbol html
-  => PxP.PXStart "~" " " html r0 p
-  => RL.RowToList r0 rl0
-  => RL.RowToList r rl
-  => PursxSubstitutions rl0 r
-  => RL.RowToList p pl
-  => Path.SymbolsToArray rl
-  => Path.RLReverses pl plr
-  => Path.Process plr path
-  => Path.Scrunch path scrunched
-  => PW.PathWalker scrunched r
-  => { | r }
-  -> Nut
-pursx = pursx' @"~" @html
-
 pursx'
-  :: forall @verb (@html :: Symbol) r0 rl0 p pl r rl plr path scrunched
+  :: forall @verb (@html :: Symbol) r0 rl0 p r rl
    . IsSymbol html
   => IsSymbol verb
   => PxP.PXStart verb " " html r0 p
   => RL.RowToList r0 rl0
   => RL.RowToList r rl
   => PursxSubstitutions rl0 r
-  => RL.RowToList p pl
-  => Path.SymbolsToArray rl
-  => Path.RLReverses pl plr
-  => Path.Process plr path
-  => Path.Scrunch path scrunched
-  => PW.PathWalker scrunched r
+  => PursxableToMap r
   => { | r }
   -> Nut
-pursx' r = Nut $ mkEffectFn2
-  \ps@(PSR psr)
-   di@(DOMInterpret di') ->
-    do
-      let
-        -- various proxies
-        rlProxy = Proxy :: _ rl
-        verbProxy = Proxy :: _ verb
-        verbSymbol = reflectSymbol verbProxy
-        htmlProxy = Proxy :: _ html
-        scrunch = Proxy :: _ scrunched
-        syms = symbolsToArray rlProxy
-        -- remove all ~s~ from the html attributes
-        html = foldr
-          ( \(Tuple isAtt pat) h ->
-              String.replaceAll
-                (String.Pattern (verbSymbol <> pat <> verbSymbol))
-                ( String.Replacement $
-                    if isAtt then ""
-                    else "<!--" <> verbSymbol <> pat <> verbSymbol <> "-->"
-                )
-                h
-          )
-          (reflectSymbol htmlProxy)
-          syms
-      -- turn the pursx i into a template
-      eltX <- runEffectFn1 di'.toTemplate html
-      -- clone the template
-      elt <- runEffectFn1 di'.cloneTemplate eltX
-      let unsafeMElement = mEltify (Element.toNode elt)
-      runEffectFn3 eltAttribution ps di (toDekuElement elt)
-      -- walk through the template, getting all of the elements and
-      -- setting up listeners
-      -- for example, processAttPursx handles all of the attributes in
-      -- pursx
-      runEffectFn5
-        ( PW.walk
-            :: EffectFn5 InstructionDelegate (Proxy scrunched) { | r }
-                 DOMInterpret
-                 MElement
-                 Unit
-        )
-        ( InstructionDelegate
-            { processAttribute: mkEffectFn4 \a b c d -> runEffectFn4
-                processAttPursx
-                a
-                b
-                c
-                d
-            , processPollString: mkEffectFn4 \a b c d -> runEffectFn4
-                ( processNutPursx
-                    ( mkEffectFn2 \q z -> runEffectFn3 returnReplacementNoIndex
-                        verbSymbol
-                        q
-                        z
-                    )
-                )
-                a
-                (text b)
-                c
-                d
-            , processNut: mkEffectFn4 \a b c d -> runEffectFn4
-                ( processNutPursx
-                    ( mkEffectFn2 \q z -> runEffectFn3 returnReplacementNoIndex
-                        verbSymbol
-                        q
-                        z
-                    )
-                )
-                a
-                b
-                c
-                d
-            }
-        )
-        scrunch
-        r
-        di
-        unsafeMElement
-      -- standard unsub management, just like in elementify
+pursx' = lenientPursx' (reflectSymbol (Proxy :: _ verb))
+  (reflectSymbol (Proxy :: _ html))
 
-      unsubs <- liftST $ STArray.new
-      when (not (Array.null psr.unsubs)) do
-        void $ liftST $ STArray.pushAll psr.unsubs unsubs
-
-      -- if the element will be finalized, do all cancellations as well
-      runEffectFn2 oneOffFinalizationRegistry elt (thunker unsubs)
-
-      -- standard lifecycle management
-      for_ (getLifecycle psr.beacon) \{ l, s, e, lucky } -> runEffectFn8
-        actOnLifecycleForElement
-        psr.fromPortal
-        lucky
-        unsubs
-        l
-        di
-        (toDekuElement elt)
-        s
-        e
-      pure $ DekuElementOutcome (toDekuElement elt)
-
-template
-  :: forall (@html :: Symbol) p pl r0 rl0 elementCache r rl rr plr path
-       scrunched withLifecycle maybes rEmpty
+pursx
+  :: forall (@html :: Symbol) r0 rl0 p r rl
    . IsSymbol html
-  -- r0 is the original row we get from parsing the pursx
-  -- it contains all of the attributes and template rows
-  -- pointing to PxNut and PxAtt respectively
   => PxP.PXStart "~" " " html r0 p
-  -- r0 as a rowlist
   => RL.RowToList r0 rl0
-  -- r contains the valid types for this template
-  => TemplateSubstitutions rl0 r
-  -- turn r to a row list
   => RL.RowToList r rl
-  -- turn p (the path) to a row list
-  => RL.RowToList p pl
-  -- get all the symbols for atts when we do string replacement
-  => Path.SymbolsToArray rl
-  -- create a row of empty polls from r
-  -- needed for the walk recurser
-  => EmptyMe rEmpty rl
-  => Path.RLReverses pl plr
-  => Path.Process plr path
-  => Path.Scrunch path scrunched
-  => PW.PathWalker scrunched rEmpty
-  => Row.Lacks "sendTo" r
-  => Row.Lacks "remove" r
-  => Row.Union (sendTo :: Int, remove :: Unit) r rr
-  => RL.RowToList rr withLifecycle
-  => Labels withLifecycle
-  => AsTypeConstructor EffectOp rr elementCache
-  => AsTypeConstructor Maybe rr maybes
-  => Poll (Poll (Some rr))
+  => PursxSubstitutions rl0 r
+  => PursxableToMap r
+  => { | r }
   -> Nut
-template p = Nut $ mkEffectFn2
-  \(PSR psr)
-   di'@(DOMInterpret di) -> do
-    let
-      -- various proxies
-      rlProxy = Proxy :: _ rl
-      htmlProxy = Proxy :: _ html
-      verbProxy = Proxy :: _ "~"
-      verbSymbol = reflectSymbol verbProxy
-      scrunch = Proxy :: _ scrunched
-      syms = symbolsToArray rlProxy
-      -- remove all ~foo~ attributes from the html
-      html = foldr
-        ( \(Tuple isAtt pat) h ->
-            String.replaceAll
-              (String.Pattern (verbSymbol <> pat <> verbSymbol))
-              ( String.Replacement $
-                  if isAtt then ""
-                  else "<!--" <> verbSymbol <> pat <> verbSymbol <> "-->"
-              )
-              h
-        )
-        (reflectSymbol htmlProxy)
-        syms
-    -- we don't want to recurse over text nodes constantly checking their content
-    -- so we create a cache that helps us with that (we'll see)
-    -- it used later
-    isStringCache :: STObject.STObject Global MElement <- liftST
-      STObject.new
-    eltX <- runEffectFn1 di.toTemplate html
-    ctnt <- runEffectFn1 di.templateContent eltX
-    eltBase <- runEffectFn1 unsafeFirstChildAsElement
-      ( (unsafeCoerce :: Node.Node -> Element.Element) $ DocumentFragment.toNode
-          ctnt
-      )
-    -- we set up a dummy cache that we 
-    -- just use so that we can have the same walking al
-    let emptiness = emptyMe (Proxy :: _ rl)
-    -- we know we'll need this walk many times, so
-    -- we take it out of the loop
-    eltusMaximus <- runEffectFn1 di.cloneElement eltBase
-    let
-      walker =
-        PW.walk
-          :: EffectFn5 InstructionDelegate (Proxy scrunched)
-               { | rEmpty }
-               DOMInterpret
-               MElement
-               Unit
-  
-    -- this bloc splits all of the dynamic text nodes into
-    -- separate text nodes, which makes recursing over them faster as
-    -- we only need to do previousNode instead of splitText
-    runEffectFn5
-      walker
-      ( InstructionDelegate
-          { processAttribute: mkEffectFn4 \_ _ _ _ -> pure unit
-          , processPollString: mkEffectFn4 \a _ _ dd -> do
-              void $ liftST $ STObject.poke a dd isStringCache
-              void $ runEffectFn3
-                returnReplacementNoIndex
-                verbSymbol
-                a
-                dd
-          , processNut: mkEffectFn4 \_ _ _ _ -> throwException
-              ( error
-                  "Programming error: template should not be called with a string"
-              )
-          }
-      )
-      scrunch
-      emptiness
-      (DOMInterpret di)
-      (unsafeCoerce (mEltify $ Element.toNode eltusMaximus))
-    let
-      frozenIsStringcache =
-        ( unsafeCoerce
-            :: STObject.STObject Global MElement -> Object.Object MElement
-        ) isStringCache
-    indices <- traverseWithIndex
-      (\k v -> runEffectFn3 returnReplacementIndex verbSymbol k v)
-      frozenIsStringcache
-    -- as usual, we start off lucky
-    -- even though this can never be unlucky as templates can only
-    -- ever be populated with elements (not dyn), we still need it
-    -- just cuz of the type contracts
-    lucky <- new true
-    -- alas, our parent is not lucky, for a template is a dyn after all
-    for_ psr.beacon (_.lucky >>> notLucky)
-    -- it's a dyn, so we need an opening beacon
-    dbStart <- di.makeOpenBeacon
-
-    -- normal unsub management
-    unsubs <- liftST $ STArray.new
-    when (not (null psr.unsubs)) do
-      void $ liftST $ STArray.pushAll psr.unsubs unsubs
-
-    -- also need a close beacon
-    dbEnd <- di.makeCloseBeacon
-    -- do the same close beacon management as our dyn friends
-    case psr.beacon of
-      Nothing -> do
-        runEffectFn2 di.attributeBeaconParent dbStart (DekuParent psr.parent)
-        runEffectFn2 di.attributeBeaconParent dbEnd (DekuParent psr.parent)
-      Just y -> do
-        runEffectFn5 di.attributeDynParentForBeacons dbStart dbEnd
-          y.start
-          y.end
-          Nothing
-    -- this is our element cache
-    -- we don't even try to have a semblance of type
-    -- safety here
-    -- but we do have unit tests!
-    -- we'll be casting this to { | elementCache } later
-    oooooooooo :: STRef.STRef Global (Object.Object Void) <- liftST $ STRef.new
-      Object.empty
-    -- this is the delegate we use in the walker
-    let
-      walkerInstructionDelegate = InstructionDelegate
-        { processAttribute: mkEffectFn4 \s _ _ eeeeeeeee -> do
-            let eeekkee = mEltElt eeeeeeeee
-            eeeee <- runEffectFn1 weakRef eeekkee
-            let
-              effn
-                :: forall t
-                 . EffectFn1 (Array (Identity (Attribute t))) Unit
-              effn = mkEffectFn1 \atts -> foreachE atts
-                \(Identity att) -> do
-                  zz <- runEffectFn1 deref eeeee
-                  for_ (toMaybe zz) \mmmm ->
-                    runEffectFn2 (unsafeUnAttribute att) mmmm
-                      (DOMInterpret di)
-            void $ liftST $ STRef.modify
-              ( Object.insert s $
-                  ( unsafeCoerce
-                      :: forall t
-                       . EffectFn1 (Array (Identity (Attribute t)))
-                           Unit
-                      -> Void
-                  ) effn
-              )
-              oooooooooo
-        , processPollString: mkEffectFn4 \s _ _ e' -> do
-            let iiiii = unsafeIndex indices s
-            realDeal0 <- runEffectFn2 returnReplacement iiiii
-              e'
-            realDekal <-
-              if nodeTypeIndex realDeal0 == 3 then pure
-                ((unsafeCoerce :: Node.Node -> Text.Text) realDeal0)
-              else do
-                nt <- runEffectFn1 di.makeText Nothing
-                par <- runEffectFn1 unsafeParentNode realDeal0
-                replaceChild
-                  (Text.toNode $ fromDekuText nt)
-                  realDeal0
-                  par
-                pure (fromDekuText nt)
-            realDeal <- runEffectFn1 weakRef realDekal
-            let
-              effn = mkEffectFn1 \(Identity str) -> do
-                zz <- runEffectFn1 deref realDeal
-                for_ (toMaybe zz) \mmmm ->
-                  runEffectFn2
-                    di.setText
-                    (toDekuText mmmm)
-                    str
-            void $ liftST $ STRef.modify
-              ( Object.insert s $
-                  ( unsafeCoerce
-                      :: EffectFn1 (Identity String) Unit -> Void
-                  ) effn
-              )
-              oooooooooo
-        , processNut: mkEffectFn4 \_ _ _ _ -> throwException
-            ( error
-                "Programming error: template should not be called with a nut"
-            )
-        }
-
-    -- this is the function that does everything
-    -- everrrryyyyyythingggggg
-    -- the deal is that, when a dyn comes down the pipe
-    -- either it is in the cache or not
-    -- if its not, we WALK and fill the cache
-    -- after it's in the cache, we can look at the `Some`
-    -- and use it to do our attribute and text wizardry
-    let
-      oh'hi = mkEffectFn1 \pp -> do
-        unsubs2 <- liftST $ STArray.new
-        -- clone the template
-        elt <- runEffectFn1 di.cloneElement eltBase
-        -- wire it up for the walking algo
-        let unsafeMElement = mEltify (Element.toNode elt)
-        -- insert our fledgling element into the dyn
-        runEffectFn5 attributeDynParentForElementEffect lucky
-          (DekuChild (toDekuElement elt))
-          dbStart
-          dbEnd
-          Nothing
-        -- this is our element cache
-        -- we don't even try to have a semblance of type
-        -- safety here
-        -- but we do have unit tests!
-        -- we'll be casting this to { | elementCache } later
-        void $ liftST $ STRef.write Object.empty oooooooooo
-        -- we walk down to cache a bunch of functions in
-        -- `oooooooooo` that will do our element manipulation
-        -- these are either EffectFn1 attribute or
-        -- EffectFn1 text
-        runEffectFn5
-          walker
-          walkerInstructionDelegate
-          scrunch
-          emptiness
-          (DOMInterpret di)
-          unsafeMElement
-        -- next up, our `oooooooooo` needs to listen for SEND
-        -- and REMOVE events
-        shmelt <- runEffectFn1 weakRef elt
-        void $ liftST $ flip STRef.modify oooooooooo
-          $ Object.union
-              ( unsafeCoerce
-                  { sendTo: mkEffectFn1 \i -> do
-                      gelt' <- runEffectFn1 deref shmelt
-                      for_ (toMaybe gelt') \gelt ->
-                        runEffectFn5 di.sendToPosForElement lucky i
-                          (toDekuElement gelt)
-                          dbStart
-                          dbEnd
-                  , remove: mkEffectFn1 \_ ->
-                      do
-                        gelt' <- runEffectFn1 deref shmelt
-                        for_ (toMaybe gelt') \gelt ->
-                          runEffectFn2 di.removeForElement
-                            false
-                            (toDekuElement gelt)
-                        u <- liftST $ STArray.unsafeFreeze unsubs2
-                        foreachE u \i -> i
-                  }
-              )
-        -- finally, we set the element cache so that next time all of
-        -- this is "easier"
-        uuuuu <- liftST $ STRef.read $
-          ( unsafeCoerce
-              :: STRef.STRef Global (Object.Object Void)
-              -> STRef.STRef Global { | elementCache }
-          ) oooooooooo
-
-        pump
-          unsubs2
-          pp
-          $ mkEffectFn1 \value -> runEffectFn2 Some.foreachE value uuuuu
-          
-    -- now that we have our element cache, we do something with it
-    pump unsubs p oh'hi
-    -- listen to the lifecycle
-    for_ (getLifecycle psr.beacon) \{ l, s, e } -> runEffectFn8
-      actOnLifecycleForDyn
-      psr.fromPortal
-      unsubs
-      l
-      di'
-      dbStart
-      dbEnd
-      s
-      e
-    -- finally, return the beacon
-    pure $ DekuBeaconOutcome dbStart
-
-thunker :: STArray.STArray Global (Effect Unit) -> Effect Unit
-thunker unsubs = do
-  unsubsX <- liftST $ STArray.unsafeFreeze unsubs
-  runEffectFn1 fastForeachThunkE unsubsX
+pursx = lenientPursx' "~" (reflectSymbol (Proxy :: _ html))

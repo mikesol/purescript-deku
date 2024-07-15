@@ -22,85 +22,94 @@ import Tidy.Codegen.Class (class ToName, class ToQualifiedName, defaultToName, t
 import Tidy.Codegen.Types (BinaryOp, Qualified(..))
 
 newtype Ctor = Ctor String
+
 derive newtype instance Eq Ctor
 derive newtype instance Ord Ctor
 derive instance Newtype Ctor _
-instance ToQualifiedName Ctor Proper where toQualifiedName = toQualifiedName <<< Qualified Nothing <<< Proper <<< un Ctor
-instance ToName Ctor Label where toName = defaultToName <<< un Ctor
-instance ToName Ctor Proper where toName = toName <<< Proper <<< un Ctor
-instance ToName Ctor Ident where toName = toName <<< Ident <<< un Ctor
+instance ToQualifiedName Ctor Proper where
+  toQualifiedName = toQualifiedName <<< Qualified Nothing <<< Proper <<< un Ctor
+
+instance ToName Ctor Label where
+  toName = defaultToName <<< un Ctor
+
+instance ToName Ctor Proper where
+  toName = toName <<< Proper <<< un Ctor
+
+instance ToName Ctor Ident where
+  toName = toName <<< Ident <<< un Ctor
 
 type Interface =
-    { ctor :: Ctor
-    , name :: String
-    , bases :: Array Ctor
-    , members :: Array ( Ctor /\ TypeStub )
-    }
+  { ctor :: Ctor
+  , name :: String
+  , bases :: Array Ctor
+  , members :: Array (Ctor /\ TypeStub)
+  }
 
 type Element =
-    { ctor :: Ctor -- name in source
-    , ns :: TagNS
-    , tag :: String
-    , interface :: Ctor
-    }
+  { ctor :: Ctor -- name in source
+  , ns :: TagNS
+  , tag :: String
+  , interface :: Ctor
+  }
 
 type Event =
-    { name :: String
-    , index :: Ctor
-    , type :: TypeStub
-    }
+  { name :: String
+  , index :: Ctor
+  , type :: TypeStub
+  }
 
 type Attribute =
-    { name :: String -- name in document
-    , index :: Ctor -- name in source and row index
-    , type :: TypeStub -- type of this attribute
-    , keywords :: Array Keyword -- valid values for this attribute
-    }
+  { name :: String -- name in document
+  , index :: Ctor -- name in source and row index
+  , type :: TypeStub -- type of this attribute
+  , keywords :: Array Keyword -- valid values for this attribute
+  }
 
 type Keyword =
-    { original :: String
-    , name :: String
-    }
+  { original :: String
+  , name :: String
+  }
 
 data TagNS = HTML | SVG | MathML
+
 derive instance Eq TagNS
 derive instance Ord TagNS
 
 xhtmlNamespace :: TagNS -> Maybe String
 xhtmlNamespace = case _ of
-    HTML ->
-        Nothing
-    
-    SVG ->
-        Just "http://www.w3.org/2000/svg"
+  HTML ->
+    Nothing
 
-    MathML ->
-        Just "http://www.w3.org/1998/Math/MathML"
+  SVG ->
+    Just "http://www.w3.org/2000/svg"
+
+  MathML ->
+    Just "http://www.w3.org/1998/Math/MathML"
 
 -- | Creates a valid attribute definition. Invalid definitions get converted to `Nothing`.
 mkAttribute :: Array String -> String -> Maybe Attribute
 mkAttribute keywords name =
-    Just
-        { name
-        , index : Ctor $ unSnake $ escape name
-        , type : TypeString
-        , keywords : flip map keywords case _ of
-            "I" ->
-                { original : "I", name : "UpperI" }
-            
-            "i" ->
-                { original : "i", name : "LowerI" }
+  Just
+    { name
+    , index: Ctor $ unSnake $ escape name
+    , type: TypeString
+    , keywords: flip map keywords case _ of
+        "I" ->
+          { original: "I", name: "UpperI" }
 
-            "A" ->
-                { original : "A", name : "UpperA" }
+        "i" ->
+          { original: "i", name: "LowerI" }
 
-            "a" ->
-                { original : "a", name : "LowerA" }
+        "A" ->
+          { original: "A", name: "UpperA" }
 
-            original ->
-                { original, name :  capitalize $ unSnake original }
-        
-        }
+        "a" ->
+          { original: "a", name: "LowerA" }
+
+        original ->
+          { original, name: capitalize $ unSnake original }
+
+    }
 
 -- | Creates a valid event definition. Invalid definitions get converted to `Nothing`.
 mkHandler :: String -> String -> Maybe Event
@@ -108,184 +117,188 @@ mkHandler :: String -> String -> Maybe Event
 -- has type "FocusEvent"
 mkHandler "Event" "blur" = Nothing
 mkHandler "Event" "focus" = Nothing
-mkHandler type_ name = case String.stripPrefix ( String.Pattern "DOM" ) name of
-    Just mutEvent ->
-        Just
-            { name
-            , index : Ctor $ "dom" <> mutEvent
-            , type : webEvents type_
-            } 
-    
-    _ ->
-        Just
-            { name : name
-            , index: Ctor $ unSnake name
-            , type : webEvents type_ 
-            }
+mkHandler type_ name = case String.stripPrefix (String.Pattern "DOM") name of
+  Just mutEvent ->
+    Just
+      { name
+      , index: Ctor $ "dom" <> mutEvent
+      , type: webEvents type_
+      }
+
+  _ ->
+    Just
+      { name: name
+      , index: Ctor $ unSnake name
+      , type: webEvents type_
+      }
 
 -- | Creates a valid element Invalid definitions get converted to `Nothing`.
 mkElement :: TagNS -> String -> String -> Maybe Element
 mkElement ns interface name =
-    Just
-        { ctor : Ctor $ unSnake $ escape name
-        , ns : ns
-        , tag : name
-        , interface : Ctor interface
-        }
+  Just
+    { ctor: Ctor $ unSnake $ escape name
+    , ns: ns
+    , tag: name
+    , interface: Ctor interface
+    }
 
 -- | Creates a valid interface definition. Invalid definitions get converted to `Nothing`.
-mkInterface :: Array String -> Array ( Ctor /\ TypeStub ) -> String -> Maybe Interface
+mkInterface
+  :: Array String -> Array (Ctor /\ TypeStub) -> String -> Maybe Interface
 mkInterface _ _ "LinkStyle" = Nothing -- does not seem to exist
 mkInterface bases members name =
-    Just { name, ctor : Ctor name, members, bases : coerce bases }
+  Just { name, ctor: Ctor name, members, bases: coerce bases }
 
 escape :: String -> String
 escape n =
-    if not $ Set.member n reserved then n else case String.uncons n of
-        -- c -> k
-        Just { head, tail } | head == c ->
-            String.singleton k <> tail
+  if not $ Set.member n reserved then n
+  else case String.uncons n of
+    -- c -> k
+    Just { head, tail } | head == c ->
+      String.singleton k <> tail
 
-        -- else prefix with x
-        _ ->
-            "x" <> n
+    -- else prefix with x
+    _ ->
+      "x" <> n
 
-    where
+  where
 
-    c = codePointFromChar 'c'
-    k = codePointFromChar 'k'
+  c = codePointFromChar 'c'
+  k = codePointFromChar 'k'
 
 reserved :: Set String
 reserved =
-    Set.fromFoldable
-        [ "data"
-        , "if"
-        , "in"
-        , "class"
-        , "type"
-        , "module"
-        ]
+  Set.fromFoldable
+    [ "data"
+    , "if"
+    , "in"
+    , "class"
+    , "type"
+    , "module"
+    ]
 
 unSnake :: String -> String
 unSnake =
-    _.acc
-        <<< foldl
-            (\{ dropped, acc } c -> case dropped, c of
-                _, '-' -> { dropped : true, acc }
-                _, ' ' -> { dropped : true, acc }
-                _, '/' -> { dropped : true, acc }
-                _, ':' -> { dropped : true, acc }
-                true, _ -> { dropped : false, acc : acc <> ( String.toUpper $ CU.singleton c ) }
-                _, _ -> { dropped : false, acc : acc <> CU.singleton c }
-            )
-            { dropped : false, acc : "" }
-        <<< CU.toCharArray
+  _.acc
+    <<< foldl
+      ( \{ dropped, acc } c -> case dropped, c of
+          _, '-' -> { dropped: true, acc }
+          _, ' ' -> { dropped: true, acc }
+          _, '/' -> { dropped: true, acc }
+          _, ':' -> { dropped: true, acc }
+          true, _ ->
+            { dropped: false, acc: acc <> (String.toUpper $ CU.singleton c) }
+          _, _ -> { dropped: false, acc: acc <> CU.singleton c }
+      )
+      { dropped: false, acc: "" }
+    <<< CU.toCharArray
 
 capitalize :: String -> String
-capitalize = 
-    String.splitAt 1 >>> \{ before, after } -> String.toUpper before <> after
+capitalize =
+  String.splitAt 1 >>> \{ before, after } -> String.toUpper before <> after
 
-declHandler :: String -> Array ( BinaryOp ( Expr Void ) ) -> Declaration Void
+declHandler :: String -> Array (BinaryOp (Expr Void)) -> Declaration Void
 declHandler name ops =
-    unsafePartial
-        $ declValue name []
-        $ exprApp ( exprIdent "Functor.map" ) [ exprHandler ops ]
+  unsafePartial
+    $ declValue name []
+    $ exprApp (exprIdent "Functor.map") [ exprHandler ops ]
 
-exprHandler :: Partial => Array ( BinaryOp ( Expr Void ) ) -> Expr Void
+exprHandler :: Partial => Array (BinaryOp (Expr Void)) -> Expr Void
 exprHandler ops =
-    exprOp ( exprIdent "Deku.Attribute.unsafeAttribute" )
-        $ ops
+  exprOp (exprIdent "Deku.Attribute.unsafeAttribute")
+    $ ops
 
 typeArrayed :: Type Void -> Type Void
-typeArrayed t = 
-    unsafePartial $ typeApp ( typeCtor "Array" ) $ pure t
+typeArrayed t =
+  unsafePartial $ typeApp (typeCtor "Array") $ pure t
 
 typePolled :: Type Void -> Type Void
 typePolled t =
-    unsafePartial $ typeApp ( typeCtor "FRP.Poll.Poll" ) $ pure t
+  unsafePartial $ typeApp (typeCtor "FRP.Poll.Poll") $ pure t
 
-typeFunked ::  String -> Type Void -> Type Void
+typeFunked :: String -> Type Void -> Type Void
 typeFunked f t =
-    unsafePartial $ typeApp ( typeVar f ) $ pure t
+  unsafePartial $ typeApp (typeVar f) $ pure t
 
 typeAttributed :: Type Void -> Type Void
 typeAttributed t =
-    unsafePartial $ typeApp ( typeCtor "Deku.Attribute.Attribute" ) $ pure t
+  unsafePartial $ typeApp (typeCtor "Deku.Attribute.Attribute") $ pure t
 
 typeNut :: Type Void
 typeNut =
-    unsafePartial $ typeCtor "Nut"
+  unsafePartial $ typeCtor "Nut"
 
 typeIndexedAt :: Ctor -> Type Void -> Type Void
 typeIndexedAt n t =
-    unsafePartial $ typeRow [ n /\ t ] $ Just $ typeVar "r"
+  unsafePartial $ typeRow [ n /\ t ] $ Just $ typeVar "r"
 
 nominal :: Ctor
 nominal =
-    Ctor "__tag"
+  Ctor "__tag"
 
 selfKey :: String
 selfKey =
-    "@self@"
-    
+  "@self@"
+
 -- | Elements that have an implementation in the current web-html package.
 webElements :: Array TypeStub
-webElements = map (\intf -> TypeEvent intf ( "Web.HTML." <> intf ) )
-    [ "HTMLAnchorElement"
-    , "HTMLAreaElement"
-    , "HTMLAudioElement"
-    , "HTMLBRElement"
-    , "HTMLBaseElement"
-    , "HTMLBodyElement"
-    , "HTMLButtonElement"
-    , "HTMLCanvasElement"
-    , "HTMLDivElement"
-    , "HTMLEmbedElement"
-    , "HTMLFormElement"
-    , "HTMLHRElement"
-    , "HTMLHeadElement"
-    , "HTMLHtmlElement"
-    , "HTMLInputElement"
-    , "HTMLLabelElement"
-    , "HTMLLegendElement"
-    , "HTMLLinkElement"
-    , "HTMLMapElement"
-    , "HTMLMetaElement"
-    , "HTMLMeterElement"
-    , "HTMLObjectElement"
-    , "HTMLOptionElement"
-    , "HTMLOutputElement"
-    , "HTMLParagraphElement"
-    , "HTMLParamElement"
-    , "HTMLPreElement"
-    , "HTMLProgressElement"
-    , "HTMLScriptElement"
-    , "HTMLSelectElement"
-    , "HTMLSourceElement"
-    , "HTMLSpanElement"
-    , "HTMLStyleElement"
-    , "HTMLTableDataCellElement"
-    , "HTMLTableElement"
-    , "HTMLTemplateElement"
-    , "HTMLTextAreaElement"
-    , "HTMLTimeElement"
-    , "HTMLTitleElement"
-    , "HTMLTrackElement"
-    , "HTMLVideoElement"
-    ]
+webElements = map (\intf -> TypeEvent intf ("Web.HTML." <> intf))
+  [ "HTMLAnchorElement"
+  , "HTMLAreaElement"
+  , "HTMLAudioElement"
+  , "HTMLBRElement"
+  , "HTMLBaseElement"
+  , "HTMLBodyElement"
+  , "HTMLButtonElement"
+  , "HTMLCanvasElement"
+  , "HTMLDivElement"
+  , "HTMLEmbedElement"
+  , "HTMLFormElement"
+  , "HTMLHRElement"
+  , "HTMLHeadElement"
+  , "HTMLHtmlElement"
+  , "HTMLInputElement"
+  , "HTMLLabelElement"
+  , "HTMLLegendElement"
+  , "HTMLLinkElement"
+  , "HTMLMapElement"
+  , "HTMLMetaElement"
+  , "HTMLMeterElement"
+  , "HTMLObjectElement"
+  , "HTMLOptionElement"
+  , "HTMLOutputElement"
+  , "HTMLParagraphElement"
+  , "HTMLParamElement"
+  , "HTMLPreElement"
+  , "HTMLProgressElement"
+  , "HTMLScriptElement"
+  , "HTMLSelectElement"
+  , "HTMLSourceElement"
+  , "HTMLSpanElement"
+  , "HTMLStyleElement"
+  , "HTMLTableDataCellElement"
+  , "HTMLTableElement"
+  , "HTMLTemplateElement"
+  , "HTMLTextAreaElement"
+  , "HTMLTimeElement"
+  , "HTMLTitleElement"
+  , "HTMLTrackElement"
+  , "HTMLVideoElement"
+  ]
 
 -- | Looks up the name of an event interface name and returns the best fitting `TypeStub`.
 webEvents :: String -> TypeStub
 webEvents ev = case ev of
-    "CompositionEvent" -> TypeEvent "CompositionEvent" "Web.UIEvent.CompositionEvent"
-    "FocusEvent" -> TypeEvent "FocusEvent" "Web.UIEvent.FocusEvent"
-    "MouseEvent" -> TypeEvent "MouseEvent" "Web.UIEvent.MouseEvent"
-    "KeyboardEvent" -> TypeEvent "KeyboardEvent" "Web.UIEvent.KeyboardEvent"
-    "UIEvent" -> TypeEvent "UIEvent" "Web.UIEvent.UIEvent"
-    "DragEvent" -> TypeEvent "DragEvent" "Web.HTML.Event.DragEvent"
-    "DragEvent" -> TypeEvent "DragEvent" "Web.HTML.Event.DragEvent"
-    "TrackEvent" -> TypeEvent "TrackEvent" "Web.HTML.Event.TrackEvent"
-    "PointerEvent" -> TypeEvent "PointerEvent" "Web.PointerEvent.PointerEvent"
-    "TouchEvent" -> TypeEvent "TouchEvent" "Web.TouchEvent.TouchEvent"
+  "CompositionEvent" -> TypeEvent "CompositionEvent"
+    "Web.UIEvent.CompositionEvent"
+  "FocusEvent" -> TypeEvent "FocusEvent" "Web.UIEvent.FocusEvent"
+  "MouseEvent" -> TypeEvent "MouseEvent" "Web.UIEvent.MouseEvent"
+  "KeyboardEvent" -> TypeEvent "KeyboardEvent" "Web.UIEvent.KeyboardEvent"
+  "UIEvent" -> TypeEvent "UIEvent" "Web.UIEvent.UIEvent"
+  "DragEvent" -> TypeEvent "DragEvent" "Web.HTML.Event.DragEvent"
+  "DragEvent" -> TypeEvent "DragEvent" "Web.HTML.Event.DragEvent"
+  "TrackEvent" -> TypeEvent "TrackEvent" "Web.HTML.Event.TrackEvent"
+  "PointerEvent" -> TypeEvent "PointerEvent" "Web.PointerEvent.PointerEvent"
+  "TouchEvent" -> TypeEvent "TouchEvent" "Web.TouchEvent.TouchEvent"
 
-    _ -> TypeEvent "Event" "Web.Event.Internal.Types"
+  _ -> TypeEvent "Event" "Web.Event.Internal.Types"

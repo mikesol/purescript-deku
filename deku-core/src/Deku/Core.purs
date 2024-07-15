@@ -78,8 +78,7 @@ module Deku.Core
   , useStateTagged'
   , withUnsub
   , xdata
-  )
-  where
+  ) where
 
 import Prelude
 
@@ -108,9 +107,6 @@ import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
 import FRP.Poll.Unoptimized as UPoll
 import Foreign.Object as Object
-import Prim.Row as Row
-import Prim.RowList as RL
-import Record (get)
 import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 import Web.DOM (DocumentFragment, Element)
@@ -153,7 +149,7 @@ type Attribute' = EffectFn2 Element DOMInterpret Unit
 -- | Low level representation of key-value pairs for attributes and listeners.
 -- | In general, this type is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
-newtype Attribute :: forall k. k -> Type
+newtype Attribute :: Row Type -> Type
 newtype Attribute i = Attribute Attribute'
 
 -- | For internal use only, exported to be used by other modules. Ignore this.

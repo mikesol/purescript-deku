@@ -47,11 +47,14 @@ class PXTagPostAttrName (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symb
 instance (Sym.Cons x y tail, PXTagPreAttrValue  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagPostAttrName  verb hasAttributed tag "=" tail onezero pursi pathi purso patho trailing
 --
 class PXTagPreAttrValue (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb hasAttributed tag head tail onezero pursi pathi -> purso patho trailing
-instance (Sym.Cons x y tail, PXTagAttrValue  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagPreAttrValue  verb hasAttributed tag "\"" tail onezero pursi pathi purso patho trailing
+instance (Sym.Cons x y tail, PXTagAttrValueWithWithDoubleQuote  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagPreAttrValue  verb hasAttributed tag "\"" tail onezero pursi pathi purso patho trailing
+instance (Sym.Cons x y tail, PXTagAttrValueWithWithSingleQuote  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagPreAttrValue  verb hasAttributed tag "'" tail onezero pursi pathi purso patho trailing
 --
-class PXTagAttrValue (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb hasAttributed tag head tail onezero pursi pathi -> purso patho trailing
+class PXTagAttrValueWithWithDoubleQuote (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb hasAttributed tag head tail onezero pursi pathi -> purso patho trailing
+class PXTagAttrValueWithWithSingleQuote (verb :: Symbol) (hasAttributed :: Boolean) (tag :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb hasAttributed tag head tail onezero pursi pathi -> purso patho trailing
 
-instance (Sym.Cons x y tail, PXTagPreAttrName  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagAttrValue  verb hasAttributed tag "\"" tail onezero pursi pathi purso patho trailing
+instance (Sym.Cons x y tail, PXTagPreAttrName  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagAttrValueWithWithDoubleQuote  verb hasAttributed tag "\"" tail onezero pursi pathi purso patho trailing
+instance (Sym.Cons x y tail, PXTagPreAttrName  verb hasAttributed tag x y onezero pursi pathi purso patho trailing) => PXTagAttrValueWithWithSingleQuote  verb hasAttributed tag "'" tail onezero pursi pathi purso patho trailing
 class PXBody (verb :: Symbol) (head :: Symbol) (tail :: Symbol) (onezero :: RL.RowList Symbol) (pursi :: Row Type)  (pathi :: Row (RL.RowList Symbol)) (purso :: Row Type) (patho :: Row (RL.RowList Symbol)) (trailing :: Symbol) |  verb tail onezero pursi pathi -> purso patho trailing
 
 

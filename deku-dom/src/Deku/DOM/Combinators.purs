@@ -7,41 +7,16 @@ import Data.Maybe (Maybe)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Deku.Attribute (Attribute, unsafeAttribute, unset')
 import Deku.DOM.Self as Self
-import Deku.Some (class IsSubsetRL)
-import Deku.Some as Some
 import Effect (Effect)
 import Effect.Aff (Milliseconds(..), delay, launchAff_)
 import Effect.Class (liftEffect)
 import Prim.Row as Row
-import Prim.RowList as RL
 import Type.Proxy (Proxy(..))
 import Web.DOM (Element)
 import Web.Event.Event as Web
 import Web.Event.EventTarget (EventTarget)
-import Web.HTML.HTMLInputElement as IE
-import Web.HTML.HTMLTextAreaElement as TAE
 import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
 import Web.HTML.HTMLSelectElement as SE
-
-templated_
-  :: forall f r sr rl x
-   . Functor f
-  => RL.RowToList r rl
-  => IsSubsetRL rl sr
-  => f x
-  -> Record r
-  -> f (Some.Some sr)
-templated_ e v = e <#> \_ -> Some.inj v
-
-templatedMap_
-  :: forall f a r sr rl
-   . Functor f
-  => RL.RowToList r rl
-  => IsSubsetRL rl sr
-  => f a
-  -> (a -> Record r)
-  -> f (Some.Some sr)
-templatedMap_ e v = e <#> \i -> Some.inj (v i)
 
 transformOn
   :: ∀ a b r f
