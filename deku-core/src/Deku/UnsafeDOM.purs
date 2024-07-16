@@ -1,3 +1,4 @@
+-- maybe remove this module in favor of just using Web.DOM
 module Deku.UnsafeDOM where
 
 import Prelude

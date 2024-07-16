@@ -15,7 +15,7 @@ import Deku.Internal.Region (Anchor(..))
 import Deku.UnsafeDOM (addEventListener, after, createDocumentFragment, createElement, createElementNS, createText, eventListener, popCb, prepend, pushCb, removeEventListener, setTextContent)
 import Effect (Effect, whileE)
 import Effect.Ref as Ref
-import Effect.Uncurried (EffectFn1, EffectFn2, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
+import Effect.Uncurried (EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
 import Partial.Unsafe (unsafePartial)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
@@ -207,21 +207,34 @@ beamRegionEffect = mkEffectFn3 case _, _, _ of
     pure unit
 
   ParentStart ( DekuParent parent ), end, target -> do
-    firstChild ( fromDekuElement @Node parent ) >>= traverse_ \first -> do
-      let
-        endNode :: Node
-        endNode = unsafePartial case end of
-          Element el -> fromDekuElement @Node el
-          Text txt -> fromDekuText @Node txt
+    firstChild ( fromDekuElement @Node parent ) >>= traverse_ \first ->
+      runEffectFn3 beamNodes first ( toNode end ) target 
+
+  fromBegin, fromEnd, target -> do
+    let
+      beginNode = toNode fromBegin
+      endNode = toNode fromEnd
+    
+    -- if beginning equals the end `nextSibling` would overshoot, so just check now and abort
+    if unsafeRefEq beginNode endNode then
+      pure unit
+    else
+      nextSibling beginNode >>= traverse_ \first ->
+        runEffectFn3 beamNodes first endNode target
+
+  where 
+
+  beamNodes :: EffectFn3 Node Node Anchor Unit
+  beamNodes = mkEffectFn3 \first end target -> do
 
       acc <- liftST $ STArray.new
-
       next <- Ref.new $ Just first
+
       whileE ( isJust <$> Ref.read next ) do
         current <- unsafePartial $ fromJust <$> Ref.read next
         void $ liftST $ STArray.push current acc
         
-        if unsafeRefEq current endNode then
+        if unsafeRefEq current end then
           void $ Ref.write Nothing next
         else
           void $ Ref.write <$> nextSibling current <@> next
@@ -229,9 +242,10 @@ beamRegionEffect = mkEffectFn3 case _, _, _ of
       nodes <- liftST $ STArray.unsafeFreeze acc
       runEffectFn2 attachNodeEffect nodes target
 
-  fromBegin, fromEnd, target -> do
-
-    runEffectFn2 attachNodeEffect [] target
+  toNode :: Anchor -> Node
+  toNode a = unsafePartial case a of
+          Element el -> fromDekuElement @Node el
+          Text txt -> fromDekuText @Node txt
 
 attachNodeEffect :: EffectFn2 ( Array Node ) Anchor Unit
 attachNodeEffect = mkEffectFn2 \nodes -> case _ of
