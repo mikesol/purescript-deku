@@ -1,11 +1,11 @@
 -- | `Region`s are used to figure out the bounds of collections of managed elements. The difficulty lies mostly in empty
 -- | managed regions, they have nothing to get a hold of and need to be managed outside of the DOM. To communicate the
--- | presence or absence of elements, `Region`s have to use `Bump` to signal to their parents that they contain an
--- | element that can be used to locate a region or `Clear` to signal that no elements to locate.
+-- | presence or absence of elements, `Region`s have to use `Bump Just` to signal to their parents that they contain an
+-- | element that can be used to locate a region or `Bump Nothing` to signal that it contains no elements to locate.
 -- |
 -- | It is then the responsibilty of the parent to use the information of all its children to provide correct `Bound`
--- | information to i.e. `DOMInterpret` to use `attachElement` or `beamRegion`. A `Bump` causes all following `Region`s
--- | to update their begin(and their end when empty) until a new non-empty region is found. A `Clear` causes the
+-- | information to i.e. `DOMInterpret` to use `attachElement` or `beamRegion`. A `Bump Just` causes all following `Region`s
+-- | to update their begin(and their end when empty) until a new non-empty region is found. A `Bump Nothing` causes the
 -- | inverse. First a non-empty `Region` has be found which will be used to update the beginning of all following empty
 -- | `Region`s until a new non-empty `Region` is found.
 module Deku.Internal.Region
@@ -14,7 +14,9 @@ module Deku.Internal.Region
     , Region(..)
     , StaticRegion(..)
     , RegionSpan(..)
+    , Bump
     , fromParent
+    , newStaticRegion
     ) where
 
 import Prelude
@@ -28,7 +30,7 @@ import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Foldable (traverse_)
 import Data.Maybe (Maybe(..), fromJust, fromMaybe)
-import Data.Newtype (class Newtype, un)
+import Data.Newtype (class Newtype)
 import Deku.Internal.Entities (DekuElement, DekuParent, DekuText)
 import FRP.Event (createPure)
 import FRP.Poll (Poll, pollFromEvent, stRefToPoll)
@@ -43,10 +45,7 @@ type Bound =
     ST.ST Global Anchor
 
 type Bump =
-    STFn1 Bound Global Unit
-
-type Clear =
-    ST.ST Global Unit
+    STFn1 ( Maybe Bound ) Global Unit
 
 -- | Region that supports adding, moving and removing new child regions.
 newtype Region = Region
@@ -57,7 +56,7 @@ newtype Region = Region
     , sendTo :: STFn1 Int Global Unit
     , remove :: ST.ST Global Unit
 
-    , static :: StaticRegion
+    , bump :: Bump
     }
 derive instance Newtype Region _
 
@@ -65,6 +64,7 @@ derive instance Newtype Region _
 newtype StaticRegion = StaticRegion
     { end :: Bound
     , span :: ST.ST Global RegionSpan
+    , region :: ST.ST Global Region
     , element :: STFn1 Anchor Global Unit
     }
 derive instance Newtype StaticRegion _
@@ -97,8 +97,8 @@ newtype RegionSpan =
     RegionSpan ( STFn1 ( Maybe Int ) Global Region )
 derive instance Newtype RegionSpan _
 
-newSpan :: STFn3 Bound Bump Clear Global RegionSpan
-newSpan = mkSTFn3 \parent parentBump parentClear -> do
+newSpan :: STFn2 Bound Bump Global RegionSpan
+newSpan = mkSTFn2 \parent parentBump -> do
     children <- STArray.new
     -- bound owned by an element outside of this region
     
@@ -130,15 +130,15 @@ newSpan = mkSTFn3 \parent parentBump parentClear -> do
                 runSTFn1 readSharedBound managed.end
 
             bump :: Bump
-            bump = mkSTFn1 \bound -> do
-                runSTFn3 bumpBound bound managed children
-                whenM ( runSTFn2 isLastBound managed children ) ( runSTFn1 parentBump bound )
+            bump = mkSTFn1 case _ of
+                Nothing -> do
+                    runSTFn2 clearBound managed children
+                    whenM ( runSTFn1 isClear children ) do
+                        runSTFn1 parentBump Nothing
 
-            clear :: Clear
-            clear = do
-                runSTFn2 clearBound managed children
-                whenM ( runSTFn1 isClear children ) do
-                    parentClear
+                b@( Just bound ) -> do
+                    runSTFn3 bumpBound bound managed children
+                    whenM ( runSTFn2 isLastBound managed children ) ( runSTFn1 parentBump b )
 
             sendTo :: STFn1 Int Global Unit
             sendTo = mkSTFn1 \pos -> do
@@ -173,23 +173,22 @@ newSpan = mkSTFn3 \parent parentBump parentClear -> do
 
             remove :: ST.ST Global Unit
             remove = do
-                clear
+                runSTFn1 bump Nothing
                 finalIx <- ix
                 void $ STArray.splice finalIx ( finalIx + 1 ) [] children
                 runSTFn3 fixManaged finalIx updateIx children
 
-        static <- runSTFn3 newStaticRegion begin bump clear
-        pure $ Region { begin, end, position, sendTo, remove, static }
+        pure $ Region { begin, end, position, sendTo, remove, bump }
 
 -- | Determines the final `Bound` and runs the provided effect on it.
 -- | ASSUMES that the last element is not the parent.
-rebumpLast :: STFn2 ( STFn1 Bound Global Unit ) ( STArray.STArray Global ManagedRegion ) Global Unit
+rebumpLast :: STFn2 Bump ( STArray.STArray Global ManagedRegion ) Global Unit
 rebumpLast = mkSTFn2 \bump children -> do
     length <- STArray.length children
     STArray.peek ( length - 1 ) children >>= traverse_ \lastRegion -> do
         end <- ST.read lastRegion.end
         bound <- ST.read end.ref
-        runSTFn1 bump bound
+        runSTFn1 bump $ Just bound
 
 -- | Uses the bound information to infer if the whole span is empty.
 isClear :: STFn1 ( STArray.STArray Global ManagedRegion ) Global Boolean
@@ -383,44 +382,56 @@ isSpanning = case _ of
     Spanning _ -> true
     _ -> false
 
-newStaticRegion :: STFn3 Bound Bump Clear Global StaticRegion
-newStaticRegion = mkSTFn3 \parent bump clear -> do
+newStaticRegion :: STFn2 Bound Bump Global StaticRegion
+newStaticRegion = mkSTFn2 \parent bump -> do
     spanCounter <- ST.new (-1) -- making the first span 0
     -- when any static element is added it can not be removed by this static region so this anchor can be used to bump 
     -- when the last child span signals a clear
     state <- ST.new $ Anchored parent
 
     end <- ST.new parent
+    let
+        findOrCreateSpan :: ST.ST Global RegionSpan
+        findOrCreateSpan = ST.read state >>= case _ of
+            Anchored begin -> do
+                spanIx <- ST.modify ( add 1 ) spanCounter
+                span <- runSTFn2 newSpan
+                    ( begin )
+                    ( mkSTFn1 case _ of
+                        Nothing ->
+                            whenM ( eq spanIx <$> ST.read spanCounter ) do
+                                void $ ST.write begin end
+                                -- only signal clear when we are the first and only span
+                                when ( spanIx == 0 ) $ runSTFn1 bump Nothing
+                        
+                        a@( Just anchor ) ->
+                            whenM ( eq spanIx <$> ST.read spanCounter ) do
+                                void $ ST.write anchor end
+                                runSTFn1 bump a
+                    )
+
+                pure span
+
+            Spanning span ->
+                pure span
+
     pure $ StaticRegion
         { end : join $ ST.read end
         , span : do
             -- find or create a span
-            RegionSpan span <- ST.read state >>= case _ of
-                Anchored begin -> do
-                    spanIx <- ST.modify ( add 1 ) spanCounter
-                    span <- runSTFn3 newSpan
-                        ( begin )
-                        ( mkSTFn1 \a -> whenM ( eq spanIx <$> ST.read spanCounter ) do
-                            void $ ST.write a end
-                            runSTFn1 bump a
-                        )
-                        ( whenM ( eq spanIx <$> ST.read spanCounter ) do
-                            void $ ST.write begin end
-                            -- only signal clear when we are the first and only span
-                            when ( spanIx == 0 ) clear
-                        )
-
-                    pure span
-
-                Spanning span ->
-                    pure span
+            RegionSpan span <- findOrCreateSpan
             
             -- allocate a new region
             Region region <- runSTFn1 span Nothing
 
             -- create a single span in that region, this double allocation is necessary to isolate two spans in the same
             -- static region.
-            ( un StaticRegion region.static ).span
+            StaticRegion static <- runSTFn2 newStaticRegion region.begin region.bump
+            static.span
+
+        , region : do
+            RegionSpan span <- findOrCreateSpan
+            runSTFn1 span Nothing
 
         , element : mkSTFn1 \anchor' -> do
             let anchor = pure anchor'
@@ -431,9 +442,9 @@ newStaticRegion = mkSTFn3 \parent bump clear -> do
                 void $ ST.modify ( add 1 ) spanCounter
             
             void $ ST.write anchor end
-            runSTFn1 bump anchor
+            runSTFn1 bump $ Just anchor
         }
 
 fromParent :: STFn1 DekuParent Global StaticRegion
 fromParent = 
-    mkSTFn1 \parent -> runSTFn3 newStaticRegion ( pure $ ParentStart parent ) ( mkSTFn1 \_ -> pure unit ) mempty
+    mkSTFn1 \parent -> runSTFn2 newStaticRegion ( pure $ ParentStart parent ) ( mkSTFn1 \_ -> pure unit )
