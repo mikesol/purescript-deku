@@ -191,6 +191,7 @@ else instance
   pursxableToMapRL _ r = Map.insert (reflectSymbol (Proxy :: _ k))
     (Left (xa (to ((Record.get (Proxy :: _ k) r) :: z))))
     (pursxableToMapRL (Proxy :: _ rest) r)
+
 lenientPursx'
   :: forall r. PursxableToMap r => String -> String -> { | r } -> Nut
 lenientPursx' verb html r = purs $ PursxInfo htmlified mapified

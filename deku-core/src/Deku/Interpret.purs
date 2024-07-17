@@ -42,12 +42,13 @@ makeElementEffect :: Core.MakeElement
 makeElementEffect = mkEffectFn2 \ns tag -> do
   elt <- case coerce ns :: Maybe String of
     Nothing -> runEffectFn1 createElement (coerce tag)
-    Just ns' -> runEffectFn2 createElementNS ( coerce ns' ) (coerce tag)
+    Just ns' -> runEffectFn2 createElementNS (coerce ns') (coerce tag)
   pure $ toDekuElement elt
 
 attachElementEffect :: Core.AttachElement
 attachElementEffect =
-  mkEffectFn2 \( DekuChild el ) -> runEffectFn2 attachNodeEffect [ fromDekuElement @Node el ]
+  mkEffectFn2 \(DekuChild el) -> runEffectFn2 attachNodeEffect
+    [ fromDekuElement @Node el ]
 
 setPropEffect :: Core.SetProp
 setPropEffect = mkEffectFn3 \(Core.Key k) (Core.Value v) elt' -> do
@@ -75,7 +76,7 @@ setPropEffect = mkEffectFn3 \(Core.Key k) (Core.Value v) elt' -> do
 setCbEffect :: Core.SetCb
 setCbEffect = mkEffectFn3 \(Core.Key k) (Core.Cb v) elt' -> do
   if k == "@self@" then do
-    void $ v  ((unsafeCoerce :: DekuElement -> Web.Event) elt')
+    void $ v ((unsafeCoerce :: DekuElement -> Web.Event) elt')
   else do
     let asElt = fromDekuElement @Element elt'
     l <- runEffectFn2 popCb k asElt
@@ -101,7 +102,7 @@ unsetAttributeEffect = mkEffectFn2 \(Core.Key k) elt' -> do
 
 removeElementEffect :: Core.RemoveElement
 removeElementEffect = mkEffectFn1 \e -> do
-  remove ( fromDekuElement @ChildNode e)
+  remove (fromDekuElement @ChildNode e)
 
 newtype FeI e = FeI
   { f :: Boolean -> e -> Effect Unit, e :: Element -> Maybe e }
@@ -168,7 +169,7 @@ disableables =
 
 getDisableable :: Element -> List (Exists FeI) -> Maybe (Exists FeO)
 getDisableable elt = go
-  
+
   where
 
   go Nil = Nothing
@@ -198,7 +199,7 @@ removeTextEffect = mkEffectFn1 \t -> do
   remove (Text.toChildNode (fromDekuText t))
 
 bufferPortal :: Core.BufferPortal
-bufferPortal = 
+bufferPortal =
   DekuParent <<< toDekuElement <$> createDocumentFragment
 
 beamRegionEffect :: Core.BeamRegion
@@ -206,15 +207,15 @@ beamRegionEffect = mkEffectFn3 case _, _, _ of
   _, ParentStart _, _ ->
     pure unit
 
-  ParentStart ( DekuParent parent ), end, target -> do
-    firstChild ( fromDekuElement @Node parent ) >>= traverse_ \first ->
-      runEffectFn3 beamNodes first ( toNode end ) target 
+  ParentStart (DekuParent parent), end, target -> do
+    firstChild (fromDekuElement @Node parent) >>= traverse_ \first ->
+      runEffectFn3 beamNodes first (toNode end) target
 
   fromBegin, fromEnd, target -> do
     let
       beginNode = toNode fromBegin
       endNode = toNode fromEnd
-    
+
     -- if beginning equals the end `nextSibling` would overshoot, so just check now and abort
     if unsafeRefEq beginNode endNode then
       pure unit
@@ -222,38 +223,38 @@ beamRegionEffect = mkEffectFn3 case _, _, _ of
       nextSibling beginNode >>= traverse_ \first ->
         runEffectFn3 beamNodes first endNode target
 
-  where 
+  where
 
   beamNodes :: EffectFn3 Node Node Anchor Unit
   beamNodes = mkEffectFn3 \first end target -> do
 
-      acc <- liftST $ STArray.new
-      next <- Ref.new $ Just first
+    acc <- liftST $ STArray.new
+    next <- Ref.new $ Just first
 
-      whileE ( isJust <$> Ref.read next ) do
-        current <- unsafePartial $ fromJust <$> Ref.read next
-        void $ liftST $ STArray.push current acc
-        
-        if unsafeRefEq current end then
-          void $ Ref.write Nothing next
-        else
-          void $ Ref.write <$> nextSibling current <@> next
+    whileE (isJust <$> Ref.read next) do
+      current <- unsafePartial $ fromJust <$> Ref.read next
+      void $ liftST $ STArray.push current acc
 
-      nodes <- liftST $ STArray.unsafeFreeze acc
-      runEffectFn2 attachNodeEffect nodes target
+      if unsafeRefEq current end then
+        void $ Ref.write Nothing next
+      else
+        void $ Ref.write <$> nextSibling current <@> next
+
+    nodes <- liftST $ STArray.unsafeFreeze acc
+    runEffectFn2 attachNodeEffect nodes target
 
   toNode :: Anchor -> Node
   toNode a = unsafePartial case a of
-          Element el -> fromDekuElement @Node el
-          Text txt -> fromDekuText @Node txt
+    Element el -> fromDekuElement @Node el
+    Text txt -> fromDekuText @Node txt
 
-attachNodeEffect :: EffectFn2 ( Array Node ) Anchor Unit
+attachNodeEffect :: EffectFn2 (Array Node) Anchor Unit
 attachNodeEffect = mkEffectFn2 \nodes -> case _ of
-  ParentStart ( DekuParent parent ) -> do
-    runEffectFn2 prepend nodes ( fromDekuElement @Node parent )
+  ParentStart (DekuParent parent) -> do
+    runEffectFn2 prepend nodes (fromDekuElement @Node parent)
 
   Element el -> do
-    runEffectFn2 after nodes ( fromDekuElement @Node el )
+    runEffectFn2 after nodes (fromDekuElement @Node el)
 
   Text txt -> do
-    runEffectFn2 after nodes ( fromDekuText @Node txt )
+    runEffectFn2 after nodes (fromDekuText @Node txt)

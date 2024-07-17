@@ -25,18 +25,19 @@ import Web.HTML.Window (document)
 runInElement
   :: Web.DOM.Element
   -> Nut
-  -> Effect ( Effect Unit )
+  -> Effect (Effect Unit)
 runInElement elt (Nut nut) = do
-  { poll : lifecycle, push : dispose } <- liftST create
-  region <- liftST $ runSTFn1 Region.fromParent ( DekuParent $ toDekuElement elt )
-  void $ runEffectFn2 nut ( PSR { region, unsubs: [], lifecycle } ) fullDOMInterpret
+  { poll: lifecycle, push: dispose } <- liftST create
+  region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
+  void $ runEffectFn2 nut (PSR { region, unsubs: [], lifecycle })
+    fullDOMInterpret
   pure $ dispose unit
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
 runInBody
   :: Nut
-  -> Effect ( Effect Unit )
+  -> Effect (Effect Unit)
 runInBody elt = do
   b' <- window >>= document >>= body
   maybe (throwException (error "Could not find element"))

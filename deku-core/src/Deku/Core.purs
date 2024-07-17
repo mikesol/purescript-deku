@@ -125,7 +125,7 @@ cb = Cb <<< ((map <<< map) (const true))
 
 prop' :: String -> String -> Attribute'
 prop' k v = mkEffectFn2 \e (DOMInterpret { setProp }) ->
-  runEffectFn3 setProp (Key k) (Value v) (toDekuElement e) 
+  runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 cb' :: String -> Cb -> Attribute'
 cb' k v = mkEffectFn2 \e (DOMInterpret { setCb }) ->
@@ -156,12 +156,15 @@ unsafeAttribute
 unsafeAttribute = Attribute
 
 attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
-attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setProp }) ->
-  runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
+attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2
+  \e (DOMInterpret { setProp }) ->
+    runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
-callbackWithCaution :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
-callbackWithCaution k v = unsafeAttribute $ mkEffectFn2 \e (DOMInterpret { setCb }) ->
-  runEffectFn3 setCb (Key k) (Cb v) (toDekuElement e)
+callbackWithCaution
+  :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
+callbackWithCaution k v = unsafeAttribute $ mkEffectFn2
+  \e (DOMInterpret { setCb }) ->
+    runEffectFn3 setCb (Key k) (Cb v) (toDekuElement e)
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
@@ -235,29 +238,31 @@ newtype DOMInterpret = DOMInterpret
   , bufferPortal :: BufferPortal
   , beamRegion :: BeamRegion
   }
+
 derive instance Newtype DOMInterpret _
 
-collectUnsubs :: EffectFn1 PSR ( STArray.STArray Global ( Effect Unit ) )
-collectUnsubs = mkEffectFn1 \( PSR psr ) -> do
+collectUnsubs :: EffectFn1 PSR (STArray.STArray Global (Effect Unit))
+collectUnsubs = mkEffectFn1 \(PSR psr) -> do
   unsubs <- liftST $ STArray.new
-  when ( not ( Array.null psr.unsubs ) ) do
+  when (not (Array.null psr.unsubs)) do
     void $ liftST $ STArray.pushAll psr.unsubs unsubs
   pure unsubs
 
-disposeUnsubs :: EffectFn1 ( STArray.STArray Global ( Effect Unit ) ) Unit
+disposeUnsubs :: EffectFn1 (STArray.STArray Global (Effect Unit)) Unit
 disposeUnsubs = mkEffectFn1 \unsubs -> do
-  runEffectFn1 Event.fastForeachThunkE =<< liftST ( STArray.unsafeFreeze unsubs )
+  runEffectFn1 Event.fastForeachThunkE =<< liftST (STArray.unsafeFreeze unsubs)
 
 -- | Handles an optimized `Poll` by running the effect on each emitted value. Any resulting subscription gets written to 
 -- | the given cleanup array.
-pump :: forall a
+pump
+  :: forall a
    . STArray.STArray Global (Effect Unit)
   -> Poll a
   -> EffectFn1 a Unit
   -> Effect Unit
 pump associations p eff =
   go p
-  
+
   where
 
   handleEvent :: Event.Event a -> Effect Unit
@@ -271,14 +276,14 @@ pump associations p eff =
     OnlyPure x -> runEffectFn2 Event.fastForeachE x eff
     OnlyPoll x -> do
       bang <- liftST $ Event.create
-      handleEvent ( UPoll.sample x bang.event )
+      handleEvent (UPoll.sample x bang.event)
       bang.push identity
     PureAndEvent x y -> do
-      go ( OnlyPure x )
-      go ( OnlyEvent y )
+      go (OnlyPure x)
+      go (OnlyEvent y)
     PureAndPoll x y -> do
-      go ( OnlyPure x )
-      go ( OnlyPoll y )
+      go (OnlyPure x)
+      go (OnlyPoll y)
 
 newtype PSR = PSR
   { lifecycle :: Poll.Poll Unit
@@ -286,31 +291,32 @@ newtype PSR = PSR
   , region :: StaticRegion
   , unsubs :: Array (Effect Unit)
   }
+
 derive instance Newtype PSR _
 
 newtype Nut =
   Nut (EffectFn2 PSR DOMInterpret Unit)
 
 instance Semigroup Nut where
-  append ( Nut a ) ( Nut b ) =
+  append (Nut a) (Nut b) =
     -- unrolled version of `fixed`
     Nut $ mkEffectFn2 \psr di -> do
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
-      runEffectFn2 a ( over PSR _ { unsubs = [] } psr ) di 
+      runEffectFn2 a (over PSR _ { unsubs = [] } psr) di
       runEffectFn2 b psr di
-      
+
 instance Monoid Nut where
   mempty =
     -- while we contribute no UI elements we still have to handle any unsubs created by our hooks
     Nut $ mkEffectFn2 \psr _ -> do
       unsubs <- runEffectFn1 collectUnsubs psr
-      
-      let 
+
+      let
         handleLifecycle :: EffectFn1 Unit Unit
         handleLifecycle =
           mkEffectFn1 \_ -> runEffectFn1 disposeUnsubs unsubs
 
-      pump unsubs ( un PSR psr ).lifecycle handleLifecycle
+      pump unsubs (un PSR psr).lifecycle handleLifecycle
 
 -- hooks
 
@@ -398,8 +404,8 @@ useRefST a e f = Nut $ mkEffectFn2 \psr di -> do
   { event, push } <- liftST $ Event.create
   u <- Event.subscribe (Poll.sample e event) \i -> void $ liftST $ ST.write i r
   push identity
-  let Nut nut = f ( ST.read r )
-  runEffectFn2 nut ( withUnsub u psr ) di
+  let Nut nut = f (ST.read r)
+  runEffectFn2 nut (withUnsub u psr) di
 
 useState' :: forall a. Hook ((a -> Effect Unit) /\ Poll a)
 useState' f = Nut $ mkEffectFn2 \psr di -> do
@@ -436,58 +442,58 @@ dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
 useDyn
   :: forall value
    . Poll (Tuple (Maybe Int) value)
-  -> Hook ( DynControl value )
+  -> Hook (DynControl value)
 useDyn p = useDynWith p dynOptions
 
 useDynAtBeginning
   :: forall value
    . Poll value
-  -> Hook ( DynControl value )
+  -> Hook (DynControl value)
 useDynAtBeginning b = useDynAtBeginningWith b dynOptions
 
 useDynAtBeginningWith
   :: forall value
    . Poll value
   -> DynOptions value
-  -> Hook ( DynControl value )
+  -> Hook (DynControl value)
 useDynAtBeginningWith e = useDynWith (map (Just 0 /\ _) e)
 
 useDynAtEnd
   :: forall value
    . Poll value
-  -> Hook ( DynControl value )
+  -> Hook (DynControl value)
 useDynAtEnd b = useDynAtEndWith b dynOptions
 
 useDynAtEndWith
   :: forall value
    . Poll value
   -> DynOptions value
-  -> Hook ( DynControl value )
+  -> Hook (DynControl value)
 useDynAtEndWith e = useDynWith (map (Nothing /\ _) e)
 
 useDynWith
   :: forall value
-   . Poll ( Tuple ( Maybe Int ) value )
+   . Poll (Tuple (Maybe Int) value)
   -> DynOptions value
-  -> Hook ( DynControl value )
+  -> Hook (DynControl value)
 useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
-  RegionSpan span <- liftST ( un StaticRegion ( un PSR psr ).region ).span
+  RegionSpan span <- liftST (un StaticRegion (un PSR psr).region).span
   lifecycle <- liftST Poll.create
   unsubs <- runEffectFn1 collectUnsubs psr
-  
+
   let
-    handleElements :: EffectFn1 ( Tuple ( Maybe Int ) value ) Unit
-    handleElements = mkEffectFn1 \( Tuple initialPos value ) -> do
+    handleElements :: EffectFn1 (Tuple (Maybe Int) value) Unit
+    handleElements = mkEffectFn1 \(Tuple initialPos value) -> do
       Region eltRegion <- liftST $ runSTFn1 span initialPos
       region <- liftST $ runSTFn2 newStaticRegion eltRegion.begin eltRegion.bump
       eltSendTo <- liftST Poll.create
       let
         sendTo :: Poll Int
         sendTo =
-          Poll.merge [ options.sendTo value, eltSendTo.poll ] 
+          Poll.merge [ options.sendTo value, eltSendTo.poll ]
 
       eltRemove <- liftST Poll.create
-      let      
+      let
         remove :: Poll Unit
         remove =
           Poll.merge [ options.remove value, eltRemove.poll, lifecycle.poll ]
@@ -496,14 +502,14 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
       let
         Nut nut = cont
           { value
-          , position : eltRegion.position
-          , remove : eltRemove.push unit
-          , sendTo : eltSendTo.push
+          , position: eltRegion.position
+          , remove: eltRemove.push unit
+          , sendTo: eltSendTo.push
           }
-        
+
         eltPSR :: PSR
         eltPSR =
-          PSR { region, unsubs : [], lifecycle : remove }
+          PSR { region, unsubs: [], lifecycle: remove }
 
         handleManagedLifecycle :: EffectFn1 Unit Unit
         handleManagedLifecycle =
@@ -515,10 +521,10 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
         handleSendTo = mkEffectFn1 \newPos -> do
           fromBegin <- liftST eltRegion.begin
           fromEnd <- liftST eltRegion.end
-          liftST $ runSTFn1 eltRegion.sendTo newPos 
+          liftST $ runSTFn1 eltRegion.sendTo newPos
 
           target <- liftST eltRegion.begin
-          runEffectFn3 ( un DOMInterpret di ).beamRegion fromBegin fromEnd target
+          runEffectFn3 (un DOMInterpret di).beamRegion fromBegin fromEnd target
 
       pump eltUnsubs sendTo handleSendTo
       pump eltUnsubs remove handleManagedLifecycle
@@ -531,9 +537,9 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
       lifecycle.push unit
       -- and only then unsub
       runEffectFn1 disposeUnsubs unsubs
-    
+
   pump unsubs elements handleElements
-  pump unsubs ( un PSR psr ).lifecycle handleDynLifecycle
+  pump unsubs (un PSR psr).lifecycle handleDynLifecycle
 
 fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2 \psr di -> do
@@ -543,9 +549,9 @@ fixed nuts = Nut $ mkEffectFn2 \psr di -> do
       over PSR _ { unsubs = [] } psr
 
     handleNuts :: EffectFn1 Nut Unit
-    handleNuts = mkEffectFn1 \( Nut nut ) ->
+    handleNuts = mkEffectFn1 \(Nut nut) ->
       runEffectFn2 nut cleared di
-  
+
     Nut dispose = mempty
 
   -- run `nuts` without `unsubs` so they can't dispose them
@@ -561,106 +567,108 @@ elementify
   -> Array Nut
   -> Nut
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
-  elt <- runEffectFn2 ( un DOMInterpret di ).makeElement ( Namespace <$> ns ) ( Tag tag )
-  regionEnd <- liftST ( un StaticRegion ( un PSR psr ).region ).end
-  runEffectFn2 ( un DOMInterpret di ).attachElement ( DekuChild elt ) regionEnd
-  liftST $ runSTFn1 ( un StaticRegion ( un PSR psr ).region ).element ( Element ( elt ) )
+  elt <- runEffectFn2 (un DOMInterpret di).makeElement (Namespace <$> ns)
+    (Tag tag)
+  regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
+  runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
+  liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
+    (Element (elt))
 
   unsubs <- runEffectFn1 collectUnsubs psr
 
   let
-    handleAtts :: EffectFn1 ( Poll ( Attribute element ) ) Unit
+    handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
     handleAtts = mkEffectFn1 \atts ->
-      pump unsubs atts $ mkEffectFn1 \( Attribute x ) ->
+      pump unsubs atts $ mkEffectFn1 \(Attribute x) ->
         runEffectFn2 x (fromDekuElement elt) di
   runEffectFn2 Event.fastForeachE arrAtts handleAtts
 
   eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
   let
     handleNuts :: EffectFn1 Nut Unit
-    handleNuts = mkEffectFn1 \( Nut nut ) ->
-      runEffectFn2 nut 
+    handleNuts = mkEffectFn1 \(Nut nut) ->
+      runEffectFn2 nut
         ( PSR
-          { unsubs : []
-          , lifecycle : ( un PSR psr ).lifecycle
-          , region : eltRegion
-          }
+            { unsubs: []
+            , lifecycle: (un PSR psr).lifecycle
+            , region: eltRegion
+            }
         )
         di
   runEffectFn2 Event.fastForeachE nuts handleNuts
 
-  let 
+  let
     handleLifecycle :: EffectFn1 Unit Unit
     handleLifecycle = mkEffectFn1 \_ -> do
-      runEffectFn1 ( un DOMInterpret di ).removeElement elt
+      runEffectFn1 (un DOMInterpret di).removeElement elt
       runEffectFn1 disposeUnsubs unsubs
 
-  pump unsubs ( un PSR psr ).lifecycle handleLifecycle
+  pump unsubs (un PSR psr).lifecycle handleLifecycle
 
 text_ :: String -> Nut
 text_ txt =
-  text ( pure @Poll txt )
+  text (pure @Poll txt)
 
 text :: Poll String -> Nut
 text texts = Nut $ mkEffectFn2 \psr di -> do
   unsubs <- runEffectFn1 collectUnsubs psr
-  
+
   let
-    handleTextUpdate :: EffectFn2 ( Event.Event String ) DekuText Unit
+    handleTextUpdate :: EffectFn2 (Event.Event String) DekuText Unit
     handleTextUpdate = mkEffectFn2 \xs txt -> do
       sub <- runEffectFn2 Event.subscribeO xs $ mkEffectFn1 \x ->
-        runEffectFn2 ( un DOMInterpret di ).setText x txt
+        runEffectFn2 (un DOMInterpret di).setText x txt
       void $ liftST $ STArray.push sub unsubs
 
-  txt <- case texts of 
+  txt <- case texts of
     OnlyPure xs -> do
-      runEffectFn1 ( un DOMInterpret di ).makeText ( Array.last xs )
-    
+      runEffectFn1 (un DOMInterpret di).makeText (Array.last xs)
+
     OnlyEvent e -> do
-      txt <- runEffectFn1 ( un DOMInterpret di ).makeText Nothing 
+      txt <- runEffectFn1 (un DOMInterpret di).makeText Nothing
       runEffectFn2 handleTextUpdate e txt
       pure txt
 
     OnlyPoll p -> do
-      txt <- runEffectFn1 ( un DOMInterpret di ).makeText Nothing 
-      bang <- liftST Event.create 
-      runEffectFn2 handleTextUpdate ( UPoll.sample p bang.event ) txt
+      txt <- runEffectFn1 (un DOMInterpret di).makeText Nothing
+      bang <- liftST Event.create
+      runEffectFn2 handleTextUpdate (UPoll.sample p bang.event) txt
       bang.push identity
       pure txt
 
     PureAndEvent xs e -> do
-      txt <- runEffectFn1 ( un DOMInterpret di ).makeText ( Array.last xs )
+      txt <- runEffectFn1 (un DOMInterpret di).makeText (Array.last xs)
       runEffectFn2 handleTextUpdate e txt
       pure txt
 
     PureAndPoll xs p -> do
-      txt <- runEffectFn1 ( un DOMInterpret di ).makeText ( Array.last xs ) 
-      bang <- liftST Event.create 
-      runEffectFn2 handleTextUpdate ( UPoll.sample p bang.event ) txt
+      txt <- runEffectFn1 (un DOMInterpret di).makeText (Array.last xs)
+      bang <- liftST Event.create
+      runEffectFn2 handleTextUpdate (UPoll.sample p bang.event) txt
       bang.push identity
       pure txt
-  
-  regionEnd <- liftST ( un StaticRegion ( un PSR psr ).region ).end
-  runEffectFn2 ( un DOMInterpret di ).attachText txt regionEnd
-  liftST $ runSTFn1 ( un StaticRegion ( un PSR psr ).region ).element ( Text txt )
+
+  regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
+  runEffectFn2 (un DOMInterpret di).attachText txt regionEnd
+  liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
 
   let
     handleLifecycle :: EffectFn1 Unit Unit
     handleLifecycle = mkEffectFn1 \_ -> do
-      runEffectFn1 ( un DOMInterpret di ).removeText txt
+      runEffectFn1 (un DOMInterpret di).removeText txt
       runEffectFn1 disposeUnsubs unsubs
 
-  pump unsubs ( un PSR psr ).lifecycle handleLifecycle
+  pump unsubs (un PSR psr).lifecycle handleLifecycle
 
 -- | Creates a `Nut` that can be attached to another part of the application. The lifetime of the `Nut` is no longer
 -- | than that of `Nut` that created it.
 -- maybe also attach the lifetime to its mountpoints and/or do reference counting
 portal :: Nut -> Hook Nut
-portal ( Nut toBeam ) cont = Nut $ mkEffectFn2 \psr di -> do
+portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
 
   -- set up a StaticRegion for the portal contents and track its begin and end
-  buffer <- ( un DOMInterpret di ).bufferPortal
-  trackBegin <- liftST $ ST.new $ pure @( ST.ST Global ) $ ParentStart buffer
+  buffer <- (un DOMInterpret di).bufferPortal
+  trackBegin <- liftST $ ST.new $ pure @(ST.ST Global) $ ParentStart buffer
   trackEnd <- liftST $ ST.new $ Nothing @Bound
 
   -- signal for other locations of the portal that it's contents have moved
@@ -668,63 +676,70 @@ portal ( Nut toBeam ) cont = Nut $ mkEffectFn2 \psr di -> do
   bumped <- liftST Event.createPure
 
   staticBuffer <- liftST $ runSTFn2 newStaticRegion
-    ( join $ ST.read trackBegin )
+    (join $ ST.read trackBegin)
     ( mkSTFn1 \bound -> do
-      void $ ST.write bound trackEnd
-      bumped.push bound
+        void $ ST.write bound trackEnd
+        bumped.push bound
     )
-  runEffectFn2 toBeam ( over PSR _ { region = staticBuffer } psr ) di
-  
+  runEffectFn2 toBeam (over PSR _ { region = staticBuffer } psr) di
+
   let
-    Nut hooked = cont $ portaled ( beamed.push unit ) beamed.event bumped.event trackBegin trackEnd
+    Nut hooked = cont $ portaled (beamed.push unit) beamed.event bumped.event
+      trackBegin
+      trackEnd
 
   runEffectFn2 hooked psr di
 
-portaled :: Effect Unit
-  -> Event.Event Unit 
-  -> Event.Event ( Maybe Bound )
+portaled
+  :: Effect Unit
+  -> Event.Event Unit
+  -> Event.Event (Maybe Bound)
   -> ST.STRef Global Bound
-  -> ST.STRef Global ( Maybe Bound )
+  -> ST.STRef Global (Maybe Bound)
   -> Nut
-portaled beam beamed bumped trackBegin trackEnd = Nut $ mkEffectFn2 \psr di -> do  
-  -- signal to other portaled `Nut`s that we are about to steal their content
-  beam
-  
-  -- set up region and its eventual cleanup
-  Region region <- liftST ( un StaticRegion ( un PSR psr ).region ).region
-  stolen <- liftST $ ST.new false
-  let 
-    -- when someone else beams from the portal or the `Nut` gets removed we clean up the region
-    cleanRegion :: Effect Unit
-    cleanRegion =
-      whenM ( not <$> liftST ( ST.read stolen ) ) do
-        void $ liftST $ ST.write true stolen
-        liftST region.remove
+portaled beam beamed bumped trackBegin trackEnd = Nut $ mkEffectFn2 \psr di ->
+  do
+    -- signal to other portaled `Nut`s that we are about to steal their content
+    beam
 
-  unsubBeamed <- runEffectFn2 Event.subscribeO beamed $ mkEffectFn1 \_ -> cleanRegion
-  unsubBumped <- runEffectFn2 Event.subscribeO bumped $ mkEffectFn1 $ liftST <<< runSTFn1 region.bump
-  
-  -- region starts empty, only bump when we actually have an end
-  liftST $ ST.read trackEnd >>= traverse_ ( runSTFn1 region.bump <<< Just )
-  
-  -- actuall insert portal contents
-  begin <- liftST $ join $ ST.read trackBegin
-  end <- liftST $ sequence =<< ST.read trackEnd
-  target <- liftST region.begin
-  runEffectFn3 ( un DOMInterpret di ).beamRegion begin ( fromMaybe begin end ) target
+    -- set up region and its eventual cleanup
+    Region region <- liftST (un StaticRegion (un PSR psr).region).region
+    stolen <- liftST $ ST.new false
+    let
+      -- when someone else beams from the portal or the `Nut` gets removed we clean up the region
+      cleanRegion :: Effect Unit
+      cleanRegion =
+        whenM (not <$> liftST (ST.read stolen)) do
+          void $ liftST $ ST.write true stolen
+          liftST region.remove
 
-  -- update the tracked begin so other portaled `Nut`s can steal the contents correctly
-  void $ liftST $ ST.write region.begin trackBegin
-
-  -- lifecycle handling
-  unsubs <- runEffectFn1 collectUnsubs psr
-  void $ liftST $ STArray.push unsubBeamed unsubs
-  void $ liftST $ STArray.push unsubBumped unsubs
-
-  let
-    handleLifecycle :: EffectFn1 Unit Unit
-    handleLifecycle = mkEffectFn1 \_ -> do
-      runEffectFn1 disposeUnsubs unsubs
+    unsubBeamed <- runEffectFn2 Event.subscribeO beamed $ mkEffectFn1 \_ ->
       cleanRegion
-  
-  pump unsubs ( un PSR psr ).lifecycle handleLifecycle
+    unsubBumped <- runEffectFn2 Event.subscribeO bumped $ mkEffectFn1 $ liftST
+      <<< runSTFn1 region.bump
+
+    -- region starts empty, only bump when we actually have an end
+    liftST $ ST.read trackEnd >>= traverse_ (runSTFn1 region.bump <<< Just)
+
+    -- actuall insert portal contents
+    begin <- liftST $ join $ ST.read trackBegin
+    end <- liftST $ sequence =<< ST.read trackEnd
+    target <- liftST region.begin
+    runEffectFn3 (un DOMInterpret di).beamRegion begin (fromMaybe begin end)
+      target
+
+    -- update the tracked begin so other portaled `Nut`s can steal the contents correctly
+    void $ liftST $ ST.write region.begin trackBegin
+
+    -- lifecycle handling
+    unsubs <- runEffectFn1 collectUnsubs psr
+    void $ liftST $ STArray.push unsubBeamed unsubs
+    void $ liftST $ STArray.push unsubBumped unsubs
+
+    let
+      handleLifecycle :: EffectFn1 Unit Unit
+      handleLifecycle = mkEffectFn1 \_ -> do
+        runEffectFn1 disposeUnsubs unsubs
+        cleanRegion
+
+    pump unsubs (un PSR psr).lifecycle handleLifecycle

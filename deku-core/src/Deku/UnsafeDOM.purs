@@ -18,10 +18,10 @@ foreign import createText :: EffectFn1 String Text
 foreign import setTextContent :: EffectFn2 String Node Unit
 
 foreign import pushCb :: EffectFn3 String EventListener Element Unit
-foreign import popCb :: EffectFn2 String Element ( Nullable EventListener )
+foreign import popCb :: EffectFn2 String Element (Nullable EventListener)
 
-foreign import after :: EffectFn2 ( Array Node ) Node Unit
-foreign import prepend :: EffectFn2 ( Array Node ) Node Unit
+foreign import after :: EffectFn2 (Array Node) Node Unit
+foreign import prepend :: EffectFn2 (Array Node) Node Unit
 
 foreign import addEventListener
   :: EffectFn4 EventType
