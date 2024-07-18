@@ -154,6 +154,7 @@ workspace:
         - control
         - css
         - datetime
+        - debug
         - deku-core
         - deku-css
         - deku-dom
@@ -172,10 +173,6 @@ workspace:
         - functions
         - functors
         - gen
-        - halogen
-        - halogen-hooks
-        - halogen-subscriptions
-        - halogen-vdom
         - heterogeneous
         - hyrule
         - identity
@@ -221,7 +218,6 @@ workspace:
         - unsafe-reference
         - untagged-union
         - variant
-        - web-clipboard
         - web-dom
         - web-dom-parser
         - web-events
@@ -238,6 +234,7 @@ workspace:
         - arrays
         - catenable-lists
         - control
+        - debug
         - effect
         - either
         - fast-vect
@@ -281,6 +278,7 @@ workspace:
         - contravariant
         - control
         - datetime
+        - debug
         - distributive
         - effect
         - either
@@ -367,6 +365,7 @@ workspace:
         - control
         - css
         - datetime
+        - debug
         - deku-core
         - distributive
         - effect
@@ -457,6 +456,7 @@ workspace:
         - contravariant
         - control
         - datetime
+        - debug
         - deku-core
         - distributive
         - effect
@@ -1295,6 +1295,13 @@ packages:
       - partial
       - prelude
       - tuples
+  debug:
+    type: registry
+    version: 6.0.2
+    integrity: sha256-vmkYFuXYuELBzeauvgHG6E6Kf/Hp1dAnxwE9ByHfwSg=
+    dependencies:
+      - functions
+      - prelude
   distributive:
     type: registry
     version: 6.0.0
@@ -1562,90 +1569,6 @@ packages:
       - tailrec
       - tuples
       - unfoldable
-  halogen:
-    type: registry
-    version: 7.0.0
-    integrity: sha256-aAE8oW32YiDdA3oQZxPbFkK4n31paT4JL6pvzOe47YE=
-    dependencies:
-      - aff
-      - avar
-      - console
-      - const
-      - dom-indexed
-      - effect
-      - foreign
-      - fork
-      - free
-      - freeap
-      - halogen-subscriptions
-      - halogen-vdom
-      - media-types
-      - nullable
-      - ordered-collections
-      - parallel
-      - profunctor
-      - transformers
-      - unsafe-coerce
-      - unsafe-reference
-      - web-file
-      - web-uievents
-  halogen-hooks:
-    type: registry
-    version: 0.6.3
-    integrity: sha256-r3Win1phxy3TCxuS6Ws2lrkQxpPZ8U1CPWcgdXj9qq8=
-    dependencies:
-      - aff
-      - arrays
-      - bifunctors
-      - effect
-      - exceptions
-      - foldable-traversable
-      - foreign-object
-      - free
-      - freeap
-      - halogen
-      - halogen-subscriptions
-      - maybe
-      - newtype
-      - ordered-collections
-      - parallel
-      - partial
-      - prelude
-      - refs
-      - tailrec
-      - transformers
-      - tuples
-      - unsafe-coerce
-      - unsafe-reference
-      - web-dom
-      - web-html
-  halogen-subscriptions:
-    type: registry
-    version: 2.0.0
-    integrity: sha256-8/BPME/sC/kWMDxp0+n4k09gA1IIedXn2yUJ4pCH5xw=
-    dependencies:
-      - arrays
-      - effect
-      - foldable-traversable
-      - functors
-      - refs
-      - safe-coerce
-      - unsafe-reference
-  halogen-vdom:
-    type: registry
-    version: 8.0.0
-    integrity: sha256-5UMDekaYNSM3jtpfWoWTbmZ38rIcnguzGRW3z+IQgV4=
-    dependencies:
-      - bifunctors
-      - effect
-      - foreign
-      - foreign-object
-      - maybe
-      - prelude
-      - refs
-      - tuples
-      - unsafe-coerce
-      - web-html
   heterogeneous:
     type: registry
     version: 0.6.0

@@ -13,7 +13,7 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut, fixed, portal, useRefST)
+import Deku.Core (Hook, Nut(..), fixed, portal, useRefST, withUnsub)
 import Deku.DOM as D
 import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
@@ -24,7 +24,8 @@ import Deku.Pursx (lenientPursx, pursx)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Random (random)
-import FRP.Event (fold)
+import Effect.Uncurried (mkEffectFn2, runEffectFn2)
+import FRP.Event (count, fold)
 import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
@@ -33,7 +34,7 @@ import Web.HTML.Window (alert)
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
 runTest :: Nut -> Effect Unit
-runTest = runInBody
+runTest = void <<< runInBody
 
 sanityCheck :: Nut
 sanityCheck = D.span [ DA.id_ "hello" ] [ text_ "Hello" ]
@@ -150,7 +151,7 @@ sendsToPositionFixed = Deku.do
         fixed
           [ D.span [ DA.id_ ("dyn" <> show i <> "a") ]
               [ text_ (show i <> "a") ]
-          , D.span [ DA.id_ ("dyn" <> show i <> "a") ]
+          , D.span [ DA.id_ ("dyn" <> show i <> "b") ]
               [ text_ (show i <> "b") ]
           ]
     , D.button [ DA.id_ "pos", DL.click_ \_ -> setPosIdx 1 ]
