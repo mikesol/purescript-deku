@@ -227,7 +227,6 @@ beamRegionEffect = mkEffectFn3 case _, _, _ of
 
   beamNodes :: EffectFn3 Node Node Anchor Unit
   beamNodes = mkEffectFn3 \first end target -> do
-
     acc <- liftST $ STArray.new
     next <- Ref.new $ Just first
 
@@ -237,8 +236,9 @@ beamRegionEffect = mkEffectFn3 case _, _, _ of
 
       if unsafeRefEq current end then
         void $ Ref.write Nothing next
-      else
-        void $ Ref.write <$> nextSibling current <@> next
+      else do
+        nextCandidate <- nextSibling current
+        void $ Ref.write nextCandidate next
 
     nodes <- liftST $ STArray.unsafeFreeze acc
     runEffectFn2 attachNodeEffect nodes target

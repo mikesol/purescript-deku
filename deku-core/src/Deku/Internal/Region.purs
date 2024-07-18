@@ -22,7 +22,8 @@ module Deku.Internal.Region
 
 import Prelude
 
-import Control.Alt ((<|>))
+import Control.Alt (alt, (<|>))
+import Control.Apply (lift2)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
 import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, STFn4, mkSTFn1, mkSTFn2, mkSTFn3, mkSTFn4, runSTFn1, runSTFn2, runSTFn3, runSTFn4)
@@ -30,8 +31,9 @@ import Control.Plus (empty)
 import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Foldable (traverse_)
-import Data.Maybe (Maybe(..), fromJust, fromMaybe, isJust)
+import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
 import Data.Newtype (class Newtype)
+import Debug as Debug
 import Deku.Internal.Entities (DekuElement, DekuParent, DekuText)
 import Effect.Exception.Unsafe (unsafeThrow)
 import FRP.Event (createPure)
@@ -154,7 +156,13 @@ newSpan = mkSTFn2 \parent parentBump -> do
             runSTFn1 parentBump b
 
       sendTo :: STFn1 Int Global Unit
-      sendTo = mkSTFn1 \pos -> do
+      sendTo = mkSTFn1 \pos' -> do
+        let
+          -- correct shift by parent `SharedBound`
+          pos :: Int
+          pos = 
+            pos' + 1
+        
         -- safe old state of `ManagedRegion`
         lastAnchor <- ST.new $ Nothing @Anchor
         wasLast <- runSTFn2 isLastBound managed children
@@ -175,8 +183,8 @@ newSpan = mkSTFn2 \parent parentBump -> do
 
         -- now safe to move, indices becoming invalid
         do
-          removed <- STArray.splice lastIx (lastIx + 1) [] children
-          void $ STArray.splice pos pos removed children
+          removed <- STArray.splice lastIx 1 [] children
+          void $ STArray.splice pos 0 removed children
 
           newBegin <- runSTFn2 shareBound managed.ix children
           void $ ST.write newBegin managed.end
@@ -198,7 +206,7 @@ newSpan = mkSTFn2 \parent parentBump -> do
       remove = do
         runSTFn1 bump Nothing
         finalIx <- ix
-        void $ STArray.splice finalIx (finalIx + 1) [] children
+        void $ STArray.splice finalIx 1 [] children
         runSTFn3 fixManaged finalIx updateIx children
 
     pure $ Region { begin, end, position, sendTo, remove, bump }
@@ -343,7 +351,7 @@ bumpBound = mkSTFn3 \anchor bumped children -> do
           bound = ST.read ref
         pure { owner, extent, bound, pushAnchor }
 
-      runSTFn4 fixManagedTo selfIx extentToIx (updateShared newShared)
+      runSTFn4 fixManagedTo selfIx ( extentToIx + 1 ) (updateShared newShared)
         children
         
       -- update the extent of the preceding `SharedBound` to the previous `ManagedRegion`
@@ -360,7 +368,7 @@ bumpBound = mkSTFn3 \anchor bumped children -> do
           bound = ST.read ref
         pure { owner, extent, bound, pushAnchor }
 
-      runSTFn4 fixManagedTo ownerIx (selfIx - 1) (updateShared newShared)
+      runSTFn4 fixManagedTo ownerIx selfIx (updateShared newShared)
         children
 
       -- hijack longer prevExtent `SharedBound` and update it with our own info, making bumped the new owner
@@ -373,8 +381,11 @@ insertManaged
 insertManaged = mkSTFn2 \givenPos children -> do
   length <- STArray.length children
   let
+    -- clamp and correct the givenPos, because the parent `SharedBound` already occupies the first element and shifts
+    -- everything else by one
     pos :: Int
-    pos = clamp 0 length $ fromMaybe length givenPos
+    pos =
+      clamp 1 length $ maybe length (add 1) givenPos
 
   ixRef <- ST.new pos
   posEvent <- createPure
@@ -383,7 +394,7 @@ insertManaged = mkSTFn2 \givenPos children -> do
     pushIx :: STFn1 Int Global Unit
     pushIx = mkSTFn1 \i -> do
       void $ ST.write i ixRef
-      posEvent.push i
+      posEvent.push $ i - 1 -- and restore position for the user
 
     ix :: ST.ST Global Int
     ix =
@@ -400,8 +411,7 @@ insertManaged = mkSTFn2 \givenPos children -> do
     managed =
       { ix, pushIx, position, end }
 
-  void $ STArray.splice pos pos [ managed ] children
-
+  void $ STArray.splice pos 0 [ managed ] children
   runSTFn3 fixManaged (pos + 1) updateIx children
   pure managed
 
@@ -423,6 +433,7 @@ fixManaged = mkSTFn3 \from fn children -> do
   length <- STArray.length children
   runSTFn4 fixManagedTo from length fn children
 
+-- TODO: expensive operation
 fixManagedTo
   :: STFn4 Int Int (STFn2 Int ManagedRegion Global Unit)
        (STArray.STArray Global ManagedRegion)
@@ -438,6 +449,7 @@ newStaticRegion = mkSTFn2 \parentBound parentBump -> do
   spanCounter <- ST.new (-1) -- making the first span 0
   spanState <- ST.new $ Nothing @RegionSpan
   staticEnd <- ST.new $ Nothing @Anchor
+  spanEnd <- ST.new $ Nothing @Anchor
 
   let
     findOrCreateSpan :: ST.ST Global RegionSpan
@@ -452,12 +464,14 @@ newStaticRegion = mkSTFn2 \parentBound parentBump -> do
           bump :: Bump
           bump = mkSTFn1 \update -> 
             -- only take control of parentBump when we are the last span
-            whenM (eq spanIx <$> ST.read spanCounter) case update of
-              Nothing ->
-                runSTFn1 parentBump =<< ST.read staticEnd
+            whenM (eq spanIx <$> ST.read spanCounter) do
+              void $ ST.write update spanEnd
+              case update of
+                Nothing ->
+                  runSTFn1 parentBump =<< ST.read staticEnd
 
-              b ->
-                runSTFn1 parentBump b
+                b ->
+                  runSTFn1 parentBump b
 
         runSTFn2 newSpan begin bump
 
@@ -465,7 +479,8 @@ newStaticRegion = mkSTFn2 \parentBound parentBump -> do
         pure span
 
   pure $ StaticRegion
-    { end: fromMaybe <$> parentBound <*> ST.read staticEnd
+    { end: do
+      fromMaybe <$> parentBound <*> ( lift2 alt ( ST.read spanEnd ) ( ST.read staticEnd ) )
     , region: do
         RegionSpan span <- findOrCreateSpan
         runSTFn1 span Nothing
@@ -474,6 +489,7 @@ newStaticRegion = mkSTFn2 \parentBound parentBump -> do
         whenM (isJust <$> ST.read spanState) do
           -- clear span state
           void $ ST.write Nothing spanState
+          void $ ST.write Nothing spanEnd
           -- signal that any previous span is no longer allowed to use parentBump
           void $ ST.modify (add 1) spanCounter
 
