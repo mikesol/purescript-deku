@@ -209,8 +209,13 @@ type SetProp = EffectFn3 Key Value DekuElement Unit
 type SetCb =
   EffectFn3 Key Cb DekuElement Unit
 
--- | Moves all `Element` and `Text` nodes between first and second argument after the node pointed to by the third
--- | argument.
+-- | This effect takes 3 `Anchor`s and moves the elements "between" the first and second `Anchor` "after" the last
+-- | `Anchor`. Because `Anchor` includes `Node`s and `ParentNode`s we'll have to define "between" and "after".
+-- | - between: A region is the collection of elements after the beginning up and including the end. The beginning is
+-- |   never included in the collection. This means that when begin and end point to the same `Node` the collection is
+-- |   empty. 
+-- | - after: This is more straightforward: for `Node`s it's simply after the `Node` and for `ParentNode` its before the
+-- |   first child `Node`.
 type BeamRegion =
   EffectFn3 Anchor Anchor Anchor Unit
 

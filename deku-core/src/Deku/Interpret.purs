@@ -202,6 +202,12 @@ bufferPortal :: Core.BufferPortal
 bufferPortal =
   DekuParent <<< toDekuElement <$> createDocumentFragment
 
+-- | Uses [after](https://developer.mozilla.org/en-US/docs/Web/API/Element/after) and
+-- | [prepend](https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend) to efficiently move the collected
+-- | nodes. To collect the `Node`s we simply iterate from the beginning(via
+-- | [firstChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild) or
+-- | [nextSibling](https://developer.mozilla.org/en-US/docs/Web/API/Node/nextSibling)) until we find the end `Node` via
+-- | referential equality.
 beamRegionEffect :: Core.BeamRegion
 beamRegionEffect = mkEffectFn3 case _, _, _ of
   _, ParentStart _, _ ->
@@ -216,7 +222,7 @@ beamRegionEffect = mkEffectFn3 case _, _, _ of
       beginNode = toNode fromBegin
       endNode = toNode fromEnd
 
-    -- if beginning equals the end `nextSibling` would overshoot, so just check now and abort
+    -- if beginning equals the end, `nextSibling` would overshoot, so just check now and abort
     if unsafeRefEq beginNode endNode then
       pure unit
     else

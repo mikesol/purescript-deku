@@ -4,10 +4,10 @@
 -- | element that can be used to locate a region or `Bump Nothing` to signal that it contains no elements to locate.
 -- |
 -- | It is then the responsibilty of the parent to use the information of all its children to provide correct `Bound`
--- | information to i.e. `DOMInterpret` to use `attachElement` or `beamRegion`. A `Bump Just` causes all following `Region`s
--- | to update their begin(and their end when empty) until a new non-empty region is found. A `Bump Nothing` causes the
--- | inverse. First a non-empty `Region` has be found which will be used to update the beginning of all following empty
--- | `Region`s until a new non-empty `Region` is found.
+-- | information to i.e. `DOMInterpret` to use `attachElement` or `beamRegion`. A `Bump Just` causes all following
+-- | `Region`s to update their begin(and their end when empty) until a new non-empty region is found. A `Bump Nothing`
+-- | causes the inverse. First a non-empty `Region` has be found which will be used to update the beginning of all
+-- | following empty `Region`s until a new non-empty `Region` is found.
 module Deku.Internal.Region
   ( Anchor(..)
   , Bound
@@ -44,13 +44,17 @@ data Anchor
   | Element DekuElement
   | Text DekuText
 
+-- | Hides how the `Anchor` is determined. Typically a region needs to check if it has any elements of its own and
+-- | defers to the parent when it has none. Otherwise we just return the last element of the region.
 type Bound =
   ST.ST Global Anchor
 
+-- | Signals to the parent that the endpoint of the region has changed. This can cascade up a tree of regions when the
+-- | child region was the last one or the parent is now empty.
 type Bump =
   STFn1 (Maybe Anchor) Global Unit
 
--- | Region that supports adding, moving and removing new child regions.
+-- | A dynamic `Region` that supports moving, removing, appending and clearing.
 newtype Region = Region
   { begin :: Bound
   , end :: Bound
@@ -73,6 +77,7 @@ newtype StaticRegion = StaticRegion
 
 derive instance Newtype StaticRegion _
 
+-- | Contains information about which regions in a span
 type SharedBound' =
   { owner :: ST.STRef Global (ST.ST Global Int)
   -- last element that uses this bound
@@ -99,17 +104,44 @@ readSharedBound = mkSTFn1 \shared -> do
   { bound } <- ST.read shared
   bound
   
--- | Managed span of `Region`s.
+-- | The core of the Region system are RegionSpans. They manage sibling Regions and coordinate the insert, bump, move
+-- | and remove actions. They also provide Bound implementation which lets Regions determine their begin and end Anchors
+-- | for beamRegion. The actual structure of the RegionSpan is just an array of regions. All regions track their indices
+-- | by using a reference that gets updated on every insert/splice.
+-- |
+-- | The begin of a Region is defined as the end of the previous region. A dummy region is inserted at the start which
+-- | contains the information provided by the parent. This makes the while ix - 1 dance work out but we will have to
+-- | correct the indices for this at some points(see insertManaged and newSpan->sendTo).
+-- |
+-- | The end of a region is stored in a SharedBound. As the name suggests this bound can be shared among multiple
+-- | adjacent regions. The end is set by region pointed to by the owner field. All following empty regions use the same
+-- | SharedBound. The last region using the SharedBound is pointed to by the extent field.
+-- |
+-- | For a non-empty regions this works out to: begin is the end of the previous region, if it is empty this does not
+-- | matter because we read the end of the first non-empty region which is shared with the empty one.
+-- |
+-- | For an empty region we do the same, we find the end of the first non-empty region, read our own end which would be
+-- | the same SharedBound leading to the begin and end pointing to the same Node signalling an empty collection to
+-- | beamRegion.
+-- |
+-- | To split a SharedBound we can use the owner and extent pointer to find all empty regions using that bound. Then we
+-- | create a new SharedBound and update all following regions.
+-- |
+-- | The inverse happens when the region signals a clear. The we extend the preceding SharedBound and update the
+-- | following regions.
+-- |
+-- | The implementation detects if updating the preceding or following regions would be cheaper and uses that strategy.
 newtype RegionSpan =
   RegionSpan (STFn1 (Maybe Int) Global Region)
 
 derive instance Newtype RegionSpan _
 
+-- | Manages a span of `Region`s. 
 newSpan :: STFn2 Bound Bump Global RegionSpan
 newSpan = mkSTFn2 \parent parentBump -> do
   children <- STArray.new
 
-  -- bound owned by an element outside of this region
+  -- bound owned by an element outside of this span
   parentBound <- do
     owner <- ST.new $ pure 0
     extent <- ST.new $ pure 0
@@ -162,12 +194,12 @@ newSpan = mkSTFn2 \parent parentBump -> do
           pos = 
             pos' + 1
         
-        -- safe old state of `ManagedRegion`
+        -- save old state of `ManagedRegion`
         lastAnchor <- ST.new $ Nothing @Anchor
         wasLast <- runSTFn2 isLastBound managed children
         lastIx <- ix
         
-        -- clear the region so neighbouring `SharedBound`s get hooked up together
+        -- clear the region so neighbouring `SharedBound`s coalesce
         whenM (not <$> runSTFn1 isEmpty managed) do
           anchor <- _.bound =<< ST.read managed.end
           void $ ST.write (Just anchor) lastAnchor
@@ -188,8 +220,8 @@ newSpan = mkSTFn2 \parent parentBump -> do
           newBegin <- runSTFn2 shareBound managed.ix children
           void $ ST.write newBegin managed.end
 
-          -- restoring indices
-          runSTFn3 fixManaged (min lastIx pos) updateIx children
+        -- restoring indices
+        runSTFn3 fixManaged (min lastIx pos) updateIx children
 
         -- if we had any elements we signal a bump, this requires the indices to be valid so we do it last
         ST.read lastAnchor >>= traverse_ \anchor -> runSTFn3 bumpBound anchor
@@ -230,7 +262,7 @@ beginBound = mkSTFn2 \region children -> do
 
 -- | Determines the final `Bound` and runs the provided effect on it.
 -- | ASSUMES that the last element is not the parent.
-rebumpLast :: STFn2 Bump (STArray.STArray Global ManagedRegion) Global Unit
+rebumpLast :: STFn2 Bump Children Global Unit
 rebumpLast = mkSTFn2 \bump children -> do
   last <- runSTFn1 lastRegion children
   end <- ST.read last.end
@@ -253,7 +285,7 @@ isEmpty = mkSTFn1 \{ ix, end } -> do
 
 -- | Returns whether the `ManagedRegion` controls the ending bound of the whole span.
 isLastBound
-  :: STFn2 ManagedRegion (STArray.STArray Global ManagedRegion) Global Boolean
+  :: STFn2 ManagedRegion Children Global Boolean
 isLastBound = mkSTFn2 \region children -> do
   length <- STArray.length children
   end <- ST.read region.end
@@ -265,7 +297,7 @@ isLastBound = mkSTFn2 \region children -> do
 -- | Creates a new `ShareBound'` value for an empty `ManagedRegion`. It looks up the preceding `ManagedRegion` and uses
 -- | its end `SharedBound` possibly extending it.
 shareBound
-  :: STFn2 (ST.ST Global Int) (STArray.STArray Global ManagedRegion) Global
+  :: STFn2 (ST.ST Global Int) Children Global
        SharedBound'
 shareBound = mkSTFn2 \posRef children -> do
   pos <- posRef
@@ -285,7 +317,7 @@ shareBound = mkSTFn2 \posRef children -> do
 
 -- | Lifts a `ManagedRegion` out of the `RegionSpan`, restoring the `SharedBound`s of its siblings.
 clearBound
-  :: STFn2 ManagedRegion (STArray.STArray Global ManagedRegion) Global Unit
+  :: STFn2 ManagedRegion Children Global Unit
 clearBound = mkSTFn2 \cleared children -> do
   nextBound <- ST.read cleared.end
   selfIx <- cleared.ix
@@ -317,7 +349,7 @@ clearBound = mkSTFn2 \cleared children -> do
 -- | `SharedBound` that it owns and propagates it to all following members of the old `SharedBound`. 
 -- | Or it hijacks the previous `SharedBound`. 
 bumpBound
-  :: STFn3 Anchor ManagedRegion (STArray.STArray Global ManagedRegion) Global
+  :: STFn3 Anchor ManagedRegion Children Global
        Unit
 bumpBound = mkSTFn3 \anchor bumped children -> do
   empty <- runSTFn1 isEmpty bumped
@@ -375,7 +407,7 @@ bumpBound = mkSTFn3 \anchor bumped children -> do
       runSTFn1 prevExtent.pushAnchor anchor
 
 insertManaged
-  :: STFn2 (Maybe Int) (STArray.STArray Global ManagedRegion) Global
+  :: STFn2 (Maybe Int) Children Global
        ManagedRegion
 insertManaged = mkSTFn2 \givenPos children -> do
   length <- STArray.length children
@@ -425,7 +457,7 @@ updateIx =
 -- TODO: expensive operation
 fixManaged
   :: STFn3 Int (STFn2 Int ManagedRegion Global Unit)
-       (STArray.STArray Global ManagedRegion)
+       Children
        Global
        Unit
 fixManaged = mkSTFn3 \from fn children -> do
@@ -435,7 +467,7 @@ fixManaged = mkSTFn3 \from fn children -> do
 -- TODO: expensive operation
 fixManagedTo
   :: STFn4 Int Int (STFn2 Int ManagedRegion Global Unit)
-       (STArray.STArray Global ManagedRegion)
+       Children
        Global
        Unit
 fixManagedTo = mkSTFn4 \from to fn children -> do
