@@ -33,7 +33,6 @@ import Data.Array.ST as STArray
 import Data.Foldable (traverse_)
 import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
 import Data.Newtype (class Newtype)
-import Debug as Debug
 import Deku.Internal.Entities (DekuElement, DekuParent, DekuText)
 import Effect.Exception.Unsafe (unsafeThrow)
 import FRP.Event (createPure)
@@ -473,7 +472,9 @@ newStaticRegion = mkSTFn2 \parentBound parentBump -> do
                 b ->
                   runSTFn1 parentBump b
 
-        runSTFn2 newSpan begin bump
+        span <- runSTFn2 newSpan begin bump
+        void $ ST.write ( Just span ) spanState
+        pure span
 
       Just span ->
         pure span

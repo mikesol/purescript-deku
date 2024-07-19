@@ -154,7 +154,6 @@ workspace:
         - control
         - css
         - datetime
-        - debug
         - deku-core
         - deku-css
         - deku-dom
@@ -234,7 +233,6 @@ workspace:
         - arrays
         - catenable-lists
         - control
-        - debug
         - effect
         - either
         - fast-vect
@@ -278,7 +276,6 @@ workspace:
         - contravariant
         - control
         - datetime
-        - debug
         - distributive
         - effect
         - either
@@ -365,7 +362,6 @@ workspace:
         - control
         - css
         - datetime
-        - debug
         - deku-core
         - distributive
         - effect
@@ -456,7 +452,6 @@ workspace:
         - contravariant
         - control
         - datetime
-        - debug
         - deku-core
         - distributive
         - effect
@@ -1295,13 +1290,6 @@ packages:
       - partial
       - prelude
       - tuples
-  debug:
-    type: registry
-    version: 6.0.2
-    integrity: sha256-vmkYFuXYuELBzeauvgHG6E6Kf/Hp1dAnxwE9ByHfwSg=
-    dependencies:
-      - functions
-      - prelude
   distributive:
     type: registry
     version: 6.0.0

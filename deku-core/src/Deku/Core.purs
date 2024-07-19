@@ -572,7 +572,6 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   elt <- runEffectFn2 (un DOMInterpret di).makeElement (Namespace <$> ns)
     (Tag tag)
   regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
-  runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
     (Element (elt))
 
@@ -599,6 +598,8 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         di
   runEffectFn2 Event.fastForeachE nuts handleNuts
 
+  runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
+  
   let
     handleLifecycle :: EffectFn1 Unit Unit
     handleLifecycle = mkEffectFn1 \_ -> do
@@ -669,8 +670,8 @@ portal :: Nut -> Hook Nut
 portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
 
   -- set up a StaticRegion for the portal contents and track its begin and end
-  buffer <- ParentStart<$> (un DOMInterpret di).bufferPortal
-  trackBegin <- liftST $ ST.new $ pure @(ST.ST Global) buffer
+  buffer <- pure @(ST.ST Global) <<< ParentStart <$> (un DOMInterpret di).bufferPortal
+  trackBegin <- liftST $ ST.new buffer
   trackEnd <- liftST $ ST.new $ Nothing @Anchor
 
   -- signal for other locations of the portal that it's contents have moved
@@ -690,10 +691,22 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
       trackBegin
       trackEnd
 
-  runEffectFn2 hooked psr di
+    -- | Removes portaled content back into the buffer and empties it.
+    -- maybe not necessary
+    dispose :: Effect Unit
+    dispose = do
+      beamed.push unit
+      begin <- liftST $ join $ ST.read trackBegin
+      end <- liftST $ ST.read trackEnd
+      target <- liftST buffer
+      runEffectFn3 (un DOMInterpret di).beamRegion begin (fromMaybe begin end)
+        target
+      void $ liftST $ ST.write Nothing trackEnd
+
+  runEffectFn2 hooked ( withUnsub dispose psr )  di
 
 portaled
-  :: Anchor
+  :: Bound
   -> Effect Unit
   -> Event.Event Unit
   -> Event.Event (Maybe Anchor)
@@ -742,8 +755,10 @@ portaled buffer beam beamed bumped trackBegin trackEnd = Nut $ mkEffectFn2 \psr 
           -- send portaled content back to buffer
           begin <- liftST $ join $ ST.read trackBegin
           end <- liftST $ ST.read trackEnd
+          target <- liftST buffer
           runEffectFn3 (un DOMInterpret di).beamRegion begin (fromMaybe begin end)
-            buffer
+            target
+          void $ liftST $ ST.write buffer trackBegin
           liftST region.remove
         
         runEffectFn1 disposeUnsubs unsubs

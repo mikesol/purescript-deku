@@ -307,7 +307,6 @@ describe("deku", () => {
     doTest("switchers compose", (f) =>
       f(tests.switchersCompose, () => {
         const $ = require("jquery");
-        const htm = $("#maindiv")[0].innerHTML;
         expect($("#div1a").index()).toBeGreaterThan($("#div0").index());
         expect($("#div1a").index()).toBeLessThan($("#div2").index());
         $("#incr").trigger("click");
