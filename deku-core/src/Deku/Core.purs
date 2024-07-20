@@ -274,15 +274,17 @@ pump associations p effF =
 
   where
 
+  dynamicEff = effF false
+  staticEff = effF true
   handleEvent :: Event.Event a -> Effect Unit
   handleEvent y = do
-    uu <- runEffectFn2 Event.subscribeO y (effF false)
+    uu <- runEffectFn2 Event.subscribeO y dynamicEff
     void $ liftST $ STArray.push uu associations
 
   go :: Poll a -> Effect Unit
   go = case _ of
     OnlyEvent x -> handleEvent x
-    OnlyPure x -> runEffectFn2 Event.fastForeachE x (effF true)
+    OnlyPure x -> runEffectFn2 Event.fastForeachE x staticEff
     OnlyPoll x -> do
       bang <- liftST $ Event.create
       handleEvent (UPoll.sample x bang.event)
