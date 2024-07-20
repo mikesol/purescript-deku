@@ -223,11 +223,15 @@ type BeamRegion =
 type BufferPortal =
   Effect DekuParent
 
+markAsDynamic :: DOMInterpret -> DOMInterpret
+markAsDynamic = over DOMInterpret _ { inStaticPart = false }
+
 -- | This is the interpreter that any Deku backend creator needs to impelement.
 -- | Three interpreters are included with Deku: SPA.
 -- , SSR, and hydrated SSR.
 newtype DOMInterpret = DOMInterpret
   { tagger :: ST.ST Global Int
+  , inStaticPart :: Boolean
   , makeElement :: MakeElement
   , setProp :: SetProp
   , setCb :: SetCb
@@ -263,22 +267,22 @@ pump
   :: forall a
    . STArray.STArray Global (Effect Unit)
   -> Poll a
-  -> EffectFn1 a Unit
+  -> (Boolean -> EffectFn1 a Unit)
   -> Effect Unit
-pump associations p eff =
+pump associations p effF =
   go p
 
   where
 
   handleEvent :: Event.Event a -> Effect Unit
   handleEvent y = do
-    uu <- runEffectFn2 Event.subscribeO y eff
+    uu <- runEffectFn2 Event.subscribeO y (effF false)
     void $ liftST $ STArray.push uu associations
 
   go :: Poll a -> Effect Unit
   go = case _ of
     OnlyEvent x -> handleEvent x
-    OnlyPure x -> runEffectFn2 Event.fastForeachE x eff
+    OnlyPure x -> runEffectFn2 Event.fastForeachE x (effF true)
     OnlyPoll x -> do
       bang <- liftST $ Event.create
       handleEvent (UPoll.sample x bang.event)
@@ -317,8 +321,8 @@ instance Monoid Nut where
       unsubs <- runEffectFn1 collectUnsubs psr
 
       let
-        handleLifecycle :: EffectFn1 Unit Unit
-        handleLifecycle =
+        handleLifecycle :: Boolean -> EffectFn1 Unit Unit
+        handleLifecycle _ =
           mkEffectFn1 \_ -> runEffectFn1 disposeUnsubs unsubs
 
       pump unsubs (un PSR psr).lifecycle handleLifecycle
@@ -481,7 +485,7 @@ useDynWith
    . Poll (Tuple (Maybe Int) value)
   -> DynOptions value
   -> Hook (DynControl value)
-useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
+useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
   RegionSpan span <- liftST do
     Region region <- (un StaticRegion (un PSR psr).region).region
     runSTFn2 newSpan region.begin region.bump
@@ -490,8 +494,9 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
   unsubs <- runEffectFn1 collectUnsubs psr
 
   let
-    handleElements :: EffectFn1 (Tuple (Maybe Int) value) Unit
-    handleElements = mkEffectFn1 \(Tuple initialPos value) -> do
+    handleElements :: Boolean -> EffectFn1 (Tuple (Maybe Int) value) Unit
+    handleElements inStaticPart = mkEffectFn1 \(Tuple initialPos value) -> do
+      let di = if inStaticPart then di' else markAsDynamic di'
       Region eltRegion <- liftST $ runSTFn1 span initialPos
       tag <- liftST (un DOMInterpret di).tagger
       region <- liftST $ runSTFn3 newStaticRegion tag eltRegion.begin eltRegion.bump
@@ -520,14 +525,14 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
         eltPSR =
           PSR { region, unsubs: [], lifecycle: remove }
 
-        handleManagedLifecycle :: EffectFn1 Unit Unit
-        handleManagedLifecycle =
+        handleManagedLifecycle :: Boolean -> EffectFn1 Unit Unit
+        handleManagedLifecycle _ =
           mkEffectFn1 \_ -> do
             liftST eltRegion.remove
             runEffectFn1 disposeUnsubs eltUnsubs
 
-        handleSendTo :: EffectFn1 Int Unit
-        handleSendTo = mkEffectFn1 \newPos -> do
+        handleSendTo :: Boolean -> EffectFn1 Int Unit
+        handleSendTo _ = mkEffectFn1 \newPos -> do
           fromBegin <- liftST eltRegion.begin
           fromEnd <- liftST eltRegion.end
           liftST $ runSTFn1 eltRegion.sendTo newPos
@@ -540,8 +545,8 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
 
       runEffectFn2 nut eltPSR di
 
-    handleDynLifecycle :: EffectFn1 Unit Unit
-    handleDynLifecycle = mkEffectFn1 \_ -> do
+    handleDynLifecycle :: Boolean -> EffectFn1 Unit Unit
+    handleDynLifecycle _ = mkEffectFn1 \_ -> do
       -- first let children dispose of themselves
       lifecycle.push unit
       -- and only then unsub
@@ -590,7 +595,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   let
     handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
     handleAtts = mkEffectFn1 \atts ->
-      pump unsubs atts $ mkEffectFn1 \(Attribute x) ->
+      pump unsubs atts $ \_ -> mkEffectFn1 \(Attribute x) ->
         runEffectFn2 x (fromDekuElement elt) di
   runEffectFn2 Event.fastForeachE arrAtts handleAtts
 
@@ -610,8 +615,8 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
 
   let
-    handleLifecycle :: EffectFn1 Unit Unit
-    handleLifecycle = mkEffectFn1 \_ -> do
+    handleLifecycle :: Boolean -> EffectFn1 Unit Unit
+    handleLifecycle _  = mkEffectFn1 \_ -> do
       runEffectFn1 (un DOMInterpret di).removeElement elt
       runEffectFn1 disposeUnsubs unsubs
 
@@ -665,8 +670,8 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
 
   let
-    handleLifecycle :: EffectFn1 Unit Unit
-    handleLifecycle = mkEffectFn1 \_ -> do
+    handleLifecycle :: Boolean -> EffectFn1 Unit Unit
+    handleLifecycle _ = mkEffectFn1 \_ -> do
       runEffectFn1 (un DOMInterpret di).removeText txt
       runEffectFn1 disposeUnsubs unsubs
 
@@ -762,8 +767,8 @@ portaled buffer beam beamed bumped trackBegin trackEnd = Nut $ mkEffectFn2
       void $ liftST $ STArray.push unsubBumped unsubs
 
       let
-        handleLifecycle :: EffectFn1 Unit Unit
-        handleLifecycle = mkEffectFn1 \_ -> do
+        handleLifecycle :: Boolean -> EffectFn1 Unit Unit
+        handleLifecycle _ = mkEffectFn1 \_ -> do
           whenM (not <$> liftST (ST.read stolen)) do
             -- send portaled content back to buffer
             begin <- liftST $ join $ ST.read trackBegin

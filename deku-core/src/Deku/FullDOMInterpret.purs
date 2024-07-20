@@ -8,6 +8,8 @@ import Deku.Interpret as I
 fullDOMInterpret :: ST.ST Global Int -> Core.DOMInterpret
 fullDOMInterpret tagger = Core.DOMInterpret
   { tagger
+  , inStaticPart: true
+  --
   , makeElement: I.makeElementEffect
   , attachElement: I.attachElementEffect
   , setProp: I.setPropEffect
