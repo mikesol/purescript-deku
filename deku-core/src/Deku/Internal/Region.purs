@@ -73,6 +73,7 @@ newtype StaticRegion = StaticRegion
   { end :: Bound
   , region :: ST.ST Global Region
   , element :: STFn1 Anchor Global Unit
+  , tag :: Int
   }
 
 derive instance Newtype StaticRegion _
@@ -475,8 +476,8 @@ fixManagedTo = mkSTFn4 \from to fn children -> do
   ST.for from to \ix -> do
     runSTFn2 fn ix (unsafePartial (Array.unsafeIndex elems ix))
 
-newStaticRegion :: STFn2 Bound Bump Global StaticRegion
-newStaticRegion = mkSTFn2 \parentBound parentBump -> do
+newStaticRegion :: STFn3 Int Bound Bump Global StaticRegion
+newStaticRegion = mkSTFn3 \tag parentBound parentBump -> do
   spanCounter <- ST.new (-1) -- making the first span 0
   spanState <- ST.new $ Nothing @RegionSpan
   staticEnd <- ST.new $ Nothing @Anchor
@@ -512,7 +513,7 @@ newStaticRegion = mkSTFn2 \parentBound parentBump -> do
         pure span
 
   pure $ StaticRegion
-    { end: do
+    { tag, end: do
       fromMaybe <$> parentBound <*> ( lift2 alt ( ST.read spanEnd ) ( ST.read staticEnd ) )
     , region: do
         RegionSpan span <- findOrCreateSpan
@@ -530,7 +531,7 @@ newStaticRegion = mkSTFn2 \parentBound parentBump -> do
         runSTFn1 parentBump $ Just anchor
     }
 
-fromParent :: STFn1 DekuParent Global StaticRegion
+fromParent :: STFn2 Int DekuParent Global StaticRegion
 fromParent =
-  mkSTFn1 \parent -> runSTFn2 newStaticRegion (pure $ ParentStart parent)
+  mkSTFn2 \tag parent -> runSTFn3 newStaticRegion tag (pure $ ParentStart parent)
     (mkSTFn1 \_ -> pure unit)

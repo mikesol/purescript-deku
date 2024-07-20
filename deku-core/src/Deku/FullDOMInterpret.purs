@@ -1,11 +1,14 @@
 module Deku.FullDOMInterpret where
 
+import Control.Monad.ST as ST
+import Control.Monad.ST.Global (Global)
 import Deku.Core as Core
 import Deku.Interpret as I
 
-fullDOMInterpret :: Core.DOMInterpret
-fullDOMInterpret = Core.DOMInterpret
-  { makeElement: I.makeElementEffect
+fullDOMInterpret :: ST.ST Global Int -> Core.DOMInterpret
+fullDOMInterpret tagger = Core.DOMInterpret
+  { tagger
+  , makeElement: I.makeElementEffect
   , attachElement: I.attachElementEffect
   , setProp: I.setPropEffect
   , setCb: I.setCbEffect

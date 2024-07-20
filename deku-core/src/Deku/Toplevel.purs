@@ -4,7 +4,8 @@ module Deku.Toplevel where
 import Prelude
 
 import Control.Monad.ST.Class (liftST)
-import Control.Monad.ST.Uncurried (runSTFn1)
+import Control.Monad.ST.Internal as ST
+import Control.Monad.ST.Uncurried (runSTFn2)
 import Data.Maybe (maybe)
 import Deku.Core (Nut(..), PSR(..))
 import Deku.FullDOMInterpret (fullDOMInterpret)
@@ -28,9 +29,15 @@ runInElement
   -> Effect (Effect Unit)
 runInElement elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
-  region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
+  let taggerStart = 0
+  tagRef <- liftST $ ST.new $ taggerStart + 1
+  let tagger = do
+          tag <- liftST $ ST.read tagRef
+          liftST $ void $ ST.write (tag + 1) tagRef
+          pure tag
+  region <- liftST $ runSTFn2 Region.fromParent taggerStart (DekuParent $ toDekuElement elt)
   void $ runEffectFn2 nut (PSR { region, unsubs: [], lifecycle })
-    fullDOMInterpret
+    (fullDOMInterpret tagger)
   pure $ dispose unit
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
