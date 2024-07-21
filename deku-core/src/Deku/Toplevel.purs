@@ -1,5 +1,12 @@
 -- | These functions are used to run a Deku application.
-module Deku.Toplevel (runInElement, runInBody, ssrInElement) where
+module Deku.Toplevel
+  ( runInElement
+  , runInBody
+  , ssrInElement
+  , ssrInBody
+  , hydrateInElement
+  , hydrateInBody
+  ) where
 
 import Prelude
 
@@ -16,7 +23,7 @@ import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Tuple (Tuple(..))
 import Deku.Core (Nut(..), PSR(..))
 import Deku.FullDOMInterpret (fullDOMInterpret)
-import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..))
+import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
 import Deku.Internal.Entities (DekuParent(..), toDekuElement)
 import Deku.Internal.Region as Region
 import Deku.SSRDOMInterpret (SSRRenderingInfo(..), ssrDOMInterpret)
@@ -28,10 +35,11 @@ import Foreign.Object (Object)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
 import Foreign.Object.ST.Unsafe (unsafeFreeze)
-import Web.DOM.Element (setAttribute)
+import Web.DOM.Document (createElement)
+import Web.DOM.Element (setAttribute, toParentNode)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
-import Web.HTML.HTMLDocument (body)
+import Web.HTML.HTMLDocument (body, toDocument)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
@@ -91,16 +99,19 @@ runInElement elt (Nut nut) = do
     (fullDOMInterpret tagger)
   pure $ dispose unit
 
+doInBody :: forall i o. (Web.DOM.Element -> i -> Effect o) -> i -> Effect o
+doInBody f elt = do
+  b' <- window >>= document >>= body
+  maybe (throwException (error "Could not find element"))
+    (flip f elt)
+    (toElement <$> b')
+
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
 runInBody
   :: Nut
   -> Effect (Effect Unit)
-runInBody elt = do
-  b' <- window >>= document >>= body
-  maybe (throwException (error "Could not find element"))
-    (flip runInElement elt)
-    (toElement <$> b')
+runInBody = doInBody runInElement
 
 foreign import innerHTML :: Web.DOM.Element -> Effect String
 
@@ -152,3 +163,37 @@ ssrInElement elt (Nut nut) = do
   htmlString <- innerHTML elt
   dispose unit
   pure $ Tuple htmlString hydrationRenderingCache
+
+ssrInBody
+  :: Nut
+  -> Effect (Tuple String (Object HydrationRenderingInfo))
+ssrInBody = doInBody ssrInElement
+
+hydrateInElement
+  :: Object HydrationRenderingInfo
+  -> Web.DOM.Element
+  -> Nut
+  -> Effect (Effect Unit)
+hydrateInElement cache elt (Nut nut) = do
+  { poll: lifecycle, push: dispose } <- liftST create
+  let taggerStart = 0
+  tagRef <- liftST $ ST.new $ taggerStart + 1
+  let tagger = makeTagger tagRef
+  region <- liftST $ runSTFn3 Region.fromParent taggerStart Nothing
+    (DekuParent $ toDekuElement elt)
+  doc <- window >>= document
+  dummyElt <- createElement "tag" (toDocument doc)
+  let par = toParentNode elt
+  void $ runEffectFn2 nut
+    ( PSR
+        { region, disqualifyFromStaticRendering: false, unsubs: [], lifecycle }
+    )
+    (hydratingDOMInterpret tagger cache dummyElt par)
+  pure $ dispose unit
+
+
+hydrateInBody
+  :: Object HydrationRenderingInfo
+  -> Nut
+  -> Effect (Effect Unit)
+hydrateInBody = doInBody <<< hydrateInElement
