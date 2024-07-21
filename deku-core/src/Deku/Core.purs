@@ -31,6 +31,8 @@ module Deku.Core
   , Hook'
   , Nut(..)
   , PSR(..)
+  , ParentId(..)
+  , ChildId(..)
   , attributeAtYourOwnRisk
   , callbackWithCaution
   , cb
@@ -222,6 +224,13 @@ type BeamRegion =
 type BufferPortal =
   Effect DekuParent
 
+newtype ParentId = ParentId Int
+
+derive instance Newtype ParentId _
+newtype ChildId = ChildId Int
+
+derive instance Newtype ChildId _
+
 -- | This is the interpreter that any Deku backend creator needs to impelement.
 -- | Three interpreters are included with Deku: SPA.
 -- , SSR, and hydrated SSR.
@@ -229,6 +238,7 @@ newtype DOMInterpret = DOMInterpret
   { tagger :: ST.ST Global Int
   , staticDOMInterpret :: Unit -> DOMInterpret
   , dynamicDOMInterpret :: Unit -> DOMInterpret
+  , registerParentChildRelationship :: STFn2 ParentId ChildId Global Unit
   , disqualifyFromStaticRendering :: STFn1 Int Global Unit
   , isBoring :: STFn1 Int Global Boolean
   , makeElement :: MakeElement
@@ -602,6 +612,9 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   id <- liftST (un DOMInterpret di).tagger
   isBoring <- liftST $ runSTFn1 (un DOMInterpret di).isBoring id
   when (not isBoring) do
+    liftST $ runSTFn2 (un DOMInterpret di).registerParentChildRelationship
+      (ParentId (un StaticRegion (un PSR psr).region).tag)
+      (ChildId id)
     elt <- runEffectFn3 (un DOMInterpret di).makeElement id (Namespace <$> ns)
       (Tag tag)
     regionEnd <- liftST (un StaticRegion (un PSR psr).region).end

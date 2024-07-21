@@ -6,11 +6,12 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn3, runSTFn2, runSTFn3)
+import Data.Array as Array
 import Data.Compactable (compact)
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.Maybe (Maybe(..), maybe)
+import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (class Newtype, over, un)
-import Deku.Core (Attribute', MakeElement)
+import Deku.Core (Attribute', ChildId(..), MakeElement, ParentId(..))
 import Deku.Core as Core
 import Deku.Internal.Entities (fromDekuElement)
 import Deku.Internal.Region (CurrentStaticRegionStats(..), StaticRegion(..), StaticRegionStats(..))
@@ -133,17 +134,21 @@ makeElement renderingInfo = mkEffectFn3 \id ns tag -> do
   pure elt
 
 ssrDOMInterpret
-  :: ST.ST Global Int -> STObject Global RenderingInfo -> Core.DOMInterpret
-ssrDOMInterpret tagger renderingInfo = Core.DOMInterpret
+  :: ST.ST Global Int -> STObject Global (Array Int) -> STObject Global RenderingInfo -> Core.DOMInterpret
+ssrDOMInterpret tagger parentChildCache renderingInfo = Core.DOMInterpret
   { tagger
-  , staticDOMInterpret: \_ -> ssrDOMInterpret tagger renderingInfo
+  , staticDOMInterpret: \_ -> ssrDOMInterpret tagger parentChildCache renderingInfo
   -- we could likely make `dynamicDOMInterpret` a no-op
   -- should be harmless, though, as this will be called rarely if at all
   -- because SSR code will only trigger dynamic elements
   -- in case there's a dyn with pure polls that aren't optimized as being pure
-  , dynamicDOMInterpret: \_ -> ssrDOMInterpret tagger renderingInfo
+  , dynamicDOMInterpret: \_ -> ssrDOMInterpret tagger parentChildCache renderingInfo
   --
   , isBoring: mkSTFn1 \_ -> pure false
+  , registerParentChildRelationship: mkSTFn2 \(ParentId parent) (ChildId child) -> do
+      let tag = show parent
+      parentChildArray <- peek tag parentChildCache
+      void $ poke tag (Array.cons child $ fromMaybe [] parentChildArray) parentChildCache
   , makeElement: makeElement renderingInfo
   , attachElement: I.attachElementEffect
   , getUseableAttributes: getUseableAttributes renderingInfo

@@ -13,13 +13,14 @@ fullDOMInterpret tagger = Core.DOMInterpret
   { tagger
   , staticDOMInterpret: \_ -> fullDOMInterpret tagger
   , dynamicDOMInterpret: \_ -> fullDOMInterpret tagger
-  , disqualifyFromStaticRendering: mkSTFn1 mempty
+  , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
   --
   , isBoring: mkSTFn1 \_ -> pure false
+  , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
   , makeElement: I.makeElementEffect
   , attachElement: I.attachElementEffect
   , getUseableAttributes: mkSTFn2 \_ a -> pure a
-  , incrementElementCount: mkSTFn1 mempty
+  , incrementElementCount: mkSTFn1 \_ -> pure unit
   , setProp: I.setPropEffect
   , setCb: I.setCbEffect
   , unsetAttribute: I.unsetAttributeEffect
@@ -29,7 +30,7 @@ fullDOMInterpret tagger = Core.DOMInterpret
   , attachText: I.attachTextEffect
   , setText: I.setTextEffect
   , removeText: I.removeTextEffect
-  , incrementPureTextCount: mkSTFn1 mempty
+  , incrementPureTextCount: mkSTFn1 \_ -> pure unit
   --
   , beamRegion: I.beamRegionEffect
   , bufferPortal: I.bufferPortal
