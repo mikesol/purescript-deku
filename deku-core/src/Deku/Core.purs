@@ -80,7 +80,7 @@ import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (STFn1, mkSTFn1, runSTFn1, runSTFn2, runSTFn3, runSTFn4)
+import Control.Monad.ST.Uncurried (STFn1, STFn2, mkSTFn1, runSTFn1, runSTFn2, runSTFn3, runSTFn4)
 import Control.Plus (empty)
 import Data.Array (length)
 import Data.Array as Array
@@ -233,7 +233,7 @@ newtype DOMInterpret = DOMInterpret
   , inStaticPart :: Boolean
   , makeElement :: MakeElement
   , getUseableAttributes ::
-      STFn1 (Array (Poll Attribute')) Global (Array (Poll Attribute'))
+      STFn2 Int (Array (Poll Attribute')) Global (Array (Poll Attribute'))
   , incrementElementCount :: STFn1 StaticRegion Global Unit
   , setProp :: SetProp
   , setCb :: SetCb
@@ -599,7 +599,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   id <- liftST (un DOMInterpret di).tagger
   eltRegion <- liftST $ runSTFn3 fromParent id (Just (length nuts)) $ DekuParent
     elt
-  newAtts <- liftST $ runSTFn1 (un DOMInterpret di).getUseableAttributes
+  newAtts <- liftST $ runSTFn2 (un DOMInterpret di).getUseableAttributes id
     (map (map coerce) arrAtts)
 
   let
