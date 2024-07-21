@@ -182,7 +182,7 @@ hydrateInElement cache elt (Nut nut) = do
   region <- liftST $ runSTFn3 Region.fromParent taggerStart Nothing
     (DekuParent $ toDekuElement elt)
   doc <- window >>= document
-  dummyElt <- createElement "tag" (toDocument doc)
+  dummyElt <- createElement "div" (toDocument doc)
   let par = toParentNode elt
   void $ runEffectFn2 nut
     ( PSR
