@@ -136,7 +136,7 @@ makeElement renderingInfo = mkEffectFn3 \id ns tag -> do
 
 ssrDOMInterpret
   :: ST.ST Global Int
-  -> STObject Global (Array Int)
+  -> STObject Global (Array String)
   -> STObject Global SSRRenderingInfo
   -> Core.DOMInterpret
 ssrDOMInterpret tagger parentChildCache renderingInfo = Core.DOMInterpret
@@ -155,7 +155,7 @@ ssrDOMInterpret tagger parentChildCache renderingInfo = Core.DOMInterpret
       \(ParentId parent) (ChildId child) -> do
         let tag = show parent
         parentChildArray <- peek tag parentChildCache
-        void $ poke tag (Array.cons child $ fromMaybe [] parentChildArray)
+        void $ poke tag (Array.cons (show child) $ fromMaybe [] parentChildArray)
           parentChildCache
   , makeElement: makeElement renderingInfo
   , attachElement: I.attachElementEffect
