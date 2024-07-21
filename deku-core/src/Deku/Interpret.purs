@@ -39,7 +39,7 @@ import Web.HTML.HTMLSelectElement as HTMLSelectElement
 import Web.HTML.HTMLTextAreaElement as HTMLTextAreaElement
 
 makeElementEffect :: Core.MakeElement
-makeElementEffect = mkEffectFn2 \ns tag -> do
+makeElementEffect = mkEffectFn3 \_ ns tag -> do
   elt <- case coerce ns :: Maybe String of
     Nothing -> runEffectFn1 createElement (coerce tag)
     Just ns' -> runEffectFn2 createElementNS (coerce ns') (coerce tag)

@@ -3,23 +3,28 @@ module Deku.SSRDOMInterpret where
 import Prelude
 
 import Control.Monad.ST as ST
+import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
-import Control.Monad.ST.Uncurried (STFn1, STFn2, mkSTFn1, mkSTFn2, runSTFn2)
+import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn3, runSTFn2, runSTFn3)
 import Data.Compactable (compact)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, over, un)
-import Deku.Core (Attribute')
+import Deku.Core (Attribute', MakeElement)
 import Deku.Core as Core
+import Deku.Internal.Entities (fromDekuElement)
 import Deku.Internal.Region (CurrentStaticRegionStats(..), StaticRegion(..), StaticRegionStats(..))
 import Deku.Interpret as I
+import Effect.Uncurried (mkEffectFn3, runEffectFn3)
 import FRP.Poll (Poll(..))
 import Foreign.Object.ST (STObject, peek, poke)
+import Web.DOM as Web.DOM
 
 newtype RenderingInfo = RenderingInfo
   { attributeIndicesThatAreNeededDuringHydration :: Maybe (Array Int)
   , hasParentThatWouldDisqualifyFromSSR :: Boolean
   , hasChildrenThatWouldDisqualifyFromSSR :: Boolean
+  , backingElement :: Maybe Web.DOM.Element
   }
 
 derive instance Newtype RenderingInfo _
@@ -29,6 +34,7 @@ initialRenderingInfo = RenderingInfo
   { attributeIndicesThatAreNeededDuringHydration: Nothing
   , hasParentThatWouldDisqualifyFromSSR: true
   , hasChildrenThatWouldDisqualifyFromSSR: true
+  , backingElement: Nothing
   }
 
 getUseableAttributes
@@ -63,6 +69,21 @@ disqualifyFromStaticRendering renderingInfo = mkSTFn1 \id -> do
     ( maybe initialRenderingInfo
         ( over RenderingInfo _
             { hasParentThatWouldDisqualifyFromSSR = true
+            }
+        )
+        currentRenderingInfo
+    )
+    renderingInfo
+
+addElementToCache
+  :: STFn3 Int (STObject Global RenderingInfo) Web.DOM.Element Global Unit
+addElementToCache = mkSTFn3 \id renderingInfo elt -> do
+  let tag = show id
+  currentRenderingInfo <- peek tag renderingInfo
+  void $ poke tag
+    ( maybe initialRenderingInfo
+        ( over RenderingInfo _
+            { backingElement = Just elt
             }
         )
         currentRenderingInfo
@@ -105,13 +126,25 @@ incrementPureTextCount renderingInfo = mkSTFn1 \region -> do
   (un StaticRegionStats (un StaticRegion region).stats).incrementStaticTextChildCount
   runSTFn2 updateRenderingInfo renderingInfo region
 
+makeElement :: STObject Global RenderingInfo -> MakeElement
+makeElement renderingInfo = mkEffectFn3 \id ns tag -> do
+  elt <- runEffectFn3 I.makeElementEffect id ns tag
+  liftST $ runSTFn3 addElementToCache id renderingInfo (fromDekuElement elt)
+  pure elt
+
 ssrDOMInterpret
   :: ST.ST Global Int -> STObject Global RenderingInfo -> Core.DOMInterpret
 ssrDOMInterpret tagger renderingInfo = Core.DOMInterpret
   { tagger
-  , inStaticPart: true
+  , staticDOMInterpret: \_ -> ssrDOMInterpret tagger renderingInfo
+  -- we could likely make `dynamicDOMInterpret` a no-op
+  -- should be harmless, though, as this will be called rarely if at all
+  -- because SSR code will only trigger dynamic elements
+  -- in case there's a dyn with pure polls that aren't optimized as being pure
+  , dynamicDOMInterpret: \_ -> ssrDOMInterpret tagger renderingInfo
   --
-  , makeElement: I.makeElementEffect
+  , isBoring: mkSTFn1 \_ -> pure false
+  , makeElement: makeElement renderingInfo
   , attachElement: I.attachElementEffect
   , getUseableAttributes: getUseableAttributes renderingInfo
   , incrementElementCount: incrementElementCount renderingInfo

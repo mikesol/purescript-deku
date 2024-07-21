@@ -176,7 +176,7 @@ newtype Namespace = Namespace String
 
 -- | Type used by Deku backends to create an element. For internal use only unless you're writing a custom backend.
 type MakeElement =
-  EffectFn2 (Maybe Namespace) Tag DekuElement
+  EffectFn3 Int (Maybe Namespace) Tag DekuElement
 
 type RemoveElement = EffectFn1 DekuElement Unit
 type RemoveText = EffectFn1 DekuText Unit
@@ -222,16 +222,15 @@ type BeamRegion =
 type BufferPortal =
   Effect DekuParent
 
-markAsDynamic :: DOMInterpret -> DOMInterpret
-markAsDynamic = over DOMInterpret _ { inStaticPart = false }
-
 -- | This is the interpreter that any Deku backend creator needs to impelement.
 -- | Three interpreters are included with Deku: SPA.
 -- , SSR, and hydrated SSR.
 newtype DOMInterpret = DOMInterpret
   { tagger :: ST.ST Global Int
-  , inStaticPart :: Boolean
+  , staticDOMInterpret :: Unit -> DOMInterpret
+  , dynamicDOMInterpret :: Unit -> DOMInterpret
   , disqualifyFromStaticRendering :: STFn1 Int Global Unit
+  , isBoring :: STFn1 Int Global Boolean
   , makeElement :: MakeElement
   , getUseableAttributes ::
       STFn2 Int (Array (Poll Attribute')) Global (Array (Poll Attribute'))
@@ -506,7 +505,10 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
   let
     handleElements :: Boolean -> EffectFn1 (Tuple (Maybe Int) value) Unit
     handleElements inStaticPart = mkEffectFn1 \(Tuple initialPos value) -> do
-      let di = if inStaticPart then di' else markAsDynamic di'
+      let
+        di = unit #
+          if inStaticPart then (un DOMInterpret di').staticDOMInterpret
+          else (un DOMInterpret di').dynamicDOMInterpret
       Region eltRegion <- liftST $ runSTFn1 span initialPos
       tag <- liftST (un DOMInterpret di).tagger
       region <- liftST $ runSTFn4 newStaticRegion tag Nothing eltRegion.begin
@@ -597,54 +599,57 @@ elementify
   -> Array Nut
   -> Nut
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
-  elt <- runEffectFn2 (un DOMInterpret di).makeElement (Namespace <$> ns)
-    (Tag tag)
-  regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
-  liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
-    (Element (elt))
-
-  unsubs <- runEffectFn1 collectUnsubs psr
-
   id <- liftST (un DOMInterpret di).tagger
-  when (un PSR psr).disqualifyFromStaticRendering do
-    liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering id
-  eltRegion <- liftST $ runSTFn3 fromParent id (Just (length nuts)) $ DekuParent
-    elt
-  newAtts <- liftST $ runSTFn2 (un DOMInterpret di).getUseableAttributes id
-    (map (map coerce) arrAtts)
+  isBoring <- liftST $ runSTFn1 (un DOMInterpret di).isBoring id
+  when (not isBoring) do
+    elt <- runEffectFn3 (un DOMInterpret di).makeElement id (Namespace <$> ns)
+      (Tag tag)
+    regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
+    liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
+      (Element (elt))
 
-  let
-    handleAtts :: EffectFn1 (Poll Attribute') Unit
-    handleAtts = mkEffectFn1 \atts ->
-      pump unsubs atts $ \_ -> mkEffectFn1 \x ->
-        runEffectFn2 x (fromDekuElement elt) di
-  runEffectFn2 Event.fastForeachE newAtts handleAtts
+    unsubs <- runEffectFn1 collectUnsubs psr
 
-  let
-    handleNuts :: EffectFn1 Nut Unit
-    handleNuts = mkEffectFn1 \(Nut nut) ->
-      runEffectFn2 nut
-        ( PSR
-            { unsubs: []
-            , disqualifyFromStaticRendering: false
-            , lifecycle: (un PSR psr).lifecycle
-            , region: eltRegion
-            }
-        )
-        di
-  runEffectFn2 Event.fastForeachE nuts handleNuts
+    when (un PSR psr).disqualifyFromStaticRendering do
+      liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering id
+    eltRegion <- liftST $ runSTFn3 fromParent id (Just (length nuts)) $
+      DekuParent
+        elt
+    newAtts <- liftST $ runSTFn2 (un DOMInterpret di).getUseableAttributes id
+      (map (map coerce) arrAtts)
 
-  liftST $ runSTFn1 (un DOMInterpret di).incrementElementCount
-    (un PSR psr).region
-  runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
+    let
+      handleAtts :: EffectFn1 (Poll Attribute') Unit
+      handleAtts = mkEffectFn1 \atts ->
+        pump unsubs atts $ \_ -> mkEffectFn1 \x ->
+          runEffectFn2 x (fromDekuElement elt) di
+    runEffectFn2 Event.fastForeachE newAtts handleAtts
 
-  let
-    handleLifecycle :: Boolean -> EffectFn1 Unit Unit
-    handleLifecycle _ = mkEffectFn1 \_ -> do
-      runEffectFn1 (un DOMInterpret di).removeElement elt
-      runEffectFn1 disposeUnsubs unsubs
+    let
+      handleNuts :: EffectFn1 Nut Unit
+      handleNuts = mkEffectFn1 \(Nut nut) ->
+        runEffectFn2 nut
+          ( PSR
+              { unsubs: []
+              , disqualifyFromStaticRendering: false
+              , lifecycle: (un PSR psr).lifecycle
+              , region: eltRegion
+              }
+          )
+          di
+    runEffectFn2 Event.fastForeachE nuts handleNuts
 
-  pump unsubs (un PSR psr).lifecycle handleLifecycle
+    liftST $ runSTFn1 (un DOMInterpret di).incrementElementCount
+      (un PSR psr).region
+    runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
+
+    let
+      handleLifecycle :: Boolean -> EffectFn1 Unit Unit
+      handleLifecycle _ = mkEffectFn1 \_ -> do
+        runEffectFn1 (un DOMInterpret di).removeElement elt
+        runEffectFn1 disposeUnsubs unsubs
+
+    pump unsubs (un PSR psr).lifecycle handleLifecycle
 
 text_ :: String -> Nut
 text_ txt =

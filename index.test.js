@@ -28,7 +28,7 @@ describe("deku", () => {
 
   describe("low-level interpreters", () => {
     it("makeElementEffect makes an element with the correct tagname", () => {
-      const out = di.makeElementEffect(testFriend.nothing, "div");
+      const out = di.makeElementEffect(42, testFriend.nothing, "div");
       expect(out.tagName).toBe("DIV");
     });
     describe("makeText and setText", () => {
@@ -42,25 +42,25 @@ describe("deku", () => {
     describe("setProp", () => {
       it("sets the id attribute correctly and unsets it correctly", () => {
         const $ = require("jquery");
-        const elt = di.makeElementEffect(testFriend.nothing, "li");
+        const elt = di.makeElementEffect(42, testFriend.nothing, "li");
         di.setPropEffect("id", "foo", elt);
         di.unsetAttributeEffect("id", elt);
         expect($(elt).attr("id")).toBe(undefined);
       });
       it("sets checked attribute correctly", () => {
-        const elt = di.makeElementEffect(testFriend.nothing, "input");
+        const elt = di.makeElementEffect(42, testFriend.nothing, "input");
         di.setPropEffect("checked", "true", elt);
         expect(elt.checked).toBe(true);
         di.setPropEffect("checked", "false", elt);
         expect(elt.checked).toBe(false);
       });
       it("sets value attribute correctly", () => {
-        const elt = di.makeElementEffect(testFriend.nothing, "input");
+        const elt = di.makeElementEffect(42, testFriend.nothing, "input");
         di.setPropEffect("value", "hello", elt);
         expect(elt.value).toBe("hello");
       });
       it("sets disabled correctly", () => {
-        const elt = di.makeElementEffect(testFriend.nothing, "button");
+        const elt = di.makeElementEffect(42, testFriend.nothing, "button");
         di.setPropEffect("disabled", "true",elt);
         expect(elt.disabled).toBe(true);
       });
@@ -68,7 +68,7 @@ describe("deku", () => {
     describe("setCb and unsetAttribute", () => {
       it("sets and unsets the cb", () => {
         const $ = require("jquery");
-        const elt = di.makeElementEffect(testFriend.nothing, "button");
+        const elt = di.makeElementEffect(42, testFriend.nothing, "button");
         let i = 0;
         di.setCbEffect("click", () => () => {
           i++;

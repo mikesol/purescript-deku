@@ -11,9 +11,11 @@ import Deku.Interpret as I
 fullDOMInterpret :: ST.ST Global Int -> Core.DOMInterpret
 fullDOMInterpret tagger = Core.DOMInterpret
   { tagger
-  , inStaticPart: true
+  , staticDOMInterpret: \_ -> fullDOMInterpret tagger
+  , dynamicDOMInterpret: \_ -> fullDOMInterpret tagger
   , disqualifyFromStaticRendering: mkSTFn1 mempty
   --
+  , isBoring: mkSTFn1 \_ -> pure false
   , makeElement: I.makeElementEffect
   , attachElement: I.attachElementEffect
   , getUseableAttributes: mkSTFn2 \_ a -> pure a
