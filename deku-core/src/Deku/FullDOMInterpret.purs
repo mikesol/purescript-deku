@@ -15,7 +15,7 @@ fullDOMInterpret tagger = Core.DOMInterpret
   , dynamicDOMInterpret: \_ -> fullDOMInterpret tagger
   , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
   --
-  , isBoring: mkSTFn1 \_ -> pure false
+  , isBoring: const false
   , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
   , makeElement: I.makeElementEffect
   , attachElement: I.attachElementEffect

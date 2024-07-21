@@ -7,6 +7,7 @@ import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn3, runSTFn2, runSTFn3)
 import Data.Array as Array
+import Data.Array.NonEmpty (NonEmptyArray, fromArray)
 import Data.Compactable (compact)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
@@ -21,17 +22,17 @@ import FRP.Poll (Poll(..))
 import Foreign.Object.ST (STObject, peek, poke)
 import Web.DOM as Web.DOM
 
-newtype RenderingInfo = RenderingInfo
-  { attributeIndicesThatAreNeededDuringHydration :: Maybe (Array Int)
+newtype SSRRenderingInfo = SSRRenderingInfo
+  { attributeIndicesThatAreNeededDuringHydration :: Maybe (NonEmptyArray Int)
   , hasParentThatWouldDisqualifyFromSSR :: Boolean
   , hasChildrenThatWouldDisqualifyFromSSR :: Boolean
   , backingElement :: Maybe Web.DOM.Element
   }
 
-derive instance Newtype RenderingInfo _
+derive instance Newtype SSRRenderingInfo _
 
-initialRenderingInfo :: RenderingInfo
-initialRenderingInfo = RenderingInfo
+initialSSRRenderingInfo :: SSRRenderingInfo
+initialSSRRenderingInfo = SSRRenderingInfo
   { attributeIndicesThatAreNeededDuringHydration: Nothing
   , hasParentThatWouldDisqualifyFromSSR: true
   , hasChildrenThatWouldDisqualifyFromSSR: true
@@ -39,15 +40,15 @@ initialRenderingInfo = RenderingInfo
   }
 
 getUseableAttributes
-  :: STObject Global RenderingInfo
+  :: STObject Global SSRRenderingInfo
   -> STFn2 Int (Array (Poll Attribute')) Global (Array (Poll Attribute'))
 getUseableAttributes renderingInfo = mkSTFn2 \id arr -> do
   let tag = show id
-  currentRenderingInfo <- peek tag renderingInfo
+  currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
-    ( maybe initialRenderingInfo
-        ( over RenderingInfo _
-            { attributeIndicesThatAreNeededDuringHydration = Just $ compact
+    ( maybe initialSSRRenderingInfo
+        ( over SSRRenderingInfo _
+            { attributeIndicesThatAreNeededDuringHydration = fromArray $ compact
                 $ mapWithIndex
                     ( \i -> case _ of
                         OnlyPure _ -> Nothing
@@ -56,44 +57,44 @@ getUseableAttributes renderingInfo = mkSTFn2 \id arr -> do
                     arr
             }
         )
-        currentRenderingInfo
+        currentSSRRenderingInfo
     )
     renderingInfo
   pure arr
 
 disqualifyFromStaticRendering
-  :: STObject Global RenderingInfo -> STFn1 Int Global Unit
+  :: STObject Global SSRRenderingInfo -> STFn1 Int Global Unit
 disqualifyFromStaticRendering renderingInfo = mkSTFn1 \id -> do
   let tag = show id
-  currentRenderingInfo <- peek tag renderingInfo
+  currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
-    ( maybe initialRenderingInfo
-        ( over RenderingInfo _
+    ( maybe initialSSRRenderingInfo
+        ( over SSRRenderingInfo _
             { hasParentThatWouldDisqualifyFromSSR = true
             }
         )
-        currentRenderingInfo
+        currentSSRRenderingInfo
     )
     renderingInfo
 
 addElementToCache
-  :: STFn3 Int (STObject Global RenderingInfo) Web.DOM.Element Global Unit
+  :: STFn3 Int (STObject Global SSRRenderingInfo) Web.DOM.Element Global Unit
 addElementToCache = mkSTFn3 \id renderingInfo elt -> do
   let tag = show id
-  currentRenderingInfo <- peek tag renderingInfo
+  currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
-    ( maybe initialRenderingInfo
-        ( over RenderingInfo _
+    ( maybe initialSSRRenderingInfo
+        ( over SSRRenderingInfo _
             { backingElement = Just elt
             }
         )
-        currentRenderingInfo
+        currentSSRRenderingInfo
     )
     renderingInfo
 
-updateRenderingInfo
-  :: STFn2 (STObject Global RenderingInfo) StaticRegion Global Unit
-updateRenderingInfo = mkSTFn2 \renderingInfo (StaticRegion region) -> do
+updateSSRRenderingInfo
+  :: STFn2 (STObject Global SSRRenderingInfo) StaticRegion Global Unit
+updateSSRRenderingInfo = mkSTFn2 \renderingInfo (StaticRegion region) -> do
   CurrentStaticRegionStats currentStats <-
     (un StaticRegionStats region.stats).getCurrentStaticRegionStats
   let tag = show region.tag
@@ -103,52 +104,59 @@ updateRenderingInfo = mkSTFn2 \renderingInfo (StaticRegion region) -> do
   let
     containsOnlyStaticText = currentStats.numberOfChildrenThatAreElements == 0
       && currentStats.numberOfChildrenThatAreStaticTextNodes == 1
-  currentRenderingInfo <- peek tag renderingInfo
+  currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
-    ( maybe initialRenderingInfo
-        ( over RenderingInfo _
+    ( maybe initialSSRRenderingInfo
+        ( over SSRRenderingInfo _
             { hasChildrenThatWouldDisqualifyFromSSR = not
                 (containsOnlyElements || containsOnlyStaticText)
             }
         )
-        currentRenderingInfo
+        currentSSRRenderingInfo
     )
     renderingInfo
 
 incrementElementCount
-  :: STObject Global RenderingInfo -> STFn1 StaticRegion Global Unit
+  :: STObject Global SSRRenderingInfo -> STFn1 StaticRegion Global Unit
 incrementElementCount renderingInfo = mkSTFn1 \region -> do
   (un StaticRegionStats (un StaticRegion region).stats).incrementElementChildCount
-  runSTFn2 updateRenderingInfo renderingInfo region
+  runSTFn2 updateSSRRenderingInfo renderingInfo region
 
 incrementPureTextCount
-  :: STObject Global RenderingInfo -> STFn1 StaticRegion Global Unit
+  :: STObject Global SSRRenderingInfo -> STFn1 StaticRegion Global Unit
 incrementPureTextCount renderingInfo = mkSTFn1 \region -> do
   (un StaticRegionStats (un StaticRegion region).stats).incrementStaticTextChildCount
-  runSTFn2 updateRenderingInfo renderingInfo region
+  runSTFn2 updateSSRRenderingInfo renderingInfo region
 
-makeElement :: STObject Global RenderingInfo -> MakeElement
+makeElement :: STObject Global SSRRenderingInfo -> MakeElement
 makeElement renderingInfo = mkEffectFn3 \id ns tag -> do
   elt <- runEffectFn3 I.makeElementEffect id ns tag
   liftST $ runSTFn3 addElementToCache id renderingInfo (fromDekuElement elt)
   pure elt
 
 ssrDOMInterpret
-  :: ST.ST Global Int -> STObject Global (Array Int) -> STObject Global RenderingInfo -> Core.DOMInterpret
+  :: ST.ST Global Int
+  -> STObject Global (Array Int)
+  -> STObject Global SSRRenderingInfo
+  -> Core.DOMInterpret
 ssrDOMInterpret tagger parentChildCache renderingInfo = Core.DOMInterpret
   { tagger
-  , staticDOMInterpret: \_ -> ssrDOMInterpret tagger parentChildCache renderingInfo
+  , staticDOMInterpret: \_ -> ssrDOMInterpret tagger parentChildCache
+      renderingInfo
   -- we could likely make `dynamicDOMInterpret` a no-op
   -- should be harmless, though, as this will be called rarely if at all
   -- because SSR code will only trigger dynamic elements
   -- in case there's a dyn with pure polls that aren't optimized as being pure
-  , dynamicDOMInterpret: \_ -> ssrDOMInterpret tagger parentChildCache renderingInfo
+  , dynamicDOMInterpret: \_ -> ssrDOMInterpret tagger parentChildCache
+      renderingInfo
   --
-  , isBoring: mkSTFn1 \_ -> pure false
-  , registerParentChildRelationship: mkSTFn2 \(ParentId parent) (ChildId child) -> do
-      let tag = show parent
-      parentChildArray <- peek tag parentChildCache
-      void $ poke tag (Array.cons child $ fromMaybe [] parentChildArray) parentChildCache
+  , isBoring: const false
+  , registerParentChildRelationship: mkSTFn2
+      \(ParentId parent) (ChildId child) -> do
+        let tag = show parent
+        parentChildArray <- peek tag parentChildCache
+        void $ poke tag (Array.cons child $ fromMaybe [] parentChildArray)
+          parentChildCache
   , makeElement: makeElement renderingInfo
   , attachElement: I.attachElementEffect
   , getUseableAttributes: getUseableAttributes renderingInfo

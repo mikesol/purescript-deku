@@ -221,8 +221,7 @@ type BeamRegion =
   EffectFn3 Anchor Anchor Anchor Unit
 
 -- | Generates a place for portals to render into that will not be displayed immediatly.
-type BufferPortal =
-  Effect DekuParent
+type BufferPortal = Effect DekuParent
 
 newtype ParentId = ParentId Int
 
@@ -240,7 +239,7 @@ newtype DOMInterpret = DOMInterpret
   , dynamicDOMInterpret :: Unit -> DOMInterpret
   , registerParentChildRelationship :: STFn2 ParentId ChildId Global Unit
   , disqualifyFromStaticRendering :: STFn1 Int Global Unit
-  , isBoring :: STFn1 Int Global Boolean
+  , isBoring :: Int -> Boolean
   , makeElement :: MakeElement
   , getUseableAttributes ::
       STFn2 Int (Array (Poll Attribute')) Global (Array (Poll Attribute'))
@@ -610,7 +609,7 @@ elementify
   -> Nut
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   id <- liftST (un DOMInterpret di).tagger
-  isBoring <- liftST $ runSTFn1 (un DOMInterpret di).isBoring id
+  let isBoring = (un DOMInterpret di).isBoring id
   when (not isBoring) do
     liftST $ runSTFn2 (un DOMInterpret di).registerParentChildRelationship
       (ParentId (un StaticRegion (un PSR psr).region).tag)
