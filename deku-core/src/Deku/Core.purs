@@ -231,6 +231,7 @@ markAsDynamic = over DOMInterpret _ { inStaticPart = false }
 newtype DOMInterpret = DOMInterpret
   { tagger :: ST.ST Global Int
   , inStaticPart :: Boolean
+  , disqualifyFromStaticRendering :: STFn1 Int Global Unit
   , makeElement :: MakeElement
   , getUseableAttributes ::
       STFn2 Int (Array (Poll Attribute')) Global (Array (Poll Attribute'))
@@ -304,6 +305,9 @@ newtype PSR = PSR
   { lifecycle :: Poll.Poll Unit
   -- used by `Nut`s to register or clear the last element of their region.
   , region :: StaticRegion
+  -- used to indicate when an element should never be statically rendered
+  -- it may be disqualified for other reasons, but this flag trumps them all
+  , disqualifyFromStaticRendering :: Boolean
   , unsubs :: Array (Effect Unit)
   }
 
@@ -530,7 +534,12 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
 
         eltPSR :: PSR
         eltPSR =
-          PSR { region, unsubs: [], lifecycle: remove }
+          PSR
+            { region
+            , disqualifyFromStaticRendering: true
+            , unsubs: []
+            , lifecycle: remove
+            }
 
         handleManagedLifecycle :: Boolean -> EffectFn1 Unit Unit
         handleManagedLifecycle _ =
@@ -597,6 +606,8 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   unsubs <- runEffectFn1 collectUnsubs psr
 
   id <- liftST (un DOMInterpret di).tagger
+  when (un PSR psr).disqualifyFromStaticRendering do
+    liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering id
   eltRegion <- liftST $ runSTFn3 fromParent id (Just (length nuts)) $ DekuParent
     elt
   newAtts <- liftST $ runSTFn2 (un DOMInterpret di).getUseableAttributes id
@@ -615,6 +626,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
       runEffectFn2 nut
         ( PSR
             { unsubs: []
+            , disqualifyFromStaticRendering: false
             , lifecycle: (un PSR psr).lifecycle
             , region: eltRegion
             }
@@ -716,7 +728,11 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
         void $ ST.write bound trackEnd
         bumped.push bound
     )
-  runEffectFn2 toBeam (over PSR _ { region = staticBuffer } psr) di
+  runEffectFn2 toBeam
+    ( over PSR _ { disqualifyFromStaticRendering = true, region = staticBuffer }
+        psr
+    )
+    di
 
   let
     Nut hooked = cont $ portaled buffer (beamed.push unit) beamed.event

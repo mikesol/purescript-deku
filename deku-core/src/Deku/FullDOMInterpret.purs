@@ -12,6 +12,7 @@ fullDOMInterpret :: ST.ST Global Int -> Core.DOMInterpret
 fullDOMInterpret tagger = Core.DOMInterpret
   { tagger
   , inStaticPart: true
+  , disqualifyFromStaticRendering: mkSTFn1 mempty
   --
   , makeElement: I.makeElementEffect
   , attachElement: I.attachElementEffect

@@ -18,7 +18,8 @@ import Foreign.Object.ST (STObject, peek, poke)
 
 newtype RenderingInfo = RenderingInfo
   { attributeIndicesThatAreNeededDuringHydration :: Maybe (Array Int)
-  , needsToBeTrackedForHydration :: Boolean
+  , hasParentThatWouldDisqualifyFromSSR :: Boolean
+  , hasChildrenThatWouldDisqualifyFromSSR :: Boolean
   }
 
 derive instance Newtype RenderingInfo _
@@ -26,7 +27,8 @@ derive instance Newtype RenderingInfo _
 initialRenderingInfo :: RenderingInfo
 initialRenderingInfo = RenderingInfo
   { attributeIndicesThatAreNeededDuringHydration: Nothing
-  , needsToBeTrackedForHydration: true
+  , hasParentThatWouldDisqualifyFromSSR: true
+  , hasChildrenThatWouldDisqualifyFromSSR: true
   }
 
 getUseableAttributes
@@ -52,6 +54,21 @@ getUseableAttributes renderingInfo = mkSTFn2 \id arr -> do
     renderingInfo
   pure arr
 
+disqualifyFromStaticRendering
+  :: STObject Global RenderingInfo -> STFn1 Int Global Unit
+disqualifyFromStaticRendering renderingInfo = mkSTFn1 \id -> do
+  let tag = show id
+  currentRenderingInfo <- peek tag renderingInfo
+  void $ poke tag
+    ( maybe initialRenderingInfo
+        ( over RenderingInfo _
+            { hasParentThatWouldDisqualifyFromSSR = true
+            }
+        )
+        currentRenderingInfo
+    )
+    renderingInfo
+
 updateRenderingInfo
   :: STFn2 (STObject Global RenderingInfo) StaticRegion Global Unit
 updateRenderingInfo = mkSTFn2 \renderingInfo (StaticRegion region) -> do
@@ -68,7 +85,7 @@ updateRenderingInfo = mkSTFn2 \renderingInfo (StaticRegion region) -> do
   void $ poke tag
     ( maybe initialRenderingInfo
         ( over RenderingInfo _
-            { needsToBeTrackedForHydration = not
+            { hasChildrenThatWouldDisqualifyFromSSR = not
                 (containsOnlyElements || containsOnlyStaticText)
             }
         )
@@ -84,23 +101,9 @@ incrementElementCount renderingInfo = mkSTFn1 \region -> do
 
 incrementPureTextCount
   :: STObject Global RenderingInfo -> STFn1 StaticRegion Global Unit
-incrementPureTextCount renderingInfo = mkSTFn1 \(StaticRegion region) -> do
-  (un StaticRegionStats region.stats).incrementStaticTextChildCount
-  CurrentStaticRegionStats currentStats <-
-    (un StaticRegionStats region.stats).getCurrentStaticRegionStats
-  when
-    ( Just currentStats.numberOfChildrenThatAreElements ==
-        currentStats.childCount
-    )
-    do
-      let tag = show region.tag
-      currentRenderingInfo <- peek tag renderingInfo
-      void $ poke tag
-        ( maybe initialRenderingInfo
-            (over RenderingInfo _ { needsToBeTrackedForHydration = false })
-            currentRenderingInfo
-        )
-        renderingInfo
+incrementPureTextCount renderingInfo = mkSTFn1 \region -> do
+  (un StaticRegionStats (un StaticRegion region).stats).incrementStaticTextChildCount
+  runSTFn2 updateRenderingInfo renderingInfo region
 
 ssrDOMInterpret
   :: ST.ST Global Int -> STObject Global RenderingInfo -> Core.DOMInterpret
@@ -112,7 +115,7 @@ ssrDOMInterpret tagger renderingInfo = Core.DOMInterpret
   , attachElement: I.attachElementEffect
   , getUseableAttributes: getUseableAttributes renderingInfo
   , incrementElementCount: incrementElementCount renderingInfo
-
+  , disqualifyFromStaticRendering: disqualifyFromStaticRendering renderingInfo
   , setProp: I.setPropEffect
   , setCb: I.setCbEffect
   , unsetAttribute: I.unsetAttributeEffect
