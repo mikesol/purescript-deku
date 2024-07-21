@@ -187,7 +187,8 @@ makeTextEffect = mkEffectFn1 \mstr -> do
 
 attachTextEffect :: Core.AttachText
 attachTextEffect =
-  mkEffectFn2 \txt -> runEffectFn2 attachNodeEffect [ fromDekuText @Node txt ]
+  mkEffectFn2 \txt -> do
+    runEffectFn2 attachNodeEffect [ fromDekuText @Node txt ]
 
 setTextEffect :: Core.SetText
 setTextEffect = mkEffectFn2 \str txt' -> do

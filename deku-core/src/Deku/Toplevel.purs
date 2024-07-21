@@ -5,8 +5,8 @@ import Prelude
 
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (runSTFn2)
-import Data.Maybe (maybe)
+import Control.Monad.ST.Uncurried (runSTFn2, runSTFn3)
+import Data.Maybe (Maybe(..), maybe)
 import Deku.Core (Nut(..), PSR(..))
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Entities (DekuParent(..), toDekuElement)
@@ -35,7 +35,7 @@ runInElement elt (Nut nut) = do
           tag <- liftST $ ST.read tagRef
           liftST $ void $ ST.write (tag + 1) tagRef
           pure tag
-  region <- liftST $ runSTFn2 Region.fromParent taggerStart (DekuParent $ toDekuElement elt)
+  region <- liftST $ runSTFn3 Region.fromParent taggerStart Nothing (DekuParent $ toDekuElement elt)
   void $ runEffectFn2 nut (PSR { region, unsubs: [], lifecycle })
     (fullDOMInterpret tagger)
   pure $ dispose unit

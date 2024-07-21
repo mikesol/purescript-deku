@@ -80,8 +80,9 @@ import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (mkSTFn1, runSTFn1, runSTFn2, runSTFn3)
+import Control.Monad.ST.Uncurried (STFn1, mkSTFn1, runSTFn1, runSTFn2, runSTFn3, runSTFn4)
 import Control.Plus (empty)
+import Data.Array (length)
 import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Compactable (compact)
@@ -139,14 +140,12 @@ type Attribute' =
   EffectFn2 Element DOMInterpret Unit
 
 -- | Low level representation of key-value pairs for attributes and listeners.
--- | In general, this type is for internal use only. In practice, you'll use
--- | the `:=` family of operators and helpers like `style` and `klass` instead.
+-- | In general, this type is for internal use only.
 newtype Attribute :: Row Type -> Type
 newtype Attribute i = Attribute Attribute'
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
-unsafeUnAttribute
-  :: forall e. Attribute e -> EffectFn2 Element DOMInterpret Unit
+unsafeUnAttribute :: forall e. Attribute e -> Attribute'
 unsafeUnAttribute = coerce
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
@@ -233,6 +232,9 @@ newtype DOMInterpret = DOMInterpret
   { tagger :: ST.ST Global Int
   , inStaticPart :: Boolean
   , makeElement :: MakeElement
+  , getUseableAttributes ::
+      STFn1 (Array (Poll Attribute')) Global (Array (Poll Attribute'))
+  , incrementElementCount :: STFn1 StaticRegion Global Unit
   , setProp :: SetProp
   , setCb :: SetCb
   , unsetAttribute :: UnsetAttribute
@@ -243,6 +245,7 @@ newtype DOMInterpret = DOMInterpret
   , setText :: SetText
   , attachText :: AttachText
   , removeText :: RemoveText
+  , incrementPureTextCount :: STFn1 StaticRegion Global Unit
   -- 
   , bufferPortal :: BufferPortal
   , beamRegion :: BeamRegion
@@ -502,7 +505,8 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
       let di = if inStaticPart then di' else markAsDynamic di'
       Region eltRegion <- liftST $ runSTFn1 span initialPos
       tag <- liftST (un DOMInterpret di).tagger
-      region <- liftST $ runSTFn3 newStaticRegion tag eltRegion.begin eltRegion.bump
+      region <- liftST $ runSTFn4 newStaticRegion tag Nothing eltRegion.begin
+        eltRegion.bump
       eltSendTo <- liftST Poll.create
       let
         sendTo :: Poll Int
@@ -593,14 +597,17 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   unsubs <- runEffectFn1 collectUnsubs psr
 
   id <- liftST (un DOMInterpret di).tagger
-  eltRegion <- liftST $ runSTFn2 fromParent id $ DekuParent elt
+  eltRegion <- liftST $ runSTFn3 fromParent id (Just (length nuts)) $ DekuParent
+    elt
+  newAtts <- liftST $ runSTFn1 (un DOMInterpret di).getUseableAttributes
+    (map (map coerce) arrAtts)
 
   let
-    handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
+    handleAtts :: EffectFn1 (Poll Attribute') Unit
     handleAtts = mkEffectFn1 \atts ->
-      pump unsubs atts $ \_ -> mkEffectFn1 \(Attribute x) ->
+      pump unsubs atts $ \_ -> mkEffectFn1 \x ->
         runEffectFn2 x (fromDekuElement elt) di
-  runEffectFn2 Event.fastForeachE arrAtts handleAtts
+  runEffectFn2 Event.fastForeachE newAtts handleAtts
 
   let
     handleNuts :: EffectFn1 Nut Unit
@@ -615,11 +622,13 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         di
   runEffectFn2 Event.fastForeachE nuts handleNuts
 
+  liftST $ runSTFn1 (un DOMInterpret di).incrementElementCount
+    (un PSR psr).region
   runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
 
   let
     handleLifecycle :: Boolean -> EffectFn1 Unit Unit
-    handleLifecycle _  = mkEffectFn1 \_ -> do
+    handleLifecycle _ = mkEffectFn1 \_ -> do
       runEffectFn1 (un DOMInterpret di).removeElement elt
       runEffectFn1 disposeUnsubs unsubs
 
@@ -672,6 +681,10 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 (un DOMInterpret di).attachText txt regionEnd
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
 
+  case texts of
+    OnlyPure _ -> liftST $ runSTFn1 (un DOMInterpret di).incrementPureTextCount
+      (un PSR psr).region
+    _ -> pure unit
   let
     handleLifecycle :: Boolean -> EffectFn1 Unit Unit
     handleLifecycle _ = mkEffectFn1 \_ -> do
@@ -697,7 +710,7 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
   bumped <- liftST Event.createPure
 
   tag <- liftST (un DOMInterpret di).tagger
-  staticBuffer <- liftST $ runSTFn3 newStaticRegion tag
+  staticBuffer <- liftST $ runSTFn4 newStaticRegion tag Nothing
     (join $ ST.read trackBegin)
     ( mkSTFn1 \bound -> do
         void $ ST.write bound trackEnd
