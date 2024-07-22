@@ -245,17 +245,6 @@ newtype DOMInterpret = DOMInterpret
 
 derive instance Newtype DOMInterpret _
 
-collectUnsubs :: EffectFn1 PSR (STArray.STArray Global (Effect Unit))
-collectUnsubs = mkEffectFn1 \(PSR psr) -> do
-  unsubs <- liftST $ STArray.new
-  when (not (Array.null psr.unsubs)) do
-    void $ liftST $ STArray.pushAll psr.unsubs unsubs
-  pure unsubs
-
-disposeUnsubs :: EffectFn1 (STArray.STArray Global (Effect Unit)) Unit
-disposeUnsubs = mkEffectFn1 \unsubs -> do
-  runEffectFn1 Event.fastForeachThunkE =<< liftST (STArray.unsafeFreeze unsubs)
-
 -- | Handles an optimized `Poll` by running the effect on each emitted value. Any resulting subscription gets written to 
 -- | the given cleanup array.
 pump
@@ -301,6 +290,25 @@ derive instance Newtype PSR _
 newtype Nut =
   Nut (EffectFn2 PSR DOMInterpret Unit)
 
+collectUnsubs :: EffectFn1 PSR (STArray.STArray Global (Effect Unit))
+collectUnsubs = mkEffectFn1 \(PSR psr) ->
+  liftST $ STArray.thaw psr.unsubs
+  
+disposeUnsubs :: EffectFn1 (STArray.STArray Global (Effect Unit)) Unit
+disposeUnsubs = mkEffectFn1 \unsubs -> do
+  runEffectFn1 Event.fastForeachThunkE =<< liftST (STArray.unsafeFreeze unsubs)
+
+handleSimpleLifecycle :: EffectFn1 PSR Unit
+handleSimpleLifecycle = mkEffectFn1 \psr -> do
+  unsubs <- runEffectFn1 collectUnsubs psr
+
+  let
+    handleLifecycle :: EffectFn1 Unit Unit
+    handleLifecycle =
+      mkEffectFn1 \_ -> runEffectFn1 disposeUnsubs unsubs
+
+  pump unsubs (un PSR psr).lifecycle handleLifecycle
+
 instance Semigroup Nut where
   append (Nut a) (Nut b) =
     -- unrolled version of `fixed`
@@ -312,15 +320,7 @@ instance Semigroup Nut where
 instance Monoid Nut where
   mempty =
     -- while we contribute no UI elements we still have to handle any unsubs created by our hooks
-    Nut $ mkEffectFn2 \psr _ -> do
-      unsubs <- runEffectFn1 collectUnsubs psr
-
-      let
-        handleLifecycle :: EffectFn1 Unit Unit
-        handleLifecycle =
-          mkEffectFn1 \_ -> runEffectFn1 disposeUnsubs unsubs
-
-      pump unsubs (un PSR psr).lifecycle handleLifecycle
+    Nut $ mkEffectFn2 \psr _ -> do runEffectFn1 handleSimpleLifecycle psr
 
 -- hooks
 
@@ -559,12 +559,10 @@ fixed nuts = Nut $ mkEffectFn2 \psr di -> do
     handleNuts = mkEffectFn1 \(Nut nut) ->
       runEffectFn2 nut cleared di
 
-    Nut dispose = mempty
-
   -- run `nuts` without `unsubs` so they can't dispose them
   runEffectFn2 Event.fastForeachE nuts handleNuts
-  -- run an empty `Nut` to actually dispose the `unsubs`
-  runEffectFn2 dispose psr di
+  -- actually dispose the `unsubs`
+  runEffectFn1 handleSimpleLifecycle psr
 
 elementify
   :: forall element
@@ -679,7 +677,7 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
   trackBegin <- liftST $ ST.new buffer
   trackEnd <- liftST $ ST.new $ Nothing @Anchor
 
-  -- signal for other locations of the portal that it's contents have moved
+  -- signal for other locations of the portal that its contents have moved
   beamed <- liftST Event.create
   bumped <- liftST Event.createPure
 
@@ -718,8 +716,9 @@ portaled
   -> ST.STRef Global Bound
   -> ST.STRef Global (Maybe Anchor)
   -> Nut
-portaled buffer beam beamed bumped trackBegin trackEnd = Nut $ mkEffectFn2 \psr di ->
-  do
+portaled buffer beam beamed bumped trackBegin trackEnd =
+  Nut $ mkEffectFn2 \psr di -> do
+
     -- signal to other portaled `Nut`s that we are about to steal their content
     beam
 
