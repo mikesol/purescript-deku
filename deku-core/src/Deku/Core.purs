@@ -32,6 +32,7 @@ module Deku.Core
   , Nut(..)
   , PSR(..)
   , newPSR
+  , pump
   , attributeAtYourOwnRisk
   , callbackWithCaution
   , cb
