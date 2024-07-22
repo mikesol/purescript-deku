@@ -93,6 +93,7 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
+import Debug (spy)
 import Deku.Do as Deku
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
 import Deku.Internal.Region (Anchor(..), Bound, Region(..), RegionSpan(..), StaticRegion(..), fromParent, newSpan, newStaticRegion)
@@ -601,6 +602,7 @@ elementify
   -> Nut
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   id <- liftST (un DOMInterpret di).tagger
+  let _ = spy "running elementify" { id, tag }
   let isBoring = (un DOMInterpret di).isBoring id
   when (not isBoring) do
     liftST $ runSTFn2 (un DOMInterpret di).registerParentChildRelationship

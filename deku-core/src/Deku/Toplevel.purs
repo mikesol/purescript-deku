@@ -28,6 +28,7 @@ import Deku.Internal.Entities (DekuParent(..), toDekuElement)
 import Deku.Internal.Region as Region
 import Deku.SSRDOMInterpret (SSRRenderingInfo(..), ssrDOMInterpret)
 import Effect (Effect)
+import Effect.Console (log)
 import Effect.Exception (error, throwException)
 import Effect.Random (randomInt)
 import Effect.Uncurried (runEffectFn2)
@@ -36,9 +37,9 @@ import Foreign.Object (Object)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
 import Foreign.Object.ST.Unsafe (unsafeFreeze)
+import Web.DOM as Web.DOM
 import Web.DOM.Document (createElement, createTextNode)
 import Web.DOM.Element (setAttribute, toParentNode)
-import Web.DOM as Web.DOM
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body, toDocument)
 import Web.HTML.HTMLElement (toElement)

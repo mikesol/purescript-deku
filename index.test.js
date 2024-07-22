@@ -327,7 +327,7 @@ describe("deku", () => {
       })
     );
 
-    doTest("switcher works for compositional elements", (f) =>
+    doSSRTest("switcher works for compositional elements", (f) =>
       f(tests.switcherWorksForCompositionalElements, () => {
         const $ = require("jquery");
         expect($("#id0").text()).toBe("0-0");

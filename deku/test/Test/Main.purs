@@ -24,6 +24,7 @@ import Deku.HydratingDOMInterpret (HydrationRenderingInfo)
 import Deku.Pursx (lenientPursx, pursx)
 import Deku.Toplevel (hydrateInBody, runInBody, ssrInBody)
 import Effect (Effect)
+import Effect.Console (log)
 import Effect.Random (random)
 import Effect.Uncurried (mkEffectFn2, runEffectFn2)
 import FRP.Event (count, fold)
@@ -201,7 +202,13 @@ switcherWorksForCompositionalElements = Deku.do
         ( [ 0, 1, 2 ] <#> \j -> D.span [ DA.id_ $ "id" <> show j ]
             [ text_ (show i <> "-" <> show j) ]
         )
-    , D.button [ DA.id_ "incr", DL.click_ \_ -> setItem unit ] [ text_ "incr" ]
+    , D.button
+        [ DA.id_ "incr"
+        , DL.click_ \_ -> do
+            log "Setting item"
+            setItem unit
+        ]
+        [ text_ "incr" ]
     ]
 
 tabbedNavigationWithPursx :: Nut
