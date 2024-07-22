@@ -31,6 +31,7 @@ module Deku.Core
   , Hook'
   , Nut(..)
   , PSR(..)
+  , newPSR
   , attributeAtYourOwnRisk
   , callbackWithCaution
   , cb
@@ -38,9 +39,7 @@ module Deku.Core
 
   , elementify
   , fixed
-  -- , portal
   , prop'
-  , pump
   , text
   , text_
   , unsafeAttribute
@@ -70,7 +69,8 @@ module Deku.Core
   , useState'
   , useStateTagged'
   , portal
-  , withUnsub
+  , defer
+  , deferO
   , xdata
   ) where
 
@@ -80,7 +80,7 @@ import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (mkSTFn1, runSTFn1, runSTFn2)
+import Control.Monad.ST.Uncurried (STFn1, STFn2, mkSTFn1, mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
 import Data.Array as Array
 import Data.Array.ST as STArray
@@ -249,11 +249,11 @@ derive instance Newtype DOMInterpret _
 -- | the given cleanup array.
 pump
   :: forall a
-   . STArray.STArray Global (Effect Unit)
+   . PSR
   -> Poll a
   -> EffectFn1 a Unit
   -> Effect Unit
-pump associations p eff =
+pump (PSR { defer: def }) p eff =
   go p
 
   where
@@ -261,7 +261,7 @@ pump associations p eff =
   handleEvent :: Event.Event a -> Effect Unit
   handleEvent y = do
     uu <- runEffectFn2 Event.subscribeO y eff
-    void $ liftST $ STArray.push uu associations
+    void $ liftST $ runSTFn1 def uu
 
   go :: Poll a -> Effect Unit
   go = case _ of
@@ -282,45 +282,55 @@ newtype PSR = PSR
   { lifecycle :: Poll.Poll Unit
   -- used by `Nut`s to register or clear the last element of their region.
   , region :: StaticRegion
-  , unsubs :: Array (Effect Unit)
+  -- scope
+  , defer :: STFn1 (Effect Unit) Global Unit
+  , dispose :: Effect Unit
   }
 
 derive instance Newtype PSR _
 
-newtype Nut =
-  Nut (EffectFn2 PSR DOMInterpret Unit)
+newPSR :: STFn2 (Poll.Poll Unit) StaticRegion Global PSR
+newPSR = mkSTFn2 \lifecycle region -> do
+  unsubs <- STArray.new
+  let
+    doDefer :: STFn1 (Effect Unit) Global Unit
+    doDefer =
+      mkSTFn1 \eff -> void (STArray.push eff unsubs)
 
-collectUnsubs :: EffectFn1 PSR (STArray.STArray Global (Effect Unit))
-collectUnsubs = mkEffectFn1 \(PSR psr) ->
-  liftST $ STArray.thaw psr.unsubs
-  
-disposeUnsubs :: EffectFn1 (STArray.STArray Global (Effect Unit)) Unit
-disposeUnsubs = mkEffectFn1 \unsubs -> do
-  runEffectFn1 Event.fastForeachThunkE =<< liftST (STArray.unsafeFreeze unsubs)
+    dispose :: Effect Unit
+    dispose =
+      runEffectFn1 Event.fastForeachThunkE =<< liftST
+        (STArray.unsafeFreeze unsubs)
 
-handleSimpleLifecycle :: EffectFn1 PSR Unit
-handleSimpleLifecycle = mkEffectFn1 \psr -> do
-  unsubs <- runEffectFn1 collectUnsubs psr
+  pure (PSR { lifecycle, region, defer: doDefer, dispose })
 
+handleScope :: EffectFn1 PSR Unit
+handleScope = mkEffectFn1 \psr -> do
   let
     handleLifecycle :: EffectFn1 Unit Unit
     handleLifecycle =
-      mkEffectFn1 \_ -> runEffectFn1 disposeUnsubs unsubs
+      mkEffectFn1 \_ -> (un PSR psr).dispose
 
-  pump unsubs (un PSR psr).lifecycle handleLifecycle
+  pump psr (un PSR psr).lifecycle handleLifecycle
+
+newtype Nut =
+  Nut (EffectFn2 PSR DOMInterpret Unit)
 
 instance Semigroup Nut where
   append (Nut a) (Nut b) =
     -- unrolled version of `fixed`
     Nut $ mkEffectFn2 \psr di -> do
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
-      runEffectFn2 a (over PSR _ { unsubs = [] } psr) di
+      emptyScope <- liftST $ runSTFn2 newPSR (un PSR psr).lifecycle
+        (un PSR psr).region
+
+      runEffectFn2 a emptyScope di
       runEffectFn2 b psr di
 
 instance Monoid Nut where
   mempty =
-    -- while we contribute no UI elements we still have to handle any unsubs created by our hooks
-    Nut $ mkEffectFn2 \psr _ -> do runEffectFn1 handleSimpleLifecycle psr
+    -- while we contribute no UI elements we still have to handle any deferred effects by our hooks
+    Nut $ mkEffectFn2 \psr _ -> runEffectFn1 handleScope psr
 
 -- hooks
 
@@ -369,7 +379,8 @@ useMailboxedS f = Nut $ mkEffectFn2 \psr di -> do
 useRant :: forall a. Poll a -> Hook (Poll a)
 useRant e f = Nut $ mkEffectFn2 \psr di -> do
   { poll, unsubscribe } <- liftST $ Poll.rant e
-  runEffectFn2 (coerce $ f poll) (withUnsub (liftST unsubscribe) psr) di
+  runEffectFn2 deferO psr (liftST unsubscribe)
+  runEffectFn2 (coerce $ f poll) psr di
 
 useSplit :: forall a. Poll a -> Hook { first :: Poll a, second :: Poll a }
 useSplit e f = Nut $ mkEffectFn2 \psr di -> do
@@ -381,9 +392,8 @@ useSplit e f = Nut $ mkEffectFn2 \psr di -> do
     p0.push i
     p1.push i
   e0.push identity
-  runEffectFn2 (coerce $ f { first: p0.poll, second: p1.poll })
-    (withUnsub (o *> liftST unsubscribe) psr)
-    di
+  runEffectFn2 deferO psr (o *> liftST unsubscribe)
+  runEffectFn2 (coerce $ f { first: p0.poll, second: p1.poll }) psr di
 
 useRant'
   :: forall t a
@@ -399,8 +409,12 @@ useRef a b f = Deku.do
   r <- useRefST a b
   f (liftST r)
 
-withUnsub :: Effect Unit -> PSR -> PSR
-withUnsub u (PSR psr) = PSR $ psr { unsubs = Array.snoc psr.unsubs u }
+deferO :: EffectFn2 PSR (Effect Unit) Unit
+deferO = mkEffectFn2 \psr eff -> liftST (runSTFn1 (un PSR psr).defer eff)
+
+defer :: PSR -> Effect Unit -> Effect Unit
+defer =
+  runEffectFn2 deferO
 
 useRefST :: forall a. a -> Poll a -> Hook (ST.ST Global a)
 useRefST a e f = Nut $ mkEffectFn2 \psr di -> do
@@ -409,7 +423,8 @@ useRefST a e f = Nut $ mkEffectFn2 \psr di -> do
   u <- Event.subscribe (Poll.sample e event) \i -> void $ liftST $ ST.write i r
   push identity
   let Nut nut = f (ST.read r)
-  runEffectFn2 nut (withUnsub u psr) di
+  runEffectFn2 deferO psr u
+  runEffectFn2 nut psr di
 
 useState' :: forall a. Hook ((a -> Effect Unit) /\ Poll a)
 useState' f = Nut $ mkEffectFn2 \psr di -> do
@@ -482,11 +497,10 @@ useDynWith
   -> Hook (DynControl value)
 useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
   RegionSpan span <- liftST do
-    Region region <- ( un StaticRegion (un PSR psr).region ).region
+    Region region <- (un StaticRegion (un PSR psr).region).region
     runSTFn2 newSpan region.begin region.bump
-  
+
   lifecycle <- liftST Poll.create
-  unsubs <- runEffectFn1 collectUnsubs psr
 
   let
     handleElements :: EffectFn1 (Tuple (Maybe Int) value) Unit
@@ -505,7 +519,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
         remove =
           Poll.merge [ options.remove value, eltRemove.poll, lifecycle.poll ]
 
-      eltUnsubs <- liftST STArray.new
+      eltPSR <- liftST $ runSTFn2 newPSR remove region
       let
         Nut nut = cont
           { value
@@ -514,15 +528,10 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
           , sendTo: eltSendTo.push
           }
 
-        eltPSR :: PSR
-        eltPSR =
-          PSR { region, unsubs: [], lifecycle: remove }
-
         handleManagedLifecycle :: EffectFn1 Unit Unit
         handleManagedLifecycle =
           mkEffectFn1 \_ -> do
             liftST eltRegion.remove
-            runEffectFn1 disposeUnsubs eltUnsubs
 
         handleSendTo :: EffectFn1 Int Unit
         handleSendTo = mkEffectFn1 \newPos -> do
@@ -533,36 +542,32 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
           target <- liftST eltRegion.begin
           runEffectFn3 (un DOMInterpret di).beamRegion fromBegin fromEnd target
 
-      pump eltUnsubs sendTo handleSendTo
-      pump eltUnsubs remove handleManagedLifecycle
+      pump eltPSR sendTo handleSendTo
+      pump eltPSR remove handleManagedLifecycle
 
       runEffectFn2 nut eltPSR di
 
-    handleDynLifecycle :: EffectFn1 Unit Unit
-    handleDynLifecycle = mkEffectFn1 \_ -> do
-      -- first let children dispose of themselves
-      lifecycle.push unit
-      -- and only then unsub
-      runEffectFn1 disposeUnsubs unsubs
+  pump psr elements handleElements
 
-  pump unsubs elements handleElements
-  pump unsubs (un PSR psr).lifecycle handleDynLifecycle
+  runEffectFn2 deferO psr do
+    -- let children dispose of themselves
+    lifecycle.push unit
+
+  runEffectFn1 handleScope psr
 
 fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2 \psr di -> do
+  emptyScope <- liftST $ runSTFn2 newPSR (un PSR psr).lifecycle
+    (un PSR psr).region
   let
-    cleared :: PSR
-    cleared =
-      over PSR _ { unsubs = [] } psr
-
     handleNuts :: EffectFn1 Nut Unit
     handleNuts = mkEffectFn1 \(Nut nut) ->
-      runEffectFn2 nut cleared di
+      runEffectFn2 nut emptyScope di
 
   -- run `nuts` without `unsubs` so they can't dispose them
   runEffectFn2 Event.fastForeachE nuts handleNuts
   -- actually dispose the `unsubs`
-  runEffectFn1 handleSimpleLifecycle psr
+  runEffectFn1 handleScope psr
 
 elementify
   :: forall element
@@ -578,38 +583,27 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
     (Element (elt))
 
-  unsubs <- runEffectFn1 collectUnsubs psr
-
   let
     handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
     handleAtts = mkEffectFn1 \atts ->
-      pump unsubs atts $ mkEffectFn1 \(Attribute x) ->
+      pump psr atts $ mkEffectFn1 \(Attribute x) ->
         runEffectFn2 x (fromDekuElement elt) di
   runEffectFn2 Event.fastForeachE arrAtts handleAtts
 
   eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
   let
     handleNuts :: EffectFn1 Nut Unit
-    handleNuts = mkEffectFn1 \(Nut nut) ->
-      runEffectFn2 nut
-        ( PSR
-            { unsubs: []
-            , lifecycle: (un PSR psr).lifecycle
-            , region: eltRegion
-            }
-        )
-        di
+    handleNuts = mkEffectFn1 \(Nut nut) -> do
+      scope <- liftST $ runSTFn2 newPSR (un PSR psr).lifecycle eltRegion
+      runEffectFn2 nut scope di
   runEffectFn2 Event.fastForeachE nuts handleNuts
 
   runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
-  
-  let
-    handleLifecycle :: EffectFn1 Unit Unit
-    handleLifecycle = mkEffectFn1 \_ -> do
-      runEffectFn1 (un DOMInterpret di).removeElement elt
-      runEffectFn1 disposeUnsubs unsubs
 
-  pump unsubs (un PSR psr).lifecycle handleLifecycle
+  runEffectFn2 deferO psr do
+    runEffectFn1 (un DOMInterpret di).removeElement elt
+
+  runEffectFn1 handleScope psr
 
 text_ :: String -> Nut
 text_ txt =
@@ -617,14 +611,12 @@ text_ txt =
 
 text :: Poll String -> Nut
 text texts = Nut $ mkEffectFn2 \psr di -> do
-  unsubs <- runEffectFn1 collectUnsubs psr
-
   let
     handleTextUpdate :: EffectFn2 (Event.Event String) DekuText Unit
     handleTextUpdate = mkEffectFn2 \xs txt -> do
       sub <- runEffectFn2 Event.subscribeO xs $ mkEffectFn1 \x ->
         runEffectFn2 (un DOMInterpret di).setText x txt
-      void $ liftST $ STArray.push sub unsubs
+      liftST $ runSTFn1 (un PSR psr).defer sub
 
   txt <- case texts of
     OnlyPure xs -> do
@@ -658,13 +650,10 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 (un DOMInterpret di).attachText txt regionEnd
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
 
-  let
-    handleLifecycle :: EffectFn1 Unit Unit
-    handleLifecycle = mkEffectFn1 \_ -> do
-      runEffectFn1 (un DOMInterpret di).removeText txt
-      runEffectFn1 disposeUnsubs unsubs
+  runEffectFn2 deferO psr do
+    runEffectFn1 (un DOMInterpret di).removeText txt
 
-  pump unsubs (un PSR psr).lifecycle handleLifecycle
+  runEffectFn1 handleScope psr
 
 -- | Creates a `Nut` that can be attached to another part of the application. The lifetime of the `Nut` is no longer
 -- | than that of `Nut` that created it.
@@ -673,7 +662,8 @@ portal :: Nut -> Hook Nut
 portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
 
   -- set up a StaticRegion for the portal contents and track its begin and end
-  buffer <- pure @(ST.ST Global) <<< ParentStart <$> (un DOMInterpret di).bufferPortal
+  buffer <- pure @(ST.ST Global) <<< ParentStart <$>
+    (un DOMInterpret di).bufferPortal
   trackBegin <- liftST $ ST.new buffer
   trackEnd <- liftST $ ST.new $ Nothing @Anchor
 
@@ -690,11 +680,12 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 toBeam (over PSR _ { region = staticBuffer } psr) di
 
   let
-    Nut hooked = cont $ portaled buffer (beamed.push unit) beamed.event bumped.event
+    Nut hooked = cont $ portaled buffer (beamed.push unit) beamed.event
+      bumped.event
       trackBegin
       trackEnd
 
-    -- | Removes portaled content back into the buffer and empties it.
+    -- | Moves portaled content back into the buffer and empties it.
     -- maybe not necessary
     dispose :: Effect Unit
     dispose = do
@@ -706,7 +697,8 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
         target
       void $ liftST $ ST.write Nothing trackEnd
 
-  runEffectFn2 hooked ( withUnsub dispose psr )  di
+  runEffectFn2 deferO psr dispose
+  runEffectFn2 hooked psr di
 
 portaled
   :: Bound
@@ -748,23 +740,21 @@ portaled buffer beam beamed bumped trackBegin trackEnd =
     void $ liftST $ ST.write region.begin trackBegin
 
     -- lifecycle handling
-    unsubs <- runEffectFn1 collectUnsubs psr
-    void $ liftST $ STArray.push unsubBeamed unsubs
-    void $ liftST $ STArray.push unsubBumped unsubs
+    liftST $ runSTFn1 (un PSR psr).defer (unsubBeamed *> unsubBumped)
 
     let
-      handleLifecycle :: EffectFn1 Unit Unit
-      handleLifecycle = mkEffectFn1 \_ -> do
-        whenM ( not <$> liftST ( ST.read stolen ) ) do
+      restoreBuffer :: Effect Unit
+      restoreBuffer = do
+        whenM (not <$> liftST (ST.read stolen)) do
           -- send portaled content back to buffer
           begin <- liftST $ join $ ST.read trackBegin
           end <- liftST $ ST.read trackEnd
           target <- liftST buffer
-          runEffectFn3 (un DOMInterpret di).beamRegion begin (fromMaybe begin end)
+          runEffectFn3 (un DOMInterpret di).beamRegion begin
+            (fromMaybe begin end)
             target
           void $ liftST $ ST.write buffer trackBegin
           liftST region.remove
-        
-        runEffectFn1 disposeUnsubs unsubs
 
-    pump unsubs (un PSR psr).lifecycle handleLifecycle
+    runEffectFn2 deferO psr restoreBuffer
+    runEffectFn1 handleScope psr

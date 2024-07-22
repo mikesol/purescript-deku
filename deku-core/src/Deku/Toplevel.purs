@@ -4,9 +4,9 @@ module Deku.Toplevel where
 import Prelude
 
 import Control.Monad.ST.Class (liftST)
-import Control.Monad.ST.Uncurried (runSTFn1)
+import Control.Monad.ST.Uncurried (runSTFn1, runSTFn2)
 import Data.Maybe (maybe)
-import Deku.Core (Nut(..), PSR(..))
+import Deku.Core (Nut(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Entities (DekuParent(..), toDekuElement)
 import Deku.Internal.Region as Region
@@ -29,8 +29,8 @@ runInElement
 runInElement elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
   region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
-  void $ runEffectFn2 nut (PSR { region, unsubs: [], lifecycle })
-    fullDOMInterpret
+  scope <- liftST $ runSTFn2 newPSR lifecycle region
+  void $ runEffectFn2 nut scope fullDOMInterpret
   pure $ dispose unit
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
