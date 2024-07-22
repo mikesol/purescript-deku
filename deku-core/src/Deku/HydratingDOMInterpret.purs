@@ -10,7 +10,7 @@ import Data.Array.NonEmpty (NonEmptyArray, toArray)
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (class Newtype, un)
 import Data.Traversable (traverse)
-import Deku.Core (Attribute', MakeElement)
+import Deku.Core (Attribute', MakeElement, MakeText)
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Entities (toDekuElement, toDekuText)
@@ -68,17 +68,31 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
             Just el -> pure $ toDekuElement el
         false -> pure $ toDekuElement dummyElement
 
+makeText :: Object Web.DOM.Text -> Web.DOM.Text -> MakeText
+makeText textNodeCache dummyText = mkEffectFn3 \id _ _ -> pure $ toDekuText
+        case Object.lookup (show id) textNodeCache of
+          Nothing -> dummyText
+          Just t -> t
+
 hydratingDOMInterpret
   :: ST.ST Global Int
   -> Object HydrationRenderingInfo
+  -> Object Web.DOM.Text
   -> Web.DOM.Text
   -> Web.DOM.Element
   -> Web.DOM.ParentNode
   -> Core.DOMInterpret
-hydratingDOMInterpret tagger renderingInfo dummyText dummyElement parentNode =
+hydratingDOMInterpret
+  tagger
+  renderingInfo
+  textNodeCache
+  dummyText
+  dummyElement
+  parentNode =
   Core.DOMInterpret
     { tagger
     , staticDOMInterpret: \_ -> hydratingDOMInterpret tagger renderingInfo
+        textNodeCache
         dummyText
         dummyElement
         parentNode
@@ -106,9 +120,9 @@ hydratingDOMInterpret tagger renderingInfo dummyText dummyElement parentNode =
     , setCb: I.setCbEffect
     , unsetAttribute: I.unsetAttributeEffect
     , removeElement: I.removeElementEffect
-    -- text setting should never happen during hydration
-    , makeText: mkEffectFn1 \_ -> pure $ toDekuText dummyText
+    , makeText: makeText textNodeCache dummyText
     , attachText: mkEffectFn2 \_ _ -> pure unit
+    -- text setting should never happen during hydration
     , setText: mkEffectFn2 \_ _ -> pure unit
     , removeText: mkEffectFn1 \_ -> pure unit
     , incrementPureTextCount: mkSTFn1 \_ -> pure unit

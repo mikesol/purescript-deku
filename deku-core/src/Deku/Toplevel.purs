@@ -29,6 +29,7 @@ import Deku.Internal.Region as Region
 import Deku.SSRDOMInterpret (SSRRenderingInfo(..), ssrDOMInterpret)
 import Effect (Effect)
 import Effect.Exception (error, throwException)
+import Effect.Random (randomInt)
 import Effect.Uncurried (runEffectFn2)
 import FRP.Poll (create)
 import Foreign.Object (Object)
@@ -37,7 +38,7 @@ import Foreign.Object.ST as STObject
 import Foreign.Object.ST.Unsafe (unsafeFreeze)
 import Web.DOM.Document (createElement, createTextNode)
 import Web.DOM.Element (setAttribute, toParentNode)
-import Web.DOM.Element as Web.DOM
+import Web.DOM as Web.DOM
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body, toDocument)
 import Web.HTML.HTMLElement (toElement)
@@ -115,6 +116,10 @@ runInBody = doInBody runInElement
 
 foreign import innerHTML :: Web.DOM.Element -> Effect String
 
+foreign import transformTextNodes :: Web.DOM.Element -> String -> Effect Unit
+
+foreign import mapIdsToTextNodes :: Web.DOM.Element -> Effect (Object Web.DOM.Text)
+
 ssrInElement
   :: Web.DOM.Element
   -> Nut
@@ -128,12 +133,16 @@ ssrInElement elt (Nut nut) = do
     (DekuParent $ toDekuElement elt)
   parentCache <- liftST $ STObject.new
   regionCache <- liftST $ STObject.new
+  rn0 <- randomInt 0 10000
+  rn1 <- randomInt 0 10000
+  rn2 <- randomInt 0 10000
+  let dynTextTag = show rn0 <> "_" <> show rn1 <> "_" <> show rn2
   -- liftST $ runSTFn3 addElementToCache taggerStart regionCache elt
   void $ runEffectFn2 nut
     ( PSR
         { region, disqualifyFromStaticRendering: false, unsubs: [], lifecycle }
     )
-    (ssrDOMInterpret tagger parentCache regionCache)
+    (ssrDOMInterpret tagger dynTextTag parentCache regionCache)
   unfrozenParentCache <- liftST $ unsafeFreeze parentCache
   unfrozenRegionCache <- liftST $ unsafeFreeze regionCache
   forWithIndex_ unfrozenRegionCache \tag (SSRRenderingInfo value) -> do
@@ -161,6 +170,7 @@ ssrInElement elt (Nut nut) = do
             v.hasChildrenThatWouldDisqualifyFromSSR
         , isBoring: fromMaybe false $ Object.lookup k isBoring
         }
+  transformTextNodes elt dynTextTag
   htmlString <- innerHTML elt
   dispose unit
   pure $ Tuple htmlString hydrationRenderingCache

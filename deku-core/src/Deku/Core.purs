@@ -193,7 +193,7 @@ type AttachText =
 
 -- | Type used by Deku backends to construct a text element. For internal use only unless you're writing a custom
 -- | backend.
-type MakeText = EffectFn1 (Maybe String) DekuText
+type MakeText = EffectFn3 Int (Maybe String) Boolean DekuText
 
 -- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom
 -- | backend.
@@ -669,6 +669,7 @@ text_ txt =
 
 text :: Poll String -> Nut
 text texts = Nut $ mkEffectFn2 \psr di -> do
+  id <- liftST (un DOMInterpret di).tagger
   unsubs <- runEffectFn1 collectUnsubs psr
 
   let
@@ -680,27 +681,27 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
 
   txt <- case texts of
     OnlyPure xs -> do
-      runEffectFn1 (un DOMInterpret di).makeText (Array.last xs)
+      runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs) true
 
     OnlyEvent e -> do
-      txt <- runEffectFn1 (un DOMInterpret di).makeText Nothing
+      txt <- runEffectFn3 (un DOMInterpret di).makeText id Nothing false
       runEffectFn2 handleTextUpdate e txt
       pure txt
 
     OnlyPoll p -> do
-      txt <- runEffectFn1 (un DOMInterpret di).makeText Nothing
+      txt <- runEffectFn3 (un DOMInterpret di).makeText id Nothing false
       bang <- liftST Event.create
       runEffectFn2 handleTextUpdate (UPoll.sample p bang.event) txt
       bang.push identity
       pure txt
 
     PureAndEvent xs e -> do
-      txt <- runEffectFn1 (un DOMInterpret di).makeText (Array.last xs)
+      txt <- runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs) false
       runEffectFn2 handleTextUpdate e txt
       pure txt
 
     PureAndPoll xs p -> do
-      txt <- runEffectFn1 (un DOMInterpret di).makeText (Array.last xs)
+      txt <- runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs) false
       bang <- liftST Event.create
       runEffectFn2 handleTextUpdate (UPoll.sample p bang.event) txt
       bang.push identity

@@ -181,7 +181,7 @@ getDisableable elt = go
   go (_ : y) = go y
 
 makeTextEffect :: Core.MakeText
-makeTextEffect = mkEffectFn1 \mstr -> do
+makeTextEffect = mkEffectFn3 \_ mstr _ -> do
   txt <- runEffectFn1 createText (fromMaybe "" mstr)
   pure $ toDekuText txt
 

@@ -47,14 +47,14 @@ getUseableAttributes renderingInfo = mkSTFn2 \id arr -> do
   currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
     ( over SSRRenderingInfo _
-            { attributeIndicesThatAreNeededDuringHydration = fromArray $ compact
-                $ mapWithIndex
-                    ( \i -> case _ of
-                        OnlyPure _ -> Nothing
-                        _ -> Just i
-                    )
-                    arr
-            }
+        { attributeIndicesThatAreNeededDuringHydration = fromArray $ compact
+            $ mapWithIndex
+                ( \i -> case _ of
+                    OnlyPure _ -> Nothing
+                    _ -> Just i
+                )
+                arr
+        }
         $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
     )
     renderingInfo
@@ -68,12 +68,11 @@ disqualifyFromStaticRendering renderingInfo = mkSTFn1 \id -> do
   currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
     ( over SSRRenderingInfo _
-            { hasParentThatWouldDisqualifyFromSSR = true
-            }
+        { hasParentThatWouldDisqualifyFromSSR = true
+        }
         $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
     )
     renderingInfo
-
 
 addElementToCache
   :: STFn3 Int (STObject Global SSRRenderingInfo) Web.DOM.Element Global Unit
@@ -103,9 +102,9 @@ updateSSRRenderingInfo = mkSTFn2 \renderingInfo (StaticRegion region) -> do
   currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
     ( over SSRRenderingInfo _
-            { hasChildrenThatWouldDisqualifyFromSSR = not
-                (containsOnlyElements || containsOnlyStaticText)
-            }
+        { hasChildrenThatWouldDisqualifyFromSSR = not
+            (containsOnlyElements || containsOnlyStaticText)
+        }
         $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
     )
     renderingInfo
@@ -130,44 +129,52 @@ makeElement renderingInfo = mkEffectFn3 \id ns tag -> do
 
 ssrDOMInterpret
   :: ST.ST Global Int
+  -> String
   -> STObject Global (Array String)
   -> STObject Global SSRRenderingInfo
   -> Core.DOMInterpret
-ssrDOMInterpret tagger parentChildCache renderingInfo = Core.DOMInterpret
-  { tagger
-  , staticDOMInterpret: \_ -> ssrDOMInterpret tagger parentChildCache
-      renderingInfo
-  -- we could likely make `dynamicDOMInterpret` a no-op
-  -- should be harmless, though, as this will be called rarely if at all
-  -- because SSR code will only trigger dynamic elements
-  -- in case there's a dyn with pure polls that aren't optimized as being pure
-  , dynamicDOMInterpret: \_ -> ssrDOMInterpret tagger parentChildCache
-      renderingInfo
-  --
-  , isBoring: const false
-  , registerParentChildRelationship: mkSTFn2
-      \(ParentId parent) (ChildId child) -> do
-        let tag = show parent
-        parentChildArray <- peek tag parentChildCache
-        void $ poke tag
-          (Array.cons (show child) $ fromMaybe [] parentChildArray)
-          parentChildCache
-  , makeElement: makeElement renderingInfo
-  , attachElement: I.attachElementEffect
-  , getUseableAttributes: getUseableAttributes renderingInfo
-  , incrementElementCount: incrementElementCount renderingInfo
-  , disqualifyFromStaticRendering: disqualifyFromStaticRendering renderingInfo
-  , setProp: I.setPropEffect
-  , setCb: I.setCbEffect
-  , unsetAttribute: I.unsetAttributeEffect
-  , removeElement: I.removeElementEffect
-  --
-  , makeText: I.makeTextEffect
-  , attachText: I.attachTextEffect
-  , setText: I.setTextEffect
-  , removeText: I.removeTextEffect
-  , incrementPureTextCount: incrementPureTextCount renderingInfo
-  --
-  , beamRegion: I.beamRegionEffect
-  , bufferPortal: I.bufferPortal
-  }
+ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
+  Core.DOMInterpret
+    { tagger
+    , staticDOMInterpret: \_ -> ssrDOMInterpret tagger impureTextTag
+        parentChildCache
+        renderingInfo
+    -- we could likely make `dynamicDOMInterpret` a no-op
+    -- should be harmless, though, as this will be called rarely if at all
+    -- because SSR code will only trigger dynamic elements
+    -- in case there's a dyn with pure polls that aren't optimized as being pure
+    , dynamicDOMInterpret: \_ -> ssrDOMInterpret tagger impureTextTag
+        parentChildCache
+        renderingInfo
+    --
+    , isBoring: const false
+    , registerParentChildRelationship: mkSTFn2
+        \(ParentId parent) (ChildId child) -> do
+          let tag = show parent
+          parentChildArray <- peek tag parentChildCache
+          void $ poke tag
+            (Array.cons (show child) $ fromMaybe [] parentChildArray)
+            parentChildCache
+    , makeElement: makeElement renderingInfo
+    , attachElement: I.attachElementEffect
+    , getUseableAttributes: getUseableAttributes renderingInfo
+    , incrementElementCount: incrementElementCount renderingInfo
+    , disqualifyFromStaticRendering: disqualifyFromStaticRendering renderingInfo
+    , setProp: I.setPropEffect
+    , setCb: I.setCbEffect
+    , unsetAttribute: I.unsetAttributeEffect
+    , removeElement: I.removeElementEffect
+    --
+    , makeText: mkEffectFn3 \id mtext isPure -> runEffectFn3 I.makeTextEffect id
+        ( append (if isPure then "" else show id <> "_" <> impureTextTag) <$>
+            mtext
+        )
+        isPure
+    , attachText: I.attachTextEffect
+    , setText: I.setTextEffect
+    , removeText: I.removeTextEffect
+    , incrementPureTextCount: incrementPureTextCount renderingInfo
+    --
+    , beamRegion: I.beamRegionEffect
+    , bufferPortal: I.bufferPortal
+    }
