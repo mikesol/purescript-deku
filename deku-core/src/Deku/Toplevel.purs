@@ -21,14 +21,13 @@ import Data.FoldableWithIndex (foldlWithIndex, forWithIndex_)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Tuple (Tuple(..))
-import Deku.Core (Nut(..), PSR(..))
+import Deku.Core (Nut(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
 import Deku.Internal.Entities (DekuParent(..), toDekuElement)
 import Deku.Internal.Region as Region
 import Deku.SSRDOMInterpret (SSRRenderingInfo(..), ssrDOMInterpret)
 import Effect (Effect)
-import Effect.Console (log)
 import Effect.Exception (error, throwException)
 import Effect.Random (randomInt)
 import Effect.Uncurried (runEffectFn2)
@@ -94,11 +93,8 @@ runInElement elt (Nut nut) = do
   let tagger = makeTagger tagRef
   region <- liftST $ runSTFn3 Region.fromParent taggerStart Nothing
     (DekuParent $ toDekuElement elt)
-  void $ runEffectFn2 nut
-    ( PSR
-        { region, disqualifyFromStaticRendering: false, unsubs: [], lifecycle }
-    )
-    (fullDOMInterpret tagger)
+  scope <- liftST $ runSTFn3 newPSR false lifecycle region
+  void $ runEffectFn2 nut scope (fullDOMInterpret tagger)
   pure $ dispose unit
 
 doInBody :: forall i o. (Web.DOM.Element -> i -> Effect o) -> i -> Effect o
@@ -139,11 +135,9 @@ ssrInElement elt (Nut nut) = do
   rn2 <- randomInt 0 10000
   let dynTextTag = show rn0 <> "_" <> show rn1 <> "_" <> show rn2
   -- liftST $ runSTFn3 addElementToCache taggerStart regionCache elt
-  void $ runEffectFn2 nut
-    ( PSR
-        { region, disqualifyFromStaticRendering: false, unsubs: [], lifecycle }
-    )
-    (ssrDOMInterpret tagger dynTextTag parentCache regionCache)
+  scope <- liftST $ runSTFn3 newPSR false lifecycle region
+
+  void $ runEffectFn2 nut scope (ssrDOMInterpret tagger dynTextTag parentCache regionCache)
   unfrozenParentCache <- liftST $ unsafeFreeze parentCache
   unfrozenRegionCache <- liftST $ unsafeFreeze regionCache
   forWithIndex_ unfrozenRegionCache \tag (SSRRenderingInfo value) -> do
@@ -198,11 +192,8 @@ hydrateInElement cache elt (Nut nut) = do
   dummyText <- createTextNode "dummy" (toDocument doc)
   let par = toParentNode elt
   textNodes <- mapIdsToTextNodes elt
-  void $ runEffectFn2 nut
-    ( PSR
-        { region, disqualifyFromStaticRendering: false, unsubs: [], lifecycle }
-    )
-    (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt  par)
+  scope <- liftST $ runSTFn3 newPSR false lifecycle region
+  void $ runEffectFn2 nut scope (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt  par)
   pure $ dispose unit
 
 

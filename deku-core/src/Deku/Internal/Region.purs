@@ -125,12 +125,12 @@ readSharedBound = mkSTFn1 \shared -> do
   bound
 
 -- | The core of the Region system are RegionSpans. They manage sibling Regions and coordinate the insert, bump, move
--- | and remove actions. They also provide Bound implementation which lets Regions determine their begin and end Anchors
--- | for beamRegion. The actual structure of the RegionSpan is just an array of regions. All regions track their indices
--- | by using a reference that gets updated on every insert/splice.
+-- | and remove actions. They also provide a Bound implementation which lets Regions determine their begin and end
+-- | Anchors for beamRegion. The actual structure of the RegionSpan is just an array of regions. All regions track their
+-- | indices by using a reference that gets updated on every insert/splice.
 -- |
 -- | The begin of a Region is defined as the end of the previous region. A dummy region is inserted at the start which
--- | contains the information provided by the parent. This makes the while ix - 1 dance work out but we will have to
+-- | contains the information provided by the parent. This makes the whole ix - 1 dance work out but we will have to
 -- | correct the indices for this at some points(see insertManaged and newSpan->sendTo).
 -- |
 -- | The end of a region is stored in a SharedBound. As the name suggests this bound can be shared among multiple

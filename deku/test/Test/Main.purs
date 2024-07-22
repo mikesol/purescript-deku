@@ -13,7 +13,7 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut(..), fixed, portal, useRefST, withUnsub)
+import Deku.Core (Hook, Nut(..), deferO, fixed, portal, useRefST)
 import Deku.DOM as D
 import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
@@ -653,7 +653,8 @@ useDispose :: Effect Unit -> Effect Unit -> Hook Unit
 useDispose init eff cont = Nut $ mkEffectFn2 \psr di -> do
   init
   let Nut nut = cont unit
-  runEffectFn2 nut (withUnsub eff psr) di
+  runEffectFn2 deferO psr eff
+  runEffectFn2 nut psr di
 
 disposeGetsRun :: Nut
 disposeGetsRun = Deku.do
@@ -661,7 +662,18 @@ disposeGetsRun = Deku.do
   fixed
     [ D.span [ DA.id_ "count" ] [ text $ show <$> count ticks ]
     , Deku.do
-        { remove } <- useDynAtBeginning (pure unit)
-        useDispose (pushTick unit) (pushTick unit)
-        D.span [ DA.id_ "notthere", DL.click_ \_ -> remove ] []
+      { remove } <- useDynAtBeginning ( pure unit )
+      useDispose ( pushTick unit ) ( pushTick unit )
+      D.span [ DA.id_ "notthere", DL.click_ \_ -> remove ] []
+    ]
+
+disposeGetsRunOnce :: Nut
+disposeGetsRunOnce = Deku.do
+  pushTick /\ ticks <- useState'
+  fixed
+    [ D.span [ DA.id_ "count" ] [ text $ show <$> count ticks ]
+    , Deku.do
+      { remove } <- useDynAtBeginning ( pure unit )
+      useDispose ( pushTick unit ) ( pushTick unit )
+      D.span [ DA.id_ "notthere", DL.click_ \_ -> remove ] []
     ]
