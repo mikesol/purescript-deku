@@ -241,7 +241,7 @@ describe("deku", () => {
         expect($("#incr-1").index()).toBeLessThan($("#incr-0").index());
         expect($("#incr-2").index()).toBeLessThan($("#incr-1").index());
         expect($("#incr-2").index()).toBeLessThan($("#dyn0-2").index());
-      }), true
+      })
     );
 
     doTest("domable is a monoid", (f) =>
