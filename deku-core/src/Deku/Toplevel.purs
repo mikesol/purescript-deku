@@ -196,11 +196,12 @@ hydrateInElement cache elt (Nut nut) = do
   dummyElt <- createElement "div" (toDocument doc)
   dummyText <- createTextNode "dummy" (toDocument doc)
   let par = toParentNode elt
+  textNodes <- mapIdsToTextNodes elt
   void $ runEffectFn2 nut
     ( PSR
         { region, disqualifyFromStaticRendering: false, unsubs: [], lifecycle }
     )
-    (hydratingDOMInterpret tagger cache dummyText dummyElt  par)
+    (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt  par)
   pure $ dispose unit
 
 
