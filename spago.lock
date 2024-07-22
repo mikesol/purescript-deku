@@ -1004,7 +1004,7 @@ workspace:
   extra_packages:
     hyrule:
       repo: https://github.com/mikesol/purescript-hyrule.git
-      version: v2.5.0
+      version: v2.5.1
       dependencies:
         - effect
         - avar
@@ -1591,7 +1591,7 @@ packages:
   hyrule:
     type: git
     url: https://github.com/mikesol/purescript-hyrule.git
-    rev: a2a32e02a0d8518d906ec5fb3192261f63667338
+    rev: fcbaa505faaedd06e547e33efda1275deca05448
     dependencies:
       - avar
       - effect

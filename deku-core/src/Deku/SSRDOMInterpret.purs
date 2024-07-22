@@ -10,6 +10,7 @@ import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
+import Debug (spy)
 import Deku.Core (ChildId(..), MakeElement, ParentId(..))
 import Deku.Core as Core
 import Deku.Internal.Entities (fromDekuElement)
@@ -168,7 +169,7 @@ noOpDomInterpret tagger =
     , isBoring: const false
     , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
     , makeElement: I.makeElementEffect
-    , attachElement: mempty
+    , attachElement: mkEffectFn2 \a b -> let _ = spy "attach element in noop" {a,b} in pure unit
     , incrementElementCount: mkSTFn1 \_ -> pure unit
     , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
     , setProp: mkEffectFn3 \_ _ _ -> pure unit

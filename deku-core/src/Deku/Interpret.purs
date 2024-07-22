@@ -9,6 +9,7 @@ import Data.Foldable (for_, traverse_)
 import Data.List (List(..), (:))
 import Data.Maybe (Maybe(..), fromJust, fromMaybe, isJust)
 import Data.Nullable (toMaybe)
+import Debug (spy)
 import Deku.Core as Core
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), fromDekuElement, fromDekuText, toDekuElement, toDekuText)
 import Deku.Internal.Region (Anchor(..))
@@ -38,11 +39,14 @@ import Web.HTML.HTMLOptionElement as HTMLOptionElement
 import Web.HTML.HTMLSelectElement as HTMLSelectElement
 import Web.HTML.HTMLTextAreaElement as HTMLTextAreaElement
 
+foreign import hackDeleteMe :: forall a b. a -> b -> Effect Unit
+
 makeElementEffect :: Core.MakeElement
-makeElementEffect = mkEffectFn3 \_ ns tag -> do
+makeElementEffect = mkEffectFn3 \id ns tag -> do
   elt <- case coerce ns :: Maybe String of
     Nothing -> runEffectFn1 createElement (coerce tag)
     Just ns' -> runEffectFn2 createElementNS (coerce ns') (coerce tag)
+  hackDeleteMe id elt
   pure $ toDekuElement elt
 
 attachElementEffect :: Core.AttachElement
@@ -255,13 +259,23 @@ beamRegionEffect = mkEffectFn3 case _, _, _ of
     Element el -> fromDekuElement @Node el
     Text txt -> fromDekuText @Node txt
 
+foreign import hack :: forall a. a -> Effect Unit
+
 attachNodeEffect :: EffectFn2 (Array Node) Anchor Unit
-attachNodeEffect = mkEffectFn2 \nodes -> case _ of
-  ParentStart (DekuParent parent) -> do
-    runEffectFn2 prepend nodes (fromDekuElement @Node parent)
+attachNodeEffect = mkEffectFn2 \nodes anchor -> do
+  case anchor of
+    ParentStart (DekuParent parent) -> do
+      let _ = spy "attaching after parent start" { parent, nodes }
+      runEffectFn2 prepend nodes (fromDekuElement @Node parent)
+      hack parent
+      
 
-  Element el -> do
-    runEffectFn2 after nodes (fromDekuElement @Node el)
+    Element el -> do
+      let _ = spy "attaching after el start" { el, nodes }
+      runEffectFn2 after nodes (fromDekuElement @Node el)
+      hack el
 
-  Text txt -> do
-    runEffectFn2 after nodes (fromDekuText @Node txt)
+    Text txt -> do
+      let _ = spy "attaching after txt start" { txt, nodes }
+      runEffectFn2 after nodes (fromDekuText @Node txt)
+      hack txt

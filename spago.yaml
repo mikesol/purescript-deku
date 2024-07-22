@@ -8,7 +8,7 @@ workspace:
   extraPackages:
     hyrule:
       repo: "https://github.com/mikesol/purescript-hyrule.git"
-      version: "v2.5.0"
+      version: "v2.5.1"
       dependencies:
         - effect
         - avar
