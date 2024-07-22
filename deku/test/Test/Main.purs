@@ -20,13 +20,15 @@ import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
+import Deku.HydratingDOMInterpret (HydrationRenderingInfo)
 import Deku.Pursx (lenientPursx, pursx)
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (hydrateInBody, runInBody, ssrInBody)
 import Effect (Effect)
 import Effect.Random (random)
 import Effect.Uncurried (mkEffectFn2, runEffectFn2)
 import FRP.Event (count, fold)
 import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
+import Foreign.Object (Object)
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
 import Web.HTML.Window (alert)
@@ -35,6 +37,12 @@ foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
 runTest :: Nut -> Effect Unit
 runTest = void <<< runInBody
+
+runSSR :: Nut -> Effect (Tuple String (Object HydrationRenderingInfo))
+runSSR = ssrInBody
+
+runHydration :: Object HydrationRenderingInfo -> Nut -> Effect Unit
+runHydration cache nut = void $ hydrateInBody cache nut
 
 sanityCheck :: Nut
 sanityCheck = D.span [ DA.id_ "hello" ] [ text_ "Hello" ]
@@ -254,8 +262,8 @@ pursXWiresUp = Deku.do
                 ]
                 [ text_ "après-milieu" ]
             ]
-        , evt:  DL.click_ \_ -> setMessage "hello" 
-        , mykls:  DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
+        , evt: DL.click_ \_ -> setMessage "hello"
+        , mykls: DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
         }
     , D.span [ DA.id_ "span0" ] [ text message ]
     ]
@@ -264,7 +272,8 @@ pursXWiresUp2 :: Nut
 pursXWiresUp2 = Deku.do
   setMessage /\ message <- useState'
   D.div [ DA.id_ "div0" ]
-    [ lenientPursx "<div ~mykls~><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>"
+    [ lenientPursx
+        "<div ~mykls~><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>"
         { me: fixed
             [ text_ "milieu"
             , text_ " "
@@ -274,7 +283,7 @@ pursXWiresUp2 = Deku.do
                 ]
                 [ text_ "après-milieu" ]
             ]
-        , evt:  DL.click_ \_ -> setMessage "hello" 
+        , evt: DL.click_ \_ -> setMessage "hello"
         , mykls: DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
         }
     , D.span [ DA.id_ "span0" ] [ text message ]
@@ -637,7 +646,7 @@ useDispose :: Effect Unit -> Effect Unit -> Hook Unit
 useDispose init eff cont = Nut $ mkEffectFn2 \psr di -> do
   init
   let Nut nut = cont unit
-  runEffectFn2 nut ( withUnsub eff psr ) di
+  runEffectFn2 nut (withUnsub eff psr) di
 
 disposeGetsRun :: Nut
 disposeGetsRun = Deku.do
@@ -645,7 +654,7 @@ disposeGetsRun = Deku.do
   fixed
     [ D.span [ DA.id_ "count" ] [ text $ show <$> count ticks ]
     , Deku.do
-      { remove } <- useDynAtBeginning ( pure unit )
-      useDispose ( pushTick unit ) ( pushTick unit )
-      D.span [ DA.id_ "notthere", DL.click_ \_ -> remove ] []
+        { remove } <- useDynAtBeginning (pure unit)
+        useDispose (pushTick unit) (pushTick unit)
+        D.span [ DA.id_ "notthere", DL.click_ \_ -> remove ] []
     ]

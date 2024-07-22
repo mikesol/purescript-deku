@@ -2,7 +2,13 @@ const tests = require("./output/Test.Main");
 const testFriend = require("./output/Test.TestFriend");
 const di = require("./output/Deku.Interpret");
 const region = require("./output/Deku.Internal.Region");
+
 const doTest = (name, closure, ionly) => {
+  doFullTest(name, closure, ionly);
+  doSSRTest(name, closure, ionly);
+};
+
+const doFullTest = (name, closure, ionly) => {
   (ionly ? it.only : it)(name, async () => {
     await closure(async (myTest, myScript) => {
       if (!myTest) {
@@ -16,9 +22,24 @@ const doTest = (name, closure, ionly) => {
   });
 };
 
-const getIndex = (child) => {
-  var allNodes = Array.prototype.slice.call(child.parentNode.childNodes);
-  return allNodes.indexOf(child);
+const doSSRTest = (name, closure, ionly) => {
+  (ionly ? it.only : it)(`${name} SSR`, async () => {
+    await closure(async (myTest, myScript) => {
+      if (!myTest) {
+        throw new Error(`Cannot find test named ${name}`);
+      }
+      document.getElementsByTagName("html")[0].innerHTML =
+        '<head></head><body id="mybody"></body>';
+      const res = tests.runSSR(myTest)();
+      const html = testFriend.fst(res);
+      const cache = testFriend.snd(res);
+      document.getElementsByTagName(
+        "html"
+      )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
+      tests.runHydration(cache)(myTest)();
+      await myScript(false);
+    });
+  });
 };
 
 describe("deku", () => {
@@ -28,7 +49,11 @@ describe("deku", () => {
 
   describe("low-level interpreters", () => {
     it("makeElementEffect makes an element with the correct tagname", () => {
-      const out = di.makeElementEffect(testFriend.dummyId, testFriend.nothing, "div");
+      const out = di.makeElementEffect(
+        testFriend.dummyId,
+        testFriend.nothing,
+        "div"
+      );
       expect(out.tagName).toBe("DIV");
     });
     describe("makeText and setText", () => {
@@ -42,42 +67,70 @@ describe("deku", () => {
     describe("setProp", () => {
       it("sets the id attribute correctly and unsets it correctly", () => {
         const $ = require("jquery");
-        const elt = di.makeElementEffect(testFriend.dummyId, testFriend.nothing, "li");
+        const elt = di.makeElementEffect(
+          testFriend.dummyId,
+          testFriend.nothing,
+          "li"
+        );
         di.setPropEffect("id", "foo", elt);
         di.unsetAttributeEffect("id", elt);
         expect($(elt).attr("id")).toBe(undefined);
       });
       it("sets checked attribute correctly", () => {
-        const elt = di.makeElementEffect(testFriend.dummyId, testFriend.nothing, "input");
+        const elt = di.makeElementEffect(
+          testFriend.dummyId,
+          testFriend.nothing,
+          "input"
+        );
         di.setPropEffect("checked", "true", elt);
         expect(elt.checked).toBe(true);
         di.setPropEffect("checked", "false", elt);
         expect(elt.checked).toBe(false);
       });
       it("sets value attribute correctly", () => {
-        const elt = di.makeElementEffect(testFriend.dummyId, testFriend.nothing, "input");
+        const elt = di.makeElementEffect(
+          testFriend.dummyId,
+          testFriend.nothing,
+          "input"
+        );
         di.setPropEffect("value", "hello", elt);
         expect(elt.value).toBe("hello");
       });
       it("sets disabled correctly", () => {
-        const elt = di.makeElementEffect(testFriend.dummyId, testFriend.nothing, "button");
-        di.setPropEffect("disabled", "true",elt);
+        const elt = di.makeElementEffect(
+          testFriend.dummyId,
+          testFriend.nothing,
+          "button"
+        );
+        di.setPropEffect("disabled", "true", elt);
         expect(elt.disabled).toBe(true);
       });
     });
     describe("setCb and unsetAttribute", () => {
       it("sets and unsets the cb", () => {
         const $ = require("jquery");
-        const elt = di.makeElementEffect(testFriend.dummyId, testFriend.nothing, "button");
+        const elt = di.makeElementEffect(
+          testFriend.dummyId,
+          testFriend.nothing,
+          "button"
+        );
         let i = 0;
-        di.setCbEffect("click", () => () => {
-          i++;
-        }, elt);
+        di.setCbEffect(
+          "click",
+          () => () => {
+            i++;
+          },
+          elt
+        );
         $(elt).trigger("click");
         expect(i).toBe(1);
-        di.setCbEffect("click", () => () => {
-          i += 42;
-        }, elt);
+        di.setCbEffect(
+          "click",
+          () => () => {
+            i += 42;
+          },
+          elt
+        );
         $(elt).trigger("click");
         expect(i).toBe(43);
         di.unsetAttributeEffect("click", elt);
@@ -87,6 +140,7 @@ describe("deku", () => {
     });
   });
   describe("framework tests", () => {
+
     doTest("is sane", (f) =>
       f(tests.sanityCheck, () => {
         const $ = require("jquery");
@@ -565,16 +619,16 @@ describe("deku", () => {
       })
     );
 
-    doTest( "deterministic unsub", ( f ) =>
-      f( tests.disposeGetsRun, () => {
-        const $ = require( "jquery" );
-        expect( $( "#notthere" ).length ).toBe( 1 );
-        expect( $( "#count" ).text() ).toBe( "1" );
+    doTest("deterministic unsub", (f) =>
+      f(tests.disposeGetsRun, () => {
+        const $ = require("jquery");
+        expect($("#notthere").length).toBe(1);
+        expect($("#count").text()).toBe("1");
 
-        $( "#notthere" ).trigger( "click" );
+        $("#notthere").trigger("click");
 
-        expect( $( "#notthere" ).length ).toBe( 0 ); // element is gone so its unsubs should have been called
-        expect( $( "#count" ).text() ).toBe( "2" ); // one tick for the init and one tick for the unsub
+        expect($("#notthere").length).toBe(0); // element is gone so its unsubs should have been called
+        expect($("#count").text()).toBe("2"); // one tick for the init and one tick for the unsub
       })
     );
   });
