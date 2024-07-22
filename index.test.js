@@ -332,6 +332,26 @@ describe("deku", () => {
       })
     );
 
+    doTest("empty switches", (f) =>
+      f(tests.emptySwitches, () => {
+        const $ = require("jquery");
+        expect($("#content").text()).toBe("0");
+        $("#incr").trigger("click");
+        const htm = $("#div0")[0].outerHTML;
+        expect($("#content").text()).toBe("1");
+        $("#incr").trigger("click");
+        expect($("#content").text()).toBe("2");
+        $("#incr").trigger("click");
+        expect($("#content").text()).toBe("3");
+        $("#incr").trigger("click");
+        expect($("#content").text()).toBe("4");
+        $("#incr").trigger("click");
+        expect($("#content").text()).toBe("5");
+        $("#incr").trigger("click");
+        expect($("#content").text()).toBe("0");
+      })
+    );
+
     doTest("switcher switches", (f) =>
       f(tests.switcherSwitches, () => {
         const $ = require("jquery");
