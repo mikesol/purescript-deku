@@ -4,12 +4,13 @@ import Prelude
 
 import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
-import Control.Monad.ST.Uncurried (STFn2, mkSTFn1, mkSTFn2)
+import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2)
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray, toArray)
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (class Newtype, un)
 import Data.Traversable (traverse)
+import Debug (spy)
 import Deku.Core (Attribute', MakeElement, MakeText)
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
@@ -31,15 +32,6 @@ newtype HydrationRenderingInfo = HydrationRenderingInfo
 
 derive instance Newtype HydrationRenderingInfo _
 
-getUseableAttributes
-  :: Object HydrationRenderingInfo
-  -> STFn2 Int (Array (Poll Attribute')) Global (Array (Poll Attribute'))
-getUseableAttributes renderingInfo = mkSTFn2 \tag atts -> pure $ fromMaybe atts
-  do
-    HydrationRenderingInfo ri <- Object.lookup (show tag) renderingInfo
-    indices <- ri.attributeIndicesThatAreNeededDuringHydration
-    traverse (Array.index atts) (toArray indices)
-
 makeElement
   :: Object HydrationRenderingInfo
   -> Web.DOM.Element
@@ -51,7 +43,9 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
   let createNew = runEffectFn3 I.makeElementEffect id ns tag
   case ri of
     -- shouldn't happen
-    Nothing -> createNew
+    Nothing -> do
+          let _ = spy "hydratingDOMInterpret:programming error - rendering info not found: " idS
+          createNew
     Just (HydrationRenderingInfo value) -> do
       case
         value.hasParentThatWouldDisqualifyFromSSR
@@ -64,15 +58,21 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
             parentNode
           case sel of
             -- shouldn't happen
-            Nothing -> createNew
-            Just el -> pure $ toDekuElement el
-        false -> pure $ toDekuElement dummyElement
+            Nothing -> do
+                let _ = spy "hydratingDOMInterpret:programming error - selector not found: " idS
+                createNew
+            Just el -> do
+                let _ = spy "hydratingDOMInterpret:makeElement:foundElement" idS
+                pure $ toDekuElement el
+        false -> do
+            let _ = spy "hydratingDOMInterpret:elt unneeded" idS
+            pure $ toDekuElement dummyElement
 
 makeText :: Object Web.DOM.Text -> Web.DOM.Text -> MakeText
 makeText textNodeCache dummyText = mkEffectFn3 \id _ _ -> pure $ toDekuText
-        case Object.lookup (show id) textNodeCache of
-          Nothing -> dummyText
-          Just t -> t
+  case Object.lookup (show id) textNodeCache of
+    Nothing -> dummyText
+    Just t -> t
 
 hydratingDOMInterpret
   :: ST.ST Global Int
@@ -91,11 +91,6 @@ hydratingDOMInterpret
   parentNode =
   Core.DOMInterpret
     { tagger
-    , staticDOMInterpret: \_ -> hydratingDOMInterpret tagger renderingInfo
-        textNodeCache
-        dummyText
-        dummyElement
-        parentNode
     -- we could likely make `dynamicDOMInterpret` a no-op
     -- should be harmless, though, as this will be called rarely if at all
     -- because SSR code will only trigger dynamic elements
@@ -113,7 +108,6 @@ hydratingDOMInterpret
     -- when an attachment actually needs to occur
     -- so we make it a noop
     , attachElement: mkEffectFn2 \_ _ -> pure unit
-    , getUseableAttributes: getUseableAttributes renderingInfo
     , incrementElementCount: mkSTFn1 \_ -> pure unit
     , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
     , setProp: I.setPropEffect

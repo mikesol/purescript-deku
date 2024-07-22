@@ -11,7 +11,6 @@ import Deku.Interpret as I
 fullDOMInterpret :: ST.ST Global Int -> Core.DOMInterpret
 fullDOMInterpret tagger = Core.DOMInterpret
   { tagger
-  , staticDOMInterpret: \_ -> fullDOMInterpret tagger
   , dynamicDOMInterpret: \_ -> fullDOMInterpret tagger
   , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
   --
@@ -19,7 +18,6 @@ fullDOMInterpret tagger = Core.DOMInterpret
   , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
   , makeElement: I.makeElementEffect
   , attachElement: I.attachElementEffect
-  , getUseableAttributes: mkSTFn2 \_ a -> pure a
   , incrementElementCount: mkSTFn1 \_ -> pure unit
   , setProp: I.setPropEffect
   , setCb: I.setCbEffect

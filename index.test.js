@@ -59,7 +59,7 @@ describe("deku", () => {
     });
     describe("makeText and setText", () => {
       it("makes text", () => {
-        const t = di.makeTextEffect(testFriend.just("hello"));
+        const t = di.makeTextEffect(testFriend.dummyId, testFriend.just("hello"), testFriend.ignorableBooleanForTextConstructor);
         expect(t.textContent).toBe("hello");
         di.setTextEffect("goodbye", t);
         expect(t.textContent).toBe("goodbye");
@@ -341,7 +341,7 @@ describe("deku", () => {
         expect($("#id0").text()).toBe("2-0");
         expect($("#id1").text()).toBe("2-1");
         expect($("#id2").text()).toBe("2-2");
-      })
+      }), true
     );
 
     doTest("tabbed navigation with pursx has correct layout", (f) =>

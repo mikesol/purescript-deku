@@ -7,18 +7,15 @@ import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn3, runSTFn2, runSTFn3)
 import Data.Array as Array
-import Data.Array.NonEmpty (NonEmptyArray, fromArray)
-import Data.Compactable (compact)
-import Data.FunctorWithIndex (mapWithIndex)
+import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
-import Deku.Core (Attribute', ChildId(..), MakeElement, ParentId(..))
+import Deku.Core (ChildId(..), MakeElement, ParentId(..))
 import Deku.Core as Core
 import Deku.Internal.Entities (fromDekuElement)
 import Deku.Internal.Region (CurrentStaticRegionStats(..), StaticRegion(..), StaticRegionStats(..))
 import Deku.Interpret as I
-import Effect.Uncurried (mkEffectFn3, runEffectFn3)
-import FRP.Poll (Poll(..))
+import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn3)
 import Foreign.Object.ST (STObject, peek, poke)
 import Web.DOM as Web.DOM
 
@@ -38,28 +35,6 @@ initialSSRRenderingInfo = SSRRenderingInfo
   , hasChildrenThatWouldDisqualifyFromSSR: true
   , backingElement: Nothing
   }
-
-getUseableAttributes
-  :: STObject Global SSRRenderingInfo
-  -> STFn2 Int (Array (Poll Attribute')) Global (Array (Poll Attribute'))
-getUseableAttributes renderingInfo = mkSTFn2 \id arr -> do
-  let tag = show id
-  currentSSRRenderingInfo <- peek tag renderingInfo
-  void $ poke tag
-    ( over SSRRenderingInfo _
-        { attributeIndicesThatAreNeededDuringHydration = fromArray $ compact
-            $ mapWithIndex
-                ( \i -> case _ of
-                    OnlyPure _ -> Nothing
-                    _ -> Just i
-                )
-                arr
-        }
-        $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
-    )
-    renderingInfo
-
-  pure arr
 
 disqualifyFromStaticRendering
   :: STObject Global SSRRenderingInfo -> STFn1 Int Global Unit
@@ -127,6 +102,16 @@ makeElement renderingInfo = mkEffectFn3 \id ns tag -> do
   liftST $ runSTFn3 addElementToCache id renderingInfo (fromDekuElement elt)
   pure elt
 
+registerParentChildRelationship
+  :: STObject Global (Array String) -> STFn2 ParentId ChildId Global Unit
+registerParentChildRelationship parentChildCache = mkSTFn2
+  \(ParentId parent) (ChildId child) -> do
+    let tag = show parent
+    parentChildArray <- peek tag parentChildCache
+    void $ poke tag
+      (Array.cons (show child) $ fromMaybe [] parentChildArray)
+      parentChildCache
+
 ssrDOMInterpret
   :: ST.ST Global Int
   -> String
@@ -136,28 +121,17 @@ ssrDOMInterpret
 ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
   Core.DOMInterpret
     { tagger
-    , staticDOMInterpret: \_ -> ssrDOMInterpret tagger impureTextTag
-        parentChildCache
-        renderingInfo
     -- we could likely make `dynamicDOMInterpret` a no-op
     -- should be harmless, though, as this will be called rarely if at all
     -- because SSR code will only trigger dynamic elements
     -- in case there's a dyn with pure polls that aren't optimized as being pure
-    , dynamicDOMInterpret: \_ -> ssrDOMInterpret tagger impureTextTag
-        parentChildCache
-        renderingInfo
+    , dynamicDOMInterpret: \_ -> noOpDomInterpret tagger
     --
     , isBoring: const false
-    , registerParentChildRelationship: mkSTFn2
-        \(ParentId parent) (ChildId child) -> do
-          let tag = show parent
-          parentChildArray <- peek tag parentChildCache
-          void $ poke tag
-            (Array.cons (show child) $ fromMaybe [] parentChildArray)
-            parentChildCache
+    , registerParentChildRelationship: registerParentChildRelationship
+        parentChildCache
     , makeElement: makeElement renderingInfo
     , attachElement: I.attachElementEffect
-    , getUseableAttributes: getUseableAttributes renderingInfo
     , incrementElementCount: incrementElementCount renderingInfo
     , disqualifyFromStaticRendering: disqualifyFromStaticRendering renderingInfo
     , setProp: I.setPropEffect
@@ -176,5 +150,38 @@ ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
     , incrementPureTextCount: incrementPureTextCount renderingInfo
     --
     , beamRegion: I.beamRegionEffect
+    , bufferPortal: I.bufferPortal
+    }
+
+noOpDomInterpret
+  :: ST.ST Global Int
+  -> Core.DOMInterpret
+noOpDomInterpret tagger =
+  Core.DOMInterpret
+    { tagger
+    -- we could likely make `dynamicDOMInterpret` a no-op
+    -- should be harmless, though, as this will be called rarely if at all
+    -- because SSR code will only trigger dynamic elements
+    -- in case there's a dyn with pure polls that aren't optimized as being pure
+    , dynamicDOMInterpret: \_ -> noOpDomInterpret tagger
+    --
+    , isBoring: const false
+    , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
+    , makeElement: I.makeElementEffect
+    , attachElement: mempty
+    , incrementElementCount: mkSTFn1 \_ -> pure unit
+    , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
+    , setProp: mkEffectFn3 \_ _ _ -> pure unit
+    , setCb: mkEffectFn3 \_ _ _ -> pure unit
+    , unsetAttribute: mkEffectFn2 \_ _ -> pure unit
+    , removeElement: mkEffectFn1 \_ -> pure unit
+    --
+    , makeText: I.makeTextEffect
+    , attachText: mkEffectFn2 \_ _ -> pure unit
+    , setText: mkEffectFn2 \_ _ -> pure unit
+    , removeText: mkEffectFn1 \_ -> pure unit
+    , incrementPureTextCount: mkSTFn1 \_ -> pure unit
+    --
+    , beamRegion: mkEffectFn3 \_ _ _ -> pure unit
     , bufferPortal: I.bufferPortal
     }

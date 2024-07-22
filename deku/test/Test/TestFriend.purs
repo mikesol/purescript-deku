@@ -18,6 +18,9 @@ unlucky = new false
 dummyId :: Int
 dummyId = 42
 
+ignorableBooleanForTextConstructor :: Boolean
+ignorableBooleanForTextConstructor = false
+
 fst :: forall a b. Tuple.Tuple a b -> a
 fst = Tuple.fst
 
