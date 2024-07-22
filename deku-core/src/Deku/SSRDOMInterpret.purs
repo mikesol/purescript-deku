@@ -10,7 +10,7 @@ import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray, fromArray)
 import Data.Compactable (compact)
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
 import Deku.Core (Attribute', ChildId(..), MakeElement, ParentId(..))
 import Deku.Core as Core
@@ -46,8 +46,7 @@ getUseableAttributes renderingInfo = mkSTFn2 \id arr -> do
   let tag = show id
   currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
-    ( maybe initialSSRRenderingInfo
-        ( over SSRRenderingInfo _
+    ( over SSRRenderingInfo _
             { attributeIndicesThatAreNeededDuringHydration = fromArray $ compact
                 $ mapWithIndex
                     ( \i -> case _ of
@@ -56,10 +55,10 @@ getUseableAttributes renderingInfo = mkSTFn2 \id arr -> do
                     )
                     arr
             }
-        )
-        currentSSRRenderingInfo
+        $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
     )
     renderingInfo
+
   pure arr
 
 disqualifyFromStaticRendering
@@ -68,14 +67,13 @@ disqualifyFromStaticRendering renderingInfo = mkSTFn1 \id -> do
   let tag = show id
   currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
-    ( maybe initialSSRRenderingInfo
-        ( over SSRRenderingInfo _
+    ( over SSRRenderingInfo _
             { hasParentThatWouldDisqualifyFromSSR = true
             }
-        )
-        currentSSRRenderingInfo
+        $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
     )
     renderingInfo
+
 
 addElementToCache
   :: STFn3 Int (STObject Global SSRRenderingInfo) Web.DOM.Element Global Unit
@@ -83,12 +81,10 @@ addElementToCache = mkSTFn3 \id renderingInfo elt -> do
   let tag = show id
   currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
-    ( maybe initialSSRRenderingInfo
-        ( over SSRRenderingInfo _
-            { backingElement = Just elt
-            }
-        )
-        currentSSRRenderingInfo
+    ( over SSRRenderingInfo _
+        { backingElement = Just elt
+        }
+        $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
     )
     renderingInfo
 
@@ -106,13 +102,11 @@ updateSSRRenderingInfo = mkSTFn2 \renderingInfo (StaticRegion region) -> do
       && currentStats.numberOfChildrenThatAreStaticTextNodes == 1
   currentSSRRenderingInfo <- peek tag renderingInfo
   void $ poke tag
-    ( maybe initialSSRRenderingInfo
-        ( over SSRRenderingInfo _
+    ( over SSRRenderingInfo _
             { hasChildrenThatWouldDisqualifyFromSSR = not
                 (containsOnlyElements || containsOnlyStaticText)
             }
-        )
-        currentSSRRenderingInfo
+        $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
     )
     renderingInfo
 
@@ -155,7 +149,8 @@ ssrDOMInterpret tagger parentChildCache renderingInfo = Core.DOMInterpret
       \(ParentId parent) (ChildId child) -> do
         let tag = show parent
         parentChildArray <- peek tag parentChildCache
-        void $ poke tag (Array.cons (show child) $ fromMaybe [] parentChildArray)
+        void $ poke tag
+          (Array.cons (show child) $ fromMaybe [] parentChildArray)
           parentChildCache
   , makeElement: makeElement renderingInfo
   , attachElement: I.attachElementEffect

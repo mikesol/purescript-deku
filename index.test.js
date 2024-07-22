@@ -33,6 +33,7 @@ const doSSRTest = (name, closure, ionly) => {
       const res = tests.runSSR(myTest)();
       const html = testFriend.fst(res);
       const cache = testFriend.snd(res);
+      console.log('qwerty', html);
       document.getElementsByTagName(
         "html"
       )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
@@ -240,7 +241,7 @@ describe("deku", () => {
         expect($("#incr-1").index()).toBeLessThan($("#incr-0").index());
         expect($("#incr-2").index()).toBeLessThan($("#incr-1").index());
         expect($("#incr-2").index()).toBeLessThan($("#dyn0-2").index());
-      })
+      }), true
     );
 
     doTest("domable is a monoid", (f) =>

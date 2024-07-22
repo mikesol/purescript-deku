@@ -10,17 +10,15 @@ import Data.Array.NonEmpty (NonEmptyArray, toArray)
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (class Newtype, un)
 import Data.Traversable (traverse)
-import Deku.Core (AttachElement, Attribute', MakeElement)
+import Deku.Core (Attribute', MakeElement)
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
-import Deku.Internal.Entities (DekuParent(..), fromDekuElement, toDekuElement)
-import Deku.Internal.Region (Anchor(..))
+import Deku.Internal.Entities (toDekuElement, toDekuText)
 import Deku.Interpret as I
-import Effect.Uncurried (mkEffectFn2, mkEffectFn3, runEffectFn2, runEffectFn3)
+import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn3)
 import FRP.Poll (Poll)
 import Foreign.Object (Object)
 import Foreign.Object as Object
-import Unsafe.Reference (unsafeRefEq)
 import Web.DOM as Web.DOM
 import Web.DOM.ParentNode (QuerySelector(..), querySelector)
 
@@ -70,27 +68,18 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
             Just el -> pure $ toDekuElement el
         false -> pure $ toDekuElement dummyElement
 
-attachElement :: Web.DOM.Element -> AttachElement
-attachElement dummyElement = mkEffectFn2 \node anchor -> case anchor of
-  ParentStart (DekuParent parent) -> when
-    (not (unsafeRefEq (fromDekuElement parent) dummyElement))
-    (runEffectFn2 I.attachElementEffect node anchor)
-
-  Element el -> when (not (unsafeRefEq (fromDekuElement el) dummyElement))
-    (runEffectFn2 I.attachElementEffect node anchor)
-
-  _ -> runEffectFn2 I.attachElementEffect node anchor
-
 hydratingDOMInterpret
   :: ST.ST Global Int
   -> Object HydrationRenderingInfo
+  -> Web.DOM.Text
   -> Web.DOM.Element
   -> Web.DOM.ParentNode
   -> Core.DOMInterpret
-hydratingDOMInterpret tagger renderingInfo dummyElement parentNode =
+hydratingDOMInterpret tagger renderingInfo dummyText dummyElement parentNode =
   Core.DOMInterpret
     { tagger
     , staticDOMInterpret: \_ -> hydratingDOMInterpret tagger renderingInfo
+        dummyText
         dummyElement
         parentNode
     -- we could likely make `dynamicDOMInterpret` a no-op
@@ -105,7 +94,11 @@ hydratingDOMInterpret tagger renderingInfo dummyElement parentNode =
           renderingInfo
     , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
     , makeElement: makeElement renderingInfo dummyElement parentNode
-    , attachElement: attachElement dummyElement
+    -- attachments should never happen during hydration
+    -- the dynamicDOMInterpret should always kick in
+    -- when an attachment actually needs to occur
+    -- so we make it a noop
+    , attachElement: mkEffectFn2 \_ _ -> pure unit
     , getUseableAttributes: getUseableAttributes renderingInfo
     , incrementElementCount: mkSTFn1 \_ -> pure unit
     , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
@@ -113,11 +106,11 @@ hydratingDOMInterpret tagger renderingInfo dummyElement parentNode =
     , setCb: I.setCbEffect
     , unsetAttribute: I.unsetAttributeEffect
     , removeElement: I.removeElementEffect
-    --
-    , makeText: I.makeTextEffect
-    , attachText: I.attachTextEffect
-    , setText: I.setTextEffect
-    , removeText: I.removeTextEffect
+    -- text setting should never happen during hydration
+    , makeText: mkEffectFn1 \_ -> pure $ toDekuText dummyText
+    , attachText: mkEffectFn2 \_ _ -> pure unit
+    , setText: mkEffectFn2 \_ _ -> pure unit
+    , removeText: mkEffectFn1 \_ -> pure unit
     , incrementPureTextCount: mkSTFn1 \_ -> pure unit
     --
     , beamRegion: I.beamRegionEffect

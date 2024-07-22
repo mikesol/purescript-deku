@@ -35,7 +35,7 @@ import Foreign.Object (Object)
 import Foreign.Object as Object
 import Foreign.Object.ST as STObject
 import Foreign.Object.ST.Unsafe (unsafeFreeze)
-import Web.DOM.Document (createElement)
+import Web.DOM.Document (createElement, createTextNode)
 import Web.DOM.Element (setAttribute, toParentNode)
 import Web.DOM.Element as Web.DOM
 import Web.HTML (window)
@@ -128,6 +128,7 @@ ssrInElement elt (Nut nut) = do
     (DekuParent $ toDekuElement elt)
   parentCache <- liftST $ STObject.new
   regionCache <- liftST $ STObject.new
+  -- liftST $ runSTFn3 addElementToCache taggerStart regionCache elt
   void $ runEffectFn2 nut
     ( PSR
         { region, disqualifyFromStaticRendering: false, unsubs: [], lifecycle }
@@ -183,12 +184,13 @@ hydrateInElement cache elt (Nut nut) = do
     (DekuParent $ toDekuElement elt)
   doc <- window >>= document
   dummyElt <- createElement "div" (toDocument doc)
+  dummyText <- createTextNode "dummy" (toDocument doc)
   let par = toParentNode elt
   void $ runEffectFn2 nut
     ( PSR
         { region, disqualifyFromStaticRendering: false, unsubs: [], lifecycle }
     )
-    (hydratingDOMInterpret tagger cache dummyElt par)
+    (hydratingDOMInterpret tagger cache dummyText dummyElt  par)
   pure $ dispose unit
 
 
