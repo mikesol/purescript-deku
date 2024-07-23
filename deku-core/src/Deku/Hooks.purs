@@ -40,7 +40,7 @@ guardWith m f = m <#~> case _ of
   Just x -> f x
   Nothing -> mempty
 
--- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
+-- | Like `bindFlipped`, except instead of working with a monad, it dips into an `Poll`
 -- | and creates a `Nut`. This allows you to use an event to switch between different
 -- | bits of DOM. This is how a [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM) works
 -- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient

@@ -27,6 +27,55 @@ describe("deku", () => {
   });
 
   describe("low-level interpreters", () => {
+    describe("RegionSpan", () => {
+      it("updates end on content bump", () => {
+        var end = testFriend.nothing;
+        var span = region.newSpan(()=>10,e=>end=e);
+        var r1 = region.allocateRegion(testFriend.nothing, span);
+        var r2 = region.allocateRegion(testFriend.nothing,span);
+        
+        expect(end).toEqual(testFriend.nothing);
+        expect(r1.begin()).toEqual(10);
+        expect(r2.begin()).toEqual(10);
+
+        r1.bump(testFriend.just(1));
+        expect(end).toEqual(testFriend.just(1));
+        expect(r1.begin()).toEqual(10);
+        expect(r1.end()).toEqual(1);
+        expect(r2.begin()).toEqual(1)
+
+        r2.bump(testFriend.just(2));
+        expect(end).toEqual(testFriend.just(2));
+        expect(r1.begin()).toEqual(10);
+        expect(r1.end()).toEqual(1);
+        expect(r2.begin()).toEqual(1);
+        expect(r2.end()).toEqual(2);
+      });
+
+      it("updates end on empty bump", () => {
+        var end = testFriend.nothing;
+        var span = region.newSpan(()=>10,e=>end=e);
+        var r1 = region.allocateRegion(testFriend.nothing, span);
+        var r2 = region.allocateRegion(testFriend.nothing,span);
+
+        expect(end).toEqual(testFriend.nothing);
+        expect(r1.begin()).toEqual(10);
+        expect(r2.begin()).toEqual(10);
+
+        r1.bump(testFriend.just(1));
+        expect(end).toEqual(testFriend.just(1));
+        expect(r1.begin()).toEqual(10);
+        expect(r1.end()).toEqual(1);
+        expect(r2.begin()).toEqual(1)
+
+        r1.bump(testFriend.nothing);
+        expect(end).toEqual(testFriend.nothing);
+        expect(r1.begin()).toEqual(10);
+        expect(r1.end()).toEqual(10);
+        expect(r2.begin()).toEqual(10);
+      })
+    });
+
     it("makeElementEffect makes an element with the correct tagname", () => {
       const out = di.makeElementEffect(testFriend.nothing, "div");
       expect(out.tagName).toBe("DIV");
@@ -336,8 +385,9 @@ describe("deku", () => {
       f(tests.emptySwitches, () => {
         const $ = require("jquery");
         expect($("#content").text()).toBe("0");
+        const htm1 = $("#div0")[0].outerHTML;
         $("#incr").trigger("click");
-        const htm = $("#div0")[0].outerHTML;
+        const htm2 = $("#div0")[0].outerHTML;
         expect($("#content").text()).toBe("1");
         $("#incr").trigger("click");
         expect($("#content").text()).toBe("2");

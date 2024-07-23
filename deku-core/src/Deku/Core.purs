@@ -26,7 +26,6 @@ module Deku.Core
   , BeamRegion
 
   , DOMInterpret(..)
-  , DekuDynamic(..)
   , Hook
   , Hook'
   , Nut(..)
@@ -93,13 +92,15 @@ import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
-import Deku.Internal.Region (Anchor(..), Bound, Region(..), RegionSpan(..), StaticRegion(..), fromParent, newSpan, newStaticRegion)
-import Effect (Effect)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3)
+import Deku.Internal.Region (Anchor(..), Bound, Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
+import Effect (Effect, forE)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3)
 import FRP.Event as Event
+import FRP.Event.Class (once)
 import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
 import FRP.Poll.Unoptimized as UPoll
+import Partial.Unsafe (unsafePartial)
 import Safe.Coerce (coerce)
 import Web.DOM (Element)
 import Web.Event.Internal.Types (Event)
@@ -108,16 +109,6 @@ import Web.Event.Internal.Types (Event)
 newtype Key = Key String
 newtype Value = Value String
 newtype Cb = Cb (Event -> Effect Boolean)
-
-derive instance newtypeCb :: Newtype Cb _
-instance eqCb :: Eq Cb where
-  eq _ _ = false
-
-instance ordCb :: Ord Cb where
-  compare _ _ = LT
-
-instance showCb :: Show Cb where
-  show _ = "{callback}"
 
 -- | Construct a `cb`. This is an alias for the newtype constructor.
 cb :: (Event -> Effect Unit) -> Cb
@@ -170,8 +161,6 @@ callbackWithCaution k v = unsafeAttribute $ mkEffectFn2
 xdata :: forall e. String -> String -> Attribute e
 xdata k v =
   attributeAtYourOwnRisk ("data-" <> k) v
-
-data DekuDynamic = DekuSendToPos Int | DekuRemove
 
 newtype Tag = Tag String
 newtype Namespace = Namespace String
@@ -248,36 +237,30 @@ derive instance Newtype DOMInterpret _
 
 -- | Handles an optimized `Poll` by running the effect on each emitted value. Any resulting subscription gets written to 
 -- | the given cleanup array.
-pump
-  :: forall a
-   . PSR
-  -> Poll a
-  -> EffectFn1 a Unit
-  -> Effect Unit
-pump (PSR { defer: def }) p eff =
-  go p
+pump :: forall a . EffectFn3 PSR (Poll.Poll a) (EffectFn1 a Unit) Unit
+pump = mkEffectFn3 \(PSR { defer: def }) p eff -> do
+  let
+    handleEvent :: EffectFn1 (Event.Event a) Unit
+    handleEvent = mkEffectFn1 \y ->do
+      uu <- runEffectFn2 Event.subscribeO y eff
+      void $ liftST $ runSTFn1 def uu
 
-  where
+    go :: EffectFn1 (Poll a) Unit
+    go = mkEffectFn1 case _ of
+      OnlyEvent x -> runEffectFn1 handleEvent x
+      OnlyPure x -> runEffectFn2 Event.fastForeachE x eff
+      OnlyPoll x -> do
+        bang <- liftST $ Event.create
+        runEffectFn1 handleEvent (UPoll.sample x bang.event)
+        bang.push identity
+      PureAndEvent x y -> do
+        runEffectFn1 go (OnlyPure x)
+        runEffectFn1 go (OnlyEvent y)
+      PureAndPoll x y -> do
+        runEffectFn1 go (OnlyPure x)
+        runEffectFn1 go (OnlyPoll y)
 
-  handleEvent :: Event.Event a -> Effect Unit
-  handleEvent y = do
-    uu <- runEffectFn2 Event.subscribeO y eff
-    void $ liftST $ runSTFn1 def uu
-
-  go :: Poll a -> Effect Unit
-  go = case _ of
-    OnlyEvent x -> handleEvent x
-    OnlyPure x -> runEffectFn2 Event.fastForeachE x eff
-    OnlyPoll x -> do
-      bang <- liftST $ Event.create
-      handleEvent (UPoll.sample x bang.event)
-      bang.push identity
-    PureAndEvent x y -> do
-      go (OnlyPure x)
-      go (OnlyEvent y)
-    PureAndPoll x y -> do
-      go (OnlyPure x)
-      go (OnlyPoll y)
+  runEffectFn1 go p
 
 newtype PSR = PSR
   { lifecycle :: Poll.Poll Unit
@@ -298,10 +281,13 @@ newPSR = mkSTFn2 \lifecycle region -> do
     doDefer =
       mkSTFn1 \eff -> void (STArray.push eff unsubs)
 
+    -- to correctly dispose, effect should be run in the reverse order of insertion
     dispose :: Effect Unit
-    dispose =
-      runEffectFn1 Event.fastForeachThunkE =<< liftST
-        (STArray.unsafeFreeze unsubs)
+    dispose = do
+      stack <- liftST $ STArray.unsafeFreeze unsubs
+      let l = Array.length stack
+      forE 0 l \i -> do
+        unsafePartial $ Array.unsafeIndex stack ( l - 1 - i )
 
   pure (PSR { lifecycle, region, defer: doDefer, dispose })
 
@@ -312,7 +298,7 @@ handleScope = mkEffectFn1 \psr -> do
     handleLifecycle =
       mkEffectFn1 \_ -> (un PSR psr).dispose
 
-  pump psr (un PSR psr).lifecycle handleLifecycle
+  runEffectFn3 pump psr (un PSR psr).lifecycle handleLifecycle
 
 newtype Nut =
   Nut (EffectFn2 PSR DOMInterpret Unit)
@@ -497,17 +483,17 @@ useDynWith
   -> DynOptions value
   -> Hook (DynControl value)
 useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
-  RegionSpan span <- liftST do
-    Region region <- (un StaticRegion (un PSR psr).region).region
-    runSTFn2 newSpan region.begin region.bump
+  Region region <- liftST $ (un StaticRegion (un PSR psr).region).region
+  span <- liftST $ runSTFn2 newSpan region.begin region.bump
 
-  lifecycle <- liftST Poll.create
-
+  runEffectFn2 deferO psr do
+    liftST region.remove
+  
   let
     handleElements :: EffectFn1 (Tuple (Maybe Int) value) Unit
     handleElements = mkEffectFn1 \(Tuple initialPos value) -> do
-      Region eltRegion <- liftST $ runSTFn1 span initialPos
-      region <- liftST $ runSTFn2 newStaticRegion eltRegion.begin eltRegion.bump
+      Region eltRegion <- liftST $ runSTFn2 allocateRegion initialPos span
+      staticRegion <- liftST $ runSTFn2 newStaticRegion eltRegion.begin eltRegion.bump
       eltSendTo <- liftST Poll.create
       let
         sendTo :: Poll Int
@@ -518,9 +504,9 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
       let
         remove :: Poll Unit
         remove =
-          Poll.merge [ options.remove value, eltRemove.poll, lifecycle.poll ]
+          Poll.merge [ options.remove value, eltRemove.poll, ( un PSR psr ).lifecycle ]
 
-      eltPSR <- liftST $ runSTFn2 newPSR remove region
+      eltPSR <- liftST $ runSTFn2 newPSR remove staticRegion
       let
         Nut nut = cont
           { value
@@ -543,17 +529,12 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
           target <- liftST eltRegion.begin
           runEffectFn3 (un DOMInterpret di).beamRegion fromBegin fromEnd target
 
-      pump eltPSR sendTo handleSendTo
-      pump eltPSR remove handleManagedLifecycle
+      runEffectFn3 pump eltPSR sendTo handleSendTo
+      runEffectFn3 pump eltPSR ( once remove ) handleManagedLifecycle
 
       runEffectFn2 nut eltPSR di
 
-  pump psr elements handleElements
-
-  runEffectFn2 deferO psr do
-    -- let children dispose of themselves
-    lifecycle.push unit
-
+  runEffectFn3 pump psr elements handleElements
   runEffectFn1 handleScope psr
 
 fixed :: Array Nut -> Nut
@@ -584,10 +565,13 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
     (Element (elt))
 
+  runEffectFn2 deferO psr do
+    runEffectFn1 (un DOMInterpret di).removeElement elt
+    
   let
     handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
     handleAtts = mkEffectFn1 \atts ->
-      pump psr atts $ mkEffectFn1 \(Attribute x) ->
+      runEffectFn3 pump psr atts $ mkEffectFn1 \(Attribute x) ->
         runEffectFn2 x (fromDekuElement elt) di
   runEffectFn2 Event.fastForeachE arrAtts handleAtts
 
@@ -601,8 +585,6 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
 
   runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
 
-  runEffectFn2 deferO psr do
-    runEffectFn1 (un DOMInterpret di).removeElement elt
 
   runEffectFn1 handleScope psr
 
@@ -720,8 +702,9 @@ portaled buffer beam beamed bumped trackBegin trackEnd =
     stolen <- liftST $ ST.new false
 
     unsubBeamed <- runEffectFn2 Event.subscribeO beamed $ mkEffectFn1 \_ -> do
-      void $ liftST $ ST.write true stolen
-      liftST region.remove
+      whenM ( not <$> liftST ( ST.read stolen ) ) do
+        void $ liftST $ ST.write true stolen
+        liftST region.remove
 
     unsubBumped <- runEffectFn2 Event.subscribeO bumped $ mkEffectFn1 $ liftST
       <<< runSTFn1 region.bump
@@ -748,13 +731,14 @@ portaled buffer beam beamed bumped trackBegin trackEnd =
       restoreBuffer = do
         whenM (not <$> liftST (ST.read stolen)) do
           -- send portaled content back to buffer
-          begin <- liftST $ join $ ST.read trackBegin
+          begin <- liftST region.begin
           end <- liftST $ ST.read trackEnd
           target <- liftST buffer
           runEffectFn3 (un DOMInterpret di).beamRegion begin
             (fromMaybe begin end)
             target
           void $ liftST $ ST.write buffer trackBegin
+          void $ liftST $ ST.write true stolen
           liftST region.remove
 
     runEffectFn2 deferO psr restoreBuffer

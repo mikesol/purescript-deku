@@ -13,17 +13,18 @@ module Deku.Internal.Region
   , Bound
   , Region(..)
   , StaticRegion(..)
-  , RegionSpan(..)
+  , RegionSpan
   , Bump
   , fromParent
   , newStaticRegion
   , newSpan
+  , allocateRegion
+  , printSpan
   ) where
 
 import Prelude
 
-import Control.Alt (alt, (<|>))
-import Control.Apply (lift2)
+import Control.Alt ((<|>))
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
 import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, STFn4, mkSTFn1, mkSTFn2, mkSTFn3, mkSTFn4, runSTFn1, runSTFn2, runSTFn3, runSTFn4)
@@ -132,15 +133,16 @@ readSharedBound = mkSTFn1 \shared -> do
 -- |
 -- | The implementation detects if updating the preceding or following regions would be cheaper and uses that strategy.
 newtype RegionSpan =
-  RegionSpan (STFn1 (Maybe Int) Global Region)
-
-derive instance Newtype RegionSpan _
+  RegionSpan
+    { children :: Children
+    , bump :: Bump
+    }
 
 -- | Manages a span of `Region`s. 
 newSpan :: STFn2 Bound Bump Global RegionSpan
 newSpan = mkSTFn2 \parent parentBump -> do
   children <- STArray.new
-
+  
   -- bound owned by an element outside of this span
   parentBound <- do
     owner <- ST.new $ pure 0
@@ -163,84 +165,96 @@ newSpan = mkSTFn2 \parent parentBump -> do
       , end: parentBound
       }
   void $ STArray.push parentRegion children
-  pure $ RegionSpan $ mkSTFn1 \givenPos -> do
-    managed@{ position, ix } <- runSTFn2 insertManaged givenPos children
-    let
-      begin :: Bound
-      begin =
-        runSTFn2 beginBound managed children
+  pure $ RegionSpan { children, bump : parentBump }
 
-      end :: Bound
-      end =
-        runSTFn1 readSharedBound managed.end
+printSpan :: STFn1 RegionSpan Global String
+printSpan = mkSTFn1 \(RegionSpan {children}) -> do
+  arr <- STArray.freeze children
+  owner <- Array.foldM (\a r -> append a <<< show <$> join ( ST.read <<< _.owner =<< ST.read r.end) ) "" arr
+  extent <- Array.foldM (\a r -> append a <<< show <$> join(ST.read <<< _.extent =<< ST.read r.end) ) "" arr
+  pure $ owner <> "\n" <> extent
 
-      bump :: Bump
-      bump = mkSTFn1 case _ of
-        Nothing -> do
-          runSTFn2 clearBound managed children
-          whenM (runSTFn1 isClear children) do
-            runSTFn1 parentBump Nothing
+allocateRegion :: STFn2 ( Maybe Int ) RegionSpan Global Region
+allocateRegion = mkSTFn2 \givenPos (RegionSpan { children, bump : parentBump } ) -> do
+  managed@{ position, ix } <- runSTFn2 insertManaged givenPos children
+  let
+    begin :: Bound
+    begin =
+      runSTFn2 beginBound managed children
 
-        b@(Just anchor) -> do
-          runSTFn3 bumpBound anchor managed children
-          whenM (runSTFn2 isLastBound managed children) do
-            runSTFn1 parentBump b
+    end :: Bound
+    end =
+      runSTFn1 readSharedBound managed.end
 
-      sendTo :: STFn1 Int Global Unit
-      sendTo = mkSTFn1 \pos' -> do
-        let
-          -- correct shift by parent `SharedBound`
-          pos :: Int
-          pos =
-            pos' + 1
+    bump :: Bump
+    bump = mkSTFn1 case _ of
+      Nothing -> do
+        runSTFn2 clearBound managed children
+        whenM (runSTFn1 isClear children) do
+          runSTFn1 parentBump Nothing
 
-        -- save old state of `ManagedRegion`
-        lastAnchor <- ST.new $ Nothing @Anchor
-        wasLast <- runSTFn2 isLastBound managed children
-        lastIx <- ix
+      b@(Just anchor) -> do
+        runSTFn3 bumpBound anchor managed children
+        whenM (runSTFn2 isLastBound managed children) do
+          runSTFn1 parentBump b
 
-        -- clear the region so neighbouring `SharedBound`s coalesce
-        whenM (not <$> runSTFn1 isEmpty managed) do
-          anchor <- _.bound =<< ST.read managed.end
-          void $ ST.write (Just anchor) lastAnchor
-          runSTFn2 clearBound managed children
+    sendTo :: STFn1 Int Global Unit
+    sendTo = mkSTFn1 \pos' -> do
+      let
+        -- correct shift by parent `SharedBound`
+        pos :: Int
+        pos =
+          pos' + 1
 
-        -- update `SharedBound` so the extent of the cleared bound does not point at us
-        do
-          sharedBound <- ST.read managed.end
-          whenM (eq lastIx <$> join (ST.read sharedBound.extent)) do
-            previousRegion <- runSTFn2 index (lastIx - 1) children
-            void $ ST.write previousRegion.ix sharedBound.extent
+      -- save old state of `ManagedRegion`
+      lastAnchor <- ST.new $ Nothing @Anchor
+      wasLast <- runSTFn2 isLastBound managed children
+      lastIx <- ix
 
-        -- now safe to move, indices becoming invalid
-        do
-          removed <- STArray.splice lastIx 1 [] children
-          void $ STArray.splice pos 0 removed children
+      -- clear the region so neighbouring `SharedBound`s coalesce
+      whenM (not <$> runSTFn1 isEmpty managed) do
+        anchor <- _.bound =<< ST.read managed.end
+        void $ ST.write (Just anchor) lastAnchor
+        runSTFn2 clearBound managed children
 
-          newBegin <- runSTFn2 shareBound managed.ix children
-          void $ ST.write newBegin managed.end
+      -- update `SharedBound` so the extent of the cleared bound does not point at us
+      do
+        sharedBound <- ST.read managed.end
+        whenM (eq lastIx <$> join (ST.read sharedBound.extent)) do
+          previousRegion <- runSTFn2 index (lastIx - 1) children
+          void $ ST.write previousRegion.ix sharedBound.extent
 
-        -- restoring indices
-        runSTFn3 fixManaged (min lastIx pos) updateIx children
+      -- now safe to move, indices becoming invalid
+      do
+        removed <- STArray.splice lastIx 1 [] children
+        void $ STArray.splice pos 0 removed children
 
-        -- if we had any elements we signal a bump, this requires the indices to be valid so we do it last
-        ST.read lastAnchor >>= traverse_ \anchor -> runSTFn3 bumpBound anchor
-          managed
-          children
+        newBegin <- runSTFn2 shareBound managed.ix children
+        void $ ST.write newBegin managed.end
 
-        -- update parent when necessary
-        nowLast <- runSTFn2 isLastBound managed children
-        when (wasLast /= nowLast) do
-          runSTFn2 rebumpLast parentBump children
+      -- restoring indices
+      runSTFn3 fixManaged (min lastIx pos) updateIx children
 
-      remove :: ST.ST Global Unit
-      remove = do
-        runSTFn1 bump Nothing
-        finalIx <- ix
-        void $ STArray.splice finalIx 1 [] children
-        runSTFn3 fixManaged finalIx updateIx children
+      -- if we had any elements we signal a bump, this requires the indices to be valid so we do it last
+      ST.read lastAnchor >>= traverse_ \anchor -> runSTFn3 bumpBound anchor
+        managed
+        children
 
-    pure $ Region { begin, end, position, sendTo, remove, bump }
+      -- update parent when necessary
+      nowLast <- runSTFn2 isLastBound managed children
+      when (wasLast /= nowLast) do
+        runSTFn2 rebumpLast parentBump children
+
+    remove :: ST.ST Global Unit
+    remove = do
+      runSTFn1 bump Nothing
+      finalIx <- ix
+      -- give ourselves an invalid index so later sendTo and removes have no effect
+      runSTFn1 managed.pushIx (-1)
+      void $ STArray.splice finalIx 1 [] children
+      runSTFn3 fixManaged finalIx updateIx children
+
+  pure $ Region { begin, end, position, sendTo, remove, bump }
 
 index :: forall r a. STFn2 Int (STArray.STArray r a) r a
 index = mkSTFn2 \ix arr ->
@@ -333,7 +347,7 @@ clearBound = mkSTFn2 \cleared children -> do
     -- the following owned `SharedBound` was smaller, so we extend prevBound to cover nextBound and update the following 
     -- regions
     void $ ST.write extentToEff prevBound.extent
-    runSTFn4 fixManagedTo selfIx extentToIx (updateShared prevBound)
+    runSTFn4 fixManagedTo selfIx (extentToIx + 1) (updateShared prevBound)
       children
 
   else do
@@ -490,8 +504,11 @@ newStaticRegion = mkSTFn2 \parentBound parentBump -> do
         staticBegin <- ST.read staticEnd
         let
           begin :: Bound
-          begin = fromMaybe <$> parentBound <@> staticBegin
-
+          begin = do
+            case staticBegin of
+              Just e -> pure e
+              Nothing -> parentBound
+              
           bump :: Bump
           bump = mkSTFn1 \update ->
             -- only take control of parentBump when we are the last span
@@ -513,11 +530,23 @@ newStaticRegion = mkSTFn2 \parentBound parentBump -> do
 
   pure $ StaticRegion
     { end: do
-        fromMaybe <$> parentBound <*>
-          (lift2 alt (ST.read spanEnd) (ST.read staticEnd))
+      fromSpan <- ST.read spanEnd
+      case fromSpan of
+        Just e ->
+          pure e
+
+        Nothing -> do
+          fromStatic <- ST.read staticEnd
+          case fromStatic of
+            Just e ->
+              pure e
+
+            Nothing ->
+              parentBound
+
     , region: do
-        RegionSpan span <- findOrCreateSpan
-        runSTFn1 span Nothing
+      span <- findOrCreateSpan
+      runSTFn2 allocateRegion Nothing span
 
     , element: mkSTFn1 \anchor -> do
         whenM (isJust <$> ST.read spanState) do
