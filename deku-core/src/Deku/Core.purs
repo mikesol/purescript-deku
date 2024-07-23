@@ -98,7 +98,7 @@ import Deku.Do as Deku
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
 import Deku.Internal.Region (Anchor(..), Bound, Region(..), RegionSpan(..), StaticRegion(..), fromParent, newSpan, newStaticRegion)
 import Effect (Effect)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
 import FRP.Event as Event
 import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
@@ -198,7 +198,7 @@ type MakeText = EffectFn3 Int (Maybe String) Boolean DekuText
 
 -- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom
 -- | backend.
-type SetText = EffectFn2 String DekuText Unit
+type SetText = EffectFn4 Int String DekuText Boolean Unit
 
 -- | Type used by Deku backends to unset an attribute. For internal use only unless you're writing a custom backend.
 type UnsetAttribute =
@@ -262,36 +262,59 @@ derive instance Newtype DOMInterpret _
 
 -- | Handles an optimized `Poll` by running the effect on each emitted value. Any resulting subscription gets written to 
 -- | the given cleanup array.
-pump
+pump'
   :: forall a
    . PSR
   -> Poll a
-  -> EffectFn1 a Unit
+  -> (Boolean -> EffectFn1 a Unit)
   -> Effect Unit
-pump (PSR { defer: def }) p eff =
+pump' (PSR { defer: def }) p effF =
   go p
 
   where
 
+  staticEff = effF true
+  dynamicEff = effF false
+
   handleEvent :: Event.Event a -> Effect Unit
   handleEvent y = do
-    uu <- runEffectFn2 Event.subscribeO y eff
+    uu <- runEffectFn2 Event.subscribeO y dynamicEff
+    void $ liftST $ runSTFn1 def uu
+
+  handlePoll
+    :: ST.STRef Global (EffectFn1 a Unit) -> Event.Event a -> Effect Unit
+  handlePoll whichF y = do
+    uu <- runEffectFn2 Event.subscribeO y $ mkEffectFn1 \i -> do
+      f <- liftST $ ST.read whichF
+      runEffectFn1 f i
     void $ liftST $ runSTFn1 def uu
 
   go :: Poll a -> Effect Unit
   go = case _ of
     OnlyEvent x -> handleEvent x
-    OnlyPure x -> runEffectFn2 Event.fastForeachE x eff
+    OnlyPure x -> runEffectFn2 Event.fastForeachE x staticEff
     OnlyPoll x -> do
       bang <- liftST $ Event.create
-      handleEvent (UPoll.sample x bang.event)
+      -- start with the statif function
+      f <- liftST $ ST.new staticEff
+      handlePoll f (UPoll.sample x bang.event)
       bang.push identity
+      -- after we peel off the "pure" values, switch to the dynamic function
+      liftST $ void $ ST.write dynamicEff f
     PureAndEvent x y -> do
       go (OnlyPure x)
       go (OnlyEvent y)
     PureAndPoll x y -> do
       go (OnlyPure x)
       go (OnlyPoll y)
+
+pump
+  :: forall a
+   . PSR
+  -> Poll a
+  -> EffectFn1 a Unit
+  -> Effect Unit
+pump psr poll fn = pump' psr poll (const fn)
 
 newtype PSR = PSR
   { lifecycle :: Poll.Poll Unit
@@ -320,7 +343,15 @@ newPSR = mkSTFn3 \disqualifyFromStaticRendering lifecycle region -> do
       runEffectFn1 Event.fastForeachThunkE =<< liftST
         (STArray.unsafeFreeze unsubs)
 
-  pure (PSR { lifecycle, disqualifyFromStaticRendering, region, defer: doDefer, dispose })
+  pure
+    ( PSR
+        { lifecycle
+        , disqualifyFromStaticRendering
+        , region
+        , defer: doDefer
+        , dispose
+        }
+    )
 
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
@@ -400,6 +431,8 @@ useRant e f = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 deferO psr (liftST unsubscribe)
   runEffectFn2 (coerce $ f poll) psr di
 
+-- Splits a poll into two polls, both of which are memoized versions of
+-- the first
 useSplit :: forall a. Poll a -> Hook { first :: Poll a, second :: Poll a }
 useSplit e f = Nut $ mkEffectFn2 \psr di -> do
   { poll, unsubscribe } <- liftST $ Poll.rant e
@@ -521,10 +554,13 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
   lifecycle <- liftST Poll.create
 
   let
-    handleElements :: EffectFn1 (Tuple (Maybe Int) value) Unit
-    handleElements = mkEffectFn1 \(Tuple initialPos value) -> do
+    handleElements :: Boolean -> EffectFn1 (Tuple (Maybe Int) value) Unit
+    handleElements isStatic = mkEffectFn1 \(Tuple initialPos value) -> do
       let
-        di = (un DOMInterpret di').dynamicDOMInterpret unit
+        di =
+          if isStatic then di'
+          else (un DOMInterpret di').dynamicDOMInterpret unit
+      let ___ = spy "in a dyn with isStatic" { isStatic }
       Region eltRegion <- liftST $ runSTFn1 span initialPos
       tag <- liftST (un DOMInterpret di).tagger
       region <- liftST $ runSTFn4 newStaticRegion tag Nothing eltRegion.begin
@@ -550,10 +586,10 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
           , sendTo: eltSendTo.push
           }
 
-
         handleManagedLifecycle :: EffectFn1 Unit Unit
         handleManagedLifecycle =
           mkEffectFn1 \_ -> do
+            let _ = spy "removing dyn element" { eltRegion }
             liftST eltRegion.remove
 
         handleSendTo :: EffectFn1 Int Unit
@@ -570,7 +606,8 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
 
       runEffectFn2 nut eltPSR di
 
-  pump psr elements handleElements
+  let ___ = spy "here are the dyn elements" { elements }
+  pump' psr elements handleElements
 
   runEffectFn2 deferO psr do
     -- let children dispose of themselves
@@ -622,9 +659,14 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
     let
       handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
       handleAtts = mkEffectFn1 \atts ->
-        pump psr atts $ mkEffectFn1 \(Attribute x) ->
-          runEffectFn2 x (fromDekuElement elt) di
-    
+        pump' psr atts $ \useOriginalDi -> do
+          let
+            newDi =
+              if useOriginalDi then di
+              else (un DOMInterpret di).dynamicDOMInterpret unit
+          mkEffectFn1 \(Attribute x) ->
+            runEffectFn2 x (fromDekuElement elt) newDi
+
     -- todo: in hydration, we don't need to set attributes
     -- that are already set
     -- it's easier to set them, but if there's a perf speedup in not setting
@@ -634,7 +676,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
     let
       handleNuts :: EffectFn1 Nut Unit
       handleNuts = mkEffectFn1 \(Nut nut) -> do
-        scope <- liftST $ runSTFn3 newPSR  false (un PSR psr).lifecycle eltRegion
+        scope <- liftST $ runSTFn3 newPSR false (un PSR psr).lifecycle eltRegion
         runEffectFn2 nut scope di
     runEffectFn2 Event.fastForeachE nuts handleNuts
 
@@ -654,42 +696,59 @@ text_ txt =
 text :: Poll String -> Nut
 text texts = Nut $ mkEffectFn2 \psr di -> do
   id <- liftST (un DOMInterpret di).tagger
+  let ______ = spy "creating text" {id, texts }
+
+  {txt, doesNotNeedReferenceInDOM } <- case texts of
+    OnlyPure xs -> do
+      let doesNotNeedReferenceInDOM = not (un PSR psr).disqualifyFromStaticRendering
+      txt <- runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs) doesNotNeedReferenceInDOM
+      pure {txt, doesNotNeedReferenceInDOM }
+
+    OnlyEvent _ -> do
+      let doesNotNeedReferenceInDOM = false
+      txt <- runEffectFn3 (un DOMInterpret di).makeText id Nothing doesNotNeedReferenceInDOM
+      pure { txt , doesNotNeedReferenceInDOM }
+
+    OnlyPoll _ -> do
+      let doesNotNeedReferenceInDOM = false
+      txt <- runEffectFn3 (un DOMInterpret di).makeText id Nothing doesNotNeedReferenceInDOM
+      pure { txt , doesNotNeedReferenceInDOM }
+
+    PureAndEvent xs _ -> do
+      let doesNotNeedReferenceInDOM = false
+      txt <- runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs) doesNotNeedReferenceInDOM
+      pure { txt, doesNotNeedReferenceInDOM }
+      
+
+    PureAndPoll xs _ -> do
+      let doesNotNeedReferenceInDOM = false
+      txt <- runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs) doesNotNeedReferenceInDOM
+      pure { txt, doesNotNeedReferenceInDOM }
 
   let
-    handleTextUpdate :: EffectFn2 (Event.Event String) DekuText Unit
-    handleTextUpdate = mkEffectFn2 \xs txt -> do
-      sub <- runEffectFn2 Event.subscribeO xs $ mkEffectFn1 \x ->
-        runEffectFn2 (un DOMInterpret di).setText x txt
-      liftST $ runSTFn1 (un PSR psr).defer sub
+    modifiedPoll = case texts of
+      OnlyPure _ -> OnlyPure []
 
-  txt <- case texts of
-    OnlyPure xs -> do
-      runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs) true
+      OnlyEvent e -> OnlyEvent e
 
-    OnlyEvent e -> do
-      txt <- runEffectFn3 (un DOMInterpret di).makeText id Nothing false
-      runEffectFn2 handleTextUpdate e txt
-      pure txt
+      OnlyPoll p -> OnlyPoll p
 
-    OnlyPoll p -> do
-      txt <- runEffectFn3 (un DOMInterpret di).makeText id Nothing false
-      bang <- liftST Event.create
-      runEffectFn2 handleTextUpdate (UPoll.sample p bang.event) txt
-      bang.push identity
-      pure txt
+      PureAndEvent _ e -> OnlyEvent e
 
-    PureAndEvent xs e -> do
-      txt <- runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs) false
-      runEffectFn2 handleTextUpdate e txt
-      pure txt
+      PureAndPoll _ p -> OnlyPoll p
 
-    PureAndPoll xs p -> do
-      txt <- runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs) false
-      bang <- liftST Event.create
-      runEffectFn2 handleTextUpdate (UPoll.sample p bang.event) txt
-      bang.push identity
-      pure txt
+  let
+    handleTextUpdate :: Boolean -> EffectFn1 String Unit
+    handleTextUpdate useOriginalDi =
+      let
+        di2 =
+          if useOriginalDi then di
+          else (un DOMInterpret di).dynamicDOMInterpret unit
+      in
+        mkEffectFn1 \x -> do
+          runEffectFn4 (un DOMInterpret di2).setText id x txt doesNotNeedReferenceInDOM
 
+  pump' psr modifiedPoll handleTextUpdate
   regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
   runEffectFn2 (un DOMInterpret di).attachText txt regionEnd
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)

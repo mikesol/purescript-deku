@@ -20,6 +20,7 @@ export const transformTextNodes = (element) => (dynTextTag) => () => {
   let pattern = new RegExp(`^(\\d+)_${dynTextTag}(.*)$`);
 
   textNodes.forEach((textNode) => {
+    console.log('transofrmTextNodes', textNode.nodeValue);
     let match = textNode.nodeValue.match(pattern);
     if (match) {
       let id = match[1];
@@ -64,6 +65,7 @@ export const mapIdsToTextNodes = (rootElement) => () => {
   // Use the TreeWalker to find the comment nodes
   let currentNode;
   while ((currentNode = treeWalker.nextNode())) {
+    console.log("TREE WALKER", currentNode.nodeValue);
     const match = currentNode.nodeValue.match(/^d\$i@(\d+)$/);
     if (match) {
       const id = match[1];

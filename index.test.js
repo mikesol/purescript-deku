@@ -61,7 +61,7 @@ describe("deku", () => {
       it("makes text", () => {
         const t = di.makeTextEffect(testFriend.dummyId, testFriend.just("hello"), testFriend.ignorableBooleanForTextConstructor);
         expect(t.textContent).toBe("hello");
-        di.setTextEffect("goodbye", t);
+        di.setTextEffect(testFriend.dummyId,"goodbye", t, testFriend.ignorableBooleanForTextConstructor);
         expect(t.textContent).toBe("goodbye");
       });
     });
@@ -327,7 +327,7 @@ describe("deku", () => {
       })
     );
 
-    doSSRTest("switcher works for compositional elements", (f) =>
+    doTest("switcher works for compositional elements", (f) =>
       f(tests.switcherWorksForCompositionalElements, () => {
         const $ = require("jquery");
         expect($("#id0").text()).toBe("0-0");
@@ -341,7 +341,7 @@ describe("deku", () => {
         expect($("#id0").text()).toBe("2-0");
         expect($("#id1").text()).toBe("2-1");
         expect($("#id2").text()).toBe("2-2");
-      }), true
+      })
     );
 
     doTest("tabbed navigation with pursx has correct layout", (f) =>
@@ -387,7 +387,7 @@ describe("deku", () => {
       })
     );
 
-    doTest("empty switches", (f) =>
+    doFullTest("empty switches", (f) =>
       f(tests.emptySwitches, () => {
         const $ = require("jquery");
         expect($("#content").text()).toBe("0");
@@ -404,12 +404,13 @@ describe("deku", () => {
         expect($("#content").text()).toBe("5");
         $("#incr").trigger("click");
         expect($("#content").text()).toBe("0");
-      })
+      }), true
     );
 
-    doTest("switcher switches", (f) =>
-      f(tests.switcherSwitches, () => {
+    doTest("filters and refs work correctly", (f) =>
+      f(tests.filtersAndRefs, () => {
         const $ = require("jquery");
+        expect($("#hack").text()).toBe("");
         $("#about-btn").trigger("click");
         expect($("#hack").text()).toBe("hello");
         $("#contact-btn").trigger("click");
@@ -623,7 +624,7 @@ describe("deku", () => {
         expect($("#hello").text()).toBe("hello");
       })
     );
-    doTest("useRant works", (f) =>
+    doTest("use hot rant works", (f) =>
       f(tests.useHotRantWorks, () => {
         const $ = require("jquery");
         expect($("#da").text()).toBe("1");

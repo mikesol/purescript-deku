@@ -16,12 +16,15 @@ import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Entities (toDekuElement, toDekuText)
 import Deku.Interpret as I
-import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn3)
+import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn3)
+import Effect.Unsafe (unsafePerformEffect)
 import FRP.Poll (Poll)
 import Foreign.Object (Object)
 import Foreign.Object as Object
 import Web.DOM as Web.DOM
+import Web.DOM.Node (nodeValue)
 import Web.DOM.ParentNode (QuerySelector(..), querySelector)
+import Web.DOM.Text (toNode)
 
 newtype HydrationRenderingInfo = HydrationRenderingInfo
   { attributeIndicesThatAreNeededDuringHydration :: Maybe (NonEmptyArray Int)
@@ -70,9 +73,10 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
 
 makeText :: Object Web.DOM.Text -> Web.DOM.Text -> MakeText
 makeText textNodeCache dummyText = mkEffectFn3 \id _ _ -> pure $ toDekuText
+  let _ = spy "looking up text" {id, lookup: Object.lookup (show id) textNodeCache} in
   case Object.lookup (show id) textNodeCache of
     Nothing -> dummyText
-    Just t -> t
+    Just t -> let ____ = spy "and here is what it says" (unsafePerformEffect $ nodeValue $ toNode t)  in t
 
 hydratingDOMInterpret
   :: ST.ST Global Int
@@ -117,8 +121,8 @@ hydratingDOMInterpret
     , makeText: makeText textNodeCache dummyText
     , attachText: mkEffectFn2 \_ _ -> pure unit
     -- text setting should never happen during hydration
-    , setText: mkEffectFn2 \_ _ -> pure unit
-    , removeText: mkEffectFn1 \_ -> pure unit
+    , setText: mkEffectFn4 \_ _ _ _ -> pure unit
+    , removeText: I.removeTextEffect
     , incrementPureTextCount: mkSTFn1 \_ -> pure unit
     --
     , beamRegion: I.beamRegionEffect

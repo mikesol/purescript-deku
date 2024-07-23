@@ -575,8 +575,8 @@ hotIsHot = Deku.do
         [ text_ "set label" ]
     ]
 
-switcherSwitches :: Nut
-switcherSwitches = Deku.do
+filtersAndRefs :: Nut
+filtersAndRefs = Deku.do
   setItem /\ item <- useState 0
   setGoodbyeC /\ goodbyeC <- useState'
   iref <- useRef (-1) item
@@ -620,7 +620,6 @@ emptySwitches = Deku.do
   D.div [ DA.id_ "div0" ]
     [ D.div [ DA.id_ "content" ] $ Array.range 0 5 <#> \id ->
       guard ( eq id <$> item ) ( text_ $ show id )
-    
     , D.div [ DA.id_ "incr", DL.click $ item <#> \st _ -> setItem $ ( st + 1 ) `mod` 6 ] [ text_ "next" ]
     ]
 
