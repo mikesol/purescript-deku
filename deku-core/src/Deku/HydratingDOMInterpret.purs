@@ -98,6 +98,8 @@ hydratingDOMInterpret
     , attachElement: mkEffectFn2 \_ _ -> pure unit
     , incrementElementCount: mkSTFn1 \_ -> pure unit
     , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
+    , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit
+  , shouldSkipAttribute: \_ _ -> false
     , setProp: I.setPropEffect
     , setCb: I.setCbEffect
     , unsetAttribute: I.unsetAttributeEffect

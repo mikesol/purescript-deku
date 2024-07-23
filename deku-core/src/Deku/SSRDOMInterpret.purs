@@ -134,6 +134,8 @@ ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
     , attachElement: I.attachElementEffect
     , incrementElementCount: incrementElementCount renderingInfo
     , disqualifyFromStaticRendering: disqualifyFromStaticRendering renderingInfo
+    , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit
+    , shouldSkipAttribute: \_ _ -> false
     , setProp: I.setPropEffect
     , setCb: I.setCbEffect
     , unsetAttribute: I.unsetAttributeEffect
@@ -141,20 +143,24 @@ ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
     --
     , makeText: mkEffectFn3 \id mtext doesNotNeedReferenceInDOM -> do
         runEffectFn3 I.makeTextEffect id
-          ( Just $ (if doesNotNeedReferenceInDOM then "" else show id <> "_" <> impureTextTag) <>
-              fromMaybe "" mtext
+          ( Just $
+              ( if doesNotNeedReferenceInDOM then ""
+                else show id <> "_" <> impureTextTag
+              ) <>
+                fromMaybe "" mtext
           )
           doesNotNeedReferenceInDOM
     , attachText: I.attachTextEffect
     , setText: mkEffectFn4 \id txt elt doesNotNeedReferenceInDOM -> do
         runEffectFn4 I.setTextEffect id
-          (  (if doesNotNeedReferenceInDOM then "" else show id <> "_" <> impureTextTag) <>
+          ( ( if doesNotNeedReferenceInDOM then ""
+              else show id <> "_" <> impureTextTag
+            ) <>
               txt
           )
           elt
           doesNotNeedReferenceInDOM
-    
-    
+
     , removeText: I.removeTextEffect
     , incrementPureTextCount: incrementPureTextCount renderingInfo
     --
@@ -175,6 +181,8 @@ noOpDomInterpret tagger =
     , dynamicDOMInterpret: \_ -> noOpDomInterpret tagger
     --
     , isBoring: const false
+    , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit
+    , shouldSkipAttribute: \_ _ -> false
     , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
     , makeElement: I.makeElementEffect
     , attachElement: mkEffectFn2 \_ _ -> pure unit

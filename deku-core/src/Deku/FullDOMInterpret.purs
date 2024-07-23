@@ -19,6 +19,8 @@ fullDOMInterpret tagger = Core.DOMInterpret
   , makeElement: I.makeElementEffect
   , attachElement: I.attachElementEffect
   , incrementElementCount: mkSTFn1 \_ -> pure unit
+  , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit
+  , shouldSkipAttribute: \_ _ -> false
   , setProp: I.setPropEffect
   , setCb: I.setCbEffect
   , unsetAttribute: I.unsetAttributeEffect

@@ -89,6 +89,7 @@ import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Compactable (compact)
 import Data.Foldable (traverse_)
+import Data.FoldableWithIndex (forWithIndex_)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
 import Data.Tuple (Tuple(..))
@@ -97,7 +98,7 @@ import Deku.Do as Deku
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
 import Deku.Internal.Region (Anchor(..), Bound, Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
 import Effect (Effect, forE)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
 import FRP.Event as Event
 import FRP.Event.Class (once)
 import FRP.Poll (Poll(..))
@@ -118,20 +119,22 @@ cb :: (Event -> Effect Unit) -> Cb
 cb = Cb <<< ((map <<< map) (const true))
 
 prop' :: String -> String -> Attribute'
-prop' k v = mkEffectFn2 \e (DOMInterpret { setProp }) ->
+prop' k v = mkEffectFn4 \_ _ e (DOMInterpret { setProp }) ->
   runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 cb' :: String -> Cb -> Attribute'
-cb' k v = mkEffectFn2 \e (DOMInterpret { setCb }) ->
-  runEffectFn3 setCb (Key k) v (toDekuElement e)
+cb' k v = mkEffectFn4
+  \id ix e (DOMInterpret { markIndexAsNeedingHydration, setCb }) -> do
+    liftST $ runSTFn2 markIndexAsNeedingHydration id ix
+    runEffectFn3 setCb (Key k) v (toDekuElement e)
 
 unset' :: String -> Attribute'
-unset' k = mkEffectFn2 \e (DOMInterpret { unsetAttribute }) ->
+unset' k = mkEffectFn4 \_ _ e (DOMInterpret { unsetAttribute }) ->
   runEffectFn2 unsetAttribute (Key k) (toDekuElement e)
 
 -- TODO: get rid of `Element` type
 type Attribute' =
-  EffectFn2 Element DOMInterpret Unit
+  EffectFn4 Int Int Element DOMInterpret Unit
 
 -- | Low level representation of key-value pairs for attributes and listeners.
 -- | In general, this type is for internal use only.
@@ -144,18 +147,19 @@ unsafeUnAttribute = coerce
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
-  :: forall e. EffectFn2 Element DOMInterpret Unit -> Attribute e
+  :: forall e. EffectFn4 Int Int Element DOMInterpret Unit -> Attribute e
 unsafeAttribute = Attribute
 
 attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
-attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2
-  \e (DOMInterpret { setProp }) ->
+attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn4
+  \_ _ e (DOMInterpret { setProp }) ->
     runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 callbackWithCaution
   :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
-callbackWithCaution k v = unsafeAttribute $ mkEffectFn2
-  \e (DOMInterpret { setCb }) ->
+callbackWithCaution k v = unsafeAttribute $ mkEffectFn4
+  \id ix e (DOMInterpret { markIndexAsNeedingHydration, setCb }) -> do
+    liftST $ runSTFn2 markIndexAsNeedingHydration id ix
     runEffectFn3 setCb (Key k) (Cb v) (toDekuElement e)
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
@@ -231,6 +235,8 @@ newtype DOMInterpret = DOMInterpret
   , isBoring :: Int -> Boolean
   , makeElement :: MakeElement
   , incrementElementCount :: STFn1 StaticRegion Global Unit
+  , shouldSkipAttribute :: Int -> Int -> Boolean
+  , markIndexAsNeedingHydration :: STFn2 Int Int Global Unit
   , setProp :: SetProp
   , setCb :: SetCb
   , unsetAttribute :: UnsetAttribute
@@ -635,21 +641,27 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
       runEffectFn1 (un DOMInterpret di).removeElement elt
 
     let
-      handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
-      handleAtts = mkEffectFn1 \atts ->
+      handleAtts :: Int -> Poll (Attribute element) -> Effect Unit
+      handleAtts ix atts =
         pump' psr atts $ \useOriginalDi -> do
           let
             newDi =
               if useOriginalDi then di
               else (un DOMInterpret di).dynamicDOMInterpret unit
           mkEffectFn1 \(Attribute x) ->
-            runEffectFn2 x (fromDekuElement elt) newDi
+            runEffectFn4 x id ix (fromDekuElement elt) newDi
 
     -- todo: in hydration, we don't need to set attributes
     -- that are already set
     -- it's easier to set them, but if there's a perf speedup in not setting
     -- them, then we should code up a mechanism to skip it
-    runEffectFn2 Event.fastForeachE arrAtts handleAtts
+    forWithIndex_ arrAtts \ix att -> do
+      when (not (un DOMInterpret di).shouldSkipAttribute id ix) do
+        case att of
+          OnlyPure _ -> pure unit
+          _ -> liftST $ runSTFn2
+                  (un DOMInterpret di).markIndexAsNeedingHydration id ix
+        handleAtts ix att
 
     let
       handleNuts :: EffectFn1 Nut Unit
