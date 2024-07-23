@@ -96,7 +96,6 @@ import Deku.Internal.Region (Anchor(..), Bound, Region(..), StaticRegion(..), al
 import Effect (Effect, forE)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3)
 import FRP.Event as Event
-import FRP.Event.Class (once)
 import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
 import FRP.Poll.Unoptimized as UPoll
@@ -284,6 +283,7 @@ newPSR = mkSTFn2 \lifecycle region -> do
     -- to correctly dispose, effect should be run in the reverse order of insertion
     dispose :: Effect Unit
     dispose = do
+      -- runEffectFn1 Event.fastForeachThunkE =<< liftST (STArray.unsafeFreeze unsubs)
       stack <- liftST $ STArray.unsafeFreeze unsubs
       let l = Array.length stack
       forE 0 l \i -> do
@@ -515,11 +515,6 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
           , sendTo: eltSendTo.push
           }
 
-        handleManagedLifecycle :: EffectFn1 Unit Unit
-        handleManagedLifecycle =
-          mkEffectFn1 \_ -> do
-            liftST eltRegion.remove
-
         handleSendTo :: EffectFn1 Int Unit
         handleSendTo = mkEffectFn1 \newPos -> do
           fromBegin <- liftST eltRegion.begin
@@ -529,9 +524,12 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
           target <- liftST eltRegion.begin
           runEffectFn3 (un DOMInterpret di).beamRegion fromBegin fromEnd target
 
-      runEffectFn3 pump eltPSR sendTo handleSendTo
-      runEffectFn3 pump eltPSR ( once remove ) handleManagedLifecycle
+        disposeElementRegion :: Effect Unit
+        disposeElementRegion =
+          liftST eltRegion.remove
 
+      runEffectFn2 deferO eltPSR disposeElementRegion
+      runEffectFn3 pump eltPSR sendTo handleSendTo
       runEffectFn2 nut eltPSR di
 
   runEffectFn3 pump psr elements handleElements
