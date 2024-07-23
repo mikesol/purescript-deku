@@ -32,6 +32,7 @@ module Deku.Core
   , PSR(..)
   , newPSR
   , pump
+  , handleScope
   , attributeAtYourOwnRisk
   , callbackWithCaution
   , cb
@@ -96,6 +97,7 @@ import Deku.Internal.Region (Anchor(..), Bound, Region(..), StaticRegion(..), al
 import Effect (Effect, forE)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3)
 import FRP.Event as Event
+import FRP.Event.Class (once)
 import FRP.Poll (Poll(..))
 import FRP.Poll as Poll
 import FRP.Poll.Unoptimized as UPoll
@@ -289,7 +291,7 @@ newPSR = mkSTFn2 \lifecycle region -> do
       forE 0 l \i -> do
         unsafePartial $ Array.unsafeIndex stack ( l - 1 - i )
 
-  pure (PSR { lifecycle, region, defer: doDefer, dispose })
+  pure (PSR { lifecycle : once lifecycle, region, defer: doDefer, dispose })
 
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
@@ -486,9 +488,6 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
   Region region <- liftST $ (un StaticRegion (un PSR psr).region).region
   span <- liftST $ runSTFn2 newSpan region.begin region.bump
 
-  runEffectFn2 deferO psr do
-    liftST region.remove
-  
   let
     handleElements :: EffectFn1 (Tuple (Maybe Int) value) Unit
     handleElements = mkEffectFn1 \(Tuple initialPos value) -> do
@@ -524,11 +523,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
           target <- liftST eltRegion.begin
           runEffectFn3 (un DOMInterpret di).beamRegion fromBegin fromEnd target
 
-        disposeElementRegion :: Effect Unit
-        disposeElementRegion =
-          liftST eltRegion.remove
-
-      runEffectFn2 deferO eltPSR disposeElementRegion
+      runEffectFn2 deferO eltPSR (liftST eltRegion.remove)
       runEffectFn3 pump eltPSR sendTo handleSendTo
       runEffectFn2 nut eltPSR di
 
@@ -582,8 +577,6 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 Event.fastForeachE nuts handleNuts
 
   runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
-
-
   runEffectFn1 handleScope psr
 
 text_ :: String -> Nut
@@ -702,7 +695,6 @@ portaled buffer beam beamed bumped trackBegin trackEnd =
     unsubBeamed <- runEffectFn2 Event.subscribeO beamed $ mkEffectFn1 \_ -> do
       whenM ( not <$> liftST ( ST.read stolen ) ) do
         void $ liftST $ ST.write true stolen
-        liftST region.remove
 
     unsubBumped <- runEffectFn2 Event.subscribeO bumped $ mkEffectFn1 $ liftST
       <<< runSTFn1 region.bump
@@ -737,7 +729,6 @@ portaled buffer beam beamed bumped trackBegin trackEnd =
             target
           void $ liftST $ ST.write buffer trackBegin
           void $ liftST $ ST.write true stolen
-          liftST region.remove
 
     runEffectFn2 deferO psr restoreBuffer
     runEffectFn1 handleScope psr

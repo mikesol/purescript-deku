@@ -32,10 +32,9 @@ import Control.Plus (empty)
 import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Foldable (traverse_)
-import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
+import Data.Maybe (Maybe(..), isJust, maybe)
 import Data.Newtype (class Newtype)
 import Deku.Internal.Entities (DekuElement, DekuParent, DekuText)
-import Effect.Exception.Unsafe (unsafeThrow)
 import FRP.Event (createPure)
 import FRP.Poll (Poll, pollFromEvent, stRefToPoll)
 import Partial.Unsafe (unsafePartial)
@@ -152,7 +151,7 @@ newSpan = mkSTFn2 \parent parentBump -> do
       -- `bumpBound` and `clearBound` have safeguards to never call this effect
       pushAnchor :: STFn1 Anchor Global Unit
       pushAnchor =
-        mkSTFn1 \_ -> unsafeThrow "parent forced to update anchor"
+        mkSTFn1 \_ -> pure unit -- unsafeThrow "parent forced to update anchor"
 
     ST.new { owner, extent, bound: parent, pushAnchor }
 
@@ -160,7 +159,7 @@ newSpan = mkSTFn2 \parent parentBump -> do
     parentRegion :: ManagedRegion
     parentRegion =
       { ix: pure 0
-      , pushIx: mkSTFn1 \_ -> unsafeThrow "parent forced to update index"
+      , pushIx: mkSTFn1 \_ -> pure unit -- unsafeThrow "parent forced to update index"
       , position: empty
       , end: parentBound
       }

@@ -10,8 +10,9 @@ const doTest = (name, closure, ionly) => {
       }
       document.getElementsByTagName("html")[0].innerHTML =
         '<head></head><body id="mybody"></body>';
-      tests.runTest(myTest)();
+      const unsub = tests.runTest(myTest)();
       await myScript(false);
+      unsub();
     });
   });
 };

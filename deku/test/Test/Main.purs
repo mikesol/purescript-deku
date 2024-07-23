@@ -33,8 +33,8 @@ import Web.HTML.Window (alert)
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
-runTest :: Nut -> Effect Unit
-runTest = void <<< runInBody
+runTest :: Nut -> Effect (Effect Unit)
+runTest = runInBody
 
 sanityCheck :: Nut
 sanityCheck = D.span [ DA.id_ "hello" ] [ text_ "Hello" ]
