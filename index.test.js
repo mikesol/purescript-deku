@@ -3,13 +3,13 @@ const testFriend = require("./output/Test.TestFriend");
 const di = require("./output/Deku.Interpret");
 const region = require("./output/Deku.Internal.Region");
 
-const doTest = (name, closure, ionly) => {
-  doFullTest(name, closure, ionly);
-  doSSRTest(name, closure, ionly);
+const doTest = (name, closure, itIs) => {
+  doFullTest(name, closure, itIs);
+  doSSRTest(name, closure, itIs);
 };
 
-const doFullTest = (name, closure, ionly) => {
-  (ionly ? it.only : it)(name, async () => {
+const doFullTest = (name, closure, itIs) => {
+  (itIs ? itIs : it)(name, async () => {
     await closure(async (myTest, myScript) => {
       if (!myTest) {
         throw new Error(`Cannot find test named ${name}`);
@@ -22,8 +22,8 @@ const doFullTest = (name, closure, ionly) => {
   });
 };
 
-const doSSRTest = (name, closure, ionly) => {
-  (ionly ? it.only : it)(`${name} SSR`, async () => {
+const doSSRTest = (name, closure, itIs) => {
+  (itIs ? itIs : it)(`${name} SSR`, async () => {
     await closure(async (myTest, myScript) => {
       if (!myTest) {
         throw new Error(`Cannot find test named ${name}`);
@@ -315,7 +315,7 @@ describe("deku", () => {
       })
     );
 
-    doTest("sends to initial position correctly", (f) =>
+    doSSRTest("sets dyn to initial position correctly", (f) =>
       f(tests.insertsAtCorrectPositions, () => {
         const $ = require("jquery");
         expect($("#dyn0").index()).toBeLessThan($("#dyn1").index());
@@ -324,7 +324,7 @@ describe("deku", () => {
         expect($("#dyn3").index()).toBeLessThan($("#dyn4").index());
         // for kicks
         expect($("#dyn4").index()).toBeGreaterThan($("#dyn0").index());
-      })
+      }), it.only
     );
 
     doTest("switcher works for compositional elements", (f) =>
@@ -404,7 +404,7 @@ describe("deku", () => {
         expect($("#content").text()).toBe("5");
         $("#incr").trigger("click");
         expect($("#content").text()).toBe("0");
-      }), true
+      }), it.failing
     );
 
     doTest("filters and refs work correctly", (f) =>

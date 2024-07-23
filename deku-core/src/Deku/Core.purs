@@ -789,8 +789,7 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 toBeam
     ( over PSR _ { disqualifyFromStaticRendering = true, region = staticBuffer }
         psr
-    )
-    $ (un DOMInterpret di).dynamicDOMInterpret unit
+    ) di
 
   let
     Nut hooked = cont $ portaled buffer (beamed.push unit) beamed.event

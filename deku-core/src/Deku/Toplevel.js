@@ -20,7 +20,7 @@ export const transformTextNodes = (element) => (dynTextTag) => () => {
   let pattern = new RegExp(`^(\\d+)_${dynTextTag}(.*)$`);
 
   textNodes.forEach((textNode) => {
-    console.log('transofrmTextNodes', textNode.nodeValue);
+    console.log('transformTextNodes', textNode.nodeValue);
     let match = textNode.nodeValue.match(pattern);
     if (match) {
       let id = match[1];
