@@ -614,6 +614,16 @@ lotsOfSwitching = Deku.do
         ]
     ]
 
+emptySwitches :: Nut
+emptySwitches = Deku.do
+  setItem /\ item <- useState 0
+  D.div [ DA.id_ "div0" ]
+    [ D.div [ DA.id_ "content" ] $ Array.range 0 5 <#> \id ->
+      guard ( eq id <$> item ) ( text_ $ show id )
+    
+    , D.div [ DA.id_ "incr", DL.click $ item <#> \st _ -> setItem $ ( st + 1 ) `mod` 6 ] [ text_ "next" ]
+    ]
+
 pureSwitches :: Nut
 pureSwitches = Deku.do
   _ /\ elem <- useState'
