@@ -5,26 +5,19 @@ import Prelude
 import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2)
-import Data.Array as Array
-import Data.Array.NonEmpty (NonEmptyArray, toArray)
-import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Array.NonEmpty (NonEmptyArray)
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, un)
-import Data.Traversable (traverse)
-import Debug (spy)
-import Deku.Core (Attribute', MakeElement, MakeText)
+import Deku.Core (MakeElement, MakeText)
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Entities (toDekuElement, toDekuText)
 import Deku.Interpret as I
-import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn3)
-import Effect.Unsafe (unsafePerformEffect)
-import FRP.Poll (Poll)
+import Effect.Uncurried (mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn3)
 import Foreign.Object (Object)
 import Foreign.Object as Object
 import Web.DOM as Web.DOM
-import Web.DOM.Node (nodeValue)
 import Web.DOM.ParentNode (QuerySelector(..), querySelector)
-import Web.DOM.Text (toNode)
 
 newtype HydrationRenderingInfo = HydrationRenderingInfo
   { attributeIndicesThatAreNeededDuringHydration :: Maybe (NonEmptyArray Int)
@@ -46,9 +39,7 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
   let createNew = runEffectFn3 I.makeElementEffect id ns tag
   case ri of
     -- shouldn't happen
-    Nothing -> do
-          let _ = spy "hydratingDOMInterpret:programming error - rendering info not found: " idS
-          createNew
+    Nothing ->     createNew
     Just (HydrationRenderingInfo value) -> do
       case
         value.hasParentThatWouldDisqualifyFromSSR
@@ -61,22 +52,15 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
             parentNode
           case sel of
             -- shouldn't happen
-            Nothing -> do
-                let _ = spy "hydratingDOMInterpret:programming error - selector not found: " idS
-                createNew
-            Just el -> do
-                let _ = spy "hydratingDOMInterpret:makeElement:foundElement" idS
-                pure $ toDekuElement el
-        false -> do
-            let _ = spy "hydratingDOMInterpret:elt unneeded" idS
-            pure $ toDekuElement dummyElement
+            Nothing -> createNew
+            Just el -> pure $ toDekuElement el
+        false -> pure $ toDekuElement dummyElement
 
 makeText :: Object Web.DOM.Text -> Web.DOM.Text -> MakeText
 makeText textNodeCache dummyText = mkEffectFn3 \id _ _ -> pure $ toDekuText
-  let _ = spy "looking up text" {id, lookup: Object.lookup (show id) textNodeCache} in
   case Object.lookup (show id) textNodeCache of
     Nothing -> dummyText
-    Just t -> let ____ = spy "and here is what it says" (unsafePerformEffect $ nodeValue $ toNode t)  in t
+    Just t -> t
 
 hydratingDOMInterpret
   :: ST.ST Global Int

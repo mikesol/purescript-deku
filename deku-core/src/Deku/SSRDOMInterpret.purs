@@ -10,13 +10,11 @@ import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
-import Debug (spy)
 import Deku.Core (ChildId(..), MakeElement, ParentId(..))
 import Deku.Core as Core
 import Deku.Internal.Entities (fromDekuElement)
 import Deku.Internal.Region (CurrentStaticRegionStats(..), StaticRegion(..), StaticRegionStats(..))
 import Deku.Interpret as I
-import Effect.Console (log)
 import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn3, runEffectFn4)
 import Foreign.Object.ST (STObject, peek, poke)
 import Web.DOM as Web.DOM
@@ -142,7 +140,6 @@ ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
     , removeElement: I.removeElementEffect
     --
     , makeText: mkEffectFn3 \id mtext doesNotNeedReferenceInDOM -> do
-        log $ "making text: " <> show { id, mtext, doesNotNeedReferenceInDOM }
         runEffectFn3 I.makeTextEffect id
           ( Just $ (if doesNotNeedReferenceInDOM then "" else show id <> "_" <> impureTextTag) <>
               fromMaybe "" mtext
@@ -150,7 +147,6 @@ ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
           doesNotNeedReferenceInDOM
     , attachText: I.attachTextEffect
     , setText: mkEffectFn4 \id txt elt doesNotNeedReferenceInDOM -> do
-        log $ "making text: " <> show { id, txt, doesNotNeedReferenceInDOM }
         runEffectFn4 I.setTextEffect id
           (  (if doesNotNeedReferenceInDOM then "" else show id <> "_" <> impureTextTag) <>
               txt
@@ -181,8 +177,7 @@ noOpDomInterpret tagger =
     , isBoring: const false
     , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
     , makeElement: I.makeElementEffect
-    , attachElement: mkEffectFn2 \a b ->
-        let _ = spy "attach element in noop" { a, b } in pure unit
+    , attachElement: mkEffectFn2 \_ _ -> pure unit
     , incrementElementCount: mkSTFn1 \_ -> pure unit
     , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
     , setProp: mkEffectFn3 \_ _ _ -> pure unit

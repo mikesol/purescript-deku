@@ -13,19 +13,20 @@ module Deku.Internal.Region
   , Bound
   , Region(..)
   , StaticRegion(..)
-  , RegionSpan(..)
+  , RegionSpan
   , Bump
   , StaticRegionStats(..)
   , CurrentStaticRegionStats(..)
   , fromParent
   , newStaticRegion
   , newSpan
+  , allocateRegion
+  , printSpan
   ) where
 
 import Prelude
 
-import Control.Alt (alt, (<|>))
-import Control.Apply (lift2)
+import Control.Alt ((<|>))
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
 import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, STFn4, mkSTFn1, mkSTFn2, mkSTFn3, mkSTFn4, runSTFn1, runSTFn2, runSTFn3, runSTFn4)
@@ -33,10 +34,9 @@ import Control.Plus (empty)
 import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Foldable (traverse_)
-import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
+import Data.Maybe (Maybe(..), isJust, maybe)
 import Data.Newtype (class Newtype)
 import Deku.Internal.Entities (DekuElement, DekuParent, DekuText)
-import Effect.Exception.Unsafe (unsafeThrow)
 import FRP.Event (createPure)
 import FRP.Poll (Poll, pollFromEvent, stRefToPoll)
 import Partial.Unsafe (unsafePartial)
@@ -152,9 +152,10 @@ readSharedBound = mkSTFn1 \shared -> do
 -- |
 -- | The implementation detects if updating the preceding or following regions would be cheaper and uses that strategy.
 newtype RegionSpan =
-  RegionSpan (STFn1 (Maybe Int) Global Region)
-
-derive instance Newtype RegionSpan _
+  RegionSpan
+    { children :: Children
+    , bump :: Bump
+    }
 
 -- | Manages a span of `Region`s. 
 newSpan :: STFn2 Bound Bump Global RegionSpan
@@ -170,7 +171,7 @@ newSpan = mkSTFn2 \parent parentBump -> do
       -- `bumpBound` and `clearBound` have safeguards to never call this effect
       pushAnchor :: STFn1 Anchor Global Unit
       pushAnchor =
-        mkSTFn1 \_ -> unsafeThrow "parent forced to update anchor"
+        mkSTFn1 \_ -> pure unit -- unsafeThrow "parent forced to update anchor"
 
     ST.new { owner, extent, bound: parent, pushAnchor }
 
@@ -178,12 +179,31 @@ newSpan = mkSTFn2 \parent parentBump -> do
     parentRegion :: ManagedRegion
     parentRegion =
       { ix: pure 0
-      , pushIx: mkSTFn1 \_ -> unsafeThrow "parent forced to update index"
+      , pushIx: mkSTFn1 \_ -> pure unit -- unsafeThrow "parent forced to update index"
       , position: empty
       , end: parentBound
       }
   void $ STArray.push parentRegion children
-  pure $ RegionSpan $ mkSTFn1 \givenPos -> do
+  pure $ RegionSpan { children, bump: parentBump }
+
+printSpan :: STFn1 RegionSpan Global String
+printSpan = mkSTFn1 \(RegionSpan { children }) -> do
+  arr <- STArray.freeze children
+  owner <- Array.foldM
+    (\a r -> append a <<< show <$> join (ST.read <<< _.owner =<< ST.read r.end))
+    ""
+    arr
+  extent <- Array.foldM
+    ( \a r -> append a <<< show <$> join
+        (ST.read <<< _.extent =<< ST.read r.end)
+    )
+    ""
+    arr
+  pure $ owner <> "\n" <> extent
+
+allocateRegion :: STFn2 (Maybe Int) RegionSpan Global Region
+allocateRegion = mkSTFn2
+  \givenPos (RegionSpan { children, bump: parentBump }) -> do
     managed@{ position, ix } <- runSTFn2 insertManaged givenPos children
     let
       begin :: Bound
@@ -257,6 +277,8 @@ newSpan = mkSTFn2 \parent parentBump -> do
       remove = do
         runSTFn1 bump Nothing
         finalIx <- ix
+        -- give ourselves an invalid index so later sendTo and removes have no effect
+        runSTFn1 managed.pushIx (-1)
         void $ STArray.splice finalIx 1 [] children
         runSTFn3 fixManaged finalIx updateIx children
 
@@ -353,7 +375,7 @@ clearBound = mkSTFn2 \cleared children -> do
     -- the following owned `SharedBound` was smaller, so we extend prevBound to cover nextBound and update the following 
     -- regions
     void $ ST.write extentToEff prevBound.extent
-    runSTFn4 fixManagedTo selfIx extentToIx (updateShared prevBound)
+    runSTFn4 fixManagedTo selfIx (extentToIx + 1) (updateShared prevBound)
       children
 
   else do
@@ -500,12 +522,15 @@ makeStaticRegionStats = mkSTFn1 \childCount -> do
   numberOfChildrenThatAreElementsRef <- ST.new 0
   numberOfChildrenThatAreStaticTextNodesRef <- ST.new 0
   pure $ StaticRegionStats
-    { incrementElementChildCount: void $ ST.modify (add 1) numberOfChildrenThatAreElementsRef
+    { incrementElementChildCount: void $ ST.modify (add 1)
+        numberOfChildrenThatAreElementsRef
     , incrementStaticTextChildCount: void $ ST.modify (add 1)
         numberOfChildrenThatAreStaticTextNodesRef
     , getCurrentStaticRegionStats: do
-        numberOfChildrenThatAreElements <- ST.read numberOfChildrenThatAreElementsRef
-        numberOfChildrenThatAreStaticTextNodes <- ST.read numberOfChildrenThatAreStaticTextNodesRef
+        numberOfChildrenThatAreElements <- ST.read
+          numberOfChildrenThatAreElementsRef
+        numberOfChildrenThatAreStaticTextNodes <- ST.read
+          numberOfChildrenThatAreStaticTextNodesRef
         pure $ CurrentStaticRegionStats
           { childCount
           , numberOfChildrenThatAreElements
@@ -528,7 +553,10 @@ newStaticRegion = mkSTFn4 \tag childCount parentBound parentBump -> do
         staticBegin <- ST.read staticEnd
         let
           begin :: Bound
-          begin = fromMaybe <$> parentBound <@> staticBegin
+          begin = do
+            case staticBegin of
+              Just e -> pure e
+              Nothing -> parentBound
 
           bump :: Bump
           bump = mkSTFn1 \update ->
@@ -554,11 +582,23 @@ newStaticRegion = mkSTFn4 \tag childCount parentBound parentBump -> do
     { tag
     , stats
     , end: do
-        fromMaybe <$> parentBound <*>
-          (lift2 alt (ST.read spanEnd) (ST.read staticEnd))
+        fromSpan <- ST.read spanEnd
+        case fromSpan of
+          Just e ->
+            pure e
+
+          Nothing -> do
+            fromStatic <- ST.read staticEnd
+            case fromStatic of
+              Just e ->
+                pure e
+
+              Nothing ->
+                parentBound
+
     , region: do
-        RegionSpan span <- findOrCreateSpan
-        runSTFn1 span Nothing
+        span <- findOrCreateSpan
+        runSTFn2 allocateRegion Nothing span
 
     , element: mkSTFn1 \anchor -> do
         whenM (isJust <$> ST.read spanState) do
