@@ -13,7 +13,7 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut(..), deferO, fixed, portal, useRefST)
+import Deku.Core (Hook, Nut(..), deferO, fixed, portal, useDynAtEnd, useRefST, useState')
 import Deku.DOM as D
 import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
@@ -179,6 +179,20 @@ insertsAtCorrectPositions = D.div [ DA.id_ "div0" ]
         (mergeMapPure (\i -> Tuple (Just i) $ mporder i) [ 3, 0, 4, 2, 1 ])
       D.span [ DA.id_ ("dyn" <> show i) ] [ text_ (show i) ]
   ]
+
+nestedInpureDyn :: Nut
+nestedInpureDyn = Deku.do
+  pushClick /\ click <- useState'
+  
+  D.div [ DA.id_ "div0" ] 
+    [ text_ "start"
+    , Deku.do
+      { value } <- useDynAtEnd ( mergeMap pure [ 0, 1, 2, 3 ] )
+      _ <- useDynAtEnd click
+      D.span [ DA.id_ $ "dyn" <> show value ] [ text_ $ show value ]
+    
+    , D.span [ DA.id_ "action", DL.click_ \_ -> pushClick unit ] [ text_ "end" ]
+    ]
 
 switcherWorksForCompositionalElements :: Nut
 switcherWorksForCompositionalElements = Deku.do

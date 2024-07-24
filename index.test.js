@@ -322,6 +322,15 @@ describe("deku", () => {
       })
     );
 
+    doTest("inpure nested dyn disposes correctly",(f) => 
+      f(tests.nestedInpureDyn, () => {
+        const $ = require("jquery");
+        expect($("#div0").text()).toBe("startend");
+        $("#action").trigger("click");
+        expect($("#div0").text()).toBe("start0123end");
+      })
+    );
+
     doTest("switcher works for compositional elements", (f) =>
       f(tests.switcherWorksForCompositionalElements, () => {
         const $ = require("jquery");
