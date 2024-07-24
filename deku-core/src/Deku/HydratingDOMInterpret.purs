@@ -5,9 +5,9 @@ import Prelude
 import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2)
-import Data.Array.NonEmpty (NonEmptyArray)
-import Data.Maybe (Maybe(..), maybe)
+import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (class Newtype, un)
+import Data.Set as Set
 import Deku.Core (MakeElement, MakeText)
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
@@ -20,7 +20,7 @@ import Web.DOM as Web.DOM
 import Web.DOM.ParentNode (QuerySelector(..), querySelector)
 
 newtype HydrationRenderingInfo = HydrationRenderingInfo
-  { attributeIndicesThatAreNeededDuringHydration :: Maybe (NonEmptyArray Int)
+  { attributeIndicesThatAreNeededDuringHydration :: Set.Set Int
   , hasParentThatWouldDisqualifyFromSSR :: Boolean
   , hasChildrenThatWouldDisqualifyFromSSR :: Boolean
   , isBoring :: Boolean
@@ -39,12 +39,15 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
   let createNew = runEffectFn3 I.makeElementEffect id ns tag
   case ri of
     -- shouldn't happen
-    Nothing ->     createNew
+    Nothing -> createNew
     Just (HydrationRenderingInfo value) -> do
       case
         value.hasParentThatWouldDisqualifyFromSSR
           || value.hasChildrenThatWouldDisqualifyFromSSR
-          || value.attributeIndicesThatAreNeededDuringHydration /= Nothing
+          ||
+            ( not $ Set.isEmpty
+                value.attributeIndicesThatAreNeededDuringHydration
+            )
         of
         true -> do
           sel <- querySelector
@@ -61,6 +64,12 @@ makeText textNodeCache dummyText = mkEffectFn3 \id _ _ -> pure $ toDekuText
   case Object.lookup (show id) textNodeCache of
     Nothing -> dummyText
     Just t -> t
+
+shouldSkipAttribute :: Object HydrationRenderingInfo -> Int -> Int -> Boolean
+shouldSkipAttribute renderingInfo id ix = fromMaybe false do
+  ri <- Object.lookup (show id) renderingInfo
+  pure $ not $ Set.member ix
+    (un HydrationRenderingInfo ri).attributeIndicesThatAreNeededDuringHydration
 
 hydratingDOMInterpret
   :: ST.ST Global Int
@@ -99,7 +108,7 @@ hydratingDOMInterpret
     , incrementElementCount: mkSTFn1 \_ -> pure unit
     , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
     , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit
-  , shouldSkipAttribute: \_ _ -> false
+    , shouldSkipAttribute: shouldSkipAttribute renderingInfo
     , setProp: I.setPropEffect
     , setCb: I.setCbEffect
     , unsetAttribute: I.unsetAttributeEffect

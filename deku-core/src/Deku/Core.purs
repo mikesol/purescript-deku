@@ -92,6 +92,7 @@ import Data.Foldable (traverse_)
 import Data.FoldableWithIndex (forWithIndex_)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
+import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
@@ -107,6 +108,7 @@ import FRP.Poll.Unoptimized as UPoll
 import Partial.Unsafe (unsafePartial)
 import Safe.Coerce (coerce)
 import Web.DOM (Element)
+import Web.DOM.DOMParser (_getParserError)
 import Web.Event.Internal.Types (Event)
 
 -- | A callback function that can be used as a value for a listener.
@@ -119,7 +121,8 @@ cb :: (Event -> Effect Unit) -> Cb
 cb = Cb <<< ((map <<< map) (const true))
 
 prop' :: String -> String -> Attribute'
-prop' k v = mkEffectFn4 \_ _ e (DOMInterpret { setProp }) ->
+prop' k v = mkEffectFn4 \id ix e (DOMInterpret { setProp, markIndexAsNeedingHydration }) -> do
+  when (Set.member k dynamicKeywords) $ liftST $ runSTFn2 markIndexAsNeedingHydration id ix
   runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 cb' :: String -> Cb -> Attribute'
@@ -150,9 +153,12 @@ unsafeAttribute
   :: forall e. EffectFn4 Int Int Element DOMInterpret Unit -> Attribute e
 unsafeAttribute = Attribute
 
+dynamicKeywords :: Set.Set String
+dynamicKeywords = Set.fromFoldable ["checked", "value", "disabled"]
+
 attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
 attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn4
-  \_ _ e (DOMInterpret { setProp }) ->
+  \_ _getParserError e (DOMInterpret { setProp }) -> do
     runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 callbackWithCaution
@@ -622,7 +628,7 @@ elementify
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   id <- liftST (un DOMInterpret di).tagger
   let isBoring = (un DOMInterpret di).isBoring id
-  when (not isBoring) do
+  when true do -- when (not isBoring) do
     liftST $ runSTFn2 (un DOMInterpret di).registerParentChildRelationship
       (ParentId (un StaticRegion (un PSR psr).region).tag)
       (ChildId id)

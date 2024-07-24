@@ -20,6 +20,8 @@ import Data.Foldable (for_)
 import Data.FoldableWithIndex (foldlWithIndex, forWithIndex_)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Newtype (un)
+import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Deku.Core (Nut(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
@@ -44,6 +46,11 @@ import Web.HTML.HTMLDocument (body, toDocument)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
+isLively :: SSRRenderingInfo -> Boolean
+isLively (SSRRenderingInfo value) = value.hasParentThatWouldDisqualifyFromSSR
+  || value.hasChildrenThatWouldDisqualifyFromSSR
+  || (not $ Set.isEmpty value.attributeIndicesThatAreNeededDuringHydration)
+
 produceIsBoring
   :: Object (Array String)
   -> Object SSRRenderingInfo
@@ -64,11 +71,7 @@ produceIsBoring parentToChildren parentToRI childToParent =
       let
         iAmBoring = case Object.lookup h parentToRI of
           Nothing -> false
-          Just (SSRRenderingInfo value) -> not
-            ( value.hasParentThatWouldDisqualifyFromSSR
-                || value.hasChildrenThatWouldDisqualifyFromSSR
-                || value.attributeIndicesThatAreNeededDuringHydration /= Nothing
-            )
+          Just value -> not (isLively value)
       let myParentIs = Object.lookup h childToParent
       moveThroughBoringArray
         (maybe boringArray (Array.snoc (Array.drop 1 boringArray)) myParentIs)
@@ -115,7 +118,8 @@ foreign import innerHTML :: Web.DOM.Element -> Effect String
 
 foreign import transformTextNodes :: Web.DOM.Element -> String -> Effect Unit
 
-foreign import mapIdsToTextNodes :: Web.DOM.Element -> Effect (Object Web.DOM.Text)
+foreign import mapIdsToTextNodes
+  :: Web.DOM.Element -> Effect (Object Web.DOM.Text)
 
 ssrInElement
   :: Web.DOM.Element
@@ -137,16 +141,13 @@ ssrInElement elt (Nut nut) = do
   -- liftST $ runSTFn3 addElementToCache taggerStart regionCache elt
   scope <- liftST $ runSTFn3 newPSR false lifecycle region
 
-  void $ runEffectFn2 nut scope (ssrDOMInterpret tagger dynTextTag parentCache regionCache)
+  void $ runEffectFn2 nut scope
+    (ssrDOMInterpret tagger dynTextTag parentCache regionCache)
   unfrozenParentCache <- liftST $ unsafeFreeze parentCache
   unfrozenRegionCache <- liftST $ unsafeFreeze regionCache
-  forWithIndex_ unfrozenRegionCache \tag (SSRRenderingInfo value) -> do
-    for_ value.backingElement \element -> do
-      when
-        ( value.hasParentThatWouldDisqualifyFromSSR
-            || value.hasChildrenThatWouldDisqualifyFromSSR
-            || value.attributeIndicesThatAreNeededDuringHydration /= Nothing
-        )
+  forWithIndex_ unfrozenRegionCache \tag value -> do
+    for_ (un SSRRenderingInfo value).backingElement \element -> do
+      when (isLively value)
         do
           setAttribute "data-deku-ssr" tag element
   let ibab i b a = Object.union (Object.fromFoldable $ map (flip Tuple i) a) b
@@ -193,9 +194,9 @@ hydrateInElement cache elt (Nut nut) = do
   let par = toParentNode elt
   textNodes <- mapIdsToTextNodes elt
   scope <- liftST $ runSTFn3 newPSR false lifecycle region
-  void $ runEffectFn2 nut scope (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt  par)
+  void $ runEffectFn2 nut scope
+    (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt par)
   pure $ dispose unit
-
 
 hydrateInBody
   :: Object HydrationRenderingInfo

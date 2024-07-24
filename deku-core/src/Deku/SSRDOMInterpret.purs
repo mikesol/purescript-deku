@@ -7,10 +7,11 @@ import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn3, runSTFn2, runSTFn3)
 import Data.Array as Array
-import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
-import Deku.Core (ChildId(..), MakeElement, ParentId(..))
+import Data.Set (Set)
+import Data.Set as Set
+import Deku.Core (ChildId(..), MakeElement, ParentId(..), SetText, MakeText)
 import Deku.Core as Core
 import Deku.Internal.Entities (fromDekuElement)
 import Deku.Internal.Region (CurrentStaticRegionStats(..), StaticRegion(..), StaticRegionStats(..))
@@ -20,7 +21,7 @@ import Foreign.Object.ST (STObject, peek, poke)
 import Web.DOM as Web.DOM
 
 newtype SSRRenderingInfo = SSRRenderingInfo
-  { attributeIndicesThatAreNeededDuringHydration :: Maybe (NonEmptyArray Int)
+  { attributeIndicesThatAreNeededDuringHydration :: Set Int
   , hasParentThatWouldDisqualifyFromSSR :: Boolean
   , hasChildrenThatWouldDisqualifyFromSSR :: Boolean
   , backingElement :: Maybe Web.DOM.Element
@@ -30,7 +31,7 @@ derive instance Newtype SSRRenderingInfo _
 
 initialSSRRenderingInfo :: SSRRenderingInfo
 initialSSRRenderingInfo = SSRRenderingInfo
-  { attributeIndicesThatAreNeededDuringHydration: Nothing
+  { attributeIndicesThatAreNeededDuringHydration: Set.empty
   , hasParentThatWouldDisqualifyFromSSR: true
   , hasChildrenThatWouldDisqualifyFromSSR: true
   , backingElement: Nothing
@@ -112,6 +113,46 @@ registerParentChildRelationship parentChildCache = mkSTFn2
       (Array.cons (show child) $ fromMaybe [] parentChildArray)
       parentChildCache
 
+setText :: String -> SetText
+setText impureTextTag = mkEffectFn4 \id txt elt doesNotNeedReferenceInDOM -> do
+  runEffectFn4 I.setTextEffect id
+    ( ( if doesNotNeedReferenceInDOM then ""
+        else show id <> "_" <> impureTextTag
+      ) <>
+        txt
+    )
+    elt
+    doesNotNeedReferenceInDOM
+
+makeText :: String -> MakeText
+makeText impureTextTag = mkEffectFn3 \id mtext doesNotNeedReferenceInDOM -> do
+  runEffectFn3 I.makeTextEffect id
+    ( Just $
+        ( if doesNotNeedReferenceInDOM then ""
+          else show id <> "_" <> impureTextTag
+        ) <>
+          fromMaybe "" mtext
+    )
+    doesNotNeedReferenceInDOM
+
+markIndexAsNeedingHydration
+  :: STObject Global SSRRenderingInfo -> STFn2 Int Int Global Unit
+markIndexAsNeedingHydration renderingInfo = mkSTFn2 \id ix -> do
+  let tag = show id
+  currentSSRRenderingInfo <- peek tag renderingInfo
+  void $ poke tag
+    ( over SSRRenderingInfo
+        ( \i@{ attributeIndicesThatAreNeededDuringHydration } ->
+            i
+              { attributeIndicesThatAreNeededDuringHydration = Set.insert
+                  ix
+                  attributeIndicesThatAreNeededDuringHydration
+              }
+        )
+        $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
+    )
+    renderingInfo
+
 ssrDOMInterpret
   :: ST.ST Global Int
   -> String
@@ -121,10 +162,6 @@ ssrDOMInterpret
 ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
   Core.DOMInterpret
     { tagger
-    -- we could likely make `dynamicDOMInterpret` a no-op
-    -- should be harmless, though, as this will be called rarely if at all
-    -- because SSR code will only trigger dynamic elements
-    -- in case there's a dyn with pure polls that aren't optimized as being pure
     , dynamicDOMInterpret: \_ -> noOpDomInterpret tagger
     --
     , isBoring: const false
@@ -134,33 +171,16 @@ ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
     , attachElement: I.attachElementEffect
     , incrementElementCount: incrementElementCount renderingInfo
     , disqualifyFromStaticRendering: disqualifyFromStaticRendering renderingInfo
-    , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit
+    , markIndexAsNeedingHydration: markIndexAsNeedingHydration renderingInfo
     , shouldSkipAttribute: \_ _ -> false
     , setProp: I.setPropEffect
     , setCb: I.setCbEffect
     , unsetAttribute: I.unsetAttributeEffect
     , removeElement: I.removeElementEffect
     --
-    , makeText: mkEffectFn3 \id mtext doesNotNeedReferenceInDOM -> do
-        runEffectFn3 I.makeTextEffect id
-          ( Just $
-              ( if doesNotNeedReferenceInDOM then ""
-                else show id <> "_" <> impureTextTag
-              ) <>
-                fromMaybe "" mtext
-          )
-          doesNotNeedReferenceInDOM
+    , makeText: makeText impureTextTag
     , attachText: I.attachTextEffect
-    , setText: mkEffectFn4 \id txt elt doesNotNeedReferenceInDOM -> do
-        runEffectFn4 I.setTextEffect id
-          ( ( if doesNotNeedReferenceInDOM then ""
-              else show id <> "_" <> impureTextTag
-            ) <>
-              txt
-          )
-          elt
-          doesNotNeedReferenceInDOM
-
+    , setText: setText impureTextTag
     , removeText: I.removeTextEffect
     , incrementPureTextCount: incrementPureTextCount renderingInfo
     --
