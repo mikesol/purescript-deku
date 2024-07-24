@@ -75,6 +75,47 @@ describe("deku", () => {
         expect(r1.end()).toEqual(10);
         expect(r2.begin()).toEqual(10);
       });
+
+      it("updates end on sendTo", () => {
+        var end = testFriend.nothing;
+        var span = region.newSpan(()=>10,e=>end=e);
+        var r1 = region.allocateRegion(testFriend.nothing, span);
+        var r2 = region.allocateRegion(testFriend.nothing,span);
+
+        r1.bump(testFriend.just(1));
+        r2.bump(testFriend.just(2));
+        
+        expect(end).toEqual(testFriend.just(2));
+        r2.sendTo(0);
+        expect(end).toEqual(testFriend.just(1));
+        r2.sendTo(1);
+        expect(end).toEqual(testFriend.just(2));
+        r1.bump(testFriend.nothing);
+        expect(end).toEqual(testFriend.just(2));
+        r2.sendTo(0);
+        expect(end).toEqual(testFriend.just(2));
+      } )
+
+      it("updates end on remove", () => {
+        var end = testFriend.nothing;
+        var span = region.newSpan(()=>10,e=>end=e);
+        var r1 = region.allocateRegion(testFriend.nothing,span);
+        var r2 = region.allocateRegion(testFriend.nothing,span);
+
+        r1.bump(testFriend.just(1));
+        r2.bump(testFriend.just(2));
+        
+        expect(end).toEqual(testFriend.just(2));
+        r2.remove();
+        expect(end).toEqual(testFriend.just(1));
+        var r3 = region.allocateRegion(testFriend.nothing,span);
+        r3.bump(testFriend.just(3));
+        expect(end).toEqual(testFriend.just(3));
+        r1.remove()
+        expect(end).toEqual(testFriend.just(3));
+        r3.remove();
+        expect(end).toEqual(testFriend.nothing);
+      } )
     });
 
     it("makeElementEffect makes an element with the correct tagname", () => {

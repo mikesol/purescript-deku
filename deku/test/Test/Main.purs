@@ -13,7 +13,7 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut(..), deferO, fixed, portal, useDynAtEnd, useRefST, useState')
+import Deku.Core (Hook, Nut(..), deferO, fixed, portal, useRefST)
 import Deku.DOM as D
 import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
