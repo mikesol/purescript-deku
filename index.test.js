@@ -51,6 +51,10 @@ describe("deku", () => {
         expect(r1.end()).toEqual(1);
         expect(r2.begin()).toEqual(1);
         expect(r2.end()).toEqual(2);
+
+        r2.bump(testFriend.just(3));
+        expect(r2.end()).toEqual(3);
+        expect(end).toEqual(testFriend.just(3));
       });
 
       it("updates end on empty bump", () => {

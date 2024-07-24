@@ -238,11 +238,11 @@ derive instance Newtype DOMInterpret _
 
 -- | Handles an optimized `Poll` by running the effect on each emitted value. Any resulting subscription gets written to 
 -- | the given cleanup array.
-pump :: forall a . EffectFn3 PSR (Poll.Poll a) (EffectFn1 a Unit) Unit
+pump :: forall a. EffectFn3 PSR (Poll.Poll a) (EffectFn1 a Unit) Unit
 pump = mkEffectFn3 \(PSR { defer: def }) p eff -> do
   let
     handleEvent :: EffectFn1 (Event.Event a) Unit
-    handleEvent = mkEffectFn1 \y ->do
+    handleEvent = mkEffectFn1 \y -> do
       uu <- runEffectFn2 Event.subscribeO y eff
       void $ liftST $ runSTFn1 def uu
 
@@ -288,9 +288,9 @@ newPSR = mkSTFn2 \lifecycle region -> do
       stack <- liftST $ STArray.unsafeFreeze unsubs
       let l = Array.length stack
       forE 0 l \i -> do
-        unsafePartial $ Array.unsafeIndex stack ( l - 1 - i )
+        unsafePartial $ Array.unsafeIndex stack (l - 1 - i)
 
-  pure (PSR { lifecycle : once lifecycle, region, defer: doDefer, dispose })
+  pure (PSR { lifecycle: once lifecycle, region, defer: doDefer, dispose })
 
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
@@ -491,9 +491,10 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
     handleElements :: EffectFn1 (Tuple (Maybe Int) value) Unit
     handleElements = mkEffectFn1 \(Tuple initialPos value) -> do
       Region eltRegion <- liftST $ runSTFn2 allocateRegion initialPos span
-      staticRegion <- liftST $ runSTFn2 newStaticRegion eltRegion.begin eltRegion.bump
+      staticRegion <- liftST $ runSTFn2 newStaticRegion eltRegion.begin
+        eltRegion.bump
       eltDisposed <- liftST $ ST.new false
-      
+
       eltSendTo <- liftST Poll.create
       let
         sendTo :: Poll Int
@@ -504,7 +505,8 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
       let
         remove :: Poll Unit
         remove =
-          Poll.merge [ options.remove value, eltRemove.poll, ( un PSR psr ).lifecycle ]
+          Poll.merge
+            [ options.remove value, eltRemove.poll, (un PSR psr).lifecycle ]
 
       eltLifecycle <- liftST Poll.create
       eltPSR <- liftST $ runSTFn2 newPSR eltLifecycle.poll staticRegion
@@ -518,13 +520,14 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
 
         handleSendTo :: EffectFn1 Int Unit
         handleSendTo = mkEffectFn1 \newPos -> do
-          whenM (not <$> liftST (ST.read eltDisposed))do
+          whenM (not <$> liftST (ST.read eltDisposed)) do
             fromBegin <- liftST eltRegion.begin
             fromEnd <- liftST eltRegion.end
             liftST $ runSTFn1 eltRegion.sendTo newPos
 
             target <- liftST eltRegion.begin
-            runEffectFn3 (un DOMInterpret di).beamRegion fromBegin fromEnd target
+            runEffectFn3 (un DOMInterpret di).beamRegion fromBegin fromEnd
+              target
 
         -- | We need explicit ordering here, if just pass the lifecycle of the parent to the child element it is not 
         -- | guarantueed that the child will dispose itself before the parent.
@@ -535,7 +538,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
           eltLifecycle.push unit
           liftST eltRegion.remove
 
-      runEffectFn3 pump eltPSR ( once remove ) handleRemove
+      runEffectFn3 pump eltPSR (once remove) handleRemove
       runEffectFn3 pump eltPSR sendTo handleSendTo
       runEffectFn2 nut eltPSR di
 
@@ -572,7 +575,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
 
   runEffectFn2 deferO psr do
     runEffectFn1 (un DOMInterpret di).removeElement elt
-    
+
   let
     handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
     handleAtts = mkEffectFn1 \atts ->
@@ -705,7 +708,7 @@ portaled buffer beam beamed bumped trackBegin trackEnd =
     stolen <- liftST $ ST.new false
 
     unsubBeamed <- runEffectFn2 Event.subscribeO beamed $ mkEffectFn1 \_ -> do
-      whenM ( not <$> liftST ( ST.read stolen ) ) do
+      whenM (not <$> liftST (ST.read stolen)) do
         void $ liftST $ ST.write true stolen
 
     unsubBumped <- runEffectFn2 Event.subscribeO bumped $ mkEffectFn1 $ liftST
