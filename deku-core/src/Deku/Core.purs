@@ -285,7 +285,6 @@ newPSR = mkSTFn2 \lifecycle region -> do
     -- to correctly dispose, effect should be run in the reverse order of insertion
     dispose :: Effect Unit
     dispose = do
-      -- runEffectFn1 Event.fastForeachThunkE =<< liftST (STArray.unsafeFreeze unsubs)
       stack <- liftST $ STArray.unsafeFreeze unsubs
       let l = Array.length stack
       forE 0 l \i -> do
@@ -493,6 +492,8 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
     handleElements = mkEffectFn1 \(Tuple initialPos value) -> do
       Region eltRegion <- liftST $ runSTFn2 allocateRegion initialPos span
       staticRegion <- liftST $ runSTFn2 newStaticRegion eltRegion.begin eltRegion.bump
+      eltDisposed <- liftST $ ST.new false
+      
       eltSendTo <- liftST Poll.create
       let
         sendTo :: Poll Int
@@ -505,7 +506,8 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
         remove =
           Poll.merge [ options.remove value, eltRemove.poll, ( un PSR psr ).lifecycle ]
 
-      eltPSR <- liftST $ runSTFn2 newPSR remove staticRegion
+      eltLifecycle <- liftST Poll.create
+      eltPSR <- liftST $ runSTFn2 newPSR eltLifecycle.poll staticRegion
       let
         Nut nut = cont
           { value
@@ -516,14 +518,24 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
 
         handleSendTo :: EffectFn1 Int Unit
         handleSendTo = mkEffectFn1 \newPos -> do
-          fromBegin <- liftST eltRegion.begin
-          fromEnd <- liftST eltRegion.end
-          liftST $ runSTFn1 eltRegion.sendTo newPos
+          whenM (not <$> liftST (ST.read eltDisposed))do
+            fromBegin <- liftST eltRegion.begin
+            fromEnd <- liftST eltRegion.end
+            liftST $ runSTFn1 eltRegion.sendTo newPos
 
-          target <- liftST eltRegion.begin
-          runEffectFn3 (un DOMInterpret di).beamRegion fromBegin fromEnd target
+            target <- liftST eltRegion.begin
+            runEffectFn3 (un DOMInterpret di).beamRegion fromBegin fromEnd target
 
-      runEffectFn2 deferO eltPSR (liftST eltRegion.remove)
+        -- | We need explicit ordering here, if just pass the lifecycle of the parent to the child element it is not 
+        -- | guarantueed that the child will dispose itself before the parent.
+        handleRemove :: EffectFn1 Unit Unit
+        handleRemove = mkEffectFn1 \_ -> do
+          -- deactivate sendTo
+          void $ liftST $ ST.write true eltDisposed
+          eltLifecycle.push unit
+          liftST eltRegion.remove
+
+      runEffectFn3 pump eltPSR ( once remove ) handleRemove
       runEffectFn3 pump eltPSR sendTo handleSendTo
       runEffectFn2 nut eltPSR di
 

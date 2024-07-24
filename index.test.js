@@ -74,7 +74,7 @@ describe("deku", () => {
         expect(r1.begin()).toEqual(10);
         expect(r1.end()).toEqual(10);
         expect(r2.begin()).toEqual(10);
-      })
+      });
     });
 
     it("makeElementEffect makes an element with the correct tagname", () => {
@@ -395,9 +395,7 @@ describe("deku", () => {
       f(tests.emptySwitches, () => {
         const $ = require("jquery");
         expect($("#content").text()).toBe("0");
-        const htm1 = $("#div0")[0].outerHTML;
         $("#incr").trigger("click");
-        const htm2 = $("#div0")[0].outerHTML;
         expect($("#content").text()).toBe("1");
         $("#incr").trigger("click");
         expect($("#content").text()).toBe("2");
@@ -628,6 +626,7 @@ describe("deku", () => {
         expect($("#hello").text()).toBe("hello");
       })
     );
+
     doTest("useRant works", (f) =>
       f(tests.useHotRantWorks, () => {
         const $ = require("jquery");
