@@ -24,7 +24,7 @@ import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useD
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo)
 import Deku.Internal.Region (ElementId)
 import Deku.Pursx (lenientPursx, pursx)
-import Deku.Toplevel (hydrateInBody, runInBody, ssrInBody)
+import Deku.Toplevel (SSROutput, hydrateInBody, runInBody, ssrInBody)
 import Effect (Effect)
 import Effect.Random (random)
 import Effect.Uncurried (mkEffectFn2, runEffectFn2)
@@ -39,10 +39,10 @@ foreign import hackyInnerHTML :: String -> String -> Effect Unit
 runTest :: Nut -> Effect (Effect Unit)
 runTest = runInBody
 
-runSSR :: Nut -> Effect (Tuple String (Map.Map ElementId HydrationRenderingInfo))
+runSSR :: Nut -> Effect SSROutput
 runSSR = ssrInBody
 
-runHydration :: Map.Map ElementId  HydrationRenderingInfo -> Nut -> Effect Unit
+runHydration :: SSROutput -> Nut -> Effect Unit
 runHydration cache nut = void $ hydrateInBody cache nut
 
 sanityCheck :: Nut

@@ -6,6 +6,7 @@ module Deku.Toplevel
   , ssrInBody
   , hydrateInElement
   , hydrateInBody
+  , SSROutput
   ) where
 
 import Prelude
@@ -27,7 +28,6 @@ import Data.Newtype (over, un)
 import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
-import Debug (spy)
 import Deku.Core (ChildId(..), Nut(..), ParentId(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
@@ -116,10 +116,10 @@ runInElement elt (Nut nut) = do
   let taggerStart = 0
   tagRef <- liftST $ ST.new $ taggerStart + 1
   let tagger = makeTagger tagRef
-  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) Nothing
+  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) (Just 1)
     (DekuParent $ toDekuElement elt)
   scope <- liftST $ runSTFn3 newPSR false lifecycle region
-  void $ runEffectFn2 nut scope (fullDOMInterpret tagger)
+  void $ runEffectFn2 nut scope ( fullDOMInterpret tagger)
   pure $ dispose unit
 
 doInBody :: forall i o. (Web.DOM.Element -> i -> Effect o) -> i -> Effect o
@@ -148,7 +148,7 @@ fixParents
   -> Map.Map ElementId SSRRenderingInfo
   -> Map.Map ElementId SSRRenderingInfo
 fixParents parentInfo renderingInfo =
-  (foldlWithIndex go { flipped: Set.empty, final: Map.empty } renderingInfo).final
+  (foldlWithIndex go { flipped: Set.empty, final: renderingInfo } renderingInfo).final
 
   where
   go
@@ -180,16 +180,18 @@ fixParents parentInfo renderingInfo =
             final
         }
 
+type SSROutput = { html::String,cache :: Map.Map ElementId HydrationRenderingInfo }
+
 ssrInElement
   :: Web.DOM.Element
   -> Nut
-  -> Effect (Tuple String (Map.Map ElementId HydrationRenderingInfo))
+  -> Effect SSROutput
 ssrInElement elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
   let taggerStart = 0
   tagRef <- liftST $ ST.new $ taggerStart + 1
   let tagger = makeTagger tagRef
-  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) Nothing
+  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) (Just 1)
     (DekuParent $ toDekuElement elt)
   parentCache <- liftST $ ST.new Map.empty
   regionCache <- liftST $ ST.new Map.empty
@@ -216,11 +218,6 @@ ssrInElement elt (Nut nut) = do
     isBoring = produceIsBoring unfrozenParentCache unfrozenRegionCache
       reverseParentCache
   let
-    terminallyBoring = isBoring # mapWithIndex \k v -> v && not fromMaybe true
-      ( coerce (Map.lookup (coerce k) reverseParentCache) >>= flip Map.lookup
-          isBoring
-      )
-  let
     hydrationRenderingCache = unfrozenRegionCache # mapWithIndex
       \k (SSRRenderingInfo v) -> HydrationRenderingInfo
         { attributeIndicesThatAreNeededDuringHydration:
@@ -234,24 +231,24 @@ ssrInElement elt (Nut nut) = do
   transformTextNodes elt dynTextTag
   htmlString <- innerHTML elt
   dispose unit
-  pure $ Tuple htmlString hydrationRenderingCache
+  pure $   {html:htmlString,cache:hydrationRenderingCache}
 
 ssrInBody
   :: Nut
-  -> Effect (Tuple String (Map.Map ElementId HydrationRenderingInfo))
+  -> Effect  {html:: String,cache :: Map.Map ElementId HydrationRenderingInfo}
 ssrInBody = doInBody ssrInElement
 
 hydrateInElement
-  :: Map.Map ElementId HydrationRenderingInfo
+  :: forall r. {cache :: Map.Map ElementId HydrationRenderingInfo | r}
   -> Web.DOM.Element
   -> Nut
   -> Effect (Effect Unit)
-hydrateInElement cache elt (Nut nut) = do
+hydrateInElement {cache} elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
   let taggerStart = 0
   tagRef <- liftST $ ST.new $ taggerStart + 1
   let tagger = makeTagger tagRef
-  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) Nothing
+  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) (Just 1)
     (DekuParent $ toDekuElement elt)
   doc <- window >>= document
   dummyElt <- createElement "div" (toDocument doc)
@@ -265,7 +262,7 @@ hydrateInElement cache elt (Nut nut) = do
   pure $ dispose unit
 
 hydrateInBody
-  :: Map.Map ElementId HydrationRenderingInfo
+  :: forall r. {cache::Map.Map ElementId HydrationRenderingInfo|r}
   -> Nut
   -> Effect (Effect Unit)
 hydrateInBody = doInBody <<< hydrateInElement

@@ -107,6 +107,11 @@ incrementElementCount renderingInfo = mkSTFn1 \region -> do
   (un StaticRegionStats (un StaticRegion region).stats).incrementElementChildCount
   runSTFn2 updateSSRRenderingInfo renderingInfo region
 
+initializeRendering
+  :: STRef.STRef Global SSRRenderingInfoCache -> STFn1 StaticRegion Global Unit
+initializeRendering renderingInfo = mkSTFn1 \region -> do
+  runSTFn2 updateSSRRenderingInfo renderingInfo region
+
 incrementPureTextCount
   :: STRef.STRef Global SSRRenderingInfoCache -> STFn1 StaticRegion Global Unit
 incrementPureTextCount renderingInfo = mkSTFn1 \region -> do
@@ -196,6 +201,7 @@ ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
     , makeElement: makeElement renderingInfo
     , attachElement: I.attachElementEffect
     , incrementElementCount: incrementElementCount renderingInfo
+    , initializeRendering: initializeRendering renderingInfo
     , disqualifyFromStaticRendering: disqualifyFromStaticRendering renderingInfo
     , markIndexAsNeedingHydration: markIndexAsNeedingHydration renderingInfo
     , shouldSkipAttribute: \_ _ -> false
@@ -232,6 +238,7 @@ noOpDomInterpret tagger =
     , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
     , makeElement: I.makeElementEffect
     , attachElement: mkEffectFn2 \_ _ -> pure unit
+    , initializeRendering: mkSTFn1 \_ -> pure unit
     , incrementElementCount: mkSTFn1 \_ -> pure unit
     , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
     , setProp: mkEffectFn3 \_ _ _ -> pure unit

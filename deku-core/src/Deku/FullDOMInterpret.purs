@@ -18,6 +18,7 @@ fullDOMInterpret tagger = Core.DOMInterpret
   , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
   , makeElement: I.makeElementEffect
   , attachElement: I.attachElementEffect
+    , initializeRendering: mkSTFn1 \_ -> pure unit
   , incrementElementCount: mkSTFn1 \_ -> pure unit
   , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit
   , shouldSkipAttribute: \_ _ -> false

@@ -108,6 +108,7 @@ hydratingDOMInterpret
     -- when an attachment actually needs to occur
     -- so we make it a noop
     , attachElement: mkEffectFn2 \_ _ -> pure unit
+    , initializeRendering: mkSTFn1 \_ -> pure unit
     , incrementElementCount: mkSTFn1 \_ -> pure unit
     , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
     , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit

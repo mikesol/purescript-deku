@@ -32,12 +32,11 @@ const doSSRTest = (name, closure, itIs) => {
       document.getElementsByTagName("html")[0].innerHTML =
         '<head></head><body id="mybody"></body>';
       const res = tests.runSSR(myTest)();
-      const html = testFriend.fst(res);
-      const cache = testFriend.snd(res);
+      const html = res.html
       document.getElementsByTagName(
         "html"
       )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
-      tests.runHydration(cache)(myTest)();
+      tests.runHydration(res)(myTest)();
       await myScript(false);
     });
   });

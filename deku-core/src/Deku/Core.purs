@@ -100,7 +100,6 @@ import Deku.Do as Deku
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
 import Deku.Internal.Region (Anchor(..), Bound, ElementId(..), Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
 import Effect (Effect, forE)
-import Effect.Console (log)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
 import FRP.Event as Event
 import FRP.Event.Class (once)
@@ -110,7 +109,6 @@ import FRP.Poll.Unoptimized as UPoll
 import Partial.Unsafe (unsafePartial)
 import Safe.Coerce (coerce)
 import Web.DOM (Element)
-import Web.DOM.DOMParser (_getParserError)
 import Web.Event.Internal.Types (Event)
 
 -- | A callback function that can be used as a value for a listener.
@@ -123,9 +121,13 @@ cb :: (Event -> Effect Unit) -> Cb
 cb = Cb <<< ((map <<< map) (const true))
 
 prop' :: String -> String -> Attribute'
-prop' k v = mkEffectFn4 \id ix e (DOMInterpret { setProp, markIndexAsNeedingHydration }) -> do
-  when (Set.member k dynamicKeywords) $ liftST $ runSTFn2 markIndexAsNeedingHydration id ix
-  runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
+prop' k v = mkEffectFn4
+  \id ix e (DOMInterpret { setProp, markIndexAsNeedingHydration }) -> do
+    when (Set.member k dynamicKeywords) $ liftST $ runSTFn2
+      markIndexAsNeedingHydration
+      id
+      ix
+    runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 cb' :: String -> Cb -> Attribute'
 cb' k v = mkEffectFn4
@@ -152,11 +154,13 @@ unsafeUnAttribute = coerce
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
-  :: forall e. EffectFn4 ElementId AttrIndex Element DOMInterpret Unit -> Attribute e
+  :: forall e
+   . EffectFn4 ElementId AttrIndex Element DOMInterpret Unit
+  -> Attribute e
 unsafeAttribute = Attribute
 
 dynamicKeywords :: Set.Set String
-dynamicKeywords = Set.fromFoldable ["checked", "value", "disabled"]
+dynamicKeywords = Set.fromFoldable [ "checked", "value", "disabled" ]
 
 attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
 attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn4
@@ -252,6 +256,7 @@ newtype DOMInterpret = DOMInterpret
   , disqualifyFromStaticRendering :: STFn1 ElementId Global Unit
   , isBoring :: ElementId -> Boolean
   , makeElement :: MakeElement
+  , initializeRendering :: STFn1 StaticRegion Global Unit
   , incrementElementCount :: STFn1 StaticRegion Global Unit
   , shouldSkipAttribute :: ElementId -> AttrIndex -> Boolean
   , markIndexAsNeedingHydration :: STFn2 ElementId AttrIndex Global Unit
@@ -640,23 +645,37 @@ elementify
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   id <- liftST (un DOMInterpret di).tagger
   let isBoring = (un DOMInterpret di).isBoring (ElementId id)
-  -- when isBoring (log "booooooring")
-  when true do -- (not isBoring) do
+  if isBoring then do
+    -- boring is a short circuit - all we need to do is peel of ids to keep the counter consistent
+    -- but otherwise we can skip everything
+    -- we can feed it the old PSR as it'll be skipping all logic using PSR anyway
+    -- change this if it bugs out
+    runEffectFn2 Event.fastForeachE nuts $ mkEffectFn1 \(Nut nut) -> do
+      runEffectFn2 nut psr di
+
+  else do
     liftST $ runSTFn2 (un DOMInterpret di).registerParentChildRelationship
       (ParentId (un ElementId (un StaticRegion (un PSR psr).region).tag))
       (ChildId id)
-    elt <- runEffectFn3 (un DOMInterpret di).makeElement (ElementId id) (Namespace <$> ns)
+    elt <- runEffectFn3 (un DOMInterpret di).makeElement (ElementId id)
+      (Namespace <$> ns)
       (Tag tag)
     regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
     liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
       (Element (elt))
 
     when (un PSR psr).disqualifyFromStaticRendering do
-      liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering (ElementId id)
+      liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering
+        (ElementId id)
       pure unit
-    eltRegion <- liftST $ runSTFn3 fromParent (ElementId id) (Just (length nuts)) $
-      DekuParent
-        elt
+    eltRegion <- liftST
+      $ runSTFn3 fromParent (ElementId id) (Just (length nuts))
+      $
+        DekuParent
+          elt
+
+    liftST $ runSTFn1 (un DOMInterpret di).initializeRendering eltRegion
+
     runEffectFn2 deferO psr do
       runEffectFn1 (un DOMInterpret di).removeElement elt
 
@@ -676,12 +695,18 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
     -- it's easier to set them, but if there's a perf speedup in not setting
     -- them, then we should code up a mechanism to skip it
     forWithIndex_ arrAtts \ix att -> do
-      when (not (un DOMInterpret di).shouldSkipAttribute (ElementId id) (AttrIndex ix)) do
-        case att of
-          OnlyPure _ -> pure unit
-          _ -> liftST $ runSTFn2
-                  (un DOMInterpret di).markIndexAsNeedingHydration (ElementId id) (AttrIndex ix)
-        handleAtts (AttrIndex ix) att
+      when
+        ( not (un DOMInterpret di).shouldSkipAttribute (ElementId id)
+            (AttrIndex ix)
+        )
+        do
+          case att of
+            OnlyPure _ -> pure unit
+            _ -> liftST $ runSTFn2
+              (un DOMInterpret di).markIndexAsNeedingHydration
+              (ElementId id)
+              (AttrIndex ix)
+          handleAtts (AttrIndex ix) att
 
     let
       handleNuts :: EffectFn1 Nut Unit
@@ -689,7 +714,6 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         scope <- liftST $ runSTFn3 newPSR false (un PSR psr).lifecycle eltRegion
         runEffectFn2 nut scope di
     runEffectFn2 Event.fastForeachE nuts handleNuts
-
     liftST $ runSTFn1 (un DOMInterpret di).incrementElementCount
       (un PSR psr).region
     runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
@@ -711,7 +735,8 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
       let
         doesNotNeedReferenceInDOM = not
           (un PSR psr).disqualifyFromStaticRendering
-      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id) (Array.last xs)
+      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id)
+        (Array.last xs)
         doesNotNeedReferenceInDOM
       pure { txt, doesNotNeedReferenceInDOM }
 
@@ -729,13 +754,15 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
 
     PureAndEvent xs _ -> do
       let doesNotNeedReferenceInDOM = false
-      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id) (Array.last xs)
+      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id)
+        (Array.last xs)
         doesNotNeedReferenceInDOM
       pure { txt, doesNotNeedReferenceInDOM }
 
     PureAndPoll xs _ -> do
       let doesNotNeedReferenceInDOM = false
-      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id) (Array.last xs)
+      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id)
+        (Array.last xs)
         doesNotNeedReferenceInDOM
       pure { txt, doesNotNeedReferenceInDOM }
 

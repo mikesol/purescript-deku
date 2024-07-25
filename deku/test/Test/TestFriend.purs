@@ -2,7 +2,6 @@ module Test.TestFriend where
 
 
 import Data.Maybe (Maybe(..))
-import Data.Tuple as Tuple
 import Effect (Effect)
 import Effect.Ref (Ref, new)
 
@@ -20,9 +19,3 @@ dummyId = 42
 
 ignorableBooleanForTextConstructor :: Boolean
 ignorableBooleanForTextConstructor = false
-
-fst :: forall a b. Tuple.Tuple a b -> a
-fst = Tuple.fst
-
-snd :: forall a b. Tuple.Tuple a b -> b
-snd = Tuple.snd
