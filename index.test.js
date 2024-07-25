@@ -34,7 +34,6 @@ const doSSRTest = (name, closure, itIs) => {
       const res = tests.runSSR(myTest)();
       const html = testFriend.fst(res);
       const cache = testFriend.snd(res);
-      console.log('foobar', html)
       document.getElementsByTagName(
         "html"
       )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
@@ -605,15 +604,14 @@ describe("deku", () => {
       })
     );
 
-    doSSRTest("todo mvc", (f) =>
+    doTest("todo mvc", (f) =>
       f(tests.todoMVC, async () => {
         const $ = require("jquery");
         // because of the injectElementT
         await new Promise((resolve) => setTimeout(resolve, 42.0));
         $("#add").trigger("click");
-        console.log("HNOW", document.body.innerHTML);
         expect($("#item0").text()).toBe("Tasko primo");
-      }), it.only
+      })
     );
 
     doTest("useEffect with a ref has correct behavior", (f) =>

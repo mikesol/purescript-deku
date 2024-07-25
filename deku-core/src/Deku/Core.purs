@@ -96,7 +96,6 @@ import Data.Newtype (class Newtype, over, un)
 import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
-import Debug (spy)
 import Deku.Do as Deku
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
 import Deku.Internal.Region (Anchor(..), Bound, ElementId(..), Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
@@ -386,7 +385,7 @@ instance Semigroup Nut where
     -- unrolled version of `fixed`
     Nut $ mkEffectFn2 \psr di -> do
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
-      emptyScope <- liftST $ runSTFn3 newPSR false (un PSR psr).lifecycle
+      emptyScope <- liftST $ runSTFn3 newPSR true (un PSR psr).lifecycle
         (un PSR psr).region
 
       runEffectFn2 a emptyScope di
@@ -619,7 +618,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
 
 fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2 \psr di -> do
-  emptyScope <- liftST $ runSTFn3 newPSR false (un PSR psr).lifecycle
+  emptyScope <- liftST $ runSTFn3 newPSR true (un PSR psr).lifecycle
     (un PSR psr).region
   let
     handleNuts :: EffectFn1 Nut Unit
@@ -640,14 +639,12 @@ elementify
   -> Nut
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   id <- liftST (un DOMInterpret di).tagger
-  -- let _ = spy "starting elementify" true
   let isBoring = (un DOMInterpret di).isBoring (ElementId id)
   -- when isBoring (log "booooooring")
   when true do -- (not isBoring) do
     liftST $ runSTFn2 (un DOMInterpret di).registerParentChildRelationship
       (ParentId (un ElementId (un StaticRegion (un PSR psr).region).tag))
       (ChildId id)
-    let _ = spy "creating elt with info" { id, tag }
     elt <- runEffectFn3 (un DOMInterpret di).makeElement (ElementId id) (Namespace <$> ns)
       (Tag tag)
     regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
@@ -656,7 +653,6 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
 
     when (un PSR psr).disqualifyFromStaticRendering do
       liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering (ElementId id)
-      -- let _ = spy "disqualifying from static rendering" id
       pure unit
     eltRegion <- liftST $ runSTFn3 fromParent (ElementId id) (Just (length nuts)) $
       DekuParent

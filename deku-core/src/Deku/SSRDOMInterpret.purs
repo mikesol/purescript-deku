@@ -14,7 +14,6 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
 import Data.Set (Set)
 import Data.Set as Set
-import Debug (spy)
 import Deku.Core (AttrIndex, ChildId, MakeElement, MakeText, ParentId, SetText)
 import Deku.Core as Core
 import Deku.Internal.Entities (fromDekuElement)
@@ -88,7 +87,6 @@ updateSSRRenderingInfo = mkSTFn2 \renderingInfo (StaticRegion region) -> do
   let
     containsOnlyStaticText = currentStats.numberOfChildrenThatAreElements == 0
       && currentStats.numberOfChildrenThatAreStaticTextNodes == 1
-  let _ = spy "updating with tag" { tag: region.tag, containsOnlyElements, containsOnlyStaticText }
   void $ STRef.modify
     ( Map.alter
         ( \currentSSRRenderingInfo ->

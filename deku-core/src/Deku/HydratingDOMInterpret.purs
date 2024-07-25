@@ -9,16 +9,13 @@ import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (class Newtype, un)
 import Data.Set as Set
-import Debug (spy)
 import Deku.Core (AttrIndex, MakeElement, MakeText)
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Entities (toDekuElement, toDekuText)
 import Deku.Internal.Region (ElementId, elementIdToString)
 import Deku.Interpret as I
-import Effect.Console (logShow)
-import Effect.Exception (throwException, error)
-import Effect.Uncurried (mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn3)
+import Effect.Uncurried (mkEffectFn2, mkEffectFn3, mkEffectFn4)
 import Web.DOM as Web.DOM
 import Web.DOM.ParentNode (QuerySelector(..), querySelector)
 
@@ -36,11 +33,10 @@ makeElement
   -> Web.DOM.Element
   -> Web.DOM.ParentNode
   -> MakeElement
-makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
+makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id _ _ -> do
   let ri = Map.lookup id renderingInfo
   case ri of
-    -- shouldn't happen
-    Nothing -> throwException $ error $ "makeElement: no rendering info for " <> elementIdToString id
+    Nothing -> pure $ toDekuElement dummyElement
     Just (HydrationRenderingInfo value) -> do
       case
         value.hasParentThatWouldDisqualifyFromSSR
@@ -52,12 +48,13 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
         of
         true -> do
           sel <- querySelector
-            (QuerySelector $ "[data-deku-ssr=\"" <> elementIdToString id <> "\"]")
+            ( QuerySelector $ "[data-deku-ssr=\"" <> elementIdToString id <>
+                "\"]"
+            )
             parentNode
-          let ____ = spy "hydration info" { id, tag }
           case sel of
             -- shouldn't happen
-            Nothing -> throwException $ error $ "makeElement: no selector for " <> elementIdToString id
+            Nothing -> pure $ toDekuElement dummyElement
             Just el -> pure $ toDekuElement el
         false -> pure $ toDekuElement dummyElement
 
@@ -67,7 +64,11 @@ makeText textNodeCache dummyText = mkEffectFn3 \id _ _ -> pure $ toDekuText
     Nothing -> dummyText
     Just t -> t
 
-shouldSkipAttribute :: Map.Map ElementId HydrationRenderingInfo -> ElementId -> AttrIndex -> Boolean
+shouldSkipAttribute
+  :: Map.Map ElementId HydrationRenderingInfo
+  -> ElementId
+  -> AttrIndex
+  -> Boolean
 shouldSkipAttribute renderingInfo id ix = fromMaybe false do
   ri <- Map.lookup id renderingInfo
   pure $ not $ Set.member ix
