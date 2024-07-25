@@ -189,8 +189,8 @@ insertsAtCorrectPositions = D.div [ DA.id_ "div0" ]
       D.span [ DA.id_ ("dyn" <> show i) ] [ text_ (show i) ]
   ]
 
-nestedInpureDyn :: Nut
-nestedInpureDyn = Deku.do
+nestedInPureDyn :: Nut
+nestedInPureDyn = Deku.do
   pushClick /\ click <- useState'
   
   D.div [ DA.id_ "div0" ] 

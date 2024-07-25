@@ -420,8 +420,8 @@ describe("deku", () => {
       })
     );
 
-    doTest("impure nested dyn disposes correctly",(f) => 
-      f(tests.nestedInpureDyn, () => {
+    doTest("in pure nested dyn disposes correctly",(f) => 
+      f(tests.nestedInPureDyn, () => {
         const $ = require("jquery");
         expect($("#div0").text()).toBe("startend");
         $("#action").trigger("click");
