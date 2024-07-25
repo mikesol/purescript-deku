@@ -15,18 +15,23 @@ import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (STRef)
 import Control.Monad.ST.Internal as ST
 import Control.Monad.ST.Uncurried (runSTFn3)
-import Data.Array as Array
 import Data.Foldable (for_)
 import Data.FoldableWithIndex (foldlWithIndex, forWithIndex_)
 import Data.FunctorWithIndex (mapWithIndex)
+import Data.List (List)
+import Data.List as List
+import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (un)
 import Data.Set as Set
 import Data.Tuple (Tuple(..))
-import Deku.Core (Nut(..), newPSR)
+import Data.Tuple.Nested ((/\))
+import Debug (spy)
+import Deku.Core (ChildId(..), Nut(..), ParentId(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
 import Deku.Internal.Entities (DekuParent(..), toDekuElement)
+import Deku.Internal.Region (ElementId(..), elementIdToString)
 import Deku.Internal.Region as Region
 import Deku.SSRDOMInterpret (SSRRenderingInfo(..), ssrDOMInterpret)
 import Effect (Effect)
@@ -34,10 +39,7 @@ import Effect.Exception (error, throwException)
 import Effect.Random (randomInt)
 import Effect.Uncurried (runEffectFn2)
 import FRP.Poll (create)
-import Foreign.Object (Object)
-import Foreign.Object as Object
-import Foreign.Object.ST as STObject
-import Foreign.Object.ST.Unsafe (unsafeFreeze)
+import Safe.Coerce (coerce)
 import Web.DOM as Web.DOM
 import Web.DOM.Document (createElement, createTextNode)
 import Web.DOM.Element (setAttribute, toParentNode)
@@ -52,30 +54,45 @@ isLively (SSRRenderingInfo value) = value.hasParentThatWouldDisqualifyFromSSR
   || (not $ Set.isEmpty value.attributeIndicesThatAreNeededDuringHydration)
 
 produceIsBoring
-  :: Object (Array String)
-  -> Object SSRRenderingInfo
-  -> Object String
-  -> Object Boolean
+  :: Map.Map ParentId (List ChildId)
+  -> Map.Map ElementId SSRRenderingInfo
+  -> Map.Map ChildId ParentId
+  -> Map.Map ElementId Boolean
 produceIsBoring parentToChildren parentToRI childToParent =
-  moveThroughBoringArray childless Object.empty
+  moveThroughBoringList
+    (Set.toUnfoldable $ Set.union  notInObject  childless)
+    Map.empty
   where
-  childless = join $ Object.values $ Object.filter Array.null parentToChildren
-  moveThroughBoringArray boringArray isBoring = case Array.head boringArray of
-    Nothing -> isBoring
-    Just h -> do
-      let kids = fromMaybe [] $ Object.lookup h parentToChildren
-      let
-        kidsAreBoring = Array.all
-          (\k -> fromMaybe false $ Object.lookup k isBoring)
-          kids
-      let
-        iAmBoring = case Object.lookup h parentToRI of
-          Nothing -> false
-          Just value -> not (isLively value)
-      let myParentIs = Object.lookup h childToParent
-      moveThroughBoringArray
-        (maybe boringArray (Array.snoc (Array.drop 1 boringArray)) myParentIs)
-        (Object.insert h (iAmBoring && kidsAreBoring) isBoring)
+  allChildren :: Set.Set ElementId
+  allChildren =  Set.fromFoldable ((coerce :: _ -> List _) (join (Map.values parentToChildren)))
+
+  allParents :: Set.Set ElementId
+  allParents =  Set.fromFoldable  ((coerce  :: _ -> List _) (Map.values childToParent))
+
+  notInObject :: Set.Set ElementId
+  notInObject = Set.difference allChildren  allParents
+
+  childless :: Set.Set ElementId
+  childless = foldlWithIndex (\i b a -> if List.null a then (Set.insert (coerce i) b) else b) Set.empty parentToChildren
+
+  moveThroughBoringList
+    :: List ElementId -> Map.Map ElementId Boolean -> Map.Map ElementId Boolean
+  moveThroughBoringList List.Nil isBoring = isBoring
+  moveThroughBoringList (List.Cons h rest) isBoring = do
+    let kids = fromMaybe List.Nil $ Map.lookup (coerce h) parentToChildren
+    let
+      kidsAreBoring = List.all
+        (\k -> fromMaybe true $ Map.lookup (coerce k) isBoring)
+        kids
+    let
+      iAmBoring = case Map.lookup h (coerce parentToRI) of
+        Nothing -> true
+        Just value -> not (isLively value)
+    -- let _ = spy "analyzing" {h, kidsAreBoring, iAmBoring, value: Object.lookup h parentToRI}
+    let myParentIs = Map.lookup (coerce h) childToParent
+    moveThroughBoringList
+      ((maybe identity (flip List.snoc) (coerce myParentIs)) rest)
+      (Map.insert h (iAmBoring && kidsAreBoring) isBoring)
 
 makeTagger :: STRef Global Int -> ST.ST Global Int
 makeTagger tagRef = do
@@ -94,7 +111,7 @@ runInElement elt (Nut nut) = do
   let taggerStart = 0
   tagRef <- liftST $ ST.new $ taggerStart + 1
   let tagger = makeTagger tagRef
-  region <- liftST $ runSTFn3 Region.fromParent taggerStart Nothing
+  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) Nothing
     (DekuParent $ toDekuElement elt)
   scope <- liftST $ runSTFn3 newPSR false lifecycle region
   void $ runEffectFn2 nut scope (fullDOMInterpret tagger)
@@ -119,21 +136,21 @@ foreign import innerHTML :: Web.DOM.Element -> Effect String
 foreign import transformTextNodes :: Web.DOM.Element -> String -> Effect Unit
 
 foreign import mapIdsToTextNodes
-  :: Web.DOM.Element -> Effect (Object Web.DOM.Text)
+  :: Web.DOM.Element -> Effect (Array { k :: ElementId, v :: Web.DOM.Text })
 
 ssrInElement
   :: Web.DOM.Element
   -> Nut
-  -> Effect (Tuple String (Object HydrationRenderingInfo))
+  -> Effect (Tuple String (Map.Map ElementId HydrationRenderingInfo))
 ssrInElement elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
   let taggerStart = 0
   tagRef <- liftST $ ST.new $ taggerStart + 1
   let tagger = makeTagger tagRef
-  region <- liftST $ runSTFn3 Region.fromParent taggerStart Nothing
+  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) Nothing
     (DekuParent $ toDekuElement elt)
-  parentCache <- liftST $ STObject.new
-  regionCache <- liftST $ STObject.new
+  parentCache <- liftST $ ST.new Map.empty
+  regionCache <- liftST $ ST.new Map.empty
   rn0 <- randomInt 0 10000
   rn1 <- randomInt 0 10000
   rn2 <- randomInt 0 10000
@@ -143,18 +160,22 @@ ssrInElement elt (Nut nut) = do
 
   void $ runEffectFn2 nut scope
     (ssrDOMInterpret tagger dynTextTag parentCache regionCache)
-  unfrozenParentCache <- liftST $ unsafeFreeze parentCache
-  unfrozenRegionCache <- liftST $ unsafeFreeze regionCache
+  unfrozenParentCache <- liftST $ ST.read parentCache
+  unfrozenRegionCache <- liftST $ ST.read regionCache
   forWithIndex_ unfrozenRegionCache \tag value -> do
     for_ (un SSRRenderingInfo value).backingElement \element -> do
       when (isLively value)
         do
-          setAttribute "data-deku-ssr" tag element
-  let ibab i b a = Object.union (Object.fromFoldable $ map (flip Tuple i) a) b
-  let reverseParentCache = foldlWithIndex ibab Object.empty unfrozenParentCache
+          setAttribute "data-deku-ssr" (elementIdToString tag) element
+  let ibab i b a = Map.union (Map.fromFoldable $ map (flip Tuple i) a) b
+  let reverseParentCache = foldlWithIndex ibab Map.empty unfrozenParentCache
   let
     isBoring = produceIsBoring unfrozenParentCache unfrozenRegionCache
       reverseParentCache
+  let
+    terminallyBoring = isBoring # mapWithIndex \k v -> v && not fromMaybe true
+      (coerce (Map.lookup (coerce k) reverseParentCache) >>= flip Map.lookup isBoring)
+  -- let ____ = spy "isBoring" $ show terminallyBoring
   let
     hydrationRenderingCache = unfrozenRegionCache # mapWithIndex
       \k (SSRRenderingInfo v) -> HydrationRenderingInfo
@@ -164,7 +185,7 @@ ssrInElement elt (Nut nut) = do
             v.hasParentThatWouldDisqualifyFromSSR
         , hasChildrenThatWouldDisqualifyFromSSR:
             v.hasChildrenThatWouldDisqualifyFromSSR
-        , isBoring: fromMaybe false $ Object.lookup k isBoring
+        , isBoring: fromMaybe false $ Map.lookup k isBoring
         }
   transformTextNodes elt dynTextTag
   htmlString <- innerHTML elt
@@ -173,33 +194,34 @@ ssrInElement elt (Nut nut) = do
 
 ssrInBody
   :: Nut
-  -> Effect (Tuple String (Object HydrationRenderingInfo))
+  -> Effect (Tuple String (Map.Map ElementId HydrationRenderingInfo))
 ssrInBody = doInBody ssrInElement
 
 hydrateInElement
-  :: Object HydrationRenderingInfo
+  :: Map.Map ElementId HydrationRenderingInfo
   -> Web.DOM.Element
   -> Nut
   -> Effect (Effect Unit)
 hydrateInElement cache elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
+  let _ = spy "hydrating" {cache: Map.toUnfoldable cache :: Array _}
   let taggerStart = 0
   tagRef <- liftST $ ST.new $ taggerStart + 1
   let tagger = makeTagger tagRef
-  region <- liftST $ runSTFn3 Region.fromParent taggerStart Nothing
+  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) Nothing
     (DekuParent $ toDekuElement elt)
   doc <- window >>= document
   dummyElt <- createElement "div" (toDocument doc)
   dummyText <- createTextNode "dummy" (toDocument doc)
   let par = toParentNode elt
-  textNodes <- mapIdsToTextNodes elt
+  textNodes <- Map.fromFoldable <<< map (\{k,v} -> k /\ v) <$> mapIdsToTextNodes elt
   scope <- liftST $ runSTFn3 newPSR false lifecycle region
   void $ runEffectFn2 nut scope
-    (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt par)
+    (hydratingDOMInterpret tagger cache  textNodes dummyText dummyElt par)
   pure $ dispose unit
 
 hydrateInBody
-  :: Object HydrationRenderingInfo
+  :: Map.Map ElementId HydrationRenderingInfo
   -> Nut
   -> Effect (Effect Unit)
 hydrateInBody = doInBody <<< hydrateInElement

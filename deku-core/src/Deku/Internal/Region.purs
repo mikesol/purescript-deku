@@ -17,11 +17,13 @@ module Deku.Internal.Region
   , Bump
   , StaticRegionStats(..)
   , CurrentStaticRegionStats(..)
+  , elementIdToString
   , fromParent
   , newStaticRegion
   , newSpan
   , allocateRegion
   , printSpan
+  , ElementId(..)
   ) where
 
 import Prelude
@@ -35,11 +37,20 @@ import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Foldable (traverse_)
 import Data.Maybe (Maybe(..), isJust, maybe)
-import Data.Newtype (class Newtype)
+import Data.Newtype (class Newtype, un)
 import Deku.Internal.Entities (DekuElement, DekuParent, DekuText)
 import FRP.Event (createPure)
 import FRP.Poll (Poll, pollFromEvent, stRefToPoll)
 import Partial.Unsafe (unsafePartial)
+
+newtype ElementId = ElementId Int
+
+derive instance Newtype ElementId _
+derive newtype instance Eq ElementId
+derive newtype instance Ord ElementId
+
+elementIdToString :: ElementId -> String
+elementIdToString = show <<< un ElementId
 
 data Anchor
   = ParentStart DekuParent
@@ -75,7 +86,7 @@ newtype StaticRegion = StaticRegion
   { end :: Bound
   , region :: ST.ST Global Region
   , element :: STFn1 Anchor Global Unit
-  , tag :: Int
+  , tag :: ElementId
   , stats :: StaticRegionStats
   }
 
@@ -538,7 +549,7 @@ makeStaticRegionStats = mkSTFn1 \childCount -> do
           }
     }
 
-newStaticRegion :: STFn4 Int (Maybe Int) Bound Bump Global StaticRegion
+newStaticRegion :: STFn4 ElementId (Maybe Int) Bound Bump Global StaticRegion
 newStaticRegion = mkSTFn4 \tag childCount parentBound parentBump -> do
   spanCounter <- ST.new (-1) -- making the first span 0
   spanState <- ST.new $ Nothing @RegionSpan
@@ -612,7 +623,7 @@ newStaticRegion = mkSTFn4 \tag childCount parentBound parentBump -> do
         runSTFn1 parentBump $ Just anchor
     }
 
-fromParent :: STFn3 Int (Maybe Int) DekuParent Global StaticRegion
+fromParent :: STFn3 ElementId (Maybe Int) DekuParent Global StaticRegion
 fromParent =
   mkSTFn3 \tag childCount parent -> runSTFn4 newStaticRegion tag
     childCount

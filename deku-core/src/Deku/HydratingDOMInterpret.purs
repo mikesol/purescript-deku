@@ -5,22 +5,25 @@ import Prelude
 import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2)
+import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (class Newtype, un)
 import Data.Set as Set
-import Deku.Core (MakeElement, MakeText)
+import Debug (spy)
+import Deku.Core (AttrIndex, MakeElement, MakeText)
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Entities (toDekuElement, toDekuText)
+import Deku.Internal.Region (ElementId, elementIdToString)
 import Deku.Interpret as I
+import Effect.Console (logShow)
+import Effect.Exception (throwException, error)
 import Effect.Uncurried (mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn3)
-import Foreign.Object (Object)
-import Foreign.Object as Object
 import Web.DOM as Web.DOM
 import Web.DOM.ParentNode (QuerySelector(..), querySelector)
 
 newtype HydrationRenderingInfo = HydrationRenderingInfo
-  { attributeIndicesThatAreNeededDuringHydration :: Set.Set Int
+  { attributeIndicesThatAreNeededDuringHydration :: Set.Set AttrIndex
   , hasParentThatWouldDisqualifyFromSSR :: Boolean
   , hasChildrenThatWouldDisqualifyFromSSR :: Boolean
   , isBoring :: Boolean
@@ -29,17 +32,15 @@ newtype HydrationRenderingInfo = HydrationRenderingInfo
 derive instance Newtype HydrationRenderingInfo _
 
 makeElement
-  :: Object HydrationRenderingInfo
+  :: Map.Map ElementId HydrationRenderingInfo
   -> Web.DOM.Element
   -> Web.DOM.ParentNode
   -> MakeElement
 makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
-  let idS = show id
-  let ri = Object.lookup idS renderingInfo
-  let createNew = runEffectFn3 I.makeElementEffect id ns tag
+  let ri = Map.lookup id renderingInfo
   case ri of
     -- shouldn't happen
-    Nothing -> createNew
+    Nothing -> throwException $ error $ "makeElement: no rendering info for " <> elementIdToString id
     Just (HydrationRenderingInfo value) -> do
       case
         value.hasParentThatWouldDisqualifyFromSSR
@@ -51,30 +52,31 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id ns tag -> do
         of
         true -> do
           sel <- querySelector
-            (QuerySelector $ "[data-deku-ssr=\"" <> idS <> "\"]")
+            (QuerySelector $ "[data-deku-ssr=\"" <> elementIdToString id <> "\"]")
             parentNode
+          let ____ = spy "hydration info" { id, tag }
           case sel of
             -- shouldn't happen
-            Nothing -> createNew
+            Nothing -> throwException $ error $ "makeElement: no selector for " <> elementIdToString id
             Just el -> pure $ toDekuElement el
         false -> pure $ toDekuElement dummyElement
 
-makeText :: Object Web.DOM.Text -> Web.DOM.Text -> MakeText
+makeText :: Map.Map ElementId Web.DOM.Text -> Web.DOM.Text -> MakeText
 makeText textNodeCache dummyText = mkEffectFn3 \id _ _ -> pure $ toDekuText
-  case Object.lookup (show id) textNodeCache of
+  case Map.lookup id textNodeCache of
     Nothing -> dummyText
     Just t -> t
 
-shouldSkipAttribute :: Object HydrationRenderingInfo -> Int -> Int -> Boolean
+shouldSkipAttribute :: Map.Map ElementId HydrationRenderingInfo -> ElementId -> AttrIndex -> Boolean
 shouldSkipAttribute renderingInfo id ix = fromMaybe false do
-  ri <- Object.lookup (show id) renderingInfo
+  ri <- Map.lookup id renderingInfo
   pure $ not $ Set.member ix
     (un HydrationRenderingInfo ri).attributeIndicesThatAreNeededDuringHydration
 
 hydratingDOMInterpret
   :: ST.ST Global Int
-  -> Object HydrationRenderingInfo
-  -> Object Web.DOM.Text
+  -> Map.Map ElementId HydrationRenderingInfo
+  -> Map.Map ElementId Web.DOM.Text
   -> Web.DOM.Text
   -> Web.DOM.Element
   -> Web.DOM.ParentNode
@@ -95,8 +97,8 @@ hydratingDOMInterpret
     , dynamicDOMInterpret: \_ -> fullDOMInterpret tagger
     --
     , isBoring: \tag ->
-        maybe false (un HydrationRenderingInfo >>> _.isBoring) $ Object.lookup
-          (show tag)
+        maybe false (un HydrationRenderingInfo >>> _.isBoring) $ Map.lookup
+          tag
           renderingInfo
     , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
     , makeElement: makeElement renderingInfo dummyElement parentNode

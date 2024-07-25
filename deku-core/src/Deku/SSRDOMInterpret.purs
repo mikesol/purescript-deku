@@ -5,23 +5,28 @@ import Prelude
 import Control.Monad.ST as ST
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
+import Control.Monad.ST.Internal as STRef
 import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn3, runSTFn2, runSTFn3)
-import Data.Array as Array
+import Data.List (List)
+import Data.List as List
+import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
 import Data.Set (Set)
 import Data.Set as Set
-import Deku.Core (ChildId(..), MakeElement, ParentId(..), SetText, MakeText)
+import Debug (spy)
+import Deku.Core (AttrIndex, ChildId, MakeElement, MakeText, ParentId, SetText)
 import Deku.Core as Core
 import Deku.Internal.Entities (fromDekuElement)
-import Deku.Internal.Region (CurrentStaticRegionStats(..), StaticRegion(..), StaticRegionStats(..))
+import Deku.Internal.Region (CurrentStaticRegionStats(..), ElementId, StaticRegion(..), StaticRegionStats(..), elementIdToString)
 import Deku.Interpret as I
 import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn3, runEffectFn4)
-import Foreign.Object.ST (STObject, peek, poke)
 import Web.DOM as Web.DOM
 
+type SSRRenderingInfoCache = Map.Map ElementId SSRRenderingInfo
+
 newtype SSRRenderingInfo = SSRRenderingInfo
-  { attributeIndicesThatAreNeededDuringHydration :: Set Int
+  { attributeIndicesThatAreNeededDuringHydration :: Set AttrIndex
   , hasParentThatWouldDisqualifyFromSSR :: Boolean
   , hasChildrenThatWouldDisqualifyFromSSR :: Boolean
   , backingElement :: Maybe Web.DOM.Element
@@ -32,85 +37,103 @@ derive instance Newtype SSRRenderingInfo _
 initialSSRRenderingInfo :: SSRRenderingInfo
 initialSSRRenderingInfo = SSRRenderingInfo
   { attributeIndicesThatAreNeededDuringHydration: Set.empty
-  , hasParentThatWouldDisqualifyFromSSR: true
-  , hasChildrenThatWouldDisqualifyFromSSR: true
+  , hasParentThatWouldDisqualifyFromSSR: false
+  , hasChildrenThatWouldDisqualifyFromSSR: false
   , backingElement: Nothing
   }
 
 disqualifyFromStaticRendering
-  :: STObject Global SSRRenderingInfo -> STFn1 Int Global Unit
+  :: STRef.STRef Global SSRRenderingInfoCache -> STFn1 ElementId Global Unit
 disqualifyFromStaticRendering renderingInfo = mkSTFn1 \id -> do
-  let tag = show id
-  currentSSRRenderingInfo <- peek tag renderingInfo
-  void $ poke tag
-    ( over SSRRenderingInfo _
-        { hasParentThatWouldDisqualifyFromSSR = true
-        }
-        $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
+  void $ STRef.modify
+    ( Map.alter
+        ( \currentSSRRenderingInfo ->
+            Just
+              $ over SSRRenderingInfo _
+                  { hasParentThatWouldDisqualifyFromSSR = true
+                  }
+              $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
+        )
+        id
     )
     renderingInfo
 
 addElementToCache
-  :: STFn3 Int (STObject Global SSRRenderingInfo) Web.DOM.Element Global Unit
+  :: STFn3 ElementId (STRef.STRef Global SSRRenderingInfoCache) Web.DOM.Element
+       Global
+       Unit
 addElementToCache = mkSTFn3 \id renderingInfo elt -> do
-  let tag = show id
-  currentSSRRenderingInfo <- peek tag renderingInfo
-  void $ poke tag
-    ( over SSRRenderingInfo _
-        { backingElement = Just elt
-        }
-        $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
+
+  void $ STRef.modify
+    ( Map.alter
+        ( \currentSSRRenderingInfo ->
+            Just
+              $ over SSRRenderingInfo _
+                  { backingElement = Just elt
+                  }
+              $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
+        )
+        id
     )
     renderingInfo
 
 updateSSRRenderingInfo
-  :: STFn2 (STObject Global SSRRenderingInfo) StaticRegion Global Unit
+  :: STFn2 (STRef.STRef Global SSRRenderingInfoCache) StaticRegion Global Unit
 updateSSRRenderingInfo = mkSTFn2 \renderingInfo (StaticRegion region) -> do
   CurrentStaticRegionStats currentStats <-
     (un StaticRegionStats region.stats).getCurrentStaticRegionStats
-  let tag = show region.tag
   let
     containsOnlyElements = Just currentStats.numberOfChildrenThatAreElements ==
       currentStats.childCount
   let
     containsOnlyStaticText = currentStats.numberOfChildrenThatAreElements == 0
       && currentStats.numberOfChildrenThatAreStaticTextNodes == 1
-  currentSSRRenderingInfo <- peek tag renderingInfo
-  void $ poke tag
-    ( over SSRRenderingInfo _
-        { hasChildrenThatWouldDisqualifyFromSSR = not
-            (containsOnlyElements || containsOnlyStaticText)
-        }
-        $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
+  let _ = spy "updating with tag" { tag: region.tag, containsOnlyElements, containsOnlyStaticText }
+  void $ STRef.modify
+    ( Map.alter
+        ( \currentSSRRenderingInfo ->
+            Just
+              $ over SSRRenderingInfo _
+                  { hasChildrenThatWouldDisqualifyFromSSR = not
+                      (containsOnlyElements || containsOnlyStaticText)
+                  }
+              $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
+        )
+        region.tag
     )
     renderingInfo
 
 incrementElementCount
-  :: STObject Global SSRRenderingInfo -> STFn1 StaticRegion Global Unit
+  :: STRef.STRef Global SSRRenderingInfoCache -> STFn1 StaticRegion Global Unit
 incrementElementCount renderingInfo = mkSTFn1 \region -> do
   (un StaticRegionStats (un StaticRegion region).stats).incrementElementChildCount
   runSTFn2 updateSSRRenderingInfo renderingInfo region
 
 incrementPureTextCount
-  :: STObject Global SSRRenderingInfo -> STFn1 StaticRegion Global Unit
+  :: STRef.STRef Global SSRRenderingInfoCache -> STFn1 StaticRegion Global Unit
 incrementPureTextCount renderingInfo = mkSTFn1 \region -> do
   (un StaticRegionStats (un StaticRegion region).stats).incrementStaticTextChildCount
   runSTFn2 updateSSRRenderingInfo renderingInfo region
 
-makeElement :: STObject Global SSRRenderingInfo -> MakeElement
+makeElement :: STRef.STRef Global SSRRenderingInfoCache -> MakeElement
 makeElement renderingInfo = mkEffectFn3 \id ns tag -> do
   elt <- runEffectFn3 I.makeElementEffect id ns tag
   liftST $ runSTFn3 addElementToCache id renderingInfo (fromDekuElement elt)
   pure elt
 
 registerParentChildRelationship
-  :: STObject Global (Array String) -> STFn2 ParentId ChildId Global Unit
+  :: STRef.STRef Global (Map.Map ParentId (List ChildId))
+  -> STFn2 ParentId ChildId Global Unit
 registerParentChildRelationship parentChildCache = mkSTFn2
-  \(ParentId parent) (ChildId child) -> do
-    let tag = show parent
-    parentChildArray <- peek tag parentChildCache
-    void $ poke tag
-      (Array.cons (show child) $ fromMaybe [] parentChildArray)
+  \parent child -> do
+    void $ STRef.modify
+      ( Map.alter
+          ( \parentChildArray ->
+              Just
+                $ (List.Cons child $ fromMaybe List.Nil parentChildArray)
+          )
+          parent
+      )
       parentChildCache
 
 setText :: String -> SetText
@@ -129,35 +152,40 @@ makeText impureTextTag = mkEffectFn3 \id mtext doesNotNeedReferenceInDOM -> do
   runEffectFn3 I.makeTextEffect id
     ( Just $
         ( if doesNotNeedReferenceInDOM then ""
-          else show id <> "_" <> impureTextTag
+          else elementIdToString id <> "_" <> impureTextTag
         ) <>
           fromMaybe "" mtext
     )
     doesNotNeedReferenceInDOM
 
 markIndexAsNeedingHydration
-  :: STObject Global SSRRenderingInfo -> STFn2 Int Int Global Unit
+  :: STRef.STRef Global SSRRenderingInfoCache
+  -> STFn2 ElementId AttrIndex Global Unit
 markIndexAsNeedingHydration renderingInfo = mkSTFn2 \id ix -> do
-  let tag = show id
-  currentSSRRenderingInfo <- peek tag renderingInfo
-  void $ poke tag
-    ( over SSRRenderingInfo
-        ( \i@{ attributeIndicesThatAreNeededDuringHydration } ->
-            i
-              { attributeIndicesThatAreNeededDuringHydration = Set.insert
-                  ix
-                  attributeIndicesThatAreNeededDuringHydration
-              }
+  void $ STRef.modify
+    ( Map.alter
+        ( \currentSSRRenderingInfo ->
+            Just
+              $ over SSRRenderingInfo
+                  ( \i@{ attributeIndicesThatAreNeededDuringHydration } ->
+                      i
+                        { attributeIndicesThatAreNeededDuringHydration =
+                            Set.insert
+                              ix
+                              attributeIndicesThatAreNeededDuringHydration
+                        }
+                  )
+              $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
         )
-        $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
+        id
     )
     renderingInfo
 
 ssrDOMInterpret
   :: ST.ST Global Int
   -> String
-  -> STObject Global (Array String)
-  -> STObject Global SSRRenderingInfo
+  -> STRef.STRef Global (Map.Map ParentId (List ChildId))
+  -> STRef.STRef Global SSRRenderingInfoCache
   -> Core.DOMInterpret
 ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
   Core.DOMInterpret

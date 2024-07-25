@@ -9,6 +9,7 @@ import Data.Array as Array
 import Data.Filterable (compact, filter)
 import Data.Foldable (intercalate, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
+import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
@@ -21,6 +22,7 @@ import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo)
+import Deku.Internal.Region (ElementId)
 import Deku.Pursx (lenientPursx, pursx)
 import Deku.Toplevel (hydrateInBody, runInBody, ssrInBody)
 import Effect (Effect)
@@ -28,7 +30,6 @@ import Effect.Random (random)
 import Effect.Uncurried (mkEffectFn2, runEffectFn2)
 import FRP.Event (count, fold)
 import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
-import Foreign.Object (Object)
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
 import Web.HTML.Window (alert)
@@ -38,10 +39,10 @@ foreign import hackyInnerHTML :: String -> String -> Effect Unit
 runTest :: Nut -> Effect (Effect Unit)
 runTest = runInBody
 
-runSSR :: Nut -> Effect (Tuple String (Object HydrationRenderingInfo))
+runSSR :: Nut -> Effect (Tuple String (Map.Map ElementId HydrationRenderingInfo))
 runSSR = ssrInBody
 
-runHydration :: Object HydrationRenderingInfo -> Nut -> Effect Unit
+runHydration :: Map.Map ElementId  HydrationRenderingInfo -> Nut -> Effect Unit
 runHydration cache nut = void $ hydrateInBody cache nut
 
 sanityCheck :: Nut

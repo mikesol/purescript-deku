@@ -41,7 +41,7 @@ export const transformTextNodes = (element) => (dynTextTag) => () => {
 };
 
 export const mapIdsToTextNodes = (rootElement) => () => {
-  const result = {};
+  const result = [];
 
   // Create a TreeWalker to traverse the DOM tree and show all comments
   const treeWalker = document.createTreeWalker(
@@ -70,12 +70,12 @@ export const mapIdsToTextNodes = (rootElement) => () => {
       let nextNode = currentNode.nextSibling;
 
       if (nextNode && nextNode.nodeType === Node.TEXT_NODE) {
-        result[id] = nextNode;
+        result.push({ k: JSON.parse(id), v: nextNode });
       } else {
         // Create a new text node, insert it after the comment, and make it the value
         const newTextNode = document.createTextNode("");
         currentNode.parentNode.insertBefore(newTextNode, nextNode);
-        result[id] = newTextNode;
+        result.push({ k: JSON.parse(id), v: newTextNode });
       }
     }
   }

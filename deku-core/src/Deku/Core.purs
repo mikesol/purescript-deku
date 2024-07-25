@@ -13,6 +13,7 @@ module Deku.Core
   , Tag(..)
   , ParentId(..)
   , ChildId(..)
+  , AttrIndex(..)
   , MakeElement
   , SetCb
   , SetProp
@@ -95,10 +96,12 @@ import Data.Newtype (class Newtype, over, un)
 import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
+import Debug (spy)
 import Deku.Do as Deku
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
-import Deku.Internal.Region (Anchor(..), Bound, Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
+import Deku.Internal.Region (Anchor(..), Bound, ElementId(..), Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
 import Effect (Effect, forE)
+import Effect.Console (log)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
 import FRP.Event as Event
 import FRP.Event.Class (once)
@@ -137,7 +140,7 @@ unset' k = mkEffectFn4 \_ _ e (DOMInterpret { unsetAttribute }) ->
 
 -- TODO: get rid of `Element` type
 type Attribute' =
-  EffectFn4 Int Int Element DOMInterpret Unit
+  EffectFn4 ElementId AttrIndex Element DOMInterpret Unit
 
 -- | Low level representation of key-value pairs for attributes and listeners.
 -- | In general, this type is for internal use only.
@@ -150,7 +153,7 @@ unsafeUnAttribute = coerce
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
-  :: forall e. EffectFn4 Int Int Element DOMInterpret Unit -> Attribute e
+  :: forall e. EffectFn4 ElementId AttrIndex Element DOMInterpret Unit -> Attribute e
 unsafeAttribute = Attribute
 
 dynamicKeywords :: Set.Set String
@@ -178,7 +181,7 @@ newtype Namespace = Namespace String
 
 -- | Type used by Deku backends to create an element. For internal use only unless you're writing a custom backend.
 type MakeElement =
-  EffectFn3 Int (Maybe Namespace) Tag DekuElement
+  EffectFn3 ElementId (Maybe Namespace) Tag DekuElement
 
 type RemoveElement = EffectFn1 DekuElement Unit
 type RemoveText = EffectFn1 DekuText Unit
@@ -193,7 +196,7 @@ type AttachText =
 
 -- | Type used by Deku backends to construct a text element. For internal use only unless you're writing a custom
 -- | backend.
-type MakeText = EffectFn3 Int (Maybe String) Boolean DekuText
+type MakeText = EffectFn3 ElementId (Maybe String) Boolean DekuText
 
 -- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom
 -- | backend.
@@ -226,9 +229,19 @@ type BufferPortal = Effect DekuParent
 newtype ParentId = ParentId Int
 
 derive instance Newtype ParentId _
+derive newtype instance Eq ParentId
+derive newtype instance Ord ParentId
 newtype ChildId = ChildId Int
 
 derive instance Newtype ChildId _
+derive newtype instance Eq ChildId
+derive newtype instance Ord ChildId
+
+newtype AttrIndex = AttrIndex Int
+
+derive instance Newtype AttrIndex _
+derive newtype instance Eq AttrIndex
+derive newtype instance Ord AttrIndex
 
 -- | This is the interpreter that any Deku backend creator needs to impelement.
 -- | Three interpreters are included with Deku: SPA.
@@ -237,12 +250,12 @@ newtype DOMInterpret = DOMInterpret
   { tagger :: ST.ST Global Int
   , dynamicDOMInterpret :: Unit -> DOMInterpret
   , registerParentChildRelationship :: STFn2 ParentId ChildId Global Unit
-  , disqualifyFromStaticRendering :: STFn1 Int Global Unit
-  , isBoring :: Int -> Boolean
+  , disqualifyFromStaticRendering :: STFn1 ElementId Global Unit
+  , isBoring :: ElementId -> Boolean
   , makeElement :: MakeElement
   , incrementElementCount :: STFn1 StaticRegion Global Unit
-  , shouldSkipAttribute :: Int -> Int -> Boolean
-  , markIndexAsNeedingHydration :: STFn2 Int Int Global Unit
+  , shouldSkipAttribute :: ElementId -> AttrIndex -> Boolean
+  , markIndexAsNeedingHydration :: STFn2 ElementId AttrIndex Global Unit
   , setProp :: SetProp
   , setCb :: SetCb
   , unsetAttribute :: UnsetAttribute
@@ -373,7 +386,7 @@ instance Semigroup Nut where
     -- unrolled version of `fixed`
     Nut $ mkEffectFn2 \psr di -> do
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
-      emptyScope <- liftST $ runSTFn3 newPSR true (un PSR psr).lifecycle
+      emptyScope <- liftST $ runSTFn3 newPSR false (un PSR psr).lifecycle
         (un PSR psr).region
 
       runEffectFn2 a emptyScope di
@@ -562,7 +575,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
           else (un DOMInterpret di').dynamicDOMInterpret unit
       Region eltRegion <- liftST $ runSTFn2 allocateRegion initialPos span
       tag <- liftST (un DOMInterpret di).tagger
-      staticRegion <- liftST $ runSTFn4 newStaticRegion tag Nothing
+      staticRegion <- liftST $ runSTFn4 newStaticRegion (ElementId tag) Nothing
         eltRegion.begin
         eltRegion.bump
       eltSendTo <- liftST Poll.create
@@ -606,7 +619,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
 
 fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2 \psr di -> do
-  emptyScope <- liftST $ runSTFn3 newPSR true (un PSR psr).lifecycle
+  emptyScope <- liftST $ runSTFn3 newPSR false (un PSR psr).lifecycle
     (un PSR psr).region
   let
     handleNuts :: EffectFn1 Nut Unit
@@ -627,27 +640,32 @@ elementify
   -> Nut
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   id <- liftST (un DOMInterpret di).tagger
-  let isBoring = (un DOMInterpret di).isBoring id
-  when true do -- when (not isBoring) do
+  -- let _ = spy "starting elementify" true
+  let isBoring = (un DOMInterpret di).isBoring (ElementId id)
+  -- when isBoring (log "booooooring")
+  when true do -- (not isBoring) do
     liftST $ runSTFn2 (un DOMInterpret di).registerParentChildRelationship
-      (ParentId (un StaticRegion (un PSR psr).region).tag)
+      (ParentId (un ElementId (un StaticRegion (un PSR psr).region).tag))
       (ChildId id)
-    elt <- runEffectFn3 (un DOMInterpret di).makeElement id (Namespace <$> ns)
+    let _ = spy "creating elt with info" { id, tag }
+    elt <- runEffectFn3 (un DOMInterpret di).makeElement (ElementId id) (Namespace <$> ns)
       (Tag tag)
     regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
     liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
       (Element (elt))
 
     when (un PSR psr).disqualifyFromStaticRendering do
-      liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering id
-    eltRegion <- liftST $ runSTFn3 fromParent id (Just (length nuts)) $
+      liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering (ElementId id)
+      -- let _ = spy "disqualifying from static rendering" id
+      pure unit
+    eltRegion <- liftST $ runSTFn3 fromParent (ElementId id) (Just (length nuts)) $
       DekuParent
         elt
     runEffectFn2 deferO psr do
       runEffectFn1 (un DOMInterpret di).removeElement elt
 
     let
-      handleAtts :: Int -> Poll (Attribute element) -> Effect Unit
+      handleAtts :: AttrIndex -> Poll (Attribute element) -> Effect Unit
       handleAtts ix atts =
         pump' psr atts $ \useOriginalDi -> do
           let
@@ -655,19 +673,19 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
               if useOriginalDi then di
               else (un DOMInterpret di).dynamicDOMInterpret unit
           mkEffectFn1 \(Attribute x) ->
-            runEffectFn4 x id ix (fromDekuElement elt) newDi
+            runEffectFn4 x (ElementId id) ix (fromDekuElement elt) newDi
 
     -- todo: in hydration, we don't need to set attributes
     -- that are already set
     -- it's easier to set them, but if there's a perf speedup in not setting
     -- them, then we should code up a mechanism to skip it
     forWithIndex_ arrAtts \ix att -> do
-      when (not (un DOMInterpret di).shouldSkipAttribute id ix) do
+      when (not (un DOMInterpret di).shouldSkipAttribute (ElementId id) (AttrIndex ix)) do
         case att of
           OnlyPure _ -> pure unit
           _ -> liftST $ runSTFn2
-                  (un DOMInterpret di).markIndexAsNeedingHydration id ix
-        handleAtts ix att
+                  (un DOMInterpret di).markIndexAsNeedingHydration (ElementId id) (AttrIndex ix)
+        handleAtts (AttrIndex ix) att
 
     let
       handleNuts :: EffectFn1 Nut Unit
@@ -697,31 +715,31 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
       let
         doesNotNeedReferenceInDOM = not
           (un PSR psr).disqualifyFromStaticRendering
-      txt <- runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs)
+      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id) (Array.last xs)
         doesNotNeedReferenceInDOM
       pure { txt, doesNotNeedReferenceInDOM }
 
     OnlyEvent _ -> do
       let doesNotNeedReferenceInDOM = false
-      txt <- runEffectFn3 (un DOMInterpret di).makeText id Nothing
+      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id) Nothing
         doesNotNeedReferenceInDOM
       pure { txt, doesNotNeedReferenceInDOM }
 
     OnlyPoll _ -> do
       let doesNotNeedReferenceInDOM = false
-      txt <- runEffectFn3 (un DOMInterpret di).makeText id Nothing
+      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id) Nothing
         doesNotNeedReferenceInDOM
       pure { txt, doesNotNeedReferenceInDOM }
 
     PureAndEvent xs _ -> do
       let doesNotNeedReferenceInDOM = false
-      txt <- runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs)
+      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id) (Array.last xs)
         doesNotNeedReferenceInDOM
       pure { txt, doesNotNeedReferenceInDOM }
 
     PureAndPoll xs _ -> do
       let doesNotNeedReferenceInDOM = false
-      txt <- runEffectFn3 (un DOMInterpret di).makeText id (Array.last xs)
+      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id) (Array.last xs)
         doesNotNeedReferenceInDOM
       pure { txt, doesNotNeedReferenceInDOM }
 
@@ -781,7 +799,7 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
   bumped <- liftST Event.createPure
 
   tag <- liftST (un DOMInterpret di).tagger
-  staticBuffer <- liftST $ runSTFn4 newStaticRegion tag Nothing
+  staticBuffer <- liftST $ runSTFn4 newStaticRegion (ElementId tag) Nothing
     (join $ ST.read trackBegin)
     ( mkSTFn1 \bound -> do
         void $ ST.write bound trackEnd
