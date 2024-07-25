@@ -189,6 +189,20 @@ insertsAtCorrectPositions = D.div [ DA.id_ "div0" ]
       D.span [ DA.id_ ("dyn" <> show i) ] [ text_ (show i) ]
   ]
 
+nestedInpureDyn :: Nut
+nestedInpureDyn = Deku.do
+  pushClick /\ click <- useState'
+  
+  D.div [ DA.id_ "div0" ] 
+    [ text_ "start"
+    , Deku.do
+      { value } <- useDynAtEnd ( mergeMap pure [ 0, 1, 2, 3 ] )
+      _ <- useDynAtEnd click
+      D.span [ DA.id_ $ "dyn" <> show value ] [ text_ $ show value ]
+    
+    , D.span [ DA.id_ "action", DL.click_ \_ -> pushClick unit ] [ text_ "end" ]
+    ]
+
 switcherWorksForCompositionalElements :: Nut
 switcherWorksForCompositionalElements = Deku.do
   let

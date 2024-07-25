@@ -214,7 +214,7 @@ printSpan = mkSTFn1 \(RegionSpan { children }) -> do
 
 allocateRegion :: STFn2 (Maybe Int) RegionSpan Global Region
 allocateRegion = mkSTFn2
-  \givenPos (RegionSpan { children, bump: parentBump }) -> do
+  \givenPos span@(RegionSpan { children, bump: parentBump }) -> do
     managed@{ position, ix } <- runSTFn2 insertManaged givenPos children
     let
       begin :: Bound
@@ -228,9 +228,9 @@ allocateRegion = mkSTFn2
       bump :: Bump
       bump = mkSTFn1 case _ of
         Nothing -> do
+          wasLast <- runSTFn2 isLastBound managed children
           runSTFn2 clearBound managed children
-          whenM (runSTFn1 isClear children) do
-            runSTFn1 parentBump Nothing
+          runSTFn3 updateParent wasLast managed span
 
         b@(Just anchor) -> do
           runSTFn3 bumpBound anchor managed children
@@ -268,11 +268,10 @@ allocateRegion = mkSTFn2
           removed <- STArray.splice lastIx 1 [] children
           void $ STArray.splice pos 0 removed children
 
+          -- restoring indices
+          runSTFn3 fixManaged (min lastIx pos) updateIx children
           newBegin <- runSTFn2 shareBound managed.ix children
           void $ ST.write newBegin managed.end
-
-        -- restoring indices
-        runSTFn3 fixManaged (min lastIx pos) updateIx children
 
         -- if we had any elements we signal a bump, this requires the indices to be valid so we do it last
         ST.read lastAnchor >>= traverse_ \anchor -> runSTFn3 bumpBound anchor
@@ -280,9 +279,7 @@ allocateRegion = mkSTFn2
           children
 
         -- update parent when necessary
-        nowLast <- runSTFn2 isLastBound managed children
-        when (wasLast /= nowLast) do
-          runSTFn2 rebumpLast parentBump children
+        runSTFn3 updateParent wasLast managed span
 
       remove :: ST.ST Global Unit
       remove = do
@@ -313,22 +310,19 @@ beginBound = mkSTFn2 \region children -> do
   sbound <- ST.read prev.end
   sbound.bound
 
--- | Determines the final `Bound` and runs the provided effect on it.
--- | ASSUMES that the last element is not the parent.
-rebumpLast :: STFn2 Bump Children Global Unit
-rebumpLast = mkSTFn2 \bump children -> do
-  last <- runSTFn1 lastRegion children
-  end <- ST.read last.end
-  anchor <- end.bound
-  runSTFn1 bump $ Just anchor
-
--- | Uses the bound information to infer if the whole span is empty.
-isClear :: STFn1 Children Global Boolean
-isClear = mkSTFn1 \children -> do
-  last <- runSTFn1 lastRegion children
-  end <- ST.read last.end
-  owner <- join $ ST.read end.owner
-  pure (owner == 0) -- the last element of the span uses the parent as its end so we have no non-empty elements
+-- | Determines the whether the final `Bound`, determines the final `Bound` and runs the `Bump` effect on it.
+updateParent :: STFn3 Boolean ManagedRegion RegionSpan Global Unit
+updateParent = mkSTFn3 \wasLast managed (RegionSpan { bump, children }) -> do
+  nowLast <- runSTFn2 isLastBound managed children
+  when (wasLast /= nowLast) do
+    last <- runSTFn1 lastRegion children
+    end <- ST.read last.end
+    ownerIx <- join $ ST.read end.owner
+    if ownerIx == 0 then
+      runSTFn1 bump Nothing
+    else do
+      anchor <- end.bound
+      runSTFn1 bump $ Just anchor
 
 isEmpty :: STFn1 ManagedRegion Global Boolean
 isEmpty = mkSTFn1 \{ ix, end } -> do
@@ -336,7 +330,7 @@ isEmpty = mkSTFn1 \{ ix, end } -> do
   -- if the `ManagedRegion` does not own its end it's considered empty
   notEq <$> (join $ ST.read owner) <*> ix
 
--- | Returns whether the `ManagedRegion` controls the ending bound of the whole span.
+-- | Returns whether the given `ManagedRegion` controls the ending bound of the whole span.
 isLastBound
   :: STFn2 ManagedRegion Children Global Boolean
 isLastBound = mkSTFn2 \region children -> do
