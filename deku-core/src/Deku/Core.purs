@@ -666,27 +666,12 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
       runEffectFn2 nut psr di
 
   else do
-    liftST $ runSTFn2 (un DOMInterpret di).registerParentChildRelationship
-      (ParentId (un ElementId (un StaticRegion (un PSR psr).region).tag))
-      (ChildId id)
     elt <- runEffectFn3 (un DOMInterpret di).makeElement (ElementId id)
       (Namespace <$> ns)
       (Tag tag)
     regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
     liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
       (Element (elt))
-
-    when (un PSR psr).disqualifyFromStaticRendering do
-      liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering
-        (ElementId id)
-      pure unit
-    eltRegion <- liftST
-      $ runSTFn3 fromParent (ElementId id) (Just (length nuts))
-      $
-        DekuParent
-          elt
-
-    liftST $ runSTFn1 (un DOMInterpret di).initializeRendering eltRegion
 
     runEffectFn2 deferO psr do
       runEffectFn1 (un DOMInterpret di).removeElement elt
@@ -701,6 +686,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
               else (un DOMInterpret di).dynamicDOMInterpret unit
           mkEffectFn1 \(Attribute x) ->
             runEffectFn4 x (ElementId id) ix (fromDekuElement elt) newDi
+
 
     -- todo: in hydration, we don't need to set attributes
     -- that are already set
@@ -719,6 +705,27 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
               (ElementId id)
               (AttrIndex ix)
           handleAtts (AttrIndex ix) att
+          
+    eltRegion <- liftST
+      $ runSTFn3 fromParent (ElementId id) (Just (length nuts))
+      $  DekuParent   elt
+
+    ---
+    --- ssr management
+    liftST $ runSTFn2 (un DOMInterpret di).registerParentChildRelationship
+      (ParentId (un ElementId (un StaticRegion (un PSR psr).region).tag))
+      (ChildId id)
+
+    when (un PSR psr).disqualifyFromStaticRendering do
+      liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering
+        (ElementId id)
+
+    liftST $ runSTFn1 (un DOMInterpret di).initializeRendering eltRegion
+
+    liftST $ runSTFn1 (un DOMInterpret di).incrementElementCount
+      (un PSR psr).region
+    --- end ssr management
+    ---
 
     let
       handleNuts :: EffectFn1 Nut Unit
@@ -726,13 +733,8 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         scope <- liftST $ runSTFn3 newPSR false (un PSR psr).lifecycle eltRegion
         runEffectFn2 nut scope di
     runEffectFn2 Event.fastForeachE nuts handleNuts
-    liftST $ runSTFn1 (un DOMInterpret di).incrementElementCount
-      (un PSR psr).region
+
     runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
-
-    runEffectFn2 deferO psr do
-      runEffectFn1 (un DOMInterpret di).removeElement elt
-
     runEffectFn1 handleScope psr
 
 text_ :: String -> Nut
