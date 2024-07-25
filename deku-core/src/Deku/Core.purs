@@ -596,7 +596,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
             [ options.remove value, eltRemove.poll, (un PSR psr).lifecycle ]
 
       eltLifecycle <- liftST Poll.create
-      eltPSR <- liftST $ runSTFn3 newPSR true remove staticRegion
+      eltPSR <- liftST $ runSTFn3 newPSR true eltLifecycle.poll staticRegion
       let
         Nut nut = cont
           { value

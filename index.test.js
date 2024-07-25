@@ -475,7 +475,7 @@ describe("deku", () => {
       })
     );
 
-    doFullTest("portals compose", (f) =>
+    doTest("portals compose", (f) =>
       f(tests.portalsCompose, () => {
         const $ = require("jquery");
         // d0, then abc, then d1, then d2, then the button
@@ -486,7 +486,7 @@ describe("deku", () => {
         $("#incr").trigger("click");
         // shifts the portal
         expect($("#maindiv").text()).toBe("d0d1d2abcincr");
-      }), it.only
+      })
     );
 
     doFullTest("empty switches", (f) =>
