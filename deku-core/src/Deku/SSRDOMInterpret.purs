@@ -55,15 +55,18 @@ initializeElementRendering
   -> STFn4 ElementId DekuElement Int Boolean Global Unit
 initializeElementRendering renderingInfo = mkSTFn4
   \id backingElement childCount hasParentThatWouldDisqualifyFromSSR -> do
-    runSTFn3 updateRenderingInfo id
-      ( const $ SSRElementRenderingInfo
-          { attributeIndicesThatAreNeededDuringHydration: Set.empty
-          , hasParentThatWouldDisqualifyFromSSR
-          , childCount
-          , numberOfChildrenThatAreElements: 0
-          , numberOfChildrenThatAreStaticTextNodes: 0
-          , backingElement
-          }
+    void $ STRef.modify
+      ( Map.alter
+          ( const $ Just $ SSRElementRenderingInfo
+              { attributeIndicesThatAreNeededDuringHydration: Set.empty
+              , hasParentThatWouldDisqualifyFromSSR
+              , childCount
+              , numberOfChildrenThatAreElements: 0
+              , numberOfChildrenThatAreStaticTextNodes: 0
+              , backingElement
+              }
+          )
+          id
       )
       renderingInfo
 
@@ -117,12 +120,15 @@ initializeTextRendering
   -> STFn4 ElementId DekuText Boolean Boolean Global Unit
 initializeTextRendering renderingInfo = mkSTFn4
   \id backingText isVolatile hasParentThatWouldDisqualifyFromSSR -> do
-    runSTFn3 updateRenderingInfo id
-      ( const $ SSRTextRenderingInfo
-          { hasParentThatWouldDisqualifyFromSSR
-          , isVolatile
-          , backingText
-          }
+    void $ STRef.modify
+      ( Map.alter
+          ( const $ Just $ SSRTextRenderingInfo
+              { hasParentThatWouldDisqualifyFromSSR
+              , isVolatile
+              , backingText
+              }
+          )
+          id
       )
       renderingInfo
 

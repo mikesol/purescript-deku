@@ -82,3 +82,46 @@ export const mapIdsToTextNodes = (rootElement) => () => {
 
   return result;
 };
+
+export const traverseDOMAndConstructParentChildMapping = (elt) => (dynTextTag) => () => {
+  const pattern = new RegExp(`^(\\d+)_${dynTextTag}(.*)$`);
+  const parentChildMap = {};
+
+  function traverse(node, parentId = null) {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+          const ssrId = node.getAttribute('data-deku-ssr');
+          if (ssrId) {
+              const id = parseInt(ssrId, 10);
+              if (!parentChildMap[id]) {
+                  parentChildMap[id] = [];
+              }
+              if (parentId !== null) {
+                  parentChildMap[parentId].push(id);
+              }
+              parentId = id; // Update the parentId for child elements
+          }
+      } else if (node.nodeType === Node.TEXT_NODE) {
+          const match = node.textContent.trim().match(pattern);
+          if (match) {
+              const textId = parseInt(match[1], 10);
+              if (!parentChildMap[textId]) {
+                  parentChildMap[textId] = [];
+              }
+              if (parentId !== null) {
+                  parentChildMap[parentId].push(textId);
+              }
+          }
+      }
+
+      node.childNodes.forEach(child => traverse(child, parentId));
+  }
+
+  traverse(elt);
+
+  const result = Object.entries(parentChildMap).map(([parent, children]) => ({
+      parent: parseInt(parent, 10),
+      children: children.map(child => parseInt(child, 10))
+  }));
+
+  return result;
+}

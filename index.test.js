@@ -33,6 +33,7 @@ const doSSRTest = (name, closure, itIs) => {
         '<head></head><body id="mybody"></body>';
       const res = tests.runSSR(myTest)();
       const html = res.html
+      console.log('html', html);
       document.getElementsByTagName(
         "html"
       )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
@@ -521,7 +522,7 @@ describe("deku", () => {
       })
     );
 
-    doTest("lots of switching!", (f) =>
+    doSSRTest("lots of switching!", (f) =>
       f(tests.lotsOfSwitching, () => {
         const $ = require("jquery");
         expect($("#hack").text()).toBe("hello");
@@ -535,7 +536,7 @@ describe("deku", () => {
         expect($("#hack").text()).toBe("goodbye");
         $("#home-btn").trigger("click");
         expect($("#hack").text()).toBe("hello");
-      })
+      }), it.only
     );
 
     doTest("attributes are correctly unset", (f) =>
