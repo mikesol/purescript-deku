@@ -393,6 +393,17 @@ describe("deku", () => {
       })
     );
 
+    doTest("pure switcher works", (f) =>
+      f(tests.slightlyLessPureSwitcher, () => {
+        const $ = require("jquery");
+        expect($("#content").text()).toBe("foo4");
+        $("#incr").trigger("click");
+        expect($("#content").text()).toBe("foo5");
+        $("#reset").trigger("click")
+        expect($("#content").text()).toBe("foo4")
+      })
+    );
+
     doTest("tabbed navigation with pursx has correct layout", (f) =>
       f(tests.tabbedNavigationWithPursx, () => {
         const $ = require("jquery");
