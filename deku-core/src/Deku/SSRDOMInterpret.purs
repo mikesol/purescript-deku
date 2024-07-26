@@ -3,207 +3,156 @@ module Deku.SSRDOMInterpret where
 import Prelude
 
 import Control.Monad.ST as ST
-import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as STRef
-import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn3, runSTFn2, runSTFn3)
-import Data.List (List)
-import Data.List as List
+import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, STFn4, mkSTFn1, mkSTFn2, mkSTFn3, mkSTFn4, runSTFn3)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Newtype (class Newtype, over, un)
+import Data.Newtype (class Newtype, over)
 import Data.Set (Set)
 import Data.Set as Set
-import Deku.Core (AttrIndex, ChildId, MakeElement, MakeText, ParentId, SetText)
+import Deku.Core (AttrIndex, MakeText, SetText)
 import Deku.Core as Core
-import Deku.Internal.Entities (fromDekuElement)
-import Deku.Internal.Region (CurrentStaticRegionStats(..), ElementId, StaticRegion(..), StaticRegionStats(..), elementIdToString)
+import Deku.Internal.Entities (DekuElement, DekuText)
+import Deku.Internal.Region (ElementId, elementIdToString)
 import Deku.Interpret as I
-import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn3, runEffectFn4)
-import Web.DOM as Web.DOM
+import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn2, runEffectFn3)
 
-type SSRRenderingInfoCache = Map.Map ElementId SSRRenderingInfo
-
-newtype SSRRenderingInfo = SSRRenderingInfo
-  { attributeIndicesThatAreNeededDuringHydration :: Set AttrIndex
-  , hasParentThatWouldDisqualifyFromSSR :: Boolean
-  , hasChildrenThatWouldDisqualifyFromSSR :: Boolean
-  , backingElement :: Maybe Web.DOM.Element
-  }
-
-derive instance Newtype SSRRenderingInfo _
-
-initialSSRRenderingInfo :: SSRRenderingInfo
-initialSSRRenderingInfo = SSRRenderingInfo
-  { attributeIndicesThatAreNeededDuringHydration: Set.empty
-  , hasParentThatWouldDisqualifyFromSSR: false
-  , hasChildrenThatWouldDisqualifyFromSSR: false
-  , backingElement: Nothing
-  }
-
-disqualifyFromStaticRendering
-  :: STRef.STRef Global SSRRenderingInfoCache -> STFn1 ElementId Global Unit
-disqualifyFromStaticRendering renderingInfo = mkSTFn1 \id -> do
-  void $ STRef.modify
-    ( Map.alter
-        ( \currentSSRRenderingInfo ->
-            Just
-              $ over SSRRenderingInfo _
-                  { hasParentThatWouldDisqualifyFromSSR = true
-                  }
-              $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
-        )
-        id
-    )
-    renderingInfo
-
-addElementToCache
-  :: STFn3 ElementId (STRef.STRef Global SSRRenderingInfoCache) Web.DOM.Element
+updateRenderingInfo
+  :: forall k a
+   . Ord k
+  => STFn3 k (a -> a)
+       (STRef.STRef Global (Map.Map k a))
        Global
        Unit
-addElementToCache = mkSTFn3 \id renderingInfo elt -> do
+updateRenderingInfo = mkSTFn3 \id fn renderingInfo -> do
+  void $ STRef.modify (Map.alter (map fn) id) renderingInfo
 
-  void $ STRef.modify
-    ( Map.alter
-        ( \currentSSRRenderingInfo ->
-            Just
-              $ over SSRRenderingInfo _
-                  { backingElement = Just elt
-                  }
-              $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
-        )
-        id
-    )
-    renderingInfo
+type SSRElementRenderingInfoCache = Map.Map ElementId SSRElementRenderingInfo
 
-updateSSRRenderingInfo
-  :: STFn2 (STRef.STRef Global SSRRenderingInfoCache) StaticRegion Global Unit
-updateSSRRenderingInfo = mkSTFn2 \renderingInfo (StaticRegion region) -> do
-  CurrentStaticRegionStats currentStats <-
-    (un StaticRegionStats region.stats).getCurrentStaticRegionStats
-  let
-    containsOnlyElements = Just currentStats.numberOfChildrenThatAreElements ==
-      currentStats.childCount
-  let
-    containsOnlyStaticText = currentStats.numberOfChildrenThatAreElements == 0
-      && currentStats.numberOfChildrenThatAreStaticTextNodes == 1
-  void $ STRef.modify
-    ( Map.alter
-        ( \currentSSRRenderingInfo ->
-            Just
-              $ over SSRRenderingInfo _
-                  { hasChildrenThatWouldDisqualifyFromSSR = not
-                      (containsOnlyElements || containsOnlyStaticText)
-                  }
-              $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
-        )
-        region.tag
-    )
-    renderingInfo
+newtype SSRElementRenderingInfo = SSRElementRenderingInfo
+  { attributeIndicesThatAreNeededDuringHydration :: Set AttrIndex
+  , hasParentThatWouldDisqualifyFromSSR :: Boolean
+  , childCount :: Int
+  , numberOfChildrenThatAreElements :: Int
+  , numberOfChildrenThatAreStaticTextNodes :: Int
+  , backingElement :: DekuElement
+  }
+
+derive instance Newtype SSRElementRenderingInfo _
 
 incrementElementCount
-  :: STRef.STRef Global SSRRenderingInfoCache -> STFn1 StaticRegion Global Unit
-incrementElementCount renderingInfo = mkSTFn1 \region -> do
-  (un StaticRegionStats (un StaticRegion region).stats).incrementElementChildCount
-  runSTFn2 updateSSRRenderingInfo renderingInfo region
+  :: STRef.STRef Global SSRElementRenderingInfoCache
+  -> STFn1 ElementId Global Unit
+incrementElementCount renderingInfo = mkSTFn1 \id -> do
+  runSTFn3 updateRenderingInfo id f renderingInfo
+  where
+  f = over SSRElementRenderingInfo \r -> r
+    { numberOfChildrenThatAreElements = r.numberOfChildrenThatAreElements + 1 }
 
-initializeRendering
-  :: STRef.STRef Global SSRRenderingInfoCache -> STFn1 StaticRegion Global Unit
-initializeRendering renderingInfo = mkSTFn1 \region -> do
-  runSTFn2 updateSSRRenderingInfo renderingInfo region
+initializeElementRendering
+  :: STRef.STRef Global SSRElementRenderingInfoCache
+  -> STFn4 ElementId DekuElement Int Boolean Global Unit
+initializeElementRendering renderingInfo = mkSTFn4
+  \id backingElement childCount hasParentThatWouldDisqualifyFromSSR -> do
+    runSTFn3 updateRenderingInfo id
+      ( const $ SSRElementRenderingInfo
+          { attributeIndicesThatAreNeededDuringHydration: Set.empty
+          , hasParentThatWouldDisqualifyFromSSR
+          , childCount
+          , numberOfChildrenThatAreElements: 0
+          , numberOfChildrenThatAreStaticTextNodes: 0
+          , backingElement
+          }
+      )
+      renderingInfo
 
 incrementPureTextCount
-  :: STRef.STRef Global SSRRenderingInfoCache -> STFn1 StaticRegion Global Unit
-incrementPureTextCount renderingInfo = mkSTFn1 \region -> do
-  (un StaticRegionStats (un StaticRegion region).stats).incrementStaticTextChildCount
-  runSTFn2 updateSSRRenderingInfo renderingInfo region
-
-makeElement :: STRef.STRef Global SSRRenderingInfoCache -> MakeElement
-makeElement renderingInfo = mkEffectFn3 \id ns tag -> do
-  elt <- runEffectFn3 I.makeElementEffect id ns tag
-  liftST $ runSTFn3 addElementToCache id renderingInfo (fromDekuElement elt)
-  pure elt
-
-registerParentChildRelationship
-  :: STRef.STRef Global (Map.Map ParentId (List ChildId))
-  -> STFn2 ParentId ChildId Global Unit
-registerParentChildRelationship parentChildCache = mkSTFn2
-  \parent child -> do
-    void $ STRef.modify
-      ( Map.alter
-          ( \parentChildArray ->
-              Just
-                $ (List.Cons child $ fromMaybe List.Nil parentChildArray)
-          )
-          parent
-      )
-      parentChildCache
+  :: STRef.STRef Global SSRElementRenderingInfoCache
+  -> STFn1 ElementId Global Unit
+incrementPureTextCount renderingInfo = mkSTFn1 \id -> do
+  runSTFn3 updateRenderingInfo id f renderingInfo
+  where
+  f = over SSRElementRenderingInfo \r -> r
+    { numberOfChildrenThatAreStaticTextNodes =
+        r.numberOfChildrenThatAreStaticTextNodes + 1
+    }
 
 setText :: String -> SetText
-setText impureTextTag = mkEffectFn4 \id txt elt doesNotNeedReferenceInDOM -> do
-  runEffectFn4 I.setTextEffect id
-    ( ( if doesNotNeedReferenceInDOM then ""
-        else show id <> "_" <> impureTextTag
-      ) <>
-        txt
+setText impureTextTag = mkEffectFn3 \id txt elt -> do
+  runEffectFn3 I.setTextEffect id
+    ( show id <> "_" <> impureTextTag <> txt
     )
     elt
-    doesNotNeedReferenceInDOM
-
-makeText :: String -> MakeText
-makeText impureTextTag = mkEffectFn3 \id mtext doesNotNeedReferenceInDOM -> do
-  runEffectFn3 I.makeTextEffect id
-    ( Just $
-        ( if doesNotNeedReferenceInDOM then ""
-          else elementIdToString id <> "_" <> impureTextTag
-        ) <>
-          fromMaybe "" mtext
-    )
-    doesNotNeedReferenceInDOM
 
 markIndexAsNeedingHydration
-  :: STRef.STRef Global SSRRenderingInfoCache
+  :: STRef.STRef Global SSRElementRenderingInfoCache
   -> STFn2 ElementId AttrIndex Global Unit
 markIndexAsNeedingHydration renderingInfo = mkSTFn2 \id ix -> do
-  void $ STRef.modify
-    ( Map.alter
-        ( \currentSSRRenderingInfo ->
-            Just
-              $ over SSRRenderingInfo
-                  ( \i@{ attributeIndicesThatAreNeededDuringHydration } ->
-                      i
-                        { attributeIndicesThatAreNeededDuringHydration =
-                            Set.insert
-                              ix
-                              attributeIndicesThatAreNeededDuringHydration
-                        }
-                  )
-              $ fromMaybe initialSSRRenderingInfo currentSSRRenderingInfo
+  runSTFn3 updateRenderingInfo id
+    ( over SSRElementRenderingInfo
+        ( \i@{ attributeIndicesThatAreNeededDuringHydration } ->
+            i
+              { attributeIndicesThatAreNeededDuringHydration =
+                  Set.insert
+                    ix
+                    attributeIndicesThatAreNeededDuringHydration
+              }
         )
-        id
     )
     renderingInfo
+
+type SSRTextRenderingInfoCache = Map.Map ElementId SSRTextRenderingInfo
+
+newtype SSRTextRenderingInfo = SSRTextRenderingInfo
+  { hasParentThatWouldDisqualifyFromSSR :: Boolean
+  , isVolatile :: Boolean
+  , backingText :: DekuText
+  }
+
+derive instance Newtype SSRTextRenderingInfo _
+
+initializeTextRendering
+  :: STRef.STRef Global SSRTextRenderingInfoCache
+  -> STFn4 ElementId DekuText Boolean Boolean Global Unit
+initializeTextRendering renderingInfo = mkSTFn4
+  \id backingText isVolatile hasParentThatWouldDisqualifyFromSSR -> do
+    runSTFn3 updateRenderingInfo id
+      ( const $ SSRTextRenderingInfo
+          { hasParentThatWouldDisqualifyFromSSR
+          , isVolatile
+          , backingText
+          }
+      )
+      renderingInfo
+
+makeText :: String -> MakeText
+makeText impureTextTag = mkEffectFn2 \id mtext -> do
+  runEffectFn2 I.makeTextEffect id
+    ( Just $
+        elementIdToString id <> "_" <> impureTextTag <> fromMaybe "" mtext
+    )
 
 ssrDOMInterpret
   :: ST.ST Global Int
   -> String
-  -> STRef.STRef Global (Map.Map ParentId (List ChildId))
-  -> STRef.STRef Global SSRRenderingInfoCache
+  -> STRef.STRef Global SSRTextRenderingInfoCache
+  -> STRef.STRef Global SSRElementRenderingInfoCache
   -> Core.DOMInterpret
-ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
+ssrDOMInterpret tagger impureTextTag textRenderingInfo elementRenderingInfo =
   Core.DOMInterpret
     { tagger
     , dynamicDOMInterpret: \_ -> noOpDomInterpret tagger
     --
     , isBoring: const false
-    , registerParentChildRelationship: registerParentChildRelationship
-        parentChildCache
-    , makeElement: makeElement renderingInfo
+    , makeElement: I.makeElementEffect
     , attachElement: I.attachElementEffect
-    , incrementElementCount: incrementElementCount renderingInfo
-    , initializeRendering: initializeRendering renderingInfo
-    , disqualifyFromStaticRendering: disqualifyFromStaticRendering renderingInfo
-    , markIndexAsNeedingHydration: markIndexAsNeedingHydration renderingInfo
+    , incrementElementCount: incrementElementCount elementRenderingInfo
+    , initializeElementRendering: initializeElementRendering
+        elementRenderingInfo
+    , initializeTextRendering: initializeTextRendering textRenderingInfo
+    , markIndexAsNeedingHydration: markIndexAsNeedingHydration
+        elementRenderingInfo
     , shouldSkipAttribute: \_ _ -> false
     , setProp: I.setPropEffect
     , setCb: I.setCbEffect
@@ -214,7 +163,7 @@ ssrDOMInterpret tagger impureTextTag parentChildCache renderingInfo =
     , attachText: I.attachTextEffect
     , setText: setText impureTextTag
     , removeText: I.removeTextEffect
-    , incrementPureTextCount: incrementPureTextCount renderingInfo
+    , incrementPureTextCount: incrementPureTextCount elementRenderingInfo
     --
     , beamRegion: I.beamRegionEffect
     , bufferPortal: I.bufferPortal
@@ -235,12 +184,11 @@ noOpDomInterpret tagger =
     , isBoring: const false
     , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit
     , shouldSkipAttribute: \_ _ -> false
-    , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
     , makeElement: I.makeElementEffect
     , attachElement: mkEffectFn2 \_ _ -> pure unit
-    , initializeRendering: mkSTFn1 \_ -> pure unit
+    , initializeElementRendering: mkSTFn4 \_ _ _ _ -> pure unit
+    , initializeTextRendering: mkSTFn4 \_ _ _ _ -> pure unit
     , incrementElementCount: mkSTFn1 \_ -> pure unit
-    , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
     , setProp: mkEffectFn3 \_ _ _ -> pure unit
     , setCb: mkEffectFn3 \_ _ _ -> pure unit
     , unsetAttribute: mkEffectFn2 \_ _ -> pure unit
@@ -248,7 +196,7 @@ noOpDomInterpret tagger =
     --
     , makeText: I.makeTextEffect
     , attachText: mkEffectFn2 \_ _ -> pure unit
-    , setText: mkEffectFn4 \_ _ _ _ -> pure unit
+    , setText: mkEffectFn3 \_ _ _ -> pure unit
     , removeText: mkEffectFn1 \_ -> pure unit
     , incrementPureTextCount: mkSTFn1 \_ -> pure unit
     --

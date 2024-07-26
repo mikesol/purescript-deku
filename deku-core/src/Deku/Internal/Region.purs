@@ -15,8 +15,6 @@ module Deku.Internal.Region
   , StaticRegion(..)
   , RegionSpan
   , Bump
-  , StaticRegionStats(..)
-  , CurrentStaticRegionStats(..)
   , elementIdToString
   , fromParent
   , newStaticRegion
@@ -86,27 +84,9 @@ newtype StaticRegion = StaticRegion
   { end :: Bound
   , region :: ST.ST Global Region
   , element :: STFn1 Anchor Global Unit
-  , tag :: ElementId
-  , stats :: StaticRegionStats
   }
 
 derive instance Newtype StaticRegion _
-
-newtype StaticRegionStats = StaticRegionStats
-  { incrementElementChildCount :: ST.ST Global Unit
-  , incrementStaticTextChildCount :: ST.ST Global Unit
-  , getCurrentStaticRegionStats :: ST.ST Global CurrentStaticRegionStats
-  }
-
-derive instance Newtype StaticRegionStats _
-
-newtype CurrentStaticRegionStats = CurrentStaticRegionStats
-  { childCount :: Maybe Int
-  , numberOfChildrenThatAreElements :: Int
-  , numberOfChildrenThatAreStaticTextNodes :: Int
-  }
-
-derive instance Newtype CurrentStaticRegionStats _
 
 -- | Contains information about which regions in a span
 type SharedBound' =
@@ -522,29 +502,8 @@ fixManagedTo = mkSTFn4 \from to fn children -> do
   ST.for from to \ix -> do
     runSTFn2 fn ix (unsafePartial (Array.unsafeIndex elems ix))
 
-makeStaticRegionStats :: STFn1 (Maybe Int) Global StaticRegionStats
-makeStaticRegionStats = mkSTFn1 \childCount -> do
-  numberOfChildrenThatAreElementsRef <- ST.new 0
-  numberOfChildrenThatAreStaticTextNodesRef <- ST.new 0
-  pure $ StaticRegionStats
-    { incrementElementChildCount: void $ ST.modify (add 1)
-        numberOfChildrenThatAreElementsRef
-    , incrementStaticTextChildCount: void $ ST.modify (add 1)
-        numberOfChildrenThatAreStaticTextNodesRef
-    , getCurrentStaticRegionStats: do
-        numberOfChildrenThatAreElements <- ST.read
-          numberOfChildrenThatAreElementsRef
-        numberOfChildrenThatAreStaticTextNodes <- ST.read
-          numberOfChildrenThatAreStaticTextNodesRef
-        pure $ CurrentStaticRegionStats
-          { childCount
-          , numberOfChildrenThatAreElements
-          , numberOfChildrenThatAreStaticTextNodes
-          }
-    }
-
-newStaticRegion :: STFn4 ElementId (Maybe Int) Bound Bump Global StaticRegion
-newStaticRegion = mkSTFn4 \tag childCount parentBound parentBump -> do
+newStaticRegion :: STFn2 Bound Bump Global StaticRegion
+newStaticRegion = mkSTFn2 \parentBound parentBump -> do
   spanCounter <- ST.new (-1) -- making the first span 0
   spanState <- ST.new $ Nothing @RegionSpan
   staticEnd <- ST.new $ Nothing @Anchor
@@ -582,11 +541,8 @@ newStaticRegion = mkSTFn4 \tag childCount parentBound parentBump -> do
       Just span ->
         pure span
 
-  stats <- runSTFn1 makeStaticRegionStats childCount
   pure $ StaticRegion
-    { tag
-    , stats
-    , end: do
+    { end: do
         fromSpan <- ST.read spanEnd
         case fromSpan of
           Just e ->
@@ -617,9 +573,8 @@ newStaticRegion = mkSTFn4 \tag childCount parentBound parentBump -> do
         runSTFn1 parentBump $ Just anchor
     }
 
-fromParent :: STFn3 ElementId (Maybe Int) DekuParent Global StaticRegion
+fromParent :: STFn1 DekuParent Global StaticRegion
 fromParent =
-  mkSTFn3 \tag childCount parent -> runSTFn4 newStaticRegion tag
-    childCount
+  mkSTFn1 \parent -> runSTFn2 newStaticRegion
     (pure $ ParentStart parent)
     (mkSTFn1 \_ -> pure unit)

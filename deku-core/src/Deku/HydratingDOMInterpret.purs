@@ -4,7 +4,7 @@ import Prelude
 
 import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
-import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2)
+import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2, mkSTFn4)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (class Newtype, un)
@@ -15,7 +15,7 @@ import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Entities (toDekuElement, toDekuText)
 import Deku.Internal.Region (ElementId, elementIdToString)
 import Deku.Interpret as I
-import Effect.Uncurried (mkEffectFn2, mkEffectFn3, mkEffectFn4)
+import Effect.Uncurried (mkEffectFn2, mkEffectFn3)
 import Web.DOM as Web.DOM
 import Web.DOM.ParentNode (QuerySelector(..), querySelector)
 
@@ -59,7 +59,7 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id _ _ -> do
         false -> pure $ toDekuElement dummyElement
 
 makeText :: Map.Map ElementId Web.DOM.Text -> Web.DOM.Text -> MakeText
-makeText textNodeCache dummyText = mkEffectFn3 \id _ _ -> pure $ toDekuText
+makeText textNodeCache dummyText = mkEffectFn2 \id _ -> pure $ toDekuText
   case Map.lookup id textNodeCache of
     Nothing -> dummyText
     Just t -> t
@@ -101,16 +101,15 @@ hydratingDOMInterpret
         maybe false (un HydrationRenderingInfo >>> _.isBoring) $ Map.lookup
           tag
           renderingInfo
-    , registerParentChildRelationship: mkSTFn2 \_ _ -> pure unit
     , makeElement: makeElement renderingInfo dummyElement parentNode
     -- attachments should never happen during hydration
     -- the dynamicDOMInterpret should always kick in
     -- when an attachment actually needs to occur
     -- so we make it a noop
     , attachElement: mkEffectFn2 \_ _ -> pure unit
-    , initializeRendering: mkSTFn1 \_ -> pure unit
+    , initializeElementRendering: mkSTFn4 \_ _ _ _ -> pure unit
+    , initializeTextRendering: mkSTFn4 \_ _ _ _ -> pure unit
     , incrementElementCount: mkSTFn1 \_ -> pure unit
-    , disqualifyFromStaticRendering: mkSTFn1 \_ -> pure unit
     , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit
     , shouldSkipAttribute: shouldSkipAttribute renderingInfo
     , setProp: I.setPropEffect
@@ -120,7 +119,7 @@ hydratingDOMInterpret
     , makeText: makeText textNodeCache dummyText
     , attachText: mkEffectFn2 \_ _ -> pure unit
     -- text setting should never happen during hydration
-    , setText: mkEffectFn4 \_ _ _ _ -> pure unit
+    , setText: mkEffectFn3 \_ _ _ -> pure unit
     , removeText: I.removeTextEffect
     , incrementPureTextCount: mkSTFn1 \_ -> pure unit
     --

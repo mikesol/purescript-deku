@@ -83,9 +83,8 @@ import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn3, runSTFn1, runSTFn2, runSTFn3, runSTFn4)
+import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn4, STFn5, mkSTFn1, mkSTFn5, runSTFn1, runSTFn2, runSTFn4, runSTFn5)
 import Control.Plus (empty)
-import Data.Array (length)
 import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Compactable (compact)
@@ -199,11 +198,11 @@ type AttachText =
 
 -- | Type used by Deku backends to construct a text element. For internal use only unless you're writing a custom
 -- | backend.
-type MakeText = EffectFn3 ElementId (Maybe String) Boolean DekuText
+type MakeText = EffectFn2 ElementId (Maybe String) DekuText
 
 -- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom
 -- | backend.
-type SetText = EffectFn4 Int String DekuText Boolean Unit
+type SetText = EffectFn3 Int String DekuText Unit
 
 -- | Type used by Deku backends to unset an attribute. For internal use only unless you're writing a custom backend.
 type UnsetAttribute =
@@ -252,12 +251,13 @@ derive newtype instance Ord AttrIndex
 newtype DOMInterpret = DOMInterpret
   { tagger :: ST.ST Global Int
   , dynamicDOMInterpret :: Unit -> DOMInterpret
-  , registerParentChildRelationship :: STFn2 ParentId ChildId Global Unit
-  , disqualifyFromStaticRendering :: STFn1 ElementId Global Unit
   , isBoring :: ElementId -> Boolean
   , makeElement :: MakeElement
-  , initializeRendering :: STFn1 StaticRegion Global Unit
-  , incrementElementCount :: STFn1 StaticRegion Global Unit
+  , initializeElementRendering ::
+      STFn4 ElementId DekuElement Int Boolean Global Unit
+  , initializeTextRendering ::
+      STFn4 ElementId DekuText Boolean Boolean Global Unit
+  , incrementElementCount :: STFn1 ElementId Global Unit
   , shouldSkipAttribute :: ElementId -> AttrIndex -> Boolean
   , markIndexAsNeedingHydration :: STFn2 ElementId AttrIndex Global Unit
   , setProp :: SetProp
@@ -270,7 +270,7 @@ newtype DOMInterpret = DOMInterpret
   , setText :: SetText
   , attachText :: AttachText
   , removeText :: RemoveText
-  , incrementPureTextCount :: STFn1 StaticRegion Global Unit
+  , incrementPureTextCount :: STFn1 ElementId Global Unit
   -- 
   , bufferPortal :: BufferPortal
   , beamRegion :: BeamRegion
@@ -342,35 +342,50 @@ newtype PSR = PSR
   -- scope
   , defer :: STFn1 (Effect Unit) Global Unit
   , dispose :: Effect Unit
+  -- signals that this is an element to all listeners
+  , incrementElementCount :: ST.ST Global Unit
+  -- signals that this is a pure text node to all listeners
+  , incrementPureTextCount :: ST.ST Global Unit
   }
 
 derive instance Newtype PSR _
 
-newPSR :: STFn3 Boolean (Poll.Poll Unit) StaticRegion Global PSR
-newPSR = mkSTFn3 \disqualifyFromStaticRendering lifecycle region -> do
-  unsubs <- STArray.new
-  let
-    doDefer :: STFn1 (Effect Unit) Global Unit
-    doDefer =
-      mkSTFn1 \eff -> void (STArray.push eff unsubs)
+newPSR
+  :: STFn5 (ST.ST Global Unit) (ST.ST Global Unit) Boolean (Poll.Poll Unit)
+       StaticRegion
+       Global
+       PSR
+newPSR = mkSTFn5
+  \incrementElementCount
+   incrementPureTextCount
+   disqualifyFromStaticRendering
+   lifecycle
+   region -> do
+    unsubs <- STArray.new
+    let
+      doDefer :: STFn1 (Effect Unit) Global Unit
+      doDefer =
+        mkSTFn1 \eff -> void (STArray.push eff unsubs)
 
-    -- to correctly dispose, effect should be run in the reverse order of insertion
-    dispose :: Effect Unit
-    dispose = do
-      stack <- liftST $ STArray.unsafeFreeze unsubs
-      let l = Array.length stack
-      forE 0 l \i -> do
-        unsafePartial $ Array.unsafeIndex stack (l - 1 - i)
+      -- to correctly dispose, effect should be run in the reverse order of insertion
+      dispose :: Effect Unit
+      dispose = do
+        stack <- liftST $ STArray.unsafeFreeze unsubs
+        let l = Array.length stack
+        forE 0 l \i -> do
+          unsafePartial $ Array.unsafeIndex stack (l - 1 - i)
 
-  pure
-    ( PSR
-        { lifecycle: once lifecycle
-        , disqualifyFromStaticRendering
-        , region
-        , defer: doDefer
-        , dispose
-        }
-    )
+    pure
+      ( PSR
+          { lifecycle: once lifecycle
+          , disqualifyFromStaticRendering
+          , incrementElementCount
+          , incrementPureTextCount
+          , region
+          , defer: doDefer
+          , dispose
+          }
+      )
 
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
@@ -389,7 +404,10 @@ instance Semigroup Nut where
     -- unrolled version of `fixed`
     Nut $ mkEffectFn2 \psr di -> do
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
-      emptyScope <- liftST $ runSTFn3 newPSR true (un PSR psr).lifecycle
+      emptyScope <- liftST $ runSTFn5 newPSR (un PSR psr).incrementElementCount
+        (un PSR psr).incrementPureTextCount
+        true
+        (un PSR psr).lifecycle
         (un PSR psr).region
 
       runEffectFn2 a emptyScope di
@@ -577,8 +595,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
           if isStatic then di'
           else (un DOMInterpret di').dynamicDOMInterpret unit
       Region eltRegion <- liftST $ runSTFn2 allocateRegion initialPos span
-      tag <- liftST (un DOMInterpret di).tagger
-      staticRegion <- liftST $ runSTFn4 newStaticRegion (ElementId tag) Nothing
+      staticRegion <- liftST $ runSTFn2 newStaticRegion
         eltRegion.begin
         eltRegion.bump
       eltDisposed <- liftST $ ST.new false
@@ -596,7 +613,8 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
             [ options.remove value, eltRemove.poll, (un PSR psr).lifecycle ]
 
       eltLifecycle <- liftST Poll.create
-      eltPSR <- liftST $ runSTFn3 newPSR true eltLifecycle.poll staticRegion
+      eltPSR <- liftST $ runSTFn5 newPSR mempty mempty true eltLifecycle.poll
+        staticRegion
       let
         Nut nut = cont
           { value
@@ -635,7 +653,10 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
 
 fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2 \psr di -> do
-  emptyScope <- liftST $ runSTFn3 newPSR true (un PSR psr).lifecycle
+  emptyScope <- liftST $ runSTFn5 newPSR (un PSR psr).incrementElementCount
+    (un PSR psr).incrementPureTextCount
+    true
+    (un PSR psr).lifecycle
     (un PSR psr).region
   let
     handleNuts :: EffectFn1 Nut Unit
@@ -687,7 +708,6 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
           mkEffectFn1 \(Attribute x) ->
             runEffectFn4 x (ElementId id) ix (fromDekuElement elt) newDi
 
-
     -- todo: in hydration, we don't need to set attributes
     -- that are already set
     -- it's easier to set them, but if there's a perf speedup in not setting
@@ -705,32 +725,32 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
               (ElementId id)
               (AttrIndex ix)
           handleAtts (AttrIndex ix) att
-          
-    eltRegion <- liftST
-      $ runSTFn3 fromParent (ElementId id) (Just (length nuts))
-      $  DekuParent   elt
+
+    eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
 
     ---
     --- ssr management
-    liftST $ runSTFn2 (un DOMInterpret di).registerParentChildRelationship
-      (ParentId (un ElementId (un StaticRegion (un PSR psr).region).tag))
-      (ChildId id)
 
-    when (un PSR psr).disqualifyFromStaticRendering do
-      liftST $ runSTFn1 (un DOMInterpret di).disqualifyFromStaticRendering
-        (ElementId id)
+    liftST $ runSTFn4 (un DOMInterpret di).initializeElementRendering
+      (ElementId id)
+      elt
+      (Array.length nuts)
+      (un PSR psr).disqualifyFromStaticRendering
 
-    liftST $ runSTFn1 (un DOMInterpret di).initializeRendering eltRegion
+    liftST $ (un PSR psr).incrementElementCount
 
-    liftST $ runSTFn1 (un DOMInterpret di).incrementElementCount
-      (un PSR psr).region
     --- end ssr management
     ---
 
     let
       handleNuts :: EffectFn1 Nut Unit
       handleNuts = mkEffectFn1 \(Nut nut) -> do
-        scope <- liftST $ runSTFn3 newPSR false (un PSR psr).lifecycle eltRegion
+        scope <- liftST $ runSTFn5 newPSR
+          (runSTFn1 (un DOMInterpret di).incrementElementCount (ElementId id))
+          (runSTFn1 (un DOMInterpret di).incrementPureTextCount (ElementId id))
+          false
+          (un PSR psr).lifecycle
+          eltRegion
         runEffectFn2 nut scope di
     runEffectFn2 Event.fastForeachE nuts handleNuts
 
@@ -744,41 +764,34 @@ text_ txt =
 text :: Poll String -> Nut
 text texts = Nut $ mkEffectFn2 \psr di -> do
   id <- liftST (un DOMInterpret di).tagger
-  { txt, doesNotNeedReferenceInDOM } <- case texts of
+  txt <- case texts of
     OnlyPure xs -> do
-      let
-        doesNotNeedReferenceInDOM = not
-          (un PSR psr).disqualifyFromStaticRendering
-      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id)
+      runEffectFn2 (un DOMInterpret di).makeText (ElementId id)
         (Array.last xs)
-        doesNotNeedReferenceInDOM
-      pure { txt, doesNotNeedReferenceInDOM }
 
     OnlyEvent _ -> do
-      let doesNotNeedReferenceInDOM = false
-      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id) Nothing
-        doesNotNeedReferenceInDOM
-      pure { txt, doesNotNeedReferenceInDOM }
+      runEffectFn2 (un DOMInterpret di).makeText (ElementId id) Nothing
 
     OnlyPoll _ -> do
-      let doesNotNeedReferenceInDOM = false
-      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id) Nothing
-        doesNotNeedReferenceInDOM
-      pure { txt, doesNotNeedReferenceInDOM }
+      runEffectFn2 (un DOMInterpret di).makeText (ElementId id) Nothing
 
     PureAndEvent xs _ -> do
-      let doesNotNeedReferenceInDOM = false
-      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id)
+      runEffectFn2 (un DOMInterpret di).makeText (ElementId id)
         (Array.last xs)
-        doesNotNeedReferenceInDOM
-      pure { txt, doesNotNeedReferenceInDOM }
 
     PureAndPoll xs _ -> do
-      let doesNotNeedReferenceInDOM = false
-      txt <- runEffectFn3 (un DOMInterpret di).makeText (ElementId id)
+      runEffectFn2 (un DOMInterpret di).makeText (ElementId id)
         (Array.last xs)
-        doesNotNeedReferenceInDOM
-      pure { txt, doesNotNeedReferenceInDOM }
+
+  let
+    isVolatile = case texts of
+      OnlyPure _ -> false
+      _ -> true
+
+  liftST $ runSTFn4 (un DOMInterpret di).initializeTextRendering (ElementId id)
+    txt
+    isVolatile
+    (un PSR psr).disqualifyFromStaticRendering
 
   let
     modifiedPoll = case texts of
@@ -801,8 +814,7 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
           else (un DOMInterpret di).dynamicDOMInterpret unit
       in
         mkEffectFn1 \x -> do
-          runEffectFn4 (un DOMInterpret di2).setText id x txt
-            doesNotNeedReferenceInDOM
+          runEffectFn3 (un DOMInterpret di2).setText id x txt
 
   pump' psr modifiedPoll handleTextUpdate
   regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
@@ -810,8 +822,7 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
 
   case texts of
-    OnlyPure _ -> liftST $ runSTFn1 (un DOMInterpret di).incrementPureTextCount
-      (un PSR psr).region
+    OnlyPure _ -> liftST $ (un PSR psr).incrementPureTextCount
     _ -> pure unit
 
   runEffectFn2 deferO psr do
@@ -835,8 +846,7 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
   beamed <- liftST Event.create
   bumped <- liftST Event.createPure
 
-  tag <- liftST (un DOMInterpret di).tagger
-  staticBuffer <- liftST $ runSTFn4 newStaticRegion (ElementId tag) Nothing
+  staticBuffer <- liftST $ runSTFn2 newStaticRegion
     (join $ ST.read trackBegin)
     ( mkSTFn1 \bound -> do
         void $ ST.write bound trackEnd

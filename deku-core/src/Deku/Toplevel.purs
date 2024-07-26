@@ -16,7 +16,7 @@ import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (STRef)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (runSTFn3)
+import Control.Monad.ST.Uncurried (runSTFn1, runSTFn3, runSTFn5)
 import Data.Foldable (for_)
 import Data.FoldableWithIndex (foldlWithIndex, forWithIndex_)
 import Data.FunctorWithIndex (mapWithIndex)
@@ -28,13 +28,13 @@ import Data.Newtype (over, un)
 import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Core (ChildId(..), Nut(..), ParentId(..), newPSR)
+import Deku.Core (ChildId(..), DOMInterpret(..), Nut(..), ParentId(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
 import Deku.Internal.Entities (DekuParent(..), toDekuElement)
 import Deku.Internal.Region (ElementId(..), elementIdToString)
 import Deku.Internal.Region as Region
-import Deku.SSRDOMInterpret (SSRRenderingInfo(..), ssrDOMInterpret)
+import Deku.SSRDOMInterpret (SSRElementRenderingInfo(..), ssrDOMInterpret)
 import Effect (Effect)
 import Effect.Exception (error, throwException)
 import Effect.Random (randomInt)
@@ -49,14 +49,21 @@ import Web.HTML.HTMLDocument (body, toDocument)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
-isLively :: SSRRenderingInfo -> Boolean
-isLively (SSRRenderingInfo value) = value.hasParentThatWouldDisqualifyFromSSR
-  || value.hasChildrenThatWouldDisqualifyFromSSR
-  || (not $ Set.isEmpty value.attributeIndicesThatAreNeededDuringHydration)
+elementIsLively :: SSRElementRenderingInfo -> Boolean
+elementIsLively (SSRElementRenderingInfo value) =
+  value.hasParentThatWouldDisqualifyFromSSR
+    || not
+      ( value.childCount == value.numberOfChildrenThatAreElements
+          ||
+            ( value.childCount == 0 &&
+                value.numberOfChildrenThatAreStaticTextNodes == 1
+            )
+          || Set.isEmpty value.attributeIndicesThatAreNeededDuringHydration
+      )
 
 produceIsBoring
   :: Map.Map ParentId (List ChildId)
-  -> Map.Map ElementId SSRRenderingInfo
+  -> Map.Map ElementId SSRElementRenderingInfo
   -> Map.Map ChildId ParentId
   -> Map.Map ElementId Boolean
 produceIsBoring parentToChildren parentToRI childToParent =
@@ -93,7 +100,7 @@ produceIsBoring parentToChildren parentToRI childToParent =
     let
       iAmBoring = case Map.lookup h (coerce parentToRI) of
         Nothing -> true
-        Just value -> not (isLively value)
+        Just value -> not (elementIsLively value)
     let myParentIs = Map.lookup (coerce h) childToParent
     moveThroughBoringList
       ((maybe identity (flip List.snoc) (coerce myParentIs)) rest)
@@ -116,10 +123,9 @@ runInElement elt (Nut nut) = do
   let taggerStart = 0
   tagRef <- liftST $ ST.new $ taggerStart + 1
   let tagger = makeTagger tagRef
-  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) (Just 1)
-    (DekuParent $ toDekuElement elt)
-  scope <- liftST $ runSTFn3 newPSR false lifecycle region
-  void $ runEffectFn2 nut scope ( fullDOMInterpret tagger)
+  region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
+  scope <- liftST $ runSTFn5 newPSR mempty mempty false lifecycle region
+  void $ runEffectFn2 nut scope (fullDOMInterpret tagger)
   pure $ dispose unit
 
 doInBody :: forall i o. (Web.DOM.Element -> i -> Effect o) -> i -> Effect o
@@ -145,32 +151,28 @@ foreign import mapIdsToTextNodes
 
 fixParents
   :: Map.Map ParentId (List ChildId)
-  -> Map.Map ElementId SSRRenderingInfo
-  -> Map.Map ElementId SSRRenderingInfo
+  -> Map.Map ElementId SSRElementRenderingInfo
+  -> Map.Map ElementId SSRElementRenderingInfo
 fixParents parentInfo renderingInfo =
   (foldlWithIndex go { flipped: Set.empty, final: renderingInfo } renderingInfo).final
 
   where
-  go
-    eltId
-    { flipped, final }
-    s@(SSRRenderingInfo { hasChildrenThatWouldDisqualifyFromSSR: false }) =
-    { flipped, final: Map.alter (\i -> i <|> Just s) eltId final }
-  go
-    eltId
-    { flipped, final }
-    _ = imputeAllChildren
-    (fromMaybe List.Nil $ Map.lookup (coerce eltId) parentInfo)
-    { flipped, final }
+  go eltId { flipped, final } s
+    | not (elementIsLively s) =
+        { flipped, final: Map.alter (\i -> i <|> Just s) eltId final }
+    | otherwise = imputeAllChildren
+        (fromMaybe List.Nil $ Map.lookup (coerce eltId) parentInfo)
+        { flipped, final }
   imputeAllChildren List.Nil { flipped, final } = { flipped, final }
   imputeAllChildren (List.Cons h rest) { flipped, final }
-    | Set.member ((coerce :: _ -> ElementId) h) flipped = imputeAllChildren rest { flipped, final }
+    | Set.member ((coerce :: _ -> ElementId) h) flipped = imputeAllChildren rest
+        { flipped, final }
     | otherwise = imputeAllChildren
         (rest <> (fromMaybe List.Nil $ Map.lookup (coerce h) parentInfo))
         { flipped: Set.insert (coerce h) flipped
         , final: Map.alter
             ( \i -> map
-                ( over SSRRenderingInfo _
+                ( over SSRElementRenderingInfo _
                     { hasParentThatWouldDisqualifyFromSSR = true }
 
                 )
@@ -180,7 +182,8 @@ fixParents parentInfo renderingInfo =
             final
         }
 
-type SSROutput = { html::String,cache :: Map.Map ElementId HydrationRenderingInfo }
+type SSROutput =
+  { html :: String, cache :: Map.Map ElementId HydrationRenderingInfo }
 
 ssrInElement
   :: Web.DOM.Element
@@ -191,27 +194,32 @@ ssrInElement elt (Nut nut) = do
   let taggerStart = 0
   tagRef <- liftST $ ST.new $ taggerStart + 1
   let tagger = makeTagger tagRef
-  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) (Just 1)
-    (DekuParent $ toDekuElement elt)
-  parentCache <- liftST $ ST.new Map.empty
-  regionCache <- liftST $ ST.new Map.empty
+  textCacheRef <- liftST $ ST.new Map.empty
+  elementCacheRef <- liftST $ ST.new Map.empty
   rn0 <- randomInt 0 10000
   rn1 <- randomInt 0 10000
   rn2 <- randomInt 0 10000
   let dynTextTag = show rn0 <> "_" <> show rn1 <> "_" <> show rn2
-  -- liftST $ runSTFn3 addElementToCache taggerStart regionCache elt
-  scope <- liftST $ runSTFn3 newPSR false lifecycle region
+  let di = ssrDOMInterpret tagger dynTextTag textCacheRef elementCacheRef
+  region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
+  scope <- liftST $ runSTFn5 newPSR
+    ( runSTFn1 (un DOMInterpret di).incrementElementCount
+        (ElementId taggerStart)
+    )
+    ( runSTFn1 (un DOMInterpret di).incrementPureTextCount
+        (ElementId taggerStart)
+    )
+    false
+    lifecycle
+    region
 
-  void $ runEffectFn2 nut scope
-    (ssrDOMInterpret tagger dynTextTag parentCache regionCache)
-  unfrozenParentCache <- liftST $ ST.read parentCache
-  unfrozenRegionCache' <- liftST $ ST.read regionCache
+  void $ runEffectFn2 nut scope di
+  elementCache' <- liftST $ ST.read elementCacheRef
+  textCache <- liftST $ ST.read textCacheRef
   let unfrozenRegionCache = fixParents unfrozenParentCache unfrozenRegionCache'
   forWithIndex_ unfrozenRegionCache \tag value -> do
-    for_ (un SSRRenderingInfo value).backingElement \element -> do
-      when (isLively value)
-        do
-          setAttribute "data-deku-ssr" (elementIdToString tag) element
+    for_ (un SSRElementRenderingInfo value).backingElement \element -> do
+      setAttribute "data-deku-ssr" (elementIdToString tag) element
   let ibab i b a = Map.union (Map.fromFoldable $ map (flip Tuple i) a) b
   let reverseParentCache = foldlWithIndex ibab Map.empty unfrozenParentCache
   let
@@ -219,7 +227,7 @@ ssrInElement elt (Nut nut) = do
       reverseParentCache
   let
     hydrationRenderingCache = unfrozenRegionCache # mapWithIndex
-      \k (SSRRenderingInfo v) -> HydrationRenderingInfo
+      \k (SSRElementRenderingInfo v) -> HydrationRenderingInfo
         { attributeIndicesThatAreNeededDuringHydration:
             v.attributeIndicesThatAreNeededDuringHydration
         , hasParentThatWouldDisqualifyFromSSR:
@@ -231,38 +239,40 @@ ssrInElement elt (Nut nut) = do
   transformTextNodes elt dynTextTag
   htmlString <- innerHTML elt
   dispose unit
-  pure $   {html:htmlString,cache:hydrationRenderingCache}
+  pure $ { html: htmlString, cache: hydrationRenderingCache }
 
 ssrInBody
   :: Nut
-  -> Effect  {html:: String,cache :: Map.Map ElementId HydrationRenderingInfo}
+  -> Effect
+       { html :: String, cache :: Map.Map ElementId HydrationRenderingInfo }
 ssrInBody = doInBody ssrInElement
 
 hydrateInElement
-  :: forall r. {cache :: Map.Map ElementId HydrationRenderingInfo | r}
+  :: forall r
+   . { cache :: Map.Map ElementId HydrationRenderingInfo | r }
   -> Web.DOM.Element
   -> Nut
   -> Effect (Effect Unit)
-hydrateInElement {cache} elt (Nut nut) = do
+hydrateInElement { cache } elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
   let taggerStart = 0
   tagRef <- liftST $ ST.new $ taggerStart + 1
   let tagger = makeTagger tagRef
-  region <- liftST $ runSTFn3 Region.fromParent (ElementId taggerStart) (Just 1)
-    (DekuParent $ toDekuElement elt)
+  region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
   doc <- window >>= document
   dummyElt <- createElement "div" (toDocument doc)
   dummyText <- createTextNode "dummy" (toDocument doc)
   let par = toParentNode elt
   textNodes <- Map.fromFoldable <<< map (\{ k, v } -> k /\ v) <$>
     mapIdsToTextNodes elt
-  scope <- liftST $ runSTFn3 newPSR false lifecycle region
+  scope <- liftST $ runSTFn5 newPSR mempty mempty false lifecycle region
   void $ runEffectFn2 nut scope
     (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt par)
   pure $ dispose unit
 
 hydrateInBody
-  :: forall r. {cache::Map.Map ElementId HydrationRenderingInfo|r}
+  :: forall r
+   . { cache :: Map.Map ElementId HydrationRenderingInfo | r }
   -> Nut
   -> Effect (Effect Unit)
 hydrateInBody = doInBody <<< hydrateInElement

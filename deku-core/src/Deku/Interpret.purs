@@ -15,7 +15,7 @@ import Deku.Internal.Region (Anchor(..))
 import Deku.UnsafeDOM (addEventListener, after, createDocumentFragment, createElement, createElementNS, createText, eventListener, popCb, prepend, pushCb, removeEventListener, setTextContent)
 import Effect (Effect, whileE)
 import Effect.Ref as Ref
-import Effect.Uncurried (EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, mkEffectFn3, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
+import Effect.Uncurried (EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
 import Partial.Unsafe (unsafePartial)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
@@ -181,7 +181,7 @@ getDisableable elt = go
   go (_ : y) = go y
 
 makeTextEffect :: Core.MakeText
-makeTextEffect = mkEffectFn3 \_ mstr _ -> do
+makeTextEffect = mkEffectFn2 \_ mstr -> do
   txt <- runEffectFn1 createText (fromMaybe "" mstr)
   pure $ toDekuText txt
 
@@ -191,7 +191,7 @@ attachTextEffect =
     runEffectFn2 attachNodeEffect [ fromDekuText @Node txt ]
 
 setTextEffect :: Core.SetText
-setTextEffect = mkEffectFn4 \_ str txt' _ -> do
+setTextEffect = mkEffectFn3 \_ str txt' -> do
   let txt = fromDekuText @Node txt'
   runEffectFn2 setTextContent str txt
 
@@ -260,7 +260,6 @@ attachNodeEffect = mkEffectFn2 \nodes anchor -> do
   case anchor of
     ParentStart (DekuParent parent) -> do
       runEffectFn2 prepend nodes (fromDekuElement @Node parent)
-      
 
     Element el -> do
       runEffectFn2 after nodes (fromDekuElement @Node el)
