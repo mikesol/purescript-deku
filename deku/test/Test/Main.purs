@@ -7,7 +7,7 @@ import Control.Plus (empty)
 import Data.Array ((..))
 import Data.Array as Array
 import Data.Filterable (compact, filter)
-import Data.Foldable (intercalate, traverse_)
+import Data.Foldable (intercalate, sequence_, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
@@ -23,6 +23,7 @@ import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo)
 import Deku.Internal.Region (ElementId)
+import Deku.Hooks (cycle, dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Pursx (lenientPursx, pursx)
 import Deku.Toplevel (SSROutput, hydrateInBody, runInBody, ssrInBody)
 import Effect (Effect)
@@ -221,6 +222,36 @@ switcherWorksForCompositionalElements = Deku.do
         , DL.click_ \_ -> setItem unit
         ]
         [ text_ "incr" ]
+    ]
+
+slightlyLessPureSwitcher :: Nut
+slightlyLessPureSwitcher = Deku.do
+  elemCtrl /\ elemCom <- useState'
+  let
+    elemCount :: Poll Int
+    elemCount =
+      fold (\c -> if _ then c + 1 else 0 ) 0 $ initial <|> elemCom
+    
+    initial :: Poll Boolean
+    initial =
+      merge $ Array.replicate 4 $ pure true 
+
+    incrElem :: Effect Unit
+    incrElem =
+      elemCtrl true
+
+    resetElem :: Effect Unit
+    resetElem = do
+        elemCtrl false
+        sequence_ $ Array.replicate 4 incrElem
+
+  D.div [ DA.id_ "div0" ]
+    [ D.span [ DA.id_ "content" ]
+      [ text_ "foo"
+      , cycle $ text_ <<< show <$> elemCount
+      ]
+    , D.button [ DA.id_ "incr", DL.click_ \_ -> incrElem ] [ text_ "incr" ]
+    , D.button [ DA.id_ "reset", DL.click_ \_ -> resetElem ] [ text_ "reset" ]
     ]
 
 tabbedNavigationWithPursx :: Nut

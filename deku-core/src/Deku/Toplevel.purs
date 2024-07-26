@@ -28,6 +28,9 @@ import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Core (ChildId(..), DOMInterpret(..), Nut(..), ParentId(..), newPSR)
+import Control.Monad.ST.Uncurried (runSTFn1, runSTFn2)
+import Data.Maybe (maybe)
+import Deku.Core (Nut(..), ScopeDepth(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
 import Deku.Internal.Entities (DekuParent(..), fromDekuElement, toDekuElement)
@@ -129,7 +132,7 @@ runInElement elt (Nut nut) = do
   region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
   scope <- liftST $ runSTFn5 newPSR mempty mempty false lifecycle region
   void $ runEffectFn2 nut scope (fullDOMInterpret tagger)
-  pure $ dispose unit
+  pure $ dispose (ScopeDepth 0)
 
 doInBody :: forall i o. (Web.DOM.Element -> i -> Effect o) -> i -> Effect o
 doInBody f elt = do
