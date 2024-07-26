@@ -822,7 +822,7 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
 
   let
     handleTextUpdate :: Boolean -> EffectFn1 String Unit
-    handleTextUpdate useOriginalDi = do
+    handleTextUpdate useOriginalDi = mkEffectFn1 \xs -> do
       let
         di2 =
           if useOriginalDi then di
