@@ -303,7 +303,7 @@ pump' (PSR { defer: def }) p effF =
   handleEvent :: Event.Event a -> Effect Unit
   handleEvent y = do
     uu <- runEffectFn2 Event.subscribeO y dynamicEff
-    void $ liftST $ runSTFn1 def uu
+    void $ liftST $ runSTFn1 def $ mkEffectFn1 \_ -> uu
 
   handlePoll
     :: ST.STRef Global (EffectFn1 a Unit) -> Event.Event a -> Effect Unit
@@ -311,7 +311,7 @@ pump' (PSR { defer: def }) p effF =
     uu <- runEffectFn2 Event.subscribeO y $ mkEffectFn1 \i -> do
       f <- liftST $ ST.read whichF
       runEffectFn1 f i
-    void $ liftST $ runSTFn1 def uu
+    void $ liftST $ runSTFn1 def $ mkEffectFn1 \_ -> uu
 
   go :: Poll a -> Effect Unit
   go = case _ of
@@ -828,7 +828,7 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
           if useOriginalDi then di
           else (un DOMInterpret di).dynamicDOMInterpret unit
       sub <- runEffectFn2 Event.subscribeO xs $ mkEffectFn1 \x ->
-        runEffectFn2 (un DOMInterpret di).setText x txt
+        runEffectFn3 (un DOMInterpret di).setText id x txt
       liftST $ runSTFn1 (un PSR psr).defer $ mkEffectFn1 \_ -> sub
 
   pump' psr modifiedPoll handleTextUpdate
