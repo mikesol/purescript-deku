@@ -822,14 +822,13 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
 
   let
     handleTextUpdate :: Boolean -> EffectFn1 String Unit
-    handleTextUpdate useOriginalDi = mkEffectFn1 \xs -> do
+    handleTextUpdate useOriginalDi = mkEffectFn1 \x -> do
       let
         di2 =
           if useOriginalDi then di
           else (un DOMInterpret di).dynamicDOMInterpret unit
-      sub <- runEffectFn2 Event.subscribeO xs $ mkEffectFn1 \x ->
-        runEffectFn3 (un DOMInterpret di).setText id x txt
-      liftST $ runSTFn1 (un PSR psr).defer $ mkEffectFn1 \_ -> sub
+      runEffectFn3 (un DOMInterpret di2).setText id x txt
+      
 
   pump' psr modifiedPoll handleTextUpdate
   regionEnd <- liftST (un StaticRegion (un PSR psr).region).end

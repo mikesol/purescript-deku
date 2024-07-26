@@ -28,7 +28,7 @@ import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Core (ChildId(..), DOMInterpret(..), Nut(..), ParentId(..), newPSR)
-import Control.Monad.ST.Uncurried (runSTFn1, runSTFn2)
+import Control.Monad.ST.Uncurried (runSTFn1, runSTFn5)
 import Data.Maybe (maybe)
 import Deku.Core (Nut(..), ScopeDepth(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
@@ -246,7 +246,7 @@ ssrInElement elt (Nut nut) = do
         }
   transformTextNodes elt dynTextTag
   htmlString <- innerHTML elt
-  dispose unit
+  dispose (ScopeDepth 0)
   pure $ { html: htmlString, cache: hydrationRenderingCache }
 
 ssrInBody
@@ -276,7 +276,7 @@ hydrateInElement { cache } elt (Nut nut) = do
   scope <- liftST $ runSTFn5 newPSR mempty mempty false lifecycle region
   void $ runEffectFn2 nut scope
     (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt par)
-  pure $ dispose unit
+  pure $ dispose (ScopeDepth 0)
 
 hydrateInBody
   :: forall r
