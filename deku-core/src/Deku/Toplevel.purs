@@ -27,7 +27,6 @@ import Data.Newtype (over, un)
 import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
-import Debug (spy)
 import Deku.Core (ChildId(..), DOMInterpret(..), Nut(..), ParentId(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
@@ -242,7 +241,6 @@ ssrInElement elt (Nut nut) = do
             hasChildrenThatWouldDisqualifyFromSSR v
         , isBoring: fromMaybe false $ Map.lookup k isBoring
         }
-  let _ = spy "HRC" (Map.toUnfoldable hydrationRenderingCache :: Array _)
   transformTextNodes elt dynTextTag
   htmlString <- innerHTML elt
   dispose unit
@@ -272,7 +270,6 @@ hydrateInElement { cache } elt (Nut nut) = do
   let par = toParentNode elt
   textNodes <- Map.fromFoldable <<< map (\{ k, v } -> k /\ v) <$>
     mapIdsToTextNodes elt
-  let _ = spy "TNC" textNodes
   scope <- liftST $ runSTFn5 newPSR mempty mempty false lifecycle region
   void $ runEffectFn2 nut scope
     (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt par)

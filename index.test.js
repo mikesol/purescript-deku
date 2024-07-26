@@ -33,7 +33,6 @@ const doSSRTest = (name, closure, itIs) => {
         '<head></head><body id="mybody"></body>';
       const res = tests.runSSR(myTest)();
       const html = res.html
-      console.log('html', html);
       document.getElementsByTagName(
         "html"
       )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
@@ -264,27 +263,13 @@ describe("deku", () => {
       (f) =>
         f(tests.dynAppearsCorrectlyAtBeginning, () => {
           const $ = require("jquery");
-          // text, span, button
-          const base = 3;
-          expect($("#div0").contents().length).toEqual(base);
-          expect($($("#div0").contents()[0]).text()).toBe("foo");
-          expect($($("#div0").contents()[base - 2]).text()).toBe("bar");
-          expect($($("#div0").contents()[base - 1]).text()).toBe("incr");
-          $($("#div0").contents()[base - 1]).trigger("click");
-          expect($("#div0").contents().length).toBe(base + 1);
-          // has shifted button by 1
-          expect($($("#div0").contents()[base]).text()).toBe("incr");
-          // there's a new node now with the number "0" as its text
-          expect($($("#div0").contents()[base - 1]).text()).toBe("0");
-          // index is now 4 as it has moved back by 1
-          $($("#div0").contents()[base]).trigger("click");
-          expect($("#div0").contents().length).toBe(base + 2);
-          // has again shifted button by 1
-          expect($($("#div0").contents()[base + 1]).text()).toBe("incr");
-          // there's a new node now with the number "1" as its text
-          expect($($("#div0").contents()[base - 1]).text()).toBe("1");
-          // the old node is to the after of the new node
-          expect($($("#div0").contents()[base - 0]).text()).toBe("0");
+          expect($("#div0").text()).toEqual("foobarincr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar0incr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar10incr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar210incr");
         })
     );
 
@@ -293,27 +278,13 @@ describe("deku", () => {
       (f) =>
         f(tests.dynAppearsCorrectlyAtEnd, (usingSSR) => {
           const $ = require("jquery");
-          // text, span, start beacon, end beacon, button
-          const base = usingSSR ? 4 : 3;
-          expect($("#div0").contents().length).toEqual(base);
-          expect($($("#div0").contents()[0]).text()).toBe("foo");
-          expect($($("#div0").contents()[base - 2]).text()).toBe("bar");
-          expect($($("#div0").contents()[base - 1]).text()).toBe("incr");
-          $($("#div0").contents()[base - 1]).trigger("click");
-          expect($("#div0").contents().length).toBe(base + 1);
-          // has shifted button by 1
-          expect($($("#div0").contents()[base]).text()).toBe("incr");
-          // there's a new node now with the number "0" as its text
-          expect($($("#div0").contents()[base - 1]).text()).toBe("0");
-          // index is now 5/4 as it has moved back by 1
-          $($("#div0").contents()[base]).trigger("click");
-          expect($("#div0").contents().length).toBe(base + 2);
-          // has again shifted button by 1
-          expect($($("#div0").contents()[base + 1]).text()).toBe("incr");
-          // there's a new node now with the number "1" as its text
-          expect($($("#div0").contents()[base - 0]).text()).toBe("1");
-          // the old node is to the left of the new node
-          expect($($("#div0").contents()[base - 1]).text()).toBe("0");
+          expect($("#div0").text()).toEqual("foobarincr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar0incr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar01incr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar012incr");
         })
     );
 
@@ -522,7 +493,7 @@ describe("deku", () => {
       })
     );
 
-    doSSRTest("lots of switching!", (f) =>
+    doTest("lots of switching!", (f) =>
       f(tests.lotsOfSwitching, () => {
         const $ = require("jquery");
         expect($("#hack").text()).toBe("hello");
@@ -536,7 +507,7 @@ describe("deku", () => {
         expect($("#hack").text()).toBe("goodbye");
         $("#home-btn").trigger("click");
         expect($("#hack").text()).toBe("hello");
-      }), it.only
+      })
     );
 
     doTest("attributes are correctly unset", (f) =>

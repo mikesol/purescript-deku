@@ -697,6 +697,20 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
     runEffectFn2 deferO psr do
       runEffectFn1 (un DOMInterpret di).removeElement elt
 
+    ---
+    --- ssr management
+
+    liftST $ runSTFn4 (un DOMInterpret di).initializeElementRendering
+      (ElementId id)
+      elt
+      (Array.length nuts)
+      (un PSR psr).disqualifyFromStaticRendering
+
+    liftST $ (un PSR psr).incrementElementCount
+
+    --- end ssr management
+    ---
+
     let
       handleAtts :: AttrIndex -> Poll (Attribute element) -> Effect Unit
       handleAtts ix atts =
@@ -727,20 +741,6 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
           handleAtts (AttrIndex ix) att
 
     eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
-
-    ---
-    --- ssr management
-
-    liftST $ runSTFn4 (un DOMInterpret di).initializeElementRendering
-      (ElementId id)
-      elt
-      (Array.length nuts)
-      (un PSR psr).disqualifyFromStaticRendering
-
-    liftST $ (un PSR psr).incrementElementCount
-
-    --- end ssr management
-    ---
 
     let
       handleNuts :: EffectFn1 Nut Unit

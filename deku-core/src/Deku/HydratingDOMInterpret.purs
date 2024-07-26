@@ -15,7 +15,6 @@ import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (class Newtype, un)
 import Data.Set as Set
-import Debug (spy)
 import Deku.Core (AttrIndex, MakeElement, MakeText)
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
@@ -43,7 +42,7 @@ makeElement
 makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id _ _ -> do
   let ri = Map.lookup id renderingInfo
   case ri of
-    Nothing -> let _ = spy "baaad" "lookupBroken" in pure $ toDekuElement dummyElement
+    Nothing -> pure $ toDekuElement dummyElement
     Just (HydrationRenderingInfo value) -> do
       case
         value.hasParentThatWouldDisqualifyFromSSR
@@ -61,15 +60,15 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id _ _ -> do
             parentNode
           case sel of
             -- shouldn't happen
-            Nothing -> let _ = spy "baaad" "selectorNotWorking" in pure $ toDekuElement dummyElement
-            Just el -> let _ = spy "gooood" id in pure $ toDekuElement el
-        false -> let _ = spy "baaad" "notLookingUp" in pure $ toDekuElement dummyElement
+            Nothing ->  pure $ toDekuElement dummyElement
+            Just el -> pure $ toDekuElement el
+        false ->  pure $ toDekuElement dummyElement
 
 makeText :: Map.Map ElementId Web.DOM.Text -> Web.DOM.Text -> MakeText
 makeText textNodeCache dummyText = mkEffectFn2 \id _ -> pure $ toDekuText
   case Map.lookup id textNodeCache of
-    Nothing -> let _ = spy "baaad" id in dummyText
-    Just t -> let _ = spy "gooood" id in t
+    Nothing -> dummyText
+    Just t ->  t
 
 shouldSkipAttribute
   :: Map.Map ElementId HydrationRenderingInfo
