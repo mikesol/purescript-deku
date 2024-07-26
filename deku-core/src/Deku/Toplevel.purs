@@ -6,7 +6,7 @@ import Prelude
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Uncurried (runSTFn1, runSTFn2)
 import Data.Maybe (maybe)
-import Deku.Core (Nut(..), newPSR)
+import Deku.Core (Nut(..), ScopeDepth(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Entities (DekuParent(..), toDekuElement)
 import Deku.Internal.Region as Region
@@ -31,7 +31,7 @@ runInElement elt (Nut nut) = do
   region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
   scope <- liftST $ runSTFn2 newPSR lifecycle region
   void $ runEffectFn2 nut scope fullDOMInterpret
-  pure $ dispose unit
+  pure $ dispose (ScopeDepth 0)
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.

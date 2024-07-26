@@ -30,6 +30,7 @@ module Deku.Core
   , Hook'
   , Nut(..)
   , PSR(..)
+  , ScopeDepth(..)
   , newPSR
   , pump
   , handleScope
@@ -236,6 +237,24 @@ newtype DOMInterpret = DOMInterpret
 
 derive instance Newtype DOMInterpret _
 
+-- | Tracks the depths of the current dispose action. The initial level will be `ScopeDepth 0`. Every descent into an
+-- | `elementify` `Nut` will increase the depth.
+newtype ScopeDepth =
+  ScopeDepth Int
+
+derive instance Newtype ScopeDepth _
+
+newtype PSR = PSR
+  { lifecycle :: Poll.Poll ScopeDepth
+  -- used by `Nut`s to register or clear the last element of their region.
+  , region :: StaticRegion
+  -- scope
+  , defer :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
+  , dispose :: EffectFn1 ScopeDepth Unit
+  }
+
+derive instance Newtype PSR _
+
 -- | Handles an optimized `Poll` by running the effect on each emitted value. Any resulting subscription gets written to 
 -- | the given cleanup array.
 pump :: forall a. EffectFn3 PSR (Poll.Poll a) (EffectFn1 a Unit) Unit
@@ -244,7 +263,7 @@ pump = mkEffectFn3 \(PSR { defer: def }) p eff -> do
     handleEvent :: EffectFn1 (Event.Event a) Unit
     handleEvent = mkEffectFn1 \y -> do
       uu <- runEffectFn2 Event.subscribeO y eff
-      void $ liftST $ runSTFn1 def uu
+      void $ liftST $ runSTFn1 def $ mkEffectFn1 \_ -> uu
 
     go :: EffectFn1 (Poll a) Unit
     go = mkEffectFn1 case _ of
@@ -263,43 +282,27 @@ pump = mkEffectFn3 \(PSR { defer: def }) p eff -> do
 
   runEffectFn1 go p
 
-newtype PSR = PSR
-  { lifecycle :: Poll.Poll Unit
-  -- used by `Nut`s to register or clear the last element of their region.
-  , region :: StaticRegion
-  -- scope
-  , defer :: STFn1 (Effect Unit) Global Unit
-  , dispose :: Effect Unit
-  }
-
-derive instance Newtype PSR _
-
-newPSR :: STFn2 (Poll.Poll Unit) StaticRegion Global PSR
+newPSR :: STFn2 (Poll.Poll ScopeDepth) StaticRegion Global PSR
 newPSR = mkSTFn2 \lifecycle region -> do
   unsubs <- STArray.new
   let
-    doDefer :: STFn1 (Effect Unit) Global Unit
+    doDefer :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
     doDefer =
       mkSTFn1 \eff -> void (STArray.push eff unsubs)
 
     -- to correctly dispose, effect should be run in the reverse order of insertion
-    dispose :: Effect Unit
-    dispose = do
+    dispose :: EffectFn1 ScopeDepth Unit
+    dispose = mkEffectFn1 \d -> do
       stack <- liftST $ STArray.unsafeFreeze unsubs
       let l = Array.length stack
       forE 0 l \i -> do
-        unsafePartial $ Array.unsafeIndex stack (l - 1 - i)
+        runEffectFn1 (unsafePartial $ Array.unsafeIndex stack (l - 1 - i)) d
 
   pure (PSR { lifecycle: once lifecycle, region, defer: doDefer, dispose })
 
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
-  let
-    handleLifecycle :: EffectFn1 Unit Unit
-    handleLifecycle =
-      mkEffectFn1 \_ -> (un PSR psr).dispose
-
-  runEffectFn3 pump psr (un PSR psr).lifecycle handleLifecycle
+  runEffectFn3 pump psr (un PSR psr).lifecycle (un PSR psr).dispose
 
 newtype Nut =
   Nut (EffectFn2 PSR DOMInterpret Unit)
@@ -398,7 +401,7 @@ useRef a b f = Deku.do
   f (liftST r)
 
 deferO :: EffectFn2 PSR (Effect Unit) Unit
-deferO = mkEffectFn2 \psr eff -> liftST (runSTFn1 (un PSR psr).defer eff)
+deferO = mkEffectFn2 \psr eff -> liftST (runSTFn1 (un PSR psr).defer (mkEffectFn1 \_ -> eff))
 
 defer :: PSR -> Effect Unit -> Effect Unit
 defer =
@@ -503,10 +506,13 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
 
       eltRemove <- liftST Poll.create
       let
-        remove :: Poll Unit
+        remove :: Poll ScopeDepth
         remove =
           Poll.merge
-            [ options.remove value, eltRemove.poll, (un PSR psr).lifecycle ]
+            [ const (ScopeDepth 0) <$> options.remove value
+            , const (ScopeDepth 0) <$> eltRemove.poll
+            , (un PSR psr).lifecycle
+            ]
 
       eltLifecycle <- liftST Poll.create
       eltPSR <- liftST $ runSTFn2 newPSR eltLifecycle.poll staticRegion
@@ -531,11 +537,11 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
 
         -- | We need explicit ordering here, if just pass the lifecycle of the parent to the child element it is not 
         -- | guarantueed that the child will dispose itself before the parent.
-        handleRemove :: EffectFn1 Unit Unit
-        handleRemove = mkEffectFn1 \_ -> do
+        handleRemove :: EffectFn1 ScopeDepth Unit
+        handleRemove = mkEffectFn1 \depth -> do
           -- deactivate sendTo
           void $ liftST $ ST.write true eltDisposed
-          eltLifecycle.push unit
+          eltLifecycle.push depth
           liftST eltRegion.remove
 
       runEffectFn3 pump eltPSR (once remove) handleRemove
@@ -554,9 +560,9 @@ fixed nuts = Nut $ mkEffectFn2 \psr di -> do
     handleNuts = mkEffectFn1 \(Nut nut) ->
       runEffectFn2 nut emptyScope di
 
-  -- run `nuts` without `unsubs` so they can't dispose them
+  -- run `nuts` with separate scope
   runEffectFn2 Event.fastForeachE nuts handleNuts
-  -- actually dispose the `unsubs`
+  -- actually handle the scope
   runEffectFn1 handleScope psr
 
 elementify
@@ -573,9 +579,6 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
     (Element (elt))
 
-  runEffectFn2 deferO psr do
-    runEffectFn1 (un DOMInterpret di).removeElement elt
-
   let
     handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
     handleAtts = mkEffectFn1 \atts ->
@@ -587,11 +590,26 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
   let
     handleNuts :: EffectFn1 Nut Unit
     handleNuts = mkEffectFn1 \(Nut nut) -> do
-      scope <- liftST $ runSTFn2 newPSR (un PSR psr).lifecycle eltRegion
+      scope <- liftST $ runSTFn2 newPSR
+        (over ScopeDepth (add 1) <$> (un PSR psr).lifecycle)
+        eltRegion
       runEffectFn2 nut scope di
   runEffectFn2 Event.fastForeachE nuts handleNuts
 
+  let 
+    handleRemove :: EffectFn1 ScopeDepth Unit
+    handleRemove = mkEffectFn1 case _ of
+      ScopeDepth 0 ->
+        runEffectFn1 (un DOMInterpret di).removeElement elt
+
+      -- on higher `ScopeDepth`s we don't have to do anything, when this ancestor has been removed this will also
+      -- disappear from screen
+      _ ->
+        pure unit
+
   runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
+  liftST $ runSTFn1 (un PSR psr).defer handleRemove
+
   runEffectFn1 handleScope psr
 
 text_ :: String -> Nut
@@ -605,7 +623,7 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
     handleTextUpdate = mkEffectFn2 \xs txt -> do
       sub <- runEffectFn2 Event.subscribeO xs $ mkEffectFn1 \x ->
         runEffectFn2 (un DOMInterpret di).setText x txt
-      liftST $ runSTFn1 (un PSR psr).defer sub
+      liftST $ runSTFn1 (un PSR psr).defer $ mkEffectFn1 \_ -> sub
 
   txt <- case texts of
     OnlyPure xs -> do
@@ -639,9 +657,17 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 (un DOMInterpret di).attachText txt regionEnd
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
 
-  runEffectFn2 deferO psr do
-    runEffectFn1 (un DOMInterpret di).removeText txt
+  let
+    handleRemove :: EffectFn1 ScopeDepth Unit
+    handleRemove = mkEffectFn1 case _ of
+      ScopeDepth 0 ->
+        runEffectFn1 (un DOMInterpret di).removeText txt
 
+      -- like `elementify` we rely on our ancestor for removal
+      _ ->
+        pure unit
+
+  liftST $ runSTFn1 (un PSR psr).defer handleRemove
   runEffectFn1 handleScope psr
 
 -- | Creates a `Nut` that can be attached to another part of the application. The lifetime of the `Nut` is no longer
@@ -666,7 +692,9 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
         void $ ST.write bound trackEnd
         bumped.push bound
     )
-  runEffectFn2 toBeam (over PSR _ { region = staticBuffer } psr) di
+  runEffectFn2 toBeam
+    (over PSR _ { region = staticBuffer } psr)
+    di
 
   let
     Nut hooked = cont $ portaled buffer (beamed.push unit) beamed.event
@@ -674,8 +702,8 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
       trackBegin
       trackEnd
 
-    -- | Moves portaled content back into the buffer and empties it.
-    -- maybe not necessary
+    -- | We can't rely on our ancestor to move our nodes of the screen so we move portaled content of the screen back
+    -- | into the buffer. Afterwards we mark the buffer as empty so all references get lost.
     dispose :: Effect Unit
     dispose = do
       beamed.push unit
@@ -729,7 +757,7 @@ portaled buffer beam beamed bumped trackBegin trackEnd =
     void $ liftST $ ST.write region.begin trackBegin
 
     -- lifecycle handling
-    liftST $ runSTFn1 (un PSR psr).defer (unsubBeamed *> unsubBumped)
+    liftST $ runSTFn1 (un PSR psr).defer $ mkEffectFn1 \_ -> (unsubBeamed *> unsubBumped)
 
     let
       restoreBuffer :: Effect Unit
