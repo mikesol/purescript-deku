@@ -23,13 +23,12 @@ import Data.List (List)
 import Data.List as List
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Maybe (maybe)
 import Data.Newtype (over, un)
 import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
-import Deku.Core (ChildId(..), DOMInterpret(..), Nut(..), ParentId(..), newPSR)
-import Control.Monad.ST.Uncurried (runSTFn1, runSTFn5)
-import Data.Maybe (maybe)
+import Deku.Core (ChildId(..), DOMInterpret(..), Nut(..), ParentId(..), ParentTag(..), newPSR)
 import Deku.Core (Nut(..), ScopeDepth(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
@@ -64,7 +63,7 @@ hasChildrenThatWouldDisqualifyFromSSR (SSRElementRenderingInfo value) =  not
 
 elementIsLively :: SSRElementRenderingInfo -> Boolean
 elementIsLively value =
-  (un SSRElementRenderingInfo value).hasParentThatWouldDisqualifyFromSSR
+  (un SSRElementRenderingInfo value).parentIs == PDyn || (un SSRElementRenderingInfo value).parentIs == PPortal
     || hasChildrenThatWouldDisqualifyFromSSR value
 
 produceIsBoring
@@ -130,7 +129,7 @@ runInElement elt (Nut nut) = do
   tagRef <- liftST $ ST.new $ taggerStart + 1
   let tagger = makeTagger tagRef
   region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
-  scope <- liftST $ runSTFn5 newPSR mempty mempty false lifecycle region
+  scope <- liftST $ runSTFn5 newPSR mempty mempty PElement lifecycle region
   void $ runEffectFn2 nut scope (fullDOMInterpret tagger)
   pure $ dispose (ScopeDepth 0)
 
@@ -180,9 +179,10 @@ fixParents parentInfo renderingInfo =
         { flipped: Set.insert (coerce h) flipped
         , final: Map.alter
             ( \i -> map
+                -- this will do what we want, but is wrong and heavy-handed
+                -- we'll eventually sub this out with a more semantically correct approach
                 ( over SSRElementRenderingInfo _
-                    { hasParentThatWouldDisqualifyFromSSR = true }
-
+                    { parentIs = PDyn }
                 )
                 (i <|> Map.lookup (coerce h) renderingInfo)
             )
@@ -217,7 +217,7 @@ ssrInElement elt (Nut nut) = do
     ( runSTFn1 (un DOMInterpret di).incrementPureTextCount
         (ElementId taggerStart)
     )
-    false
+    PElement
     lifecycle
     region
 
@@ -238,8 +238,8 @@ ssrInElement elt (Nut nut) = do
       \k v -> HydrationRenderingInfo
         { attributeIndicesThatAreNeededDuringHydration:
            (un SSRElementRenderingInfo v).attributeIndicesThatAreNeededDuringHydration
-        , hasParentThatWouldDisqualifyFromSSR:
-            (un SSRElementRenderingInfo v).hasParentThatWouldDisqualifyFromSSR
+        , parentIs:
+            (un SSRElementRenderingInfo v).parentIs
         , hasChildrenThatWouldDisqualifyFromSSR:
             hasChildrenThatWouldDisqualifyFromSSR v
         , isBoring: fromMaybe false $ Map.lookup k isBoring
@@ -273,7 +273,7 @@ hydrateInElement { cache } elt (Nut nut) = do
   let par = toParentNode elt
   textNodes <- Map.fromFoldable <<< map (\{ k, v } -> k /\ v) <$>
     mapIdsToTextNodes elt
-  scope <- liftST $ runSTFn5 newPSR mempty mempty false lifecycle region
+  scope <- liftST $ runSTFn5 newPSR mempty mempty PElement lifecycle region
   void $ runEffectFn2 nut scope
     (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt par)
   pure $ dispose (ScopeDepth 0)

@@ -15,7 +15,7 @@ import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (class Newtype, un)
 import Data.Set as Set
-import Deku.Core (AttrIndex, MakeElement, MakeText)
+import Deku.Core (AttrIndex, MakeElement, MakeText, ParentTag(..))
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Entities (toDekuElement, toDekuText)
@@ -27,7 +27,7 @@ import Web.DOM.ParentNode (QuerySelector(..), querySelector)
 
 newtype HydrationRenderingInfo = HydrationRenderingInfo
   { attributeIndicesThatAreNeededDuringHydration :: Set.Set AttrIndex
-  , hasParentThatWouldDisqualifyFromSSR :: Boolean
+  , parentIs :: ParentTag
   , hasChildrenThatWouldDisqualifyFromSSR :: Boolean
   , isBoring :: Boolean
   }
@@ -45,7 +45,8 @@ makeElement renderingInfo dummyElement parentNode = mkEffectFn3 \id _ _ -> do
     Nothing -> pure $ toDekuElement dummyElement
     Just (HydrationRenderingInfo value) -> do
       case
-        value.hasParentThatWouldDisqualifyFromSSR
+        value.parentIs == PDyn
+          || value.parentIs == PPortal
           || value.hasChildrenThatWouldDisqualifyFromSSR
           ||
             ( not $ Set.isEmpty

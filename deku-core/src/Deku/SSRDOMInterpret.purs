@@ -11,7 +11,7 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over)
 import Data.Set (Set)
 import Data.Set as Set
-import Deku.Core (AttrIndex, MakeText, SetText)
+import Deku.Core (AttrIndex, MakeText, ParentTag, SetText)
 import Deku.Core as Core
 import Deku.Internal.Entities (DekuElement, DekuText)
 import Deku.Internal.Region (ElementId, elementIdToString)
@@ -32,7 +32,7 @@ type SSRElementRenderingInfoCache = Map.Map ElementId SSRElementRenderingInfo
 
 newtype SSRElementRenderingInfo = SSRElementRenderingInfo
   { attributeIndicesThatAreNeededDuringHydration :: Set AttrIndex
-  , hasParentThatWouldDisqualifyFromSSR :: Boolean
+  , parentIs :: ParentTag
   , childCount :: Int
   , numberOfChildrenThatAreElements :: Int
   , numberOfChildrenThatAreStaticTextNodes :: Int
@@ -52,14 +52,14 @@ incrementElementCount renderingInfo = mkSTFn1 \id -> do
 
 initializeElementRendering
   :: STRef.STRef Global SSRElementRenderingInfoCache
-  -> STFn4 ElementId DekuElement Int Boolean Global Unit
+  -> STFn4 ElementId DekuElement Int ParentTag Global Unit
 initializeElementRendering renderingInfo = mkSTFn4
-  \id backingElement childCount hasParentThatWouldDisqualifyFromSSR -> do
+  \id backingElement childCount parentIs -> do
     void $ STRef.modify
       ( Map.alter
           ( const $ Just $ SSRElementRenderingInfo
               { attributeIndicesThatAreNeededDuringHydration: Set.empty
-              , hasParentThatWouldDisqualifyFromSSR
+              , parentIs
               , childCount
               , numberOfChildrenThatAreElements: 0
               , numberOfChildrenThatAreStaticTextNodes: 0
@@ -108,8 +108,8 @@ markIndexAsNeedingHydration renderingInfo = mkSTFn2 \id ix -> do
 type SSRTextRenderingInfoCache = Map.Map ElementId SSRTextRenderingInfo
 
 newtype SSRTextRenderingInfo = SSRTextRenderingInfo
-  { hasParentThatWouldDisqualifyFromSSR :: Boolean
-  , isVolatile :: Boolean
+  {   parentIs :: ParentTag
+   , isVolatile :: Boolean
   , backingText :: DekuText
   }
 
@@ -117,13 +117,13 @@ derive instance Newtype SSRTextRenderingInfo _
 
 initializeTextRendering
   :: STRef.STRef Global SSRTextRenderingInfoCache
-  -> STFn4 ElementId DekuText Boolean Boolean Global Unit
+  -> STFn4 ElementId DekuText Boolean ParentTag Global Unit
 initializeTextRendering renderingInfo = mkSTFn4
-  \id backingText isVolatile hasParentThatWouldDisqualifyFromSSR -> do
+  \id backingText isVolatile parentIs -> do
     void $ STRef.modify
       ( Map.alter
           ( const $ Just $ SSRTextRenderingInfo
-              { hasParentThatWouldDisqualifyFromSSR
+              { parentIs
               , isVolatile
               , backingText
               }

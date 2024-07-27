@@ -26,7 +26,7 @@ module Deku.Core
   , RemoveText
   , BufferPortal
   , BeamRegion
-
+  , ParentTag(..)
   , DOMInterpret(..)
   , Hook
   , Hook'
@@ -255,9 +255,9 @@ newtype DOMInterpret = DOMInterpret
   , isBoring :: ElementId -> Boolean
   , makeElement :: MakeElement
   , initializeElementRendering ::
-      STFn4 ElementId DekuElement Int Boolean Global Unit
+      STFn4 ElementId DekuElement Int ParentTag Global Unit
   , initializeTextRendering ::
-      STFn4 ElementId DekuText Boolean Boolean Global Unit
+      STFn4 ElementId DekuText Boolean ParentTag Global Unit
   , incrementElementCount :: STFn1 ElementId Global Unit
   , shouldSkipAttribute :: ElementId -> AttrIndex -> Boolean
   , markIndexAsNeedingHydration :: STFn2 ElementId AttrIndex Global Unit
@@ -340,6 +340,10 @@ pump
   -> Effect Unit
 pump psr poll fn = pump' psr poll (const fn)
 
+data ParentTag = PElement | PDyn | PPortal | PFixed
+
+derive instance Eq ParentTag
+
 newtype PSR = PSR
   { lifecycle :: Poll.Poll ScopeDepth
   -- used by `Nut`s to register or clear the last element of their region.
@@ -349,7 +353,7 @@ newtype PSR = PSR
   , dispose :: EffectFn1 ScopeDepth Unit
   -- used to indicate when an element should never be statically rendered
   -- it may be disqualified for other reasons, but this flag trumps them all
-  , disqualifyFromStaticRendering :: Boolean
+  , parentIs :: ParentTag
   -- scope
   -- signals that this is an element to all listeners
   , incrementElementCount :: ST.ST Global Unit
@@ -359,10 +363,10 @@ newtype PSR = PSR
 
 derive instance Newtype PSR _
 
-newPSR :: STFn5 (ST.ST Global Unit) (ST.ST Global Unit) Boolean  (Poll.Poll ScopeDepth) StaticRegion Global PSR
+newPSR :: STFn5 (ST.ST Global Unit) (ST.ST Global Unit) ParentTag (Poll.Poll ScopeDepth) StaticRegion Global PSR
 newPSR = mkSTFn5 \incrementElementCount
    incrementPureTextCount
-   disqualifyFromStaticRendering
+   parentIs
    lifecycle region -> do
   unsubs <- STArray.new
   let
@@ -381,7 +385,7 @@ newPSR = mkSTFn5 \incrementElementCount
   pure
       ( PSR
           { lifecycle: once lifecycle
-          , disqualifyFromStaticRendering
+          , parentIs
           , incrementElementCount
           , incrementPureTextCount
           , region
@@ -404,7 +408,7 @@ instance Semigroup Nut where
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
       emptyScope <- liftST $ runSTFn5 newPSR (un PSR psr).incrementElementCount
         (un PSR psr).incrementPureTextCount
-        true
+        PFixed
         (un PSR psr).lifecycle
         (un PSR psr).region
 
@@ -614,7 +618,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
             ]
 
       eltLifecycle <- liftST Poll.create
-      eltPSR <- liftST $ runSTFn5 newPSR mempty mempty true eltLifecycle.poll
+      eltPSR <- liftST $ runSTFn5 newPSR mempty mempty PDyn eltLifecycle.poll
         staticRegion
       let
         Nut nut = cont
@@ -656,7 +660,7 @@ fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2 \psr di -> do
   emptyScope <- liftST $ runSTFn5 newPSR (un PSR psr).incrementElementCount
     (un PSR psr).incrementPureTextCount
-    true
+    PFixed
     (un PSR psr).lifecycle
     (un PSR psr).region
   let
@@ -705,7 +709,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
       (ElementId id)
       elt
       (Array.length nuts)
-      (un PSR psr).disqualifyFromStaticRendering
+      (un PSR psr).parentIs
 
     liftST $ (un PSR psr).incrementElementCount
 
@@ -749,7 +753,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         scope <- liftST $ runSTFn5 newPSR
           (runSTFn1 (un DOMInterpret di).incrementElementCount (ElementId id))
           (runSTFn1 (un DOMInterpret di).incrementPureTextCount (ElementId id))
-          false
+          PElement
           (over ScopeDepth (add 1) <$> (un PSR psr).lifecycle)
           eltRegion
         runEffectFn2 nut scope di
@@ -806,7 +810,7 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
   liftST $ runSTFn4 (un DOMInterpret di).initializeTextRendering (ElementId id)
     txt
     isVolatile
-    (un PSR psr).disqualifyFromStaticRendering
+    (un PSR psr).parentIs
 
   let
     modifiedPoll = case texts of
@@ -876,7 +880,7 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
         bumped.push bound
     )
   runEffectFn2 toBeam
-    ( over PSR _ { disqualifyFromStaticRendering = true, region = staticBuffer }
+    ( over PSR _ { parentIs = PPortal, region = staticBuffer }
         psr
     )
     di
