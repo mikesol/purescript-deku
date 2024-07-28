@@ -97,7 +97,7 @@ hydratingDOMInterpret
     , attachText: mkEffectFn2 \_ _ -> pure unit
     , setText: mkEffectFn2 \_ _ -> pure unit
     , removeText: I.removeTextEffect
-    , markTextAsPure: mkSTFn1 \_ -> pure unit
+    , markTextAsImpure: mkSTFn1 \_ -> pure unit
     --
     , beamRegion: I.beamRegionEffect
     , bufferPortal: I.bufferPortal

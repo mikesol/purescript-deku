@@ -24,7 +24,7 @@ data SerializableSSRRenderingInfo
       }
   | SerializableSSRTextRenderingInfo
       { ancestry :: Ancestry
-      , isPure :: Boolean
+      , isImpure :: Boolean
       }
 
 updateRenderingInfo
@@ -64,14 +64,14 @@ initializeElementRendering renderingInfo = mkSTFn2
       )
       renderingInfo
 
-markTextAsPure
+markTextAsImpure
   :: STRef.STRef Global SSRTextRenderingInfoCache
   -> STFn1 Ancestry Global Unit
-markTextAsPure renderingInfo = mkSTFn1 \id -> do
+markTextAsImpure renderingInfo = mkSTFn1 \id -> do
   runSTFn3 updateRenderingInfo id f renderingInfo
   where
   f = over SSRTextRenderingInfo \r -> r
-    { isPure = true
+    { isImpure = true
     }
 
 markAttributeIndexForHydration
@@ -95,7 +95,7 @@ type SSRTextRenderingInfoCache = Map.Map Ancestry SSRTextRenderingInfo
 
 newtype SSRTextRenderingInfo = SSRTextRenderingInfo
   { ancestry :: Ancestry
-  , isPure :: Boolean
+  , isImpure :: Boolean
   , backingText :: DekuText
   }
 
@@ -110,7 +110,7 @@ initializeTextRendering renderingInfo = mkSTFn2
       ( Map.alter
           ( const $ Just $ SSRTextRenderingInfo
               { ancestry
-              , isPure: false
+              , isImpure: false
               , backingText
               }
           )
@@ -144,7 +144,7 @@ ssrDOMInterpret textRenderingInfo elementRenderingInfo =
     , setText: I.setTextEffect
     , removeText: I.removeTextEffect
     , initializeTextRendering: initializeTextRendering textRenderingInfo
-    , markTextAsPure: markTextAsPure textRenderingInfo
+    , markTextAsImpure: markTextAsImpure textRenderingInfo
     --
     , beamRegion: I.beamRegionEffect
     , bufferPortal: I.bufferPortal
@@ -176,7 +176,7 @@ noOpDomInterpret =
     , attachText: mkEffectFn2 \_ _ -> pure unit
     , setText: mkEffectFn2 \_ _ -> pure unit
     , removeText: mkEffectFn1 \_ -> pure unit
-    , markTextAsPure: mkSTFn1 \_ -> pure unit
+    , markTextAsImpure: mkSTFn1 \_ -> pure unit
     --
     , beamRegion: mkEffectFn3 \_ _ _ -> pure unit
     , bufferPortal: I.bufferPortal

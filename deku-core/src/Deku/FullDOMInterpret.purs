@@ -26,7 +26,7 @@ fullDOMInterpret = Core.DOMInterpret
   , attachText: I.attachTextEffect
   , setText: I.setTextEffect
   , removeText: I.removeTextEffect
-  , markTextAsPure: mkSTFn1 \_ -> pure unit
+  , markTextAsImpure: mkSTFn1 \_ -> pure unit
   --
   , beamRegion: I.beamRegionEffect
   , bufferPortal: I.bufferPortal

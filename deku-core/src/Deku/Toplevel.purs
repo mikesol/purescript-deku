@@ -108,8 +108,8 @@ ssrInElement elt (Nut nut) = do
       (un SSRTextRenderingInfo value).backingText
   let
     cache = foldlWithIndex
-      ( \i b (SSRTextRenderingInfo { ancestry, isPure }) -> Map.insert i
-          (SerializableSSRTextRenderingInfo { ancestry, isPure })
+      ( \i b (SSRTextRenderingInfo { ancestry, isImpure }) -> Map.insert i
+          (SerializableSSRTextRenderingInfo { ancestry, isImpure })
           b
       )
       ( foldlWithIndex

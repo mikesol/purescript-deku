@@ -275,7 +275,7 @@ newtype DOMInterpret = DOMInterpret
   -- text ssr
   , initializeTextRendering ::
       STFn2 Ancestry DekuText Global Unit
-  , markTextAsPure :: STFn1 Ancestry Global Unit
+  , markTextAsImpure :: STFn1 Ancestry Global Unit
   -- portal
   , bufferPortal :: BufferPortal
   -- beam
@@ -815,8 +815,8 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
       PureAndPoll _ p -> OnlyPoll p
 
   case texts of
-    OnlyPure _ -> liftST $ runSTFn1 (un DOMInterpret di).markTextAsPure ancestry
-    _ -> pure unit
+    OnlyPure _ -> pure unit
+    _ -> liftST $ runSTFn1 (un DOMInterpret di).markTextAsImpure ancestry
 
   let
     handleTextUpdate :: Boolean -> EffectFn1 String Unit
