@@ -191,7 +191,7 @@ attachTextEffect =
     runEffectFn2 attachNodeEffect [ fromDekuText @Node txt ]
 
 setTextEffect :: Core.SetText
-setTextEffect = mkEffectFn3 \_ str txt' -> do
+setTextEffect = mkEffectFn2 \str txt' -> do
   let txt = fromDekuText @Node txt'
   runEffectFn2 setTextContent str txt
 

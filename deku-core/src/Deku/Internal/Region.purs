@@ -15,13 +15,11 @@ module Deku.Internal.Region
   , StaticRegion(..)
   , RegionSpan
   , Bump
-  , elementIdToString
   , fromParent
   , newStaticRegion
   , newSpan
   , allocateRegion
   , printSpan
-  , ElementId(..)
   ) where
 
 import Prelude
@@ -35,20 +33,11 @@ import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Foldable (traverse_)
 import Data.Maybe (Maybe(..), isJust, maybe)
-import Data.Newtype (class Newtype, un)
+import Data.Newtype (class Newtype)
 import Deku.Internal.Entities (DekuElement, DekuParent, DekuText)
 import FRP.Event (createPure)
 import FRP.Poll (Poll, pollFromEvent, stRefToPoll)
 import Partial.Unsafe (unsafePartial)
-
-newtype ElementId = ElementId Int
-
-derive instance Newtype ElementId _
-derive newtype instance Eq ElementId
-derive newtype instance Ord ElementId
-
-elementIdToString :: ElementId -> String
-elementIdToString = show <<< un ElementId
 
 data Anchor
   = ParentStart DekuParent

@@ -2,24 +2,20 @@ module Deku.FullDOMInterpret where
 
 import Prelude
 
-import Control.Monad.ST as ST
-import Control.Monad.ST.Global (Global)
-import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2, mkSTFn4)
+import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2)
 import Deku.Core as Core
 import Deku.Interpret as I
 
-fullDOMInterpret :: ST.ST Global Int -> Core.DOMInterpret
-fullDOMInterpret tagger = Core.DOMInterpret
-  { tagger
-  , dynamicDOMInterpret: \_ -> fullDOMInterpret tagger
+fullDOMInterpret :: Core.DOMInterpret
+fullDOMInterpret = Core.DOMInterpret
+  {  dynamicDOMInterpret: \_ -> fullDOMInterpret
   --
   , isBoring: const false
   , makeElement: I.makeElementEffect
   , attachElement: I.attachElementEffect
-  , initializeElementRendering: mkSTFn4 \_ _ _ _ -> pure unit
-  , initializeTextRendering: mkSTFn4 \_ _ _ _ -> pure unit
-  , incrementElementCount: mkSTFn1 \_ -> pure unit
-  , markIndexAsNeedingHydration: mkSTFn2 \_ _ -> pure unit
+  , initializeElementRendering: mkSTFn2 \_ _ -> pure unit
+  , initializeTextRendering: mkSTFn2 \_ _ -> pure unit
+  , markAttributeIndexForHydration: mkSTFn2 \_ _ -> pure unit
   , shouldSkipAttribute: \_ _ -> false
   , setProp: I.setPropEffect
   , setCb: I.setCbEffect
@@ -30,7 +26,7 @@ fullDOMInterpret tagger = Core.DOMInterpret
   , attachText: I.attachTextEffect
   , setText: I.setTextEffect
   , removeText: I.removeTextEffect
-  , incrementPureTextCount: mkSTFn1 \_ -> pure unit
+  , markTextAsPure: mkSTFn1 \_ -> pure unit
   --
   , beamRegion: I.beamRegionEffect
   , bufferPortal: I.bufferPortal

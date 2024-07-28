@@ -26,7 +26,6 @@ module Deku.Core
   , RemoveText
   , BufferPortal
   , BeamRegion
-  , ParentTag(..)
   , DOMInterpret(..)
   , Hook
   , Hook'
@@ -84,7 +83,8 @@ import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn4, STFn5, mkSTFn1, mkSTFn5, runSTFn1, runSTFn2, runSTFn4, runSTFn5)
+import Control.Monad.ST.Internal as STRef
+import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn3, runSTFn1, runSTFn2, runSTFn3)
 import Control.Plus (empty)
 import Data.Array as Array
 import Data.Array.ST as STArray
@@ -97,8 +97,10 @@ import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
+import Deku.Internal.Ancestry (Ancestry)
+import Deku.Internal.Ancestry as Ancestry
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
-import Deku.Internal.Region (Anchor(..), Bound, ElementId(..), Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
+import Deku.Internal.Region (Anchor(..), Bound, Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
 import Effect (Effect, forE)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
 import FRP.Event as Event
@@ -122,17 +124,17 @@ cb = Cb <<< ((map <<< map) (const true))
 
 prop' :: String -> String -> Attribute'
 prop' k v = mkEffectFn4
-  \id ix e (DOMInterpret { setProp, markIndexAsNeedingHydration }) -> do
+  \id ix e (DOMInterpret { setProp, markAttributeIndexForHydration }) -> do
     when (Set.member k dynamicKeywords) $ liftST $ runSTFn2
-      markIndexAsNeedingHydration
+      markAttributeIndexForHydration
       id
       ix
     runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 cb' :: String -> Cb -> Attribute'
 cb' k v = mkEffectFn4
-  \id ix e (DOMInterpret { markIndexAsNeedingHydration, setCb }) -> do
-    liftST $ runSTFn2 markIndexAsNeedingHydration id ix
+  \id ix e (DOMInterpret { markAttributeIndexForHydration, setCb }) -> do
+    liftST $ runSTFn2 markAttributeIndexForHydration id ix
     runEffectFn3 setCb (Key k) v (toDekuElement e)
 
 unset' :: String -> Attribute'
@@ -141,7 +143,7 @@ unset' k = mkEffectFn4 \_ _ e (DOMInterpret { unsetAttribute }) ->
 
 -- TODO: get rid of `Element` type
 type Attribute' =
-  EffectFn4 ElementId AttrIndex Element DOMInterpret Unit
+  EffectFn4 Ancestry AttrIndex Element DOMInterpret Unit
 
 -- | Low level representation of key-value pairs for attributes and listeners.
 -- | In general, this type is for internal use only.
@@ -155,7 +157,7 @@ unsafeUnAttribute = coerce
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
   :: forall e
-   . EffectFn4 ElementId AttrIndex Element DOMInterpret Unit
+   . EffectFn4 Ancestry AttrIndex Element DOMInterpret Unit
   -> Attribute e
 unsafeAttribute = Attribute
 
@@ -170,8 +172,8 @@ attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn4
 callbackWithCaution
   :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
 callbackWithCaution k v = unsafeAttribute $ mkEffectFn4
-  \id ix e (DOMInterpret { markIndexAsNeedingHydration, setCb }) -> do
-    liftST $ runSTFn2 markIndexAsNeedingHydration id ix
+  \id ix e (DOMInterpret { markAttributeIndexForHydration, setCb }) -> do
+    liftST $ runSTFn2 markAttributeIndexForHydration id ix
     runEffectFn3 setCb (Key k) (Cb v) (toDekuElement e)
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
@@ -184,7 +186,7 @@ newtype Namespace = Namespace String
 
 -- | Type used by Deku backends to create an element. For internal use only unless you're writing a custom backend.
 type MakeElement =
-  EffectFn3 ElementId (Maybe Namespace) Tag DekuElement
+  EffectFn3 Ancestry (Maybe Namespace) Tag DekuElement
 
 type RemoveElement = EffectFn1 DekuElement Unit
 type RemoveText = EffectFn1 DekuText Unit
@@ -199,11 +201,11 @@ type AttachText =
 
 -- | Type used by Deku backends to construct a text element. For internal use only unless you're writing a custom
 -- | backend.
-type MakeText = EffectFn2 ElementId (Maybe String) DekuText
+type MakeText = EffectFn2 Ancestry (Maybe String) DekuText
 
 -- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom
 -- | backend.
-type SetText = EffectFn3 Int String DekuText Unit
+type SetText = EffectFn2 String DekuText Unit
 
 -- | Type used by Deku backends to unset an attribute. For internal use only unless you're writing a custom backend.
 type UnsetAttribute =
@@ -250,30 +252,33 @@ derive newtype instance Ord AttrIndex
 -- | Three interpreters are included with Deku: SPA.
 -- , SSR, and hydrated SSR.
 newtype DOMInterpret = DOMInterpret
-  { tagger :: ST.ST Global Int
-  , dynamicDOMInterpret :: Unit -> DOMInterpret
-  , isBoring :: ElementId -> Boolean
+  { -- ssr
+    dynamicDOMInterpret :: Unit -> DOMInterpret
+  -- element
   , makeElement :: MakeElement
-  , initializeElementRendering ::
-      STFn4 ElementId DekuElement Int ParentTag Global Unit
-  , initializeTextRendering ::
-      STFn4 ElementId DekuText Boolean ParentTag Global Unit
-  , incrementElementCount :: STFn1 ElementId Global Unit
-  , shouldSkipAttribute :: ElementId -> AttrIndex -> Boolean
-  , markIndexAsNeedingHydration :: STFn2 ElementId AttrIndex Global Unit
   , setProp :: SetProp
   , setCb :: SetCb
   , unsetAttribute :: UnsetAttribute
   , attachElement :: AttachElement
   , removeElement :: RemoveElement
-  --
+  -- element ssr
+  , initializeElementRendering ::
+      STFn2 Ancestry DekuElement Global Unit
+  , markAttributeIndexForHydration :: STFn2 Ancestry AttrIndex Global Unit
+  , shouldSkipAttribute :: Ancestry -> AttrIndex -> Boolean
+  , isBoring :: Ancestry -> Boolean
+  -- text
   , makeText :: MakeText
   , setText :: SetText
   , attachText :: AttachText
   , removeText :: RemoveText
-  , incrementPureTextCount :: STFn1 ElementId Global Unit
-  -- 
+  -- text ssr
+  , initializeTextRendering ::
+      STFn2 Ancestry DekuText Global Unit
+  , markTextAsPure :: STFn1 Ancestry Global Unit
+  -- portal
   , bufferPortal :: BufferPortal
+  -- beam
   , beamRegion :: BeamRegion
   }
 
@@ -340,10 +345,6 @@ pump
   -> Effect Unit
 pump psr poll fn = pump' psr poll (const fn)
 
-data ParentTag = PElement | PDyn | PPortal | PFixed
-
-derive instance Eq ParentTag
-
 newtype PSR = PSR
   { lifecycle :: Poll.Poll ScopeDepth
   -- used by `Nut`s to register or clear the last element of their region.
@@ -353,21 +354,13 @@ newtype PSR = PSR
   , dispose :: EffectFn1 ScopeDepth Unit
   -- used to indicate when an element should never be statically rendered
   -- it may be disqualified for other reasons, but this flag trumps them all
-  , parentIs :: ParentTag
-  -- scope
-  -- signals that this is an element to all listeners
-  , incrementElementCount :: ST.ST Global Unit
-  -- signals that this is a pure text node to all listeners
-  , incrementPureTextCount :: ST.ST Global Unit
+  , ancestry :: Ancestry
   }
 
 derive instance Newtype PSR _
 
-newPSR :: STFn5 (ST.ST Global Unit) (ST.ST Global Unit) ParentTag (Poll.Poll ScopeDepth) StaticRegion Global PSR
-newPSR = mkSTFn5 \incrementElementCount
-   incrementPureTextCount
-   parentIs
-   lifecycle region -> do
+newPSR :: STFn3 Ancestry (Poll.Poll ScopeDepth) StaticRegion Global PSR
+newPSR = mkSTFn3 \ancestry lifecycle region -> do
   unsubs <- STArray.new
   let
     doDefer :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
@@ -383,16 +376,14 @@ newPSR = mkSTFn5 \incrementElementCount
         runEffectFn1 (unsafePartial $ Array.unsafeIndex stack (l - 1 - i)) d
 
   pure
-      ( PSR
-          { lifecycle: once lifecycle
-          , parentIs
-          , incrementElementCount
-          , incrementPureTextCount
-          , region
-          , defer: doDefer
-          , dispose
-          }
-      )
+    ( PSR
+        { lifecycle: once lifecycle
+        , ancestry
+        , region
+        , defer: doDefer
+        , dispose
+        }
+    )
 
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
@@ -406,14 +397,15 @@ instance Semigroup Nut where
     -- unrolled version of `fixed`
     Nut $ mkEffectFn2 \psr di -> do
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
-      emptyScope <- liftST $ runSTFn5 newPSR (un PSR psr).incrementElementCount
-        (un PSR psr).incrementPureTextCount
-        PFixed
+      emptyScope <- liftST $ runSTFn3 newPSR
+        (Ancestry.fixed 0 (un PSR psr).ancestry)
         (un PSR psr).lifecycle
         (un PSR psr).region
 
       runEffectFn2 a emptyScope di
-      runEffectFn2 b psr di
+      runEffectFn2 b
+        (over PSR (\i -> i { ancestry = (Ancestry.fixed 1 i.ancestry) }) psr)
+        di
 
 instance Monoid Nut where
   mempty =
@@ -500,7 +492,8 @@ useRef a b f = Deku.do
   f (liftST r)
 
 deferO :: EffectFn2 PSR (Effect Unit) Unit
-deferO = mkEffectFn2 \psr eff -> liftST (runSTFn1 (un PSR psr).defer (mkEffectFn1 \_ -> eff))
+deferO = mkEffectFn2 \psr eff -> liftST
+  (runSTFn1 (un PSR psr).defer (mkEffectFn1 \_ -> eff))
 
 defer :: PSR -> Effect Unit -> Effect Unit
 defer =
@@ -588,6 +581,8 @@ useDynWith
 useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
   Region region <- liftST $ (un StaticRegion (un PSR psr).region).region
   span <- liftST $ runSTFn2 newSpan region.begin region.bump
+  let ancestry = (un PSR psr).ancestry
+  aref <- liftST $ STRef.new (-1)
 
   let
     handleElements :: Boolean -> EffectFn1 (Tuple (Maybe Int) value) Unit
@@ -618,7 +613,9 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
             ]
 
       eltLifecycle <- liftST Poll.create
-      eltPSR <- liftST $ runSTFn5 newPSR mempty mempty PDyn eltLifecycle.poll
+      a <- liftST $ STRef.modify (add 1) aref
+      eltPSR <- liftST $ runSTFn3 newPSR (Ancestry.dyn a ancestry)
+        eltLifecycle.poll
         staticRegion
       let
         Nut nut = cont
@@ -658,15 +655,20 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
 
 fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2 \psr di -> do
-  emptyScope <- liftST $ runSTFn5 newPSR (un PSR psr).incrementElementCount
-    (un PSR psr).incrementPureTextCount
-    PFixed
+  emptyScope <- liftST $ runSTFn3 newPSR
+    (un PSR psr).ancestry
     (un PSR psr).lifecycle
     (un PSR psr).region
+  aref <- liftST $ STRef.new (-1)
   let
     handleNuts :: EffectFn1 Nut Unit
-    handleNuts = mkEffectFn1 \(Nut nut) ->
-      runEffectFn2 nut emptyScope di
+    handleNuts = mkEffectFn1 \(Nut nut) -> do
+      a <- liftST $ STRef.modify (add 1) aref
+      runEffectFn2 nut
+        ( over PSR (\i -> i { ancestry = Ancestry.fixed a i.ancestry })
+            emptyScope
+        )
+        di
 
   -- run `nuts` with separate scope
   runEffectFn2 Event.fastForeachE nuts handleNuts
@@ -681,18 +683,9 @@ elementify
   -> Array Nut
   -> Nut
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
-  id <- liftST (un DOMInterpret di).tagger
-  let isBoring = (un DOMInterpret di).isBoring (ElementId id)
-  if isBoring then do
-    -- boring is a short circuit - all we need to do is peel of ids to keep the counter consistent
-    -- but otherwise we can skip everything
-    -- we can feed it the old PSR as it'll be skipping all logic using PSR anyway
-    -- change this if it bugs out
-    runEffectFn2 Event.fastForeachE nuts $ mkEffectFn1 \(Nut nut) -> do
-      runEffectFn2 nut psr di
-
-  else do
-    elt <- runEffectFn3 (un DOMInterpret di).makeElement (ElementId id)
+  let isBoring = (un DOMInterpret di).isBoring (un PSR psr).ancestry
+  when (not isBoring) do
+    elt <- runEffectFn3 (un DOMInterpret di).makeElement (un PSR psr).ancestry
       (Namespace <$> ns)
       (Tag tag)
     regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
@@ -705,13 +698,9 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
     ---
     --- ssr management
 
-    liftST $ runSTFn4 (un DOMInterpret di).initializeElementRendering
-      (ElementId id)
+    liftST $ runSTFn2 (un DOMInterpret di).initializeElementRendering
+      (un PSR psr).ancestry
       elt
-      (Array.length nuts)
-      (un PSR psr).parentIs
-
-    liftST $ (un PSR psr).incrementElementCount
 
     --- end ssr management
     ---
@@ -725,7 +714,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
               if useOriginalDi then di
               else (un DOMInterpret di).dynamicDOMInterpret unit
           mkEffectFn1 \(Attribute x) ->
-            runEffectFn4 x (ElementId id) ix (fromDekuElement elt) newDi
+            runEffectFn4 x (un PSR psr).ancestry ix (fromDekuElement elt) newDi
 
     -- todo: in hydration, we don't need to set attributes
     -- that are already set
@@ -733,33 +722,33 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
     -- them, then we should code up a mechanism to skip it
     forWithIndex_ arrAtts \ix att -> do
       when
-        ( not (un DOMInterpret di).shouldSkipAttribute (ElementId id)
+        ( not (un DOMInterpret di).shouldSkipAttribute (un PSR psr).ancestry
             (AttrIndex ix)
         )
         do
           case att of
             OnlyPure _ -> pure unit
             _ -> liftST $ runSTFn2
-              (un DOMInterpret di).markIndexAsNeedingHydration
-              (ElementId id)
+              (un DOMInterpret di).markAttributeIndexForHydration
+              (un PSR psr).ancestry
               (AttrIndex ix)
           handleAtts (AttrIndex ix) att
 
     eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
+    aref <- liftST $ STRef.new (-1)
 
     let
       handleNuts :: EffectFn1 Nut Unit
       handleNuts = mkEffectFn1 \(Nut nut) -> do
-        scope <- liftST $ runSTFn5 newPSR
-          (runSTFn1 (un DOMInterpret di).incrementElementCount (ElementId id))
-          (runSTFn1 (un DOMInterpret di).incrementPureTextCount (ElementId id))
-          PElement
+        a <- liftST $ STRef.modify (add 1) aref
+        scope <- liftST $ runSTFn3 newPSR
+          (Ancestry.element a (un PSR psr).ancestry)
           (over ScopeDepth (add 1) <$> (un PSR psr).lifecycle)
           eltRegion
         runEffectFn2 nut scope di
     runEffectFn2 Event.fastForeachE nuts handleNuts
 
-    let 
+    let
       handleRemove :: EffectFn1 ScopeDepth Unit
       handleRemove = mkEffectFn1 case _ of
         ScopeDepth 0 ->
@@ -782,35 +771,36 @@ text_ txt =
 
 text :: Poll String -> Nut
 text texts = Nut $ mkEffectFn2 \psr di -> do
-  id <- liftST (un DOMInterpret di).tagger
+  let ancestry = (un PSR psr).ancestry
   txt <- case texts of
     OnlyPure xs -> do
-      runEffectFn2 (un DOMInterpret di).makeText (ElementId id)
+      runEffectFn2 (un DOMInterpret di).makeText
+        ancestry
         (Array.last xs)
 
     OnlyEvent _ -> do
-      runEffectFn2 (un DOMInterpret di).makeText (ElementId id) Nothing
+      runEffectFn2 (un DOMInterpret di).makeText
+        ancestry
+        Nothing
 
     OnlyPoll _ -> do
-      runEffectFn2 (un DOMInterpret di).makeText (ElementId id) Nothing
+      runEffectFn2 (un DOMInterpret di).makeText
+        ancestry
+        Nothing
 
     PureAndEvent xs _ -> do
-      runEffectFn2 (un DOMInterpret di).makeText (ElementId id)
+      runEffectFn2 (un DOMInterpret di).makeText
+        ancestry
         (Array.last xs)
 
     PureAndPoll xs _ -> do
-      runEffectFn2 (un DOMInterpret di).makeText (ElementId id)
+      runEffectFn2 (un DOMInterpret di).makeText
+        ancestry
         (Array.last xs)
 
-  let
-    isVolatile = case texts of
-      OnlyPure _ -> false
-      _ -> true
-
-  liftST $ runSTFn4 (un DOMInterpret di).initializeTextRendering (ElementId id)
+  liftST $ runSTFn2 (un DOMInterpret di).initializeTextRendering
+    (un PSR psr).ancestry
     txt
-    isVolatile
-    (un PSR psr).parentIs
 
   let
     modifiedPoll = case texts of
@@ -824,6 +814,10 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
 
       PureAndPoll _ p -> OnlyPoll p
 
+  case texts of
+    OnlyPure _ -> liftST $ runSTFn1 (un DOMInterpret di).markTextAsPure ancestry
+    _ -> pure unit
+
   let
     handleTextUpdate :: Boolean -> EffectFn1 String Unit
     handleTextUpdate useOriginalDi = mkEffectFn1 \x -> do
@@ -831,18 +825,12 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
         di2 =
           if useOriginalDi then di
           else (un DOMInterpret di).dynamicDOMInterpret unit
-      runEffectFn3 (un DOMInterpret di2).setText id x txt
-      
+      runEffectFn2 (un DOMInterpret di2).setText x txt
 
   pump' psr modifiedPoll handleTextUpdate
   regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
   runEffectFn2 (un DOMInterpret di).attachText txt regionEnd
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
-
-  case texts of
-    OnlyPure _ -> liftST $ (un PSR psr).incrementPureTextCount
-    _ -> pure unit
-
 
   let
     handleRemove :: EffectFn1 ScopeDepth Unit
@@ -880,7 +868,10 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
         bumped.push bound
     )
   runEffectFn2 toBeam
-    ( over PSR _ { parentIs = PPortal, region = staticBuffer }
+    ( over PSR
+        ( \i ->
+            i { ancestry = Ancestry.portal i.ancestry, region = staticBuffer }
+        )
         psr
     )
     di
@@ -946,7 +937,8 @@ portaled buffer beam beamed bumped trackBegin trackEnd =
     void $ liftST $ ST.write region.begin trackBegin
 
     -- lifecycle handling
-    liftST $ runSTFn1 (un PSR psr).defer $ mkEffectFn1 \_ -> (unsubBeamed *> unsubBumped)
+    liftST $ runSTFn1 (un PSR psr).defer $ mkEffectFn1 \_ ->
+      (unsubBeamed *> unsubBumped)
 
     let
       restoreBuffer :: Effect Unit

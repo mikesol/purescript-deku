@@ -9,7 +9,6 @@ import Data.Array as Array
 import Data.Filterable (compact, filter)
 import Data.Foldable (intercalate, sequence_, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
@@ -20,9 +19,6 @@ import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
-import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
-import Deku.HydratingDOMInterpret (HydrationRenderingInfo)
-import Deku.Internal.Region (ElementId)
 import Deku.Hooks (cycle, dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Pursx (lenientPursx, pursx)
 import Deku.Toplevel (SSROutput, hydrateInBody, runInBody, ssrInBody)

@@ -11,111 +11,39 @@ module Deku.Toplevel
 
 import Prelude
 
-import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
-import Control.Monad.ST.Global (Global)
-import Control.Monad.ST.Internal (STRef)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (runSTFn1, runSTFn5)
+import Control.Monad.ST.Uncurried (runSTFn1, runSTFn3)
+import Control.Plus (empty)
 import Data.FoldableWithIndex (foldlWithIndex, forWithIndex_)
-import Data.FunctorWithIndex (mapWithIndex)
-import Data.List (List)
-import Data.List as List
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
-import Data.Maybe (maybe)
-import Data.Newtype (over, un)
+import Data.Newtype (un)
 import Data.Set as Set
-import Data.Tuple (Tuple(..))
+import Data.Traversable (traverse)
 import Data.Tuple.Nested ((/\))
-import Deku.Core (ChildId(..), DOMInterpret(..), Nut(..), ParentId(..), ParentTag(..), newPSR)
-import Deku.Core (Nut(..), ScopeDepth(..), newPSR)
+import Deku.Core (Nut(..), ScopeDepth(ScopeDepth), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
-import Deku.Internal.Entities (DekuParent(..), fromDekuElement, toDekuElement)
-import Deku.Internal.Region (ElementId(..), elementIdToString)
+import Deku.Internal.Ancestry (Ancestry)
+import Deku.Internal.Ancestry as Ancestry
+import Deku.Internal.Entities (DekuParent(..), fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Internal.Region as Region
-import Deku.SSRDOMInterpret (SSRElementRenderingInfo(..), ssrDOMInterpret)
+import Deku.SSRDOMInterpret (SSRElementRenderingInfo(..), SSRTextRenderingInfo(..), SerializableSSRRenderingInfo(..), ssrDOMInterpret)
 import Effect (Effect)
 import Effect.Exception (error, throwException)
-import Effect.Random (randomInt)
 import Effect.Uncurried (runEffectFn2)
 import FRP.Poll (create)
-import Safe.Coerce (coerce)
 import Web.DOM as Web.DOM
 import Web.DOM.Document (createElement, createTextNode)
-import Web.DOM.Element (setAttribute, toParentNode)
+import Web.DOM.Element (getAttribute, setAttribute, toParentNode)
+import Web.DOM.Element as Element
+import Web.DOM.NodeList (toArray)
+import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (body, toDocument)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
-
-hasChildrenThatWouldDisqualifyFromSSR :: SSRElementRenderingInfo -> Boolean
-hasChildrenThatWouldDisqualifyFromSSR (SSRElementRenderingInfo value) =  not
-      ( value.childCount == value.numberOfChildrenThatAreElements
-          ||
-            ( value.childCount == 0 &&
-                value.numberOfChildrenThatAreStaticTextNodes == 1
-            )
-          || Set.isEmpty value.attributeIndicesThatAreNeededDuringHydration
-      )  || Set.isEmpty value.attributeIndicesThatAreNeededDuringHydration
-      
-
-elementIsLively :: SSRElementRenderingInfo -> Boolean
-elementIsLively value =
-  (un SSRElementRenderingInfo value).parentIs == PDyn || (un SSRElementRenderingInfo value).parentIs == PPortal
-    || hasChildrenThatWouldDisqualifyFromSSR value
-
-produceIsBoring
-  :: Map.Map ParentId (List ChildId)
-  -> Map.Map ElementId SSRElementRenderingInfo
-  -> Map.Map ChildId ParentId
-  -> Map.Map ElementId Boolean
-produceIsBoring parentToChildren parentToRI childToParent =
-  moveThroughBoringList
-    (Set.toUnfoldable $ Set.union notInObject childless)
-    Map.empty
-  where
-  allChildren :: Set.Set ElementId
-  allChildren = Set.fromFoldable
-    ((coerce :: _ -> List _) (join (Map.values parentToChildren)))
-
-  allParents :: Set.Set ElementId
-  allParents = Set.fromFoldable
-    ((coerce :: _ -> List _) (Map.values childToParent))
-
-  notInObject :: Set.Set ElementId
-  notInObject = Set.difference allChildren allParents
-
-  childless :: Set.Set ElementId
-  childless = foldlWithIndex
-    (\i b a -> if List.null a then (Set.insert (coerce i) b) else b)
-    Set.empty
-    parentToChildren
-
-  moveThroughBoringList
-    :: List ElementId -> Map.Map ElementId Boolean -> Map.Map ElementId Boolean
-  moveThroughBoringList List.Nil isBoring = isBoring
-  moveThroughBoringList (List.Cons h rest) isBoring = do
-    let kids = fromMaybe List.Nil $ Map.lookup (coerce h) parentToChildren
-    let
-      kidsAreBoring = List.all
-        (\k -> fromMaybe true $ Map.lookup (coerce k) isBoring)
-        kids
-    let
-      iAmBoring = case Map.lookup h (coerce parentToRI) of
-        Nothing -> true
-        Just value -> not (elementIsLively value)
-    let myParentIs = Map.lookup (coerce h) childToParent
-    moveThroughBoringList
-      ((maybe identity (flip List.snoc) (coerce myParentIs)) rest)
-      (Map.insert h (iAmBoring && kidsAreBoring) isBoring)
-
-makeTagger :: STRef Global Int -> ST.ST Global Int
-makeTagger tagRef = do
-  tag <- ST.read tagRef
-  void $ ST.write (tag + 1) tagRef
-  pure tag
 
 -- | Runs a deku application in a DOM element, returning a canceler that can
 -- | be used to cancel the application.
@@ -125,12 +53,9 @@ runInElement
   -> Effect (Effect Unit)
 runInElement elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
-  let taggerStart = 0
-  tagRef <- liftST $ ST.new $ taggerStart + 1
-  let tagger = makeTagger tagRef
   region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
-  scope <- liftST $ runSTFn5 newPSR mempty mempty PElement lifecycle region
-  void $ runEffectFn2 nut scope (fullDOMInterpret tagger)
+  scope <- liftST $ runSTFn3 newPSR Ancestry.root lifecycle region
+  void $ runEffectFn2 nut scope fullDOMInterpret
   pure $ dispose (ScopeDepth 0)
 
 doInBody :: forall i o. (Web.DOM.Element -> i -> Effect o) -> i -> Effect o
@@ -149,49 +74,13 @@ runInBody = doInBody runInElement
 
 foreign import innerHTML :: Web.DOM.Element -> Effect String
 
-foreign import transformTextNodes :: Web.DOM.Element -> String -> Effect Unit
+foreign import transformTextNode :: String -> Web.DOM.Text -> Effect Unit
 
 foreign import mapIdsToTextNodes
-  :: Web.DOM.Element -> Effect (Array { k :: ElementId, v :: Web.DOM.Text })
-
-foreign import traverseDOMAndConstructParentChildMapping :: Web.DOM.Element -> String -> Effect (Array { parent:: ParentId, children:: Array ChildId})
-
-fixParents
-  :: Map.Map ParentId (List ChildId)
-  -> Map.Map ElementId SSRElementRenderingInfo
-  -> Map.Map ElementId SSRElementRenderingInfo
-fixParents parentInfo renderingInfo =
-  (foldlWithIndex go { flipped: Set.empty, final: renderingInfo } renderingInfo).final
-
-  where
-  go eltId { flipped, final } s
-    | not (elementIsLively s) =
-        { flipped, final: Map.alter (\i -> i <|> Just s) eltId final }
-    | otherwise = imputeAllChildren
-        (fromMaybe List.Nil $ Map.lookup (coerce eltId) parentInfo)
-        { flipped, final }
-  imputeAllChildren List.Nil { flipped, final } = { flipped, final }
-  imputeAllChildren (List.Cons h rest) { flipped, final }
-    | Set.member ((coerce :: _ -> ElementId) h) flipped = imputeAllChildren rest
-        { flipped, final }
-    | otherwise = imputeAllChildren
-        (rest <> (fromMaybe List.Nil $ Map.lookup (coerce h) parentInfo))
-        { flipped: Set.insert (coerce h) flipped
-        , final: Map.alter
-            ( \i -> map
-                -- this will do what we want, but is wrong and heavy-handed
-                -- we'll eventually sub this out with a more semantically correct approach
-                ( over SSRElementRenderingInfo _
-                    { parentIs = PDyn }
-                )
-                (i <|> Map.lookup (coerce h) renderingInfo)
-            )
-            (coerce h)
-            final
-        }
+  :: Web.DOM.Element -> Effect (Array { k :: String, v :: Web.DOM.Text })
 
 type SSROutput =
-  { html :: String, cache :: Map.Map ElementId HydrationRenderingInfo }
+  { html :: String, cache :: Map.Map Ancestry SerializableSSRRenderingInfo }
 
 ssrInElement
   :: Web.DOM.Element
@@ -199,88 +88,105 @@ ssrInElement
   -> Effect SSROutput
 ssrInElement elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
-  let taggerStart = 0
-  tagRef <- liftST $ ST.new $ taggerStart + 1
-  let tagger = makeTagger tagRef
   textCacheRef <- liftST $ ST.new Map.empty
   elementCacheRef <- liftST $ ST.new Map.empty
-  rn0 <- randomInt 0 10000
-  rn1 <- randomInt 0 10000
-  rn2 <- randomInt 0 10000
-  let dynTextTag = show rn0 <> "_" <> show rn1 <> "_" <> show rn2
-  let di = ssrDOMInterpret tagger dynTextTag textCacheRef elementCacheRef
+  let di = ssrDOMInterpret textCacheRef elementCacheRef
   region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
-  scope <- liftST $ runSTFn5 newPSR
-    ( runSTFn1 (un DOMInterpret di).incrementElementCount
-        (ElementId taggerStart)
-    )
-    ( runSTFn1 (un DOMInterpret di).incrementPureTextCount
-        (ElementId taggerStart)
-    )
-    PElement
+  scope <- liftST $ runSTFn3 newPSR
+    Ancestry.root
     lifecycle
     region
 
   void $ runEffectFn2 nut scope di
-  elementCache' <- liftST $ ST.read elementCacheRef
+  elementCache <- liftST $ ST.read elementCacheRef
   textCache <- liftST $ ST.read textCacheRef
-  parentCache <- Map.fromFoldable <<< map (\{parent, children} -> parent /\ List.fromFoldable children) <$> traverseDOMAndConstructParentChildMapping elt dynTextTag
-  let elementCache = fixParents parentCache elementCache'
   forWithIndex_ elementCache \tag value -> do
-      setAttribute "data-deku-ssr" (elementIdToString tag) $ fromDekuElement (un SSRElementRenderingInfo value).backingElement
-  let ibab i b a = Map.union (Map.fromFoldable $ map (flip Tuple i) a) b
-  let reverseParentCache = foldlWithIndex ibab Map.empty parentCache
+    setAttribute "data-deku-ssr" (Ancestry.toStringRepresentationInDOM tag) $
+      fromDekuElement (un SSRElementRenderingInfo value).backingElement
+  forWithIndex_ textCache \tag value -> do
+    transformTextNode (Ancestry.toStringRepresentationInDOM tag) $ fromDekuText
+      (un SSRTextRenderingInfo value).backingText
   let
-    isBoring = produceIsBoring parentCache elementCache
-      reverseParentCache
-  let
-    hydrationRenderingCache = elementCache # mapWithIndex
-      \k v -> HydrationRenderingInfo
-        { attributeIndicesThatAreNeededDuringHydration:
-           (un SSRElementRenderingInfo v).attributeIndicesThatAreNeededDuringHydration
-        , parentIs:
-            (un SSRElementRenderingInfo v).parentIs
-        , hasChildrenThatWouldDisqualifyFromSSR:
-            hasChildrenThatWouldDisqualifyFromSSR v
-        , isBoring: fromMaybe false $ Map.lookup k isBoring
-        }
-  transformTextNodes elt dynTextTag
+    cache = foldlWithIndex
+      ( \i b (SSRTextRenderingInfo { ancestry, isPure }) -> Map.insert i
+          (SerializableSSRTextRenderingInfo { ancestry, isPure })
+          b
+      )
+      ( foldlWithIndex
+          ( \i
+             b
+             ( SSRElementRenderingInfo
+                 { ancestry, attributeIndicesThatAreNeededDuringHydration }
+             ) -> Map.insert i
+              ( SerializableSSRElementRenderingInfo
+                  { ancestry, attributeIndicesThatAreNeededDuringHydration }
+              )
+              b
+          )
+          Map.empty
+          elementCache
+      )
+      textCache
   htmlString <- innerHTML elt
   dispose (ScopeDepth 0)
-  pure $ { html: htmlString, cache: hydrationRenderingCache }
+  pure $ { html: htmlString, cache }
 
 ssrInBody
   :: Nut
   -> Effect
-       { html :: String, cache :: Map.Map ElementId HydrationRenderingInfo }
+       { html :: String
+       , cache :: Map.Map Ancestry SerializableSSRRenderingInfo
+       }
 ssrInBody = doInBody ssrInElement
 
 hydrateInElement
   :: forall r
-   . { cache :: Map.Map ElementId HydrationRenderingInfo | r }
+   . { cache :: Map.Map Ancestry SerializableSSRRenderingInfo | r }
   -> Web.DOM.Element
   -> Nut
   -> Effect (Effect Unit)
-hydrateInElement { cache } elt (Nut nut) = do
+hydrateInElement { cache } ielt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
-  let taggerStart = 0
-  tagRef <- liftST $ ST.new $ taggerStart + 1
-  let tagger = makeTagger tagRef
-  region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
+  region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement ielt)
   doc <- window >>= document
   dummyElt <- createElement "div" (toDocument doc)
   dummyText <- createTextNode "dummy" (toDocument doc)
-  let par = toParentNode elt
-  textNodes <- Map.fromFoldable <<< map (\{ k, v } -> k /\ v) <$>
-    mapIdsToTextNodes elt
-  scope <- liftST $ runSTFn5 newPSR mempty mempty PElement lifecycle region
+  nodes <- querySelectorAll (QuerySelector "[data-deku-ssr]") (toParentNode ielt)
+    >>= toArray
+  kv <- nodes # traverse \node -> do
+    case Element.fromNode node of
+      Nothing -> throwException (error "Could not convert node to element")
+      Just elt -> do
+        attr <- getAttribute "data-deku-ssr" elt
+        case attr of
+          Nothing -> throwException (error "Could not get ssr rep")
+          Just k -> pure $
+            ( Ancestry.unsafeFakeAncestry k /\ HydrationRenderingInfo
+                { attributeIndicesThatAreNeededDuringHydration: fromMaybe
+                    Set.empty
+                    do
+                      cacheValue <- Map.lookup (Ancestry.unsafeFakeAncestry k)
+                        cache
+                      case cacheValue of
+                        SerializableSSRElementRenderingInfo
+                          { attributeIndicesThatAreNeededDuringHydration } ->
+                          pure attributeIndicesThatAreNeededDuringHydration
+                        _ -> empty
+                , isBoring: false
+                , backingElement: elt
+                }
+            )
+  textNodes <- Map.fromFoldable <<< map (\{ k, v } -> Ancestry.unsafeFakeAncestry k /\ v) <$>
+    mapIdsToTextNodes ielt
+  scope <- liftST $ runSTFn3 newPSR Ancestry.root lifecycle region
   void $ runEffectFn2 nut scope
-    (hydratingDOMInterpret tagger cache textNodes dummyText dummyElt par)
+    ( hydratingDOMInterpret (Map.fromFoldable kv) textNodes dummyText dummyElt
+    )
   pure $ dispose (ScopeDepth 0)
 
 hydrateInBody
   :: forall r
-   . { cache :: Map.Map ElementId HydrationRenderingInfo | r }
+   . { cache :: Map.Map Ancestry SerializableSSRRenderingInfo | r }
   -> Nut
   -> Effect (Effect Unit)
 hydrateInBody = doInBody <<< hydrateInElement

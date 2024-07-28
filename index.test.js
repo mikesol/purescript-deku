@@ -32,7 +32,7 @@ const doSSRTest = (name, closure, itIs) => {
       document.getElementsByTagName("html")[0].innerHTML =
         '<head></head><body id="mybody"></body>';
       const res = tests.runSSR(myTest)();
-      const html = res.html
+      const html = res.html;
       document.getElementsByTagName(
         "html"
       )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
@@ -51,10 +51,13 @@ describe("deku", () => {
     describe("RegionSpan", () => {
       it("updates end on content bump", () => {
         var end = testFriend.nothing;
-        var span = region.newSpan(()=>10,e=>end=e);
+        var span = region.newSpan(
+          () => 10,
+          (e) => (end = e)
+        );
         var r1 = region.allocateRegion(testFriend.nothing, span);
-        var r2 = region.allocateRegion(testFriend.nothing,span);
-        
+        var r2 = region.allocateRegion(testFriend.nothing, span);
+
         expect(end).toEqual(testFriend.nothing);
         expect(r1.begin()).toEqual(10);
         expect(r2.begin()).toEqual(10);
@@ -63,7 +66,7 @@ describe("deku", () => {
         expect(end).toEqual(testFriend.just(1));
         expect(r1.begin()).toEqual(10);
         expect(r1.end()).toEqual(1);
-        expect(r2.begin()).toEqual(1)
+        expect(r2.begin()).toEqual(1);
 
         r2.bump(testFriend.just(2));
         expect(end).toEqual(testFriend.just(2));
@@ -79,9 +82,12 @@ describe("deku", () => {
 
       it("updates end on empty bump", () => {
         var end = testFriend.nothing;
-        var span = region.newSpan(()=>10,e=>end=e);
+        var span = region.newSpan(
+          () => 10,
+          (e) => (end = e)
+        );
         var r1 = region.allocateRegion(testFriend.nothing, span);
-        var r2 = region.allocateRegion(testFriend.nothing,span);
+        var r2 = region.allocateRegion(testFriend.nothing, span);
 
         expect(end).toEqual(testFriend.nothing);
         expect(r1.begin()).toEqual(10);
@@ -91,7 +97,7 @@ describe("deku", () => {
         expect(end).toEqual(testFriend.just(1));
         expect(r1.begin()).toEqual(10);
         expect(r1.end()).toEqual(1);
-        expect(r2.begin()).toEqual(1)
+        expect(r2.begin()).toEqual(1);
 
         r1.bump(testFriend.nothing);
         expect(end).toEqual(testFriend.nothing);
@@ -102,13 +108,16 @@ describe("deku", () => {
 
       it("updates end on sendTo", () => {
         var end = testFriend.nothing;
-        var span = region.newSpan(()=>10,e=>end=e);
+        var span = region.newSpan(
+          () => 10,
+          (e) => (end = e)
+        );
         var r1 = region.allocateRegion(testFriend.nothing, span);
-        var r2 = region.allocateRegion(testFriend.nothing,span);
+        var r2 = region.allocateRegion(testFriend.nothing, span);
 
         r1.bump(testFriend.just(1));
         r2.bump(testFriend.just(2));
-        
+
         expect(end).toEqual(testFriend.just(2));
         r2.sendTo(0);
         expect(end).toEqual(testFriend.just(1));
@@ -118,28 +127,31 @@ describe("deku", () => {
         expect(end).toEqual(testFriend.just(2));
         r2.sendTo(0);
         expect(end).toEqual(testFriend.just(2));
-      } )
+      });
 
       it("updates end on remove", () => {
         var end = testFriend.nothing;
-        var span = region.newSpan(()=>10,e=>end=e);
-        var r1 = region.allocateRegion(testFriend.nothing,span);
-        var r2 = region.allocateRegion(testFriend.nothing,span);
+        var span = region.newSpan(
+          () => 10,
+          (e) => (end = e)
+        );
+        var r1 = region.allocateRegion(testFriend.nothing, span);
+        var r2 = region.allocateRegion(testFriend.nothing, span);
 
         r1.bump(testFriend.just(1));
         r2.bump(testFriend.just(2));
-        
+
         expect(end).toEqual(testFriend.just(2));
         r2.remove();
         expect(end).toEqual(testFriend.just(1));
-        var r3 = region.allocateRegion(testFriend.nothing,span);
+        var r3 = region.allocateRegion(testFriend.nothing, span);
         r3.bump(testFriend.just(3));
         expect(end).toEqual(testFriend.just(3));
-        r1.remove()
+        r1.remove();
         expect(end).toEqual(testFriend.just(3));
         r3.remove();
         expect(end).toEqual(testFriend.nothing);
-      } )
+      });
     });
 
     it("makeElementEffect makes an element with the correct tagname", () => {
@@ -152,9 +164,17 @@ describe("deku", () => {
     });
     describe("makeText and setText", () => {
       it("makes text", () => {
-        const t = di.makeTextEffect(testFriend.dummyId, testFriend.just("hello"), testFriend.ignorableBooleanForTextConstructor);
+        const t = di.makeTextEffect(
+          testFriend.dummyId,
+          testFriend.just("hello"),
+          testFriend.ignorableBooleanForTextConstructor
+        );
         expect(t.textContent).toBe("hello");
-        di.setTextEffect(testFriend.dummyId,"goodbye", t, testFriend.ignorableBooleanForTextConstructor);
+        di.setTextEffect(
+          "goodbye",
+          t,
+          testFriend.ignorableBooleanForTextConstructor
+        );
         expect(t.textContent).toBe("goodbye");
       });
     });
@@ -234,7 +254,6 @@ describe("deku", () => {
     });
   });
   describe("framework tests", () => {
-
     doTest("is sane", (f) =>
       f(tests.sanityCheck, () => {
         const $ = require("jquery");
@@ -392,7 +411,7 @@ describe("deku", () => {
       })
     );
 
-    doTest("in pure nested dyn disposes correctly",(f) => 
+    doTest("in pure nested dyn disposes correctly", (f) =>
       f(tests.nestedInPureDyn, () => {
         const $ = require("jquery");
         expect($("#div0").text()).toBe("startend");
@@ -424,8 +443,8 @@ describe("deku", () => {
         expect($("#content").text()).toBe("foo4");
         $("#incr").trigger("click");
         expect($("#content").text()).toBe("foo5");
-        $("#reset").trigger("click")
-        expect($("#content").text()).toBe("foo4")
+        $("#reset").trigger("click");
+        expect($("#content").text()).toBe("foo4");
       })
     );
 
