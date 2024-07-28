@@ -10,10 +10,9 @@ import Prelude
 
 import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2)
 import Data.Map as Map
-import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, un)
-import Data.Set as Set
-import Deku.Core (AttrIndex, MakeElement, MakeText)
+import Deku.Core (MakeElement, MakeText)
 import Deku.Core as Core
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.Internal.Ancestry (Ancestry)
@@ -23,7 +22,7 @@ import Effect.Uncurried (mkEffectFn2, mkEffectFn3)
 import Web.DOM as Web.DOM
 
 newtype HydrationRenderingInfo = HydrationRenderingInfo
-  { attributeIndicesThatAreNeededDuringHydration :: Set.Set AttrIndex
+  { isImpure :: Boolean
   , isBoring :: Boolean
   , backingElement :: Web.DOM.Element
   }
@@ -45,16 +44,6 @@ makeText textNodeCache dummyText = mkEffectFn2 \id _ -> pure $ toDekuText
   case Map.lookup id textNodeCache of
     Nothing -> dummyText
     Just t ->  t
-
-shouldSkipAttribute
-  :: Map.Map Ancestry HydrationRenderingInfo
-  -> Ancestry
-  -> AttrIndex
-  -> Boolean
-shouldSkipAttribute renderingInfo id ix = fromMaybe false do
-  ri <- Map.lookup id renderingInfo
-  pure $ not $ Set.member ix
-    (un HydrationRenderingInfo ri).attributeIndicesThatAreNeededDuringHydration
 
 hydratingDOMInterpret
   :: Map.Map Ancestry HydrationRenderingInfo
@@ -87,9 +76,8 @@ hydratingDOMInterpret
     , attachElement: mkEffectFn2 \_ _ -> pure unit
     , initializeElementRendering: mkSTFn2 \_ _ -> pure unit
     , initializeTextRendering: mkSTFn2 \_ _ -> pure unit
-    , markAttributeIndexForHydration: mkSTFn2 \_ _ -> pure unit
-    , shouldSkipAttribute: shouldSkipAttribute renderingInfo
-    , setProp: I.setPropEffect
+    , markElementAsImpure: mkSTFn1 \_ -> pure unit
+    , setProp: mkEffectFn3 \_ _ _ -> pure unit
     , setCb: I.setCbEffect
     , unsetAttribute: I.unsetAttributeEffect
     , removeElement: I.removeElementEffect

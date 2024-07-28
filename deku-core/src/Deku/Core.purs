@@ -90,10 +90,8 @@ import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Compactable (compact)
 import Data.Foldable (traverse_)
-import Data.FoldableWithIndex (forWithIndex_)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
-import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
@@ -102,7 +100,7 @@ import Deku.Internal.Ancestry as Ancestry
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
 import Deku.Internal.Region (Anchor(..), Bound, Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
 import Effect (Effect, forE)
-import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4, mkEffectFn1, mkEffectFn2, mkEffectFn4, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3)
 import FRP.Event as Event
 import FRP.Event.Class (once)
 import FRP.Poll (Poll(..))
@@ -123,27 +121,23 @@ cb :: (Event -> Effect Unit) -> Cb
 cb = Cb <<< ((map <<< map) (const true))
 
 prop' :: String -> String -> Attribute'
-prop' k v = mkEffectFn4
-  \id ix e (DOMInterpret { setProp, markAttributeIndexForHydration }) -> do
-    when (Set.member k dynamicKeywords) $ liftST $ runSTFn2
-      markAttributeIndexForHydration
-      id
-      ix
+prop' k v = mkEffectFn3
+  \_ e (DOMInterpret { setProp }) -> do
     runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 cb' :: String -> Cb -> Attribute'
-cb' k v = mkEffectFn4
-  \id ix e (DOMInterpret { markAttributeIndexForHydration, setCb }) -> do
-    liftST $ runSTFn2 markAttributeIndexForHydration id ix
+cb' k v = mkEffectFn3
+  \id e (DOMInterpret { markElementAsImpure, setCb }) -> do
+    liftST $ runSTFn1 markElementAsImpure id
     runEffectFn3 setCb (Key k) v (toDekuElement e)
 
 unset' :: String -> Attribute'
-unset' k = mkEffectFn4 \_ _ e (DOMInterpret { unsetAttribute }) ->
+unset' k = mkEffectFn3 \_ e (DOMInterpret { unsetAttribute }) ->
   runEffectFn2 unsetAttribute (Key k) (toDekuElement e)
 
 -- TODO: get rid of `Element` type
 type Attribute' =
-  EffectFn4 Ancestry AttrIndex Element DOMInterpret Unit
+  EffectFn3 Ancestry Element DOMInterpret Unit
 
 -- | Low level representation of key-value pairs for attributes and listeners.
 -- | In general, this type is for internal use only.
@@ -157,23 +151,20 @@ unsafeUnAttribute = coerce
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
   :: forall e
-   . EffectFn4 Ancestry AttrIndex Element DOMInterpret Unit
+   . EffectFn3 Ancestry Element DOMInterpret Unit
   -> Attribute e
 unsafeAttribute = Attribute
 
-dynamicKeywords :: Set.Set String
-dynamicKeywords = Set.fromFoldable [ "checked", "value", "disabled" ]
-
 attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
-attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn4
-  \_ _getParserError e (DOMInterpret { setProp }) -> do
+attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn3
+  \_ e (DOMInterpret { setProp }) -> do
     runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 callbackWithCaution
   :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
-callbackWithCaution k v = unsafeAttribute $ mkEffectFn4
-  \id ix e (DOMInterpret { markAttributeIndexForHydration, setCb }) -> do
-    liftST $ runSTFn2 markAttributeIndexForHydration id ix
+callbackWithCaution k v = unsafeAttribute $ mkEffectFn3
+  \id e (DOMInterpret { markElementAsImpure, setCb }) -> do
+    liftST $ runSTFn1 markElementAsImpure id
     runEffectFn3 setCb (Key k) (Cb v) (toDekuElement e)
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
@@ -264,8 +255,7 @@ newtype DOMInterpret = DOMInterpret
   -- element ssr
   , initializeElementRendering ::
       STFn2 Ancestry DekuElement Global Unit
-  , markAttributeIndexForHydration :: STFn2 Ancestry AttrIndex Global Unit
-  , shouldSkipAttribute :: Ancestry -> AttrIndex -> Boolean
+  , markElementAsImpure :: STFn1 Ancestry Global Unit
   , isBoring :: Ancestry -> Boolean
   -- text
   , makeText :: MakeText
@@ -706,33 +696,22 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
     ---
 
     let
-      handleAtts :: AttrIndex -> Poll (Attribute element) -> Effect Unit
-      handleAtts ix atts =
+      handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
+      handleAtts = mkEffectFn1 \atts -> do
+        case atts of
+          OnlyPure _ -> pure unit
+          _ -> liftST $ runSTFn1
+            (un DOMInterpret di).markElementAsImpure
+            (un PSR psr).ancestry
         pump' psr atts $ \useOriginalDi -> do
           let
             newDi =
               if useOriginalDi then di
               else (un DOMInterpret di).dynamicDOMInterpret unit
           mkEffectFn1 \(Attribute x) ->
-            runEffectFn4 x (un PSR psr).ancestry ix (fromDekuElement elt) newDi
+            runEffectFn3 x (un PSR psr).ancestry (fromDekuElement elt) newDi
 
-    -- todo: in hydration, we don't need to set attributes
-    -- that are already set
-    -- it's easier to set them, but if there's a perf speedup in not setting
-    -- them, then we should code up a mechanism to skip it
-    forWithIndex_ arrAtts \ix att -> do
-      when
-        ( not (un DOMInterpret di).shouldSkipAttribute (un PSR psr).ancestry
-            (AttrIndex ix)
-        )
-        do
-          case att of
-            OnlyPure _ -> pure unit
-            _ -> liftST $ runSTFn2
-              (un DOMInterpret di).markAttributeIndexForHydration
-              (un PSR psr).ancestry
-              (AttrIndex ix)
-          handleAtts (AttrIndex ix) att
+    runEffectFn2 Event.fastForeachE arrAtts handleAtts
 
     eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
     aref <- liftST $ STRef.new (-1)

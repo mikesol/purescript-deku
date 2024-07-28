@@ -19,7 +19,7 @@ import Data.FoldableWithIndex (foldlWithIndex, forWithIndex_)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (un)
-import Data.Set as Set
+import Data.String as String
 import Data.Traversable (traverse)
 import Data.Tuple.Nested ((/\))
 import Deku.Core (Nut(..), ScopeDepth(ScopeDepth), newPSR)
@@ -116,10 +116,10 @@ ssrInElement elt (Nut nut) = do
           ( \i
              b
              ( SSRElementRenderingInfo
-                 { ancestry, attributeIndicesThatAreNeededDuringHydration }
+                 { ancestry, isImpure }
              ) -> Map.insert i
               ( SerializableSSRElementRenderingInfo
-                  { ancestry, attributeIndicesThatAreNeededDuringHydration }
+                  { ancestry, isImpure }
               )
               b
           )
@@ -129,7 +129,12 @@ ssrInElement elt (Nut nut) = do
       textCache
   htmlString <- innerHTML elt
   dispose (ScopeDepth 0)
-  pure $ { html: htmlString, cache }
+  pure $
+    { html: String.replace (String.Pattern "data-deku-value")
+        (String.Replacement "value")
+        htmlString
+    , cache
+    }
 
 ssrInBody
   :: Nut
@@ -147,12 +152,14 @@ hydrateInElement
   -> Effect (Effect Unit)
 hydrateInElement { cache } ielt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
-  region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement ielt)
+  region <- liftST $ runSTFn1 Region.fromParent
+    (DekuParent $ toDekuElement ielt)
   doc <- window >>= document
   dummyElt <- createElement "div" (toDocument doc)
   dummyText <- createTextNode "dummy" (toDocument doc)
-  nodes <- querySelectorAll (QuerySelector "[data-deku-ssr]") (toParentNode ielt)
-    >>= toArray
+  nodes <-
+    querySelectorAll (QuerySelector "[data-deku-ssr]") (toParentNode ielt)
+      >>= toArray
   kv <- nodes # traverse \node -> do
     case Element.fromNode node of
       Nothing -> throwException (error "Could not convert node to element")
@@ -162,22 +169,24 @@ hydrateInElement { cache } ielt (Nut nut) = do
           Nothing -> throwException (error "Could not get ssr rep")
           Just k -> pure $
             ( Ancestry.unsafeFakeAncestry k /\ HydrationRenderingInfo
-                { attributeIndicesThatAreNeededDuringHydration: fromMaybe
-                    Set.empty
+                { isImpure: fromMaybe
+                    false
                     do
                       cacheValue <- Map.lookup (Ancestry.unsafeFakeAncestry k)
                         cache
                       case cacheValue of
                         SerializableSSRElementRenderingInfo
-                          { attributeIndicesThatAreNeededDuringHydration } ->
-                          pure attributeIndicesThatAreNeededDuringHydration
+                          { isImpure } ->
+                          pure isImpure
                         _ -> empty
                 , isBoring: false
                 , backingElement: elt
                 }
             )
-  textNodes <- Map.fromFoldable <<< map (\{ k, v } -> Ancestry.unsafeFakeAncestry k /\ v) <$>
-    mapIdsToTextNodes ielt
+  textNodes <-
+    Map.fromFoldable <<< map (\{ k, v } -> Ancestry.unsafeFakeAncestry k /\ v)
+      <$>
+        mapIdsToTextNodes ielt
   scope <- liftST $ runSTFn3 newPSR Ancestry.root lifecycle region
   void $ runEffectFn2 nut scope
     ( hydratingDOMInterpret (Map.fromFoldable kv) textNodes dummyText dummyElt

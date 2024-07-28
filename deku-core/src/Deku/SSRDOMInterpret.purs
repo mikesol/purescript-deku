@@ -8,19 +8,17 @@ import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, over)
-import Data.Set (Set)
-import Data.Set as Set
-import Deku.Core (AttrIndex)
 import Deku.Core as Core
 import Deku.Internal.Ancestry (Ancestry)
-import Deku.Internal.Entities (DekuElement, DekuText)
+import Deku.Internal.Entities (DekuElement, DekuText, fromDekuElement)
 import Deku.Interpret as I
-import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3)
+import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn3)
+import Web.DOM.Element (setAttribute)
 
 data SerializableSSRRenderingInfo
   = SerializableSSRElementRenderingInfo
-      { attributeIndicesThatAreNeededDuringHydration :: Set AttrIndex
-      , ancestry :: Ancestry
+      { ancestry :: Ancestry
+      , isImpure :: Boolean
       }
   | SerializableSSRTextRenderingInfo
       { ancestry :: Ancestry
@@ -40,7 +38,7 @@ updateRenderingInfo = mkSTFn3 \id fn renderingInfo -> do
 type SSRElementRenderingInfoCache = Map.Map Ancestry SSRElementRenderingInfo
 
 newtype SSRElementRenderingInfo = SSRElementRenderingInfo
-  { attributeIndicesThatAreNeededDuringHydration :: Set AttrIndex
+  { isImpure :: Boolean
   , ancestry :: Ancestry
   , backingElement :: DekuElement
   }
@@ -55,7 +53,7 @@ initializeElementRendering renderingInfo = mkSTFn2
     void $ STRef.modify
       ( Map.alter
           ( const $ Just $ SSRElementRenderingInfo
-              { attributeIndicesThatAreNeededDuringHydration: Set.empty
+              { isImpure: false
               , ancestry
               , backingElement
               }
@@ -74,22 +72,15 @@ markTextAsImpure renderingInfo = mkSTFn1 \id -> do
     { isImpure = true
     }
 
-markAttributeIndexForHydration
+markElementAsImpure
   :: STRef.STRef Global SSRElementRenderingInfoCache
-  -> STFn2 Ancestry AttrIndex Global Unit
-markAttributeIndexForHydration renderingInfo = mkSTFn2 \id ix -> do
-  runSTFn3 updateRenderingInfo id
-    ( over SSRElementRenderingInfo
-        ( \i@{ attributeIndicesThatAreNeededDuringHydration } ->
-            i
-              { attributeIndicesThatAreNeededDuringHydration =
-                  Set.insert
-                    ix
-                    attributeIndicesThatAreNeededDuringHydration
-              }
-        )
-    )
-    renderingInfo
+  -> STFn1 Ancestry Global Unit
+markElementAsImpure renderingInfo = mkSTFn1 \id -> do
+  runSTFn3 updateRenderingInfo id f renderingInfo
+  where
+  f = over SSRElementRenderingInfo \r -> r
+    { isImpure = true
+    }
 
 type SSRTextRenderingInfoCache = Map.Map Ancestry SSRTextRenderingInfo
 
@@ -131,10 +122,15 @@ ssrDOMInterpret textRenderingInfo elementRenderingInfo =
     , attachElement: I.attachElementEffect
     , initializeElementRendering: initializeElementRendering
         elementRenderingInfo
-    , markAttributeIndexForHydration: markAttributeIndexForHydration
+    , markElementAsImpure: markElementAsImpure
         elementRenderingInfo
-    , shouldSkipAttribute: \_ _ -> false
-    , setProp: I.setPropEffect
+    , setProp: mkEffectFn3 \a@(Core.Key k) b@(Core.Value v) elt' -> do
+        -- innerHTML doesn't show values
+        -- so we set it this way and then sub it out later
+        let elt = fromDekuElement elt'
+        when (k == "value") do
+          setAttribute "data-deku-value" v elt
+        runEffectFn3 I.setPropEffect a b elt'
     , setCb: I.setCbEffect
     , unsetAttribute: I.unsetAttributeEffect
     , removeElement: I.removeElementEffect
@@ -161,8 +157,7 @@ noOpDomInterpret =
       dynamicDOMInterpret: \_ -> noOpDomInterpret
     --
     , isBoring: const false
-    , markAttributeIndexForHydration: mkSTFn2 \_ _ -> pure unit
-    , shouldSkipAttribute: \_ _ -> false
+    , markElementAsImpure: mkSTFn1 \_ -> pure unit
     , makeElement: I.makeElementEffect
     , attachElement: mkEffectFn2 \_ _ -> pure unit
     , initializeElementRendering: mkSTFn2 \_ _ -> pure unit

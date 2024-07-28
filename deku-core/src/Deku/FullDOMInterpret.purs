@@ -15,8 +15,7 @@ fullDOMInterpret = Core.DOMInterpret
   , attachElement: I.attachElementEffect
   , initializeElementRendering: mkSTFn2 \_ _ -> pure unit
   , initializeTextRendering: mkSTFn2 \_ _ -> pure unit
-  , markAttributeIndexForHydration: mkSTFn2 \_ _ -> pure unit
-  , shouldSkipAttribute: \_ _ -> false
+  , markElementAsImpure: mkSTFn1 \_ -> pure unit
   , setProp: I.setPropEffect
   , setCb: I.setCbEffect
   , unsetAttribute: I.unsetAttributeEffect
