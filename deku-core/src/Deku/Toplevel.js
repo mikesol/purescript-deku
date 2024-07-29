@@ -5,9 +5,11 @@ export const transformTextNode = (id) => (textNode) => () => {
       let beforeComment = document.createComment(`d$i@${id}`);
       let afterComment = document.createComment(`d$o@${id}`);
 
-      textNode.parentNode.insertBefore(beforeComment, textNode);
-      textNode.parentNode.insertBefore(afterComment, textNode);
-      textNode.parentNode.insertBefore(textNode, afterComment);
+      if (textNode && textNode.parentNode) {
+        textNode.parentNode.insertBefore(beforeComment, textNode);
+        textNode.parentNode.insertBefore(afterComment, textNode);
+        textNode.parentNode.insertBefore(textNode, afterComment);  
+      }
 };
 
 export const mapIdsToTextNodes = (rootElement) => () => {
