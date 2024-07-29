@@ -48,19 +48,11 @@ guardWith m f = m <#~> case _ of
 -- | approach, see the `useDyn` hook.
 switcher :: forall a. (a -> Nut) -> Poll a -> Nut
 switcher f poll = Deku.do
-  { first: ctr1, second: ctr2 } <- useSplit (counter poll)
-  dctr <- useDeflect (counter poll)
-  { value } <- useDynAtBeginningWith (ctr2 <|> dctr) $ dynOptions
-    { remove = \(oldV /\ _) -> filterMap
-        (\(newV /\ _) -> if newV == oldV + 1 then Just unit else Nothing)
-        ctr1
+  { value } <- useDynAtBeginningWith poll $ dynOptions
+    { remove = \sibling _ -> const unit <$> sibling
     }
 
-  f (snd value)
-  where
-  counter = mapAccum fn 0
-    where
-    fn a b = (a + 1) /\ (a /\ b)
+  f value
 
 cycle :: Poll Nut -> Nut
 cycle = switcher identity

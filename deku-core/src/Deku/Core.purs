@@ -401,7 +401,8 @@ useRef a b f = Deku.do
   f (liftST r)
 
 deferO :: EffectFn2 PSR (Effect Unit) Unit
-deferO = mkEffectFn2 \psr eff -> liftST (runSTFn1 (un PSR psr).defer (mkEffectFn1 \_ -> eff))
+deferO = mkEffectFn2 \psr eff -> liftST
+  (runSTFn1 (un PSR psr).defer (mkEffectFn1 \_ -> eff))
 
 defer :: PSR -> Effect Unit -> Effect Unit
 defer =
@@ -437,7 +438,9 @@ useState a f = Nut $ mkEffectFn2 \psr di -> do
 
 -- dyn
 type DynOptions value =
-  { sendTo :: value -> Poll Int, remove :: value -> Poll Unit }
+  { sendTo :: value -> Poll Int
+  , remove :: value -> Poll Unit
+  }
 
 type DynControl value =
   { value :: value
@@ -447,7 +450,7 @@ type DynControl value =
   }
 
 dynOptions :: forall v. DynOptions v
-dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
+dynOptions = { sendTo: \_ -> empty, remove: \_ _ -> empty }
 
 useDyn
   :: forall value
@@ -484,15 +487,19 @@ useDynAtEndWith e = useDynWith (map (Nothing /\ _) e)
 useDynWith
   :: forall value
    . Poll (Tuple (Maybe Int) value)
-  -> DynOptions value
+  -> { sendTo :: value -> Poll Int
+     , remove :: Poll (Maybe Int) -> value -> Poll Unit
+     }
   -> Hook (DynControl value)
 useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
   Region region <- liftST $ (un StaticRegion (un PSR psr).region).region
   span <- liftST $ runSTFn2 newSpan region.begin region.bump
 
+  siblings <- liftST Event.create
   let
     handleElements :: EffectFn1 (Tuple (Maybe Int) value) Unit
     handleElements = mkEffectFn1 \(Tuple initialPos value) -> do
+      siblings.push initialPos
       Region eltRegion <- liftST $ runSTFn2 allocateRegion initialPos span
       staticRegion <- liftST $ runSTFn2 newStaticRegion eltRegion.begin
         eltRegion.bump
@@ -513,7 +520,8 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
         remove :: Poll ScopeDepth
         remove =
           Poll.merge
-            [ const (ScopeDepth 0) <$> options.remove value
+            [ const (ScopeDepth 0) <$> options.remove (Poll.sham siblings.event)
+                value
             , const (ScopeDepth 0) <$> eltRemove.poll
             , (un PSR psr).lifecycle
             ]
@@ -554,7 +562,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
       runEffectFn2 nut eltPSR di
       -- enable user control
       void $ liftST $ ST.write false eltDisposed
-      
+
   runEffectFn3 pump psr elements handleElements
   runEffectFn1 handleScope psr
 
@@ -603,7 +611,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
       runEffectFn2 nut scope di
   runEffectFn2 Event.fastForeachE nuts handleNuts
 
-  let 
+  let
     handleRemove :: EffectFn1 ScopeDepth Unit
     handleRemove = mkEffectFn1 case _ of
       ScopeDepth 0 ->
@@ -764,7 +772,8 @@ portaled buffer beam beamed bumped trackBegin trackEnd =
     void $ liftST $ ST.write region.begin trackBegin
 
     -- lifecycle handling
-    liftST $ runSTFn1 (un PSR psr).defer $ mkEffectFn1 \_ -> (unsubBeamed *> unsubBumped)
+    liftST $ runSTFn1 (un PSR psr).defer $ mkEffectFn1 \_ ->
+      (unsubBeamed *> unsubBumped)
 
     let
       restoreBuffer :: Effect Unit
