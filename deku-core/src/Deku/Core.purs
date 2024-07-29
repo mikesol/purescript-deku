@@ -442,6 +442,11 @@ type DynOptions value =
   , remove :: value -> Poll Unit
   }
 
+type DynOptions' value =
+  { sendTo :: value -> Poll Int
+  , remove :: Poll (Maybe Int) -> value -> Poll Unit
+  }
+
 type DynControl value =
   { value :: value
   , position :: Poll Int
@@ -450,13 +455,16 @@ type DynControl value =
   }
 
 dynOptions :: forall v. DynOptions v
-dynOptions = { sendTo: \_ -> empty, remove: \_ _ -> empty }
+dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
+
+fromDynOptions :: forall v . DynOptions v -> DynOptions' v
+fromDynOptions opt = opt { remove = \_ -> opt.remove } 
 
 useDyn
   :: forall value
    . Poll (Tuple (Maybe Int) value)
   -> Hook (DynControl value)
-useDyn p = useDynWith p dynOptions
+useDyn p = useDynWith p ( fromDynOptions dynOptions )
 
 useDynAtBeginning
   :: forall value
@@ -469,7 +477,7 @@ useDynAtBeginningWith
    . Poll value
   -> DynOptions value
   -> Hook (DynControl value)
-useDynAtBeginningWith e = useDynWith (map (Just 0 /\ _) e)
+useDynAtBeginningWith e = useDynWith (map (Just 0 /\ _) e) <<< fromDynOptions
 
 useDynAtEnd
   :: forall value
@@ -482,14 +490,12 @@ useDynAtEndWith
    . Poll value
   -> DynOptions value
   -> Hook (DynControl value)
-useDynAtEndWith e = useDynWith (map (Nothing /\ _) e)
+useDynAtEndWith e = useDynWith (map (Nothing /\ _) e) <<< fromDynOptions
 
 useDynWith
   :: forall value
    . Poll (Tuple (Maybe Int) value)
-  -> { sendTo :: value -> Poll Int
-     , remove :: Poll (Maybe Int) -> value -> Poll Unit
-     }
+  -> DynOptions' value
   -> Hook (DynControl value)
 useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
   Region region <- liftST $ (un StaticRegion (un PSR psr).region).region
