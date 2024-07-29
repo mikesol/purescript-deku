@@ -496,7 +496,11 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
       Region eltRegion <- liftST $ runSTFn2 allocateRegion initialPos span
       staticRegion <- liftST $ runSTFn2 newStaticRegion eltRegion.begin
         eltRegion.bump
-      eltDisposed <- liftST $ ST.new false
+
+      -- this controls whether the user can influence the element via `remove` or `sentTo`, it will change to `false`
+      -- after initialization and back to `true` before removal. This means that the user is only in control the element
+      -- between initialization and removal.
+      eltDisposed <- liftST $ ST.new true
 
       eltSendTo <- liftST Poll.create
       let
@@ -539,15 +543,18 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
         -- | guarantueed that the child will dispose itself before the parent.
         handleRemove :: EffectFn1 ScopeDepth Unit
         handleRemove = mkEffectFn1 \depth -> do
-          -- deactivate sendTo
-          void $ liftST $ ST.write true eltDisposed
-          eltLifecycle.push depth
-          liftST eltRegion.remove
+          whenM (not <$> liftST (ST.read eltDisposed)) do
+            -- disable user control
+            void $ liftST $ ST.write true eltDisposed
+            eltLifecycle.push depth
+            liftST eltRegion.remove
 
-      runEffectFn3 pump eltPSR (once remove) handleRemove
       runEffectFn3 pump eltPSR sendTo handleSendTo
+      runEffectFn3 pump eltPSR (once remove) handleRemove
       runEffectFn2 nut eltPSR di
-
+      -- enable user control
+      void $ liftST $ ST.write false eltDisposed
+      
   runEffectFn3 pump psr elements handleElements
   runEffectFn1 handleScope psr
 
