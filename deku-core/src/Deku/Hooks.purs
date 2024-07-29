@@ -23,13 +23,11 @@ module Deku.Hooks
 
 import Prelude
 
-import Control.Alt ((<|>))
+import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
-import Data.Tuple (snd)
-import Data.Tuple.Nested ((/\))
+import Data.Tuple (Tuple(..))
 import Deku.Core (Nut(..), useMailboxedS, useSplit, useDyn, dynOptions, useDeflect, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed, useRant, useRant', useStateTagged', useRef, useRefST, useState, useState')
 import Deku.Do as Deku
-import FRP.Event (filterMap, mapAccum)
 import FRP.Poll (Poll)
 
 guard :: Poll Boolean -> Nut -> Nut
@@ -48,19 +46,12 @@ guardWith m f = m <#~> case _ of
 -- | approach, see the `useDyn` hook.
 switcher :: forall a. (a -> Nut) -> Poll a -> Nut
 switcher f poll = Deku.do
-  { first: ctr1, second: ctr2 } <- useSplit (counter poll)
-  dctr <- useDeflect (counter poll)
-  { value } <- useDynAtBeginningWith (ctr2 <|> dctr) $ dynOptions
-    { remove = \(oldV /\ _) -> filterMap
-        (\(newV /\ _) -> if newV == oldV + 1 then Just unit else Nothing)
-        ctr1
+  { value } <- useDynWith ( Tuple Nothing <$> poll )
+    { remove : \sibling _ -> const unit <$> sibling
+    , sendTo : const empty
     }
 
-  f (snd value)
-  where
-  counter = mapAccum fn 0
-    where
-    fn a b = (a + 1) /\ (a /\ b)
+  f value
 
 cycle :: Poll Nut -> Nut
 cycle = switcher identity

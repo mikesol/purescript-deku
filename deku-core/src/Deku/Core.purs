@@ -519,7 +519,14 @@ useState a f = Nut $ mkEffectFn2 \psr di -> do
 
 -- dyn
 type DynOptions value =
-  { sendTo :: value -> Poll Int, remove :: value -> Poll Unit }
+  { sendTo :: value -> Poll Int
+  , remove :: value -> Poll Unit
+  }
+
+type DynOptions' value =
+  { sendTo :: value -> Poll Int
+  , remove :: Poll (Maybe Int) -> value -> Poll Unit
+  }
 
 type DynControl value =
   { value :: value
@@ -531,11 +538,14 @@ type DynControl value =
 dynOptions :: forall v. DynOptions v
 dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
 
+fromDynOptions :: forall v . DynOptions v -> DynOptions' v
+fromDynOptions opt = opt { remove = \_ -> opt.remove } 
+
 useDyn
   :: forall value
    . Poll (Tuple (Maybe Int) value)
   -> Hook (DynControl value)
-useDyn p = useDynWith p dynOptions
+useDyn p = useDynWith p ( fromDynOptions dynOptions )
 
 useDynAtBeginning
   :: forall value
@@ -548,7 +558,7 @@ useDynAtBeginningWith
    . Poll value
   -> DynOptions value
   -> Hook (DynControl value)
-useDynAtBeginningWith e = useDynWith (map (Just 0 /\ _) e)
+useDynAtBeginningWith e = useDynWith (map (Just 0 /\ _) e) <<< fromDynOptions
 
 useDynAtEnd
   :: forall value
@@ -561,12 +571,12 @@ useDynAtEndWith
    . Poll value
   -> DynOptions value
   -> Hook (DynControl value)
-useDynAtEndWith e = useDynWith (map (Nothing /\ _) e)
+useDynAtEndWith e = useDynWith (map (Nothing /\ _) e) <<< fromDynOptions
 
 useDynWith
   :: forall value
    . Poll (Tuple (Maybe Int) value)
-  -> DynOptions value
+  -> DynOptions' value
   -> Hook (DynControl value)
 useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
   Region region <- liftST $ (un StaticRegion (un PSR psr).region).region
@@ -574,9 +584,11 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
   let ancestry = (un PSR psr).ancestry
   aref <- liftST $ STRef.new (-1)
 
+  siblings <- liftST Event.create
   let
     handleElements :: Boolean -> EffectFn1 (Tuple (Maybe Int) value) Unit
     handleElements isStatic = mkEffectFn1 \(Tuple initialPos value) -> do
+      siblings.push initialPos
       let
         di =
           if isStatic then di'
@@ -585,7 +597,12 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
       staticRegion <- liftST $ runSTFn2 newStaticRegion
         eltRegion.begin
         eltRegion.bump
-      eltDisposed <- liftST $ ST.new false
+
+      -- this controls whether the user can influence the element via `remove` or `sentTo`, it will change to `false`
+      -- after initialization and back to `true` before removal. This means that the user is only in control the element
+      -- between initialization and removal.
+      eltDisposed <- liftST $ ST.new true
+
       eltSendTo <- liftST Poll.create
       let
         sendTo :: Poll Int
@@ -597,7 +614,8 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
         remove :: Poll ScopeDepth
         remove =
           Poll.merge
-            [ const (ScopeDepth 0) <$> options.remove value
+            [ const (ScopeDepth 0) <$> options.remove (Poll.sham siblings.event)
+                value
             , const (ScopeDepth 0) <$> eltRemove.poll
             , (un PSR psr).lifecycle
             ]
@@ -630,14 +648,17 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
         -- | guarantueed that the child will dispose itself before the parent.
         handleRemove :: EffectFn1 ScopeDepth Unit
         handleRemove = mkEffectFn1 \depth -> do
-          -- deactivate sendTo
-          void $ liftST $ ST.write true eltDisposed
-          eltLifecycle.push depth
-          liftST eltRegion.remove
+          whenM (not <$> liftST (ST.read eltDisposed)) do
+            -- disable user control
+            void $ liftST $ ST.write true eltDisposed
+            eltLifecycle.push depth
+            liftST eltRegion.remove
 
-      pump eltPSR (once remove) handleRemove
       pump eltPSR sendTo handleSendTo
+      pump eltPSR (once remove) handleRemove
       runEffectFn2 nut eltPSR di
+      -- enable user control
+      void $ liftST $ ST.write false eltDisposed
 
   pump' psr elements handleElements
 
