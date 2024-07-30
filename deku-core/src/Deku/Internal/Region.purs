@@ -434,7 +434,7 @@ insertManaged = mkSTFn2 \givenPos children -> do
     pos =
       clamp 1 length $ maybe length (add 1) givenPos
 
-  ixRef <- ST.new $ pos - 1
+  ixRef <- ST.new pos
   posEvent <- createPure
 
   let
@@ -448,7 +448,7 @@ insertManaged = mkSTFn2 \givenPos children -> do
       ST.read ixRef
 
     position :: Poll Int
-    position = stRefToPoll ixRef <|> pollFromEvent posEvent.event
+    position = add 1 <$> stRefToPoll ixRef <|> pollFromEvent posEvent.event
 
   prevBegin <- runSTFn2 shareBound ix children
   end <- ST.new prevBegin
