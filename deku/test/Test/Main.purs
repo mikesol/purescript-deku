@@ -283,6 +283,51 @@ portalsCompose = Deku.do
     , D.button [ DA.id_ "incr", DL.click_ \_ -> setItem unit ]
         [ text_ "incr" ]
     ]
+  
+wizardPortal :: Nut 
+wizardPortal = Deku.do
+  pushGlobal /\ global <- useState 0
+  pushStep /\ step <- useHot 0
+  let
+    stepPanel id = Deku.do
+      pushLocal /\ local <- useState 0
+      D.div [ DA.id_ $ "s" <> show id ]
+        [ text_ $ "step" <> show id
+        , text $ append "-" <<< show <$> global
+        , text $ append "-" <<< show <$> local
+        , D.button
+          [ DL.click $ local <#> \st _ -> pushLocal $ st + 1
+          , DA.id_ "local"
+          ]
+          []
+        ] 
+
+  step1 <- portal $ stepPanel 1
+  step2 <- portal $ stepPanel 2
+  step3 <- portal $ stepPanel 3
+
+  D.div [ DA.id_ "div0" ]
+    [ step <#~> case _ of
+      0 -> step1
+      1 -> step2
+      _ -> step3
+
+    , D.button
+      [ DL.click $ (pure 0 <|> global) <#> \st _ -> pushGlobal $ st + 1
+      , DA.id_ "global"
+      ]
+      [ text_ "incr"]
+    , D.button
+      [ DL.click $ step <#> \st _ -> pushStep $ (st + 1) `mod` 3
+      , DA.id_ "next"
+      ]
+      [ text_ "next" ]
+    , D.button 
+      [ DL.click $ step <#> \st _ -> pushStep $ (st - 1) `mod` 3
+      , DA.id_ "back"
+      ]
+      [ text_ "back" ]
+    ]
 
 pursXWiresUp :: Nut
 pursXWiresUp = Deku.do
@@ -651,16 +696,6 @@ emptySwitches = Deku.do
     
     , D.div [ DA.id_ "incr", DL.click $ item <#> \st _ -> setItem $ ( st + 1 ) `mod` 6 ] [ text_ "next" ]
     ]
-
-pureSwitches :: Nut
-pureSwitches = Deku.do
-  _ /\ elem <- useState'
-  let
-    initial :: Poll Unit
-    initial = merge $ Array.replicate 5 $ pure unit
-
-  (initial <|> elem) <#~> \e ->
-    D.span [ DA.klass_ "switcherelem" ] [ text_ $ show e ]
 
 useHotRantWorks :: Nut
 useHotRantWorks = Deku.do

@@ -447,6 +447,46 @@ describe("deku", () => {
       })
     );
 
+    doTest("portals keep state", (f) =>
+      f(tests.wizardPortal, () => {
+        const $ = require("jquery");
+        expect($("#s1").text()).toBe("step1-0-0");
+        expect($("#s2").text()).toBe("");
+        
+        $("#global").trigger("click");
+        expect($("#s1").text()).toBe("step1-1-0")
+        expect($("#s2").text()).toBe("");
+
+        $("#local").trigger("click");
+        expect($("#s1").text()).toBe("step1-1-1")
+        expect($("#s2").text()).toBe("");
+        
+        $("#next").trigger("click");
+        expect($("#s1").text()).toBe("");
+        expect($("#s2").text()).toBe("step2-1-0");
+        
+        $("#global").trigger("click");
+        expect($("#s2").text()).toBe("step2-2-0");
+
+        $("#local").trigger("click");
+        expect($("#s2").text()).toBe("step2-2-1");
+
+        $("#next").trigger("click");
+        expect($("#s2").text()).toBe("")
+        expect($("#s3").text()).toBe("step3-2-0");
+        
+        $("#back").trigger("click");
+        expect($("#s2").text()).toBe("step2-2-1")
+        expect($("#s3").text()).toBe("");
+
+        $("#next").trigger("click");
+        $("#global").trigger("click");
+        expect($("#s1").text()).toBe("");
+        expect($("#s2").text()).toBe("");
+        expect($("#s3").text()).toBe("step3-3-0");
+      })
+    );
+
     doTest("empty switches", (f) =>
       f(tests.emptySwitches, () => {
         const $ = require("jquery");
