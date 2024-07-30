@@ -284,6 +284,22 @@ describe("deku", () => {
       })
     );
 
+    doTest("position is correct", (f) =>
+      f(tests.dynPosition, () => {
+        const $ = require("jquery");
+        expect($("#div0").text()).toBe("");
+
+        $("#add").trigger("click");
+        expect($("#div0").text()).toBe("0")
+
+        $("#add").trigger("click");
+        expect($("#div0").text()).toBe("01")
+
+        $("#add").trigger("click");
+        expect($("#div0").text()).toBe("012")
+      })
+    )
+
     doTest("domable is a monoid", (f) =>
       f(tests.isAMonoid, () => {
         const $ = require("jquery");

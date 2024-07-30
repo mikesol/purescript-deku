@@ -448,7 +448,7 @@ insertManaged = mkSTFn2 \givenPos children -> do
       ST.read ixRef
 
     position :: Poll Int
-    position = add 1 <$> stRefToPoll ixRef <|> pollFromEvent posEvent.event
+    position = add (-1) <$> stRefToPoll ixRef <|> pollFromEvent posEvent.event
 
   prevBegin <- runSTFn2 shareBound ix children
   end <- ST.new prevBegin

@@ -119,6 +119,16 @@ deeplyNestedPreservesOrder = Deku.do
     , mydyn 0
     ]
 
+dynPosition :: Nut
+dynPosition = Deku.do
+  pushNext /\ next <- useState'
+  D.div [ DA.id_ "div0" ]
+    [ Deku.do 
+      { position } <- useDynAtBeginning next
+      text $ show <$> position
+    , D.button [ DA.id_ "add", DL.click_ \_ -> pushNext unit ] []
+    ]
+
 -- why intercalate with mempty? why not!
 isAMonoid :: Nut
 isAMonoid = intercalate mempty $ map text_ [ "m", "o", "n", "o", "i", "d" ]
@@ -731,17 +741,6 @@ useDispose init eff cont = Nut $ mkEffectFn2 \psr di -> do
 
 disposeGetsRun :: Nut
 disposeGetsRun = Deku.do
-  pushTick /\ ticks <- useState'
-  fixed
-    [ D.span [ DA.id_ "count" ] [ text $ show <$> count ticks ]
-    , Deku.do
-      { remove } <- useDynAtBeginning ( pure unit )
-      useDispose ( pushTick unit ) ( pushTick unit )
-      D.span [ DA.id_ "notthere", DL.click_ \_ -> remove ] []
-    ]
-
-disposeGetsRunOnce :: Nut
-disposeGetsRunOnce = Deku.do
   pushTick /\ ticks <- useState'
   fixed
     [ D.span [ DA.id_ "count" ] [ text $ show <$> count ticks ]
