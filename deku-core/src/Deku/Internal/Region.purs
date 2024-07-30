@@ -434,7 +434,7 @@ insertManaged = mkSTFn2 \givenPos children -> do
     pos =
       clamp 1 length $ maybe length (add 1) givenPos
 
-  ixRef <- ST.new pos
+  ixRef <- ST.new $ pos - 1
   posEvent <- createPure
 
   let
