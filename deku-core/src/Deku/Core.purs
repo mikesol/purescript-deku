@@ -59,6 +59,7 @@ module Deku.Core
   , useDynWith
 
   , useHot
+  , useSkimmed
   , useHotRant
   , useMailboxed
   , useMailboxedS
@@ -88,6 +89,8 @@ import Data.Array as Array
 import Data.Array.ST as STArray
 import Data.Compactable (compact)
 import Data.Foldable (traverse_)
+import Data.List ((:))
+import Data.List as List
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Newtype (class Newtype, over, un)
 import Data.Tuple (Tuple(..))
@@ -373,6 +376,26 @@ useRant e f = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 deferO psr (liftST unsubscribe)
   runEffectFn2 (coerce $ f poll) psr di
 
+useSkimmed :: forall a. Poll a -> Hook (Poll a)
+useSkimmed x f = Nut $ mkEffectFn2 \psr di -> do
+  diffusingRef <- liftST $ ST.new false
+  receptacleRef <- liftST $ ST.new List.Nil
+  bang <- liftST $ Event.create
+  hot <- liftST $ Event.create
+  uu <- Event.subscribe (Poll.sample x bang.event) \i -> do
+    diffusing <- liftST $ ST.read diffusingRef
+    if diffusing then hot.push i
+    else liftST $ void $ ST.modify (i : _) receptacleRef
+  bang.push identity
+  receptacle <- liftST $ ST.read receptacleRef
+  liftST $ void $ ST.write true diffusingRef
+  let
+    oPoll = case receptacle of
+      List.Cons i _ -> PureAndEvent [ i ] hot.event
+      List.Nil -> OnlyEvent hot.event
+  runEffectFn2 deferO psr uu
+  runEffectFn2 (coerce $ f oPoll) psr di
+
 useSplit :: forall a. Poll a -> Hook { first :: Poll a, second :: Poll a }
 useSplit e f = Nut $ mkEffectFn2 \psr di -> do
   { poll, unsubscribe } <- liftST $ Poll.rant e
@@ -444,7 +467,7 @@ type DynOptions value =
 
 type DynOptions' value =
   { sendTo :: value -> Poll Int
-  , remove :: Poll (Maybe Int) -> value -> Poll Unit
+  , remove :: value -> Poll Unit
   }
 
 type DynControl value =
@@ -457,14 +480,14 @@ type DynControl value =
 dynOptions :: forall v. DynOptions v
 dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
 
-fromDynOptions :: forall v . DynOptions v -> DynOptions' v
-fromDynOptions opt = opt { remove = \_ -> opt.remove } 
+fromDynOptions :: forall v. DynOptions v -> DynOptions' v
+fromDynOptions opt = opt { remove = opt.remove }
 
 useDyn
   :: forall value
    . Poll (Tuple (Maybe Int) value)
   -> Hook (DynControl value)
-useDyn p = useDynWith p ( fromDynOptions dynOptions )
+useDyn p = useDynWith p (fromDynOptions dynOptions)
 
 useDynAtBeginning
   :: forall value
@@ -526,8 +549,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
         remove :: Poll ScopeDepth
         remove =
           Poll.merge
-            [ const (ScopeDepth 0) <$> options.remove (Poll.sham siblings.event)
-                value
+            [ const (ScopeDepth 0) <$> options.remove value
             , const (ScopeDepth 0) <$> eltRemove.poll
             , (un PSR psr).lifecycle
             ]
