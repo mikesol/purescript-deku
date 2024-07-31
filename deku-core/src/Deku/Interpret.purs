@@ -9,6 +9,7 @@ import Data.Foldable (for_, traverse_)
 import Data.List (List(..), (:))
 import Data.Maybe (Maybe(..), fromJust, fromMaybe, isJust)
 import Data.Nullable (toMaybe)
+import Data.Tuple (Tuple(..))
 import Deku.Core as Core
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), fromDekuElement, fromDekuText, toDekuElement, toDekuText)
 import Deku.Internal.Region (Anchor(..))
@@ -200,8 +201,9 @@ removeTextEffect = mkEffectFn1 \t -> do
   remove (Text.toChildNode (fromDekuText t))
 
 bufferPortal :: Core.BufferPortal
-bufferPortal =
-  DekuParent <<< toDekuElement <$> createDocumentFragment
+bufferPortal = do
+  frag <- createDocumentFragment
+  pure $ Tuple 0 $ DekuParent $ toDekuElement frag
 
 -- | Uses [after](https://developer.mozilla.org/en-US/docs/Web/API/Element/after) and
 -- | [prepend](https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend) to efficiently move the collected

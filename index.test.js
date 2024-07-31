@@ -33,6 +33,7 @@ const doSSRTest = (name, closure, itIs) => {
         '<head></head><body id="mybody"></body>';
       const res = tests.runSSR(myTest)();
       const html = res.html;
+      console.log("HTML", html);
       document.getElementsByTagName(
         "html"
       )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
@@ -507,7 +508,7 @@ describe("deku", () => {
       })
     );
 
-    doTest("portals keep state", (f) =>
+    doSSRTest("portals keep state", (f) =>
       f(tests.wizardPortal, () => {
         const $ = require("jquery");
         expect($("#s1").text()).toBe("step1-0-0");
@@ -544,7 +545,7 @@ describe("deku", () => {
         expect($("#s1").text()).toBe("");
         expect($("#s2").text()).toBe("");
         expect($("#s3").text()).toBe("step3-3-0");
-      })
+      }), it.only
     );
 
     doTest("empty switches", (f) =>

@@ -90,7 +90,8 @@ ssrInElement elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
   textCacheRef <- liftST $ ST.new Map.empty
   elementCacheRef <- liftST $ ST.new Map.empty
-  let di = ssrDOMInterpret textCacheRef elementCacheRef
+  portalCtrRef <- liftST $ ST.new (-1)
+  let di = ssrDOMInterpret portalCtrRef textCacheRef elementCacheRef
   region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
   scope <- liftST $ runSTFn3 newPSR
     Ancestry.root

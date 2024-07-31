@@ -12,6 +12,7 @@ import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
+import Debug (spy)
 import Deku.Control (text, text_)
 import Deku.Core (Hook, Nut(..), deferO, fixed, portal, useRefST)
 import Deku.DOM as D
@@ -333,7 +334,7 @@ wizardPortal = Deku.do
       _ -> step3
 
     , D.button
-      [ DL.click $ (pure 0 <|> global) <#> \st _ -> pushGlobal $ st + 1
+      [ DL.click $ (pure 0 <|> global) <#> \st _ -> let _ = spy "pushing global" true in pushGlobal $ st + 1
       , DA.id_ "global"
       ]
       [ text_ "incr"]

@@ -2,12 +2,14 @@ module Deku.SSRDOMInterpret where
 
 import Prelude
 
+import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as STRef
 import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn3, runSTFn3)
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, over)
+import Data.Tuple (Tuple(..))
 import Deku.Core as Core
 import Deku.Internal.Ancestry (Ancestry)
 import Deku.Internal.Entities (DekuElement, DekuText, fromDekuElement)
@@ -110,10 +112,11 @@ initializeTextRendering renderingInfo = mkSTFn2
       renderingInfo
 
 ssrDOMInterpret
-  :: STRef.STRef Global SSRTextRenderingInfoCache
+  :: STRef.STRef Global Int
+  -> STRef.STRef Global SSRTextRenderingInfoCache
   -> STRef.STRef Global SSRElementRenderingInfoCache
   -> Core.DOMInterpret
-ssrDOMInterpret textRenderingInfo elementRenderingInfo =
+ssrDOMInterpret portalRef textRenderingInfo elementRenderingInfo =
   Core.DOMInterpret
     { dynamicDOMInterpret: \_ -> noOpDomInterpret
     --
@@ -143,7 +146,10 @@ ssrDOMInterpret textRenderingInfo elementRenderingInfo =
     , markTextAsImpure: markTextAsImpure textRenderingInfo
     --
     , beamRegion: I.beamRegionEffect
-    , bufferPortal: I.bufferPortal
+    , bufferPortal: do
+      i <- liftST $ STRef.modify (_ + 1) portalRef
+      Tuple _ p <- I.bufferPortal 
+      pure $ Tuple i p
     }
 
 noOpDomInterpret
@@ -174,5 +180,5 @@ noOpDomInterpret =
     , markTextAsImpure: mkSTFn1 \_ -> pure unit
     --
     , beamRegion: mkEffectFn3 \_ _ _ -> pure unit
-    , bufferPortal: I.bufferPortal
+    , bufferPortal:  I.bufferPortal
     }

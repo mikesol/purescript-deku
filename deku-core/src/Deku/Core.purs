@@ -223,7 +223,7 @@ type BeamRegion =
   EffectFn3 Anchor Anchor Anchor Unit
 
 -- | Generates a place for portals to render into that will not be displayed immediatly.
-type BufferPortal = Effect DekuParent
+type BufferPortal = Effect (Tuple Int DekuParent)
 
 newtype ParentId = ParentId Int
 
@@ -862,8 +862,9 @@ portal :: Nut -> Hook Nut
 portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
 
   -- set up a StaticRegion for the portal contents and track its begin and end
-  buffer <- pure @(ST.ST Global) <<< ParentStart <$>
-    (un DOMInterpret di).bufferPortal
+  Tuple portalIx buffer' <- (un DOMInterpret di).bufferPortal
+  let buffer =  pure $ ParentStart buffer'
+    
   trackBegin <- liftST $ ST.new buffer
   trackEnd <- liftST $ ST.new $ Nothing @Anchor
 
@@ -880,7 +881,7 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 toBeam
     ( over PSR
         ( \i ->
-            i { ancestry = Ancestry.portal i.ancestry, region = staticBuffer }
+            i { ancestry = Ancestry.portal portalIx i.ancestry, region = staticBuffer }
         )
         psr
     )

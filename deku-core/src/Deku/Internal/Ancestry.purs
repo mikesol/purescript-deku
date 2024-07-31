@@ -14,7 +14,7 @@ import Prelude
 data DekuAncestry
   = Element Int DekuAncestry
   | Dyn Int DekuAncestry
-  | Portal DekuAncestry
+  | Portal Int DekuAncestry
   | Fixed Int DekuAncestry
   | Root
 
@@ -47,11 +47,11 @@ dyn i (RealAncestry a) = RealAncestry
 dyn i (FakeAncestry a) = FakeAncestry
   { rep: a.rep <> "d" <> show i  }
 
-portal :: Ancestry -> Ancestry
-portal (RealAncestry a) = RealAncestry
-  { rep: a.rep <> "p", lineage: Portal a.lineage }
-portal (FakeAncestry a) = FakeAncestry
-  { rep: a.rep <> "p" }
+portal :: Int -> Ancestry -> Ancestry
+portal i (RealAncestry a) = RealAncestry
+  { rep: a.rep <> "p" <> show i, lineage: Portal i a.lineage }
+portal i (FakeAncestry a) = FakeAncestry
+  { rep: a.rep <> "p" <> show i }
 
 fixed :: Int -> Ancestry -> Ancestry
 fixed i (RealAncestry a) = RealAncestry
