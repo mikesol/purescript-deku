@@ -23,10 +23,8 @@ module Deku.Hooks
 
 import Prelude
 
-import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
-import Data.Tuple (Tuple(..))
-import Deku.Core (Nut(..), useMailboxedS, useSplit, useDyn, dynOptions, useDeflect, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed, useRant, useRant', useStateTagged', useRef, useRefST, useState, useState')
+import Deku.Core (Nut(..), dynOptions, useDeflect, useDyn, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed, useMailboxedS, useRant, useRant', useRef, useRefST, useSkimmed, useSplit, useState, useState', useStateTagged')
 import Deku.Do as Deku
 import FRP.Poll (Poll)
 
@@ -46,10 +44,10 @@ guardWith m f = m <#~> case _ of
 -- | approach, see the `useDyn` hook.
 switcher :: forall a. (a -> Nut) -> Poll a -> Nut
 switcher f poll = Deku.do
-  { value } <- useDynWith ( Tuple Nothing <$> poll )
-    { remove : \sibling _ -> const unit <$> sibling
-    , sendTo : const empty
-    }
+  skimmed <- useSkimmed poll
+  rantedSkimmed <- useRant skimmed
+  { value } <- useDynAtBeginningWith skimmed $ dynOptions
+    { remove = \_ -> rantedSkimmed $> unit }
 
   f value
 
