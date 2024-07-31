@@ -11,7 +11,9 @@ module Deku.Core
   , Value(..)
   , Namespace(..)
   , Tag(..)
-
+  , ParentId(..)
+  , ChildId(..)
+  , AttrIndex(..)
   , MakeElement
   , SetCb
   , SetProp
@@ -24,7 +26,6 @@ module Deku.Core
   , RemoveText
   , BufferPortal
   , BeamRegion
-
   , DOMInterpret(..)
   , Hook
   , Hook'
@@ -83,7 +84,8 @@ import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
-import Control.Monad.ST.Uncurried (STFn1, STFn2, mkSTFn1, mkSTFn2, runSTFn1, runSTFn2)
+import Control.Monad.ST.Internal as STRef
+import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn3, runSTFn1, runSTFn2, runSTFn3)
 import Control.Plus (empty)
 import Data.Array as Array
 import Data.Array.ST as STArray
@@ -96,6 +98,8 @@ import Data.Newtype (class Newtype, over, un)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
+import Deku.Internal.Ancestry (Ancestry)
+import Deku.Internal.Ancestry as Ancestry
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
 import Deku.Internal.Region (Anchor(..), Bound, Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
 import Effect (Effect, forE)
@@ -120,46 +124,50 @@ cb :: (Event -> Effect Unit) -> Cb
 cb = Cb <<< ((map <<< map) (const true))
 
 prop' :: String -> String -> Attribute'
-prop' k v = mkEffectFn2 \e (DOMInterpret { setProp }) ->
-  runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
+prop' k v = mkEffectFn3
+  \_ e (DOMInterpret { setProp }) -> do
+    runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 cb' :: String -> Cb -> Attribute'
-cb' k v = mkEffectFn2 \e (DOMInterpret { setCb }) ->
-  runEffectFn3 setCb (Key k) v (toDekuElement e)
+cb' k v = mkEffectFn3
+  \id e (DOMInterpret { markElementAsImpure, setCb }) -> do
+    liftST $ runSTFn1 markElementAsImpure id
+    runEffectFn3 setCb (Key k) v (toDekuElement e)
 
 unset' :: String -> Attribute'
-unset' k = mkEffectFn2 \e (DOMInterpret { unsetAttribute }) ->
+unset' k = mkEffectFn3 \_ e (DOMInterpret { unsetAttribute }) ->
   runEffectFn2 unsetAttribute (Key k) (toDekuElement e)
 
 -- TODO: get rid of `Element` type
 type Attribute' =
-  EffectFn2 Element DOMInterpret Unit
+  EffectFn3 Ancestry Element DOMInterpret Unit
 
 -- | Low level representation of key-value pairs for attributes and listeners.
--- | In general, this type is for internal use only. In practice, you'll use
--- | the `:=` family of operators and helpers like `style` and `klass` instead.
+-- | In general, this type is for internal use only.
 newtype Attribute :: Row Type -> Type
 newtype Attribute i = Attribute Attribute'
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
-unsafeUnAttribute
-  :: forall e. Attribute e -> EffectFn2 Element DOMInterpret Unit
+unsafeUnAttribute :: forall e. Attribute e -> Attribute'
 unsafeUnAttribute = coerce
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
-  :: forall e. EffectFn2 Element DOMInterpret Unit -> Attribute e
+  :: forall e
+   . EffectFn3 Ancestry Element DOMInterpret Unit
+  -> Attribute e
 unsafeAttribute = Attribute
 
 attributeAtYourOwnRisk :: forall e. String -> String -> Attribute e
-attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn2
-  \e (DOMInterpret { setProp }) ->
+attributeAtYourOwnRisk k v = unsafeAttribute $ mkEffectFn3
+  \_ e (DOMInterpret { setProp }) -> do
     runEffectFn3 setProp (Key k) (Value v) (toDekuElement e)
 
 callbackWithCaution
   :: forall e. String -> (Event -> Effect Boolean) -> Attribute e
-callbackWithCaution k v = unsafeAttribute $ mkEffectFn2
-  \e (DOMInterpret { setCb }) ->
+callbackWithCaution k v = unsafeAttribute $ mkEffectFn3
+  \id e (DOMInterpret { markElementAsImpure, setCb }) -> do
+    liftST $ runSTFn1 markElementAsImpure id
     runEffectFn3 setCb (Key k) (Cb v) (toDekuElement e)
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
@@ -172,7 +180,7 @@ newtype Namespace = Namespace String
 
 -- | Type used by Deku backends to create an element. For internal use only unless you're writing a custom backend.
 type MakeElement =
-  EffectFn2 (Maybe Namespace) Tag DekuElement
+  EffectFn3 Ancestry (Maybe Namespace) Tag DekuElement
 
 type RemoveElement = EffectFn1 DekuElement Unit
 type RemoveText = EffectFn1 DekuText Unit
@@ -187,7 +195,7 @@ type AttachText =
 
 -- | Type used by Deku backends to construct a text element. For internal use only unless you're writing a custom
 -- | backend.
-type MakeText = EffectFn1 (Maybe String) DekuText
+type MakeText = EffectFn2 Ancestry (Maybe String) DekuText
 
 -- | Type used by Deku backends to set the text of a text element. For internal use only unless you're writing a custom
 -- | backend.
@@ -215,26 +223,55 @@ type BeamRegion =
   EffectFn3 Anchor Anchor Anchor Unit
 
 -- | Generates a place for portals to render into that will not be displayed immediatly.
-type BufferPortal =
-  Effect DekuParent
+type BufferPortal = Effect DekuParent
+
+newtype ParentId = ParentId Int
+
+derive instance Newtype ParentId _
+derive newtype instance Eq ParentId
+derive newtype instance Ord ParentId
+newtype ChildId = ChildId Int
+
+derive instance Newtype ChildId _
+derive newtype instance Eq ChildId
+derive newtype instance Ord ChildId
+
+newtype AttrIndex = AttrIndex Int
+
+derive instance Newtype AttrIndex _
+derive newtype instance Eq AttrIndex
+derive newtype instance Ord AttrIndex
 
 -- | This is the interpreter that any Deku backend creator needs to impelement.
 -- | Three interpreters are included with Deku: SPA.
 -- , SSR, and hydrated SSR.
 newtype DOMInterpret = DOMInterpret
-  { makeElement :: MakeElement
+  { -- ssr
+    dynamicDOMInterpret :: Unit -> DOMInterpret
+  -- element
+  , makeElement :: MakeElement
   , setProp :: SetProp
   , setCb :: SetCb
   , unsetAttribute :: UnsetAttribute
   , attachElement :: AttachElement
   , removeElement :: RemoveElement
-  --
+  -- element ssr
+  , initializeElementRendering ::
+      STFn2 Ancestry DekuElement Global Unit
+  , markElementAsImpure :: STFn1 Ancestry Global Unit
+  , isBoring :: Ancestry -> Boolean
+  -- text
   , makeText :: MakeText
   , setText :: SetText
   , attachText :: AttachText
   , removeText :: RemoveText
-  -- 
+  -- text ssr
+  , initializeTextRendering ::
+      STFn2 Ancestry DekuText Global Unit
+  , markTextAsImpure :: STFn1 Ancestry Global Unit
+  -- portal
   , bufferPortal :: BufferPortal
+  -- beam
   , beamRegion :: BeamRegion
   }
 
@@ -247,6 +284,60 @@ newtype ScopeDepth =
 
 derive instance Newtype ScopeDepth _
 
+-- | Handles an optimized `Poll` by running the effect on each emitted value. Any resulting subscription gets written to 
+-- | the given cleanup array.
+pump'
+  :: forall a
+   . PSR
+  -> Poll a
+  -> (Boolean -> EffectFn1 a Unit)
+  -> Effect Unit
+pump' (PSR { defer: def }) p effF =
+  go p
+  where
+  staticEff = effF true
+  dynamicEff = effF false
+
+  handleEvent :: Event.Event a -> Effect Unit
+  handleEvent y = do
+    uu <- runEffectFn2 Event.subscribeO y dynamicEff
+    void $ liftST $ runSTFn1 def $ mkEffectFn1 \_ -> uu
+
+  handlePoll
+    :: ST.STRef Global (EffectFn1 a Unit) -> Event.Event a -> Effect Unit
+  handlePoll whichF y = do
+    uu <- runEffectFn2 Event.subscribeO y $ mkEffectFn1 \i -> do
+      f <- liftST $ ST.read whichF
+      runEffectFn1 f i
+    void $ liftST $ runSTFn1 def $ mkEffectFn1 \_ -> uu
+
+  go :: Poll a -> Effect Unit
+  go = case _ of
+    OnlyEvent x -> handleEvent x
+    OnlyPure x -> runEffectFn2 Event.fastForeachE x staticEff
+    OnlyPoll x -> do
+      bang <- liftST $ Event.create
+      -- start with the statif function
+      f <- liftST $ ST.new staticEff
+      handlePoll f (UPoll.sample x bang.event)
+      bang.push identity
+      -- after we peel off the "pure" values, switch to the dynamic function
+      liftST $ void $ ST.write dynamicEff f
+    PureAndEvent x y -> do
+      go (OnlyPure x)
+      go (OnlyEvent y)
+    PureAndPoll x y -> do
+      go (OnlyPure x)
+      go (OnlyPoll y)
+
+pump
+  :: forall a
+   . PSR
+  -> Poll a
+  -> EffectFn1 a Unit
+  -> Effect Unit
+pump psr poll fn = pump' psr poll (const fn)
+
 newtype PSR = PSR
   { lifecycle :: Poll.Poll ScopeDepth
   -- used by `Nut`s to register or clear the last element of their region.
@@ -254,39 +345,15 @@ newtype PSR = PSR
   -- scope
   , defer :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
   , dispose :: EffectFn1 ScopeDepth Unit
+  -- used to indicate when an element should never be statically rendered
+  -- it may be disqualified for other reasons, but this flag trumps them all
+  , ancestry :: Ancestry
   }
 
 derive instance Newtype PSR _
 
--- | Handles an optimized `Poll` by running the effect on each emitted value. Any resulting subscription gets written to 
--- | the given cleanup array.
-pump :: forall a. EffectFn3 PSR (Poll.Poll a) (EffectFn1 a Unit) Unit
-pump = mkEffectFn3 \(PSR { defer: def }) p eff -> do
-  let
-    handleEvent :: EffectFn1 (Event.Event a) Unit
-    handleEvent = mkEffectFn1 \y -> do
-      uu <- runEffectFn2 Event.subscribeO y eff
-      void $ liftST $ runSTFn1 def $ mkEffectFn1 \_ -> uu
-
-    go :: EffectFn1 (Poll a) Unit
-    go = mkEffectFn1 case _ of
-      OnlyEvent x -> runEffectFn1 handleEvent x
-      OnlyPure x -> runEffectFn2 Event.fastForeachE x eff
-      OnlyPoll x -> do
-        bang <- liftST $ Event.create
-        runEffectFn1 handleEvent (UPoll.sample x bang.event)
-        bang.push identity
-      PureAndEvent x y -> do
-        runEffectFn1 go (OnlyPure x)
-        runEffectFn1 go (OnlyEvent y)
-      PureAndPoll x y -> do
-        runEffectFn1 go (OnlyPure x)
-        runEffectFn1 go (OnlyPoll y)
-
-  runEffectFn1 go p
-
-newPSR :: STFn2 (Poll.Poll ScopeDepth) StaticRegion Global PSR
-newPSR = mkSTFn2 \lifecycle region -> do
+newPSR :: STFn3 Ancestry (Poll.Poll ScopeDepth) StaticRegion Global PSR
+newPSR = mkSTFn3 \ancestry lifecycle region -> do
   unsubs <- STArray.new
   let
     doDefer :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
@@ -301,11 +368,19 @@ newPSR = mkSTFn2 \lifecycle region -> do
       forE 0 l \i -> do
         runEffectFn1 (unsafePartial $ Array.unsafeIndex stack (l - 1 - i)) d
 
-  pure (PSR { lifecycle: once lifecycle, region, defer: doDefer, dispose })
+  pure
+    ( PSR
+        { lifecycle: once lifecycle
+        , ancestry
+        , region
+        , defer: doDefer
+        , dispose
+        }
+    )
 
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
-  runEffectFn3 pump psr (un PSR psr).lifecycle (un PSR psr).dispose
+  pump psr (un PSR psr).lifecycle (un PSR psr).dispose
 
 newtype Nut =
   Nut (EffectFn2 PSR DOMInterpret Unit)
@@ -315,11 +390,15 @@ instance Semigroup Nut where
     -- unrolled version of `fixed`
     Nut $ mkEffectFn2 \psr di -> do
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
-      emptyScope <- liftST $ runSTFn2 newPSR (un PSR psr).lifecycle
+      emptyScope <- liftST $ runSTFn3 newPSR
+        (Ancestry.fixed 0 (un PSR psr).ancestry)
+        (un PSR psr).lifecycle
         (un PSR psr).region
 
       runEffectFn2 a emptyScope di
-      runEffectFn2 b psr di
+      runEffectFn2 b
+        (over PSR (\i -> i { ancestry = (Ancestry.fixed 1 i.ancestry) }) psr)
+        di
 
 instance Monoid Nut where
   mempty =
@@ -512,15 +591,22 @@ useDynWith
    . Poll (Tuple (Maybe Int) value)
   -> DynOptions value
   -> Hook (DynControl value)
-useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
+useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
   Region region <- liftST $ (un StaticRegion (un PSR psr).region).region
   span <- liftST $ runSTFn2 newSpan region.begin region.bump
+  let ancestry = (un PSR psr).ancestry
+  aref <- liftST $ STRef.new (-1)
 
   let
-    handleElements :: EffectFn1 (Tuple (Maybe Int) value) Unit
-    handleElements = mkEffectFn1 \(Tuple initialPos value) -> do
+    handleElements :: Boolean -> EffectFn1 (Tuple (Maybe Int) value) Unit
+    handleElements isStatic = mkEffectFn1 \(Tuple initialPos value) -> do
+      let
+        di =
+          if isStatic then di'
+          else (un DOMInterpret di').dynamicDOMInterpret unit
       Region eltRegion <- liftST $ runSTFn2 allocateRegion initialPos span
-      staticRegion <- liftST $ runSTFn2 newStaticRegion eltRegion.begin
+      staticRegion <- liftST $ runSTFn2 newStaticRegion
+        eltRegion.begin
         eltRegion.bump
 
       -- this controls whether the user can influence the element via `remove` or `sentTo`, it will change to `false`
@@ -545,7 +631,10 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
             ]
 
       eltLifecycle <- liftST Poll.create
-      eltPSR <- liftST $ runSTFn2 newPSR eltLifecycle.poll staticRegion
+      a <- liftST $ STRef.modify (add 1) aref
+      eltPSR <- liftST $ runSTFn3 newPSR (Ancestry.dyn a ancestry)
+        eltLifecycle.poll
+        staticRegion
       let
         Nut nut = cont
           { value
@@ -575,23 +664,32 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di -> do
             eltLifecycle.push depth
             liftST eltRegion.remove
 
-      runEffectFn3 pump eltPSR sendTo handleSendTo
-      runEffectFn3 pump eltPSR (once remove) handleRemove
+      pump eltPSR sendTo handleSendTo
+      pump eltPSR (once remove) handleRemove
       runEffectFn2 nut eltPSR di
       -- enable user control
       void $ liftST $ ST.write false eltDisposed
 
-  runEffectFn3 pump psr elements handleElements
+  pump' psr elements handleElements
+
   runEffectFn1 handleScope psr
 
 fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2 \psr di -> do
-  emptyScope <- liftST $ runSTFn2 newPSR (un PSR psr).lifecycle
+  emptyScope <- liftST $ runSTFn3 newPSR
+    (un PSR psr).ancestry
+    (un PSR psr).lifecycle
     (un PSR psr).region
+  aref <- liftST $ STRef.new (-1)
   let
     handleNuts :: EffectFn1 Nut Unit
-    handleNuts = mkEffectFn1 \(Nut nut) ->
-      runEffectFn2 nut emptyScope di
+    handleNuts = mkEffectFn1 \(Nut nut) -> do
+      a <- liftST $ STRef.modify (add 1) aref
+      runEffectFn2 nut
+        ( over PSR (\i -> i { ancestry = Ancestry.fixed a i.ancestry })
+            emptyScope
+        )
+        di
 
   -- run `nuts` with separate scope
   runEffectFn2 Event.fastForeachE nuts handleNuts
@@ -606,44 +704,76 @@ elementify
   -> Array Nut
   -> Nut
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
-  elt <- runEffectFn2 (un DOMInterpret di).makeElement (Namespace <$> ns)
-    (Tag tag)
-  regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
-  liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
-    (Element (elt))
+  let isBoring = (un DOMInterpret di).isBoring (un PSR psr).ancestry
+  when (not isBoring) do
+    elt <- runEffectFn3 (un DOMInterpret di).makeElement (un PSR psr).ancestry
+      (Namespace <$> ns)
+      (Tag tag)
+    regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
+    liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
+      (Element (elt))
 
-  let
-    handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
-    handleAtts = mkEffectFn1 \atts ->
-      runEffectFn3 pump psr atts $ mkEffectFn1 \(Attribute x) ->
-        runEffectFn2 x (fromDekuElement elt) di
-  runEffectFn2 Event.fastForeachE arrAtts handleAtts
+    -- runEffectFn2 deferO psr do
+    --   runEffectFn1 (un DOMInterpret di).removeElement elt
 
-  eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
-  let
-    handleNuts :: EffectFn1 Nut Unit
-    handleNuts = mkEffectFn1 \(Nut nut) -> do
-      scope <- liftST $ runSTFn2 newPSR
-        (over ScopeDepth (add 1) <$> (un PSR psr).lifecycle)
-        eltRegion
-      runEffectFn2 nut scope di
-  runEffectFn2 Event.fastForeachE nuts handleNuts
+    ---
+    --- ssr management
 
-  let
-    handleRemove :: EffectFn1 ScopeDepth Unit
-    handleRemove = mkEffectFn1 case _ of
-      ScopeDepth 0 ->
-        runEffectFn1 (un DOMInterpret di).removeElement elt
+    liftST $ runSTFn2 (un DOMInterpret di).initializeElementRendering
+      (un PSR psr).ancestry
+      elt
 
-      -- on higher `ScopeDepth`s we don't have to do anything, when this ancestor has been removed this will also
-      -- disappear from screen
-      _ ->
-        pure unit
+    --- end ssr management
+    ---
 
-  runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
-  liftST $ runSTFn1 (un PSR psr).defer handleRemove
+    let
+      handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
+      handleAtts = mkEffectFn1 \atts -> do
+        case atts of
+          OnlyPure _ -> pure unit
+          _ -> liftST $ runSTFn1
+            (un DOMInterpret di).markElementAsImpure
+            (un PSR psr).ancestry
+        pump' psr atts $ \useOriginalDi -> do
+          let
+            newDi =
+              if useOriginalDi then di
+              else (un DOMInterpret di).dynamicDOMInterpret unit
+          mkEffectFn1 \(Attribute x) ->
+            runEffectFn3 x (un PSR psr).ancestry (fromDekuElement elt) newDi
 
-  runEffectFn1 handleScope psr
+    runEffectFn2 Event.fastForeachE arrAtts handleAtts
+
+    eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
+    aref <- liftST $ STRef.new (-1)
+
+    let
+      handleNuts :: EffectFn1 Nut Unit
+      handleNuts = mkEffectFn1 \(Nut nut) -> do
+        a <- liftST $ STRef.modify (add 1) aref
+        scope <- liftST $ runSTFn3 newPSR
+          (Ancestry.element a (un PSR psr).ancestry)
+          (over ScopeDepth (add 1) <$> (un PSR psr).lifecycle)
+          eltRegion
+        runEffectFn2 nut scope di
+    runEffectFn2 Event.fastForeachE nuts handleNuts
+
+    let
+      handleRemove :: EffectFn1 ScopeDepth Unit
+      handleRemove = mkEffectFn1 case _ of
+        ScopeDepth 0 ->
+          runEffectFn1 (un DOMInterpret di).removeElement elt
+
+        -- on higher `ScopeDepth`s we don't have to do anything, when this ancestor has been removed this will also
+        -- disappear from screen
+        _ ->
+          pure unit
+
+    runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
+
+    liftST $ runSTFn1 (un PSR psr).defer handleRemove
+
+    runEffectFn1 handleScope psr
 
 text_ :: String -> Nut
 text_ txt =
@@ -651,41 +781,63 @@ text_ txt =
 
 text :: Poll String -> Nut
 text texts = Nut $ mkEffectFn2 \psr di -> do
-  let
-    handleTextUpdate :: EffectFn2 (Event.Event String) DekuText Unit
-    handleTextUpdate = mkEffectFn2 \xs txt -> do
-      sub <- runEffectFn2 Event.subscribeO xs $ mkEffectFn1 \x ->
-        runEffectFn2 (un DOMInterpret di).setText x txt
-      liftST $ runSTFn1 (un PSR psr).defer $ mkEffectFn1 \_ -> sub
-
+  let ancestry = (un PSR psr).ancestry
   txt <- case texts of
     OnlyPure xs -> do
-      runEffectFn1 (un DOMInterpret di).makeText (Array.last xs)
+      runEffectFn2 (un DOMInterpret di).makeText
+        ancestry
+        (Array.last xs)
 
-    OnlyEvent e -> do
-      txt <- runEffectFn1 (un DOMInterpret di).makeText Nothing
-      runEffectFn2 handleTextUpdate e txt
-      pure txt
+    OnlyEvent _ -> do
+      runEffectFn2 (un DOMInterpret di).makeText
+        ancestry
+        Nothing
 
-    OnlyPoll p -> do
-      txt <- runEffectFn1 (un DOMInterpret di).makeText Nothing
-      bang <- liftST Event.create
-      runEffectFn2 handleTextUpdate (UPoll.sample p bang.event) txt
-      bang.push identity
-      pure txt
+    OnlyPoll _ -> do
+      runEffectFn2 (un DOMInterpret di).makeText
+        ancestry
+        Nothing
 
-    PureAndEvent xs e -> do
-      txt <- runEffectFn1 (un DOMInterpret di).makeText (Array.last xs)
-      runEffectFn2 handleTextUpdate e txt
-      pure txt
+    PureAndEvent xs _ -> do
+      runEffectFn2 (un DOMInterpret di).makeText
+        ancestry
+        (Array.last xs)
 
-    PureAndPoll xs p -> do
-      txt <- runEffectFn1 (un DOMInterpret di).makeText (Array.last xs)
-      bang <- liftST Event.create
-      runEffectFn2 handleTextUpdate (UPoll.sample p bang.event) txt
-      bang.push identity
-      pure txt
+    PureAndPoll xs _ -> do
+      runEffectFn2 (un DOMInterpret di).makeText
+        ancestry
+        (Array.last xs)
 
+  liftST $ runSTFn2 (un DOMInterpret di).initializeTextRendering
+    (un PSR psr).ancestry
+    txt
+
+  let
+    modifiedPoll = case texts of
+      OnlyPure _ -> OnlyPure []
+
+      OnlyEvent e -> OnlyEvent e
+
+      OnlyPoll p -> OnlyPoll p
+
+      PureAndEvent _ e -> OnlyEvent e
+
+      PureAndPoll _ p -> OnlyPoll p
+
+  case texts of
+    OnlyPure _ -> pure unit
+    _ -> liftST $ runSTFn1 (un DOMInterpret di).markTextAsImpure ancestry
+
+  let
+    handleTextUpdate :: Boolean -> EffectFn1 String Unit
+    handleTextUpdate useOriginalDi = mkEffectFn1 \x -> do
+      let
+        di2 =
+          if useOriginalDi then di
+          else (un DOMInterpret di).dynamicDOMInterpret unit
+      runEffectFn2 (un DOMInterpret di2).setText x txt
+
+  pump' psr modifiedPoll handleTextUpdate
   regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
   runEffectFn2 (un DOMInterpret di).attachText txt regionEnd
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
@@ -726,7 +878,12 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
         bumped.push bound
     )
   runEffectFn2 toBeam
-    (over PSR _ { region = staticBuffer } psr)
+    ( over PSR
+        ( \i ->
+            i { ancestry = Ancestry.portal i.ancestry, region = staticBuffer }
+        )
+        psr
+    )
     di
 
   let

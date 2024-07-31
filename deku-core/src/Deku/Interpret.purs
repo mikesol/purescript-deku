@@ -39,7 +39,7 @@ import Web.HTML.HTMLSelectElement as HTMLSelectElement
 import Web.HTML.HTMLTextAreaElement as HTMLTextAreaElement
 
 makeElementEffect :: Core.MakeElement
-makeElementEffect = mkEffectFn2 \ns tag -> do
+makeElementEffect = mkEffectFn3 \_ ns tag -> do
   elt <- case coerce ns :: Maybe String of
     Nothing -> runEffectFn1 createElement (coerce tag)
     Just ns' -> runEffectFn2 createElementNS (coerce ns') (coerce tag)
@@ -181,13 +181,14 @@ getDisableable elt = go
   go (_ : y) = go y
 
 makeTextEffect :: Core.MakeText
-makeTextEffect = mkEffectFn1 \mstr -> do
+makeTextEffect = mkEffectFn2 \_ mstr -> do
   txt <- runEffectFn1 createText (fromMaybe "" mstr)
   pure $ toDekuText txt
 
 attachTextEffect :: Core.AttachText
 attachTextEffect =
-  mkEffectFn2 \txt -> runEffectFn2 attachNodeEffect [ fromDekuText @Node txt ]
+  mkEffectFn2 \txt -> do
+    runEffectFn2 attachNodeEffect [ fromDekuText @Node txt ]
 
 setTextEffect :: Core.SetText
 setTextEffect = mkEffectFn2 \str txt' -> do
@@ -255,12 +256,13 @@ beamRegionEffect = mkEffectFn3 case _, _, _ of
     Text txt -> fromDekuText @Node txt
 
 attachNodeEffect :: EffectFn2 (Array Node) Anchor Unit
-attachNodeEffect = mkEffectFn2 \nodes -> case _ of
-  ParentStart (DekuParent parent) -> do
-    runEffectFn2 prepend nodes (fromDekuElement @Node parent)
+attachNodeEffect = mkEffectFn2 \nodes anchor -> do
+  case anchor of
+    ParentStart (DekuParent parent) -> do
+      runEffectFn2 prepend nodes (fromDekuElement @Node parent)
 
-  Element el -> do
-    runEffectFn2 after nodes (fromDekuElement @Node el)
+    Element el -> do
+      runEffectFn2 after nodes (fromDekuElement @Node el)
 
-  Text txt -> do
-    runEffectFn2 after nodes (fromDekuText @Node txt)
+    Text txt -> do
+      runEffectFn2 after nodes (fromDekuText @Node txt)

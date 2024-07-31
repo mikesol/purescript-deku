@@ -21,7 +21,7 @@ import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (cycle, dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Pursx (lenientPursx, pursx)
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (SSROutput, hydrateInBody, runInBody, ssrInBody)
 import Effect (Effect)
 import Effect.Random (random)
 import Effect.Uncurried (mkEffectFn2, runEffectFn2)
@@ -35,6 +35,12 @@ foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
 runTest :: Nut -> Effect (Effect Unit)
 runTest = runInBody
+
+runSSR :: Nut -> Effect SSROutput
+runSSR = ssrInBody
+
+runHydration :: SSROutput -> Nut -> Effect Unit
+runHydration cache nut = void $ hydrateInBody cache nut
 
 sanityCheck :: Nut
 sanityCheck = D.span [ DA.id_ "hello" ] [ text_ "Hello" ]
@@ -190,8 +196,8 @@ insertsAtCorrectPositions = D.div [ DA.id_ "div0" ]
       D.span [ DA.id_ ("dyn" <> show i) ] [ text_ (show i) ]
   ]
 
-nestedInpureDyn :: Nut
-nestedInpureDyn = Deku.do
+nestedInPureDyn :: Nut
+nestedInPureDyn = Deku.do
   pushClick /\ click <- useState'
   
   D.div [ DA.id_ "div0" ] 
@@ -217,7 +223,11 @@ switcherWorksForCompositionalElements = Deku.do
         ( [ 0, 1, 2 ] <#> \j -> D.span [ DA.id_ $ "id" <> show j ]
             [ text_ (show i <> "-" <> show j) ]
         )
-    , D.button [ DA.id_ "incr", DL.click_ \_ -> setItem unit ] [ text_ "incr" ]
+    , D.button
+        [ DA.id_ "incr"
+        , DL.click_ \_ -> setItem unit
+        ]
+        [ text_ "incr" ]
     ]
 
 slightlyLessPureSwitcher :: Nut
@@ -353,8 +363,8 @@ pursXWiresUp = Deku.do
                 ]
                 [ text_ "après-milieu" ]
             ]
-        , evt:  DL.click_ \_ -> setMessage "hello" 
-        , mykls:  DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
+        , evt: DL.click_ \_ -> setMessage "hello"
+        , mykls: DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
         }
     , D.span [ DA.id_ "span0" ] [ text message ]
     ]
@@ -363,7 +373,8 @@ pursXWiresUp2 :: Nut
 pursXWiresUp2 = Deku.do
   setMessage /\ message <- useState'
   D.div [ DA.id_ "div0" ]
-    [ lenientPursx "<div ~mykls~><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>"
+    [ lenientPursx
+        "<div ~mykls~><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>"
         { me: fixed
             [ text_ "milieu"
             , text_ " "
@@ -373,7 +384,7 @@ pursXWiresUp2 = Deku.do
                 ]
                 [ text_ "après-milieu" ]
             ]
-        , evt:  DL.click_ \_ -> setMessage "hello" 
+        , evt: DL.click_ \_ -> setMessage "hello"
         , mykls: DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
         }
     , D.span [ DA.id_ "span0" ] [ text message ]
@@ -658,8 +669,8 @@ hotIsHot = Deku.do
         [ text_ "set label" ]
     ]
 
-switcherSwitches :: Nut
-switcherSwitches = Deku.do
+filtersAndRefs :: Nut
+filtersAndRefs = Deku.do
   setItem /\ item <- useState 0
   setGoodbyeC /\ goodbyeC <- useState'
   iref <- useRef (-1) item
@@ -703,7 +714,6 @@ emptySwitches = Deku.do
   D.div [ DA.id_ "div0" ]
     [ D.div [ DA.id_ "content" ] $ Array.range 0 5 <#> \id ->
       guard ( eq id <$> item ) ( D.span [ DA.id_ ( show id ) ] [ text_ $ show id ] )
-    
     , D.div [ DA.id_ "incr", DL.click $ item <#> \st _ -> setItem $ ( st + 1 ) `mod` 6 ] [ text_ "next" ]
     ]
 

@@ -5,6 +5,7 @@ package:
     - arrays
     - catenable-lists
     - control
+    - debug
     - effect
     - either
     - fast-vect
