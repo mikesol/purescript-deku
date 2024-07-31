@@ -7,24 +7,25 @@ import Control.Plus (empty)
 import Data.Array ((..))
 import Data.Array as Array
 import Data.Filterable (compact, filter)
-import Data.Foldable (intercalate, traverse_)
+import Data.Foldable (intercalate, sequence_, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
-import Deku.Core (Hook, Nut, fixed, portal, useRefST)
+import Deku.Core (Hook, Nut(..), deferO, fixed, portal, useRefST)
 import Deku.DOM as D
 import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
-import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
+import Deku.Hooks (cycle, dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Pursx (lenientPursx, pursx)
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Random (random)
-import FRP.Event (fold)
+import Effect.Uncurried (mkEffectFn2, runEffectFn2)
+import FRP.Event (count, fold)
 import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
@@ -32,7 +33,7 @@ import Web.HTML.Window (alert)
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
-runTest :: Nut -> Effect Unit
+runTest :: Nut -> Effect (Effect Unit)
 runTest = runInBody
 
 sanityCheck :: Nut
@@ -118,6 +119,16 @@ deeplyNestedPreservesOrder = Deku.do
     , mydyn 0
     ]
 
+dynPosition :: Nut
+dynPosition = Deku.do
+  pushNext /\ next <- useState'
+  D.div [ DA.id_ "div0" ]
+    [ Deku.do 
+      { position } <- useDynAtBeginning next
+      text $ show <$> position
+    , D.button [ DA.id_ "add", DL.click_ \_ -> pushNext unit ] []
+    ]
+
 -- why intercalate with mempty? why not!
 isAMonoid :: Nut
 isAMonoid = intercalate mempty $ map text_ [ "m", "o", "n", "o", "i", "d" ]
@@ -150,7 +161,7 @@ sendsToPositionFixed = Deku.do
         fixed
           [ D.span [ DA.id_ ("dyn" <> show i <> "a") ]
               [ text_ (show i <> "a") ]
-          , D.span [ DA.id_ ("dyn" <> show i <> "a") ]
+          , D.span [ DA.id_ ("dyn" <> show i <> "b") ]
               [ text_ (show i <> "b") ]
           ]
     , D.button [ DA.id_ "pos", DL.click_ \_ -> setPosIdx 1 ]
@@ -179,6 +190,20 @@ insertsAtCorrectPositions = D.div [ DA.id_ "div0" ]
       D.span [ DA.id_ ("dyn" <> show i) ] [ text_ (show i) ]
   ]
 
+nestedInpureDyn :: Nut
+nestedInpureDyn = Deku.do
+  pushClick /\ click <- useState'
+  
+  D.div [ DA.id_ "div0" ] 
+    [ text_ "start"
+    , Deku.do
+      { value } <- useDynAtEnd ( mergeMap pure [ 0, 1, 2, 3 ] )
+      _ <- useDynAtEnd click
+      D.span [ DA.id_ $ "dyn" <> show value ] [ text_ $ show value ]
+    
+    , D.span [ DA.id_ "action", DL.click_ \_ -> pushClick unit ] [ text_ "end" ]
+    ]
+
 switcherWorksForCompositionalElements :: Nut
 switcherWorksForCompositionalElements = Deku.do
   let
@@ -193,6 +218,36 @@ switcherWorksForCompositionalElements = Deku.do
             [ text_ (show i <> "-" <> show j) ]
         )
     , D.button [ DA.id_ "incr", DL.click_ \_ -> setItem unit ] [ text_ "incr" ]
+    ]
+
+slightlyLessPureSwitcher :: Nut
+slightlyLessPureSwitcher = Deku.do
+  elemCtrl /\ elemCom <- useState'
+  let
+    elemCount :: Poll Int
+    elemCount =
+      fold (\c -> if _ then c + 1 else 0 ) 0 $ initial <|> elemCom
+    
+    initial :: Poll Boolean
+    initial =
+      merge $ Array.replicate 4 $ pure true 
+
+    incrElem :: Effect Unit
+    incrElem =
+      elemCtrl true
+
+    resetElem :: Effect Unit
+    resetElem = do
+        elemCtrl false
+        sequence_ $ Array.replicate 4 incrElem
+
+  D.div [ DA.id_ "div0" ]
+    [ D.span [ DA.id_ "content" ]
+      [ text_ "foo"
+      , cycle $ text_ <<< show <$> elemCount
+      ]
+    , D.button [ DA.id_ "incr", DL.click_ \_ -> incrElem ] [ text_ "incr" ]
+    , D.button [ DA.id_ "reset", DL.click_ \_ -> resetElem ] [ text_ "reset" ]
     ]
 
 tabbedNavigationWithPursx :: Nut
@@ -237,6 +292,51 @@ portalsCompose = Deku.do
     , switchMe 2
     , D.button [ DA.id_ "incr", DL.click_ \_ -> setItem unit ]
         [ text_ "incr" ]
+    ]
+  
+wizardPortal :: Nut 
+wizardPortal = Deku.do
+  pushGlobal /\ global <- useState 0
+  pushStep /\ step <- useHot 0
+  let
+    stepPanel id = Deku.do
+      pushLocal /\ local <- useState 0
+      D.div [ DA.id_ $ "s" <> show id ]
+        [ text_ $ "step" <> show id
+        , text $ append "-" <<< show <$> global
+        , text $ append "-" <<< show <$> local
+        , D.button
+          [ DL.click $ local <#> \st _ -> pushLocal $ st + 1
+          , DA.id_ "local"
+          ]
+          []
+        ] 
+
+  step1 <- portal $ stepPanel 1
+  step2 <- portal $ stepPanel 2
+  step3 <- portal $ stepPanel 3
+
+  D.div [ DA.id_ "div0" ]
+    [ step <#~> case _ of
+      0 -> step1
+      1 -> step2
+      _ -> step3
+
+    , D.button
+      [ DL.click $ (pure 0 <|> global) <#> \st _ -> pushGlobal $ st + 1
+      , DA.id_ "global"
+      ]
+      [ text_ "incr"]
+    , D.button
+      [ DL.click $ step <#> \st _ -> pushStep $ (st + 1) `mod` 3
+      , DA.id_ "next"
+      ]
+      [ text_ "next" ]
+    , D.button 
+      [ DL.click $ step <#> \st _ -> pushStep $ (st - 1) `mod` 3
+      , DA.id_ "back"
+      ]
+      [ text_ "back" ]
     ]
 
 pursXWiresUp :: Nut
@@ -597,15 +697,15 @@ lotsOfSwitching = Deku.do
         ]
     ]
 
-pureSwitches :: Nut
-pureSwitches = Deku.do
-  _ /\ elem <- useState'
-  let
-    initial :: Poll Unit
-    initial = merge $ Array.replicate 5 $ pure unit
-
-  (initial <|> elem) <#~> \e ->
-    D.span [ DA.klass_ "switcherelem" ] [ text_ $ show e ]
+emptySwitches :: Nut
+emptySwitches = Deku.do
+  setItem /\ item <- useState 0
+  D.div [ DA.id_ "div0" ]
+    [ D.div [ DA.id_ "content" ] $ Array.range 0 5 <#> \id ->
+      guard ( eq id <$> item ) ( D.span [ DA.id_ ( show id ) ] [ text_ $ show id ] )
+    
+    , D.div [ DA.id_ "incr", DL.click $ item <#> \st _ -> setItem $ ( st + 1 ) `mod` 6 ] [ text_ "next" ]
+    ]
 
 useHotRantWorks :: Nut
 useHotRantWorks = Deku.do
@@ -630,4 +730,22 @@ useHotRantWorks = Deku.do
         [ text_ "Show another version" ]
     , framed "da"
     , guard presence $ framed "db"
+    ]
+
+useDispose :: Effect Unit -> Effect Unit -> Hook Unit
+useDispose init eff cont = Nut $ mkEffectFn2 \psr di -> do
+  init
+  let Nut nut = cont unit
+  runEffectFn2 deferO psr eff
+  runEffectFn2 nut psr di
+
+disposeGetsRun :: Nut
+disposeGetsRun = Deku.do
+  pushTick /\ ticks <- useState'
+  fixed
+    [ D.span [ DA.id_ "count" ] [ text $ show <$> count ticks ]
+    , Deku.do
+      { remove } <- useDynAtBeginning ( pure unit )
+      useDispose ( pushTick unit ) ( pushTick unit )
+      D.span [ DA.id_ "notthere", DL.click_ \_ -> remove ] []
     ]

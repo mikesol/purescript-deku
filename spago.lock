@@ -123,37 +123,25 @@ workspace:
         - deku-css
         - deku-dom
       test_dependencies:
-        - aff
-        - aff-promise
-        - argonaut-codecs
-        - argonaut-core
-        - avar
-        - console
-        - debug
-        - either
-        - exceptions
-        - halogen
-        - halogen-hooks
-        - halogen-subscriptions
-        - integers
-        - node-buffer
-        - node-fs
-        - node-path
-        - nullable
-        - partial
+        - arrays
+        - control
+        - deku-core
+        - deku-dom
+        - effect
+        - filterable
+        - foldable-traversable
+        - hyrule
+        - maybe
+        - prelude
         - random
+        - record
         - refs
-        - spec
-        - strings
+        - st
         - tailrec
+        - tuples
         - web-html
       build_plan:
         - aff
-        - aff-promise
-        - ansi
-        - argonaut-codecs
-        - argonaut-core
-        - arraybuffer-types
         - arrays
         - assert
         - avar
@@ -166,12 +154,10 @@ workspace:
         - control
         - css
         - datetime
-        - debug
         - deku-core
         - deku-css
         - deku-dom
         - distributive
-        - dom-indexed
         - effect
         - either
         - enums
@@ -182,23 +168,16 @@ workspace:
         - foldable-traversable
         - foreign
         - foreign-object
-        - fork
         - free
-        - freeap
         - functions
         - functors
         - gen
-        - halogen
-        - halogen-hooks
-        - halogen-subscriptions
-        - halogen-vdom
         - heterogeneous
         - hyrule
         - identity
         - integers
         - invariant
         - js-date
-        - js-promise
         - js-timers
         - lazy
         - lcg
@@ -206,12 +185,7 @@ workspace:
         - literals
         - maybe
         - media-types
-        - mmorph
         - newtype
-        - node-buffer
-        - node-fs
-        - node-path
-        - node-streams
         - nonempty
         - now
         - nullable
@@ -220,7 +194,6 @@ workspace:
         - orders
         - parallel
         - partial
-        - pipes
         - prelude
         - profunctor
         - psci-support
@@ -230,7 +203,6 @@ workspace:
         - record
         - refs
         - safe-coerce
-        - spec
         - st
         - strings
         - stringutils
@@ -245,7 +217,6 @@ workspace:
         - unsafe-reference
         - untagged-union
         - variant
-        - web-clipboard
         - web-dom
         - web-dom-parser
         - web-events
@@ -1033,6 +1004,7 @@ workspace:
         - effect
         - avar
         - js-timers
+        - avar
         - web-html
         - unsafe-reference
         - web-uievents
@@ -1318,13 +1290,6 @@ packages:
       - partial
       - prelude
       - tuples
-  debug:
-    type: registry
-    version: 6.0.2
-    integrity: sha256-vmkYFuXYuELBzeauvgHG6E6Kf/Hp1dAnxwE9ByHfwSg=
-    dependencies:
-      - functions
-      - prelude
   distributive:
     type: registry
     version: 6.0.0
@@ -1368,16 +1333,6 @@ packages:
       - safe-coerce
       - strings
       - tuples
-  dom-indexed:
-    type: registry
-    version: 11.0.0
-    integrity: sha256-asNUditTILJdNGS7xxFFkm6TrxC0hykoZUII3aTi5Q4=
-    dependencies:
-      - media-types
-      - prelude
-      - web-clipboard
-      - web-pointerevents
-      - web-touchevents
   effect:
     type: registry
     version: 4.0.0
@@ -1544,12 +1499,6 @@ packages:
       - tuples
       - typelevel-prelude
       - unfoldable
-  fork:
-    type: registry
-    version: 6.0.0
-    integrity: sha256-X7u0SuCvFbLbzuNEKLBNuWjmcroqMqit4xEzpQwAP7E=
-    dependencies:
-      - aff
   free:
     type: registry
     version: 7.0.0
@@ -1569,15 +1518,6 @@ packages:
       - transformers
       - tuples
       - unsafe-coerce
-  freeap:
-    type: registry
-    version: 7.0.0
-    integrity: sha256-T1VbmNxdNSKEgV4p8uFFv0F16cz+Xx1BkfF64etSdNI=
-    dependencies:
-      - const
-      - exists
-      - gen
-      - lists
   functions:
     type: registry
     version: 6.0.0
@@ -1617,90 +1557,6 @@ packages:
       - tailrec
       - tuples
       - unfoldable
-  halogen:
-    type: registry
-    version: 7.0.0
-    integrity: sha256-aAE8oW32YiDdA3oQZxPbFkK4n31paT4JL6pvzOe47YE=
-    dependencies:
-      - aff
-      - avar
-      - console
-      - const
-      - dom-indexed
-      - effect
-      - foreign
-      - fork
-      - free
-      - freeap
-      - halogen-subscriptions
-      - halogen-vdom
-      - media-types
-      - nullable
-      - ordered-collections
-      - parallel
-      - profunctor
-      - transformers
-      - unsafe-coerce
-      - unsafe-reference
-      - web-file
-      - web-uievents
-  halogen-hooks:
-    type: registry
-    version: 0.6.3
-    integrity: sha256-r3Win1phxy3TCxuS6Ws2lrkQxpPZ8U1CPWcgdXj9qq8=
-    dependencies:
-      - aff
-      - arrays
-      - bifunctors
-      - effect
-      - exceptions
-      - foldable-traversable
-      - foreign-object
-      - free
-      - freeap
-      - halogen
-      - halogen-subscriptions
-      - maybe
-      - newtype
-      - ordered-collections
-      - parallel
-      - partial
-      - prelude
-      - refs
-      - tailrec
-      - transformers
-      - tuples
-      - unsafe-coerce
-      - unsafe-reference
-      - web-dom
-      - web-html
-  halogen-subscriptions:
-    type: registry
-    version: 2.0.0
-    integrity: sha256-8/BPME/sC/kWMDxp0+n4k09gA1IIedXn2yUJ4pCH5xw=
-    dependencies:
-      - arrays
-      - effect
-      - foldable-traversable
-      - functors
-      - refs
-      - safe-coerce
-      - unsafe-reference
-  halogen-vdom:
-    type: registry
-    version: 8.0.0
-    integrity: sha256-5UMDekaYNSM3jtpfWoWTbmZ38rIcnguzGRW3z+IQgV4=
-    dependencies:
-      - bifunctors
-      - effect
-      - foreign
-      - foreign-object
-      - maybe
-      - prelude
-      - refs
-      - tuples
-      - unsafe-coerce
-      - web-html
   heterogeneous:
     type: registry
     version: 0.6.0
@@ -1766,17 +1622,6 @@ packages:
       - foreign
       - integers
       - now
-  js-promise:
-    type: registry
-    version: 1.0.0
-    integrity: sha256-kXNo5g9RJgPdrTuKRe5oG2kBIwPp+j5VDPDplqZBJzQ=
-    dependencies:
-      - effect
-      - exceptions
-      - foldable-traversable
-      - functions
-      - maybe
-      - prelude
   js-timers:
     type: registry
     version: 6.1.0
@@ -1894,14 +1739,6 @@ packages:
       - partial
       - prelude
       - refs
-  mmorph:
-    type: registry
-    version: 7.0.0
-    integrity: sha256-urZlZNNqGeQFe5D/ClHlR8QgGBNHTMFPtJ5S5IpflTQ=
-    dependencies:
-      - free
-      - functors
-      - transformers
   newtype:
     type: registry
     version: 5.0.0
@@ -2070,18 +1907,6 @@ packages:
     version: 4.0.0
     integrity: sha256-fwXerld6Xw1VkReh8yeQsdtLVrjfGiVuC5bA1Wyo/J4=
     dependencies: []
-  pipes:
-    type: registry
-    version: 8.0.0
-    integrity: sha256-kvfqGM4cPA/wCcBHbp5psouFw5dZGvku2462x7ZBwSY=
-    dependencies:
-      - aff
-      - lists
-      - mmorph
-      - prelude
-      - tailrec
-      - transformers
-      - tuples
   posix-types:
     type: registry
     version: 6.0.0
@@ -2182,39 +2007,6 @@ packages:
     integrity: sha256-a1ibQkiUcbODbLE/WAq7Ttbbh9ex+x33VCQ7GngKudU=
     dependencies:
       - unsafe-coerce
-  spec:
-    type: registry
-    version: 7.5.4
-    integrity: sha256-o49xJAmAN//ZYVMTz01xeDqdLOiEYoHbaXZYtOXmUZI=
-    dependencies:
-      - aff
-      - ansi
-      - arrays
-      - avar
-      - bifunctors
-      - control
-      - datetime
-      - debug
-      - effect
-      - either
-      - exceptions
-      - foldable-traversable
-      - fork
-      - identity
-      - integers
-      - lists
-      - maybe
-      - newtype
-      - now
-      - ordered-collections
-      - parallel
-      - pipes
-      - prelude
-      - refs
-      - strings
-      - tailrec
-      - transformers
-      - tuples
   st:
     type: registry
     version: 6.2.0
@@ -2440,13 +2232,6 @@ packages:
       - record
       - tuples
       - unsafe-coerce
-  web-clipboard:
-    type: registry
-    version: 5.0.0
-    integrity: sha256-TbZEMovHhks9Qa7JXodJabvKDpeFkl6swfPKqhXd/lE=
-    dependencies:
-      - js-promise
-      - web-html
   web-dom:
     type: registry
     version: 6.0.0

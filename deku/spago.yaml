@@ -4,33 +4,26 @@ package:
     version: 0.9.24
     license: "Apache-2.0"
   dependencies:
-  - deku-core
-  - deku-css
-  - deku-dom
+    - deku-core
+    - deku-css
+    - deku-dom
   test:
     dependencies:
-    - aff-promise
-    - avar
-    - debug
-    - argonaut-codecs
-    - argonaut-core
-    - either
-    - console
-    - halogen
-    - halogen-hooks
-    - integers
-    - node-buffer
-    - node-fs
-    - node-path
-    - nullable
-    - spec
-    - refs
-    - strings
-    - random
-    - aff
-    - halogen-subscriptions
-    - exceptions
-    - partial
-    - tailrec
-    - web-html
+      - arrays
+      - control
+      - deku-core
+      - deku-dom
+      - effect
+      - filterable
+      - foldable-traversable
+      - hyrule
+      - maybe
+      - prelude
+      - random
+      - record
+      - refs
+      - st
+      - tailrec
+      - tuples
+      - web-html
     main: Test.Main

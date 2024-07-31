@@ -23,13 +23,9 @@ module Deku.Hooks
 
 import Prelude
 
-import Control.Alt ((<|>))
 import Data.Maybe (Maybe(..))
-import Data.Tuple (snd)
-import Data.Tuple.Nested ((/\))
-import Deku.Core (Nut(..), useMailboxedS, useSplit, useDyn, dynOptions, useDeflect, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed, useRant, useRant', useStateTagged', useRef, useRefST, useState, useState')
+import Deku.Core (Nut(..), dynOptions, useDeflect, useDyn, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed, useMailboxedS, useRant, useRant', useRef, useRefST, useSkimmed, useSplit, useState, useState', useStateTagged')
 import Deku.Do as Deku
-import FRP.Event (filterMap, mapAccum)
 import FRP.Poll (Poll)
 
 guard :: Poll Boolean -> Nut -> Nut
@@ -40,7 +36,7 @@ guardWith m f = m <#~> case _ of
   Just x -> f x
   Nothing -> mempty
 
--- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
+-- | Like `bindFlipped`, except instead of working with a monad, it dips into an `Poll`
 -- | and creates a `Nut`. This allows you to use an event to switch between different
 -- | bits of DOM. This is how a [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM) works
 -- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient
@@ -48,19 +44,12 @@ guardWith m f = m <#~> case _ of
 -- | approach, see the `useDyn` hook.
 switcher :: forall a. (a -> Nut) -> Poll a -> Nut
 switcher f poll = Deku.do
-  { first: ctr1, second: ctr2 } <- useSplit (counter poll)
-  dctr <- useDeflect (counter poll)
-  { value } <- useDynAtBeginningWith (ctr2 <|> dctr) $ dynOptions
-    { remove = \(oldV /\ _) -> filterMap
-        (\(newV /\ _) -> if newV == oldV + 1 then Just unit else Nothing)
-        ctr1
-    }
+  skimmed <- useSkimmed poll
+  rantedSkimmed <- useRant skimmed
+  { value } <- useDynAtBeginningWith skimmed $ dynOptions
+    { remove = \_ -> rantedSkimmed $> unit }
 
-  f (snd value)
-  where
-  counter = mapAccum fn 0
-    where
-    fn a b = (a + 1) /\ (a /\ b)
+  f value
 
 cycle :: Poll Nut -> Nut
 cycle = switcher identity

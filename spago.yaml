@@ -13,6 +13,7 @@ workspace:
         - effect
         - avar
         - js-timers
+        - avar
         - web-html
         - unsafe-reference
         - web-uievents
