@@ -248,6 +248,7 @@ derive newtype instance Ord AttrIndex
 newtype DOMInterpret = DOMInterpret
   { -- ssr
     dynamicDOMInterpret :: Unit -> DOMInterpret
+  , portalDOMInterpret :: Ancestry -> DOMInterpret
   -- element
   , makeElement :: MakeElement
   , setProp :: SetProp
@@ -271,6 +272,7 @@ newtype DOMInterpret = DOMInterpret
   , markTextAsImpure :: STFn1 Ancestry Global Unit
   -- portal
   , bufferPortal :: BufferPortal
+  , markPortalAsRendered :: STFn1 Ancestry Global Unit
   -- beam
   , beamRegion :: BeamRegion
   }
@@ -863,8 +865,8 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
 
   -- set up a StaticRegion for the portal contents and track its begin and end
   Tuple portalIx buffer' <- (un DOMInterpret di).bufferPortal
-  let buffer =  pure $ ParentStart buffer'
-    
+  let buffer = pure $ ParentStart buffer'
+
   trackBegin <- liftST $ ST.new buffer
   trackEnd <- liftST $ ST.new $ Nothing @Anchor
 
@@ -878,17 +880,14 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
         void $ ST.write bound trackEnd
         bumped.push bound
     )
+  let myAncestry = Ancestry.portal portalIx (un PSR psr).ancestry
   runEffectFn2 toBeam
-    ( over PSR
-        ( \i ->
-            i { ancestry = Ancestry.portal portalIx i.ancestry, region = staticBuffer }
-        )
-        psr
-    )
-    di
+    (over PSR (_ { ancestry = myAncestry, region = staticBuffer }) psr)
+    $ (un DOMInterpret di).portalDOMInterpret myAncestry
 
   let
-    Nut hooked = cont $ portaled buffer (beamed.push unit) beamed.event
+    Nut hooked = cont $ portaled myAncestry buffer (beamed.push unit)
+      beamed.event
       bumped.event
       trackBegin
       trackEnd
@@ -909,16 +908,18 @@ portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 hooked psr di
 
 portaled
-  :: Bound
+  :: Ancestry
+  -> Bound
   -> Effect Unit
   -> Event.Event Unit
   -> Event.Event (Maybe Anchor)
   -> ST.STRef Global Bound
   -> ST.STRef Global (Maybe Anchor)
   -> Nut
-portaled buffer beam beamed bumped trackBegin trackEnd =
+portaled myAncestry buffer beam beamed bumped trackBegin trackEnd =
   Nut $ mkEffectFn2 \psr di -> do
 
+    liftST $ runSTFn1 (un DOMInterpret di).markPortalAsRendered myAncestry
     -- signal to other portaled `Nut`s that we are about to steal their content
     beam
 

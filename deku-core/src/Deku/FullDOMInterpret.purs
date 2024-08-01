@@ -8,7 +8,8 @@ import Deku.Interpret as I
 
 fullDOMInterpret :: Core.DOMInterpret
 fullDOMInterpret = Core.DOMInterpret
-  {  dynamicDOMInterpret: \_ -> fullDOMInterpret
+  { dynamicDOMInterpret: \_ -> fullDOMInterpret
+  , portalDOMInterpret: \_ -> fullDOMInterpret
   --
   , isBoring: const false
   , makeElement: I.makeElementEffect
@@ -28,5 +29,6 @@ fullDOMInterpret = Core.DOMInterpret
   , markTextAsImpure: mkSTFn1 \_ -> pure unit
   --
   , beamRegion: I.beamRegionEffect
+  , markPortalAsRendered: mkSTFn1 \_ -> pure unit
   , bufferPortal: I.bufferPortal
   }

@@ -33,7 +33,6 @@ const doSSRTest = (name, closure, itIs) => {
         '<head></head><body id="mybody"></body>';
       const res = tests.runSSR(myTest)();
       const html = res.html;
-      console.log("HTML", html);
       document.getElementsByTagName(
         "html"
       )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
@@ -335,15 +334,15 @@ describe("deku", () => {
         expect($("#div0").text()).toBe("");
 
         $("#add").trigger("click");
-        expect($("#div0").text()).toBe("0")
+        expect($("#div0").text()).toBe("0");
 
         $("#add").trigger("click");
-        expect($("#div0").text()).toBe("01")
+        expect($("#div0").text()).toBe("01");
 
         $("#add").trigger("click");
-        expect($("#div0").text()).toBe("012")
+        expect($("#div0").text()).toBe("012");
       })
-    )
+    );
 
     doTest("domable is a monoid", (f) =>
       f(tests.isAMonoid, () => {
@@ -508,24 +507,24 @@ describe("deku", () => {
       })
     );
 
-    doSSRTest("portals keep state", (f) =>
+    doTest("portals keep state", (f) =>
       f(tests.wizardPortal, () => {
         const $ = require("jquery");
         expect($("#s1").text()).toBe("step1-0-0");
         expect($("#s2").text()).toBe("");
-        
+
         $("#global").trigger("click");
-        expect($("#s1").text()).toBe("step1-1-0")
+        expect($("#s1").text()).toBe("step1-1-0");
         expect($("#s2").text()).toBe("");
 
         $("#local").trigger("click");
-        expect($("#s1").text()).toBe("step1-1-1")
+        expect($("#s1").text()).toBe("step1-1-1");
         expect($("#s2").text()).toBe("");
-        
+
         $("#next").trigger("click");
         expect($("#s1").text()).toBe("");
         expect($("#s2").text()).toBe("step2-1-0");
-        
+
         $("#global").trigger("click");
         expect($("#s2").text()).toBe("step2-2-0");
 
@@ -533,11 +532,11 @@ describe("deku", () => {
         expect($("#s2").text()).toBe("step2-2-1");
 
         $("#next").trigger("click");
-        expect($("#s2").text()).toBe("")
+        expect($("#s2").text()).toBe("");
         expect($("#s3").text()).toBe("step3-2-0");
-        
+
         $("#back").trigger("click");
-        expect($("#s2").text()).toBe("step2-2-1")
+        expect($("#s2").text()).toBe("step2-2-1");
         expect($("#s3").text()).toBe("");
 
         $("#next").trigger("click");
@@ -545,7 +544,7 @@ describe("deku", () => {
         expect($("#s1").text()).toBe("");
         expect($("#s2").text()).toBe("");
         expect($("#s3").text()).toBe("step3-3-0");
-      }), it.only
+      })
     );
 
     doTest("empty switches", (f) =>

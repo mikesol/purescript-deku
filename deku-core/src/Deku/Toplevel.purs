@@ -19,6 +19,7 @@ import Data.FoldableWithIndex (foldlWithIndex, forWithIndex_)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Newtype (un)
+import Data.Set as Set
 import Data.String as String
 import Data.Traversable (traverse)
 import Data.Tuple.Nested ((/\))
@@ -35,13 +36,12 @@ import Effect.Exception (error, throwException)
 import Effect.Uncurried (runEffectFn2)
 import FRP.Poll (create)
 import Web.DOM as Web.DOM
-import Web.DOM.Document (createElement, createTextNode)
 import Web.DOM.Element (getAttribute, setAttribute, toParentNode)
 import Web.DOM.Element as Element
 import Web.DOM.NodeList (toArray)
 import Web.DOM.ParentNode (QuerySelector(..), querySelectorAll)
 import Web.HTML (window)
-import Web.HTML.HTMLDocument (body, toDocument)
+import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
@@ -80,7 +80,10 @@ foreign import mapIdsToTextNodes
   :: Web.DOM.Element -> Effect (Array { k :: String, v :: Web.DOM.Text })
 
 type SSROutput =
-  { html :: String, cache :: Map.Map Ancestry SerializableSSRRenderingInfo }
+  { html :: String
+  , cache :: Map.Map Ancestry SerializableSSRRenderingInfo
+  , livePortals :: Set.Set Ancestry
+  }
 
 ssrInElement
   :: Web.DOM.Element
@@ -90,8 +93,9 @@ ssrInElement elt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
   textCacheRef <- liftST $ ST.new Map.empty
   elementCacheRef <- liftST $ ST.new Map.empty
+  portalsRef <- liftST $ ST.new Set.empty
   portalCtrRef <- liftST $ ST.new (-1)
-  let di = ssrDOMInterpret portalCtrRef textCacheRef elementCacheRef
+  let di = ssrDOMInterpret portalCtrRef textCacheRef elementCacheRef portalsRef
   region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
   scope <- liftST $ runSTFn3 newPSR
     Ancestry.root
@@ -130,34 +134,34 @@ ssrInElement elt (Nut nut) = do
       textCache
   htmlString <- innerHTML elt
   dispose (ScopeDepth 0)
+  livePortals <- liftST $ ST.read portalsRef
   pure $
     { html: String.replace (String.Pattern "data-deku-value")
         (String.Replacement "value")
         htmlString
     , cache
+    , livePortals
     }
 
 ssrInBody
   :: Nut
-  -> Effect
-       { html :: String
-       , cache :: Map.Map Ancestry SerializableSSRRenderingInfo
-       }
+  -> Effect SSROutput
 ssrInBody = doInBody ssrInElement
 
 hydrateInElement
   :: forall r
-   . { cache :: Map.Map Ancestry SerializableSSRRenderingInfo | r }
+   . { cache :: Map.Map Ancestry SerializableSSRRenderingInfo
+     , livePortals :: Set.Set Ancestry
+     | r
+     }
   -> Web.DOM.Element
   -> Nut
   -> Effect (Effect Unit)
-hydrateInElement { cache } ielt (Nut nut) = do
+hydrateInElement { cache, livePortals } ielt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
+  portalCtrRef <- liftST $ ST.new (-1)
   region <- liftST $ runSTFn1 Region.fromParent
     (DekuParent $ toDekuElement ielt)
-  doc <- window >>= document
-  dummyElt <- createElement "div" (toDocument doc)
-  dummyText <- createTextNode "dummy" (toDocument doc)
   nodes <-
     querySelectorAll (QuerySelector "[data-deku-ssr]") (toParentNode ielt)
       >>= toArray
@@ -190,13 +194,17 @@ hydrateInElement { cache } ielt (Nut nut) = do
         mapIdsToTextNodes ielt
   scope <- liftST $ runSTFn3 newPSR Ancestry.root lifecycle region
   void $ runEffectFn2 nut scope
-    ( hydratingDOMInterpret (Map.fromFoldable kv) textNodes dummyText dummyElt
+    ( hydratingDOMInterpret portalCtrRef (Map.fromFoldable kv) textNodes
+        livePortals
     )
   pure $ dispose (ScopeDepth 0)
 
 hydrateInBody
   :: forall r
-   . { cache :: Map.Map Ancestry SerializableSSRRenderingInfo | r }
+   . { cache :: Map.Map Ancestry SerializableSSRRenderingInfo
+     , livePortals :: Set.Set Ancestry
+     | r
+     }
   -> Nut
   -> Effect (Effect Unit)
 hydrateInBody = doInBody <<< hydrateInElement

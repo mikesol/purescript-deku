@@ -9,6 +9,7 @@ import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, over)
+import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Deku.Core as Core
 import Deku.Internal.Ancestry (Ancestry)
@@ -115,10 +116,12 @@ ssrDOMInterpret
   :: STRef.STRef Global Int
   -> STRef.STRef Global SSRTextRenderingInfoCache
   -> STRef.STRef Global SSRElementRenderingInfoCache
+  -> STRef.STRef Global (Set.Set Ancestry)
   -> Core.DOMInterpret
-ssrDOMInterpret portalRef textRenderingInfo elementRenderingInfo =
+ssrDOMInterpret portalRef textRenderingInfo elementRenderingInfo purePortalCache =
   Core.DOMInterpret
     { dynamicDOMInterpret: \_ -> noOpDomInterpret
+    , portalDOMInterpret: \_ -> ssrDOMInterpret portalRef textRenderingInfo elementRenderingInfo purePortalCache
     --
     , isBoring: const false
     , makeElement: I.makeElementEffect
@@ -147,9 +150,10 @@ ssrDOMInterpret portalRef textRenderingInfo elementRenderingInfo =
     --
     , beamRegion: I.beamRegionEffect
     , bufferPortal: do
-      i <- liftST $ STRef.modify (_ + 1) portalRef
-      Tuple _ p <- I.bufferPortal 
-      pure $ Tuple i p
+        i <- liftST $ STRef.modify (_ + 1) portalRef
+        Tuple _ p <- I.bufferPortal
+        pure $ Tuple i p
+    , markPortalAsRendered: mkSTFn1 \a -> void $ STRef.modify (Set.insert a) purePortalCache
     }
 
 noOpDomInterpret
@@ -161,6 +165,7 @@ noOpDomInterpret =
       -- because SSR code will only trigger dynamic elements
       -- in case there's a dyn with pure polls that aren't optimized as being pure
       dynamicDOMInterpret: \_ -> noOpDomInterpret
+    , portalDOMInterpret: \_ -> noOpDomInterpret
     --
     , isBoring: const false
     , markElementAsImpure: mkSTFn1 \_ -> pure unit
@@ -180,5 +185,6 @@ noOpDomInterpret =
     , markTextAsImpure: mkSTFn1 \_ -> pure unit
     --
     , beamRegion: mkEffectFn3 \_ _ _ -> pure unit
-    , bufferPortal:  I.bufferPortal
+    , markPortalAsRendered: mkSTFn1 \_ -> pure unit
+    , bufferPortal: I.bufferPortal
     }
