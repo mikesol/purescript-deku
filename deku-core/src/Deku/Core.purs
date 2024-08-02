@@ -26,7 +26,6 @@ module Deku.Core
   , ParentId(..)
   , RemoveElement
   , RemoveText
-  , ScopeDepth(..)
   , SetCb
   , SetProp
   , SetText
@@ -276,13 +275,6 @@ newtype DOMInterpret = DOMInterpret
 
 derive instance Newtype DOMInterpret _
 
--- | Tracks the depths of the current dispose action. The initial level will be `ScopeDepth 0`. Every descent into an
--- | `elementify` `Nut` will increase the depth.
-newtype ScopeDepth =
-  ScopeDepth Int
-
-derive instance Newtype ScopeDepth _
-
 -- | Handles an optimized `Poll` by running the effect on each emitted value. Any resulting subscription gets written to 
 -- | the given cleanup array.
 pump'
@@ -300,7 +292,7 @@ pump' (PSR { addEffectToDisposalQueue }) p effF =
   handleEvent :: Event.Event a -> Effect Unit
   handleEvent y = do
     uu <- runEffectFn2 Event.subscribeO y dynamicEff
-    void $ liftST $ runSTFn1 addEffectToDisposalQueue $ mkEffectFn1 \_ -> uu
+    void $ liftST $ runSTFn1 addEffectToDisposalQueue $ uu
 
   handlePoll
     :: ST.STRef Global (EffectFn1 a Unit) -> Event.Event a -> Effect Unit
@@ -308,7 +300,7 @@ pump' (PSR { addEffectToDisposalQueue }) p effF =
     uu <- runEffectFn2 Event.subscribeO y $ mkEffectFn1 \i -> do
       f <- liftST $ ST.read whichF
       runEffectFn1 f i
-    void $ liftST $ runSTFn1 addEffectToDisposalQueue $ mkEffectFn1 \_ -> uu
+    void $ liftST $ runSTFn1 addEffectToDisposalQueue uu
 
   go :: Poll a -> Effect Unit
   go = case _ of
@@ -343,9 +335,9 @@ newtype PSR = PSR
     region :: StaticRegion
   -- scope
   -- used by an element to signal it should be removed
-  , signalDisposalQueueShouldBeTriggered :: Poll.Poll ScopeDepth
-  , addEffectToDisposalQueue :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
-  , triggerDisposalQueueEffects :: EffectFn1 ScopeDepth Unit
+  , signalDisposalQueueShouldBeTriggered :: Poll.Poll Unit
+  , addEffectToDisposalQueue :: STFn1 (Effect Unit) Global Unit
+  , triggerDisposalQueueEffects :: Effect Unit
   -- used to indicate when an element should never be statically rendered
   -- it may be disqualified for other reasons, but this flag trumps them all
   , ancestry :: Ancestry
@@ -353,21 +345,20 @@ newtype PSR = PSR
 
 derive instance Newtype PSR _
 
-newPSR :: STFn3 Ancestry (Poll.Poll ScopeDepth) StaticRegion Global PSR
+newPSR :: STFn3 Ancestry (Poll.Poll Unit) StaticRegion Global PSR
 newPSR = mkSTFn3 \ancestry signalDisposalQueueShouldBeTriggered region -> do
   unsubs <- STArray.new
   let
-    addEffectToDisposalQueue :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
+    addEffectToDisposalQueue :: STFn1 (Effect Unit) Global Unit
     addEffectToDisposalQueue =
       mkSTFn1 \eff -> void (STArray.push eff unsubs)
 
     -- to correctly dispose, effect should be run in the reverse order of insertion
-    triggerDisposalQueueEffects :: EffectFn1 ScopeDepth Unit
-    triggerDisposalQueueEffects = mkEffectFn1 \d -> do
+    triggerDisposalQueueEffects :: Effect Unit
+    triggerDisposalQueueEffects = do
       stack <- liftST $ STArray.unsafeFreeze unsubs
       let l = Array.length stack
-      forE 0 l \i -> do
-        runEffectFn1 (unsafePartial $ Array.unsafeIndex stack (l - 1 - i)) d
+      forE 0 l \i -> (unsafePartial $ Array.unsafeIndex stack (l - 1 - i))
 
   pure
     ( PSR
@@ -383,7 +374,7 @@ newPSR = mkSTFn3 \ancestry signalDisposalQueueShouldBeTriggered region -> do
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
   pump psr (un PSR psr).signalDisposalQueueShouldBeTriggered
-    (un PSR psr).triggerDisposalQueueEffects
+    $ mkEffectFn1 \_ -> (un PSR psr).triggerDisposalQueueEffects
 
 newtype Nut =
   Nut (EffectFn2 PSR DOMInterpret Unit)
@@ -507,7 +498,7 @@ useRef a b f = Deku.do
 
 deferO :: EffectFn2 PSR (Effect Unit) Unit
 deferO = mkEffectFn2 \psr eff -> liftST
-  (runSTFn1 (un PSR psr).addEffectToDisposalQueue (mkEffectFn1 \_ -> eff))
+  (runSTFn1 (un PSR psr).addEffectToDisposalQueue eff)
 
 defer :: PSR -> Effect Unit -> Effect Unit
 defer =
@@ -625,11 +616,11 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
 
       eltRemove <- liftST Poll.create
       let
-        remove :: Poll ScopeDepth
+        remove :: Poll Unit
         remove =
           Poll.merge
-            [ const (ScopeDepth 0) <$> options.remove value
-            , const (ScopeDepth 0) <$> eltRemove.poll
+            [ options.remove value $> unit
+            , eltRemove.poll $> unit
             , (un PSR psr).signalDisposalQueueShouldBeTriggered
             ]
 
@@ -659,16 +650,15 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
 
         -- | We need explicit ordering here, if just pass the lifecycle of the parent to the child element it is not 
         -- | guarantueed that the child will dispose itself before the parent.
-        handleRemove :: EffectFn1 ScopeDepth Unit
-        handleRemove = mkEffectFn1 \depth -> do
-          whenM (not <$> liftST (ST.read eltDisposed)) do
+        handleRemove :: Effect Unit
+        handleRemove = whenM (not <$> liftST (ST.read eltDisposed)) do
             -- disable user control
             void $ liftST $ ST.write true eltDisposed
-            eltLifecycle.push depth
+            eltLifecycle.push unit
             liftST eltRegion.remove
 
       pump eltPSR sendTo handleSendTo
-      pump eltPSR (once remove) handleRemove
+      pump eltPSR (once remove) $ mkEffectFn1 \_ -> handleRemove
       runEffectFn2 nut eltPSR di
       -- enable user control
       void $ liftST $ ST.write false eltDisposed
@@ -756,16 +746,14 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         a <- liftST $ STRef.modify (add 1) aref
         scope <- liftST $ runSTFn3 newPSR
           (Ancestry.element a (un PSR psr).ancestry)
-          ( over ScopeDepth (add 1) <$>
-              (un PSR psr).signalDisposalQueueShouldBeTriggered
-          )
+          (un PSR psr).signalDisposalQueueShouldBeTriggered
           eltRegion
         runEffectFn2 nut scope di
     runEffectFn2 Event.fastForeachE nuts handleNuts
 
     let
-      handleRemove :: EffectFn1 ScopeDepth Unit
-      handleRemove = mkEffectFn1 \_ -> when
+      handleRemove :: Effect Unit
+      handleRemove = when
         (not (hasElementParent (un PSR psr).ancestry))
         do
           runEffectFn1 (un DOMInterpret di).removeElement elt
@@ -844,8 +832,8 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
 
   let
-    handleRemove :: EffectFn1 ScopeDepth Unit
-    handleRemove = mkEffectFn1 \_ -> when
+    handleRemove :: Effect  Unit
+    handleRemove = when
       (not (hasElementParent (un PSR psr).ancestry))
       do
         runEffectFn1 (un DOMInterpret di).removeText txt
@@ -945,8 +933,7 @@ portaled myAncestry buffer beam beamed bumped trackBegin trackEnd =
     void $ liftST $ ST.write region.begin trackBegin
 
     -- lifecycle handling
-    liftST $ runSTFn1 (un PSR psr).addEffectToDisposalQueue $ mkEffectFn1 \_ ->
-      (unsubBeamed *> unsubBumped)
+    liftST $ runSTFn1 (un PSR psr).addEffectToDisposalQueue (unsubBeamed *> unsubBumped)
 
     let
       restoreBuffer :: Effect Unit

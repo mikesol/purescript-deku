@@ -23,7 +23,7 @@ import Data.Set as Set
 import Data.String as String
 import Data.Traversable (traverse)
 import Data.Tuple.Nested ((/\))
-import Deku.Core (Nut(..), ScopeDepth(ScopeDepth), newPSR)
+import Deku.Core (Nut(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
 import Deku.Internal.Ancestry (Ancestry)
@@ -56,7 +56,7 @@ runInElement elt (Nut nut) = do
   region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
   scope <- liftST $ runSTFn3 newPSR Ancestry.root lifecycle region
   void $ runEffectFn2 nut scope fullDOMInterpret
-  pure $ dispose (ScopeDepth 0)
+  pure $ dispose unit
 
 doInBody :: forall i o. (Web.DOM.Element -> i -> Effect o) -> i -> Effect o
 doInBody f elt = do
@@ -133,7 +133,7 @@ ssrInElement elt (Nut nut) = do
       )
       textCache
   htmlString <- innerHTML elt
-  dispose (ScopeDepth 0)
+  dispose unit
   livePortals <- liftST $ ST.read portalsRef
   pure $
     { html: String.replace (String.Pattern "data-deku-value")
@@ -197,7 +197,7 @@ hydrateInElement { cache, livePortals } ielt (Nut nut) = do
     ( hydratingDOMInterpret portalCtrRef (Map.fromFoldable kv) textNodes
         livePortals
     )
-  pure $ dispose (ScopeDepth 0)
+  pure $ dispose unit
 
 hydrateInBody
   :: forall r
