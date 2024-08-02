@@ -51,7 +51,7 @@ element i (FakeAncestry a) = FakeAncestry
 
 dyn :: Int -> Ancestry -> Ancestry
 dyn i (RealAncestry a) = RealAncestry
-  { rep: a.rep <> "d" <> show i, lineage: Dyn i a.lineage, hasElementParent: a.hasElementParent  }
+  { rep: a.rep <> "d" <> show i, lineage: Dyn i a.lineage, hasElementParent: false }
 dyn i (FakeAncestry a) = FakeAncestry
   { rep: a.rep <> "d" <> show i  }
 

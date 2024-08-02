@@ -73,8 +73,7 @@ module Deku.Core
   , useState'
   , useStateTagged'
   , xdata
-  )
-  where
+  ) where
 
 import Prelude
 
@@ -96,7 +95,7 @@ import Data.Newtype (class Newtype, over, un)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
-import Deku.Internal.Ancestry (Ancestry)
+import Deku.Internal.Ancestry (Ancestry, hasElementParent)
 import Deku.Internal.Ancestry as Ancestry
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
 import Deku.Internal.Region (Anchor(..), Bound, Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
@@ -372,7 +371,8 @@ newPSR = mkSTFn3 \ancestry signalDisposalQueueShouldBeTriggered region -> do
 
   pure
     ( PSR
-        { signalDisposalQueueShouldBeTriggered: once signalDisposalQueueShouldBeTriggered
+        { signalDisposalQueueShouldBeTriggered: once
+            signalDisposalQueueShouldBeTriggered
         , ancestry
         , region
         , addEffectToDisposalQueue
@@ -382,7 +382,8 @@ newPSR = mkSTFn3 \ancestry signalDisposalQueueShouldBeTriggered region -> do
 
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
-  pump psr (un PSR psr).signalDisposalQueueShouldBeTriggered (un PSR psr).triggerDisposalQueueEffects
+  pump psr (un PSR psr).signalDisposalQueueShouldBeTriggered
+    (un PSR psr).triggerDisposalQueueEffects
 
 newtype Nut =
   Nut (EffectFn2 PSR DOMInterpret Unit)
@@ -755,21 +756,19 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         a <- liftST $ STRef.modify (add 1) aref
         scope <- liftST $ runSTFn3 newPSR
           (Ancestry.element a (un PSR psr).ancestry)
-          (over ScopeDepth (add 1) <$> (un PSR psr).signalDisposalQueueShouldBeTriggered)
+          ( over ScopeDepth (add 1) <$>
+              (un PSR psr).signalDisposalQueueShouldBeTriggered
+          )
           eltRegion
         runEffectFn2 nut scope di
     runEffectFn2 Event.fastForeachE nuts handleNuts
 
     let
       handleRemove :: EffectFn1 ScopeDepth Unit
-      handleRemove = mkEffectFn1 case _ of
-        ScopeDepth 0 ->
+      handleRemove = mkEffectFn1 \_ -> when
+        (not (hasElementParent (un PSR psr).ancestry))
+        do
           runEffectFn1 (un DOMInterpret di).removeElement elt
-
-        -- on higher `ScopeDepth`s we don't have to do anything, when this ancestor has been removed this will also
-        -- disappear from screen
-        _ ->
-          pure unit
 
     runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
 
@@ -846,13 +845,10 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
 
   let
     handleRemove :: EffectFn1 ScopeDepth Unit
-    handleRemove = mkEffectFn1 case _ of
-      ScopeDepth 0 ->
+    handleRemove = mkEffectFn1 \_ -> when
+      (not (hasElementParent (un PSR psr).ancestry))
+      do
         runEffectFn1 (un DOMInterpret di).removeText txt
-
-      -- like `elementify` we rely on our ancestor for removal
-      _ ->
-        pure unit
 
   liftST $ runSTFn1 (un PSR psr).addEffectToDisposalQueue handleRemove
   runEffectFn1 handleScope psr
