@@ -4,63 +4,62 @@
 -- | exception of the `Nut` type signature and, when needed, the `Nut`
 -- | type signature (for which `Nut` is an alias).
 module Deku.Core
-  ( Attribute
-  , Attribute'
-  , Cb(..)
-  , Key(..)
-  , Value(..)
-  , Namespace(..)
-  , Tag(..)
-  , ParentId(..)
-  , ChildId(..)
-  , AttrIndex(..)
-  , MakeElement
-  , SetCb
-  , SetProp
-  , UnsetAttribute
-  , AttachElement
-  , RemoveElement
-  , MakeText
-  , SetText
+  ( AttachElement
   , AttachText
-  , RemoveText
-  , BufferPortal
+  , AttrIndex(..)
+  , Attribute
+  , Attribute'
   , BeamRegion
+  , BufferPortal
+  , Cb(..)
+  , ChildId(..)
   , DOMInterpret(..)
+  , DynOptions
   , Hook
   , Hook'
+  , Key(..)
+  , MakeElement
+  , MakeText
+  , Namespace(..)
   , Nut(..)
   , PSR(..)
+  , ParentId(..)
+  , RemoveElement
+  , RemoveText
   , ScopeDepth(..)
-  , newPSR
-  , pump
-  , handleScope
+  , SetCb
+  , SetProp
+  , SetText
+  , Tag(..)
+  , UnsetAttribute
+  , Value(..)
   , attributeAtYourOwnRisk
   , callbackWithCaution
   , cb
   , cb'
-
+  , defer
+  , deferO
+  , dynOptions
   , elementify
   , fixed
+  , handleScope
+  , newPSR
+  , portal
   , prop'
+  , pump
   , text
   , text_
   , unsafeAttribute
   , unsafeUnAttribute
   , unset'
   , useDeflect
-
-  , DynOptions
-  , dynOptions
   , useDyn
   , useDynAtBeginning
   , useDynAtBeginningWith
   , useDynAtEnd
   , useDynAtEndWith
   , useDynWith
-
   , useHot
-  , useSkimmed
   , useHotRant
   , useMailboxed
   , useMailboxedS
@@ -68,15 +67,14 @@ module Deku.Core
   , useRant'
   , useRef
   , useRefST
+  , useSkimmed
   , useSplit
   , useState
   , useState'
   , useStateTagged'
-  , portal
-  , defer
-  , deferO
   , xdata
-  ) where
+  )
+  where
 
 import Prelude
 
@@ -294,7 +292,7 @@ pump'
   -> Poll a
   -> (Boolean -> EffectFn1 a Unit)
   -> Effect Unit
-pump' (PSR { defer: def }) p effF =
+pump' (PSR { addEffectToDisposalQueue }) p effF =
   go p
   where
   staticEff = effF true
@@ -303,7 +301,7 @@ pump' (PSR { defer: def }) p effF =
   handleEvent :: Event.Event a -> Effect Unit
   handleEvent y = do
     uu <- runEffectFn2 Event.subscribeO y dynamicEff
-    void $ liftST $ runSTFn1 def $ mkEffectFn1 \_ -> uu
+    void $ liftST $ runSTFn1 addEffectToDisposalQueue $ mkEffectFn1 \_ -> uu
 
   handlePoll
     :: ST.STRef Global (EffectFn1 a Unit) -> Event.Event a -> Effect Unit
@@ -311,7 +309,7 @@ pump' (PSR { defer: def }) p effF =
     uu <- runEffectFn2 Event.subscribeO y $ mkEffectFn1 \i -> do
       f <- liftST $ ST.read whichF
       runEffectFn1 f i
-    void $ liftST $ runSTFn1 def $ mkEffectFn1 \_ -> uu
+    void $ liftST $ runSTFn1 addEffectToDisposalQueue $ mkEffectFn1 \_ -> uu
 
   go :: Poll a -> Effect Unit
   go = case _ of
@@ -341,12 +339,14 @@ pump
 pump psr poll fn = pump' psr poll (const fn)
 
 newtype PSR = PSR
-  { lifecycle :: Poll.Poll ScopeDepth
-  -- used by `Nut`s to register or clear the last element of their region.
-  , region :: StaticRegion
+  {
+    -- used by `Nut`s to register or clear the last element of their region.
+    region :: StaticRegion
   -- scope
-  , defer :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
-  , dispose :: EffectFn1 ScopeDepth Unit
+  -- used by an element to signal it should be removed
+  , signalDisposalQueueShouldBeTriggered :: Poll.Poll ScopeDepth
+  , addEffectToDisposalQueue :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
+  , triggerDisposalQueueEffects :: EffectFn1 ScopeDepth Unit
   -- used to indicate when an element should never be statically rendered
   -- it may be disqualified for other reasons, but this flag trumps them all
   , ancestry :: Ancestry
@@ -355,16 +355,16 @@ newtype PSR = PSR
 derive instance Newtype PSR _
 
 newPSR :: STFn3 Ancestry (Poll.Poll ScopeDepth) StaticRegion Global PSR
-newPSR = mkSTFn3 \ancestry lifecycle region -> do
+newPSR = mkSTFn3 \ancestry signalDisposalQueueShouldBeTriggered region -> do
   unsubs <- STArray.new
   let
-    doDefer :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
-    doDefer =
+    addEffectToDisposalQueue :: STFn1 (EffectFn1 ScopeDepth Unit) Global Unit
+    addEffectToDisposalQueue =
       mkSTFn1 \eff -> void (STArray.push eff unsubs)
 
     -- to correctly dispose, effect should be run in the reverse order of insertion
-    dispose :: EffectFn1 ScopeDepth Unit
-    dispose = mkEffectFn1 \d -> do
+    triggerDisposalQueueEffects :: EffectFn1 ScopeDepth Unit
+    triggerDisposalQueueEffects = mkEffectFn1 \d -> do
       stack <- liftST $ STArray.unsafeFreeze unsubs
       let l = Array.length stack
       forE 0 l \i -> do
@@ -372,17 +372,17 @@ newPSR = mkSTFn3 \ancestry lifecycle region -> do
 
   pure
     ( PSR
-        { lifecycle: once lifecycle
+        { signalDisposalQueueShouldBeTriggered: once signalDisposalQueueShouldBeTriggered
         , ancestry
         , region
-        , defer: doDefer
-        , dispose
+        , addEffectToDisposalQueue
+        , triggerDisposalQueueEffects
         }
     )
 
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
-  pump psr (un PSR psr).lifecycle (un PSR psr).dispose
+  pump psr (un PSR psr).signalDisposalQueueShouldBeTriggered (un PSR psr).triggerDisposalQueueEffects
 
 newtype Nut =
   Nut (EffectFn2 PSR DOMInterpret Unit)
@@ -394,7 +394,7 @@ instance Semigroup Nut where
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
       emptyScope <- liftST $ runSTFn3 newPSR
         (Ancestry.fixed 0 (un PSR psr).ancestry)
-        (un PSR psr).lifecycle
+        (un PSR psr).signalDisposalQueueShouldBeTriggered
         (un PSR psr).region
 
       runEffectFn2 a emptyScope di
@@ -506,7 +506,7 @@ useRef a b f = Deku.do
 
 deferO :: EffectFn2 PSR (Effect Unit) Unit
 deferO = mkEffectFn2 \psr eff -> liftST
-  (runSTFn1 (un PSR psr).defer (mkEffectFn1 \_ -> eff))
+  (runSTFn1 (un PSR psr).addEffectToDisposalQueue (mkEffectFn1 \_ -> eff))
 
 defer :: PSR -> Effect Unit -> Effect Unit
 defer =
@@ -629,7 +629,7 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
           Poll.merge
             [ const (ScopeDepth 0) <$> options.remove value
             , const (ScopeDepth 0) <$> eltRemove.poll
-            , (un PSR psr).lifecycle
+            , (un PSR psr).signalDisposalQueueShouldBeTriggered
             ]
 
       eltLifecycle <- liftST Poll.create
@@ -680,7 +680,7 @@ fixed :: Array Nut -> Nut
 fixed nuts = Nut $ mkEffectFn2 \psr di -> do
   emptyScope <- liftST $ runSTFn3 newPSR
     (un PSR psr).ancestry
-    (un PSR psr).lifecycle
+    (un PSR psr).signalDisposalQueueShouldBeTriggered
     (un PSR psr).region
   aref <- liftST $ STRef.new (-1)
   let
@@ -755,7 +755,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
         a <- liftST $ STRef.modify (add 1) aref
         scope <- liftST $ runSTFn3 newPSR
           (Ancestry.element a (un PSR psr).ancestry)
-          (over ScopeDepth (add 1) <$> (un PSR psr).lifecycle)
+          (over ScopeDepth (add 1) <$> (un PSR psr).signalDisposalQueueShouldBeTriggered)
           eltRegion
         runEffectFn2 nut scope di
     runEffectFn2 Event.fastForeachE nuts handleNuts
@@ -773,7 +773,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
 
     runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
 
-    liftST $ runSTFn1 (un PSR psr).defer handleRemove
+    liftST $ runSTFn1 (un PSR psr).addEffectToDisposalQueue handleRemove
 
     runEffectFn1 handleScope psr
 
@@ -854,7 +854,7 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
       _ ->
         pure unit
 
-  liftST $ runSTFn1 (un PSR psr).defer handleRemove
+  liftST $ runSTFn1 (un PSR psr).addEffectToDisposalQueue handleRemove
   runEffectFn1 handleScope psr
 
 -- | Creates a `Nut` that can be attached to another part of the application. The lifetime of the `Nut` is no longer
@@ -949,7 +949,7 @@ portaled myAncestry buffer beam beamed bumped trackBegin trackEnd =
     void $ liftST $ ST.write region.begin trackBegin
 
     -- lifecycle handling
-    liftST $ runSTFn1 (un PSR psr).defer $ mkEffectFn1 \_ ->
+    liftST $ runSTFn1 (un PSR psr).addEffectToDisposalQueue $ mkEffectFn1 \_ ->
       (unsubBeamed *> unsubBumped)
 
     let
