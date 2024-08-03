@@ -36,7 +36,7 @@ const doSSRTest = (name, closure, itIs) => {
       document.getElementsByTagName(
         "html"
       )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
-      tests.runHydration(res)(myTest)();
+      const unsub = tests.runHydration(res)(myTest)();
       await myScript(false);
     });
   });

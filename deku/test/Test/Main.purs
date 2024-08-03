@@ -39,8 +39,8 @@ runTest = runInBody
 runSSR :: Nut -> Effect SSROutput
 runSSR = ssrInBody
 
-runHydration :: SSROutput -> Nut -> Effect Unit
-runHydration cache nut = void $ hydrateInBody cache nut
+runHydration :: SSROutput -> Nut -> Effect (Effect Unit)
+runHydration = hydrateInBody
 
 sanityCheck :: Nut
 sanityCheck = D.span [ DA.id_ "hello" ] [ text_ "Hello" ]
