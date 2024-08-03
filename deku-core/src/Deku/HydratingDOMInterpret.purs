@@ -67,7 +67,7 @@ hydratingDOMInterpret
       -- because SSR code will only trigger dynamic elements
       -- in case there's a dyn with pure polls that aren't optimized as being pure
       dynamicDOMInterpret: \_ -> fullDOMInterpret
-    , portalDOMInterpret: \a -> 
+    , portalDOMInterpret: \a ->
         if Set.member a renderedPortals then hydratingDOMInterpret portalRef
           renderingInfo
           textNodeCache
@@ -103,4 +103,7 @@ hydratingDOMInterpret
         i <- liftST $ STRef.modify (_ + 1) portalRef
         Tuple _ p <- I.bufferPortal
         pure $ Tuple i p
+    , initializePortalRendering: mkSTFn1 \_ -> pure unit
+    , initializeDynRendering: mkSTFn1 \_ -> pure unit
+    , initializeFixedRendering: mkSTFn1 \_ -> pure unit
     }

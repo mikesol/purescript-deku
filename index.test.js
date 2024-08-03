@@ -394,6 +394,7 @@ describe("deku", () => {
         expect($("#span0").text()).toBe("goodbye");
       })
     );
+
     doTest("sends to position correctly when elt is fixed", (f) =>
       f(tests.sendsToPositionFixed, () => {
         const $ = require("jquery");

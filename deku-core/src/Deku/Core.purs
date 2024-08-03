@@ -268,9 +268,14 @@ newtype DOMInterpret = DOMInterpret
   , markTextAsImpure :: STFn1 Ancestry Global Unit
   -- portal
   , bufferPortal :: BufferPortal
+  , initializePortalRendering :: STFn1 Ancestry Global Unit
   , markPortalAsRendered :: STFn1 Ancestry Global Unit
   -- beam
   , beamRegion :: BeamRegion
+  -- dyn
+  , initializeDynRendering :: STFn1 Ancestry Global Unit
+  -- fixed
+  , initializeFixedRendering :: STFn1 Ancestry Global Unit
   }
 
 derive instance Newtype DOMInterpret _
@@ -383,6 +388,7 @@ instance Semigroup Nut where
   append (Nut a) (Nut b) =
     -- unrolled version of `fixed`
     Nut $ mkEffectFn2 \psr di -> do
+      liftST $ runSTFn1 (un DOMInterpret di).initializeFixedRendering (un PSR psr).ancestry
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
       emptyScope <- liftST $ runSTFn3 newPSR
         (Ancestry.fixed 0 (un PSR psr).ancestry)
@@ -586,6 +592,9 @@ useDynWith
   -> DynOptions value
   -> Hook (DynControl value)
 useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
+
+  liftST $ runSTFn1 (un DOMInterpret di').initializeDynRendering (un PSR psr).ancestry
+
   Region region <- liftST $ (un StaticRegion (un PSR psr).region).region
   span <- liftST $ runSTFn2 newSpan region.begin region.bump
   let ancestry = (un PSR psr).ancestry
@@ -652,10 +661,10 @@ useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
         -- | guarantueed that the child will dispose itself before the parent.
         handleRemove :: Effect Unit
         handleRemove = whenM (not <$> liftST (ST.read eltDisposed)) do
-            -- disable user control
-            void $ liftST $ ST.write true eltDisposed
-            eltLifecycle.push unit
-            liftST eltRegion.remove
+          -- disable user control
+          void $ liftST $ ST.write true eltDisposed
+          eltLifecycle.push unit
+          liftST eltRegion.remove
 
       pump eltPSR sendTo handleSendTo
       pump eltPSR (once remove) $ mkEffectFn1 \_ -> handleRemove
@@ -674,6 +683,8 @@ fixed nuts = Nut $ mkEffectFn2 \psr di -> do
     (un PSR psr).signalDisposalQueueShouldBeTriggered
     (un PSR psr).region
   aref <- liftST $ STRef.new (-1)
+  liftST $ runSTFn1 (un DOMInterpret di).initializeFixedRendering (un PSR psr).ancestry
+
   let
     handleNuts :: EffectFn1 Nut Unit
     handleNuts = mkEffectFn1 \(Nut nut) -> do
@@ -749,6 +760,7 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
           (un PSR psr).signalDisposalQueueShouldBeTriggered
           eltRegion
         runEffectFn2 nut scope di
+
     runEffectFn2 Event.fastForeachE nuts handleNuts
 
     let
@@ -832,7 +844,7 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
   liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
 
   let
-    handleRemove :: Effect  Unit
+    handleRemove :: Effect Unit
     handleRemove = when
       (not (hasElementParent (un PSR psr).ancestry))
       do
@@ -847,6 +859,8 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
 portal :: Nut -> Hook Nut
 portal (Nut toBeam) cont = Nut $ mkEffectFn2 \psr di -> do
 
+  liftST $ runSTFn1 (un DOMInterpret di).initializePortalRendering
+    (un PSR psr).ancestry
   -- set up a StaticRegion for the portal contents and track its begin and end
   Tuple portalIx buffer' <- (un DOMInterpret di).bufferPortal
   let buffer = pure $ ParentStart buffer'
@@ -933,7 +947,8 @@ portaled myAncestry buffer beam beamed bumped trackBegin trackEnd =
     void $ liftST $ ST.write region.begin trackBegin
 
     -- lifecycle handling
-    liftST $ runSTFn1 (un PSR psr).addEffectToDisposalQueue (unsubBeamed *> unsubBumped)
+    liftST $ runSTFn1 (un PSR psr).addEffectToDisposalQueue
+      (unsubBeamed *> unsubBumped)
 
     let
       restoreBuffer :: Effect Unit

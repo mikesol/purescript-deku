@@ -29,6 +29,10 @@ fullDOMInterpret = Core.DOMInterpret
   , markTextAsImpure: mkSTFn1 \_ -> pure unit
   --
   , beamRegion: I.beamRegionEffect
+  , initializePortalRendering: mkSTFn1 \_ -> pure unit
   , markPortalAsRendered: mkSTFn1 \_ -> pure unit
   , bufferPortal: I.bufferPortal
+  --
+  , initializeDynRendering: mkSTFn1 \_ -> pure unit
+  , initializeFixedRendering: mkSTFn1 \_ -> pure unit
   }

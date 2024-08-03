@@ -7,19 +7,26 @@ module Deku.Internal.Ancestry
   , toStringRepresentationInDOM
   , unsafeFakeAncestry
   , hasElementParent
+  , unsafeCollectLineage
   , Ancestry
+  , DekuAncestry(..)
   ) where
 
 import Prelude
 
+import Data.Maybe (Maybe(..))
 import Data.String as String
 
+-- Fixed and Element track total
 data DekuAncestry
   = Element Int DekuAncestry
   | Dyn Int DekuAncestry
   | Portal Int DekuAncestry
   | Fixed Int DekuAncestry
   | Root
+
+derive instance Eq DekuAncestry
+derive instance Ord DekuAncestry
 
 data Ancestry = RealAncestry { rep :: String, lineage :: DekuAncestry, hasElementParent :: Boolean } | FakeAncestry { rep :: String }
 
@@ -43,7 +50,7 @@ hasElementParent (FakeAncestry { rep }) = String.contains (String.Pattern "e") r
 root :: Ancestry
 root = RealAncestry { rep: "", lineage: Root, hasElementParent: false }
 
-element :: Int -> Ancestry -> Ancestry
+element :: Int ->  Ancestry -> Ancestry
 element i (RealAncestry a) = RealAncestry
   { rep: a.rep <> "e" <> show i, lineage: Element i a.lineage, hasElementParent: true }
 element i (FakeAncestry a) = FakeAncestry
@@ -73,3 +80,7 @@ toStringRepresentationInDOM (FakeAncestry { rep }) = rep
 
 unsafeFakeAncestry :: String -> Ancestry
 unsafeFakeAncestry rep = FakeAncestry { rep }
+
+unsafeCollectLineage :: Ancestry -> Maybe DekuAncestry
+unsafeCollectLineage (RealAncestry { lineage }) = Just lineage
+unsafeCollectLineage (FakeAncestry _) = Nothing

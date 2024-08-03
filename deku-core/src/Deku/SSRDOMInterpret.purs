@@ -117,11 +117,14 @@ ssrDOMInterpret
   -> STRef.STRef Global SSRTextRenderingInfoCache
   -> STRef.STRef Global SSRElementRenderingInfoCache
   -> STRef.STRef Global (Set.Set Ancestry)
+  -> STRef.STRef Global (Set.Set Ancestry)
+  -> STRef.STRef Global (Set.Set Ancestry)
+  -> STRef.STRef Global (Set.Set Ancestry)
   -> Core.DOMInterpret
-ssrDOMInterpret portalRef textRenderingInfo elementRenderingInfo purePortalCache =
+ssrDOMInterpret portalRef textRenderingInfo elementRenderingInfo purePortalCache portalCache dynCache fixedCache =
   Core.DOMInterpret
     { dynamicDOMInterpret: \_ -> noOpDomInterpret
-    , portalDOMInterpret: \_ -> ssrDOMInterpret portalRef textRenderingInfo elementRenderingInfo purePortalCache
+    , portalDOMInterpret: \_ -> ssrDOMInterpret portalRef textRenderingInfo elementRenderingInfo purePortalCache portalCache dynCache fixedCache
     --
     , isBoring: const false
     , makeElement: I.makeElementEffect
@@ -154,6 +157,9 @@ ssrDOMInterpret portalRef textRenderingInfo elementRenderingInfo purePortalCache
         Tuple _ p <- I.bufferPortal
         pure $ Tuple i p
     , markPortalAsRendered: mkSTFn1 \a -> void $ STRef.modify (Set.insert a) purePortalCache
+    , initializePortalRendering: mkSTFn1 \a -> void $ STRef.modify (Set.insert a) portalCache
+    , initializeDynRendering: mkSTFn1 \a -> void $ STRef.modify (Set.insert a) dynCache
+    , initializeFixedRendering: mkSTFn1 \a -> void $ STRef.modify (Set.insert a) fixedCache
     }
 
 noOpDomInterpret
@@ -187,4 +193,7 @@ noOpDomInterpret =
     , beamRegion: mkEffectFn3 \_ _ _ -> pure unit
     , markPortalAsRendered: mkSTFn1 \_ -> pure unit
     , bufferPortal: I.bufferPortal
+    , initializePortalRendering: mkSTFn1 \_ -> pure unit
+    , initializeDynRendering: mkSTFn1 \_ -> pure unit
+    , initializeFixedRendering: mkSTFn1 \_ -> pure unit
     }
