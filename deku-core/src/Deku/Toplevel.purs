@@ -14,12 +14,11 @@ import Prelude
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as ST
 import Control.Monad.ST.Uncurried (runSTFn1, runSTFn3)
-import Control.Plus (empty)
 import Data.Bifunctor (lmap)
 import Data.Filterable (filterMap)
 import Data.FoldableWithIndex (foldlWithIndex, forWithIndex_)
 import Data.Map as Map
-import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (un)
 import Data.Set as Set
 import Data.String as String
@@ -126,34 +125,13 @@ ssrInElement elt (Nut nut) = do
     transformTextNode (Ancestry.toStringRepresentationInDOM tag) $ fromDekuText
       (un SSRTextRenderingInfo value).backingText
   let
-    cache = foldlWithIndex
-      ( \i b (SSRTextRenderingInfo { ancestry, isImpure }) -> Map.insert i
-          (SerializableSSRTextRenderingInfo { ancestry, isImpure })
-          b
-      )
-      ( foldlWithIndex
-          ( \i
-             b
-             ( SSRElementRenderingInfo
-                 { ancestry, isImpure }
-             ) -> Map.insert i
-              ( SerializableSSRElementRenderingInfo
-                  { ancestry, isImpure }
-              )
-              b
-          )
-          Map.empty
-          elementCache
-      )
-      textCache
-  let
     setMapOpPar = Set.fromFoldable
       <<< filterMap (unsafeCollectLineage >=> truncateLineageBy1)
       <<< (Set.toUnfoldable :: _ -> Array _)
     setMapOp = Set.fromFoldable
       <<< filterMap unsafeCollectLineage
       <<< (Set.toUnfoldable :: _ -> Array _)
-      --
+  --
   allParDynAncestry <- setMapOpPar <$> (liftST $ ST.read dynCacheRef)
   allParPortalAncestry <- setMapOpPar <$> (liftST $ ST.read portalCacheRef)
   allParFixedAncestry <- setMapOpPar <$> (liftST $ ST.read fixedCacheRef)
@@ -165,7 +143,7 @@ ssrInElement elt (Nut nut) = do
   let
     allDekuEltAndTextAncestries =
       foldl (\b a -> maybe b (flip Set.insert b) $ unsafeCollectLineage a)
-        Set.empty $ Map.keys cache
+        Set.empty $ Map.keys textCache <> Map.keys elementCache
     safeEntries = Set.filter
       ( hasPlainAncestry
           (allParDynAncestry <> allParPortalAncestry <> allParFixedAncestry)
@@ -202,7 +180,26 @@ ssrInElement elt (Nut nut) = do
     { html: String.replace (String.Pattern "data-deku-value")
         (String.Replacement "value")
         htmlString
-    , cache
+    , cache: foldlWithIndex
+        ( \i b (SSRTextRenderingInfo { ancestry, isImpure }) -> Map.insert i
+            (SerializableSSRTextRenderingInfo { ancestry, isImpure })
+            b
+        )
+        ( foldlWithIndex
+            ( \i
+               b
+               ( SSRElementRenderingInfo
+                   { ancestry, isImpure }
+               ) -> Map.insert i
+                ( SerializableSSRElementRenderingInfo
+                    { ancestry, isImpure }
+                )
+                b
+            )
+            Map.empty
+            elementCache
+        )
+        textCache
     , livePortals
     }
 
@@ -235,22 +232,21 @@ hydrateInElement { cache, livePortals } ielt (Nut nut) = do
         attr <- getAttribute "data-deku-ssr" elt
         case attr of
           Nothing -> throwException (error "Could not get ssr rep")
-          Just k -> pure $
-            ( Ancestry.unsafeFakeAncestry k /\ HydrationRenderingInfo
-                { isImpure: fromMaybe
-                    false
-                    do
-                      cacheValue <- Map.lookup (Ancestry.unsafeFakeAncestry k)
-                        cache
-                      case cacheValue of
+          Just k -> do
+            let serialized = Map.lookup (Ancestry.unsafeFakeAncestry k) cache
+            pure $
+              ( Ancestry.unsafeFakeAncestry k /\ HydrationRenderingInfo
+                  { isImpure: serialized # maybe
+                      false
+                      case _ of
                         SerializableSSRElementRenderingInfo
-                          { isImpure } ->
-                          pure isImpure
-                        _ -> empty
-                , isBoring: false
-                , backingElement: elt
-                }
-            )
+                          { isImpure } -> isImpure
+                        SerializableSSRTextRenderingInfo { isImpure } ->
+                          isImpure
+                  , isBoring: false
+                  , backingElement: elt
+                  }
+              )
   textNodes <-
     Map.fromFoldable <<< map (\{ k, v } -> Ancestry.unsafeFakeAncestry k /\ v)
       <$>
