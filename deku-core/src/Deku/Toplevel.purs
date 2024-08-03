@@ -15,6 +15,7 @@ import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as ST
 import Control.Monad.ST.Uncurried (runSTFn1, runSTFn3)
 import Control.Monad.Writer (lift, runWriterT, tell)
+import Data.Array as Array
 import Data.Bifunctor (lmap)
 import Data.Filterable (filterMap)
 import Data.FoldableWithIndex (forWithIndex_)
@@ -88,8 +89,8 @@ foreign import mapIdsToTextNodes
 
 type SSROutput =
   { html :: String
-  , livePortals :: Set.Set Ancestry
-  , boring :: Set.Set Ancestry
+  , livePortals :: Array Ancestry
+  , boring :: Array Ancestry
   }
 
 -- we run this over all of the entries that are _not_ super safe
@@ -237,8 +238,8 @@ ssrInElement elt (Nut nut) = do
     { html: String.replace (String.Pattern "data-deku-value")
         (String.Replacement "value")
         htmlString
-    , livePortals
-    , boring: Set.map reconstructAncestry boring
+    , livePortals: Array.fromFoldable livePortals
+    , boring:reconstructAncestry <$> Array.fromFoldable boring
     }
 
 ssrInBody
@@ -248,8 +249,8 @@ ssrInBody = doInBody ssrInElement
 
 hydrateInElement
   :: forall r
-   . { livePortals :: Set.Set Ancestry
-     , boring :: Set.Set Ancestry
+   . { livePortals :: Array Ancestry
+     , boring :: Array Ancestry
      | r
      }
   -> Web.DOM.Element
@@ -277,15 +278,15 @@ hydrateInElement { livePortals, boring } ielt (Nut nut) = do
         mapIdsToTextNodes ielt
   scope <- liftST $ runSTFn3 newPSR Ancestry.root lifecycle region
   void $ runEffectFn2 nut scope
-    ( hydratingDOMInterpret boring portalCtrRef (Map.fromFoldable kv) textNodes
-        livePortals
+    ( hydratingDOMInterpret (Set.fromFoldable boring) portalCtrRef (Map.fromFoldable kv) textNodes
+        (Set.fromFoldable livePortals)
     )
   pure $ dispose unit
 
 hydrateInBody
   :: forall r
-   . { livePortals :: Set.Set Ancestry
-     , boring :: Set.Set Ancestry
+   . { livePortals :: Array Ancestry
+     , boring :: Array Ancestry
      | r
      }
   -> Nut

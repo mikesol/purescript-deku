@@ -10,7 +10,6 @@ import Data.Filterable (compact, filter)
 import Data.Foldable (intercalate, sequence_, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
-import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Control (text, text_)
@@ -786,14 +785,14 @@ main = do
           let nut = D.div_ []
           { html, boring } <- ssrInBody nut
           boring `shouldEqual`
-            (Set.fromFoldable $ map reconstructAncestry [ Root ])
+            (map reconstructAncestry [ Root ])
           html `shouldEqual` "<div></div>"
       it "registers the root as boring in a simple case with text" $ liftEffect
         do
           let nut = D.div_ [ text_ "foo", text_ "bar", text_ "baz" ]
           { html, boring } <- ssrInBody nut
           boring `shouldEqual`
-            (Set.fromFoldable $ map reconstructAncestry [ Root ])
+            (map reconstructAncestry [ Root ])
           html `shouldEqual` "<div>foobarbaz</div>"
       it "correctly ignores un-boring part" $ liftEffect
         do
@@ -804,7 +803,7 @@ main = do
               ]
           { html, boring } <- ssrInBody nut
           boring `shouldEqual`
-            (Set.fromFoldable $ map reconstructAncestry [ Element 1 Root ])
+            (map reconstructAncestry [ Element 1 Root ])
           html `shouldEqual`
             "<div><div data-deku-ssr=\"e0\"></div><div>foobarbaz</div></div>"
       it "correctly ignores deeply nested un-boring part" $ liftEffect
@@ -816,6 +815,6 @@ main = do
               ]
           { html, boring } <- ssrInBody nut
           boring `shouldEqual`
-            (Set.fromFoldable $ map reconstructAncestry [ Element 1 Root ])
+            (map reconstructAncestry [ Element 1 Root ])
           html `shouldEqual`
             "<div><div><div><div data-deku-ssr=\"e0e0e0\"></div></div></div><div>foobarbaz</div></div>"
