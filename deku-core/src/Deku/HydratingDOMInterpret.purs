@@ -1,6 +1,5 @@
 module Deku.HydratingDOMInterpret
-  ( HydrationRenderingInfo(..)
-  , hydratingDOMInterpret
+  ( hydratingDOMInterpret
   , makeElement
   , makeText
   ) where
@@ -12,8 +11,7 @@ import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as STRef
 import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2)
 import Data.Map as Map
-import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (class Newtype, un)
+import Data.Maybe (Maybe(..))
 import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Deku.Core (MakeElement, MakeText)
@@ -25,23 +23,14 @@ import Deku.Interpret as I
 import Effect.Uncurried (mkEffectFn2, mkEffectFn3)
 import Web.DOM as Web.DOM
 
-newtype HydrationRenderingInfo = HydrationRenderingInfo
-  { isImpure :: Boolean
-  , isBoring :: Boolean
-  , backingElement :: Web.DOM.Element
-  }
-
-derive instance Newtype HydrationRenderingInfo _
-
 makeElement
-  :: Map.Map Ancestry HydrationRenderingInfo
+  :: Map.Map Ancestry Web.DOM.Element
   -> MakeElement
 makeElement renderingInfo = mkEffectFn3 \id _ _ -> do
   let ri = Map.lookup id renderingInfo
   case ri of
     Nothing -> pure $ toDekuElement unit -- force crash
-    Just (HydrationRenderingInfo value) -> pure $ toDekuElement
-      value.backingElement
+    Just value -> pure $ toDekuElement value
 
 makeText :: Map.Map Ancestry Web.DOM.Text -> MakeText
 makeText textNodeCache = mkEffectFn2 \id _ ->
@@ -50,14 +39,16 @@ makeText textNodeCache = mkEffectFn2 \id _ ->
     Just t -> pure $ toDekuText t
 
 hydratingDOMInterpret
-  :: STRef.STRef Global Int
-  -> Map.Map Ancestry HydrationRenderingInfo
+  :: Set.Set Ancestry
+  -> STRef.STRef Global Int
+  -> Map.Map Ancestry Web.DOM.Element
   -> Map.Map Ancestry Web.DOM.Text
   -> Set.Set Ancestry
   -> Core.DOMInterpret
 hydratingDOMInterpret
+  boring
   portalRef
-  renderingInfo
+  elementCache
   textNodeCache
   renderedPortals =
   Core.DOMInterpret
@@ -68,17 +59,15 @@ hydratingDOMInterpret
       -- in case there's a dyn with pure polls that aren't optimized as being pure
       dynamicDOMInterpret: \_ -> fullDOMInterpret
     , portalDOMInterpret: \a ->
-        if Set.member a renderedPortals then hydratingDOMInterpret portalRef
-          renderingInfo
+        if Set.member a renderedPortals then hydratingDOMInterpret boring
+          portalRef
+          elementCache
           textNodeCache
           renderedPortals
         else fullDOMInterpret
     --
-    , isBoring: \tag ->
-        maybe false (un HydrationRenderingInfo >>> _.isBoring) $ Map.lookup
-          tag
-          renderingInfo
-    , makeElement: makeElement renderingInfo
+    , isBoring: flip Set.member boring
+    , makeElement: makeElement elementCache
     -- attachments should never happen during hydration
     -- the dynamicDOMInterpret should always kick in
     -- when an attachment actually needs to occur

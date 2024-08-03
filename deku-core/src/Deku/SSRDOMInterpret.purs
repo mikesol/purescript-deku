@@ -18,22 +18,6 @@ import Deku.Interpret as I
 import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn3)
 import Web.DOM.Element (setAttribute)
 
-data SerializableSSRRenderingInfo
-  = SerializableSSRElementRenderingInfo
-      { ancestry :: Ancestry
-      , isImpure :: Boolean
-      , isBoring :: Boolean
-      }
-  | SerializableSSRTextRenderingInfo
-      { ancestry :: Ancestry
-      , isImpure :: Boolean
-      , isBoring :: Boolean
-      }
-
-instance Show SerializableSSRRenderingInfo where
-  show (SerializableSSRElementRenderingInfo a) = "SerializableSSRElementRenderingInfo " <> show a 
-  show (SerializableSSRTextRenderingInfo a) = "SerializableSSRTextRenderingInfo " <> show a
-
 updateRenderingInfo
   :: forall k a
    . Ord k

@@ -1,52 +1,4 @@
-module Test.Main
-  ( customHooksDoTheirThing
-  , deeplyNestedPreservesOrder
-  , disposeGetsRun
-  , dynAppearsCorrectlyAtBeginning
-  , dynAppearsCorrectlyAtEnd
-  , dynPosition
-  , elementsInCorrectOrder
-  , emptySwitches
-  , emptyTextIsSet
-  , filtersAndRefs
-  , getBoring
-  , hackyInnerHTML
-  , hotIsHot
-  , insertsAtCorrectPositions
-  , isAMonoid
-  , lotsOfSwitching
-  , main
-  , nestedInPureDyn
-  , portalsCompose
-  , pureWorks
-  , pursXWiresUp
-  , pursXWiresUp2
-  , refToHot
-  , resetBody
-  , runHydration
-  , runSSR
-  , runTest
-  , sanityCheck
-  , sendsToPosition
-  , sendsToPositionFixed
-  , simpleSwitcher
-  , slightlyLessPureSwitcher
-  , switcherWorksForCompositionalElements
-  , switchersCompose
-  , tabbedNavigationWithPursx
-  , todoMVC
-  , twoElements
-  , unsetUnsets
-  , useDispose
-  , useEffectCanBeSimulatedWithRef
-  , useHotRantWorks
-  , useHotWorks
-  , useRantWorks
-  , useRefWorks
-  , useStateWorks
-  , useStateWorks2
-  , wizardPortal
-  ) where
+module Test.Main where
 
 import Prelude
 
@@ -54,11 +6,9 @@ import Control.Alt ((<|>))
 import Control.Plus (empty)
 import Data.Array ((..))
 import Data.Array as Array
-import Data.Filterable (compact, filter, filterMap)
+import Data.Filterable (compact, filter)
 import Data.Foldable (intercalate, sequence_, traverse_)
-import Data.FoldableWithIndex (foldlWithIndex)
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Set as Set
 import Data.Tuple (Tuple(..))
@@ -71,9 +21,8 @@ import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (cycle, dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
-import Deku.Internal.Ancestry (Ancestry, DekuAncestry(..), unsafeCollectLineage)
+import Deku.Internal.Ancestry (DekuAncestry(..), reconstructAncestry)
 import Deku.Pursx (lenientPursx, pursx)
-import Deku.SSRDOMInterpret (SerializableSSRRenderingInfo(..))
 import Deku.Toplevel (SSROutput, hydrateInBody, runInBody, ssrInBody)
 import Effect (Effect)
 import Effect.Aff (launchAff_)
@@ -826,18 +775,6 @@ disposeGetsRun = Deku.do
 foreign import resetBody :: Effect Unit
 foreign import initializeJSDOM :: Effect Unit
 
-getBoring
-  :: Map.Map Ancestry SerializableSSRRenderingInfo
-  -> Set.Set DekuAncestry
-getBoring = Set.fromFoldable <<< filterMap unsafeCollectLineage
-  <<< Array.fromFoldable
-  <<< foldlWithIndex ibab Set.empty
-  where
-  ibab i b = case _ of
-    SerializableSSRElementRenderingInfo { isBoring: true } -> Set.insert i b
-    SerializableSSRTextRenderingInfo { isBoring: true } -> Set.insert i b
-    _ -> b
-
 -- From here on are some ssr tests
 main :: Effect Unit
 main = do
@@ -847,16 +784,16 @@ main = do
       it "registers the root as boring in a simple case with no text" $
         liftEffect do
           let nut = D.div_ []
-          { html, cache } <- ssrInBody nut
-          let borings = getBoring cache
-          borings `shouldEqual` Set.fromFoldable [ Root ]
+          { html, boring } <- ssrInBody nut
+          boring `shouldEqual`
+            (Set.fromFoldable $ map reconstructAncestry [ Root ])
           html `shouldEqual` "<div></div>"
       it "registers the root as boring in a simple case with text" $ liftEffect
         do
           let nut = D.div_ [ text_ "foo", text_ "bar", text_ "baz" ]
-          { html, cache } <- ssrInBody nut
-          let borings = getBoring cache
-          borings `shouldEqual` Set.fromFoldable [ Root ]
+          { html, boring } <- ssrInBody nut
+          boring `shouldEqual`
+            (Set.fromFoldable $ map reconstructAncestry [ Root ])
           html `shouldEqual` "<div>foobarbaz</div>"
       it "correctly ignores un-boring part" $ liftEffect
         do
@@ -865,9 +802,9 @@ main = do
               [ D.div_ [ fixed [] ]
               , D.div_ [ text_ "foo", text_ "bar", text_ "baz" ]
               ]
-          { html, cache } <- ssrInBody nut
-          let borings = getBoring cache
-          borings `shouldEqual` Set.fromFoldable [ Element 1 Root ]
+          { html, boring } <- ssrInBody nut
+          boring `shouldEqual`
+            (Set.fromFoldable $ map reconstructAncestry [ Element 1 Root ])
           html `shouldEqual`
             "<div><div data-deku-ssr=\"e0\"></div><div>foobarbaz</div></div>"
       it "correctly ignores deeply nested un-boring part" $ liftEffect
@@ -877,8 +814,8 @@ main = do
               [ D.div_ [ D.div_ [ D.div_ [ fixed [] ] ] ]
               , D.div_ [ text_ "foo", text_ "bar", text_ "baz" ]
               ]
-          { html, cache } <- ssrInBody nut
-          let borings = getBoring cache
-          borings `shouldEqual` Set.fromFoldable [ Element 1 Root ]
+          { html, boring } <- ssrInBody nut
+          boring `shouldEqual`
+            (Set.fromFoldable $ map reconstructAncestry [ Element 1 Root ])
           html `shouldEqual`
             "<div><div><div><div data-deku-ssr=\"e0e0e0\"></div></div></div><div>foobarbaz</div></div>"

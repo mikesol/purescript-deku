@@ -17,7 +17,7 @@ import Control.Monad.ST.Uncurried (runSTFn1, runSTFn3)
 import Control.Monad.Writer (lift, runWriterT, tell)
 import Data.Bifunctor (lmap)
 import Data.Filterable (filterMap)
-import Data.FoldableWithIndex (foldlWithIndex, forWithIndex_)
+import Data.FoldableWithIndex (forWithIndex_)
 import Data.Map as Map
 import Data.Map.Internal (Map(..))
 import Data.Maybe (Maybe(..), maybe)
@@ -29,13 +29,13 @@ import Data.Tuple (Tuple(..), swap)
 import Data.Tuple.Nested ((/\))
 import Deku.Core (Nut(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
-import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
-import Deku.Internal.Ancestry (Ancestry, DekuAncestry(..), unsafeCollectLineage)
+import Deku.HydratingDOMInterpret (hydratingDOMInterpret)
+import Deku.Internal.Ancestry (Ancestry, DekuAncestry(..), reconstructAncestry, unsafeCollectLineage)
 import Deku.Internal.Ancestry as Ancestry
 import Deku.Internal.Entities (DekuParent(..), fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Internal.Region as Region
 import Deku.SSR.Optimize (hasPlainAncestry, truncateLineageBy1)
-import Deku.SSRDOMInterpret (SSRElementRenderingInfo(..), SSRTextRenderingInfo(..), SerializableSSRRenderingInfo(..), ssrDOMInterpret)
+import Deku.SSRDOMInterpret (SSRElementRenderingInfo(..), SSRTextRenderingInfo(..), ssrDOMInterpret)
 import Effect (Effect)
 import Effect.Exception (error, throwException)
 import Effect.Uncurried (runEffectFn2)
@@ -88,8 +88,8 @@ foreign import mapIdsToTextNodes
 
 type SSROutput =
   { html :: String
-  , cache :: Map.Map Ancestry SerializableSSRRenderingInfo
   , livePortals :: Set.Set Ancestry
+  , boring :: Set.Set Ancestry
   }
 
 -- we run this over all of the entries that are _not_ super safe
@@ -225,7 +225,7 @@ ssrInElement elt (Nut nut) = do
           )
       )
       superSafeEntries
-    booooring = Set.filter
+    boring = Set.filter
       ( maybe true (not $ flip Set.member superDuperSafeEntries) <<<
           truncateLineageBy1
       )
@@ -237,37 +237,8 @@ ssrInElement elt (Nut nut) = do
     { html: String.replace (String.Pattern "data-deku-value")
         (String.Replacement "value")
         htmlString
-    , cache: foldlWithIndex
-        ( \i b (SSRTextRenderingInfo { ancestry, isImpure }) -> Map.insert i
-            ( SerializableSSRTextRenderingInfo
-                { ancestry
-                , isImpure
-                , isBoring: unsafeCollectLineage ancestry # maybe false
-                    (flip Set.member booooring)
-                }
-            )
-            b
-        )
-        ( foldlWithIndex
-            ( \i
-               b
-               ( SSRElementRenderingInfo
-                   { ancestry, isImpure }
-               ) -> Map.insert i
-                ( SerializableSSRElementRenderingInfo
-                    { ancestry
-                    , isImpure
-                    , isBoring: unsafeCollectLineage ancestry # maybe false
-                        (flip Set.member booooring)
-                    }
-                )
-                b
-            )
-            Map.empty
-            elementCache
-        )
-        textCache
     , livePortals
+    , boring: Set.map reconstructAncestry boring
     }
 
 ssrInBody
@@ -277,14 +248,14 @@ ssrInBody = doInBody ssrInElement
 
 hydrateInElement
   :: forall r
-   . { cache :: Map.Map Ancestry SerializableSSRRenderingInfo
-     , livePortals :: Set.Set Ancestry
+   . { livePortals :: Set.Set Ancestry
+     , boring :: Set.Set Ancestry
      | r
      }
   -> Web.DOM.Element
   -> Nut
   -> Effect (Effect Unit)
-hydrateInElement { cache, livePortals } ielt (Nut nut) = do
+hydrateInElement { livePortals, boring } ielt (Nut nut) = do
   { poll: lifecycle, push: dispose } <- liftST create
   portalCtrRef <- liftST $ ST.new (-1)
   region <- liftST $ runSTFn1 Region.fromParent
@@ -299,42 +270,22 @@ hydrateInElement { cache, livePortals } ielt (Nut nut) = do
         attr <- getAttribute "data-deku-ssr" elt
         case attr of
           Nothing -> throwException (error "Could not get ssr rep")
-          Just k -> do
-            let serialized = Map.lookup (Ancestry.unsafeFakeAncestry k) cache
-            pure $
-              ( Ancestry.unsafeFakeAncestry k /\ HydrationRenderingInfo
-                  { isImpure: serialized # maybe
-                      false
-                      case _ of
-                        SerializableSSRElementRenderingInfo
-                          { isImpure } -> isImpure
-                        SerializableSSRTextRenderingInfo { isImpure } ->
-                          isImpure
-                  , isBoring: serialized # maybe
-                      false
-                      case _ of
-                        SerializableSSRElementRenderingInfo
-                          { isBoring } -> isBoring
-                        SerializableSSRTextRenderingInfo { isBoring } ->
-                          isBoring
-                  , backingElement: elt
-                  }
-              )
+          Just k -> pure $ Tuple (Ancestry.unsafeFakeAncestry k) elt
   textNodes <-
     Map.fromFoldable <<< map (\{ k, v } -> Ancestry.unsafeFakeAncestry k /\ v)
       <$>
         mapIdsToTextNodes ielt
   scope <- liftST $ runSTFn3 newPSR Ancestry.root lifecycle region
   void $ runEffectFn2 nut scope
-    ( hydratingDOMInterpret portalCtrRef (Map.fromFoldable kv) textNodes
+    ( hydratingDOMInterpret boring portalCtrRef (Map.fromFoldable kv) textNodes
         livePortals
     )
   pure $ dispose unit
 
 hydrateInBody
   :: forall r
-   . { cache :: Map.Map Ancestry SerializableSSRRenderingInfo
-     , livePortals :: Set.Set Ancestry
+   . { livePortals :: Set.Set Ancestry
+     , boring :: Set.Set Ancestry
      | r
      }
   -> Nut
