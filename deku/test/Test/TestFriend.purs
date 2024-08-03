@@ -1,6 +1,5 @@
 module Test.TestFriend where
 
-
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Ref (Ref, new)

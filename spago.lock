@@ -182,6 +182,7 @@ workspace:
         - identity
         - integers
         - invariant
+        - js-bigints
         - js-date
         - js-timers
         - lazy
@@ -234,6 +235,8 @@ workspace:
         - web-storage
         - web-touchevents
         - web-uievents
+        - yoga-json
+        - yoga-tree
     deku-core:
       path: deku-core
       dependencies:
@@ -272,6 +275,7 @@ workspace:
         - web-events
         - web-html
         - web-uievents
+        - yoga-json
       test_dependencies: []
       build_plan:
         - aff
@@ -306,6 +310,7 @@ workspace:
         - identity
         - integers
         - invariant
+        - js-bigints
         - js-date
         - js-timers
         - lazy
@@ -351,6 +356,8 @@ workspace:
         - web-html
         - web-storage
         - web-uievents
+        - yoga-json
+        - yoga-tree
     deku-css:
       path: deku-css
       dependencies:
@@ -394,6 +401,7 @@ workspace:
         - identity
         - integers
         - invariant
+        - js-bigints
         - js-date
         - js-timers
         - lazy
@@ -441,6 +449,8 @@ workspace:
         - web-html
         - web-storage
         - web-uievents
+        - yoga-json
+        - yoga-tree
     deku-dom:
       path: deku-dom
       dependencies:
@@ -485,6 +495,7 @@ workspace:
         - identity
         - integers
         - invariant
+        - js-bigints
         - js-date
         - js-timers
         - lazy
@@ -532,6 +543,8 @@ workspace:
         - web-storage
         - web-touchevents
         - web-uievents
+        - yoga-json
+        - yoga-tree
   package_set:
     address:
       registry: 56.4.0
@@ -1671,6 +1684,14 @@ packages:
     dependencies:
       - control
       - prelude
+  js-bigints:
+    type: registry
+    version: 2.2.1
+    integrity: sha256-hKWZo9NxtsAaHmNXr6B8GY4c0olQbYLXPVGWm4TF2Ss=
+    dependencies:
+      - integers
+      - maybe
+      - prelude
   js-date:
     type: registry
     version: 8.0.0
@@ -2501,3 +2522,51 @@ packages:
     integrity: sha256-5I+ut9JYno3wowti3vJGs1afKCm1ucppKuy+zhuSyss=
     dependencies:
       - web-html
+  yoga-json:
+    type: registry
+    version: 5.1.0
+    integrity: sha256-ei/fyvrh8fGgcqGrdRQ7+r6dwSYcfEGOFf5yKc1g7oE=
+    dependencies:
+      - arrays
+      - bifunctors
+      - control
+      - datetime
+      - effect
+      - either
+      - exceptions
+      - foldable-traversable
+      - foreign
+      - foreign-object
+      - free
+      - identity
+      - integers
+      - js-bigints
+      - js-date
+      - lists
+      - maybe
+      - newtype
+      - nullable
+      - numbers
+      - ordered-collections
+      - partial
+      - prelude
+      - record
+      - strings
+      - transformers
+      - tuples
+      - typelevel-prelude
+      - unsafe-coerce
+      - variant
+      - yoga-tree
+  yoga-tree:
+    type: registry
+    version: 1.0.0
+    integrity: sha256-wBjfEYrX1ffTHa/mE9B26C6td0FFfjYNnysTJ9/N8Hc=
+    dependencies:
+      - arrays
+      - control
+      - foldable-traversable
+      - free
+      - maybe
+      - prelude
+      - tailrec

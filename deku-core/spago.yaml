@@ -36,3 +36,4 @@ package:
     - web-events
     - web-html
     - web-uievents
+    - yoga-json

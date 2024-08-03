@@ -15,8 +15,13 @@ module Deku.Internal.Ancestry
 
 import Prelude
 
+import Control.Monad.Except (except)
+import Data.Either (Either(..), either)
+import Data.List.NonEmpty (singleton)
 import Data.Maybe (Maybe(..))
 import Data.String as String
+import Foreign (ForeignError(..))
+import Yoga.JSON as Yoga
 
 -- Fixed and Element track total
 data DekuAncestry
@@ -25,6 +30,42 @@ data DekuAncestry
   | Portal Int DekuAncestry
   | Fixed Int DekuAncestry
   | Root
+
+newtype AncestryHelperType = AncestryHelperType { t :: String }
+newtype AncestryHelperIA = AncestryHelperIA { i :: Int, a :: DekuAncestry }
+
+derive newtype instance Yoga.ReadForeign AncestryHelperType
+derive newtype instance Yoga.WriteForeign AncestryHelperType
+derive newtype instance Yoga.ReadForeign AncestryHelperIA
+derive newtype instance Yoga.WriteForeign AncestryHelperIA
+
+instance Yoga.ReadForeign DekuAncestry where
+  readImpl x = do
+    AncestryHelperType { t } <- Yoga.readImpl x
+    case t of
+      "Element" -> do
+        AncestryHelperIA { i, a } <- Yoga.readImpl x
+        pure $ Element i a
+      "Dyn" -> do
+        AncestryHelperIA { i, a } <- Yoga.readImpl x
+        pure $ Dyn i a
+      "Portal" -> do
+        AncestryHelperIA { i, a } <- Yoga.readImpl x
+        pure $ Portal i a
+      "Fixed" -> do
+        AncestryHelperIA { i, a } <- Yoga.readImpl x
+        pure $ Fixed i a
+      "Root" -> pure Root
+      _ -> except $ Left
+        (singleton $ ForeignError ("Unknown DekuAncestry type: " <> t))
+
+instance Yoga.WriteForeign DekuAncestry where
+  writeImpl = case _ of
+    Element i a -> Yoga.writeImpl { i, a, t: "Element" }
+    Dyn i a -> Yoga.writeImpl { i, a, t: "Dyn" }
+    Portal i a -> Yoga.writeImpl { i, a, t: "Portal" }
+    Fixed i a -> Yoga.writeImpl { i, a, t: "Fixed" }
+    Root -> Yoga.writeImpl { t: "Root" }
 
 instance Show DekuAncestry where
   show (Element i a) = "Element " <> show i <> " " <> show a
@@ -40,6 +81,15 @@ data Ancestry
   = RealAncestry
       { rep :: String, lineage :: DekuAncestry, hasElementParent :: Boolean }
   | FakeAncestry { rep :: String }
+
+instance Yoga.ReadForeign Ancestry where
+  readImpl = map (either RealAncestry FakeAncestry) <<< Yoga.readImpl
+
+instance Yoga.WriteForeign Ancestry where
+  writeImpl = toEither >>> Yoga.writeImpl
+    where
+    toEither (RealAncestry a) = Left a
+    toEither (FakeAncestry a) = Right a
 
 instance Eq Ancestry where
   eq (RealAncestry a) (RealAncestry b) = a.rep == b.rep
@@ -59,6 +109,8 @@ instance Show Ancestry where
 
 hasElementParent :: Ancestry -> Boolean
 hasElementParent (RealAncestry a) = a.hasElementParent
+-- todo: this is not correct, as a dyn would cancel this
+-- not currently used, but fix it eventually
 hasElementParent (FakeAncestry { rep }) = String.contains (String.Pattern "e")
   rep
 

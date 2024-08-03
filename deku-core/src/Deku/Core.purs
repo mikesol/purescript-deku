@@ -388,7 +388,8 @@ instance Semigroup Nut where
   append (Nut a) (Nut b) =
     -- unrolled version of `fixed`
     Nut $ mkEffectFn2 \psr di -> do
-      liftST $ runSTFn1 (un DOMInterpret di).initializeFixedRendering (un PSR psr).ancestry
+      liftST $ runSTFn1 (un DOMInterpret di).initializeFixedRendering
+        (un PSR psr).ancestry
       -- first `Nut` should not handle any unsubs, they may still be needed for later elements
       emptyScope <- liftST $ runSTFn3 newPSR
         (Ancestry.fixed 0 (un PSR psr).ancestry)
@@ -593,7 +594,8 @@ useDynWith
   -> Hook (DynControl value)
 useDynWith elements options cont = Nut $ mkEffectFn2 \psr di' -> do
 
-  liftST $ runSTFn1 (un DOMInterpret di').initializeDynRendering (un PSR psr).ancestry
+  liftST $ runSTFn1 (un DOMInterpret di').initializeDynRendering
+    (un PSR psr).ancestry
 
   Region region <- liftST $ (un StaticRegion (un PSR psr).region).region
   span <- liftST $ runSTFn2 newSpan region.begin region.bump
@@ -683,7 +685,8 @@ fixed nuts = Nut $ mkEffectFn2 \psr di -> do
     (un PSR psr).signalDisposalQueueShouldBeTriggered
     (un PSR psr).region
   aref <- liftST $ STRef.new (-1)
-  liftST $ runSTFn1 (un DOMInterpret di).initializeFixedRendering (un PSR psr).ancestry
+  liftST $ runSTFn1 (un DOMInterpret di).initializeFixedRendering
+    (un PSR psr).ancestry
 
   let
     handleNuts :: EffectFn1 Nut Unit
