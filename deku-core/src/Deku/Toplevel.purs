@@ -14,21 +14,23 @@ import Prelude
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as ST
 import Control.Monad.ST.Uncurried (runSTFn1, runSTFn3)
+import Control.Monad.Writer (lift, runWriterT, tell)
 import Data.Bifunctor (lmap)
 import Data.Filterable (filterMap)
 import Data.FoldableWithIndex (foldlWithIndex, forWithIndex_)
 import Data.Map as Map
+import Data.Map.Internal (Map(..))
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (un)
 import Data.Set as Set
 import Data.String as String
 import Data.Traversable (foldl, for_, sequence, traverse)
-import Data.Tuple (swap)
+import Data.Tuple (Tuple(..), swap)
 import Data.Tuple.Nested ((/\))
 import Deku.Core (Nut(..), newPSR)
 import Deku.FullDOMInterpret (fullDOMInterpret)
 import Deku.HydratingDOMInterpret (HydrationRenderingInfo(..), hydratingDOMInterpret)
-import Deku.Internal.Ancestry (Ancestry, unsafeCollectLineage)
+import Deku.Internal.Ancestry (Ancestry, DekuAncestry(..), unsafeCollectLineage)
 import Deku.Internal.Ancestry as Ancestry
 import Deku.Internal.Entities (DekuParent(..), fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Internal.Region as Region
@@ -90,6 +92,41 @@ type SSROutput =
   , livePortals :: Set.Set Ancestry
   }
 
+-- we run this over all of the entries that are _not_ super safe
+-- in order to be super-duper safe, something can't be an ancestor of
+-- something that's unsafe, even if _it_ is safe
+-- for example, there could be a D.div that is completely safe but
+-- deep down in the tree in contains a dyn
+-- this will mark it as unsafe
+ancestryNotPresentIn :: DekuAncestry -> Set.Set DekuAncestry -> Boolean
+ancestryNotPresentIn needle haystack = any (Set.toMap haystack)
+  where
+  ff (Element i a) (Element j b)
+    | i == j = ff a b
+    | otherwise = false
+  ff (Fixed i a) (Fixed j b)
+    | i == j = ff a b
+    | otherwise = false
+  ff (Portal i a) (Portal j b)
+    | i == j = ff a b
+    | otherwise = false
+  ff (Dyn i a) (Dyn j b)
+    | i == j = ff a b
+    | otherwise = false
+  ff Root Root = true
+  ff _ _ = false
+  -- f returns true if the ancestry is present and false otherwise
+  f a@(Element _ r) = ff needle a || f r
+  f a@(Fixed _ r) = ff needle a || f r
+  f a@(Dyn _ r) = ff needle a || f r
+  f a@(Portal _ r) = ff needle a || f r
+  f Root = ff needle Root
+  any = case _ of
+    Leaf -> true
+    -- f guarantees that the ancestry is not present
+    -- so if it is false, it terminates early
+    Node _ _ mk _ ml mr -> not f mk && any ml && any mr
+
 ssrInElement
   :: Web.DOM.Element
   -> Nut
@@ -141,13 +178,14 @@ ssrInElement elt (Nut nut) = do
   allFixedAncestry <- setMapOp <$> (liftST $ ST.read fixedCacheRef)
   --
   let
+    allDynamicEntries = allDynAncestry <> allPortalAncestry <> allFixedAncestry
     allDekuEltAndTextAncestries =
       foldl (\b a -> maybe b (flip Set.insert b) $ unsafeCollectLineage a)
         Set.empty $ Map.keys textCache <> Map.keys elementCache
     safeEntries = Set.filter
       ( hasPlainAncestry
           (allParDynAncestry <> allParPortalAncestry <> allParFixedAncestry)
-          (allDynAncestry <> allPortalAncestry <> allFixedAncestry)
+          allDynamicEntries
       )
       allDekuEltAndTextAncestries
     elementCache' = Map.fromFoldable $ filterMap
@@ -156,23 +194,42 @@ ssrInElement elt (Nut nut) = do
     textCache' = Map.fromFoldable $ filterMap
       (lmap unsafeCollectLineage >>> swap >>> sequence >>> map swap)
       (Map.toUnfoldable textCache :: Array _)
-  for_ safeEntries \se -> do
-    for_ (Map.lookup se elementCache')
-      \(SSRElementRenderingInfo { isImpure, backingElement }) ->
-        when (not isImpure) do
-          removeAttribute "data-deku-ssr" $ fromDekuElement backingElement
-    for_ (Map.lookup se textCache')
-      \(SSRTextRenderingInfo { backingText, isImpure }) ->
-        when (not isImpure) do
-          let tn = Text.toNode $ fromDekuText backingText
-          prevComment <- previousSibling tn
-          nextComment <- nextSibling tn
-          for_ prevComment \pc ->
-            for_ nextComment \nc -> do
-              par <- parentNode pc
-              for_ par \p -> do
-                removeChild pc p
-                removeChild nc p
+  Tuple _ superSafeEntries <- map (map Set.fromFoldable) $ runWriterT $ for_
+    safeEntries
+    \se -> do
+      for_ (Map.lookup se elementCache')
+        \(SSRElementRenderingInfo { isImpure, backingElement }) ->
+          when (not isImpure) do
+            tell [ se ]
+            lift do
+              removeAttribute "data-deku-ssr" $ fromDekuElement backingElement
+      for_ (Map.lookup se textCache')
+        \(SSRTextRenderingInfo { backingText, isImpure }) ->
+          when (not isImpure) do
+            tell [ se ]
+            lift do
+              let tn = Text.toNode $ fromDekuText backingText
+              prevComment <- previousSibling tn
+              nextComment <- nextSibling tn
+              for_ prevComment \pc ->
+                for_ nextComment \nc -> do
+                  par <- parentNode pc
+                  for_ par \p -> do
+                    removeChild pc p
+                    removeChild nc p
+  let
+    superDuperSafeEntries = Set.filter
+      ( flip ancestryNotPresentIn
+          ( Set.difference (allDekuEltAndTextAncestries <> allDynamicEntries)
+              superSafeEntries
+          )
+      )
+      superSafeEntries
+    booooring = Set.filter
+      ( maybe true (not $ flip Set.member superDuperSafeEntries) <<<
+          truncateLineageBy1
+      )
+      superDuperSafeEntries
   htmlString <- innerHTML elt
   dispose unit
   livePortals <- liftST $ ST.read purePortalsRef
@@ -182,7 +239,13 @@ ssrInElement elt (Nut nut) = do
         htmlString
     , cache: foldlWithIndex
         ( \i b (SSRTextRenderingInfo { ancestry, isImpure }) -> Map.insert i
-            (SerializableSSRTextRenderingInfo { ancestry, isImpure })
+            ( SerializableSSRTextRenderingInfo
+                { ancestry
+                , isImpure
+                , isBoring: unsafeCollectLineage ancestry # maybe false
+                    (flip Set.member booooring)
+                }
+            )
             b
         )
         ( foldlWithIndex
@@ -192,7 +255,11 @@ ssrInElement elt (Nut nut) = do
                    { ancestry, isImpure }
                ) -> Map.insert i
                 ( SerializableSSRElementRenderingInfo
-                    { ancestry, isImpure }
+                    { ancestry
+                    , isImpure
+                    , isBoring: unsafeCollectLineage ancestry # maybe false
+                        (flip Set.member booooring)
+                    }
                 )
                 b
             )
@@ -243,7 +310,13 @@ hydrateInElement { cache, livePortals } ielt (Nut nut) = do
                           { isImpure } -> isImpure
                         SerializableSSRTextRenderingInfo { isImpure } ->
                           isImpure
-                  , isBoring: false
+                  , isBoring: serialized # maybe
+                      false
+                      case _ of
+                        SerializableSSRElementRenderingInfo
+                          { isBoring } -> isBoring
+                        SerializableSSRTextRenderingInfo { isBoring } ->
+                          isBoring
                   , backingElement: elt
                   }
               )

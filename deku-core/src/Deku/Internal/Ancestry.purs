@@ -25,6 +25,13 @@ data DekuAncestry
   | Fixed Int DekuAncestry
   | Root
 
+instance Show DekuAncestry where
+  show (Element i a) = "Element " <> show i <> " " <> show a
+  show (Dyn i a) = "Dyn " <> show i <> " " <> show a
+  show (Portal i a) = "Portal " <> show i <> " " <> show a
+  show (Fixed i a) = "Fixed " <> show i <> " " <> show a
+  show Root = "Root"
+
 derive instance Eq DekuAncestry
 derive instance Ord DekuAncestry
 
@@ -42,6 +49,9 @@ instance Ord Ancestry where
   compare (RealAncestry a) (FakeAncestry b) = compare a.rep b.rep
   compare (FakeAncestry a) (RealAncestry b) = compare a.rep b.rep
 
+instance Show Ancestry where
+  show (RealAncestry a) = "RealAncestry " <> show a
+  show (FakeAncestry a) = "FakeAncestry " <> show a
 
 hasElementParent :: Ancestry -> Boolean
 hasElementParent (RealAncestry a) = a.hasElementParent

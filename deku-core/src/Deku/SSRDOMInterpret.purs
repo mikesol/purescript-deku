@@ -22,11 +22,17 @@ data SerializableSSRRenderingInfo
   = SerializableSSRElementRenderingInfo
       { ancestry :: Ancestry
       , isImpure :: Boolean
+      , isBoring :: Boolean
       }
   | SerializableSSRTextRenderingInfo
       { ancestry :: Ancestry
       , isImpure :: Boolean
+      , isBoring :: Boolean
       }
+
+instance Show SerializableSSRRenderingInfo where
+  show (SerializableSSRElementRenderingInfo a) = "SerializableSSRElementRenderingInfo " <> show a 
+  show (SerializableSSRTextRenderingInfo a) = "SerializableSSRTextRenderingInfo " <> show a
 
 updateRenderingInfo
   :: forall k a

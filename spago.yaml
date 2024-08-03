@@ -1,6 +1,6 @@
 workspace:
   packageSet:
-    registry: 31.0.0
+    registry: 56.4.0
   # backend:
   #   cmd: purs-backend-es
   #   args:
@@ -32,6 +32,42 @@ workspace:
         - language-cst-parser
         - strings
         - tuples
+    dodo-printer:
+      repo: "https://github.com/natefaubion/purescript-dodo-printer"
+      version: "master"
+      dependencies:
+        - aff
+        - ansi
+        - arrays
+        - avar
+        - console
+        - "ansi"
+        - "arrays"
+        - "avar"
+        - "console"
+        - "control"
+        - "effect"
+        - "either"
+        - "exceptions"
+        - "foldable-traversable"
+        - "integers"
+        - "lists"
+        - "maybe"
+        - "minibench"
+        - "newtype"
+        - "node-buffer"
+        - "node-child-process"
+        - "node-fs"
+        - "node-os"
+        - "node-path"
+        - "node-process"
+        - "node-streams"
+        - "parallel"
+        - "partial"
+        - "prelude"
+        - "safe-coerce"
+        - "strings"
+        - "tuples"
     tidy-codegen:
       repo: "https://github.com/natefaubion/purescript-tidy-codegen"
       version: "main"
@@ -60,7 +96,7 @@ workspace:
         - newtype
         - node-buffer
         - node-child-process
-        - node-fs-aff
+        - node-fs
         - node-path
         - node-process
         - node-streams

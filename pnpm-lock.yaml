@@ -45,6 +45,9 @@ importers:
       jsdom:
         specifier: ^22.1.0
         version: 22.1.0
+      jsdom-global:
+        specifier: ^3.0.2
+        version: 3.0.2(jsdom@22.1.0)
       netlify-cli:
         specifier: ^8.0.1
         version: 8.19.3(@types/babel__core@7.20.0)(@types/express@4.17.13)(acorn@8.10.0)(encoding@0.1.13)
@@ -3873,6 +3876,11 @@ packages:
 
   jsbn@1.1.0:
     resolution: {integrity: sha512-4bYVV3aAMtDTTu4+xsDYa6sy9GyJ69/amsu9sYF2zqjiEoZA5xJi3BrfX3uY+/IekIu7MwdObdbDWpoZdBv3/A==}
+
+  jsdom-global@3.0.2:
+    resolution: {integrity: sha512-t1KMcBkz/pT5JrvcJbpUR2u/w1kO9jXctaaGJ0vZDzwFnIvGWw9IDSRciT83kIs8Bnw4qpOl8bQK08V01YgMPg==}
+    peerDependencies:
+      jsdom: '>=10.0.0'
 
   jsdom@20.0.3:
     resolution: {integrity: sha512-SYhBvTh89tTfCD/CRdSOm13mOBa42iTaTyfyEWBdKcGdPxPtLFBXuHR8XHb33YNYaP+lLbmSvBTsnoesCNJEsQ==}
@@ -11853,6 +11861,10 @@ snapshots:
       argparse: 2.0.1
 
   jsbn@1.1.0: {}
+
+  jsdom-global@3.0.2(jsdom@22.1.0):
+    dependencies:
+      jsdom: 22.1.0
 
   jsdom@20.0.3:
     dependencies:
