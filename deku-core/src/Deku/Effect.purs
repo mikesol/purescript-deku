@@ -4,6 +4,7 @@
 -- | syntax in a `do` as you would in a Deku.do block.
 module Deku.Effect
   ( useHot
+  , useMailboxed'
   , useMailboxed
   , useRant
   , useState'
@@ -14,11 +15,12 @@ module Deku.Effect
 
 import Prelude
 
-import Control.Alt ((<|>))
+import Control.Alt (alt, (<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as STRef
+import Control.Plus (empty)
 import Data.Tuple.Nested (type (/\), (/\))
 import Effect (Effect)
 import FRP.Event as Event
@@ -84,10 +86,24 @@ useRefST a e = do
 -- | given an address, at which point they listen for a payload. This is useful when listening to
 -- | large domains like updates of single items over large lists. It runs in _O(log n)_ time.
 -- | For example usage, see [`useMailboxed`](https://purescript-deku.netlify.app/core-concepts/more-hooks#use-mailboxed) in the Deku guide.
-useMailboxed
+useMailboxed'
   :: forall a b
    . Ord a
   => Effect (({ address :: a, payload :: b } -> Effect Unit) /\ (a -> Poll b))
-useMailboxed = do
+useMailboxed' = do
   { poll, push } <- liftST $ Poll.mailbox
   pure (push /\ poll)
+
+useMailboxed
+  :: forall a b
+   . Ord a
+  => { address :: a, payload :: b }
+  -> Effect (({ address :: a, payload :: b } -> Effect Unit) /\ (a -> Poll b))
+useMailboxed i = do
+  { poll, push } <- liftST $ Poll.mailbox
+  pure
+    ( push /\
+        ( alt <$> (eq i.address >>> if _ then pure i.payload else empty) <*>
+            poll
+        )
+    )

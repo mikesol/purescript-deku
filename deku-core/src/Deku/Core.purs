@@ -61,7 +61,9 @@ module Deku.Core
   , useHot
   , useHotRant
   , useMailboxed
+  , useMailboxed'
   , useMailboxedS
+  , useMailboxedS'
   , useRant
   , useRant'
   , useRef
@@ -76,7 +78,7 @@ module Deku.Core
 
 import Prelude
 
-import Control.Alt ((<|>))
+import Control.Alt (alt, (<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
@@ -432,23 +434,58 @@ useHotRant e f = Deku.do
   -- we `once e` in case it has an initial value
   f $ compact (Poll.stToPoll r <|> (Just <$> p))
 
-useMailboxed
+useMailboxed'
   :: forall a b
    . Ord a
   => Hook (({ address :: a, payload :: b } -> Effect Unit) /\ (a -> Poll b))
-useMailboxed f = Nut $ mkEffectFn2 \psr di -> do
+useMailboxed' f = Nut $ mkEffectFn2 \psr di -> do
   { poll, push } <- liftST $ Poll.mailbox
   runEffectFn2 (coerce $ f (push /\ poll)) psr di
 
-useMailboxedS
+useMailboxed
+  :: forall a b
+   . Ord a
+  => { address :: a, payload :: b }
+  -> Hook (({ address :: a, payload :: b } -> Effect Unit) /\ (a -> Poll b))
+useMailboxed i f = Nut $ mkEffectFn2 \psr di -> do
+  { poll, push } <- liftST $ Poll.mailbox
+  runEffectFn2
+    ( coerce $ f
+        ( push /\
+            ( alt <$> (eq i.address >>> if _ then pure i.payload else empty) <*>
+                poll
+            )
+        )
+    )
+    psr
+    di
+
+useMailboxedS'
   :: forall b
    . Hook
        ( ({ address :: String, payload :: b } -> Effect Unit) /\
            (String -> Poll b)
        )
-useMailboxedS f = Nut $ mkEffectFn2 \psr di -> do
+useMailboxedS' f = Nut $ mkEffectFn2 \psr di -> do
   { poll, push } <- liftST $ Poll.mailboxS
   runEffectFn2 (coerce $ f (push /\ poll)) psr di
+
+useMailboxedS
+  :: forall b
+   . { address :: String, payload :: b }
+  -> Hook (({ address :: String, payload :: b } -> Effect Unit) /\ (String -> Poll b))
+useMailboxedS i f = Nut $ mkEffectFn2 \psr di -> do
+  { poll, push } <- liftST $ Poll.mailbox
+  runEffectFn2
+    ( coerce $ f
+        ( push /\
+            ( alt <$> (eq i.address >>> if _ then pure i.payload else empty) <*>
+                poll
+            )
+        )
+    )
+    psr
+    di
 
 useRant :: forall a. Poll a -> Hook (Poll a)
 useRant e f = Nut $ mkEffectFn2 \psr di -> do
