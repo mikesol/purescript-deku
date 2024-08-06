@@ -564,5 +564,6 @@ newStaticRegion = mkSTFn2 \parentBound parentBump -> do
 
 fromParent :: STFn1 DekuParent Global StaticRegion
 fromParent =
-  mkSTFn1 \parent -> runSTFn2 newStaticRegion (pure $ ParentStart parent)
+  mkSTFn1 \parent -> runSTFn2 newStaticRegion
+    (pure $ ParentStart parent)
     (mkSTFn1 \_ -> pure unit)

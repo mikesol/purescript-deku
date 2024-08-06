@@ -24,7 +24,7 @@ module Deku.Hooks
 import Prelude
 
 import Data.Maybe (Maybe(..))
-import Deku.Core (Nut(..), dynOptions, useDeflect, useDyn, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed, useMailboxedS, useRant, useRant', useRef, useRefST, useSkimmed, useSplit, useState, useState', useStateTagged')
+import Deku.Core (Nut(..), dynOptions, useDeflect, useDyn, useDynAtBeginning, useDynAtBeginningWith, useDynAtEnd, useDynAtEndWith, useDynWith, useHot, useHotRant, useMailboxed', useMailboxedS', useMailboxed, useMailboxedS, useRant, useRant', useRef, useRefST, useSkimmed, useSplit, useState, useState', useStateTagged')
 import Deku.Do as Deku
 import FRP.Poll (Poll)
 

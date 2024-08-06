@@ -5,6 +5,7 @@ package:
     - arrays
     - catenable-lists
     - control
+    - debug
     - effect
     - either
     - fast-vect
@@ -35,3 +36,4 @@ package:
     - web-events
     - web-html
     - web-uievents
+    - yoga-json

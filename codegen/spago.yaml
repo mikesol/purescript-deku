@@ -15,7 +15,7 @@ package:
   - console
   - tidy-codegen
   - node-buffer
-  - node-fs-aff
+  - node-fs
   - node-path
   - language-cst-parser
   - argonaut-core

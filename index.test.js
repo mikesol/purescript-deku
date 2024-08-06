@@ -2,8 +2,14 @@ const tests = require("./output/Test.Main");
 const testFriend = require("./output/Test.TestFriend");
 const di = require("./output/Deku.Interpret");
 const region = require("./output/Deku.Internal.Region");
-const doTest = (name, closure, ionly) => {
-  (ionly ? it.only : it)(name, async () => {
+
+const doTest = (name, closure, itIs) => {
+  doFullTest(name, closure, itIs);
+  doSSRTest(name, closure, itIs);
+};
+
+const doFullTest = (name, closure, itIs) => {
+  (itIs ? itIs : it)(name, async () => {
     await closure(async (myTest, myScript) => {
       if (!myTest) {
         throw new Error(`Cannot find test named ${name}`);
@@ -17,9 +23,23 @@ const doTest = (name, closure, ionly) => {
   });
 };
 
-const getIndex = (child) => {
-  var allNodes = Array.prototype.slice.call(child.parentNode.childNodes);
-  return allNodes.indexOf(child);
+const doSSRTest = (name, closure, itIs) => {
+  (itIs ? itIs : it)(`${name} SSR`, async () => {
+    await closure(async (myTest, myScript) => {
+      if (!myTest) {
+        throw new Error(`Cannot find test named ${name}`);
+      }
+      document.getElementsByTagName("html")[0].innerHTML =
+        '<head></head><body id="mybody"></body>';
+      const res = tests.runSSR(myTest)();
+      const html = res.html;
+      document.getElementsByTagName(
+        "html"
+      )[0].innerHTML = `<head></head><body id="mybody">${html}</body>`;
+      const unsub = tests.runHydration(res)(myTest)();
+      await myScript(false);
+    });
+  });
 };
 
 describe("deku", () => {
@@ -31,10 +51,13 @@ describe("deku", () => {
     describe("RegionSpan", () => {
       it("updates end on content bump", () => {
         var end = testFriend.nothing;
-        var span = region.newSpan(()=>10,e=>end=e);
+        var span = region.newSpan(
+          () => 10,
+          (e) => (end = e)
+        );
         var r1 = region.allocateRegion(testFriend.nothing, span);
-        var r2 = region.allocateRegion(testFriend.nothing,span);
-        
+        var r2 = region.allocateRegion(testFriend.nothing, span);
+
         expect(end).toEqual(testFriend.nothing);
         expect(r1.begin()).toEqual(10);
         expect(r2.begin()).toEqual(10);
@@ -43,7 +66,7 @@ describe("deku", () => {
         expect(end).toEqual(testFriend.just(1));
         expect(r1.begin()).toEqual(10);
         expect(r1.end()).toEqual(1);
-        expect(r2.begin()).toEqual(1)
+        expect(r2.begin()).toEqual(1);
 
         r2.bump(testFriend.just(2));
         expect(end).toEqual(testFriend.just(2));
@@ -59,9 +82,12 @@ describe("deku", () => {
 
       it("updates end on empty bump", () => {
         var end = testFriend.nothing;
-        var span = region.newSpan(()=>10,e=>end=e);
+        var span = region.newSpan(
+          () => 10,
+          (e) => (end = e)
+        );
         var r1 = region.allocateRegion(testFriend.nothing, span);
-        var r2 = region.allocateRegion(testFriend.nothing,span);
+        var r2 = region.allocateRegion(testFriend.nothing, span);
 
         expect(end).toEqual(testFriend.nothing);
         expect(r1.begin()).toEqual(10);
@@ -71,7 +97,7 @@ describe("deku", () => {
         expect(end).toEqual(testFriend.just(1));
         expect(r1.begin()).toEqual(10);
         expect(r1.end()).toEqual(1);
-        expect(r2.begin()).toEqual(1)
+        expect(r2.begin()).toEqual(1);
 
         r1.bump(testFriend.nothing);
         expect(end).toEqual(testFriend.nothing);
@@ -82,13 +108,16 @@ describe("deku", () => {
 
       it("updates end on sendTo", () => {
         var end = testFriend.nothing;
-        var span = region.newSpan(()=>10,e=>end=e);
+        var span = region.newSpan(
+          () => 10,
+          (e) => (end = e)
+        );
         var r1 = region.allocateRegion(testFriend.nothing, span);
-        var r2 = region.allocateRegion(testFriend.nothing,span);
+        var r2 = region.allocateRegion(testFriend.nothing, span);
 
         r1.bump(testFriend.just(1));
         r2.bump(testFriend.just(2));
-        
+
         expect(end).toEqual(testFriend.just(2));
         r2.sendTo(0);
         expect(end).toEqual(testFriend.just(1));
@@ -98,81 +127,124 @@ describe("deku", () => {
         expect(end).toEqual(testFriend.just(2));
         r2.sendTo(0);
         expect(end).toEqual(testFriend.just(2));
-      } )
+      });
 
       it("updates end on remove", () => {
         var end = testFriend.nothing;
-        var span = region.newSpan(()=>10,e=>end=e);
-        var r1 = region.allocateRegion(testFriend.nothing,span);
-        var r2 = region.allocateRegion(testFriend.nothing,span);
+        var span = region.newSpan(
+          () => 10,
+          (e) => (end = e)
+        );
+        var r1 = region.allocateRegion(testFriend.nothing, span);
+        var r2 = region.allocateRegion(testFriend.nothing, span);
 
         r1.bump(testFriend.just(1));
         r2.bump(testFriend.just(2));
-        
+
         expect(end).toEqual(testFriend.just(2));
         r2.remove();
         expect(end).toEqual(testFriend.just(1));
-        var r3 = region.allocateRegion(testFriend.nothing,span);
+        var r3 = region.allocateRegion(testFriend.nothing, span);
         r3.bump(testFriend.just(3));
         expect(end).toEqual(testFriend.just(3));
-        r1.remove()
+        r1.remove();
         expect(end).toEqual(testFriend.just(3));
         r3.remove();
         expect(end).toEqual(testFriend.nothing);
-      } )
+      });
     });
 
     it("makeElementEffect makes an element with the correct tagname", () => {
-      const out = di.makeElementEffect(testFriend.nothing, "div");
+      const out = di.makeElementEffect(
+        testFriend.dummyId,
+        testFriend.nothing,
+        "div"
+      );
       expect(out.tagName).toBe("DIV");
     });
     describe("makeText and setText", () => {
       it("makes text", () => {
-        const t = di.makeTextEffect(testFriend.just("hello"));
+        const t = di.makeTextEffect(
+          testFriend.dummyId,
+          testFriend.just("hello"),
+          testFriend.ignorableBooleanForTextConstructor
+        );
         expect(t.textContent).toBe("hello");
-        di.setTextEffect("goodbye", t);
+        di.setTextEffect(
+          "goodbye",
+          t,
+          testFriend.ignorableBooleanForTextConstructor
+        );
         expect(t.textContent).toBe("goodbye");
       });
     });
     describe("setProp", () => {
       it("sets the id attribute correctly and unsets it correctly", () => {
         const $ = require("jquery");
-        const elt = di.makeElementEffect(testFriend.nothing, "li");
+        const elt = di.makeElementEffect(
+          testFriend.dummyId,
+          testFriend.nothing,
+          "li"
+        );
         di.setPropEffect("id", "foo", elt);
         di.unsetAttributeEffect("id", elt);
         expect($(elt).attr("id")).toBe(undefined);
       });
       it("sets checked attribute correctly", () => {
-        const elt = di.makeElementEffect(testFriend.nothing, "input");
+        const elt = di.makeElementEffect(
+          testFriend.dummyId,
+          testFriend.nothing,
+          "input"
+        );
         di.setPropEffect("checked", "true", elt);
         expect(elt.checked).toBe(true);
         di.setPropEffect("checked", "false", elt);
         expect(elt.checked).toBe(false);
       });
       it("sets value attribute correctly", () => {
-        const elt = di.makeElementEffect(testFriend.nothing, "input");
+        const elt = di.makeElementEffect(
+          testFriend.dummyId,
+          testFriend.nothing,
+          "input"
+        );
         di.setPropEffect("value", "hello", elt);
         expect(elt.value).toBe("hello");
       });
       it("sets disabled correctly", () => {
-        const elt = di.makeElementEffect(testFriend.nothing, "button");
-        di.setPropEffect("disabled", "true",elt);
+        const elt = di.makeElementEffect(
+          testFriend.dummyId,
+          testFriend.nothing,
+          "button"
+        );
+        di.setPropEffect("disabled", "true", elt);
         expect(elt.disabled).toBe(true);
       });
     });
     describe("setCb and unsetAttribute", () => {
       it("sets and unsets the cb", () => {
         const $ = require("jquery");
-        const elt = di.makeElementEffect(testFriend.nothing, "button");
+        const elt = di.makeElementEffect(
+          testFriend.dummyId,
+          testFriend.nothing,
+          "button"
+        );
         let i = 0;
-        di.setCbEffect("click", () => () => {
-          i++;
-        }, elt);
+        di.setCbEffect(
+          "click",
+          () => () => {
+            i++;
+          },
+          elt
+        );
         $(elt).trigger("click");
         expect(i).toBe(1);
-        di.setCbEffect("click", () => () => {
-          i += 42;
-        }, elt);
+        di.setCbEffect(
+          "click",
+          () => () => {
+            i += 42;
+          },
+          elt
+        );
         $(elt).trigger("click");
         expect(i).toBe(43);
         di.unsetAttributeEffect("click", elt);
@@ -210,27 +282,13 @@ describe("deku", () => {
       (f) =>
         f(tests.dynAppearsCorrectlyAtBeginning, () => {
           const $ = require("jquery");
-          // text, span, button
-          const base = 3;
-          expect($("#div0").contents().length).toEqual(base);
-          expect($($("#div0").contents()[0]).text()).toBe("foo");
-          expect($($("#div0").contents()[base - 2]).text()).toBe("bar");
-          expect($($("#div0").contents()[base - 1]).text()).toBe("incr");
-          $($("#div0").contents()[base - 1]).trigger("click");
-          expect($("#div0").contents().length).toBe(base + 1);
-          // has shifted button by 1
-          expect($($("#div0").contents()[base]).text()).toBe("incr");
-          // there's a new node now with the number "0" as its text
-          expect($($("#div0").contents()[base - 1]).text()).toBe("0");
-          // index is now 4 as it has moved back by 1
-          $($("#div0").contents()[base]).trigger("click");
-          expect($("#div0").contents().length).toBe(base + 2);
-          // has again shifted button by 1
-          expect($($("#div0").contents()[base + 1]).text()).toBe("incr");
-          // there's a new node now with the number "1" as its text
-          expect($($("#div0").contents()[base - 1]).text()).toBe("1");
-          // the old node is to the after of the new node
-          expect($($("#div0").contents()[base - 0]).text()).toBe("0");
+          expect($("#div0").text()).toEqual("foobarincr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar0incr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar10incr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar210incr");
         })
     );
 
@@ -239,27 +297,13 @@ describe("deku", () => {
       (f) =>
         f(tests.dynAppearsCorrectlyAtEnd, (usingSSR) => {
           const $ = require("jquery");
-          // text, span, start beacon, end beacon, button
-          const base = usingSSR ? 4 : 3;
-          expect($("#div0").contents().length).toEqual(base);
-          expect($($("#div0").contents()[0]).text()).toBe("foo");
-          expect($($("#div0").contents()[base - 2]).text()).toBe("bar");
-          expect($($("#div0").contents()[base - 1]).text()).toBe("incr");
-          $($("#div0").contents()[base - 1]).trigger("click");
-          expect($("#div0").contents().length).toBe(base + 1);
-          // has shifted button by 1
-          expect($($("#div0").contents()[base]).text()).toBe("incr");
-          // there's a new node now with the number "0" as its text
-          expect($($("#div0").contents()[base - 1]).text()).toBe("0");
-          // index is now 5/4 as it has moved back by 1
-          $($("#div0").contents()[base]).trigger("click");
-          expect($("#div0").contents().length).toBe(base + 2);
-          // has again shifted button by 1
-          expect($($("#div0").contents()[base + 1]).text()).toBe("incr");
-          // there's a new node now with the number "1" as its text
-          expect($($("#div0").contents()[base - 0]).text()).toBe("1");
-          // the old node is to the left of the new node
-          expect($($("#div0").contents()[base - 1]).text()).toBe("0");
+          expect($("#div0").text()).toEqual("foobarincr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar0incr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar01incr");
+          $("#incr").trigger("click");
+          expect($("#div0").text()).toEqual("foobar012incr");
         })
     );
 
@@ -290,15 +334,15 @@ describe("deku", () => {
         expect($("#div0").text()).toBe("");
 
         $("#add").trigger("click");
-        expect($("#div0").text()).toBe("0")
+        expect($("#div0").text()).toBe("0");
 
         $("#add").trigger("click");
-        expect($("#div0").text()).toBe("01")
+        expect($("#div0").text()).toBe("01");
 
         $("#add").trigger("click");
-        expect($("#div0").text()).toBe("012")
+        expect($("#div0").text()).toBe("012");
       })
-    )
+    );
 
     doTest("domable is a monoid", (f) =>
       f(tests.isAMonoid, () => {
@@ -350,6 +394,7 @@ describe("deku", () => {
         expect($("#span0").text()).toBe("goodbye");
       })
     );
+
     doTest("sends to position correctly when elt is fixed", (f) =>
       f(tests.sendsToPositionFixed, () => {
         const $ = require("jquery");
@@ -371,7 +416,7 @@ describe("deku", () => {
       })
     );
 
-    doTest("sends to initial position correctly", (f) =>
+    doTest("sets dyn to initial position correctly", (f) =>
       f(tests.insertsAtCorrectPositions, () => {
         const $ = require("jquery");
         expect($("#dyn0").index()).toBeLessThan($("#dyn1").index());
@@ -383,8 +428,8 @@ describe("deku", () => {
       })
     );
 
-    doTest("inpure nested dyn disposes correctly",(f) => 
-      f(tests.nestedInpureDyn, () => {
+    doTest("in pure nested dyn disposes correctly", (f) =>
+      f(tests.nestedInPureDyn, () => {
         const $ = require("jquery");
         expect($("#div0").text()).toBe("startend");
         $("#action").trigger("click");
@@ -415,8 +460,8 @@ describe("deku", () => {
         expect($("#content").text()).toBe("foo4");
         $("#incr").trigger("click");
         expect($("#content").text()).toBe("foo5");
-        $("#reset").trigger("click")
-        expect($("#content").text()).toBe("foo4")
+        $("#reset").trigger("click");
+        expect($("#content").text()).toBe("foo4");
       })
     );
 
@@ -468,19 +513,19 @@ describe("deku", () => {
         const $ = require("jquery");
         expect($("#s1").text()).toBe("step1-0-0");
         expect($("#s2").text()).toBe("");
-        
+
         $("#global").trigger("click");
-        expect($("#s1").text()).toBe("step1-1-0")
+        expect($("#s1").text()).toBe("step1-1-0");
         expect($("#s2").text()).toBe("");
 
         $("#local").trigger("click");
-        expect($("#s1").text()).toBe("step1-1-1")
+        expect($("#s1").text()).toBe("step1-1-1");
         expect($("#s2").text()).toBe("");
-        
+
         $("#next").trigger("click");
         expect($("#s1").text()).toBe("");
         expect($("#s2").text()).toBe("step2-1-0");
-        
+
         $("#global").trigger("click");
         expect($("#s2").text()).toBe("step2-2-0");
 
@@ -488,11 +533,11 @@ describe("deku", () => {
         expect($("#s2").text()).toBe("step2-2-1");
 
         $("#next").trigger("click");
-        expect($("#s2").text()).toBe("")
+        expect($("#s2").text()).toBe("");
         expect($("#s3").text()).toBe("step3-2-0");
-        
+
         $("#back").trigger("click");
-        expect($("#s2").text()).toBe("step2-2-1")
+        expect($("#s2").text()).toBe("step2-2-1");
         expect($("#s3").text()).toBe("");
 
         $("#next").trigger("click");
@@ -522,9 +567,10 @@ describe("deku", () => {
       })
     );
 
-    doTest("switcher switches", (f) =>
-      f(tests.switcherSwitches, () => {
+    doTest("filters and refs work correctly", (f) =>
+      f(tests.filtersAndRefs, () => {
         const $ = require("jquery");
+        expect($("#hack").text()).toBe("");
         $("#about-btn").trigger("click");
         expect($("#hack").text()).toBe("hello");
         $("#contact-btn").trigger("click");
@@ -738,8 +784,7 @@ describe("deku", () => {
         expect($("#hello").text()).toBe("hello");
       })
     );
-
-    doTest("useRant works", (f) =>
+    doTest("use hot rant works", (f) =>
       f(tests.useHotRantWorks, () => {
         const $ = require("jquery");
         expect($("#da").text()).toBe("1");
@@ -756,16 +801,16 @@ describe("deku", () => {
       })
     );
 
-    doTest( "deterministic unsub", ( f ) =>
-      f( tests.disposeGetsRun, () => {
-        const $ = require( "jquery" );
-        expect( $( "#notthere" ).length ).toBe( 1 );
-        expect( $( "#count" ).text() ).toBe( "1" );
+    doTest("deterministic unsub", (f) =>
+      f(tests.disposeGetsRun, () => {
+        const $ = require("jquery");
+        expect($("#notthere").length).toBe(1);
+        expect($("#count").text()).toBe("1");
 
-        $( "#notthere" ).trigger( "click" );
+        $("#notthere").trigger("click");
 
-        expect( $( "#notthere" ).length ).toBe( 0 ); // element is gone so its unsubs should have been called
-        expect( $( "#count" ).text() ).toBe( "2" ); // one tick for the init and one tick for the unsub
+        expect($("#notthere").length).toBe(0); // element is gone so its unsubs should have been called
+        expect($("#count").text()).toBe("2"); // one tick for the init and one tick for the unsub
       })
     );
   });

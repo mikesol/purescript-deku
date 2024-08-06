@@ -20,13 +20,20 @@ import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (cycle, dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
+import Deku.Internal.Ancestry (DekuAncestry(..), reconstructAncestry)
 import Deku.Pursx (lenientPursx, pursx)
-import Deku.Toplevel (runInBody)
+import Deku.Toplevel (SSROutput, hydrateInBody, runInBody, ssrInBody)
 import Effect (Effect)
+import Effect.Aff (launchAff_)
+import Effect.Class (liftEffect)
 import Effect.Random (random)
 import Effect.Uncurried (mkEffectFn2, runEffectFn2)
 import FRP.Event (count, fold)
 import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
+import Test.Spec (before_, describe, it)
+import Test.Spec.Assertions (shouldEqual)
+import Test.Spec.Reporter (consoleReporter)
+import Test.Spec.Runner (runSpec)
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
 import Web.HTML.Window (alert)
@@ -35,6 +42,12 @@ foreign import hackyInnerHTML :: String -> String -> Effect Unit
 
 runTest :: Nut -> Effect (Effect Unit)
 runTest = runInBody
+
+runSSR :: Nut -> Effect SSROutput
+runSSR = ssrInBody
+
+runHydration :: SSROutput -> Nut -> Effect (Effect Unit)
+runHydration = hydrateInBody
 
 sanityCheck :: Nut
 sanityCheck = D.span [ DA.id_ "hello" ] [ text_ "Hello" ]
@@ -123,9 +136,9 @@ dynPosition :: Nut
 dynPosition = Deku.do
   pushNext /\ next <- useState'
   D.div [ DA.id_ "div0" ]
-    [ Deku.do 
-      { position } <- useDynAtBeginning next
-      text $ show <$> position
+    [ Deku.do
+        { position } <- useDynAtBeginning next
+        text $ show <$> position
     , D.button [ DA.id_ "add", DL.click_ \_ -> pushNext unit ] []
     ]
 
@@ -190,17 +203,17 @@ insertsAtCorrectPositions = D.div [ DA.id_ "div0" ]
       D.span [ DA.id_ ("dyn" <> show i) ] [ text_ (show i) ]
   ]
 
-nestedInpureDyn :: Nut
-nestedInpureDyn = Deku.do
+nestedInPureDyn :: Nut
+nestedInPureDyn = Deku.do
   pushClick /\ click <- useState'
-  
-  D.div [ DA.id_ "div0" ] 
+
+  D.div [ DA.id_ "div0" ]
     [ text_ "start"
     , Deku.do
-      { value } <- useDynAtEnd ( mergeMap pure [ 0, 1, 2, 3 ] )
-      _ <- useDynAtEnd click
-      D.span [ DA.id_ $ "dyn" <> show value ] [ text_ $ show value ]
-    
+        { value } <- useDynAtEnd (mergeMap pure [ 0, 1, 2, 3 ])
+        _ <- useDynAtEnd click
+        D.span [ DA.id_ $ "dyn" <> show value ] [ text_ $ show value ]
+
     , D.span [ DA.id_ "action", DL.click_ \_ -> pushClick unit ] [ text_ "end" ]
     ]
 
@@ -217,7 +230,11 @@ switcherWorksForCompositionalElements = Deku.do
         ( [ 0, 1, 2 ] <#> \j -> D.span [ DA.id_ $ "id" <> show j ]
             [ text_ (show i <> "-" <> show j) ]
         )
-    , D.button [ DA.id_ "incr", DL.click_ \_ -> setItem unit ] [ text_ "incr" ]
+    , D.button
+        [ DA.id_ "incr"
+        , DL.click_ \_ -> setItem unit
+        ]
+        [ text_ "incr" ]
     ]
 
 slightlyLessPureSwitcher :: Nut
@@ -226,11 +243,11 @@ slightlyLessPureSwitcher = Deku.do
   let
     elemCount :: Poll Int
     elemCount =
-      fold (\c -> if _ then c + 1 else 0 ) 0 $ initial <|> elemCom
-    
+      fold (\c -> if _ then c + 1 else 0) 0 $ initial <|> elemCom
+
     initial :: Poll Boolean
     initial =
-      merge $ Array.replicate 4 $ pure true 
+      merge $ Array.replicate 4 $ pure true
 
     incrElem :: Effect Unit
     incrElem =
@@ -238,14 +255,14 @@ slightlyLessPureSwitcher = Deku.do
 
     resetElem :: Effect Unit
     resetElem = do
-        elemCtrl false
-        sequence_ $ Array.replicate 4 incrElem
+      elemCtrl false
+      sequence_ $ Array.replicate 4 incrElem
 
   D.div [ DA.id_ "div0" ]
     [ D.span [ DA.id_ "content" ]
-      [ text_ "foo"
-      , cycle $ text_ <<< show <$> elemCount
-      ]
+        [ text_ "foo"
+        , cycle $ text_ <<< show <$> elemCount
+        ]
     , D.button [ DA.id_ "incr", DL.click_ \_ -> incrElem ] [ text_ "incr" ]
     , D.button [ DA.id_ "reset", DL.click_ \_ -> resetElem ] [ text_ "reset" ]
     ]
@@ -293,8 +310,8 @@ portalsCompose = Deku.do
     , D.button [ DA.id_ "incr", DL.click_ \_ -> setItem unit ]
         [ text_ "incr" ]
     ]
-  
-wizardPortal :: Nut 
+
+wizardPortal :: Nut
 wizardPortal = Deku.do
   pushGlobal /\ global <- useState 0
   pushStep /\ step <- useHot 0
@@ -306,11 +323,11 @@ wizardPortal = Deku.do
         , text $ append "-" <<< show <$> global
         , text $ append "-" <<< show <$> local
         , D.button
-          [ DL.click $ local <#> \st _ -> pushLocal $ st + 1
-          , DA.id_ "local"
-          ]
-          []
-        ] 
+            [ DL.click $ local <#> \st _ -> pushLocal $ st + 1
+            , DA.id_ "local"
+            ]
+            []
+        ]
 
   step1 <- portal $ stepPanel 1
   step2 <- portal $ stepPanel 2
@@ -318,25 +335,25 @@ wizardPortal = Deku.do
 
   D.div [ DA.id_ "div0" ]
     [ step <#~> case _ of
-      0 -> step1
-      1 -> step2
-      _ -> step3
+        0 -> step1
+        1 -> step2
+        _ -> step3
 
     , D.button
-      [ DL.click $ (pure 0 <|> global) <#> \st _ -> pushGlobal $ st + 1
-      , DA.id_ "global"
-      ]
-      [ text_ "incr"]
+        [ DL.click $ (pure 0 <|> global) <#> \st _ -> pushGlobal $ st + 1
+        , DA.id_ "global"
+        ]
+        [ text_ "incr" ]
     , D.button
-      [ DL.click $ step <#> \st _ -> pushStep $ (st + 1) `mod` 3
-      , DA.id_ "next"
-      ]
-      [ text_ "next" ]
-    , D.button 
-      [ DL.click $ step <#> \st _ -> pushStep $ (st - 1) `mod` 3
-      , DA.id_ "back"
-      ]
-      [ text_ "back" ]
+        [ DL.click $ step <#> \st _ -> pushStep $ (st + 1) `mod` 3
+        , DA.id_ "next"
+        ]
+        [ text_ "next" ]
+    , D.button
+        [ DL.click $ step <#> \st _ -> pushStep $ (st - 1) `mod` 3
+        , DA.id_ "back"
+        ]
+        [ text_ "back" ]
     ]
 
 pursXWiresUp :: Nut
@@ -353,8 +370,8 @@ pursXWiresUp = Deku.do
                 ]
                 [ text_ "après-milieu" ]
             ]
-        , evt:  DL.click_ \_ -> setMessage "hello" 
-        , mykls:  DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
+        , evt: DL.click_ \_ -> setMessage "hello"
+        , mykls: DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
         }
     , D.span [ DA.id_ "span0" ] [ text message ]
     ]
@@ -363,7 +380,8 @@ pursXWiresUp2 :: Nut
 pursXWiresUp2 = Deku.do
   setMessage /\ message <- useState'
   D.div [ DA.id_ "div0" ]
-    [ lenientPursx "<div ~mykls~><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>"
+    [ lenientPursx
+        "<div ~mykls~><h1 id=\"px\" ~evt~ >hi</h1>début ~me~ fin</div>"
         { me: fixed
             [ text_ "milieu"
             , text_ " "
@@ -373,7 +391,7 @@ pursXWiresUp2 = Deku.do
                 ]
                 [ text_ "après-milieu" ]
             ]
-        , evt:  DL.click_ \_ -> setMessage "hello" 
+        , evt: DL.click_ \_ -> setMessage "hello"
         , mykls: DA.klass_ "arrrrr" <|> DA.id_ "topdiv"
         }
     , D.span [ DA.id_ "span0" ] [ text message ]
@@ -658,8 +676,8 @@ hotIsHot = Deku.do
         [ text_ "set label" ]
     ]
 
-switcherSwitches :: Nut
-switcherSwitches = Deku.do
+filtersAndRefs :: Nut
+filtersAndRefs = Deku.do
   setItem /\ item <- useState 0
   setGoodbyeC /\ goodbyeC <- useState'
   iref <- useRef (-1) item
@@ -702,9 +720,12 @@ emptySwitches = Deku.do
   setItem /\ item <- useState 0
   D.div [ DA.id_ "div0" ]
     [ D.div [ DA.id_ "content" ] $ Array.range 0 5 <#> \id ->
-      guard ( eq id <$> item ) ( D.span [ DA.id_ ( show id ) ] [ text_ $ show id ] )
-    
-    , D.div [ DA.id_ "incr", DL.click $ item <#> \st _ -> setItem $ ( st + 1 ) `mod` 6 ] [ text_ "next" ]
+        guard (eq id <$> item) (D.span [ DA.id_ (show id) ] [ text_ $ show id ])
+    , D.div
+        [ DA.id_ "incr"
+        , DL.click $ item <#> \st _ -> setItem $ (st + 1) `mod` 6
+        ]
+        [ text_ "next" ]
     ]
 
 useHotRantWorks :: Nut
@@ -745,7 +766,55 @@ disposeGetsRun = Deku.do
   fixed
     [ D.span [ DA.id_ "count" ] [ text $ show <$> count ticks ]
     , Deku.do
-      { remove } <- useDynAtBeginning ( pure unit )
-      useDispose ( pushTick unit ) ( pushTick unit )
-      D.span [ DA.id_ "notthere", DL.click_ \_ -> remove ] []
+        { remove } <- useDynAtBeginning (pure unit)
+        useDispose (pushTick unit) (pushTick unit)
+        D.span [ DA.id_ "notthere", DL.click_ \_ -> remove ] []
     ]
+
+foreign import resetBody :: Effect Unit
+foreign import initializeJSDOM :: Effect Unit
+
+-- From here on are some ssr tests
+main :: Effect Unit
+main = do
+  initializeJSDOM
+  launchAff_ $ runSpec [ consoleReporter ] $ before_ (liftEffect resetBody) do
+    describe "ssr" do
+      it "registers the root as boring in a simple case with no text" $
+        liftEffect do
+          let nut = D.div_ []
+          { html, boring } <- ssrInBody nut
+          boring `shouldEqual`
+            (map reconstructAncestry [ Root ])
+          html `shouldEqual` "<div></div>"
+      it "registers the root as boring in a simple case with text" $ liftEffect
+        do
+          let nut = D.div_ [ text_ "foo", text_ "bar", text_ "baz" ]
+          { html, boring } <- ssrInBody nut
+          boring `shouldEqual`
+            (map reconstructAncestry [ Root ])
+          html `shouldEqual` "<div>foobarbaz</div>"
+      it "correctly ignores un-boring part" $ liftEffect
+        do
+          let
+            nut = D.div_
+              [ D.div_ [ fixed [] ]
+              , D.div_ [ text_ "foo", text_ "bar", text_ "baz" ]
+              ]
+          { html, boring } <- ssrInBody nut
+          boring `shouldEqual`
+            (map reconstructAncestry [ Element 1 Root ])
+          html `shouldEqual`
+            "<div><div data-deku-ssr=\"e0\"></div><div>foobarbaz</div></div>"
+      it "correctly ignores deeply nested un-boring part" $ liftEffect
+        do
+          let
+            nut = D.div_
+              [ D.div_ [ D.div_ [ D.div_ [ fixed [] ] ] ]
+              , D.div_ [ text_ "foo", text_ "bar", text_ "baz" ]
+              ]
+          { html, boring } <- ssrInBody nut
+          boring `shouldEqual`
+            (map reconstructAncestry [ Element 1 Root ])
+          html `shouldEqual`
+            "<div><div><div><div data-deku-ssr=\"e0e0e0\"></div></div></div><div>foobarbaz</div></div>"

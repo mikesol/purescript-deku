@@ -22,6 +22,7 @@ package:
       - random
       - record
       - refs
+      - spec
       - st
       - tailrec
       - tuples
