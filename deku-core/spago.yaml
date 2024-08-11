@@ -27,7 +27,9 @@ package:
     - st
     - strings
     - stringutils
+    - tldr
     - transformers
+    - typelevel-prelude
     - tuples
     - unsafe-coerce
     - untagged-union

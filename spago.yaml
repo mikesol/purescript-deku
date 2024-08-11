@@ -6,6 +6,10 @@ workspace:
   #   args:
   #     - build
   extraPackages:
+    tldr:
+      git: "https://github.com/mikesol/purescript-tldr.git"
+      ref: "7945d3f"
+      dependencies: [prelude]
     hyrule:
       repo: "https://github.com/mikesol/purescript-hyrule.git"
       version: "v2.5.1"

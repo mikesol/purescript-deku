@@ -217,6 +217,7 @@ workspace:
         - stringutils
         - tailrec
         - these
+        - tldr
         - transformers
         - tuples
         - type-equality
@@ -266,8 +267,10 @@ workspace:
         - st
         - strings
         - stringutils
+        - tldr
         - transformers
         - tuples
+        - typelevel-prelude
         - unsafe-coerce
         - untagged-union
         - web-dom
@@ -340,6 +343,7 @@ workspace:
         - strings
         - stringutils
         - tailrec
+        - tldr
         - transformers
         - tuples
         - type-equality
@@ -433,6 +437,7 @@ workspace:
         - stringutils
         - tailrec
         - these
+        - tldr
         - transformers
         - tuples
         - type-equality
@@ -525,6 +530,7 @@ workspace:
         - strings
         - stringutils
         - tailrec
+        - tldr
         - transformers
         - tuples
         - type-equality
@@ -1158,6 +1164,11 @@ workspace:
         - tuples
         - type-equality
         - unicode
+    tldr:
+      git: https://github.com/mikesol/purescript-tldr.git
+      ref: 7945d3f
+      dependencies:
+        - prelude
 packages:
   aff:
     type: registry
@@ -2342,6 +2353,12 @@ packages:
       - tuples
       - type-equality
       - unicode
+  tldr:
+    type: git
+    url: https://github.com/mikesol/purescript-tldr.git
+    rev: 7945d3f41d16035774e1eedd1a239aaeccc9fbab
+    dependencies:
+      - prelude
   transformers:
     type: registry
     version: 6.1.0
