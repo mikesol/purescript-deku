@@ -10,11 +10,13 @@ import Data.List (List(..), (:))
 import Data.Maybe (Maybe(..), fromJust, fromMaybe, isJust)
 import Data.Nullable (toMaybe)
 import Data.Tuple (Tuple(..))
+import Deku.Core (SetInnerHtml)
 import Deku.Core as Core
 import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), fromDekuElement, fromDekuText, toDekuElement, toDekuText)
 import Deku.Internal.Region (Anchor(..))
 import Deku.UnsafeDOM (addEventListener, after, createDocumentFragment, createElement, createElementNS, createText, eventListener, popCb, prepend, pushCb, removeEventListener, setTextContent)
 import Effect (Effect, whileE)
+import Effect.Exception (error, throwException)
 import Effect.Ref as Ref
 import Effect.Uncurried (EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3, runEffectFn4)
 import Partial.Unsafe (unsafePartial)
@@ -268,3 +270,17 @@ attachNodeEffect = mkEffectFn2 \nodes anchor -> do
 
     Text txt -> do
       runEffectFn2 after nodes (fromDekuText @Node txt)
+
+foreign import setInnerHtml :: EffectFn2 String DekuElement Unit
+
+setInnerHtmlEffect :: SetInnerHtml
+setInnerHtmlEffect = mkEffectFn2 \html anchor -> do
+  case anchor of
+    ParentStart (DekuParent parent) -> do
+      runEffectFn2 setInnerHtml html parent
+
+    Element _ -> do
+      throwException $ error "setInnerHtmlEffect: Cannot set innerHTML on an Element"
+
+    Text _ -> do
+      throwException $ error "setInnerHtmlEffect: Cannot set innerHTML on an Element"

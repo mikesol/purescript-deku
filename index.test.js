@@ -372,6 +372,14 @@ describe("deku", () => {
       })
     );
 
+
+    doTest("optimized pursx renders", (f) =>
+      f(tests.optimizedPursx, () => {
+        const $ = require("jquery");
+        expect($("#check-me").text()).toBe("i am a span");
+      })
+    );
+
     doTest("pursx adds listeners", (f) =>
       f(tests.pursXWiresUp, () => {
         const $ = require("jquery");
@@ -383,6 +391,7 @@ describe("deku", () => {
         expect($("#span0").text()).toBe("goodbye");
       })
     );
+
     doTest("pursx adds listeners 2", (f) =>
       f(tests.pursXWiresUp2, () => {
         const $ = require("jquery");

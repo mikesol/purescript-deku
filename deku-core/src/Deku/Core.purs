@@ -27,6 +27,7 @@ module Deku.Core
   , RemoveElement
   , RemoveText
   , SetCb
+  , SetInnerHtml
   , SetProp
   , SetText
   , Tag(..)
@@ -188,6 +189,10 @@ type RemoveText = EffectFn1 DekuText Unit
 type AttachElement =
   EffectFn2 DekuChild Anchor Unit
 
+-- | An optimization to attach innerhtml
+type SetInnerHtml =
+  EffectFn2 String Anchor Unit
+
 type AttachText =
   EffectFn2 DekuText Anchor Unit
 
@@ -278,6 +283,8 @@ newtype DOMInterpret = DOMInterpret
   , initializeDynRendering :: STFn1 Ancestry Global Unit
   -- fixed
   , initializeFixedRendering :: STFn1 Ancestry Global Unit
+  -- pursx optimization
+  , setInnerHTML :: SetInnerHtml
   }
 
 derive instance Newtype DOMInterpret _
