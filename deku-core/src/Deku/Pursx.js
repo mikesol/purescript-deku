@@ -24,3 +24,32 @@ export const splitOnDelimiter = (delimiter) => (str) =>
     .map((part) =>
       part.replace(new RegExp(`^${delimiter}|${delimiter}$`, "g"), "")
     );
+
+    export const  removeOuterTags = (html) =>
+       html.replace(/^[^>]*>([\s\S]*?)<[^<]*$/, '$1');
+  
+    export const  getOuterTagInfo = (html) => {
+      const result = {
+          tagName: '',
+          attributes: {}
+      };
+  
+      // Regular expression to match the outermost tag and capture the tag name and attributes
+      const tagMatch = html.match(/^<(\w+)([^>]*)>/);
+  
+      if (tagMatch) {
+          result.tagName = tagMatch[1];
+  
+          // Extracting attributes
+          const attrString = tagMatch[2];
+          const attrRegex = /(\w+)=["']([^"']*)["']/g;
+          let match;
+  
+          while ((match = attrRegex.exec(attrString)) !== null) {
+              result.attributes[match[1]] = match[2];
+          }
+      }
+  
+      return result;
+  }
+    

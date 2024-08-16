@@ -376,6 +376,13 @@ pursXWiresUp = Deku.do
     , D.span [ DA.id_ "span0" ] [ text message ]
     ]
 
+optimizedPursx :: Nut
+optimizedPursx = Deku.do
+  D.div [ DA.id_ "div0" ]
+    [ pursx @"<div><h1 id=\"px\">hi there</h1><span id=\"check-me\">i am a span</span></div>" { }
+    , D.span [ DA.id_ "span0" ] [ text_ "oh hi" ]
+    ]
+
 pursXWiresUp2 :: Nut
 pursXWiresUp2 = Deku.do
   setMessage /\ message <- useState'

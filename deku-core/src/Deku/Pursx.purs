@@ -18,6 +18,7 @@ module Deku.Pursx
 import Prelude
 
 import Control.Monad.ST (ST, run)
+import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Ref as STRef
 import Data.Either (Either(..), isLeft, isRight)
 import Data.Exists (Exists, mkExists, runExists)
@@ -26,10 +27,14 @@ import Data.List (List(..), (:))
 import Data.Map (Map)
 import Data.Map as Map
 import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Newtype (un)
 import Data.Symbol (class IsSymbol, reflectSymbol)
 import Data.Tuple (uncurry)
-import Deku.Core (Attribute, Nut, attributeAtYourOwnRisk, elementify, text_)
+import Data.Tuple.Nested ((/\))
+import Deku.Core (Attribute, DOMInterpret(..), Nut(..), PSR(..), attributeAtYourOwnRisk, elementify, text_)
+import Deku.Internal.Region (StaticRegion(..))
 import Deku.PursxParser (AttributeVerb, ElementVerb, PursxState, PxElt'P)
+import Effect.Uncurried (mkEffectFn2, runEffectFn2)
 import FRP.Poll (Poll)
 import Foreign.Object (Object, toUnfoldable)
 import Foreign.Object as Object
@@ -117,6 +122,25 @@ onOpenTag info stack name attributes = do
     (nut : stackValue)
     stack
 
+foreign import  getOuterTagInfo :: String -> {
+          tagName:: String,
+          attributes:: Object String
+      }
+
+optimizedPursx
+  :: String -> Nut
+optimizedPursx html = do
+  let outerInfo = getOuterTagInfo html
+  let innerStuff = removeOuterTags html
+  elementify Nothing outerInfo.tagName
+      ( map (\(k /\ v) -> (pure $ attributeAtYourOwnRisk k v)) $ toUnfoldable
+          outerInfo.attributes
+      )
+      [ Nut $ mkEffectFn2 \psr di -> do
+          anchor <- liftST $ (un StaticRegion (un PSR psr).region).end
+          runEffectFn2 (un DOMInterpret di).setInnerHTML innerStuff anchor
+      ]
+
 onText
   :: forall r
    . PursxInfoMap
@@ -148,8 +172,10 @@ onCloseTag _ stack _ = do
     f : g : rest -> do
       void $ STRef.write ((\i -> g ([ f [] ] <> i)) : rest) stack
 
+foreign import removeOuterTags :: String -> String
+
 purs :: PursxInfo -> Nut
-purs (PursxInfo html i) = run do
+purs (PursxInfo html i) =  if Map.isEmpty i then optimizedPursx html else run do
   r <- STRef.new Nil
   parser <- createParser (onOpenTag i r) (onText i r) (onCloseTag i r)
   write parser html
@@ -240,7 +266,8 @@ pursx'
   :: forall @verb (@html :: Symbol) r0 rl0 h t r rl
    . IsSymbol html
   => IsSymbol verb
-  => Parse html (PxElt'P verb) (PursxState () L.Nil) (R.Success h t) (PursxState r0 L.Nil)
+  => Parse html (PxElt'P verb) (PursxState () L.Nil) (R.Success h t)
+       (PursxState r0 L.Nil)
   => RL.RowToList r0 rl0
   => RL.RowToList r rl
   => PursxSubstitutions rl0 r
@@ -253,7 +280,8 @@ pursx' = lenientPursx' (reflectSymbol (Proxy :: _ verb))
 pursx
   :: forall (@html :: Symbol) r0 rl0 h t r rl
    . IsSymbol html
-  => Parse html (PxElt'P "~") (PursxState () L.Nil) (R.Success h t) (PursxState r0 L.Nil)
+  => Parse html (PxElt'P "~") (PursxState () L.Nil) (R.Success h t)
+       (PursxState r0 L.Nil)
   => RL.RowToList r0 rl0
   => RL.RowToList r rl
   => PursxSubstitutions rl0 r

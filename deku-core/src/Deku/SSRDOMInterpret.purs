@@ -167,6 +167,8 @@ ssrDOMInterpret
         dynCache
     , initializeFixedRendering: mkSTFn1 \a -> void $ STRef.modify (Set.insert a)
         fixedCache
+    , setInnerHTML: I.setInnerHtmlEffect
+
     }
 
 noOpDomInterpret
@@ -203,4 +205,5 @@ noOpDomInterpret =
     , initializePortalRendering: mkSTFn1 \_ -> pure unit
     , initializeDynRendering: mkSTFn1 \_ -> pure unit
     , initializeFixedRendering: mkSTFn1 \_ -> pure unit
+    , setInnerHTML: mkEffectFn2 \_ _ -> pure unit
     }

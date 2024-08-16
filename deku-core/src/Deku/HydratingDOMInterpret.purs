@@ -95,4 +95,5 @@ hydratingDOMInterpret
     , initializePortalRendering: mkSTFn1 \_ -> pure unit
     , initializeDynRendering: mkSTFn1 \_ -> pure unit
     , initializeFixedRendering: mkSTFn1 \_ -> pure unit
+    , setInnerHTML: mkEffectFn2 \_ _ -> pure unit
     }

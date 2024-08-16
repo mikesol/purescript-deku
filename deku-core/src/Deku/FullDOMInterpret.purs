@@ -35,4 +35,5 @@ fullDOMInterpret = Core.DOMInterpret
   --
   , initializeDynRendering: mkSTFn1 \_ -> pure unit
   , initializeFixedRendering: mkSTFn1 \_ -> pure unit
+  , setInnerHTML: I.setInnerHtmlEffect
   }
