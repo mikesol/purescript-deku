@@ -12,7 +12,7 @@ A PureScript web framework for apps that need to be fast.
 
 ## Documentation
 
-[Here is a guide](https://purescript-deku.netlify.app/) to building apps with Deku. The guide is written in Deku and its source code can be found [here](https://github.com/mikesol/deku-documentation). **You should probably start your Deku journey with this guide.** It contains everything you need to build a Deku app, from bootstrapping a project to `Hello World` to a Discord clone!
+[Here is a guide](https://deku-documentation.vercel.app/) to building apps with Deku. The guide is written in Deku and its source code can be found [here](https://github.com/mikesol/deku-documentation). **You should probably start your Deku journey with this guide.** It contains everything you need to build a Deku app, from bootstrapping a project to `Hello World` to a Discord clone!
 
 Indexed documentation for Deku is published on [Pursuit](https://pursuit.purescript.org/packages/purescript-deku). Deku's structure is currently highly decentralized, so it can be tough to know where to look. Here's a small Deku app that acts as a legend for the Pursuit docs.
 
