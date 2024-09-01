@@ -32,6 +32,7 @@ package:
     - typelevel-prelude
     - tuples
     - unsafe-coerce
+    - unsafe-reference
     - untagged-union
     - web-dom
     - web-dom-parser
