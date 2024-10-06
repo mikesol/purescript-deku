@@ -137,7 +137,7 @@ newtype RegionSpan =
     , bump :: Bump
     }
 
--- | Manages a span of `Region`s. 
+-- | Manages a span of `Region`s.
 newSpan :: STFn2 Bound Bump Global RegionSpan
 newSpan = mkSTFn2 \parent parentBump -> do
   children <- STArray.new
@@ -325,7 +325,7 @@ shareBound = mkSTFn2 \posRef children -> do
 
   -- If the currentExtent is equal or greater to our pos then the region will be inserted before the end of the
   -- `SharedBound` and we dont have to anything.
-  -- otherwise we are getting inserted at the end of the `SharedBound` so we set it up to track our position 
+  -- otherwise we are getting inserted at the end of the `SharedBound` so we set it up to track our position
   when (currentExtent < pos) do
     void $ ST.write posRef endFromPrev.extent
 
@@ -346,7 +346,7 @@ clearBound = mkSTFn2 \cleared children -> do
 
   -- choose the smaller `SharedBound` to update, but never update the first element, the parent
   if selfIx - ownerIx > extentToIx - selfIx || ownerIx == 0 then do
-    -- the following owned `SharedBound` was smaller, so we extend prevBound to cover nextBound and update the following 
+    -- the following owned `SharedBound` was smaller, so we extend prevBound to cover nextBound and update the following
     -- regions
     void $ ST.write extentToEff prevBound.extent
     runSTFn4 fixManagedTo selfIx (extentToIx + 1) (updateShared prevBound)
@@ -362,8 +362,8 @@ clearBound = mkSTFn2 \cleared children -> do
     runSTFn4 fixManagedTo ownerIx (selfIx + 1) (updateShared nextBound) children
 
 -- | Updates the end of a `ManagedRegion`. If it shares that bound with a preceding sibling it will set up a new
--- | `SharedBound` that it owns and propagates it to all following members of the old `SharedBound`. 
--- | Or it hijacks the previous `SharedBound`. 
+-- | `SharedBound` that it owns and propagates it to all following members of the old `SharedBound`.
+-- | Or it hijacks the previous `SharedBound`.
 bumpBound
   :: STFn3 Anchor ManagedRegion Children Global
        Unit
@@ -374,7 +374,7 @@ bumpBound = mkSTFn3 \anchor bumped children -> do
     ownedBound <- ST.read bumped.end
     runSTFn1 ownedBound.pushAnchor anchor
 
-  -- we need to split up the `SharedBound` 
+  -- we need to split up the `SharedBound`
   else do
     prevExtent <- ST.read bumped.end
     ownerEff <- ST.read prevExtent.owner

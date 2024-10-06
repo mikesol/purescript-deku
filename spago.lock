@@ -272,6 +272,7 @@ workspace:
         - tuples
         - typelevel-prelude
         - unsafe-coerce
+        - unsafe-reference
         - untagged-union
         - web-dom
         - web-dom-parser
@@ -553,7 +554,7 @@ workspace:
         - yoga-tree
   package_set:
     address:
-      registry: 56.4.0
+      registry: 58.0.0
     compiler: ">=0.15.15 <0.16.0"
     content:
       abc-parser: 2.0.1
@@ -848,9 +849,11 @@ workspace:
       oak-debug: 1.2.2
       object-maps: 0.3.0
       ocarina: 1.5.4
-      open-folds: 6.3.0
-      open-memoize: 6.1.0
-      open-pairing: 6.1.0
+      oooooooooorrrrrrrmm-lib: 0.0.1
+      open-folds: 6.4.0
+      open-memoize: 6.2.0
+      open-mkdirp-aff: 1.2.0
+      open-pairing: 6.2.0
       options: 7.0.0
       optparse: 5.0.1
       ordered-collections: 3.2.0
@@ -873,12 +876,12 @@ workspace:
       pointed-list: 0.5.1
       polymorphic-vectors: 4.0.0
       posix-types: 6.0.0
-      postgresql: 2.0.17
+      postgresql: 2.0.19
       precise: 6.0.0
       precise-datetime: 7.0.0
       prelude: 6.0.1
       prettier-printer: 3.0.0
-      priority-queue: 0.1.0
+      priority-queue: 0.1.2
       profunctor: 6.0.1
       profunctor-lenses: 8.0.0
       protobuf: 4.3.0
@@ -950,7 +953,7 @@ workspace:
       soundfonts: 4.1.0
       sparse-matrices: 2.0.1
       sparse-polynomials: 3.0.1
-      spec: 7.6.1
+      spec: 8.0.0
       spec-discovery: 8.3.0
       spec-mocha: 5.1.1
       spec-node: 0.0.1
@@ -978,6 +981,7 @@ workspace:
       thermite-dom: 0.3.1
       these: 6.0.0
       threading: 0.0.3
+      tldr: 0.0.0
       toestand: 0.9.0
       transformation-matrix: 1.0.1
       transformers: 6.1.0
@@ -1019,7 +1023,7 @@ workspace:
       vectors: 2.1.0
       versions: 7.0.0
       visx: 0.0.2
-      web-clipboard: 5.0.0
+      web-clipboard: 6.0.0
       web-cssom: 2.0.0
       web-cssom-view: 0.1.0
       web-dom: 6.0.0
@@ -1093,15 +1097,14 @@ workspace:
         - strings
         - tuples
     hyrule:
-      repo: https://github.com/mikesol/purescript-hyrule.git
-      version: v2.5.1
+      git: https://github.com/mikesol/purescript-hyrule.git
+      ref: v2.5.1
       dependencies:
+        - avar
         - effect
-        - avar
         - js-timers
-        - avar
-        - web-html
         - unsafe-reference
+        - web-html
         - web-uievents
     tidy:
       repo: https://github.com/natefaubion/purescript-tidy.git
@@ -2195,8 +2198,8 @@ packages:
       - unsafe-coerce
   spec:
     type: registry
-    version: 7.6.1
-    integrity: sha256-VycY2SgN8rHZGqcMqZEiTh9OdCw40CUMX2pCoSUJ/zY=
+    version: 8.0.0
+    integrity: sha256-Yn7MhDai1YULlQF45+9FTOTf2rcjoda1Jf2IrEFCoeg=
     dependencies:
       - aff
       - ansi

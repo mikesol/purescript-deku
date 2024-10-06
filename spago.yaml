@@ -1,6 +1,6 @@
 workspace:
   packageSet:
-    registry: 56.4.0
+    registry: 58.0.0
   # backend:
   #   cmd: purs-backend-es
   #   args:
@@ -11,8 +11,9 @@ workspace:
       ref: "7945d3f"
       dependencies: [prelude]
     hyrule:
-      repo: "https://github.com/mikesol/purescript-hyrule.git"
-      version: "v2.5.1"
+      git: "https://github.com/mikesol/purescript-hyrule.git"
+      # ref: "bf0833f"
+      ref: "v2.5.1"
       dependencies:
         - effect
         - avar
