@@ -1,5 +1,5 @@
 package:
-  name: deku
+  name: deku-test
   publish:
     version: 0.9.24
     license: "Apache-2.0"
