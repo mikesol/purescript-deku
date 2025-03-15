@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [18.x]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -20,19 +20,9 @@ jobs:
           key: >-
             ${{ hashFiles('pnpm-lock.yaml') }}-
             ${{ hashFiles('spago.yaml') }}
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 10.6.3
-          run_install: false
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
       - name: Install purescript
         run: npm i -g purescript@0.15.15
       - name: Install
-        run: pnpm i
+        run: npm i
       - name: Test
-        run: pnpm t
+        run: npm t
