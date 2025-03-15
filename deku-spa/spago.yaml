@@ -1,0 +1,4 @@
+package:
+  name: deku-spa
+  dependencies:
+  - deku-core

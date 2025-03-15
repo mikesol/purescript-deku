@@ -19,3 +19,4 @@ packages.json
 __pycache__
 .vscode
 codegen/cache
+.spec-results

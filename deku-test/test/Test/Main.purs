@@ -22,9 +22,9 @@ import Deku.Do as Deku
 import Deku.Hooks (cycle, dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Internal.Ancestry (DekuAncestry(..), reconstructAncestry)
 import Deku.Pursx (lenientPursx, pursx)
-import Deku.Toplevel (SSROutput, hydrateInBody, runInBody, ssrInBody)
+import Deku.SSR (SSROutput, hydrateInBody, ssrInBody)
+import Deku.SPA (runInBody)
 import Effect (Effect)
-import Effect.Aff (launchAff_)
 import Effect.Class (liftEffect)
 import Effect.Random (random)
 import Effect.Uncurried (mkEffectFn2, runEffectFn2)
@@ -33,7 +33,7 @@ import FRP.Poll (Poll, merge, mergeMap, mergeMapPure, stToPoll)
 import Test.Spec (before_, describe, it)
 import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.Reporter (consoleReporter)
-import Test.Spec.Runner (runSpec)
+import Test.Spec.Runner.Node (runSpecAndExitProcess)
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
 import Web.HTML.Window (alert)
@@ -785,7 +785,7 @@ foreign import initializeJSDOM :: Effect Unit
 main :: Effect Unit
 main = do
   initializeJSDOM
-  launchAff_ $ runSpec [ consoleReporter ] $ before_ (liftEffect resetBody) do
+  runSpecAndExitProcess [ consoleReporter ] $ before_ (liftEffect resetBody) do
     describe "ssr" do
       it "registers the root as boring in a simple case with no text" $
         liftEffect do
