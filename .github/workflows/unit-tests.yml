@@ -30,6 +30,8 @@ jobs:
         id: pnpm-cache
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Install purescript
+        run: npm i -g purescript@0.15.15
       - name: Install
         run: pnpm i
       - name: Test

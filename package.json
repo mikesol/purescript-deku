@@ -29,7 +29,6 @@
 		"netlify-cli": "^8.19.3",
 		"psc-package": "^4.0.1",
 		"pulp": "^16.0.2",
-		"purescript": "^0.15.15",
 		"purs-backend-es": "^1.4.3",
 		"purs-tidy": "^0.10.1",
 		"spago": "^0.93.43",
