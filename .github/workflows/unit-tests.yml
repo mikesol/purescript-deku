@@ -18,7 +18,7 @@ jobs:
             ${{ env.spago_global_cache }}
             output
           key: >-
-            ${{ hashFiles('pnpm-lock.yaml') }}-
+            ${{ hashFiles('package-lock.json') }}-
             ${{ hashFiles('spago.yaml') }}
       - name: Install purescript
         run: npm i -g purescript@0.15.15
