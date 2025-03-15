@@ -5,12 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [18.x]
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.npm
@@ -18,19 +18,11 @@ jobs:
             ${{ env.spago_global_cache }}
             output
           key: >-
-            ${{ hashFiles('pnpm-lock.yaml') }}-
+            ${{ hashFiles('package-lock.json') }}-
             ${{ hashFiles('spago.yaml') }}
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 7.13.2
-          run_install: false
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Install purescript
+        run: npm i -g purescript@0.15.15
       - name: Install
-        run: pnpm i
+        run: npm i
       - name: Test
-        run: pnpm t
+        run: npm t
