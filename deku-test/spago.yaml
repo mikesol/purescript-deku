@@ -13,6 +13,8 @@ package:
       - control
       - deku-core
       - deku-dom
+      - deku-spa
+      - deku-ssr
       - effect
       - filterable
       - foldable-traversable
@@ -23,6 +25,7 @@ package:
       - record
       - refs
       - spec
+      - spec-node
       - st
       - tailrec
       - tuples

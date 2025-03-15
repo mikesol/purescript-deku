@@ -1,15 +1,15 @@
-module Deku.FullDOMInterpret where
+module Deku.SPAInterpret where
 
 import Prelude
 
 import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2)
 import Deku.Core as Core
-import Deku.Interpret as I
+import Deku.DOMInterpret as I
 
-fullDOMInterpret :: Core.DOMInterpret
-fullDOMInterpret = Core.DOMInterpret
-  { dynamicDOMInterpret: \_ -> fullDOMInterpret
-  , portalDOMInterpret: \_ -> fullDOMInterpret
+spaInterpret :: Core.DOMInterpret
+spaInterpret = Core.DOMInterpret
+  { dynamicDOMInterpret: \_ -> spaInterpret
+  , portalDOMInterpret: \_ -> spaInterpret
   --
   , isBoring: const false
   , makeElement: I.makeElementEffect

@@ -1,8 +1,6 @@
 -- | These functions are used to run a Deku application.
-module Deku.Toplevel
-  ( runInElement
-  , runInBody
-  , ssrInElement
+module Deku.SSR
+  ( ssrInElement
   , ssrInBody
   , hydrateInElement
   , hydrateInBody
@@ -29,14 +27,13 @@ import Data.Traversable (foldl, for_, sequence, traverse)
 import Data.Tuple (Tuple(..), swap)
 import Data.Tuple.Nested ((/\))
 import Deku.Core (Nut(..), newPSR)
-import Deku.FullDOMInterpret (fullDOMInterpret)
-import Deku.HydratingDOMInterpret (hydratingDOMInterpret)
+import Deku.HydratingInterpret (hydratingInterpret)
 import Deku.Internal.Ancestry (Ancestry, DekuAncestry(..), reconstructAncestry, unsafeCollectLineage)
 import Deku.Internal.Ancestry as Ancestry
 import Deku.Internal.Entities (DekuParent(..), fromDekuElement, fromDekuText, toDekuElement)
 import Deku.Internal.Region as Region
 import Deku.SSR.Optimize (hasPlainAncestry, truncateLineageBy1)
-import Deku.SSRDOMInterpret (SSRElementRenderingInfo(..), SSRTextRenderingInfo(..), ssrDOMInterpret)
+import Deku.SSRInterpret (SSRElementRenderingInfo(..), SSRTextRenderingInfo(..), ssrInterpret)
 import Effect (Effect)
 import Effect.Exception (error, throwException)
 import Effect.Uncurried (runEffectFn2)
@@ -53,32 +50,12 @@ import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
--- | Runs a deku application in a DOM element, returning a canceler that can
--- | be used to cancel the application.
-runInElement
-  :: Web.DOM.Element
-  -> Nut
-  -> Effect (Effect Unit)
-runInElement elt (Nut nut) = do
-  { poll: lifecycle, push: dispose } <- liftST create
-  region <- liftST $ runSTFn1 Region.fromParent (DekuParent $ toDekuElement elt)
-  scope <- liftST $ runSTFn3 newPSR Ancestry.root lifecycle region
-  void $ runEffectFn2 nut scope fullDOMInterpret
-  pure $ dispose unit
-
 doInBody :: forall i o. (Web.DOM.Element -> i -> Effect o) -> i -> Effect o
 doInBody f elt = do
   b' <- window >>= document >>= body
   maybe (throwException (error "Could not find element"))
     (flip f elt)
     (toElement <$> b')
-
--- | Runs a deku application in the body of a document, returning a canceler that can
--- | be used to cancel the application.
-runInBody
-  :: Nut
-  -> Effect (Effect Unit)
-runInBody = doInBody runInElement
 
 foreign import innerHTML :: Web.DOM.Element -> Effect String
 
@@ -142,7 +119,7 @@ ssrInElement elt (Nut nut) = do
   fixedCacheRef <- liftST $ ST.new Set.empty
   portalCtrRef <- liftST $ ST.new (-1)
   let
-    di = ssrDOMInterpret portalCtrRef textCacheRef elementCacheRef
+    di = ssrInterpret portalCtrRef textCacheRef elementCacheRef
       purePortalsRef
       portalCacheRef
       dynCacheRef
@@ -278,7 +255,7 @@ hydrateInElement { livePortals, boring } ielt (Nut nut) = do
         mapIdsToTextNodes ielt
   scope <- liftST $ runSTFn3 newPSR Ancestry.root lifecycle region
   void $ runEffectFn2 nut scope
-    ( hydratingDOMInterpret (Set.fromFoldable boring) portalCtrRef (Map.fromFoldable kv) textNodes
+    ( hydratingInterpret (Set.fromFoldable boring) portalCtrRef (Map.fromFoldable kv) textNodes
         (Set.fromFoldable livePortals)
     )
   pure $ dispose unit

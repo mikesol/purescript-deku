@@ -1,4 +1,4 @@
-module Deku.SSRDOMInterpret where
+module Deku.SSRInterpret where
 
 import Prelude
 
@@ -14,7 +14,7 @@ import Data.Tuple (Tuple(..))
 import Deku.Core as Core
 import Deku.Internal.Ancestry (Ancestry)
 import Deku.Internal.Entities (DekuElement, DekuText, fromDekuElement)
-import Deku.Interpret as I
+import Deku.DOMInterpret as I
 import Effect.Uncurried (mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn3)
 import Web.DOM.Element (setAttribute)
 
@@ -102,7 +102,7 @@ initializeTextRendering renderingInfo = mkSTFn2
       )
       renderingInfo
 
-ssrDOMInterpret
+ssrInterpret
   :: STRef.STRef Global Int
   -> STRef.STRef Global SSRTextRenderingInfoCache
   -> STRef.STRef Global SSRElementRenderingInfoCache
@@ -111,7 +111,7 @@ ssrDOMInterpret
   -> STRef.STRef Global (Set.Set Ancestry)
   -> STRef.STRef Global (Set.Set Ancestry)
   -> Core.DOMInterpret
-ssrDOMInterpret
+ssrInterpret
   portalRef
   textRenderingInfo
   elementRenderingInfo
@@ -121,7 +121,7 @@ ssrDOMInterpret
   fixedCache =
   Core.DOMInterpret
     { dynamicDOMInterpret: \_ -> noOpDomInterpret
-    , portalDOMInterpret: \_ -> ssrDOMInterpret portalRef textRenderingInfo
+    , portalDOMInterpret: \_ -> ssrInterpret portalRef textRenderingInfo
         elementRenderingInfo
         purePortalCache
         portalCache

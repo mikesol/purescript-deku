@@ -1,0 +1,4 @@
+package:
+  name: deku-ssr
+  dependencies:
+    - deku-core

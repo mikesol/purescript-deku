@@ -1,4 +1,4 @@
-module Deku.Interpret where
+module Deku.DOMInterpret where
 
 import Prelude
 

@@ -1,5 +1,5 @@
-module Deku.HydratingDOMInterpret
-  ( hydratingDOMInterpret
+module Deku.HydratingInterpret
+  ( hydratingInterpret
   , makeElement
   , makeText
   ) where
@@ -16,10 +16,10 @@ import Data.Set as Set
 import Data.Tuple (Tuple(..))
 import Deku.Core (MakeElement, MakeText)
 import Deku.Core as Core
-import Deku.FullDOMInterpret (fullDOMInterpret)
+import Deku.SPAInterpret (spaInterpret)
 import Deku.Internal.Ancestry (Ancestry)
 import Deku.Internal.Entities (toDekuElement, toDekuText)
-import Deku.Interpret as I
+import Deku.DOMInterpret as I
 import Effect.Uncurried (mkEffectFn2, mkEffectFn3)
 import Web.DOM as Web.DOM
 
@@ -38,14 +38,14 @@ makeText textNodeCache = mkEffectFn2 \id _ ->
     Nothing -> pure $ toDekuText unit -- force crash
     Just t -> pure $ toDekuText t
 
-hydratingDOMInterpret
+hydratingInterpret
   :: Set.Set Ancestry
   -> STRef.STRef Global Int
   -> Map.Map Ancestry Web.DOM.Element
   -> Map.Map Ancestry Web.DOM.Text
   -> Set.Set Ancestry
   -> Core.DOMInterpret
-hydratingDOMInterpret
+hydratingInterpret
   boring
   portalRef
   elementCache
@@ -57,14 +57,14 @@ hydratingDOMInterpret
       -- should be harmless, though, as this will be called rarely if at all
       -- because SSR code will only trigger dynamic elements
       -- in case there's a dyn with pure polls that aren't optimized as being pure
-      dynamicDOMInterpret: \_ -> fullDOMInterpret
+      dynamicDOMInterpret: \_ -> spaInterpret
     , portalDOMInterpret: \a ->
-        if Set.member a renderedPortals then hydratingDOMInterpret boring
+        if Set.member a renderedPortals then hydratingInterpret boring
           portalRef
           elementCache
           textNodeCache
           renderedPortals
-        else fullDOMInterpret
+        else spaInterpret
     --
     , isBoring: flip Set.member boring
     , makeElement: makeElement elementCache
