@@ -1,3 +1,11 @@
+package:
+  name: deku
+  dependencies:
+    - tldr
+    - hyrule
+    - tidy
+    - dodo-printer
+    - tidy-codegen
 workspace:
   packageSet:
     registry: 58.0.0
