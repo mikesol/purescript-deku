@@ -115,6 +115,8 @@ generate = do
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/filter-effects-1.json"
     , fetch @"dfn"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-animations.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-paths.json"
 
     , fetch @"events"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/svg-animations.json"
@@ -127,6 +129,8 @@ generate = do
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/filter-effects-1.json"
     , fetch @"idlparsed"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/css-masking-1.json"
+    , fetch @"idlparsed"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/svg-paths.json"
 
     , fetch @"elements"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/SVG2.json"
@@ -136,6 +140,8 @@ generate = do
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/filter-effects-1.json"
     , fetch @"elements"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/css-masking-1.json"
+    , fetch @"elements"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/svg-paths.json"
     ]
 
   mathml <- Parse.parse MathML <$> sequence
