@@ -142,14 +142,12 @@ generate interfaces tags = do
     , pure $ declValue "namespaceByTag" [ binderWildcard ] (exprCtor "Nothing")
     ]
 
-  where
-
-  exprNamespace :: Partial => TagNS -> Expr Void
-  exprNamespace ns =
-    maybe
-      (exprCtor "Nothing")
-      (exprApp (exprCtor "Just") <<< pure <<< exprString)
-      (xhtmlNamespace ns)
+exprNamespace :: Partial => TagNS -> Expr Void
+exprNamespace ns =
+  maybe
+    (exprCtor "Nothing")
+    (exprApp (exprCtor "Just") <<< pure <<< exprString)
+    (xhtmlNamespace ns)
 
 typeIndex :: Partial => Array String -> Array (Ctor /\ Type Void) -> Type Void
 typeIndex bases members =
