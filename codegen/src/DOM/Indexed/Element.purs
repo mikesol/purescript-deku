@@ -14,7 +14,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Foreign.Object as Foreign
 import PureScript.CST.Types (ClassFundep(..), Declaration, Export, Expr, ImportDecl, Type)
 import Safe.Coerce (coerce)
-import Tidy.Codegen (binderVar, declClass, declImport, declImportAs, declInstance, declSignature, declType, declValue, exportClass, exportType, exportValue, exprApp, exprArray, exprCtor, exprIdent, exprString, importType, importTypeAll, importValue, typeApp, typeArrow, typeCtor, typeRow, typeRowEmpty, typeString, typeVar, typeVarKinded)
+import Tidy.Codegen (binderString, binderVar, binderWildcard, declClass, declImport, declImportAs, declInstance, declSignature, declType, declValue, exportClass, exportType, exportValue, exprApp, exprArray, exprCtor, exprIdent, exprString, importType, importTypeAll, importValue, typeApp, typeArrow, typeCtor, typeRow, typeRowEmpty, typeString, typeVar, typeVarKinded)
 import Tidy.Codegen.Class (toName)
 import Tidy.Codegen.Common (tokRightArrow)
 
@@ -63,6 +63,7 @@ exports interfaces tags = do
         let shorShortHand = tag <> "__"
         [ exportValue tag, exportValue shortHand, exportValue shorShortHand ]
     , map exportType $ Foreign.keys interfaces
+    , pure $ exportValue "namespaceByTag"
     ]
 
 generate
@@ -136,6 +137,9 @@ generate interfaces tags = do
                 ]
             ]
         ]
+    , tags <#> \{ tag, ns } -> declValue "namespaceByTag" [ binderString tag ] $
+        exprNamespace ns
+    , pure $ declValue "namespaceByTag" [ binderWildcard ] (exprCtor "Nothing")
     ]
 
   where
