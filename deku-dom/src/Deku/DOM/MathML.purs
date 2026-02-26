@@ -97,7 +97,6 @@ module Deku.DOM.MathML
   , annotationXml_
   , annotationXml__
   , MathMLElement
-  , namespaceByTag
   ) where
 
 import FRP.Poll as FRP.Poll
@@ -485,36 +484,3 @@ annotationXml_ = annotationXml []
 
 annotationXml__ :: String -> Nut
 annotationXml__ t = annotationXml [] [ DC.text_ t ]
-
-namespaceByTag "math" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mtext" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mi" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mn" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mo" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mspace" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "ms" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mrow" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mfrac" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "msqrt" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mroot" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mstyle" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "merror" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mpadded" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mphantom" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "msub" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "msup" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "msubsup" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "munder" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mover" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "munderover" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mmultiscripts" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mprescripts" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mtable" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mtr" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "mtd" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "a" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "maction" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "semantics" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "annotation" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag "annotation-xml" = Just "http://www.w3.org/1998/Math/MathML"
-namespaceByTag _ = Nothing
