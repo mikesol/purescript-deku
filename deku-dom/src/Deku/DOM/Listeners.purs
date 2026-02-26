@@ -115,18 +115,6 @@ module Deku.DOM.Listeners
   , drag_
   , dragstart
   , dragstart_
-  , domNodeRemovedFromDocument
-  , domNodeRemovedFromDocument_
-  , domNodeRemoved
-  , domNodeRemoved_
-  , domNodeInsertedIntoDocument
-  , domNodeInsertedIntoDocument_
-  , domNodeInserted
-  , domNodeInserted_
-  , domCharacterDataModified
-  , domCharacterDataModified_
-  , domSubtreeModified
-  , domSubtreeModified_
   , unload
   , unload_
   , touchcancel
@@ -189,6 +177,8 @@ module Deku.DOM.Listeners
   , beforeprint_
   , afterprint
   , afterprint_
+  , command
+  , command_
   , beforetoggle
   , beforetoggle_
   , beforematch
@@ -199,14 +189,6 @@ module Deku.DOM.Listeners
   , invalid_
   , cancel
   , cancel_
-  , textInput
-  , textInput_
-  , keypress
-  , keypress_
-  , domAttrModified
-  , domAttrModified_
-  , domActivate
-  , domActivate_
   , wheel
   , wheel_
   , mouseup
@@ -223,28 +205,34 @@ module Deku.DOM.Listeners
   , mouseenter_
   , mousedown
   , mousedown_
+  , dblclick
+  , dblclick_
+  , contextmenu
+  , contextmenu_
+  , click
+  , click_
+  , auxclick
+  , auxclick_
+  , textInput
+  , textInput_
+  , keypress
+  , keypress_
+  , domActivate
+  , domActivate_
   , keyup
   , keyup_
   , keydown
   , keydown_
   , input
   , input_
-  , dblclick
-  , dblclick_
-  , contextmenu
-  , contextmenu_
   , compositionend
   , compositionend_
   , compositionupdate
   , compositionupdate_
   , compositionstart
   , compositionstart_
-  , click
-  , click_
   , beforeinput
   , beforeinput_
-  , auxclick
-  , auxclick_
   , close
   , close_
   , connect
@@ -305,9 +293,9 @@ import Web.PointerEvent.PointerEvent as Web.PointerEvent.PointerEvent
 import Web.HTML.Event.DragEvent as Web.HTML.Event.DragEvent
 import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
 import Web.UIEvent.FocusEvent as Web.UIEvent.FocusEvent
+import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 import Web.UIEvent.KeyboardEvent as Web.UIEvent.KeyboardEvent
 import Web.UIEvent.UIEvent as Web.UIEvent.UIEvent
-import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 import Web.UIEvent.CompositionEvent as Web.UIEvent.CompositionEvent
 
 volumechange
@@ -1276,113 +1264,6 @@ dragstart_
   -> f (Deku.Attribute.Attribute (dragstart :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragstart_ = dragstart <<< Applicative.pure
 
-domNodeRemovedFromDocument
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domNodeRemovedFromDocument :: Web.Event.Internal.Types.Event | r))
-domNodeRemovedFromDocument = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMNodeRemovedFromDocument"
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
-  )
-
-domNodeRemovedFromDocument_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domNodeRemovedFromDocument :: Web.Event.Internal.Types.Event | r))
-domNodeRemovedFromDocument_ = domNodeRemovedFromDocument <<< Applicative.pure
-
-domNodeRemoved
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domNodeRemoved :: Web.Event.Internal.Types.Event | r))
-domNodeRemoved = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMNodeRemoved" <<< Deku.Attribute.cb <<<
-      Unsafe.Coerce.unsafeCoerce
-  )
-
-domNodeRemoved_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domNodeRemoved :: Web.Event.Internal.Types.Event | r))
-domNodeRemoved_ = domNodeRemoved <<< Applicative.pure
-
-domNodeInsertedIntoDocument
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f
-       (Deku.Attribute.Attribute (domNodeInsertedIntoDocument :: Web.Event.Internal.Types.Event | r))
-domNodeInsertedIntoDocument = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMNodeInsertedIntoDocument"
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
-  )
-
-domNodeInsertedIntoDocument_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f
-       (Deku.Attribute.Attribute (domNodeInsertedIntoDocument :: Web.Event.Internal.Types.Event | r))
-domNodeInsertedIntoDocument_ = domNodeInsertedIntoDocument <<< Applicative.pure
-
-domNodeInserted
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domNodeInserted :: Web.Event.Internal.Types.Event | r))
-domNodeInserted = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMNodeInserted" <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
-  )
-
-domNodeInserted_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domNodeInserted :: Web.Event.Internal.Types.Event | r))
-domNodeInserted_ = domNodeInserted <<< Applicative.pure
-
-domCharacterDataModified
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domCharacterDataModified :: Web.Event.Internal.Types.Event | r))
-domCharacterDataModified = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMCharacterDataModified"
-      <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
-  )
-
-domCharacterDataModified_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domCharacterDataModified :: Web.Event.Internal.Types.Event | r))
-domCharacterDataModified_ = domCharacterDataModified <<< Applicative.pure
-
-domSubtreeModified
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domSubtreeModified :: Web.Event.Internal.Types.Event | r))
-domSubtreeModified = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMSubtreeModified" <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
-  )
-
-domSubtreeModified_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domSubtreeModified :: Web.Event.Internal.Types.Event | r))
-domSubtreeModified_ = domSubtreeModified <<< Applicative.pure
-
 unload
   :: forall r f
    . Functor.Functor f
@@ -1910,6 +1791,23 @@ afterprint_
   -> f (Deku.Attribute.Attribute (afterprint :: Web.Event.Internal.Types.Event | r))
 afterprint_ = afterprint <<< Applicative.pure
 
+command
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (command :: Web.Event.Internal.Types.Event | r))
+command = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "command" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+command_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (command :: Web.Event.Internal.Types.Event | r))
+command_ = command <<< Applicative.pure
+
 beforetoggle
   :: forall r f
    . Functor.Functor f
@@ -1994,74 +1892,6 @@ cancel_
   => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (cancel :: Web.Event.Internal.Types.Event | r))
 cancel_ = cancel <<< Applicative.pure
-
-textInput
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (textInput :: Web.Event.Internal.Types.Event | r))
-textInput = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "textInput" <<< Deku.Attribute.cb <<<
-      Unsafe.Coerce.unsafeCoerce
-  )
-
-textInput_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (textInput :: Web.Event.Internal.Types.Event | r))
-textInput_ = textInput <<< Applicative.pure
-
-keypress
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
-keypress = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "keypress" <<< Deku.Attribute.cb <<<
-      Unsafe.Coerce.unsafeCoerce
-  )
-
-keypress_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
-keypress_ = keypress <<< Applicative.pure
-
-domAttrModified
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domAttrModified :: Web.Event.Internal.Types.Event | r))
-domAttrModified = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMAttrModified" <<< Deku.Attribute.cb
-      <<< Unsafe.Coerce.unsafeCoerce
-  )
-
-domAttrModified_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domAttrModified :: Web.Event.Internal.Types.Event | r))
-domAttrModified_ = domAttrModified <<< Applicative.pure
-
-domActivate
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.UIEvent.UIEvent.UIEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domActivate :: Web.UIEvent.UIEvent.UIEvent | r))
-domActivate = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMActivate" <<< Deku.Attribute.cb <<<
-      Unsafe.Coerce.unsafeCoerce
-  )
-
-domActivate_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.UIEvent.UIEvent.UIEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (domActivate :: Web.UIEvent.UIEvent.UIEvent | r))
-domActivate_ = domActivate <<< Applicative.pure
 
 wheel
   :: forall r f
@@ -2199,6 +2029,125 @@ mousedown_
   -> f (Deku.Attribute.Attribute (mousedown :: Web.UIEvent.MouseEvent.MouseEvent | r))
 mousedown_ = mousedown <<< Applicative.pure
 
+dblclick
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dblclick :: Web.UIEvent.MouseEvent.MouseEvent | r))
+dblclick = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "dblclick" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+dblclick_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (dblclick :: Web.UIEvent.MouseEvent.MouseEvent | r))
+dblclick_ = dblclick <<< Applicative.pure
+
+contextmenu
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+contextmenu = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "contextmenu" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+contextmenu_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+contextmenu_ = contextmenu <<< Applicative.pure
+
+click
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+click = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "click" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+click_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+click_ = click <<< Applicative.pure
+
+auxclick
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+auxclick = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "auxclick" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+auxclick_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
+auxclick_ = auxclick <<< Applicative.pure
+
+textInput
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (textInput :: Web.Event.Internal.Types.Event | r))
+textInput = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "textInput" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+textInput_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (textInput :: Web.Event.Internal.Types.Event | r))
+textInput_ = textInput <<< Applicative.pure
+
+keypress
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
+keypress = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "keypress" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+keypress_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.KeyboardEvent.KeyboardEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent | r))
+keypress_ = keypress <<< Applicative.pure
+
+domActivate
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.UIEvent.UIEvent.UIEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domActivate :: Web.UIEvent.UIEvent.UIEvent | r))
+domActivate = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "DOMActivate" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+domActivate_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.UIEvent.UIEvent.UIEvent -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (domActivate :: Web.UIEvent.UIEvent.UIEvent | r))
+domActivate_ = domActivate <<< Applicative.pure
+
 keyup
   :: forall r f
    . Functor.Functor f
@@ -2249,40 +2198,6 @@ input_
   => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (input :: Web.Event.Internal.Types.Event | r))
 input_ = input <<< Applicative.pure
-
-dblclick
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (dblclick :: Web.UIEvent.MouseEvent.MouseEvent | r))
-dblclick = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "dblclick" <<< Deku.Attribute.cb <<<
-      Unsafe.Coerce.unsafeCoerce
-  )
-
-dblclick_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.UIEvent.MouseEvent.MouseEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (dblclick :: Web.UIEvent.MouseEvent.MouseEvent | r))
-dblclick_ = dblclick <<< Applicative.pure
-
-contextmenu
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
-contextmenu = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "contextmenu" <<< Deku.Attribute.cb <<<
-      Unsafe.Coerce.unsafeCoerce
-  )
-
-contextmenu_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
-contextmenu_ = contextmenu <<< Applicative.pure
 
 compositionend
   :: forall r f
@@ -2353,23 +2268,6 @@ compositionstart_
        )
 compositionstart_ = compositionstart <<< Applicative.pure
 
-click
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
-click = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "click" <<< Deku.Attribute.cb <<<
-      Unsafe.Coerce.unsafeCoerce
-  )
-
-click_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
-click_ = click <<< Applicative.pure
-
 beforeinput
   :: forall r f
    . Functor.Functor f
@@ -2386,23 +2284,6 @@ beforeinput_
   => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (beforeinput :: Web.Event.Internal.Types.Event | r))
 beforeinput_ = beforeinput <<< Applicative.pure
-
-auxclick
-  :: forall r f
-   . Functor.Functor f
-  => f (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
-auxclick = Functor.map
-  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "auxclick" <<< Deku.Attribute.cb <<<
-      Unsafe.Coerce.unsafeCoerce
-  )
-
-auxclick_
-  :: forall r f
-   . Applicative.Applicative f
-  => (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
-  -> f (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
-auxclick_ = auxclick <<< Applicative.pure
 
 close
   :: forall r f

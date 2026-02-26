@@ -9,6 +9,8 @@ module Deku.DOM.MathML.Attributes
   , selection_
   , actiontype
   , actiontype_
+  , href
+  , href_
   , accentunder
   , accentunder_
   , accent
@@ -98,6 +100,17 @@ actiontype_
   => String
   -> f (Deku.Attribute.Attribute (actiontype :: String | r))
 actiontype_ = actiontype <<< Applicative.pure
+
+href
+  :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (href :: String | r))
+href = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "href")
+
+href_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (href :: String | r))
+href_ = href <<< Applicative.pure
 
 accentunder
   :: forall r f
