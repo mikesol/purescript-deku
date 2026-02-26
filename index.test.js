@@ -1,6 +1,6 @@
 const tests = require("./output/Test.Main");
 const testFriend = require("./output/Test.TestFriend");
-const di = require("./output/Deku.Interpret");
+const di = require("./output/Deku.DOMInterpret");
 const region = require("./output/Deku.Internal.Region");
 
 const doTest = (name, closure, itIs) => {
