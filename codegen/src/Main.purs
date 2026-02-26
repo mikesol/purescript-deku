@@ -79,7 +79,7 @@ generate = do
     , fetch @"events"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/uievents.json"
     , fetch @"events"
-        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/pointerevents3.json"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/pointerevents4.json"
     , fetch @"events"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/css-animations-1.json"
     , fetch @"events"
