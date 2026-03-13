@@ -317,6 +317,9 @@ module Deku.DOM
   , legend
   , legend_
   , legend__
+  , selectedcontent
+  , selectedcontent_
+  , selectedcontent__
   , details
   , details_
   , details__
@@ -429,6 +432,7 @@ module Deku.DOM
   , tt_
   , tt__
   , ARIAMixin
+  , ARIANotifyMixin
   , HTMLElement
   , HTMLUnknownElement
   , HTMLOrSVGElement
@@ -490,6 +494,7 @@ module Deku.DOM
   , HTMLMeterElement
   , HTMLFieldSetElement
   , HTMLLegendElement
+  , HTMLSelectedContentElement
   , HTMLDetailsElement
   , HTMLDialogElement
   , HTMLScriptElement
@@ -497,7 +502,7 @@ module Deku.DOM
   , HTMLSlotElement
   , HTMLCanvasElement
   , ElementContentEditable
-  , PopoverInvokerElement
+  , PopoverTargetAttributes
   , GlobalEventHandlers
   , WindowEventHandlers
   , HTMLMarqueeElement
@@ -526,10 +531,10 @@ import Type.Proxy (Proxy)
 import Web.Event.Internal.Types as Web.Event.Internal.Types
 import Web.PointerEvent.PointerEvent as Web.PointerEvent.PointerEvent
 import Web.HTML.Event.DragEvent as Web.HTML.Event.DragEvent
+import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 import Web.UIEvent.KeyboardEvent as Web.UIEvent.KeyboardEvent
 import Web.UIEvent.FocusEvent as Web.UIEvent.FocusEvent
 import Web.UIEvent.UIEvent as Web.UIEvent.UIEvent
-import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 import Web.UIEvent.CompositionEvent as Web.UIEvent.CompositionEvent
 import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
 
@@ -549,6 +554,7 @@ type ARIAMixin (r :: Row Type) =
   , ariaRowcount :: String
   , ariaRoledescription :: String
   , ariaRequired :: String
+  , ariaRelevant :: String
   , ariaReadonly :: String
   , ariaPressed :: String
   , ariaPosinset :: String
@@ -590,6 +596,7 @@ type ARIAMixin (r :: Row Type) =
   | r
   )
 
+type ARIANotifyMixin (r :: Row Type) = (__tag :: Proxy "ARIANotifyMixin" | r)
 type HTMLElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLElement"
   , popovertargetaction :: String
@@ -598,6 +605,7 @@ type HTMLElement (r :: Row Type) =
   , draggable :: String
   , enterkeyhint :: String
   , inputmode :: String
+  , autocorrect :: String
   , autocapitalize :: String
   , writingsuggestions :: String
   , spellcheck :: String
@@ -618,6 +626,7 @@ type HTMLElement (r :: Row Type) =
   , lang :: String
   , load :: Web.Event.Internal.Types.Event
   , error :: Web.Event.Internal.Types.Event
+  , command :: Web.Event.Internal.Types.Event
   , beforetoggle :: Web.Event.Internal.Types.Event
   , beforematch :: Web.Event.Internal.Types.Event
   | HTMLOrSVGElement (ElementContentEditable (GlobalEventHandlers (Element r)))
@@ -1104,6 +1113,8 @@ type HTMLInputElement (r :: Row Type) =
   , alt :: String
   , src :: String
   , accept :: String
+  , colorspace :: String
+  , alpha :: String
   , checked :: String
   , value :: String
   , xtype :: String
@@ -1111,7 +1122,7 @@ type HTMLInputElement (r :: Row Type) =
   , invalid :: Web.Event.Internal.Types.Event
   , change :: Web.Event.Internal.Types.Event
   , cancel :: Web.Event.Internal.Types.Event
-  | PopoverInvokerElement (HTMLElement r)
+  | PopoverTargetAttributes (HTMLElement r)
   )
 
 type HTMLButtonElement (r :: Row Type) =
@@ -1131,9 +1142,11 @@ type HTMLButtonElement (r :: Row Type) =
   , name :: String
   , form :: String
   , value :: String
+  , command :: String
+  , commandfor :: String
   , xtype :: String
   , invalid :: Web.Event.Internal.Types.Event
-  | PopoverInvokerElement (HTMLElement r)
+  | PopoverTargetAttributes (HTMLElement r)
   )
 
 type HTMLSelectElement (r :: Row Type) =
@@ -1220,6 +1233,9 @@ type HTMLFieldSetElement (r :: Row Type) =
 type HTMLLegendElement (r :: Row Type) =
   (__tag :: Proxy "HTMLLegendElement", align :: String | HTMLElement r)
 
+type HTMLSelectedContentElement (r :: Row Type) =
+  (__tag :: Proxy "HTMLSelectedContentElement" | HTMLElement r)
+
 type HTMLDetailsElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLDetailsElement"
   , open :: String
@@ -1230,6 +1246,7 @@ type HTMLDetailsElement (r :: Row Type) =
 
 type HTMLDialogElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLDialogElement"
+  , closedby :: String
   , open :: String
   , cancel :: Web.Event.Internal.Types.Event
   , close :: Web.Event.Internal.Types.Event
@@ -1243,10 +1260,10 @@ type HTMLScriptElement (r :: Row Type) =
   , language :: String
   , charset :: String
   , fetchpriority :: String
-  , blocking :: String
-  , referrerpolicy :: String
   , integrity :: String
+  , referrerpolicy :: String
   , crossorigin :: String
+  , blocking :: String
   , defer :: String
   , async :: String
   , nomodule :: String
@@ -1257,6 +1274,7 @@ type HTMLScriptElement (r :: Row Type) =
 
 type HTMLTemplateElement (r :: Row Type) =
   ( __tag :: Proxy "HTMLTemplateElement"
+  , shadowrootcustomelementregistry :: String
   , shadowrootserializable :: String
   , shadowrootclonable :: String
   , shadowrootdelegatesfocus :: String
@@ -1277,7 +1295,7 @@ type HTMLCanvasElement (r :: Row Type) =
   )
 
 type ElementContentEditable (r :: Row Type) = (__tag :: Proxy "ElementContentEditable" | r)
-type PopoverInvokerElement (r :: Row Type) = (__tag :: Proxy "PopoverInvokerElement" | r)
+type PopoverTargetAttributes (r :: Row Type) = (__tag :: Proxy "PopoverTargetAttributes" | r)
 type GlobalEventHandlers (r :: Row Type) =
   ( __tag :: Proxy "GlobalEventHandlers"
   , transitioncancel :: Web.Event.Internal.Types.Event
@@ -1334,23 +1352,12 @@ type Slottable (r :: Row Type) = (__tag :: Proxy "Slottable" | r)
 type Node (r :: Row Type) = (__tag :: Proxy "Node" | EventTarget r)
 type Element (r :: Row Type) =
   ( __tag :: Proxy "Element"
+  , headingreset :: String
+  , headingoffset :: String
   , slot :: String
   , id :: String
   , klass :: String
-  , textInput :: Web.Event.Internal.Types.Event
-  , keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent
-  , domSubtreeModified :: Web.Event.Internal.Types.Event
-  , domNodeRemovedFromDocument :: Web.Event.Internal.Types.Event
-  , domNodeRemoved :: Web.Event.Internal.Types.Event
-  , domNodeInsertedIntoDocument :: Web.Event.Internal.Types.Event
-  , domNodeInserted :: Web.Event.Internal.Types.Event
-  , domFocusOut :: Web.UIEvent.FocusEvent.FocusEvent
-  , domFocusIn :: Web.UIEvent.FocusEvent.FocusEvent
-  , domAttrModified :: Web.Event.Internal.Types.Event
-  , domActivate :: Web.UIEvent.UIEvent.UIEvent
   , wheel :: Web.Event.Internal.Types.Event
-  , unload :: Web.Event.Internal.Types.Event
-  , select :: Web.Event.Internal.Types.Event
   , mouseup :: Web.UIEvent.MouseEvent.MouseEvent
   , mouseover :: Web.UIEvent.MouseEvent.MouseEvent
   , mouseout :: Web.UIEvent.MouseEvent.MouseEvent
@@ -1358,6 +1365,17 @@ type Element (r :: Row Type) =
   , mouseleave :: Web.UIEvent.MouseEvent.MouseEvent
   , mouseenter :: Web.UIEvent.MouseEvent.MouseEvent
   , mousedown :: Web.UIEvent.MouseEvent.MouseEvent
+  , dblclick :: Web.UIEvent.MouseEvent.MouseEvent
+  , contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent
+  , click :: Web.PointerEvent.PointerEvent.PointerEvent
+  , auxclick :: Web.PointerEvent.PointerEvent.PointerEvent
+  , textInput :: Web.Event.Internal.Types.Event
+  , keypress :: Web.UIEvent.KeyboardEvent.KeyboardEvent
+  , domFocusOut :: Web.UIEvent.FocusEvent.FocusEvent
+  , domFocusIn :: Web.UIEvent.FocusEvent.FocusEvent
+  , domActivate :: Web.UIEvent.UIEvent.UIEvent
+  , unload :: Web.Event.Internal.Types.Event
+  , select :: Web.Event.Internal.Types.Event
   , load :: Web.Event.Internal.Types.Event
   , keyup :: Web.UIEvent.KeyboardEvent.KeyboardEvent
   , keydown :: Web.UIEvent.KeyboardEvent.KeyboardEvent
@@ -1366,21 +1384,18 @@ type Element (r :: Row Type) =
   , focusin :: Web.UIEvent.FocusEvent.FocusEvent
   , focus :: Web.UIEvent.FocusEvent.FocusEvent
   , error :: Web.Event.Internal.Types.Event
-  , dblclick :: Web.UIEvent.MouseEvent.MouseEvent
-  , contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent
   , compositionend :: Web.UIEvent.CompositionEvent.CompositionEvent
   , compositionupdate :: Web.UIEvent.CompositionEvent.CompositionEvent
   , compositionstart :: Web.UIEvent.CompositionEvent.CompositionEvent
-  , click :: Web.PointerEvent.PointerEvent.PointerEvent
   , blur :: Web.UIEvent.FocusEvent.FocusEvent
   , beforeinput :: Web.Event.Internal.Types.Event
-  , auxclick :: Web.PointerEvent.PointerEvent.PointerEvent
   , abort :: Web.Event.Internal.Types.Event
   , touchcancel :: Web.TouchEvent.TouchEvent.TouchEvent
   , touchmove :: Web.TouchEvent.TouchEvent.TouchEvent
   , touchend :: Web.TouchEvent.TouchEvent.TouchEvent
   , touchstart :: Web.TouchEvent.TouchEvent.TouchEvent
-  | ARIAMixin (Slottable (ChildNode (NonDocumentTypeChildNode (ParentNode (Node r)))))
+  | ARIANotifyMixin
+      (ARIAMixin (Slottable (ChildNode (NonDocumentTypeChildNode (ParentNode (Node r))))))
   )
 
 instance TagToDeku "html" (HTMLHtmlElement ())
@@ -2557,6 +2572,20 @@ legend_ = legend []
 
 legend__ :: String -> Nut
 legend__ t = legend [] [ DC.text_ t ]
+
+instance TagToDeku "selectedcontent" (HTMLSelectedContentElement ())
+
+selectedcontent
+  :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (HTMLSelectedContentElement ())))
+  -> Array Nut
+  -> Nut
+selectedcontent = elementify Nothing "selectedcontent"
+
+selectedcontent_ :: Array Nut -> Nut
+selectedcontent_ = selectedcontent []
+
+selectedcontent__ :: String -> Nut
+selectedcontent__ t = selectedcontent [] [ DC.text_ t ]
 
 instance TagToDeku "details" (HTMLDetailsElement ())
 

@@ -192,6 +192,8 @@ module Deku.DOM.SVG
   , mask
   , mask_
   , mask__
+  , SVGPathData
+  , SVGPathElement
   , SVGClipPathElement
   , SVGMaskElement
   , SVGFilterElement
@@ -245,7 +247,6 @@ module Deku.DOM.SVG
   , SVGElementInstance
   , SVGSwitchElement
   , SVGStyleElement
-  , SVGPathElement
   , SVGRectElement
   , SVGCircleElement
   , SVGEllipseElement
@@ -284,6 +285,14 @@ import Web.Event.Internal.Types as Web.Event.Internal.Types
 import Deku.DOM (Element, GlobalEventHandlers, HTMLOrSVGElement, WindowEventHandlers)
 
 class TagToDeku (tag :: Symbol) (interface :: Row Type) | tag -> interface
+type SVGPathData (r :: Row Type) = (__tag :: Proxy "SVGPathData" | SvgPresentation r)
+type SVGPathElement (r :: Row Type) =
+  ( __tag :: Proxy "SVGPathElement"
+  , systemLanguage :: String
+  , requiredExtensions :: String
+  | SvgPresentation (SVGPathData (SVGGeometryElement r))
+  )
+
 type SVGClipPathElement (r :: Row Type) =
   ( __tag :: Proxy "SVGClipPathElement"
   , systemLanguage :: String
@@ -700,13 +709,6 @@ type SVGStyleElement (r :: Row Type) =
   , media :: String
   , xtype :: String
   | SvgPresentation (SVGElement r)
-  )
-
-type SVGPathElement (r :: Row Type) =
-  ( __tag :: Proxy "SVGPathElement"
-  , systemLanguage :: String
-  , requiredExtensions :: String
-  | SvgPresentation (SVGGeometryElement r)
   )
 
 type SVGRectElement (r :: Row Type) =

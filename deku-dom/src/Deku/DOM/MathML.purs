@@ -81,6 +81,9 @@ module Deku.DOM.MathML
   , mtd
   , mtd_
   , mtd__
+  , a
+  , a_
+  , a__
   , maction
   , maction_
   , maction__
@@ -111,6 +114,7 @@ type MathMLElement (r :: Row Type) =
   , encoding :: String
   , selection :: String
   , actiontype :: String
+  , href :: String
   , accentunder :: String
   , accent :: String
   , voffset :: String
@@ -422,6 +426,17 @@ mtd_ = mtd []
 
 mtd__ :: String -> Nut
 mtd__ t = mtd [] [ DC.text_ t ]
+
+instance TagToDeku "a" (MathMLElement ())
+
+a :: Array (FRP.Poll.Poll (Deku.Attribute.Attribute (MathMLElement ()))) -> Array Nut -> Nut
+a = elementify (Just "http://www.w3.org/1998/Math/MathML") "a"
+
+a_ :: Array Nut -> Nut
+a_ = a []
+
+a__ :: String -> Nut
+a__ t = a [] [ DC.text_ t ]
 
 instance TagToDeku "maction" (MathMLElement ())
 

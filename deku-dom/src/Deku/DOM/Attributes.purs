@@ -7,6 +7,10 @@ module Deku.DOM.Attributes
   , tabindex_
   , nonce
   , nonce_
+  , headingreset
+  , headingreset_
+  , headingoffset
+  , headingoffset_
   , slot
   , slot_
   , id
@@ -22,6 +26,7 @@ module Deku.DOM.Attributes
   , popovertarget_
   , popover
   , popover_
+  , popoverHint
   , popoverManual
   , popoverAuto
   , draggable
@@ -47,6 +52,10 @@ module Deku.DOM.Attributes
   , inputmodeTel
   , inputmodeText
   , inputmodeNone
+  , autocorrect
+  , autocorrect_
+  , autocorrectOff
+  , autocorrectOn
   , autocapitalize
   , autocapitalize_
   , autocapitalizeCharacters
@@ -451,7 +460,6 @@ module Deku.DOM.Attributes
   , bgcolor_
   , scope
   , scope_
-  , scopeAuto
   , scopeColgroup
   , scopeRowgroup
   , scopeCol
@@ -527,8 +535,24 @@ module Deku.DOM.Attributes
   , readonly_
   , size
   , size_
+  , colorspace
+  , colorspace_
+  , colorspaceDisplayP3
+  , colorspaceLimitedSrgb
+  , alpha
+  , alpha_
   , checked
   , checked_
+  , command
+  , command_
+  , commandShowModal
+  , commandRequestClose
+  , commandClose
+  , commandHidePopover
+  , commandShowPopover
+  , commandTogglePopover
+  , commandfor
+  , commandfor_
   , selected
   , selected_
   , wrap
@@ -547,6 +571,11 @@ module Deku.DOM.Attributes
   , low_
   , open
   , open_
+  , closedby
+  , closedby_
+  , closedbyNone
+  , closedbyCloserequest
+  , closedbyAny
   , event
   , event_
   , language
@@ -557,6 +586,8 @@ module Deku.DOM.Attributes
   , async_
   , nomodule
   , nomodule_
+  , shadowrootcustomelementregistry
+  , shadowrootcustomelementregistry_
   , shadowrootserializable
   , shadowrootserializable_
   , shadowrootclonable
@@ -639,6 +670,8 @@ module Deku.DOM.Attributes
   , ariaRoledescription_
   , ariaRequired
   , ariaRequired_
+  , ariaRelevant
+  , ariaRelevant_
   , ariaReadonly
   , ariaReadonly_
   , ariaPressed
@@ -748,6 +781,35 @@ nonce_
   -> f (Deku.Attribute.Attribute (nonce :: String | r))
 nonce_ = nonce <<< Applicative.pure
 
+headingreset
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (headingreset :: String | r))
+headingreset = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "headingreset")
+
+headingreset_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (headingreset :: String | r))
+headingreset_ = headingreset <<< Applicative.pure
+
+headingoffset
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (headingoffset :: String | r))
+headingoffset = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "headingoffset")
+
+headingoffset_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (headingoffset :: String | r))
+headingoffset_ = headingoffset <<< Applicative.pure
+
 slot
   :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (slot :: String | r))
 slot = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "slot")
@@ -841,6 +903,10 @@ popover_
   => String
   -> f (Deku.Attribute.Attribute (popover :: String | r))
 popover_ = popover <<< Applicative.pure
+
+popoverHint
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (popover :: String | r))
+popoverHint = popover_ "hint"
 
 popoverManual
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (popover :: String | r))
@@ -973,6 +1039,32 @@ inputmodeText = inputmode_ "text"
 inputmodeNone
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmodeNone = inputmode_ "none"
+
+autocorrect
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (autocorrect :: String | r))
+autocorrect = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "autocorrect")
+
+autocorrect_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (autocorrect :: String | r))
+autocorrect_ = autocorrect <<< Applicative.pure
+
+autocorrectOff
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (autocorrect :: String | r))
+autocorrectOff = autocorrect_ "off"
+
+autocorrectOn
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (autocorrect :: String | r))
+autocorrectOn = autocorrect_ "on"
 
 autocapitalize
   :: forall r f
@@ -3297,10 +3389,6 @@ scope_
   -> f (Deku.Attribute.Attribute (scope :: String | r))
 scope_ = scope <<< Applicative.pure
 
-scopeAuto
-  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (scope :: String | r))
-scopeAuto = scope_ "auto"
-
 scopeColgroup
   :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (scope :: String | r))
 scopeColgroup = scope_ "colgroup"
@@ -3771,6 +3859,43 @@ size_
   -> f (Deku.Attribute.Attribute (size :: String | r))
 size_ = size <<< Applicative.pure
 
+colorspace
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (colorspace :: String | r))
+colorspace = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "colorspace")
+
+colorspace_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (colorspace :: String | r))
+colorspace_ = colorspace <<< Applicative.pure
+
+colorspaceDisplayP3
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (colorspace :: String | r))
+colorspaceDisplayP3 = colorspace_ "display-p3"
+
+colorspaceLimitedSrgb
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (colorspace :: String | r))
+colorspaceLimitedSrgb = colorspace_ "limited-srgb"
+
+alpha
+  :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (alpha :: String | r))
+alpha = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "alpha")
+
+alpha_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (alpha :: String | r))
+alpha_ = alpha <<< Applicative.pure
+
 checked
   :: forall r f
    . Functor.Functor f
@@ -3784,6 +3909,58 @@ checked_
   => String
   -> f (Deku.Attribute.Attribute (checked :: String | r))
 checked_ = checked <<< Applicative.pure
+
+command
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (command :: String | r))
+command = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "command")
+
+command_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (command :: String | r))
+command_ = command <<< Applicative.pure
+
+commandShowModal
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (command :: String | r))
+commandShowModal = command_ "show-modal"
+
+commandRequestClose
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (command :: String | r))
+commandRequestClose = command_ "request-close"
+
+commandClose
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (command :: String | r))
+commandClose = command_ "close"
+
+commandHidePopover
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (command :: String | r))
+commandHidePopover = command_ "hide-popover"
+
+commandShowPopover
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (command :: String | r))
+commandShowPopover = command_ "show-popover"
+
+commandTogglePopover
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (command :: String | r))
+commandTogglePopover = command_ "toggle-popover"
+
+commandfor
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (commandfor :: String | r))
+commandfor = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "commandfor")
+
+commandfor_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (commandfor :: String | r))
+commandfor_ = commandfor <<< Applicative.pure
 
 selected
   :: forall r f
@@ -3887,6 +4064,32 @@ open_
   -> f (Deku.Attribute.Attribute (open :: String | r))
 open_ = open <<< Applicative.pure
 
+closedby
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (closedby :: String | r))
+closedby = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "closedby")
+
+closedby_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (closedby :: String | r))
+closedby_ = closedby <<< Applicative.pure
+
+closedbyNone
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (closedby :: String | r))
+closedbyNone = closedby_ "none"
+
+closedbyCloserequest
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (closedby :: String | r))
+closedbyCloserequest = closedby_ "closerequest"
+
+closedbyAny
+  :: forall r f. Applicative.Applicative f => f (Deku.Attribute.Attribute (closedby :: String | r))
+closedbyAny = closedby_ "any"
+
 event
   :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (event :: String | r))
 event = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "event")
@@ -3947,6 +4150,21 @@ nomodule_
   => String
   -> f (Deku.Attribute.Attribute (nomodule :: String | r))
 nomodule_ = nomodule <<< Applicative.pure
+
+shadowrootcustomelementregistry
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (shadowrootcustomelementregistry :: String | r))
+shadowrootcustomelementregistry = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "shadowrootcustomelementregistry")
+
+shadowrootcustomelementregistry_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (shadowrootcustomelementregistry :: String | r))
+shadowrootcustomelementregistry_ = shadowrootcustomelementregistry <<< Applicative.pure
 
 shadowrootserializable
   :: forall r f
@@ -4512,6 +4730,21 @@ ariaRequired_
   => String
   -> f (Deku.Attribute.Attribute (ariaRequired :: String | r))
 ariaRequired_ = ariaRequired <<< Applicative.pure
+
+ariaRelevant
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (ariaRelevant :: String | r))
+ariaRelevant = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "aria-relevant")
+
+ariaRelevant_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (ariaRelevant :: String | r))
+ariaRelevant_ = ariaRelevant <<< Applicative.pure
 
 ariaReadonly
   :: forall r f
