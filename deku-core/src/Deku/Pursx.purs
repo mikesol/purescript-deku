@@ -47,6 +47,7 @@ import TLDR.Result as R
 import Type.Equality (class TypeEquals, to)
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
+import Deku.Pursx.NamespaceByTag (namespaceByTag)
 
 data Htmlparser2
 
@@ -107,7 +108,7 @@ onOpenTag
 onOpenTag info stack name attributes = do
   stackValue <- STRef.read stack
   let
-    backup = elementify Nothing name
+    backup = elementify (namespaceByTag name) name
       ( map (uncurry (useExistingAtt info)) $ toUnfoldable
           attributes
       )
@@ -122,24 +123,25 @@ onOpenTag info stack name attributes = do
     (nut : stackValue)
     stack
 
-foreign import  getOuterTagInfo :: String -> {
-          tagName:: String,
-          attributes:: Object String
-      }
+foreign import getOuterTagInfo
+  :: String
+  -> { tagName :: String
+     , attributes :: Object String
+     }
 
 optimizedPursx
   :: String -> Nut
 optimizedPursx html = do
   let outerInfo = getOuterTagInfo html
   let innerStuff = removeOuterTags html
-  elementify Nothing outerInfo.tagName
-      ( map (\(k /\ v) -> (pure $ attributeAtYourOwnRisk k v)) $ toUnfoldable
-          outerInfo.attributes
-      )
-      [ Nut $ mkEffectFn2 \psr di -> do
-          anchor <- liftST $ (un StaticRegion (un PSR psr).region).end
-          runEffectFn2 (un DOMInterpret di).setInnerHTML innerStuff anchor
-      ]
+  elementify (namespaceByTag outerInfo.tagName) outerInfo.tagName
+    ( map (\(k /\ v) -> (pure $ attributeAtYourOwnRisk k v)) $ toUnfoldable
+        outerInfo.attributes
+    )
+    [ Nut $ mkEffectFn2 \psr di -> do
+        anchor <- liftST $ (un StaticRegion (un PSR psr).region).end
+        runEffectFn2 (un DOMInterpret di).setInnerHTML innerStuff anchor
+    ]
 
 onText
   :: forall r
@@ -175,15 +177,17 @@ onCloseTag _ stack _ = do
 foreign import removeOuterTags :: String -> String
 
 purs :: PursxInfo -> Nut
-purs (PursxInfo html i) =  if Map.isEmpty i then optimizedPursx html else run do
-  r <- STRef.new Nil
-  parser <- createParser (onOpenTag i r) (onText i r) (onCloseTag i r)
-  write parser html
-  end parser
-  o <- STRef.read r
-  pure $ case o of
-    Nil -> mempty
-    f : _ -> f []
+purs (PursxInfo html i) =
+  if Map.isEmpty i then optimizedPursx html
+  else run do
+    r <- STRef.new Nil
+    parser <- createParser (onOpenTag i r) (onText i r) (onCloseTag i r)
+    write parser html
+    end parser
+    o <- STRef.read r
+    pure $ case o of
+      Nil -> mempty
+      f : _ -> f []
 
 -- delimiter -- str -- split
 foreign import splitOnDelimiter :: String -> String -> Array String

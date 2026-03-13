@@ -6,6 +6,7 @@ import Comment (commentModule, documentModule)
 import Control.Monad.Except (ExceptT(..))
 import DOM.Common (Interface, webElements)
 import DOM.Indexed.Attribute as Attribute
+import DOM.Indexed.Element (exprNamespace)
 import DOM.Indexed.Element as Element
 import DOM.Indexed.Listener as Listener
 import DOM.Indexed.Self as Self
@@ -21,7 +22,7 @@ import Node.FS.Aff (writeTextFile)
 import Node.Path as Path
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (Export, ImportDecl, Module)
-import Tidy.Codegen (declImportAs, exportModule, importValue, module_, printModule)
+import Tidy.Codegen (binderString, binderWildcard, declImport, declImportAs, declSignature, declValue, exportModule, exprCtor, importTypeAll, importValue, module_, printModule, typeApp, typeArrow, typeCtor)
 
 generateSpec
   :: String
@@ -141,3 +142,35 @@ generate html svg mathml = do
     []
     []
     mathml
+
+  generatePursx html svg mathml
+
+generatePursx
+  :: Specification -> Specification -> Specification -> ExceptT Error Aff Unit
+generatePursx html svg mathml = do
+  let
+    namespaceByTag :: Partial => _ -> Array _
+    namespaceByTag = map \{ tag, ns } ->
+      declValue "namespaceByTag" [ binderString tag ] $ exprNamespace ns
+
+  FS.createDir "deku-core/src/Deku/Pursx"
+  ExceptT $ attempt
+    $ writeTextFile UTF8 "./deku-core/src/Deku/Pursx/NamespaceByTag.purs"
+    $ printModule
+    $ unsafePartial
+    $ warnCodegen
+    $ module_ "Deku.Pursx.NamespaceByTag" []
+        [ declImport "Data.Maybe" [ importTypeAll "Maybe" ] ]
+        ( [ declSignature "namespaceByTag"
+              ( typeArrow [ typeCtor "String" ]
+                  (typeApp (typeCtor "Maybe") [ typeCtor "String" ])
+              )
+          ]
+            <> namespaceByTag html.elements
+            <> namespaceByTag svg.elements
+            <> namespaceByTag mathml.elements
+            <>
+              [ declValue "namespaceByTag" [ binderWildcard ]
+                  (exprCtor "Nothing")
+              ]
+        )
