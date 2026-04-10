@@ -254,6 +254,19 @@ allocateRegion = mkSTFn2
       remove = do
         runSTFn1 bump Nothing
         finalIx <- ix
+        -- clearBound (via bump Nothing) may have written our ixRef into the preceding SharedBound's
+        -- extent (when our SharedBound was a singleton, i.e. extentToIx == selfIx). pushIx(-1) below
+        -- would then corrupt that extent to -1, breaking subsequent bumpBound calls that use it to
+        -- determine how far a new SharedBound should extend.  Fix: if prevBound.extent currently
+        -- resolves to our index, replace it with the preceding region's ix (a live ref that won't be
+        -- invalidated by our pushIx(-1)).
+        do
+          prevRegion <- runSTFn2 index (finalIx - 1) children
+          prevBound <- ST.read prevRegion.end
+          extentEff <- ST.read prevBound.extent
+          curExtent <- extentEff
+          when (curExtent == finalIx) do
+            void $ ST.write prevRegion.ix prevBound.extent
         -- give ourselves an invalid index so later sendTo and removes have no effect
         runSTFn1 managed.pushIx (-1)
         void $ STArray.splice finalIx 1 [] children
@@ -348,13 +361,9 @@ clearBound = mkSTFn2 \cleared children -> do
   if selfIx - ownerIx > extentToIx - selfIx || ownerIx == 0 then do
     -- the following owned `SharedBound` was smaller, so we extend prevBound to cover nextBound and update the following
     -- regions
+    void $ ST.write extentToEff prevBound.extent
     runSTFn4 fixManagedTo selfIx (extentToIx + 1) (updateShared prevBound)
       children
-    -- only update extent when there are surviving regions beyond selfIx that now use prevBound;
-    -- if extentToIx == selfIx the nextBound was a singleton (the removed region itself) and extentToEff
-    -- will be stale (-1) after pushIx fires, so writing it would corrupt prevBound.extent
-    when (extentToIx > selfIx) do
-      void $ ST.write extentToEff prevBound.extent
 
   else do
     -- the preceding not owned `SharedBound` was smaller, update the nextBound with the information of
