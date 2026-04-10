@@ -348,9 +348,13 @@ clearBound = mkSTFn2 \cleared children -> do
   if selfIx - ownerIx > extentToIx - selfIx || ownerIx == 0 then do
     -- the following owned `SharedBound` was smaller, so we extend prevBound to cover nextBound and update the following
     -- regions
-    void $ ST.write extentToEff prevBound.extent
     runSTFn4 fixManagedTo selfIx (extentToIx + 1) (updateShared prevBound)
       children
+    -- only update extent when there are surviving regions beyond selfIx that now use prevBound;
+    -- if extentToIx == selfIx the nextBound was a singleton (the removed region itself) and extentToEff
+    -- will be stale (-1) after pushIx fires, so writing it would corrupt prevBound.extent
+    when (extentToIx > selfIx) do
+      void $ ST.write extentToEff prevBound.extent
 
   else do
     -- the preceding not owned `SharedBound` was smaller, update the nextBound with the information of

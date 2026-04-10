@@ -152,6 +152,40 @@ describe("deku", () => {
         r3.remove();
         expect(end).toEqual(testFriend.nothing);
       });
+
+      // Regression test for issue #143: removing a singleton SharedBound must not
+      // corrupt the extent of the preceding SharedBound.  The bug was that
+      // clearBound unconditionally wrote the (stale, soon-to-be-(-1)) extentToEff
+      // reference into prevBound.extent even when the removed region was the only
+      // member of its SharedBound (extentToIx == selfIx).  A subsequent bump on a
+      // newly-allocated region then read the corrupt extent and failed to propagate
+      // end to the parent span.
+      it("updates end correctly after add, add, remove-last, remove-first, add (issue #143)", () => {
+        var end = testFriend.nothing;
+        var span = region.newSpan(
+          () => 10,
+          (e) => (end = e)
+        );
+        // Add two regions and bump them
+        var r1 = region.allocateRegion(testFriend.nothing, span);
+        var r2 = region.allocateRegion(testFriend.nothing, span);
+        r1.bump(testFriend.just(1));
+        r2.bump(testFriend.just(2));
+        expect(end).toEqual(testFriend.just(2));
+
+        // Remove r2 (sole member of its SharedBound — the singleton case)
+        r2.remove();
+        expect(end).toEqual(testFriend.just(1));
+
+        // Remove r1 (now also sole member of its SharedBound)
+        r1.remove();
+        expect(end).toEqual(testFriend.nothing);
+
+        // Add a fresh region; its bump must propagate to end
+        var r3 = region.allocateRegion(testFriend.nothing, span);
+        r3.bump(testFriend.just(3));
+        expect(end).toEqual(testFriend.just(3)); // failed before the fix
+      });
     });
 
     it("makeElementEffect makes an element with the correct tagname", () => {
