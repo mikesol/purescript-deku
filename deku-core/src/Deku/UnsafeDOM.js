@@ -39,3 +39,21 @@ export const removeEventListener = (type, listener, useCapture, target) =>
   target.removeEventListener(type, listener, useCapture);
 
 export const eventListener = (fn) => fn;
+
+export const cloneNode = (el) => el.cloneNode(true);
+
+export const collectNodes = (root) => {
+  const nodes = [];
+  function walk(node) {
+    nodes.push(node);
+    if (node.nodeType === 1) {
+      for (let child = node.firstChild; child; child = child.nextSibling) {
+        if (child.nodeType === 1 || child.nodeType === 3) {
+          walk(child);
+        }
+      }
+    }
+  }
+  walk(root);
+  return nodes;
+};

@@ -43,3 +43,7 @@ foreign import eventListener
   :: forall a
    . EffectFn1 (EffectFn1 Event a)
        EventListener
+
+foreign import cloneNode :: EffectFn1 Node Node
+
+foreign import collectNodes :: EffectFn1 Node (Array Node)

@@ -14,6 +14,7 @@ module Deku.Core
   , Cb(..)
   , ChildId(..)
   , DOMInterpret(..)
+  , DynControl
   , DynOptions
   , Hook
   , Hook'
@@ -75,6 +76,9 @@ module Deku.Core
   , useState'
   , useStateTagged'
   , xdata
+  , class StubPolls
+  , buildStubs
+  , templateDynAtEndWith
   ) where
 
 import Prelude
@@ -84,7 +88,7 @@ import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as ST
 import Control.Monad.ST.Internal as STRef
-import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn3, runSTFn1, runSTFn2, runSTFn3)
+import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, mkSTFn1, mkSTFn2, mkSTFn3, runSTFn1, runSTFn2, runSTFn3)
 import Control.Plus (empty)
 import Data.Array as Array
 import Data.Array.ST as STArray
@@ -92,14 +96,14 @@ import Data.Compactable (compact)
 import Data.Foldable (traverse_)
 import Data.List ((:))
 import Data.List as List
-import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Maybe (Maybe(..), fromJust, fromMaybe)
 import Data.Newtype (class Newtype, over, un)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Do as Deku
 import Deku.Internal.Ancestry (Ancestry, hasElementParent)
 import Deku.Internal.Ancestry as Ancestry
-import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement)
+import Deku.Internal.Entities (DekuChild(..), DekuElement, DekuParent(..), DekuText, fromDekuElement, toDekuElement, toDekuText)
 import Deku.Internal.Region (Anchor(..), Bound, Region(..), StaticRegion(..), allocateRegion, fromParent, newSpan, newStaticRegion)
 import Effect (Effect, forE)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, mkEffectFn1, mkEffectFn2, mkEffectFn3, runEffectFn1, runEffectFn2, runEffectFn3)
@@ -110,7 +114,15 @@ import FRP.Poll as Poll
 import FRP.Poll.Unoptimized as UPoll
 import Partial.Unsafe (unsafePartial)
 import Safe.Coerce (coerce)
-import Web.DOM (Element)
+import Record as Record
+import Data.Symbol (class IsSymbol)
+import Deku.UnsafeDOM (cloneNode, collectNodes)
+import Prim.Row as Row
+import Prim.RowList (RowList)
+import Prim.RowList as RL
+import Type.Proxy (Proxy(..))
+import Web.DOM (Element, Node)
+import Web.DOM.Node (firstChild)
 import Web.Event.Internal.Types (Event)
 
 -- | A callback function that can be used as a value for a listener.
@@ -1013,3 +1025,116 @@ portaled myAncestry buffer beam beamed bumped trackBegin trackEnd =
 
     runEffectFn2 deferO psr restoreBuffer
     runEffectFn1 handleScope psr
+
+-- | Typeclass for building records of stub (empty) polls.
+-- | Every field in the record must be `Poll a` for some `a`.
+class StubPolls :: RowList Type -> Row Type -> Constraint
+class StubPolls rl r | rl -> r where
+  buildStubs :: Proxy rl -> { | r }
+
+instance StubPolls RL.Nil () where
+  buildStubs _ = {}
+
+instance
+  ( StubPolls restRl restR
+  , IsSymbol k
+  , Row.Cons k (Poll a) restR r
+  , Row.Lacks k restR
+  ) => StubPolls (RL.Cons k (Poll a) restRl) r where
+  buildStubs _ = Record.insert (Proxy :: Proxy k) (empty :: Poll a)
+    (buildStubs (Proxy :: Proxy restRl) :: { | restR })
+
+stubPolls_
+  :: forall r rl
+   . RL.RowToList r rl
+  => StubPolls rl r
+  => { | r }
+stubPolls_ = buildStubs (Proxy :: Proxy rl)
+
+subscriptionOnlyDI
+  :: Array Node
+  -> ST.STRef Global Int
+  -> DOMInterpret
+  -> DOMInterpret
+subscriptionOnlyDI nodes cursorRef realDi = DOMInterpret
+  { dynamicDOMInterpret: \_ -> realDi
+  , portalDOMInterpret: (un DOMInterpret realDi).portalDOMInterpret
+  , makeElement: mkEffectFn3 \_ _ _ -> do
+      i <- liftST $ ST.modify (add 1) cursorRef
+      pure $ toDekuElement (unsafePartial $ Array.unsafeIndex nodes i)
+  , makeText: mkEffectFn2 \_ mStr -> do
+      i <- liftST $ ST.modify (add 1) cursorRef
+      let node = unsafePartial $ Array.unsafeIndex nodes i
+      case mStr of
+        Nothing -> pure unit
+        Just str -> runEffectFn2 (un DOMInterpret realDi).setText str
+          (toDekuText node)
+      pure $ toDekuText node
+  , attachElement: mkEffectFn2 \_ _ -> pure unit
+  , attachText: mkEffectFn2 \_ _ -> pure unit
+  , setProp: (un DOMInterpret realDi).setProp
+  , setCb: (un DOMInterpret realDi).setCb
+  , unsetAttribute: (un DOMInterpret realDi).unsetAttribute
+  , removeElement: (un DOMInterpret realDi).removeElement
+  , removeText: (un DOMInterpret realDi).removeText
+  , setText: (un DOMInterpret realDi).setText
+  , initializeElementRendering: mkSTFn2 \_ _ -> pure unit
+  , markElementAsImpure: mkSTFn1 \_ -> pure unit
+  , isBoring: \_ -> false
+  , initializeTextRendering: mkSTFn2 \_ _ -> pure unit
+  , markTextAsImpure: mkSTFn1 \_ -> pure unit
+  , bufferPortal: (un DOMInterpret realDi).bufferPortal
+  , initializePortalRendering: mkSTFn1 \_ -> pure unit
+  , markPortalAsRendered: mkSTFn1 \_ -> pure unit
+  , beamRegion: (un DOMInterpret realDi).beamRegion
+  , initializeDynRendering: mkSTFn1 \_ -> pure unit
+  , initializeFixedRendering: mkSTFn1 \_ -> pure unit
+  , setInnerHTML: (un DOMInterpret realDi).setInnerHTML
+  }
+
+-- | Like `useDynAtEndWith` but uses DOM template cloning for performance.
+-- | The `templateFn` is called once with stub polls to build a template element,
+-- | then cloned for each row. Only subscriptions are wired up per-row.
+-- | Every field of `polls` must be a `Poll a` for some `a`.
+templateDynAtEndWith
+  :: forall value polls rl
+   . RL.RowToList polls rl
+  => StubPolls rl polls
+  => Poll value
+  -> DynOptions value
+  -> (DynControl value -> { | polls })
+  -> ({ | polls } -> Nut)
+  -> Nut
+templateDynAtEndWith stream opts toPollsFn templateFn =
+  Nut $ mkEffectFn2 \outerPsr outerDi -> do
+    -- Build the template element once into a detached document fragment
+    Tuple _ fragParent <- (un DOMInterpret outerDi).bufferPortal
+    let fragNode = fromDekuElement @Node (coerce fragParent :: DekuElement)
+    fragRegion <- liftST $ runSTFn1 fromParent fragParent
+    templatePsr <- liftST $ runSTFn3 newPSR
+      (un PSR outerPsr).ancestry
+      (empty :: Poll Unit)
+      fragRegion
+    let Nut buildNut = templateFn (stubPolls_ :: { | polls })
+    runEffectFn2 buildNut templatePsr outerDi
+    -- The template root is now the first child of the fragment
+    mTemplateNode <- firstChild fragNode
+    let templateElt = toDekuElement (unsafePartial $ fromJust mTemplateNode)
+    -- For each dynamic row, clone the template and wire up real polls
+    let
+      rowNut :: DynControl value -> Nut
+      rowNut ctrl = Nut $ mkEffectFn2 \psr di -> do
+        cloned <- runEffectFn1 cloneNode (fromDekuElement @Node templateElt)
+        nodes <- runEffectFn1 collectNodes cloned
+        -- Capture region end BEFORE the Nut runs (it gets updated during run)
+        insertionAnchor <- liftST (un StaticRegion (un PSR psr).region).end
+        cursorRef <- liftST $ ST.new (-1)
+        let cloneDi = subscriptionOnlyDI nodes cursorRef di
+        let Nut rowBuiltNut = templateFn (toPollsFn ctrl)
+        runEffectFn2 rowBuiltNut psr cloneDi
+        -- Attach root clone to DOM (cloneDi no-ops all attaches)
+        runEffectFn2 (un DOMInterpret di).attachElement
+          (DekuChild (toDekuElement cloned))
+          insertionAnchor
+    let Nut dynNut = useDynAtEndWith stream opts rowNut
+    runEffectFn2 dynNut outerPsr outerDi
