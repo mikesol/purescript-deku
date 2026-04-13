@@ -352,6 +352,7 @@ newtype PSR = PSR
   , signalDisposalQueueShouldBeTriggered :: Poll.Poll Unit
   , addEffectToDisposalQueue :: STFn1 (Effect Unit) Global Unit
   , triggerDisposalQueueEffects :: Effect Unit
+  , isDisposalQueueEmpty :: Effect Boolean
   -- used to indicate when an element should never be statically rendered
   -- it may be disqualified for other reasons, but this flag trumps them all
   , ancestry :: Ancestry
@@ -366,6 +367,9 @@ newPSR = mkSTFn3 \ancestry signalDisposalQueueShouldBeTriggered region -> do
     addEffectToDisposalQueue :: STFn1 (Effect Unit) Global Unit
     addEffectToDisposalQueue =
       mkSTFn1 \eff -> void (STArray.push eff unsubs)
+
+    isDisposalQueueEmpty :: Effect Boolean
+    isDisposalQueueEmpty = liftST $ (eq 0) <$> STArray.length unsubs
 
     -- to correctly dispose, effect should be run in the reverse order of insertion
     triggerDisposalQueueEffects :: Effect Unit
@@ -382,13 +386,17 @@ newPSR = mkSTFn3 \ancestry signalDisposalQueueShouldBeTriggered region -> do
         , region
         , addEffectToDisposalQueue
         , triggerDisposalQueueEffects
+        , isDisposalQueueEmpty
         }
     )
 
 handleScope :: EffectFn1 PSR Unit
 handleScope = mkEffectFn1 \psr -> do
-  pump psr (un PSR psr).signalDisposalQueueShouldBeTriggered
-    $ mkEffectFn1 \_ -> (un PSR psr).triggerDisposalQueueEffects
+  let psrU = un PSR psr
+  empty <- psrU.isDisposalQueueEmpty
+  unless empty do
+    pump psr psrU.signalDisposalQueueShouldBeTriggered
+      $ mkEffectFn1 \_ -> psrU.triggerDisposalQueueEffects
 
 newtype Nut =
   Nut (EffectFn2 PSR DOMInterpret Unit)
@@ -792,13 +800,10 @@ elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
           eltRegion
         runEffectFn2 nut scope di
 
-    let
-      handleRemove :: Effect Unit
-      handleRemove = when (not (hasElementParent psrU.ancestry)) do
-        runEffectFn1 diU.removeElement elt
-
     runEffectFn2 diU.attachElement (DekuChild elt) regionEnd
-    liftST $ runSTFn1 psrU.addEffectToDisposalQueue handleRemove
+    when (not (hasElementParent psrU.ancestry)) do
+      liftST $ runSTFn1 psrU.addEffectToDisposalQueue
+        (runEffectFn1 diU.removeElement elt)
     runEffectFn1 handleScope psr
 
 text_ :: String -> Nut
@@ -843,12 +848,9 @@ text texts = Nut $ mkEffectFn2 \psr di -> do
   runEffectFn2 diU.attachText txt regionEnd
   liftST $ runSTFn1 srU.element (Text txt)
 
-  let
-    handleRemove :: Effect Unit
-    handleRemove = when (not (hasElementParent ancestry)) do
-      runEffectFn1 diU.removeText txt
-
-  liftST $ runSTFn1 psrU.addEffectToDisposalQueue handleRemove
+  when (not (hasElementParent ancestry)) do
+    liftST $ runSTFn1 psrU.addEffectToDisposalQueue
+      (runEffectFn1 diU.removeText txt)
   runEffectFn1 handleScope psr
 
 -- | Creates a `Nut` that can be attached to another part of the application. The lifetime of the `Nut` is no longer
