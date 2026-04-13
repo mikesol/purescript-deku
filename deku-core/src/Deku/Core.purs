@@ -755,72 +755,50 @@ elementify
   -> Array Nut
   -> Nut
 elementify ns tag arrAtts nuts = Nut $ mkEffectFn2 \psr di -> do
-  let isBoring = (un DOMInterpret di).isBoring (un PSR psr).ancestry
+  let diU = un DOMInterpret di
+      psrU = un PSR psr
+  let isBoring = diU.isBoring psrU.ancestry
   when (not isBoring) do
-    elt <- runEffectFn3 (un DOMInterpret di).makeElement (un PSR psr).ancestry
+    elt <- runEffectFn3 diU.makeElement psrU.ancestry
       (Namespace <$> ns)
       (Tag tag)
-    regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
-    liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element
-      (Element (elt))
+    let srU = un StaticRegion psrU.region
+    regionEnd <- liftST srU.end
+    liftST $ runSTFn1 srU.element (Element elt)
 
-    -- runEffectFn2 deferO psr do
-    --   runEffectFn1 (un DOMInterpret di).removeElement elt
-
-    ---
-    --- ssr management
-
-    liftST $ runSTFn2 (un DOMInterpret di).initializeElementRendering
-      (un PSR psr).ancestry
-      elt
-
-    --- end ssr management
-    ---
+    liftST $ runSTFn2 diU.initializeElementRendering psrU.ancestry elt
 
     let
       handleAtts :: EffectFn1 (Poll (Attribute element)) Unit
       handleAtts = mkEffectFn1 \atts -> do
         case atts of
           OnlyPure _ -> pure unit
-          _ -> liftST $ runSTFn1
-            (un DOMInterpret di).markElementAsImpure
-            (un PSR psr).ancestry
+          _ -> liftST $ runSTFn1 diU.markElementAsImpure psrU.ancestry
         pump' psr atts $ \useOriginalDi -> do
-          let
-            newDi =
-              if useOriginalDi then di
-              else (un DOMInterpret di).dynamicDOMInterpret unit
+          let newDi = if useOriginalDi then di else diU.dynamicDOMInterpret unit
           mkEffectFn1 \(Attribute x) ->
-            runEffectFn3 x (un PSR psr).ancestry (fromDekuElement elt) newDi
+            runEffectFn3 x psrU.ancestry (fromDekuElement elt) newDi
 
     runEffectFn2 Event.fastForeachE arrAtts handleAtts
 
-    eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
-    aref <- liftST $ STRef.new (-1)
-
-    let
-      handleNuts :: EffectFn1 Nut Unit
-      handleNuts = mkEffectFn1 \(Nut nut) -> do
+    unless (Array.null nuts) do
+      eltRegion <- liftST $ runSTFn1 fromParent $ DekuParent elt
+      aref <- liftST $ STRef.new (-1)
+      runEffectFn2 Event.fastForeachE nuts $ mkEffectFn1 \(Nut nut) -> do
         a <- liftST $ STRef.modify (add 1) aref
         scope <- liftST $ runSTFn3 newPSR
-          (Ancestry.element a (un PSR psr).ancestry)
-          (un PSR psr).signalDisposalQueueShouldBeTriggered
+          (Ancestry.element a psrU.ancestry)
+          psrU.signalDisposalQueueShouldBeTriggered
           eltRegion
         runEffectFn2 nut scope di
 
-    runEffectFn2 Event.fastForeachE nuts handleNuts
-
     let
       handleRemove :: Effect Unit
-      handleRemove = when
-        (not (hasElementParent (un PSR psr).ancestry))
-        do
-          runEffectFn1 (un DOMInterpret di).removeElement elt
+      handleRemove = when (not (hasElementParent psrU.ancestry)) do
+        runEffectFn1 diU.removeElement elt
 
-    runEffectFn2 (un DOMInterpret di).attachElement (DekuChild elt) regionEnd
-
-    liftST $ runSTFn1 (un PSR psr).addEffectToDisposalQueue handleRemove
-
+    runEffectFn2 diU.attachElement (DekuChild elt) regionEnd
+    liftST $ runSTFn1 psrU.addEffectToDisposalQueue handleRemove
     runEffectFn1 handleScope psr
 
 text_ :: String -> Nut
@@ -829,75 +807,48 @@ text_ txt =
 
 text :: Poll String -> Nut
 text texts = Nut $ mkEffectFn2 \psr di -> do
-  let ancestry = (un PSR psr).ancestry
+  let diU = un DOMInterpret di
+      psrU = un PSR psr
+      ancestry = psrU.ancestry
   txt <- case texts of
-    OnlyPure xs -> do
-      runEffectFn2 (un DOMInterpret di).makeText
-        ancestry
-        (Array.last xs)
+    OnlyPure xs   -> runEffectFn2 diU.makeText ancestry (Array.last xs)
+    OnlyEvent _   -> runEffectFn2 diU.makeText ancestry Nothing
+    OnlyPoll _    -> runEffectFn2 diU.makeText ancestry Nothing
+    PureAndEvent xs _ -> runEffectFn2 diU.makeText ancestry (Array.last xs)
+    PureAndPoll xs _  -> runEffectFn2 diU.makeText ancestry (Array.last xs)
 
-    OnlyEvent _ -> do
-      runEffectFn2 (un DOMInterpret di).makeText
-        ancestry
-        Nothing
-
-    OnlyPoll _ -> do
-      runEffectFn2 (un DOMInterpret di).makeText
-        ancestry
-        Nothing
-
-    PureAndEvent xs _ -> do
-      runEffectFn2 (un DOMInterpret di).makeText
-        ancestry
-        (Array.last xs)
-
-    PureAndPoll xs _ -> do
-      runEffectFn2 (un DOMInterpret di).makeText
-        ancestry
-        (Array.last xs)
-
-  liftST $ runSTFn2 (un DOMInterpret di).initializeTextRendering
-    (un PSR psr).ancestry
-    txt
+  liftST $ runSTFn2 diU.initializeTextRendering ancestry txt
 
   let
     modifiedPoll = case texts of
-      OnlyPure _ -> OnlyPure []
-
-      OnlyEvent e -> OnlyEvent e
-
-      OnlyPoll p -> OnlyPoll p
-
+      OnlyPure _      -> OnlyPure []
+      OnlyEvent e     -> OnlyEvent e
+      OnlyPoll p      -> OnlyPoll p
       PureAndEvent _ e -> OnlyEvent e
-
-      PureAndPoll _ p -> OnlyPoll p
+      PureAndPoll _ p  -> OnlyPoll p
 
   case texts of
     OnlyPure _ -> pure unit
-    _ -> liftST $ runSTFn1 (un DOMInterpret di).markTextAsImpure ancestry
+    _ -> liftST $ runSTFn1 diU.markTextAsImpure ancestry
 
   let
     handleTextUpdate :: Boolean -> EffectFn1 String Unit
     handleTextUpdate useOriginalDi = mkEffectFn1 \x -> do
-      let
-        di2 =
-          if useOriginalDi then di
-          else (un DOMInterpret di).dynamicDOMInterpret unit
+      let di2 = if useOriginalDi then di else diU.dynamicDOMInterpret unit
       runEffectFn2 (un DOMInterpret di2).setText x txt
 
   pump' psr modifiedPoll handleTextUpdate
-  regionEnd <- liftST (un StaticRegion (un PSR psr).region).end
-  runEffectFn2 (un DOMInterpret di).attachText txt regionEnd
-  liftST $ runSTFn1 (un StaticRegion (un PSR psr).region).element (Text txt)
+  let srU = un StaticRegion psrU.region
+  regionEnd <- liftST srU.end
+  runEffectFn2 diU.attachText txt regionEnd
+  liftST $ runSTFn1 srU.element (Text txt)
 
   let
     handleRemove :: Effect Unit
-    handleRemove = when
-      (not (hasElementParent (un PSR psr).ancestry))
-      do
-        runEffectFn1 (un DOMInterpret di).removeText txt
+    handleRemove = when (not (hasElementParent ancestry)) do
+      runEffectFn1 diU.removeText txt
 
-  liftST $ runSTFn1 (un PSR psr).addEffectToDisposalQueue handleRemove
+  liftST $ runSTFn1 psrU.addEffectToDisposalQueue handleRemove
   runEffectFn1 handleScope psr
 
 -- | Creates a `Nut` that can be attached to another part of the application. The lifetime of the `Nut` is no longer
