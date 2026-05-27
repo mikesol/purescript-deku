@@ -115,6 +115,10 @@ module Deku.DOM.Listeners
   , drag_
   , dragstart
   , dragstart_
+  , scrollend
+  , scrollend_
+  , scroll
+  , scroll_
   , unload
   , unload_
   , touchcancel
@@ -1263,6 +1267,40 @@ dragstart_
   => (Web.HTML.Event.DragEvent.DragEvent -> Effect.Effect Data.Unit.Unit)
   -> f (Deku.Attribute.Attribute (dragstart :: Web.HTML.Event.DragEvent.DragEvent | r))
 dragstart_ = dragstart <<< Applicative.pure
+
+scrollend
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (scrollend :: Web.Event.Internal.Types.Event | r))
+scrollend = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "scrollend" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+scrollend_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (scrollend :: Web.Event.Internal.Types.Event | r))
+scrollend_ = scrollend <<< Applicative.pure
+
+scroll
+  :: forall r f
+   . Functor.Functor f
+  => f (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (scroll :: Web.Event.Internal.Types.Event | r))
+scroll = Functor.map
+  ( Deku.Attribute.unsafeAttribute <<< Deku.Attribute.cb' "scroll" <<< Deku.Attribute.cb <<<
+      Unsafe.Coerce.unsafeCoerce
+  )
+
+scroll_
+  :: forall r f
+   . Applicative.Applicative f
+  => (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+  -> f (Deku.Attribute.Attribute (scroll :: Web.Event.Internal.Types.Event | r))
+scroll_ = scroll <<< Applicative.pure
 
 unload
   :: forall r f

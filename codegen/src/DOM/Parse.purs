@@ -227,7 +227,7 @@ parse ns sources = do
     -- are stringly typed.
     attributes :: Array Attribute
     attributes =
-      Array.nubBy (compare `on` _.name) $ Array.concat $ Foreign.values
+      Array.nubBy (compare `on` _.index) $ Array.concat $ Foreign.values
         attributeMembers
 
     events :: Array Event
