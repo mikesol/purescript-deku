@@ -215,14 +215,10 @@ module Deku.DOM.SVG.Attributes
   , markerStart_
   , textAnchor
   , textAnchor_
-  , shapeMargin
-  , shapeMargin_
-  , shapeSubtract
-  , shapeSubtract_
-  , shapeInside
-  , shapeInside_
   , inlineSize
   , inlineSize_
+  , pathLength
+  , pathLength_
   , d
   , d_
   , vectorEffect
@@ -407,8 +403,6 @@ module Deku.DOM.SVG.Attributes
   , writingMode_
   , unicodeBidi
   , unicodeBidi_
-  , pathLength
-  , pathLength_
   , mask
   , mask_
   , opacity
@@ -1846,49 +1840,6 @@ textAnchor_
   -> f (Deku.Attribute.Attribute (textAnchor :: String | r))
 textAnchor_ = textAnchor <<< Applicative.pure
 
-shapeMargin
-  :: forall r f
-   . Functor.Functor f
-  => f String
-  -> f (Deku.Attribute.Attribute (shapeMargin :: String | r))
-shapeMargin = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "shape-margin")
-
-shapeMargin_
-  :: forall r f
-   . Applicative.Applicative f
-  => String
-  -> f (Deku.Attribute.Attribute (shapeMargin :: String | r))
-shapeMargin_ = shapeMargin <<< Applicative.pure
-
-shapeSubtract
-  :: forall r f
-   . Functor.Functor f
-  => f String
-  -> f (Deku.Attribute.Attribute (shapeSubtract :: String | r))
-shapeSubtract = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "shape-subtract")
-
-shapeSubtract_
-  :: forall r f
-   . Applicative.Applicative f
-  => String
-  -> f (Deku.Attribute.Attribute (shapeSubtract :: String | r))
-shapeSubtract_ = shapeSubtract <<< Applicative.pure
-
-shapeInside
-  :: forall r f
-   . Functor.Functor f
-  => f String
-  -> f (Deku.Attribute.Attribute (shapeInside :: String | r))
-shapeInside = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "shape-inside")
-
-shapeInside_
-  :: forall r f
-   . Applicative.Applicative f
-  => String
-  -> f (Deku.Attribute.Attribute (shapeInside :: String | r))
-shapeInside_ = shapeInside <<< Applicative.pure
-
 inlineSize
   :: forall r f
    . Functor.Functor f
@@ -1902,6 +1853,20 @@ inlineSize_
   => String
   -> f (Deku.Attribute.Attribute (inlineSize :: String | r))
 inlineSize_ = inlineSize <<< Applicative.pure
+
+pathLength
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (pathLength :: String | r))
+pathLength = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "path-length")
+
+pathLength_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (pathLength :: String | r))
+pathLength_ = pathLength <<< Applicative.pure
 
 d :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (d :: String | r))
 d = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "d")
@@ -3098,20 +3063,6 @@ unicodeBidi_
   => String
   -> f (Deku.Attribute.Attribute (unicodeBidi :: String | r))
 unicodeBidi_ = unicodeBidi <<< Applicative.pure
-
-pathLength
-  :: forall r f
-   . Functor.Functor f
-  => f String
-  -> f (Deku.Attribute.Attribute (pathLength :: String | r))
-pathLength = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "pathLength")
-
-pathLength_
-  :: forall r f
-   . Applicative.Applicative f
-  => String
-  -> f (Deku.Attribute.Attribute (pathLength :: String | r))
-pathLength_ = pathLength <<< Applicative.pure
 
 mask
   :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (mask :: String | r))

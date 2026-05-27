@@ -431,11 +431,12 @@ module Deku.DOM
   , tt
   , tt_
   , tt__
+  , GeometryUtils
   , ARIAMixin
   , ARIANotifyMixin
   , HTMLElement
   , HTMLUnknownElement
-  , HTMLOrSVGElement
+  , HTMLOrSVGOrMathMLElement
   , HTMLHtmlElement
   , HTMLHeadElement
   , HTMLTitleElement
@@ -460,6 +461,7 @@ module Deku.DOM
   , HTMLTimeElement
   , HTMLSpanElement
   , HTMLBRElement
+  , HyperlinkElementUtils
   , HTMLHyperlinkElementUtils
   , HTMLModElement
   , HTMLPictureElement
@@ -539,6 +541,7 @@ import Web.UIEvent.CompositionEvent as Web.UIEvent.CompositionEvent
 import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
 
 class TagToDeku (tag :: Symbol) (interface :: Row Type) | tag -> interface
+type GeometryUtils (r :: Row Type) = (__tag :: Proxy "GeometryUtils" | r)
 type ARIAMixin (r :: Row Type) =
   ( __tag :: Proxy "ARIAMixin"
   , ariaValuetext :: String
@@ -629,13 +632,11 @@ type HTMLElement (r :: Row Type) =
   , command :: Web.Event.Internal.Types.Event
   , beforetoggle :: Web.Event.Internal.Types.Event
   , beforematch :: Web.Event.Internal.Types.Event
-  | HTMLOrSVGElement (ElementContentEditable (GlobalEventHandlers (Element r)))
+  | HTMLOrSVGOrMathMLElement (ElementContentEditable (GlobalEventHandlers (Element r)))
   )
 
 type HTMLUnknownElement (r :: Row Type) = (__tag :: Proxy "HTMLUnknownElement" | HTMLElement r)
-type HTMLOrSVGElement (r :: Row Type) =
-  (__tag :: Proxy "HTMLOrSVGElement", tabindex :: String, nonce :: String | r)
-
+type HTMLOrSVGOrMathMLElement (r :: Row Type) = (__tag :: Proxy "HTMLOrSVGOrMathMLElement" | r)
 type HTMLHtmlElement (r :: Row Type) =
   (__tag :: Proxy "HTMLHtmlElement", version :: String, manifest :: String | HTMLElement r)
 
@@ -769,15 +770,15 @@ type HTMLAnchorElement (r :: Row Type) =
   , shape :: String
   , coords :: String
   , charset :: String
-  , referrerpolicy :: String
   , xtype :: String
   , hreflang :: String
+  , referrerpolicy :: String
   , rel :: String
   , ping :: String
   , download :: String
   , target :: String
   , href :: String
-  | HTMLHyperlinkElementUtils (HTMLElement r)
+  | HTMLHyperlinkElementUtils (HyperlinkElementUtils (HTMLElement r))
   )
 
 type HTMLDataElement (r :: Row Type) =
@@ -790,6 +791,7 @@ type HTMLSpanElement (r :: Row Type) = (__tag :: Proxy "HTMLSpanElement" | HTMLE
 type HTMLBRElement (r :: Row Type) =
   (__tag :: Proxy "HTMLBRElement", clear :: String | HTMLElement r)
 
+type HyperlinkElementUtils (r :: Row Type) = (__tag :: Proxy "HyperlinkElementUtils" | r)
 type HTMLHyperlinkElementUtils (r :: Row Type) = (__tag :: Proxy "HTMLHyperlinkElementUtils" | r)
 type HTMLModElement (r :: Row Type) =
   (__tag :: Proxy "HTMLModElement", datetime :: String, cite :: String | HTMLElement r)
@@ -820,6 +822,7 @@ type HTMLImageElement (r :: Row Type) =
   , height :: String
   , width :: String
   , usemap :: String
+  , controls :: String
   , ismap :: String
   , loading :: String
   , fetchpriority :: String
@@ -908,6 +911,7 @@ type HTMLVideoElement (r :: Row Type) =
   , preload :: String
   , crossorigin :: String
   , src :: String
+  , loading :: String
   , playsinline :: String
   , poster :: String
   | HTMLMediaElement r
@@ -922,6 +926,7 @@ type HTMLAudioElement (r :: Row Type) =
   , preload :: String
   , crossorigin :: String
   , src :: String
+  , loading :: String
   | HTMLMediaElement r
   )
 
@@ -983,7 +988,7 @@ type HTMLAreaElement (r :: Row Type) =
   , download :: String
   , target :: String
   , href :: String
-  | HTMLHyperlinkElementUtils (HTMLElement r)
+  | HTMLHyperlinkElementUtils (HyperlinkElementUtils (HTMLElement r))
   )
 
 type HTMLTableElement (r :: Row Type) =
@@ -1277,6 +1282,7 @@ type HTMLTemplateElement (r :: Row Type) =
   , shadowrootcustomelementregistry :: String
   , shadowrootserializable :: String
   , shadowrootclonable :: String
+  , shadowrootslotassignment :: String
   , shadowrootdelegatesfocus :: String
   , shadowrootmode :: String
   | HTMLElement r
@@ -1357,6 +1363,8 @@ type Element (r :: Row Type) =
   , slot :: String
   , id :: String
   , klass :: String
+  , scrollend :: Web.Event.Internal.Types.Event
+  , scroll :: Web.Event.Internal.Types.Event
   , wheel :: Web.Event.Internal.Types.Event
   , mouseup :: Web.UIEvent.MouseEvent.MouseEvent
   , mouseover :: Web.UIEvent.MouseEvent.MouseEvent
@@ -1394,8 +1402,12 @@ type Element (r :: Row Type) =
   , touchmove :: Web.TouchEvent.TouchEvent.TouchEvent
   , touchend :: Web.TouchEvent.TouchEvent.TouchEvent
   , touchstart :: Web.TouchEvent.TouchEvent.TouchEvent
-  | ARIANotifyMixin
-      (ARIAMixin (Slottable (ChildNode (NonDocumentTypeChildNode (ParentNode (Node r))))))
+  , scrollTop :: Number
+  , scrollLeft :: Number
+  | GeometryUtils
+      ( ARIANotifyMixin
+          (ARIAMixin (Slottable (ChildNode (NonDocumentTypeChildNode (ParentNode (Node r))))))
+      )
   )
 
 instance TagToDeku "html" (HTMLHtmlElement ())
