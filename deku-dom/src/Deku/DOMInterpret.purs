@@ -25,7 +25,8 @@ import Unsafe.Coerce (unsafeCoerce)
 import Unsafe.Reference (unsafeRefEq)
 import Web.DOM (ChildNode, Element, Node)
 import Web.DOM.ChildNode (remove)
-import Web.DOM.Element (removeAttribute, setAttribute)
+import Data.Number (fromString) as Number
+import Web.DOM.Element (removeAttribute, setAttribute, setScrollLeft, setScrollTop)
 import Web.DOM.Node (firstChild, nextSibling)
 import Web.DOM.Text as Text
 import Web.Event.Event (EventType(..))
@@ -73,6 +74,10 @@ setPropEffect = mkEffectFn3 \(Core.Key k) (Core.Value v) elt' -> do
           getDisableable elt disableables = runExists
           (\(FeO { f, e }) -> f (v == "true") e)
           fe
+      | k == "scrollTop"
+      , Just n <- Number.fromString v = setScrollTop n elt
+      | k == "scrollLeft"
+      , Just n <- Number.fromString v = setScrollLeft n elt
       | otherwise = setAttribute k v elt
   o
 

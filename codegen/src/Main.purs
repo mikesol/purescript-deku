@@ -56,7 +56,7 @@ generate = do
   FS.createDir $ cachePath <> "/idlparsed"
   FS.createDir $ cachePath <> "/elements"
 
-  html <- Parse.parse HTML <$> sequence
+  html <- fixHTML <<< Parse.parse HTML <$> sequence
     [ fetch @"dfn"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html.json"
     , fetch @"dfn"
@@ -71,6 +71,8 @@ generate = do
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-2.json"
     , fetch @"dfn"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/wai-aria-1.3.json"
+    , fetch @"dfn"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/cssom-view-1.json"
 
     , fetch @"events"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/html.json"
@@ -90,6 +92,8 @@ generate = do
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediacapture-streams.json"
     , fetch @"events"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediastream-recording.json"
+    , fetch @"events"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/cssom-view-1.json"
 
     , fetch @"idlparsed"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/dom.json"
@@ -97,6 +101,8 @@ generate = do
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/html.json"
     , fetch @"idlparsed"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/wai-aria-1.3.json"
+    , fetch @"idlparsed"
+        "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/cssom-view-1.json"
 
     , fetch @"elements"
         "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/html.json"
@@ -159,6 +165,40 @@ generate = do
 
   Indexed.generate html svg mathml
 
+-- Adds DOM properties from the CSSOM View spec that aren't in the dfn element-attr list.
+-- These are JS properties (not HTML attributes) so they also need special handling in DOMInterpret.
+fixHTML :: Parse.Specification -> Parse.Specification
+fixHTML htmlBase =
+  htmlBase
+    { attributes = do
+        let
+          existing = Set.fromFoldable $ _.name <$> htmlBase.attributes
+          newAttrs =
+            [ { name: "scrollTop"
+              , index: Ctor "scrollTop"
+              , type: TypeNumber
+              , keywords: []
+              }
+            , { name: "scrollLeft"
+              , index: Ctor "scrollLeft"
+              , type: TypeNumber
+              , keywords: []
+              }
+            ]
+          patched = Array.filter (\a -> not $ Set.member a.name existing) newAttrs
+        htmlBase.attributes <> patched
+    , interfaces = map addScrollMembers htmlBase.interfaces
+    }
+  where
+  addScrollMembers iface
+    | iface.name == "Element" = iface
+        { members = Array.nub $ iface.members <>
+            [ Ctor "scrollTop" /\ TypeNumber
+            , Ctor "scrollLeft" /\ TypeNumber
+            ]
+        }
+    | otherwise = iface
+
 -- SVG spec is barely useful
 fixSVG :: Parse.Specification -> Parse.Specification
 fixSVG svgBase =
@@ -168,11 +208,11 @@ fixSVG svgBase =
           <> [ svgText, svgPresentation ]
     , attributes = do
         let
-          existing = Set.fromFoldable $ _.name <$> svgBase.attributes
+          existingIdents = Set.fromFoldable $ (\(Ctor s) -> s) <<< _.index <$> svgBase.attributes
           patched = flip Array.mapMaybe
             (svgTextMembers <> svgPresentationMembers)
             \member ->
-              if Set.member member existing then Nothing
+              if Set.member (unSnake member) existingIdents then Nothing
               else mkAttribute mempty member
         svgBase.attributes <> patched
     }

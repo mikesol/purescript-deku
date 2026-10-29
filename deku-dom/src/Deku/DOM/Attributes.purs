@@ -286,6 +286,8 @@ module Deku.DOM.Attributes
   , longdesc_
   , usemap
   , usemap_
+  , controls
+  , controls_
   , ismap
   , ismap_
   , loading
@@ -418,8 +420,6 @@ module Deku.DOM.Attributes
   , xdata_
   , muted
   , muted_
-  , controls
-  , controls_
   , autoplay
   , autoplay_
   , loop
@@ -592,6 +592,10 @@ module Deku.DOM.Attributes
   , shadowrootserializable_
   , shadowrootclonable
   , shadowrootclonable_
+  , shadowrootslotassignment
+  , shadowrootslotassignment_
+  , shadowrootslotassignmentManual
+  , shadowrootslotassignmentNamed
   , shadowrootdelegatesfocus
   , shadowrootdelegatesfocus_
   , shadowrootmode
@@ -748,6 +752,10 @@ module Deku.DOM.Attributes
   , ariaActivedescendant_
   , role
   , role_
+  , scrollTop
+  , scrollTop_
+  , scrollLeft
+  , scrollLeft_
   ) where
 
 import Control.Applicative (pure, class Applicative) as Applicative
@@ -755,6 +763,7 @@ import Control.Category ((<<<))
 import Data.Functor (map, class Functor) as Functor
 import Deku.DOM.Combinators (unset) as Combinators
 import Deku.Attribute as Deku.Attribute
+import Data.Show as Data.Show
 
 tabindex
   :: forall r f
@@ -2346,6 +2355,20 @@ usemap_
   -> f (Deku.Attribute.Attribute (usemap :: String | r))
 usemap_ = usemap <<< Applicative.pure
 
+controls
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (controls :: String | r))
+controls = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "controls")
+
+controls_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (controls :: String | r))
+controls_ = controls <<< Applicative.pure
+
 ismap
   :: forall r f. Functor.Functor f => f String -> f (Deku.Attribute.Attribute (ismap :: String | r))
 ismap = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "ismap")
@@ -3136,20 +3159,6 @@ muted_
   => String
   -> f (Deku.Attribute.Attribute (muted :: String | r))
 muted_ = muted <<< Applicative.pure
-
-controls
-  :: forall r f
-   . Functor.Functor f
-  => f String
-  -> f (Deku.Attribute.Attribute (controls :: String | r))
-controls = Functor.map (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "controls")
-
-controls_
-  :: forall r f
-   . Applicative.Applicative f
-  => String
-  -> f (Deku.Attribute.Attribute (controls :: String | r))
-controls_ = controls <<< Applicative.pure
 
 autoplay
   :: forall r f
@@ -4195,6 +4204,33 @@ shadowrootclonable_
   => String
   -> f (Deku.Attribute.Attribute (shadowrootclonable :: String | r))
 shadowrootclonable_ = shadowrootclonable <<< Applicative.pure
+
+shadowrootslotassignment
+  :: forall r f
+   . Functor.Functor f
+  => f String
+  -> f (Deku.Attribute.Attribute (shadowrootslotassignment :: String | r))
+shadowrootslotassignment = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "shadowrootslotassignment")
+
+shadowrootslotassignment_
+  :: forall r f
+   . Applicative.Applicative f
+  => String
+  -> f (Deku.Attribute.Attribute (shadowrootslotassignment :: String | r))
+shadowrootslotassignment_ = shadowrootslotassignment <<< Applicative.pure
+
+shadowrootslotassignmentManual
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (shadowrootslotassignment :: String | r))
+shadowrootslotassignmentManual = shadowrootslotassignment_ "manual"
+
+shadowrootslotassignmentNamed
+  :: forall r f
+   . Applicative.Applicative f
+  => f (Deku.Attribute.Attribute (shadowrootslotassignment :: String | r))
+shadowrootslotassignmentNamed = shadowrootslotassignment_ "named"
 
 shadowrootdelegatesfocus
   :: forall r f
@@ -5296,3 +5332,33 @@ role_
   => String
   -> f (Deku.Attribute.Attribute (role :: String | r))
 role_ = role <<< Applicative.pure
+
+scrollTop
+  :: forall r f
+   . Functor.Functor f
+  => f Number
+  -> f (Deku.Attribute.Attribute (scrollTop :: Number | r))
+scrollTop = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "scrollTop" <<< Data.Show.show)
+
+scrollTop_
+  :: forall r f
+   . Applicative.Applicative f
+  => Number
+  -> f (Deku.Attribute.Attribute (scrollTop :: Number | r))
+scrollTop_ = scrollTop <<< Applicative.pure
+
+scrollLeft
+  :: forall r f
+   . Functor.Functor f
+  => f Number
+  -> f (Deku.Attribute.Attribute (scrollLeft :: Number | r))
+scrollLeft = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< Deku.Attribute.prop' "scrollLeft" <<< Data.Show.show)
+
+scrollLeft_
+  :: forall r f
+   . Applicative.Applicative f
+  => Number
+  -> f (Deku.Attribute.Attribute (scrollLeft :: Number | r))
+scrollLeft_ = scrollLeft <<< Applicative.pure

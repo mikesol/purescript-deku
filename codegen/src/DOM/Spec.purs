@@ -33,7 +33,7 @@ type EventSpec =
 
 type EventDef =
   { href :: Maybe String
-  , src :: { format :: String, href :: Maybe String }
+  , src :: Maybe { format :: String, href :: Maybe String }
   , type :: String
   , targets :: Array String
   , interface :: String
