@@ -106,7 +106,7 @@ import Deku.Control (elementify)
 import Deku.Control as DC
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)
-import Deku.DOM (Element, GlobalEventHandlers, HTMLOrSVGElement)
+import Deku.DOM (Element, GlobalEventHandlers, HTMLOrSVGOrMathMLElement)
 
 class TagToDeku (tag :: Symbol) (interface :: Row Type) | tag -> interface
 type MathMLElement (r :: Row Type) =
@@ -135,7 +135,7 @@ type MathMLElement (r :: Row Type) =
   , fence :: String
   , alttext :: String
   , display :: String
-  | HTMLOrSVGElement (GlobalEventHandlers (Element r))
+  | HTMLOrSVGOrMathMLElement (GlobalEventHandlers (Element r))
   )
 
 instance TagToDeku "math" (MathMLElement ())

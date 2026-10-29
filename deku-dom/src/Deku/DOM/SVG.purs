@@ -244,7 +244,6 @@ module Deku.DOM.SVG
   , SVGTitleElement
   , SVGSymbolElement
   , SVGUseElement
-  , SVGElementInstance
   , SVGSwitchElement
   , SVGStyleElement
   , SVGRectElement
@@ -282,7 +281,7 @@ import Deku.Control as DC
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)
 import Web.Event.Internal.Types as Web.Event.Internal.Types
-import Deku.DOM (Element, GlobalEventHandlers, HTMLOrSVGElement, WindowEventHandlers)
+import Deku.DOM (Element, GlobalEventHandlers, HTMLOrSVGOrMathMLElement, WindowEventHandlers)
 
 class TagToDeku (tag :: Symbol) (interface :: Row Type) | tag -> interface
 type SVGPathData (r :: Row Type) = (__tag :: Proxy "SVGPathData" | SvgPresentation r)
@@ -623,10 +622,8 @@ type SVGElement (r :: Row Type) =
   , markerMid :: String
   , markerStart :: String
   , textAnchor :: String
-  , shapeMargin :: String
-  , shapeSubtract :: String
-  , shapeInside :: String
   , inlineSize :: String
+  , pathLength :: String
   , d :: String
   , vectorEffect :: String
   , y :: String
@@ -636,7 +633,7 @@ type SVGElement (r :: Row Type) =
   , r :: String
   , cy :: String
   , cx :: String
-  | SvgPresentation (HTMLOrSVGElement (SVGElementInstance (GlobalEventHandlers (Element r))))
+  | SvgPresentation (HTMLOrSVGOrMathMLElement (GlobalEventHandlers (Element r)))
   )
 
 type SVGGraphicsElement (r :: Row Type) =
@@ -695,7 +692,6 @@ type SVGUseElement (r :: Row Type) =
   | SvgPresentation (SVGURIReference (SVGGraphicsElement r))
   )
 
-type SVGElementInstance (r :: Row Type) = (__tag :: Proxy "SVGElementInstance" | SvgPresentation r)
 type SVGSwitchElement (r :: Row Type) =
   ( __tag :: Proxy "SVGSwitchElement"
   , systemLanguage :: String
